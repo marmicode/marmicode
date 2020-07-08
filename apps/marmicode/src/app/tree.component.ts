@@ -77,8 +77,8 @@ export class TreeComponent implements OnDestroy, OnInit {
                 strokeWidth: 10,
               },
               nodes: {
+                fontSize: '1em',
                 label: {
-                  fontSize: '1em',
                   text: '{name}',
                   hideOversized: false,
                   truncate: true,

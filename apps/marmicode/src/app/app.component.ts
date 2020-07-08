@@ -8,9 +8,6 @@ import { Component } from '@angular/core';
       :host {
         display: block;
         font-family: sans-serif;
-        min-width: 300px;
-        max-width: 600px;
-        margin: 50px auto;
       }
     `,
   ],
