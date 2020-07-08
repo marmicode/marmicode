@@ -1,3 +1,4 @@
+import { ISpriteProperties } from '@amcharts/amcharts4/core';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -33,13 +34,15 @@ export class TreeComponent implements OnDestroy, OnInit {
               type: 'ForceDirectedSeries',
               data: [
                 {
+                  id: 'a',
                   name: 'A',
                   value: 1,
                 },
                 {
+                  id: 'b',
                   name: 'B',
                   value: 1,
-                  linkWith: 'A',
+                  linkWith: 'a',
                 },
               ],
               dataFields: {
@@ -50,12 +53,16 @@ export class TreeComponent implements OnDestroy, OnInit {
                 fixed: 'fixed',
                 linkWith: 'linkWith',
               },
+              links: {
+                strokeWidth: 10,
+                distance: 2,
+              },
               nodes: {
                 label: {
                   fontSize: '1em',
                   text: '{name}',
                 },
-              },
+              } as ISpriteProperties,
             },
           ],
         },
@@ -67,6 +74,23 @@ export class TreeComponent implements OnDestroy, OnInit {
     this._subscription.unsubscribe();
   }
 }
+
+// tooltipText = "{name}";
+// fillOpacity = 1;
+// propertyFields.x = "x";
+// propertyFields.y = "y";
+// label.fontSize = '1em';
+// label.text = "{name}";
+// events.on('hit', (e) => console.log(e.target.dataItem.dataContext))
+// label.hideOversized = true;
+// label.truncate = true;
+// outerCircle.__disabled = false;
+// outerCircle.disabled = false;
+// outerCircle.visible = true;
+//
+// networkSeries.links.template.strokeWidth = 20;
+// networkSeries.links.template.tooltipText = "test";
+// networkSeries.links.template.distance = 2;
 
 @NgModule({
   declarations: [TreeComponent],
