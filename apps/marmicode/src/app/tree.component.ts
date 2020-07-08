@@ -79,10 +79,11 @@ export class TreeComponent implements OnDestroy, OnInit {
                   hideOversized: false,
                   truncate: true,
                 },
+                events: {
+                  hit: (event) =>
+                    console.log(event.target.dataItem.dataContext),
+                },
               } as ISpriteProperties,
-              events: {
-                hit: (event) => console.log(event.target.dataItem),
-              },
             },
           ],
         },
