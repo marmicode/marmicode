@@ -26,24 +26,14 @@ export class Amcore {
   createFromConfig({
     element,
     config,
-    configFn,
   }: {
     element: HTMLElement;
     config: { [key: string]: unknown };
-    configFn;
   }): Observable<Sprite> {
     return combineLatest([this._core$, this._forceDirectedPluginModule$]).pipe(
-      map(([core, plugin]) => {
-        const percent = core.percent;
-        return core.createFromConfig(
-          config ??
-            configFn({
-              percent,
-            }),
-          element,
-          plugin.ForceDirectedTree
-        );
-      })
+      map(([core, plugin]) =>
+        core.createFromConfig(config, element, plugin.ForceDirectedTree)
+      )
     );
   }
 }
