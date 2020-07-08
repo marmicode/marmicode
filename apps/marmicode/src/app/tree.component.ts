@@ -5,7 +5,7 @@ import {
   NgModule,
   OnInit,
 } from '@angular/core';
-import { defer } from 'rxjs';
+import { Amcore } from './amcore.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,9 +13,9 @@ import { defer } from 'rxjs';
   template: `🚧 tree`,
 })
 export class TreeComponent implements OnInit {
+  constructor(private _amcore: Amcore) {}
+
   ngOnInit() {
-    const amcore = defer(() => import('@amcharts/amcharts4/core'));
-    const amcharts = defer(() => import('@amcharts/amcharts4/charts'));
   }
 }
 
