@@ -1,4 +1,4 @@
-import { ISpriteProperties, percent } from '@amcharts/amcharts4/core';
+import { ISpriteProperties } from '@amcharts/amcharts4/core';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -9,7 +9,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Amcore } from './amcore.service';
 
 @Component({
@@ -41,78 +41,80 @@ export class TreeComponent implements OnDestroy, OnInit {
     this._subscription = this._amcore
       .createFromConfig({
         element: this.containerEl.nativeElement,
-        config: {
-          series: [
-            {
-              type: 'ForceDirectedSeries',
-              data: [
-                {
-                  id: 'a',
-                  name: 'A',
-                  value: 1,
-                  fixed: true,
-                  x: percent(100 / 2),
-                  y: radius,
+        configFn({ percent }) {
+          return {
+            series: [
+              {
+                type: 'ForceDirectedSeries',
+                data: [
+                  {
+                    id: 'a',
+                    name: 'A',
+                    value: 1,
+                    fixed: true,
+                    x: percent(100 / 2),
+                    y: radius,
+                  },
+                  {
+                    id: 'b',
+                    name: 'B',
+                    value: 1,
+                    linkWith: ['a'],
+                    fixed: true,
+                    x: percent(100 / 3),
+                    y: radius + rowHeight,
+                  },
+                  {
+                    id: 'c',
+                    name: 'C',
+                    value: 1,
+                    linkWith: ['a'],
+                    fixed: true,
+                    x: percent((2 * 100) / 3),
+                    y: radius + rowHeight,
+                  },
+                  {
+                    id: 'd',
+                    name: 'D',
+                    value: 1,
+                    linkWith: ['b', 'c'],
+                    fixed: true,
+                    x: percent(100 / 2),
+                    y: radius + rowHeight * 2,
+                  },
+                ],
+                dataFields: {
+                  id: 'id',
+                  name: 'name',
+                  value: 'value',
+                  children: 'children',
+                  fixed: 'fixed',
+                  linkWith: 'linkWith',
                 },
-                {
-                  id: 'b',
-                  name: 'B',
-                  value: 1,
-                  linkWith: ['a'],
-                  fixed: true,
-                  x: percent(100 / 3),
-                  y: radius + rowHeight,
+                links: {
+                  strokeWidth: 10,
                 },
-                {
-                  id: 'c',
-                  name: 'C',
-                  value: 1,
-                  linkWith: ['a'],
-                  fixed: true,
-                  x: percent((2 * 100) / 3),
-                  y: radius + rowHeight,
-                },
-                {
-                  id: 'd',
-                  name: 'D',
-                  value: 1,
-                  linkWith: ['b', 'c'],
-                  fixed: true,
-                  x: percent(100 / 2),
-                  y: radius + rowHeight * 2,
-                },
-              ],
-              dataFields: {
-                id: 'id',
-                name: 'name',
-                value: 'value',
-                children: 'children',
-                fixed: 'fixed',
-                linkWith: 'linkWith',
+                nodes: {
+                  fontSize: '1em',
+                  label: {
+                    text: '{name}',
+                    hideOversized: false,
+                    truncate: true,
+                  },
+                  propertyFields: {
+                    x: 'x',
+                    y: 'y',
+                  },
+                  events: {
+                    hit: (event) =>
+                      console.log(event.target.dataItem.dataContext),
+                  },
+                } as ISpriteProperties,
+                minRadius: radius,
+                maxRadius: radius,
               },
-              links: {
-                strokeWidth: 10,
-              },
-              nodes: {
-                fontSize: '1em',
-                label: {
-                  text: '{name}',
-                  hideOversized: false,
-                  truncate: true,
-                },
-                propertyFields: {
-                  x: 'x',
-                  y: 'y',
-                },
-                events: {
-                  hit: (event) =>
-                    console.log(event.target.dataItem.dataContext),
-                },
-              } as ISpriteProperties,
-              minRadius: radius,
-              maxRadius: radius,
-            },
-          ],
+            ],
+          };
         },
       })
       .subscribe();
