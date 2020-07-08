@@ -37,12 +37,28 @@ export class TreeComponent implements OnDestroy, OnInit {
                   id: 'a',
                   name: 'A',
                   value: 1,
+                  fixed: true,
                 },
                 {
                   id: 'b',
                   name: 'B',
                   value: 1,
-                  linkWith: 'a',
+                  linkWith: ['a'],
+                  fixed: true,
+                },
+                {
+                  id: 'c',
+                  name: 'C',
+                  value: 1,
+                  linkWith: ['a'],
+                  fixed: true,
+                },
+                {
+                  id: 'd',
+                  name: 'D',
+                  value: 1,
+                  linkWith: ['b', 'c'],
+                  fixed: true,
                 },
               ],
               dataFields: {
@@ -55,14 +71,18 @@ export class TreeComponent implements OnDestroy, OnInit {
               },
               links: {
                 strokeWidth: 10,
-                distance: 2,
               },
               nodes: {
                 label: {
                   fontSize: '1em',
                   text: '{name}',
+                  hideOversized: false,
+                  truncate: true,
                 },
               } as ISpriteProperties,
+              events: {
+                hit: (event) => console.log(event.target.dataItem),
+              },
             },
           ],
         },
@@ -84,13 +104,6 @@ export class TreeComponent implements OnDestroy, OnInit {
 // events.on('hit', (e) => console.log(e.target.dataItem.dataContext))
 // label.hideOversized = true;
 // label.truncate = true;
-// outerCircle.__disabled = false;
-// outerCircle.disabled = false;
-// outerCircle.visible = true;
-//
-// networkSeries.links.template.strokeWidth = 20;
-// networkSeries.links.template.tooltipText = "test";
-// networkSeries.links.template.distance = 2;
 
 @NgModule({
   declarations: [TreeComponent],
