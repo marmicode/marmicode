@@ -1,4 +1,4 @@
-import { ISpriteProperties } from '@amcharts/amcharts4/core';
+import { ISpriteProperties, percent } from '@amcharts/amcharts4/core';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -37,7 +37,7 @@ export class TreeComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     const radius = 60;
-    const rowHeight = radius * 3.5;
+    const rowHeight = radius * 2.5;
     this._subscription = this._amcore
       .createFromConfig({
         element: this.containerEl.nativeElement,
@@ -51,6 +51,7 @@ export class TreeComponent implements OnDestroy, OnInit {
                   name: 'A',
                   value: 1,
                   fixed: true,
+                  x: percent(100 / 2),
                   y: radius,
                 },
                 {
@@ -59,7 +60,8 @@ export class TreeComponent implements OnDestroy, OnInit {
                   value: 1,
                   linkWith: ['a'],
                   fixed: true,
-                  y: rowHeight,
+                  x: percent(100 / 3),
+                  y: radius + rowHeight,
                 },
                 {
                   id: 'c',
@@ -67,7 +69,8 @@ export class TreeComponent implements OnDestroy, OnInit {
                   value: 1,
                   linkWith: ['a'],
                   fixed: true,
-                  y: rowHeight,
+                  x: percent((2 * 100) / 3),
+                  y: radius + rowHeight,
                 },
                 {
                   id: 'd',
@@ -75,7 +78,8 @@ export class TreeComponent implements OnDestroy, OnInit {
                   value: 1,
                   linkWith: ['b', 'c'],
                   fixed: true,
-                  y: rowHeight * 2,
+                  x: percent(100 / 2),
+                  y: radius + rowHeight * 2,
                 },
               ],
               dataFields: {
