@@ -6,7 +6,7 @@
       "schematics": {},
       "root": "apps/marmicode",
       "sourceRoot": "apps/marmicode/src",
-      "prefix": "marmicode",
+      "prefix": "mc",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
