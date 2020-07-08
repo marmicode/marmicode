@@ -5,7 +5,14 @@ import { TreeModule } from './tree.component';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-learning-map',
-  template: `<mc-tree></mc-tree>`,
+  template: `<mc-tree class="tree"></mc-tree>`,
+  styles: [
+    `
+      .tree {
+        height: 100vh;
+      }
+    `,
+  ],
 })
 export class LearningMapComponent {}
 

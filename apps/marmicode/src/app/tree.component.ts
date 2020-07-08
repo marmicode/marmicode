@@ -15,7 +15,18 @@ import { Amcore } from './amcore.service';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-tree',
-  template: `<div #container></div>`,
+  template: `<div class="chart-container" #container></div>`,
+  styles: [
+    `
+      :host {
+        display: block;
+      }
+
+      .chart-container {
+        height: 100vh;
+      }
+    `,
+  ],
 })
 export class TreeComponent implements OnDestroy, OnInit {
   @ViewChild('container', { static: true }) containerEl: ElementRef;
