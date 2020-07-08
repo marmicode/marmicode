@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "projects": {
+    "marmicode": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "apps/marmicode",
+      "sourceRoot": "apps/marmicode/src",
+      "prefix": "marmicode",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/marmicode",
+            "index": "apps/marmicode/src/index.html",
+            "main": "apps/marmicode/src/main.ts",
+            "polyfills": "apps/marmicode/src/polyfills.ts",
+            "tsConfig": "apps/marmicode/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/marmicode/src/favicon.ico",
+              "apps/marmicode/src/assets"
+            ],
+            "styles": ["apps/marmicode/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/marmicode/src/environments/environment.ts",
+                  "with": "apps/marmicode/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "marmicode:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "marmicode:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "marmicode:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/marmicode/tsconfig.app.json",
+              "apps/marmicode/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/marmicode/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/marmicode/jest.config.js",
+            "tsConfig": "apps/marmicode/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/marmicode/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "marmicode-e2e": {
+      "root": "apps/marmicode-e2e",
+      "sourceRoot": "apps/marmicode-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/marmicode-e2e/cypress.json",
+            "tsConfig": "apps/marmicode-e2e/tsconfig.e2e.json",
+            "devServerTarget": "marmicode:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "marmicode:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/marmicode-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/marmicode-e2e/**/*"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "marmicode"
+}
