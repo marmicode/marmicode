@@ -1,4 +1,4 @@
-import { ForceDirectedTree } from '@amcharts/amcharts4/plugins/forceDirected';
+import { Sprite } from '@amcharts/amcharts4/core';
 import { Injectable } from '@angular/core';
 import { combineLatest, defer, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -23,9 +23,17 @@ export class Amcore {
     import('@amcharts/amcharts4/plugins/forceDirected')
   );
 
-  createTree(element: HTMLElement): Observable<ForceDirectedTree> {
+  createFromConfig({
+    element,
+    config,
+  }: {
+    element: HTMLElement;
+    config: { [key: string]: unknown };
+  }): Observable<Sprite> {
     return combineLatest([this._core$, this._forceDirectedPluginModule$]).pipe(
-      map(([core, plugin]) => core.create(element, plugin.ForceDirectedTree))
+      map(([core, plugin]) =>
+        core.createFromConfig(config, element, plugin.ForceDirectedSeries)
+      )
     );
   }
 }

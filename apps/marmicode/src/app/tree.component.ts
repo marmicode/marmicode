@@ -25,7 +25,31 @@ export class TreeComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this._subscription = this._amcore
-      .createTree(this.containerEl.nativeElement)
+      .createFromConfig({
+        element: this.containerEl.nativeElement,
+        config: {
+          series: [
+            {
+              type: 'ForceDirectedSeries',
+              data: [
+                {
+                  name: 'A',
+                },
+              ],
+            },
+          ],
+          dataFields: {
+            name: 'name',
+            value: 'value',
+            children: 'children',
+          },
+          nodes: {
+            label: {
+              text: '{name}',
+            },
+          },
+        },
+      })
       .subscribe();
   }
 
