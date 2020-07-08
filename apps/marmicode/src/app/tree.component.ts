@@ -36,6 +36,8 @@ export class TreeComponent implements OnDestroy, OnInit {
   constructor(private _amcore: Amcore) {}
 
   ngOnInit() {
+    const radius = 60;
+    const rowHeight = radius * 3.5;
     this._subscription = this._amcore
       .createFromConfig({
         element: this.containerEl.nativeElement,
@@ -49,7 +51,7 @@ export class TreeComponent implements OnDestroy, OnInit {
                   name: 'A',
                   value: 1,
                   fixed: true,
-                  y: 40,
+                  y: radius,
                 },
                 {
                   id: 'b',
@@ -57,7 +59,7 @@ export class TreeComponent implements OnDestroy, OnInit {
                   value: 1,
                   linkWith: ['a'],
                   fixed: true,
-                  y: 120,
+                  y: rowHeight,
                 },
                 {
                   id: 'c',
@@ -65,7 +67,7 @@ export class TreeComponent implements OnDestroy, OnInit {
                   value: 1,
                   linkWith: ['a'],
                   fixed: true,
-                  y: 120,
+                  y: rowHeight,
                 },
                 {
                   id: 'd',
@@ -73,7 +75,7 @@ export class TreeComponent implements OnDestroy, OnInit {
                   value: 1,
                   linkWith: ['b', 'c'],
                   fixed: true,
-                  y: 200,
+                  y: rowHeight * 2,
                 },
               ],
               dataFields: {
@@ -103,6 +105,8 @@ export class TreeComponent implements OnDestroy, OnInit {
                     console.log(event.target.dataItem.dataContext),
                 },
               } as ISpriteProperties,
+              minRadius: radius,
+              maxRadius: radius,
             },
           ],
         },
