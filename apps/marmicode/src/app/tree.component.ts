@@ -38,6 +38,7 @@ export class TreeComponent implements OnDestroy, OnInit {
                   name: 'A',
                   value: 1,
                   fixed: true,
+                  y: 40,
                 },
                 {
                   id: 'b',
@@ -45,6 +46,7 @@ export class TreeComponent implements OnDestroy, OnInit {
                   value: 1,
                   linkWith: ['a'],
                   fixed: true,
+                  y: 120,
                 },
                 {
                   id: 'c',
@@ -52,6 +54,7 @@ export class TreeComponent implements OnDestroy, OnInit {
                   value: 1,
                   linkWith: ['a'],
                   fixed: true,
+                  y: 120,
                 },
                 {
                   id: 'd',
@@ -59,6 +62,7 @@ export class TreeComponent implements OnDestroy, OnInit {
                   value: 1,
                   linkWith: ['b', 'c'],
                   fixed: true,
+                  y: 200,
                 },
               ],
               dataFields: {
@@ -79,6 +83,10 @@ export class TreeComponent implements OnDestroy, OnInit {
                   hideOversized: false,
                   truncate: true,
                 },
+                propertyFields: {
+                  x: 'x',
+                  y: 'y',
+                },
                 events: {
                   hit: (event) =>
                     console.log(event.target.dataItem.dataContext),
@@ -95,16 +103,6 @@ export class TreeComponent implements OnDestroy, OnInit {
     this._subscription.unsubscribe();
   }
 }
-
-// tooltipText = "{name}";
-// fillOpacity = 1;
-// propertyFields.x = "x";
-// propertyFields.y = "y";
-// label.fontSize = '1em';
-// label.text = "{name}";
-// events.on('hit', (e) => console.log(e.target.dataItem.dataContext))
-// label.hideOversized = true;
-// label.truncate = true;
 
 @NgModule({
   declarations: [TreeComponent],
