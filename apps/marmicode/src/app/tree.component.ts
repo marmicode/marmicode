@@ -8,12 +8,14 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Amcore } from './amcore.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.ShadowDom,
   selector: 'mc-tree',
   template: `<div class="chart-container" #container></div>`,
   styles: [
@@ -24,6 +26,10 @@ import { Amcore } from './amcore.service';
 
       .chart-container {
         height: 100vh;
+      }
+
+      circle {
+        transform: scaleY(0.5);
       }
     `,
   ],
@@ -49,7 +55,7 @@ export class TreeComponent implements OnDestroy, OnInit {
                 data: [
                   {
                     id: 'a',
-                    name: 'A',
+                    name: 'Angular',
                     value: 1,
                     fixed: true,
                     x: percent(100 / 2),
@@ -58,7 +64,7 @@ export class TreeComponent implements OnDestroy, OnInit {
                   },
                   {
                     id: 'b',
-                    name: 'B',
+                    name: 'Routing',
                     value: 1,
                     linkWith: ['d'],
                     fixed: true,
@@ -67,7 +73,7 @@ export class TreeComponent implements OnDestroy, OnInit {
                   },
                   {
                     id: 'c',
-                    name: 'C',
+                    name: 'Testing',
                     value: 1,
                     linkWith: ['d'],
                     fixed: true,
@@ -76,7 +82,7 @@ export class TreeComponent implements OnDestroy, OnInit {
                   },
                   {
                     id: 'd',
-                    name: 'D',
+                    name: 'Router Testing',
                     value: 1,
                     fixed: true,
                     x: percent(100 / 2),
