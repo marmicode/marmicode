@@ -34,20 +34,30 @@ export class TreeComponent implements OnDestroy, OnInit {
               data: [
                 {
                   name: 'A',
+                  value: 1,
+                },
+                {
+                  name: 'B',
+                  value: 1,
+                  linkWith: 'A',
                 },
               ],
+              dataFields: {
+                id: 'id',
+                name: 'name',
+                value: 'value',
+                children: 'children',
+                fixed: 'fixed',
+                linkWith: 'linkWith',
+              },
+              nodes: {
+                label: {
+                  fontSize: '1em',
+                  text: '{name}',
+                },
+              },
             },
           ],
-          dataFields: {
-            name: 'name',
-            value: 'value',
-            children: 'children',
-          },
-          nodes: {
-            label: {
-              text: '{name}',
-            },
-          },
         },
       })
       .subscribe();

@@ -32,7 +32,7 @@ export class Amcore {
   }): Observable<Sprite> {
     return combineLatest([this._core$, this._forceDirectedPluginModule$]).pipe(
       map(([core, plugin]) =>
-        core.createFromConfig(config, element, plugin.ForceDirectedSeries)
+        core.createFromConfig(config, element, plugin.ForceDirectedTree)
       )
     );
   }
