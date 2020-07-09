@@ -40,6 +40,7 @@
     "@angular/router": "^9.1.0",
     "@ngneat/until-destroy": "^7.3.2",
     "@nrwl/angular": "9.5.1",
+    "panzoom": "^9.2.5",
     "rxjs": "~6.5.4",
     "zone.js": "^0.10.2"
   },

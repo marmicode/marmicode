@@ -5,12 +5,15 @@ import {
   Component,
   ElementRef,
   NgModule,
-  OnDestroy,
   OnInit,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+
+import createPanZoom from 'panzoom';
+import { BehaviorSubject } from 'rxjs';
+import { finalize, switchMap } from 'rxjs/operators';
 import { Amcore } from './amcore.service';
 
 @UntilDestroy()
@@ -122,7 +125,17 @@ export class TreeComponent implements OnInit {
           };
         },
       })
-      .pipe(untilDestroyed(this))
+      .pipe(
+        switchMap(() => {
+          const panZoom = createPanZoom(
+            this.containerEl.nativeElement.querySelector('svg')
+          );
+          return new BehaviorSubject(panZoom).pipe(
+            finalize(() => panZoom.dispose())
+          );
+        }),
+        untilDestroyed(this)
+      )
       .subscribe();
   }
 }
