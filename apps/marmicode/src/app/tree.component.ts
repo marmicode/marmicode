@@ -12,7 +12,7 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import createPanZoom from 'panzoom';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, merge } from 'rxjs';
 import { finalize, shareReplay, switchMap } from 'rxjs/operators';
 import { Amcore } from './amcore.service';
 
@@ -138,9 +138,9 @@ export class TreeComponent implements OnInit {
       })
     );
 
-    panZoom$.pipe(untilDestroyed(this)).subscribe();
+    const effects$ = merge(chart$, panZoom$);
 
-    chart$.pipe(untilDestroyed(this)).subscribe();
+    effects$.pipe(untilDestroyed(this)).subscribe();
   }
 }
 
