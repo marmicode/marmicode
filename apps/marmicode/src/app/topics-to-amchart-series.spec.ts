@@ -15,7 +15,7 @@ const radius = 60;
 const gap = 40;
 
 /**
- * @deprecated 🚧 Work in progress.
+ * Returns the width based after finding the row (depth) with the max topics.
  */
 function getTopicsChartWidth(topics: Topic[]) {
   const depthCountMap = topics.reduce((map, topic) => {
@@ -25,7 +25,15 @@ function getTopicsChartWidth(topics: Topic[]) {
     map.set(depth, count);
     return map;
   }, new Map<number, number>());
-  return 360;
+
+  const maxCount = Array.from(depthCountMap.entries()).reduce(
+    (max, [depth, count]) => {
+      return Math.max(max, count);
+    },
+    0
+  );
+
+  return maxCount * radius * 2 + (maxCount + 1) * gap;
 }
 
 /**
@@ -106,7 +114,7 @@ describe('chart utils', () => {
   });
 
   describe('getTopicsChartWidth', () => {
-    it(`🚧 should get largest row's width`, () => {
+    it(`should get largest row's width`, () => {
       expect(getTopicsChartWidth(topics)).toEqual(360);
     });
   });
