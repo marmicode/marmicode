@@ -10,9 +10,10 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Amcore } from './amcore.service';
 
+@UntilDestroy()
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.ShadowDom,
@@ -34,17 +35,15 @@ import { Amcore } from './amcore.service';
     `,
   ],
 })
-export class TreeComponent implements OnDestroy, OnInit {
+export class TreeComponent implements OnInit {
   @ViewChild('container', { static: true }) containerEl: ElementRef;
-
-  private _subscription: Subscription;
 
   constructor(private _amcore: Amcore) {}
 
   ngOnInit() {
     const radius = 60;
     const rowHeight = radius * 2.5;
-    this._subscription = this._amcore
+    this._amcore
       .createFromConfig({
         element: this.containerEl.nativeElement,
         configFn({ percent }) {
@@ -123,11 +122,8 @@ export class TreeComponent implements OnDestroy, OnInit {
           };
         },
       })
+      .pipe(untilDestroyed(this))
       .subscribe();
-  }
-
-  ngOnDestroy() {
-    this._subscription.unsubscribe();
   }
 }
 

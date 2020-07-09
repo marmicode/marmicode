@@ -1,7 +1,13 @@
 import { Percent, Sprite } from '@amcharts/amcharts4/core';
 import { Injectable } from '@angular/core';
-import { combineLatest, defer, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {
+  BehaviorSubject,
+  combineLatest,
+  defer,
+  Observable,
+  Subject,
+} from 'rxjs';
+import { finalize, map, switchMap } from 'rxjs/operators';
 
 export type PercentFn = (value: number) => Percent;
 
@@ -33,12 +39,17 @@ export class Amcore {
     configFn: ({ percent: PercentFn }) => { [key: string]: unknown };
   }): Observable<Sprite> {
     return combineLatest([this._core$, this._forceDirectedPluginModule$]).pipe(
-      map(([core, plugin]) => {
+      switchMap(([core, plugin]) => {
         const percent = core.percent;
-        return core.createFromConfig(
+        const sprite = core.createFromConfig(
           configFn({ percent }),
           element,
           plugin.ForceDirectedTree
+        );
+        /* Using `BehaviorSubject` instead of `of` in order to dispose
+         * only on error or unsubscribe. */
+        return new BehaviorSubject<Sprite>(sprite).pipe(
+          finalize(() => sprite.dispose())
         );
       })
     );
