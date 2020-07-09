@@ -142,6 +142,7 @@ export class TreeComponent implements OnInit {
             boundsPadding: 0.2,
             minZoom: 0.5,
             maxZoom: 2,
+            smoothScroll: false,
           }
         );
         return new BehaviorSubject(panZoom).pipe(
