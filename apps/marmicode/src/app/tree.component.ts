@@ -156,7 +156,7 @@ export class TreeComponent implements OnInit {
       panZoom$,
       combineLatest(panZoom$, this.zoomReset$).pipe(
         tap(([panZoom]) => {
-          panZoom.smoothZoomAbs(0, 0, 1);
+          panZoom.zoomAbs(0, 0, 1);
           panZoom.moveTo(0, 0);
         })
       )
