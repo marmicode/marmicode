@@ -12,11 +12,20 @@ function createTopic(topic: Topic): Topic {
 }
 
 const radius = 60;
+const gap = 40;
 
 /**
  * @deprecated 🚧 Work in progress.
  */
 function getTopicsChartWidth(topics: Topic[]) {
+  const depthCountDict = topics.reduce((depthCountDict, topic) => {
+    const depth = topic.depth;
+    const count = (depthCountDict[depth] ?? 0) + 1;
+    return {
+      depthCountDict,
+      [depth]: count,
+    };
+  }, {});
   return 360;
 }
 
