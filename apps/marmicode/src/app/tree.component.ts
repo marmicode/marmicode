@@ -13,7 +13,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import createPanZoom from 'panzoom';
 import { BehaviorSubject } from 'rxjs';
-import { finalize, switchMap } from 'rxjs/operators';
+import { finalize, shareReplay, switchMap } from 'rxjs/operators';
 import { Amcore } from './amcore.service';
 
 @UntilDestroy()
@@ -46,7 +46,7 @@ export class TreeComponent implements OnInit {
   ngOnInit() {
     const radius = 60;
     const rowHeight = radius * 2.5;
-    this._amcore
+    const chart$ = this._amcore
       .createFromConfig({
         element: this.containerEl.nativeElement,
         configFn({ percent }) {
@@ -125,18 +125,22 @@ export class TreeComponent implements OnInit {
           };
         },
       })
-      .pipe(
-        switchMap(() => {
-          const panZoom = createPanZoom(
-            this.containerEl.nativeElement.querySelector('svg')
-          );
-          return new BehaviorSubject(panZoom).pipe(
-            finalize(() => panZoom.dispose())
-          );
-        }),
-        untilDestroyed(this)
-      )
-      .subscribe();
+      .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+
+    const panZoom$ = chart$.pipe(
+      switchMap(() => {
+        const panZoom = createPanZoom(
+          this.containerEl.nativeElement.querySelector('svg')
+        );
+        return new BehaviorSubject(panZoom).pipe(
+          finalize(() => panZoom.dispose())
+        );
+      })
+    );
+
+    panZoom$.pipe(untilDestroyed(this)).subscribe();
+
+    chart$.pipe(untilDestroyed(this)).subscribe();
   }
 }
 
