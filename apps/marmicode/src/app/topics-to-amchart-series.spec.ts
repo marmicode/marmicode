@@ -1,6 +1,7 @@
 interface Topic {
   id: string;
   name: string;
+  depth: number;
   nextTopics?: string[];
 }
 
@@ -14,25 +15,31 @@ describe('topicsToAmchartSeries', () => {
       createTopic({
         id: 'web-basics',
         name: 'Web Basics',
+        depth: 0,
         nextTopics: ['typescript', 'cli'],
       }),
       createTopic({
         id: 'typescript',
         name: 'Typescript',
-        nextTopics: ['rxjs'],
+        depth: 1,
+        nextTopics: ['rxjs', 'components'],
       }),
       createTopic({
         id: 'cli',
         name: 'CLI',
+        depth: 1,
         nextTopics: ['components'],
-      }),
-      createTopic({
-        id: 'rxjs',
-        name: 'RxJS',
       }),
       createTopic({
         id: 'components',
         name: 'Components',
+        depth: 2,
+        nextTopics: ['pipes'],
+      }),
+      createTopic({
+        id: 'rxjs',
+        name: 'RxJS',
+        depth: 3,
       }),
     ];
     // create topics list [{id, name, nextTopics}]
