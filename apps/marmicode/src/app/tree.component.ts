@@ -154,7 +154,7 @@ export class TreeComponent implements OnInit {
     const effects$ = merge(
       chart$,
       panZoom$,
-      combineLatest(panZoom$, this.zoomReset$).pipe(
+      combineLatest([panZoom$, this.zoomReset$]).pipe(
         tap(([panZoom]) => {
           panZoom.zoomAbs(0, 0, 1);
           panZoom.moveTo(0, 0);
