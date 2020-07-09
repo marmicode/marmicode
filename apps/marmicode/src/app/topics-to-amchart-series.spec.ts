@@ -18,14 +18,13 @@ const gap = 40;
  * @deprecated 🚧 Work in progress.
  */
 function getTopicsChartWidth(topics: Topic[]) {
-  const depthCountDict = topics.reduce((depthCountDict, topic) => {
+  const depthCountMap = topics.reduce((map, topic) => {
+    map = new Map(map);
     const depth = topic.depth;
-    const count = (depthCountDict[depth] ?? 0) + 1;
-    return {
-      depthCountDict,
-      [depth]: count,
-    };
-  }, {});
+    const count = (map.get(depth) ?? 0) + 1;
+    map.set(depth, count);
+    return map;
+  }, new Map<number, number>());
   return 360;
 }
 
