@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "marmicode-next"
+  },
+  "targets": {
+    "marmicode-next": {
+      "hosting": {
+        "marmicode": [
+          "marmicode-next"
+        ]
+      }
+    }
+  }
+}

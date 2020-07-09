@@ -1,0 +1,20 @@
+{
+  "hosting": [
+    {
+      "target": "marmicode",
+      "predeploy": "yarn build marmicode --prod",
+      "public": "dist/apps/marmicode",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}
