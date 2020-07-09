@@ -16,14 +16,14 @@ const radius = 60;
 /**
  * @deprecated 🚧 Work in progress.
  */
-function topicsToChartWidth(topics: Topic[]) {
+function getTopicsChartWidth(topics: Topic[]) {
   return 360;
 }
 
 /**
  * @deprecated 🚧 Work in progress.
  */
-function topicsToChartSeries(topics: Topic[]) {
+function getTopicsChartSeries(topics: Topic[]) {
   const topic = topics[0];
   return [
     {
@@ -31,7 +31,7 @@ function topicsToChartSeries(topics: Topic[]) {
       name: topic.name,
       value: 1,
       fixed: true,
-      x: topicsToChartWidth(topics) / 2,
+      x: getTopicsChartWidth(topics) / 2,
       y: radius,
       linkWith: topic.nextTopics,
     },
@@ -76,12 +76,12 @@ describe('chart utils', () => {
       ])
   );
 
-  describe('topicsToChartSeries', () => {
+  describe('getTopicsChartSeries', () => {
     it('🚧 should convert topics list to amchart series', () => {
       /* Radius is 60px and gap is 40px.
        * Largest row is row 1 and it has 2 items
        * which means (60 * 2 * 2) + 40 * 3 = 360 */
-      expect(topicsToChartSeries(topics)).toEqual([
+      expect(getTopicsChartSeries(topics)).toEqual([
         {
           id: 'web-basics',
           name: 'Web Basics',
@@ -97,5 +97,9 @@ describe('chart utils', () => {
     });
   });
 
-  describe('topicsToChartWidth', () => {});
+  describe('getTopicsChartWidth', () => {
+    it(`🚧 should get largest row's width`, () => {
+      expect(getTopicsChartWidth(topics)).toEqual(360);
+    });
+  });
 });
