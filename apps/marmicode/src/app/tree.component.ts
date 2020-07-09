@@ -12,8 +12,8 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import createPanZoom from 'panzoom';
-import { BehaviorSubject, merge } from 'rxjs';
-import { finalize, shareReplay, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, merge, Subject } from 'rxjs';
+import { finalize, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { Amcore } from './amcore.service';
 
 @UntilDestroy()
@@ -21,7 +21,10 @@ import { Amcore } from './amcore.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.ShadowDom,
   selector: 'mc-tree',
-  template: `<div class="chart-container" #container></div>`,
+  template: ` <div>
+      <button type="button" (click)="zoomReset$.next()">RESET</button>
+    </div>
+    <div class="chart-container" #container></div>`,
   styles: [
     `
       :host {
@@ -30,6 +33,7 @@ import { Amcore } from './amcore.service';
 
       .chart-container {
         height: 100vh;
+        overflow: hidden;
       }
 
       circle {
@@ -40,6 +44,8 @@ import { Amcore } from './amcore.service';
 })
 export class TreeComponent implements OnInit {
   @ViewChild('container', { static: true }) containerEl: ElementRef;
+
+  zoomReset$ = new Subject<void>();
 
   constructor(private _amcore: Amcore) {}
 
@@ -144,7 +150,16 @@ export class TreeComponent implements OnInit {
       })
     );
 
-    const effects$ = merge(chart$, panZoom$);
+    const effects$ = merge(
+      chart$,
+      panZoom$,
+      combineLatest(panZoom$, this.zoomReset$).pipe(
+        tap(([panZoom]) => {
+          panZoom.smoothZoomAbs(0, 0, 1);
+          panZoom.moveTo(0, 0);
+        })
+      )
+    );
 
     effects$.pipe(untilDestroyed(this)).subscribe();
   }
