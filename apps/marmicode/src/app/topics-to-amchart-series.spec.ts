@@ -11,6 +11,13 @@ function createTopic(topic: Topic): Topic {
   return topic;
 }
 
+/**
+ * @deprecated 🚧 Work in progress.
+ */
+function topicsToAmchartSeries(topics: Topic[]) {
+  return [];
+}
+
 describe('topicsToAmchartSeries', () => {
   it('🚧 should convert topics list to amchart series', () => {
     const topics = [
@@ -44,7 +51,6 @@ describe('topicsToAmchartSeries', () => {
         depth: 3,
       }),
     ];
-    // create topics list [{id, name, nextTopics}]
-    // check function produces amchart series with the right distribution
+    expect(topicsToAmchartSeries(topics)).toEqual([]);
   });
 });
