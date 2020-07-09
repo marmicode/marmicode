@@ -130,7 +130,13 @@ export class TreeComponent implements OnInit {
     const panZoom$ = chart$.pipe(
       switchMap(() => {
         const panZoom = createPanZoom(
-          this.containerEl.nativeElement.querySelector('svg')
+          this.containerEl.nativeElement.querySelector('svg>g'),
+          {
+            bounds: true,
+            boundsPadding: 0.2,
+            minZoom: 0.5,
+            maxZoom: 2,
+          }
         );
         return new BehaviorSubject(panZoom).pipe(
           finalize(() => panZoom.dispose())
