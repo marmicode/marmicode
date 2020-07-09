@@ -51,6 +51,21 @@ describe('topicsToAmchartSeries', () => {
         depth: 3,
       }),
     ];
-    expect(topicsToAmchartSeries(topics)).toEqual([]);
+    /* Radius is 60px and gap is 40px.
+     * Largest row is row 1 and it has 2 items
+     * which means (60 * 2 * 2) + 40 * 3 = 360 */
+    expect(topicsToAmchartSeries(topics)).toEqual([
+      // {
+      //   id: 'web-basics',
+      //   name: 'Web Basics',
+      //   value: 1,
+      //   fixed: true,
+      //   /* Right in the middle. */
+      //   x: 180,
+      //   /* First row so exactly the radius. */
+      //   y: 60,
+      //   linkWith: ['b', 'c'],
+      // },
+    ]);
   });
 });
