@@ -41,11 +41,17 @@ import { TreeConfig } from './tree-config';
   encapsulation: ViewEncapsulation.ShadowDom,
   selector: 'mc-tree',
   template: ` <div>
-      <button type="button" (click)="zoomReset$.next()">RESET</button>
+      <button
+        (click)="zoomReset$.next()"
+        class="tree-reset-button"
+        type="button"
+      >
+        RESET
+      </button>
     </div>
     <div
       [style.height.px]="treeHeight$ | async"
-      class="chart-container"
+      class="tree-container"
       #container
     ></div>`,
   styles: [
@@ -54,8 +60,15 @@ import { TreeConfig } from './tree-config';
         display: block;
       }
 
-      .chart-container {
+      .tree-container {
         overflow: hidden;
+      }
+
+      .tree-reset-button {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 1;
       }
 
       circle {
