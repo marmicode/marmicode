@@ -13,7 +13,13 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import createPanZoom from 'panzoom';
-import { BehaviorSubject, combineLatest, merge, Subject } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  merge,
+  ReplaySubject,
+  Subject,
+} from 'rxjs';
 import { finalize, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { Amcore } from './amcore.service';
 import { TreeNode } from './chart-utils';
@@ -47,9 +53,13 @@ import { TreeNode } from './chart-utils';
 export class TreeComponent implements OnInit {
   @ViewChild('container', { static: true }) containerEl: ElementRef;
 
-  @Input() seriesData: TreeNode[];
+  @Input() set treeNodes(treeNodes: TreeNode[]) {
+    this._treeNodes$.next(treeNodes);
+  }
 
   zoomReset$ = new Subject<void>();
+
+  private _treeNodes$ = new ReplaySubject<TreeNode[]>(1);
 
   constructor(private _amcore: Amcore) {}
 

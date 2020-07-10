@@ -1,13 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { getTopicsTreeNodes, TreeNode } from './chart-utils';
 import { createTopic } from './topic';
 import { TreeModule } from './tree.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-learning-map',
-  template: `<mc-tree class="tree"></mc-tree>`,
+  template: ` <mc-tree
+    [treeNodes]="treeNodes$ | async"
+    class="tree"
+  ></mc-tree>`,
   styles: [
     `
       .tree {
@@ -48,6 +53,13 @@ export class LearningMapComponent {
       depth: 3,
     }),
   ]);
+  treeNodes$: Observable<TreeNode[]>;
+
+  constructor() {
+    this.treeNodes$ = this.topics$.pipe(
+      map((topics) => getTopicsTreeNodes(topics))
+    );
+  }
 }
 
 @NgModule({
