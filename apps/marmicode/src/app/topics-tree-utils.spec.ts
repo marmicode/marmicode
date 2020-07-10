@@ -1,5 +1,6 @@
 import {
   getDepthCountMap,
+  getTopicsTreeConfig,
   getTopicsTreeNodes,
   getTopicsTreeWidth,
 } from './topics-tree-utils';
@@ -48,37 +49,39 @@ describe('chart utils', () => {
       /* Radius is 60px and gap is 40px.
        * Largest row is row 1 and it has 2 items
        * which means (60 * 2 * 2) + 40 * 3 = 360 */
-      expect(getTopicsTreeNodes({ topics: topics })).toEqual([
-        {
-          id: 'web-basics',
-          name: 'Web Basics',
-          /* Right in the middle. */
-          x: 180,
-          /* First row so exactly the radius. */
-          y: 60,
-          linkWith: ['typescript', 'cli'],
-        },
-        expect.objectContaining({
-          id: 'typescript',
-          x: 120,
-          y: 200,
-        }),
-        expect.objectContaining({
-          id: 'cli',
-          x: 240,
-          y: 200,
-        }),
-        expect.objectContaining({
-          id: 'components',
-          x: 180,
-          y: 340,
-        }),
-        expect.objectContaining({
-          id: 'rxjs',
-          x: 180,
-          y: 480,
-        }),
-      ]);
+      expect(getTopicsTreeConfig({ topics: topics, radius: 60 })).toEqual({
+        nodes: [
+          {
+            id: 'web-basics',
+            name: 'Web Basics',
+            /* Right in the middle. */
+            x: 180,
+            /* First row so exactly the radius. */
+            y: 60,
+            linkWith: ['typescript', 'cli'],
+          },
+          expect.objectContaining({
+            id: 'typescript',
+            x: 120,
+            y: 200,
+          }),
+          expect.objectContaining({
+            id: 'cli',
+            x: 240,
+            y: 200,
+          }),
+          expect.objectContaining({
+            id: 'components',
+            x: 180,
+            y: 340,
+          }),
+          expect.objectContaining({
+            id: 'rxjs',
+            x: 180,
+            y: 480,
+          }),
+        ],
+      });
     });
   });
 

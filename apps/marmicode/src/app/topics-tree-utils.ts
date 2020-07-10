@@ -1,7 +1,7 @@
 import { TreeNode } from './tree/tree-node';
 import { Topic } from './topic';
 
-const horizontalGap = 100;
+const horizontalGap = 40;
 const verticalGap = 20;
 
 export function getDepthCountMap(topics: Topic[]) {
@@ -66,4 +66,16 @@ export function getTopicsTreeNodes({
       linkWith: topic.nextTopics,
     };
   });
+}
+
+export function getTopicsTreeConfig({
+  topics,
+  radius,
+}: {
+  topics: Topic[];
+  radius: number;
+}) {
+  return {
+    nodes: getTopicsTreeNodes({ topics, radius }),
+  };
 }
