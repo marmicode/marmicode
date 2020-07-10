@@ -1,8 +1,8 @@
 import {
   getDepthCountMap,
   getTopicsTreeNodes,
-  getTopicsChartWidth,
-} from './chart-utils';
+  getTopicsTreeWidth,
+} from './topics-tree-utils';
 import { createTopic, Topic } from './topic';
 
 describe('chart utils', () => {
@@ -97,10 +97,10 @@ describe('chart utils', () => {
     });
   });
 
-  describe('getTopicsChartWidth', () => {
+  describe('getTopicsTreeWidth', () => {
     it(`should get largest row's width`, () => {
       expect(
-        getTopicsChartWidth(
+        getTopicsTreeWidth(
           new Map([
             [0, 1],
             [1, 2],

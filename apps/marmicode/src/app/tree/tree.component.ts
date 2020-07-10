@@ -22,7 +22,7 @@ import {
 } from 'rxjs';
 import { finalize, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { Amcore } from './amcore.service';
-import { TreeNode } from './chart-utils';
+import { TreeNode } from './tree-node';
 
 @UntilDestroy()
 @Component({
@@ -65,7 +65,6 @@ export class TreeComponent implements OnInit {
 
   ngOnInit() {
     const radius = 60;
-    const rowHeight = radius * 2.5;
     const chart$ = this._treeNodes$.pipe(
       switchMap((treeNodes) =>
         this._amcore.createFromConfig({

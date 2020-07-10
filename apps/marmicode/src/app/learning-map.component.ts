@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { getTopicsTreeNodes, TreeNode } from './chart-utils';
 import { createTopic } from './topic';
-import { TreeModule } from './tree.component';
+import { getTopicsTreeNodes } from './topics-tree-utils';
+import { TreeNode } from './tree/tree-node';
+import { TreeModule } from './tree/tree.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -65,6 +66,6 @@ export class LearningMapComponent {
 @NgModule({
   declarations: [LearningMapComponent],
   exports: [LearningMapComponent],
-  imports: [CommonModule, TreeModule],
+  imports: [CommonModule, TreeModule, TreeModule],
 })
 export class LearningMapModule {}

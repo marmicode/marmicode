@@ -1,18 +1,9 @@
+import { TreeNode } from './tree/tree-node';
 import { Topic } from './topic';
 
 const radius = 60;
 const horizontalGap = 40;
 const verticalGap = 20;
-
-export interface TreeNode {
-  id: string;
-  name: string;
-  value: number;
-  fixed: boolean;
-  x: number;
-  y: number;
-  linkWith?: string[];
-}
 
 export function getDepthCountMap(topics: Topic[]) {
   return topics.reduce((map, topic) => {
@@ -27,7 +18,7 @@ export function getDepthCountMap(topics: Topic[]) {
 /**
  * Returns the width based after finding the row (depth) with the max topics.
  */
-export function getTopicsChartWidth(depthCountMap: Map<number, number>) {
+export function getTopicsTreeWidth(depthCountMap: Map<number, number>) {
   const maxCount = Array.from(depthCountMap.entries()).reduce(
     (max, [depth, count]) => {
       return Math.max(max, count);
@@ -40,7 +31,7 @@ export function getTopicsChartWidth(depthCountMap: Map<number, number>) {
 
 export function getTopicsTreeNodes(topics: Topic[]): TreeNode[] {
   const depthCountMap = getDepthCountMap(topics);
-  const chartWidth = getTopicsChartWidth(depthCountMap);
+  const chartWidth = getTopicsTreeWidth(depthCountMap);
   return topics.map((topic) => {
     /* Topic's row. */
     const rowIndex = topic.depth;
