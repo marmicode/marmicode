@@ -40,9 +40,6 @@ function getTopicsChartWidth(depthCountMap: Map<number, number>) {
   return maxCount * radius * 2 + (maxCount + 1) * horizontalGap;
 }
 
-/**
- * @deprecated 🚧 Work in progress.
- */
 function getTopicsChartSeries(topics: Topic[]) {
   const depthCountMap = getDepthCountMap(topics);
   const chartWidth = getTopicsChartWidth(depthCountMap);
@@ -106,40 +103,43 @@ describe('chart utils', () => {
   );
 
   describe('getTopicsChartSeries', () => {
-    it('🚧 should convert topics list to amchart series', () => {
+    it('should convert topics list to amchart series', () => {
       /* Radius is 60px and gap is 40px.
        * Largest row is row 1 and it has 2 items
        * which means (60 * 2 * 2) + 40 * 3 = 360 */
-      expect(getTopicsChartSeries(topics)).toEqual(
-        expect.arrayContaining([
-          {
-            id: 'web-basics',
-            name: 'Web Basics',
-            value: 1,
-            fixed: true,
-            /* Right in the middle. */
-            x: 180,
-            /* First row so exactly the radius. */
-            y: 60,
-            linkWith: ['typescript', 'cli'],
-          },
-          expect.objectContaining({
-            id: 'typescript',
-            x: 120,
-            y: 200,
-          }),
-          expect.objectContaining({
-            id: 'cli',
-            x: 240,
-            y: 200,
-          }),
-          expect.objectContaining({
-            id: 'components',
-            x: 180,
-            y: 340,
-          }),
-        ])
-      );
+      expect(getTopicsChartSeries(topics)).toEqual([
+        {
+          id: 'web-basics',
+          name: 'Web Basics',
+          value: 1,
+          fixed: true,
+          /* Right in the middle. */
+          x: 180,
+          /* First row so exactly the radius. */
+          y: 60,
+          linkWith: ['typescript', 'cli'],
+        },
+        expect.objectContaining({
+          id: 'typescript',
+          x: 120,
+          y: 200,
+        }),
+        expect.objectContaining({
+          id: 'cli',
+          x: 240,
+          y: 200,
+        }),
+        expect.objectContaining({
+          id: 'components',
+          x: 180,
+          y: 340,
+        }),
+        expect.objectContaining({
+          id: 'rxjs',
+          x: 180,
+          y: 480,
+        }),
+      ]);
     });
   });
 
