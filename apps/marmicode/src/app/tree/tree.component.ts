@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  HostListener,
   Input,
   NgModule,
   OnInit,
@@ -16,6 +17,7 @@ import createPanZoom from 'panzoom';
 import {
   BehaviorSubject,
   combineLatest,
+  defer,
   merge,
   Observable,
   of,
@@ -65,7 +67,7 @@ export class TreeComponent implements OnInit {
 
   treeHeight$: Observable<number>;
   treeWidth$: Observable<number>;
-  viewportWidth$ = of(1680);
+  viewportWidth$ = new ReplaySubject<number>(1);
   zoomReset$ = new Subject<void>();
 
   private _treeConfig$ = new ReplaySubject<TreeConfig>(1);
@@ -119,7 +121,6 @@ export class TreeComponent implements OnInit {
                   } as ISpriteProperties,
                   minRadius: this.radius,
                   maxRadius: this.radius,
-                  height: 2000,
                 },
               ],
             };
@@ -160,6 +161,9 @@ export class TreeComponent implements OnInit {
     const effects$ = merge(
       chart$,
       panZoom$,
+      defer(() =>
+        this.viewportWidth$.next(this.containerEl.nativeElement.clientWidth)
+      ),
       combineLatest([
         panZoom$,
         this.viewportWidth$,
@@ -174,6 +178,11 @@ export class TreeComponent implements OnInit {
     );
 
     effects$.pipe(untilDestroyed(this)).subscribe();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.viewportWidth$.next(this.containerEl.nativeElement.clientWidth);
   }
 }
 
