@@ -49,7 +49,12 @@ describe('chart utils', () => {
        * Largest row is row 1 and it has 2 items
        * which means (60 * 2 * 2) + 40 * 3 = 360 */
       expect(
-        getTopicsTreeConfig({ topics: topics, radius: 60, verticalGap: 20 })
+        getTopicsTreeConfig({
+          topics: topics,
+          radius: 60,
+          horizontalGap: 40,
+          verticalGap: 20,
+        })
       ).toEqual({
         height: 540,
         width: 360,
@@ -112,6 +117,7 @@ describe('chart utils', () => {
             [3, 1],
           ]),
           radius: 60,
+          horizontalGap: 40,
         })
       ).toEqual(360);
     });

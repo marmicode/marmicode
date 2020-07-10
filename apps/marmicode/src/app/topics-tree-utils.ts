@@ -1,8 +1,6 @@
 import { TreeConfig, TreeNode } from './tree/tree-config';
 import { Topic } from './topic';
 
-const horizontalGap = 40;
-
 export function getDepthCountMap(topics: Topic[]) {
   return topics.reduce((map, topic) => {
     map = new Map(map);
@@ -19,9 +17,11 @@ export function getDepthCountMap(topics: Topic[]) {
 export function getTopicsTreeWidth({
   depthCountMap,
   radius,
+  horizontalGap,
 }: {
   depthCountMap: Map<number, number>;
   radius: number;
+  horizontalGap: number;
 }) {
   const maxCount = Array.from(depthCountMap.entries()).reduce(
     (max, [depth, count]) => {
@@ -39,16 +39,19 @@ export function getTopicsTreeWidth({
 export function getTopicsTreeNodes({
   topics,
   radius,
+  horizontalGap,
   verticalGap,
 }: {
   topics: Topic[];
   radius: number;
+  horizontalGap: number;
   verticalGap: number;
 }): TreeNode[] {
   const depthCountMap = getDepthCountMap(topics);
   const chartWidth = getTopicsTreeWidth({
     depthCountMap: depthCountMap,
     radius,
+    horizontalGap,
   });
   return topics.map((topic) => {
     /* Topic's row. */
@@ -72,10 +75,12 @@ export function getTopicsTreeNodes({
 export function getTopicsTreeConfig({
   topics,
   radius = 60,
+  horizontalGap = 80,
   verticalGap = 80,
 }: {
   topics: Topic[];
   radius: number;
+  horizontalGap: number;
   verticalGap: number;
 }): TreeConfig {
   const depthCountMap = getDepthCountMap(topics);
@@ -87,10 +92,11 @@ export function getTopicsTreeConfig({
   const width = getTopicsTreeWidth({
     depthCountMap: depthCountMap,
     radius,
+    horizontalGap,
   });
 
   return {
-    nodes: getTopicsTreeNodes({ topics, radius, verticalGap }),
+    nodes: getTopicsTreeNodes({ topics, radius, horizontalGap, verticalGap }),
     height,
     width,
   };
