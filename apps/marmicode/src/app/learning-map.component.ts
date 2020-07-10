@@ -47,12 +47,20 @@ export class LearningMapComponent {
       id: 'components',
       name: 'Components',
       depth: 2,
-      nextTopics: ['pipes'],
+      nextTopics: [
+        'pipes',
+        'components-interaction',
+        'directives',
+        'dependency-injection',
+        'modules',
+        'i18n',
+      ],
     }),
     createTopic({
       id: 'rxjs',
       name: 'RxJS',
       depth: 3,
+      nextTopics: ['http-client', 'reactive-forms', 'state-management'],
     }),
     createTopic({
       id: 'immutability',
@@ -80,12 +88,13 @@ export class LearningMapComponent {
       id: 'dependency-injection',
       name: 'Dependency Injection',
       depth: 3,
+      nextTopics: ['testing'],
     }),
     createTopic({
       id: 'modules',
       name: 'Modules',
       depth: 3,
-      nextTopics: ['testing'],
+      nextTopics: ['routing'],
     }),
     createTopic({
       id: 'i18n',
