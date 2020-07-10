@@ -12,7 +12,9 @@ function createTopic(topic: Topic): Topic {
 }
 
 const radius = 60;
-const gap = 40;
+const horizontalGap = 20;
+const verticalGap = 40;
+const rowHeight = 2 * radius;
 
 /**
  * Returns the width based after finding the row (depth) with the max topics.
@@ -33,7 +35,7 @@ function getTopicsChartWidth(topics: Topic[]) {
     0
   );
 
-  return maxCount * radius * 2 + (maxCount + 1) * gap;
+  return maxCount * radius * 2 + (maxCount + 1) * verticalGap;
 }
 
 /**
@@ -109,6 +111,11 @@ describe('chart utils', () => {
           y: 60,
           linkWith: ['typescript', 'cli'],
         },
+        // expect.objectContaining({
+        //   id: 'typescript',
+        //   x: 100,
+        //   y: 200,
+        // }),
       ]);
     });
   });
