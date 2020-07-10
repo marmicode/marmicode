@@ -150,12 +150,14 @@ export class TreeComponent implements OnInit {
                     strokeWidth: 10,
                   },
                   nodes: {
-                    fontSize: '1em',
+                    fontSize: '.8em',
+                    fontWeight: 'bold',
                     label: {
                       text: '{name}',
                       hideOversized: false,
                       truncate: true,
                     },
+                    tooltipText: '{name}',
                     propertyFields: {
                       x: 'x',
                       y: 'y',
