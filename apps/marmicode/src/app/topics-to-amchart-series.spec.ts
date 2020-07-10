@@ -46,13 +46,20 @@ function getTopicsChartWidth(depthCountMap: Map<number, number>) {
 function getTopicsChartSeries(topics: Topic[]) {
   const depthCountMap = getDepthCountMap(topics);
   return topics.map((topic) => {
+    /* Topic's row. */
     const rowIndex = topic.depth;
+
+    /* Get topic's column index. */
+    const rowTopics = topics.filter(({ depth }) => depth === topic.depth);
+    const rowTopicCount = rowTopics.length;
+    const colIndex = rowTopics.indexOf(topic);
+
     return {
       id: topic.id,
       name: topic.name,
       value: 1,
       fixed: true,
-      x: getTopicsChartWidth(depthCountMap) / 2,
+      x: getTopicsChartWidth(depthCountMap) / (rowTopicCount + 1),
       y: radius + rowIndex * (2 * radius + verticalGap),
       linkWith: topic.nextTopics,
     };
@@ -117,7 +124,7 @@ describe('chart utils', () => {
           },
           expect.objectContaining({
             id: 'typescript',
-            // x: 100,
+            x: 120,
             y: 200,
           }),
         ])
