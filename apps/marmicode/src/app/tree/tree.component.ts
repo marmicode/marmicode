@@ -110,14 +110,26 @@ export class TreeComponent implements OnInit {
         this._amcore.createFromConfig({
           element: this.treeEl.nativeElement,
           configFn: () => {
+            const colors = [
+              '#607d8b',
+              '#9c27b0',
+              '#03a9f4',
+              '#9e49ff',
+              '#009688',
+              '#e91e63',
+              '#8bc34a',
+            ];
             return {
               series: [
                 {
                   type: 'ForceDirectedSeries',
-                  data: treeConfig.nodes.map((node) => ({
+                  data: treeConfig.nodes.map((node, index) => ({
                     ...node,
                     fixed: true,
                     value: 1,
+                    /* Select colors manually because amcharts colors.reuse
+                     * doesn't work. */
+                    color: colors[index % colors.length],
                   })),
                   dataFields: {
                     id: 'id',
@@ -126,6 +138,7 @@ export class TreeComponent implements OnInit {
                     children: 'children',
                     fixed: 'fixed',
                     linkWith: 'linkWith',
+                    color: 'color',
                   },
                   links: {
                     strokeWidth: 10,
