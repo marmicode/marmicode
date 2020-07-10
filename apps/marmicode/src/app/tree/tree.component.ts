@@ -62,6 +62,7 @@ import { TreeConfig } from './tree-config';
 
       .tree-container {
         overflow: hidden;
+        min-height: 100vh;
       }
 
       .tree-reset-button {
