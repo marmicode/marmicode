@@ -18,6 +18,7 @@ import {
   combineLatest,
   merge,
   Observable,
+  of,
   ReplaySubject,
   Subject,
 } from 'rxjs';
@@ -34,7 +35,7 @@ import { TreeConfig } from './tree-config';
       <button type="button" (click)="zoomReset$.next()">RESET</button>
     </div>
     <div
-      [style.height.px]="height$ | async"
+      [style.height.px]="treeHeight$ | async"
       class="chart-container"
       #container
     ></div>`,
@@ -62,15 +63,16 @@ export class TreeComponent implements OnInit {
     this._treeConfig$.next(treeConfig);
   }
 
-  height$: Observable<number>;
-  width$: Observable<number>;
+  treeHeight$: Observable<number>;
+  treeWidth$: Observable<number>;
+  viewportWidth$ = of(1680);
   zoomReset$ = new Subject<void>();
 
   private _treeConfig$ = new ReplaySubject<TreeConfig>(1);
 
   constructor(private _amcore: Amcore) {
-    this.height$ = this._treeConfig$.pipe(map((config) => config.height));
-    this.width$ = this._treeConfig$.pipe(map((config) => config.width));
+    this.treeHeight$ = this._treeConfig$.pipe(map((config) => config.height));
+    this.treeWidth$ = this._treeConfig$.pipe(map((config) => config.width));
   }
 
   ngOnInit() {
@@ -128,10 +130,14 @@ export class TreeComponent implements OnInit {
     );
 
     /* Wait for chart to be initialized and use config. */
-    const panZoom$ = combineLatest([this._treeConfig$, chart$]).pipe(
-      switchMap(([treeConfig]) => {
+    const panZoom$ = combineLatest([
+      this._treeConfig$,
+      this.viewportWidth$,
+      chart$,
+    ]).pipe(
+      switchMap(([treeConfig, viewportWidth]) => {
         const panZoom = createPanZoom(
-          this.containerEl.nativeElement.querySelector('svg>g'),
+          this.containerEl.nativeElement.querySelector('svg'),
           {
             bounds: true,
             boundsPadding: 0.2,
@@ -140,6 +146,8 @@ export class TreeComponent implements OnInit {
             smoothScroll: false,
           }
         );
+
+        panZoom.moveTo(viewportWidth / 2 - treeConfig.width / 2, 0);
 
         /* Using `BehaviorSubject` instead of `of` in order to dispose
          * only on error or unsubscribe. */
