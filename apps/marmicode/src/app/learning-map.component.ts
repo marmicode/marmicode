@@ -13,15 +13,7 @@ import { TreeModule } from './tree/tree.component';
   template: ` <mc-tree
     [radius]="radius"
     [treeConfig]="treeConfig$ | async"
-    class="tree"
   ></mc-tree>`,
-  styles: [
-    `
-      .tree {
-        height: 100vh;
-      }
-    `,
-  ],
 })
 export class LearningMapComponent {
   topics$ = of([
