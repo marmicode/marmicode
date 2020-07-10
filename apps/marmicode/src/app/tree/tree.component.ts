@@ -24,7 +24,14 @@ import {
   ReplaySubject,
   Subject,
 } from 'rxjs';
-import { finalize, map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import {
+  finalize,
+  map,
+  shareReplay,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 import { Amcore } from './amcore.service';
 import { TreeConfig } from './tree-config';
 
@@ -148,8 +155,6 @@ export class TreeComponent implements OnInit {
           }
         );
 
-        panZoom.moveTo(viewportWidth / 2 - treeConfig.width / 2, 0);
-
         /* Using `BehaviorSubject` instead of `of` in order to dispose
          * only on error or unsubscribe. */
         return new BehaviorSubject(panZoom).pipe(
@@ -168,7 +173,8 @@ export class TreeComponent implements OnInit {
         panZoom$,
         this.viewportWidth$,
         this._treeConfig$,
-        this.zoomReset$,
+        /* Trigger zoom reset the first time. */
+        this.zoomReset$.pipe(startWith(null as void)),
       ]).pipe(
         tap(([panZoom, viewportWidth, treeConfig]) => {
           panZoom.zoomAbs(0, 0, 1);
