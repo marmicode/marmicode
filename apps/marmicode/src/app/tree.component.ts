@@ -66,86 +66,53 @@ export class TreeComponent implements OnInit {
   ngOnInit() {
     const radius = 60;
     const rowHeight = radius * 2.5;
-    const chart$ = this._amcore
-      .createFromConfig({
-        element: this.containerEl.nativeElement,
-        configFn({ percent }) {
-          return {
-            series: [
-              {
-                type: 'ForceDirectedSeries',
-                data: [
-                  {
-                    id: 'a',
-                    name: 'Angular',
-                    value: 1,
-                    fixed: true,
-                    x: percent(100 / 2),
-                    y: radius,
-                    linkWith: ['b', 'c'],
+    const chart$ = this._treeNodes$.pipe(
+      switchMap((treeNodes) =>
+        this._amcore.createFromConfig({
+          element: this.containerEl.nativeElement,
+          configFn({ percent }) {
+            return {
+              series: [
+                {
+                  type: 'ForceDirectedSeries',
+                  data: treeNodes,
+                  dataFields: {
+                    id: 'id',
+                    name: 'name',
+                    value: 'value',
+                    children: 'children',
+                    fixed: 'fixed',
+                    linkWith: 'linkWith',
                   },
-                  {
-                    id: 'b',
-                    name: 'Routing',
-                    value: 1,
-                    linkWith: ['d'],
-                    fixed: true,
-                    x: percent(100 / 3),
-                    y: radius + rowHeight,
+                  links: {
+                    strokeWidth: 10,
                   },
-                  {
-                    id: 'c',
-                    name: 'Testing',
-                    value: 1,
-                    linkWith: ['d'],
-                    fixed: true,
-                    x: percent((2 * 100) / 3),
-                    y: radius + rowHeight,
-                  },
-                  {
-                    id: 'd',
-                    name: 'Router Testing',
-                    value: 1,
-                    fixed: true,
-                    x: percent(100 / 2),
-                    y: radius + rowHeight * 2,
-                  },
-                ],
-                dataFields: {
-                  id: 'id',
-                  name: 'name',
-                  value: 'value',
-                  children: 'children',
-                  fixed: 'fixed',
-                  linkWith: 'linkWith',
+                  nodes: {
+                    fontSize: '1em',
+                    label: {
+                      text: '{name}',
+                      hideOversized: false,
+                      truncate: true,
+                    },
+                    propertyFields: {
+                      x: 'x',
+                      y: 'y',
+                    },
+                    events: {
+                      hit: (event) =>
+                        console.log(event.target.dataItem.dataContext),
+                    },
+                  } as ISpriteProperties,
+                  minRadius: radius,
+                  maxRadius: radius,
                 },
-                links: {
-                  strokeWidth: 10,
-                },
-                nodes: {
-                  fontSize: '1em',
-                  label: {
-                    text: '{name}',
-                    hideOversized: false,
-                    truncate: true,
-                  },
-                  propertyFields: {
-                    x: 'x',
-                    y: 'y',
-                  },
-                  events: {
-                    hit: (event) =>
-                      console.log(event.target.dataItem.dataContext),
-                  },
-                } as ISpriteProperties,
-                minRadius: radius,
-                maxRadius: radius,
-              },
-            ],
-          };
-        },
-      })
-      .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+              ],
+            };
+          },
+        })
+      ),
+      shareReplay({ bufferSize: 1, refCount: true })
+    );
 
     const panZoom$ = chart$.pipe(
       switchMap(() => {
