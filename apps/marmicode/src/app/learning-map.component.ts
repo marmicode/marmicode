@@ -11,6 +11,7 @@ import { TreeModule } from './tree/tree.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-learning-map',
   template: ` <mc-tree
+    [radius]="radius"
     [treeNodes]="treeNodes$ | async"
     class="tree"
   ></mc-tree>`,
@@ -54,6 +55,7 @@ export class LearningMapComponent {
       depth: 3,
     }),
   ]);
+  radius = 60;
   treeNodes$: Observable<TreeNode[]>;
 
   constructor() {

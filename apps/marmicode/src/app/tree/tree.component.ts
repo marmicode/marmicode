@@ -53,6 +53,7 @@ import { TreeNode } from './tree-node';
 export class TreeComponent implements OnInit {
   @ViewChild('container', { static: true }) containerEl: ElementRef;
 
+  @Input() radius: number;
   @Input() set treeNodes(treeNodes: TreeNode[]) {
     this._treeNodes$.next(treeNodes);
   }
@@ -64,7 +65,6 @@ export class TreeComponent implements OnInit {
   constructor(private _amcore: Amcore) {}
 
   ngOnInit() {
-    const radius = 60;
     const chart$ = this._treeNodes$.pipe(
       switchMap((treeNodes) =>
         this._amcore.createFromConfig({
@@ -106,8 +106,8 @@ export class TreeComponent implements OnInit {
                         console.log(event.target.dataItem.dataContext),
                     },
                   } as ISpriteProperties,
-                  minRadius: radius,
-                  maxRadius: radius,
+                  minRadius: this.radius,
+                  maxRadius: this.radius,
                 },
               ],
             };
