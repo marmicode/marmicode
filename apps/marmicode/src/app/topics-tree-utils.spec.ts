@@ -1,10 +1,9 @@
+import { createTopic, Topic } from './topic';
 import {
   getDepthCountMap,
   getTopicsTreeConfig,
-  getTopicsTreeNodes,
   getTopicsTreeWidth,
 } from './topics-tree-utils';
-import { createTopic, Topic } from './topic';
 
 describe('chart utils', () => {
   let topics: Topic[];
@@ -44,12 +43,13 @@ describe('chart utils', () => {
       ])
   );
 
-  describe('getTopicsTreeNodes', () => {
+  describe('getTopicsTreeConfig', () => {
     it('should convert topics list to amchart series', () => {
       /* Radius is 60px and gap is 40px.
        * Largest row is row 1 and it has 2 items
        * which means (60 * 2 * 2) + 40 * 3 = 360 */
       expect(getTopicsTreeConfig({ topics: topics, radius: 60 })).toEqual({
+        width: 360,
         nodes: [
           {
             id: 'web-basics',

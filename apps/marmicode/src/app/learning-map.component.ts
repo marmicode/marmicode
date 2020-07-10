@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { createTopic } from './topic';
-import { getTopicsTreeNodes } from './topics-tree-utils';
-import { TreeNode } from './tree/tree-node';
+import { getTopicsTreeConfig } from './topics-tree-utils';
+import { TreeConfig } from './tree/tree-config';
 import { TreeModule } from './tree/tree.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { TreeModule } from './tree/tree.component';
   selector: 'mc-learning-map',
   template: ` <mc-tree
     [radius]="radius"
-    [treeNodes]="treeNodes$ | async"
+    [treeConfig]="treeConfig$ | async"
     class="tree"
   ></mc-tree>`,
   styles: [
@@ -56,12 +56,12 @@ export class LearningMapComponent {
     }),
   ]);
   radius = 60;
-  treeNodes$: Observable<TreeNode[]>;
+  treeConfig$: Observable<TreeConfig>;
 
   constructor() {
-    this.treeNodes$ = this.topics$.pipe(
+    this.treeConfig$ = this.topics$.pipe(
       map((topics) =>
-        getTopicsTreeNodes({ topics: topics, radius: this.radius })
+        getTopicsTreeConfig({ topics: topics, radius: this.radius })
       )
     );
   }

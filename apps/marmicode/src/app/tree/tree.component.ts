@@ -22,7 +22,7 @@ import {
 } from 'rxjs';
 import { finalize, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { Amcore } from './amcore.service';
-import { TreeNode } from './tree-node';
+import { TreeConfig } from './tree-config';
 
 @UntilDestroy()
 @Component({
@@ -54,19 +54,19 @@ export class TreeComponent implements OnInit {
   @ViewChild('container', { static: true }) containerEl: ElementRef;
 
   @Input() radius: number;
-  @Input() set treeNodes(treeNodes: TreeNode[]) {
-    this._treeNodes$.next(treeNodes);
+  @Input() set treeConfig(treeConfig: TreeConfig) {
+    this._treeConfig$.next(treeConfig);
   }
 
   zoomReset$ = new Subject<void>();
 
-  private _treeNodes$ = new ReplaySubject<TreeNode[]>(1);
+  private _treeConfig$ = new ReplaySubject<TreeConfig>(1);
 
   constructor(private _amcore: Amcore) {}
 
   ngOnInit() {
-    const chart$ = this._treeNodes$.pipe(
-      switchMap((treeNodes) =>
+    const chart$ = this._treeConfig$.pipe(
+      switchMap((treeConfig) =>
         this._amcore.createFromConfig({
           element: this.containerEl.nativeElement,
           configFn: () => {
@@ -74,7 +74,7 @@ export class TreeComponent implements OnInit {
               series: [
                 {
                   type: 'ForceDirectedSeries',
-                  data: treeNodes.map((node) => ({
+                  data: treeConfig.nodes.map((node) => ({
                     ...node,
                     fixed: true,
                     value: 1,

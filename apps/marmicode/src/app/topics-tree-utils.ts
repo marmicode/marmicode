@@ -1,4 +1,4 @@
-import { TreeNode } from './tree/tree-node';
+import { TreeConfig, TreeNode } from './tree/tree-config';
 import { Topic } from './topic';
 
 const horizontalGap = 40;
@@ -74,8 +74,9 @@ export function getTopicsTreeConfig({
 }: {
   topics: Topic[];
   radius: number;
-}) {
+}): TreeConfig {
   return {
     nodes: getTopicsTreeNodes({ topics, radius }),
+    width: 360,
   };
 }

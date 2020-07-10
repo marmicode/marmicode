@@ -5,3 +5,9 @@ export interface TreeNode {
   y: number;
   linkWith?: string[];
 }
+
+export interface TreeConfig {
+  height?: number;
+  width: number;
+  nodes: TreeNode[];
+}
