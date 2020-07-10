@@ -17,10 +17,11 @@ import {
   BehaviorSubject,
   combineLatest,
   merge,
+  Observable,
   ReplaySubject,
   Subject,
 } from 'rxjs';
-import { finalize, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { finalize, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { Amcore } from './amcore.service';
 import { TreeConfig } from './tree-config';
 
@@ -32,7 +33,12 @@ import { TreeConfig } from './tree-config';
   template: ` <div>
       <button type="button" (click)="zoomReset$.next()">RESET</button>
     </div>
-    <div class="chart-container" #container></div>`,
+    <div
+      [style.height]="height$ | async"
+      [style.width]="width$ | async"
+      class="chart-container"
+      #container
+    ></div>`,
   styles: [
     `
       :host {
@@ -58,11 +64,16 @@ export class TreeComponent implements OnInit {
     this._treeConfig$.next(treeConfig);
   }
 
+  height$: Observable<number>;
+  width$: Observable<number>;
   zoomReset$ = new Subject<void>();
 
   private _treeConfig$ = new ReplaySubject<TreeConfig>(1);
 
-  constructor(private _amcore: Amcore) {}
+  constructor(private _amcore: Amcore) {
+    this.height$ = this._treeConfig$.pipe(map((config) => config.height));
+    this.width$ = this._treeConfig$.pipe(map((config) => config.width));
+  }
 
   ngOnInit() {
     const chart$ = this._treeConfig$.pipe(
@@ -108,6 +119,7 @@ export class TreeComponent implements OnInit {
                   } as ISpriteProperties,
                   minRadius: this.radius,
                   maxRadius: this.radius,
+                  height: 2000,
                 },
               ],
             };
