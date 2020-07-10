@@ -48,7 +48,9 @@ describe('chart utils', () => {
       /* Radius is 60px and gap is 40px.
        * Largest row is row 1 and it has 2 items
        * which means (60 * 2 * 2) + 40 * 3 = 360 */
-      expect(getTopicsTreeConfig({ topics: topics, radius: 60 })).toEqual({
+      expect(
+        getTopicsTreeConfig({ topics: topics, radius: 60, verticalGap: 20 })
+      ).toEqual({
         height: 540,
         width: 360,
         nodes: [

@@ -2,7 +2,6 @@ import { TreeConfig, TreeNode } from './tree/tree-config';
 import { Topic } from './topic';
 
 const horizontalGap = 40;
-const verticalGap = 20;
 
 export function getDepthCountMap(topics: Topic[]) {
   return topics.reduce((map, topic) => {
@@ -39,10 +38,12 @@ export function getTopicsTreeWidth({
  */
 export function getTopicsTreeNodes({
   topics,
-  radius = 60,
+  radius,
+  verticalGap,
 }: {
   topics: Topic[];
   radius: number;
+  verticalGap: number;
 }): TreeNode[] {
   const depthCountMap = getDepthCountMap(topics);
   const chartWidth = getTopicsTreeWidth({
@@ -70,10 +71,12 @@ export function getTopicsTreeNodes({
 
 export function getTopicsTreeConfig({
   topics,
-  radius,
+  radius = 60,
+  verticalGap = 80,
 }: {
   topics: Topic[];
   radius: number;
+  verticalGap: number;
 }): TreeConfig {
   const depthCountMap = getDepthCountMap(topics);
 
@@ -87,7 +90,7 @@ export function getTopicsTreeConfig({
   });
 
   return {
-    nodes: getTopicsTreeNodes({ topics, radius }),
+    nodes: getTopicsTreeNodes({ topics, radius, verticalGap }),
     height,
     width,
   };

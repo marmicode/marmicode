@@ -80,7 +80,7 @@ import { TreeConfig } from './tree-config';
       circle {
         cursor: pointer;
         transition: transform 0.2s;
-        transform: scaleY(0.5);
+        /*transform: scaleY(0.5);*/
       }
 
       circle:hover {
