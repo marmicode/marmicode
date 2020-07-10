@@ -160,10 +160,15 @@ export class TreeComponent implements OnInit {
     const effects$ = merge(
       chart$,
       panZoom$,
-      combineLatest([panZoom$, this.zoomReset$]).pipe(
-        tap(([panZoom]) => {
+      combineLatest([
+        panZoom$,
+        this.viewportWidth$,
+        this._treeConfig$,
+        this.zoomReset$,
+      ]).pipe(
+        tap(([panZoom, viewportWidth, treeConfig]) => {
           panZoom.zoomAbs(0, 0, 1);
-          panZoom.moveTo(0, 0);
+          panZoom.moveTo(viewportWidth / 2 - treeConfig.width / 2, 0);
         })
       )
     );
