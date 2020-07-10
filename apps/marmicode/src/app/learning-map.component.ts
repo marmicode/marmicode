@@ -148,7 +148,7 @@ export class LearningMapComponent {
       depth: 5,
     }),
   ]);
-  radius = 60;
+  radius = 70;
   treeConfig$: Observable<TreeConfig>;
 
   constructor() {
