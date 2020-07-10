@@ -34,8 +34,8 @@ import { TreeConfig } from './tree-config';
       <button type="button" (click)="zoomReset$.next()">RESET</button>
     </div>
     <div
-      [style.height]="height$ | async"
-      [style.width]="width$ | async"
+      [style.height.px]="height$ | async"
+      [style.width.px]="width$ | async"
       class="chart-container"
       #container
     ></div>`,
@@ -46,7 +46,6 @@ import { TreeConfig } from './tree-config';
       }
 
       .chart-container {
-        height: 100vh;
         overflow: hidden;
       }
 
