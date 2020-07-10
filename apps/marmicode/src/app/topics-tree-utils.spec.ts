@@ -48,7 +48,7 @@ describe('chart utils', () => {
       /* Radius is 60px and gap is 40px.
        * Largest row is row 1 and it has 2 items
        * which means (60 * 2 * 2) + 40 * 3 = 360 */
-      expect(getTopicsTreeNodes(topics)).toEqual([
+      expect(getTopicsTreeNodes({ topics: topics })).toEqual([
         {
           id: 'web-basics',
           name: 'Web Basics',
@@ -98,14 +98,15 @@ describe('chart utils', () => {
   describe('getTopicsTreeWidth', () => {
     it(`should get largest row's width`, () => {
       expect(
-        getTopicsTreeWidth(
-          new Map([
+        getTopicsTreeWidth({
+          depthCountMap: new Map([
             [0, 1],
             [1, 2],
             [2, 1],
             [3, 1],
-          ])
-        )
+          ]),
+          radius: 60,
+        })
       ).toEqual(360);
     });
   });
