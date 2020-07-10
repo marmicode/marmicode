@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  Input,
   NgModule,
   OnInit,
   ViewChild,
@@ -15,6 +16,7 @@ import createPanZoom from 'panzoom';
 import { BehaviorSubject, combineLatest, merge, Subject } from 'rxjs';
 import { finalize, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { Amcore } from './amcore.service';
+import { TreeNode } from './chart-utils';
 
 @UntilDestroy()
 @Component({
@@ -44,6 +46,8 @@ import { Amcore } from './amcore.service';
 })
 export class TreeComponent implements OnInit {
   @ViewChild('container', { static: true }) containerEl: ElementRef;
+
+  @Input() seriesData: TreeNode[];
 
   zoomReset$ = new Subject<void>();
 

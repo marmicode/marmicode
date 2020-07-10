@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { of } from 'rxjs';
+import { createTopic } from './topic';
 import { TreeModule } from './tree.component';
 
 @Component({
@@ -14,7 +16,39 @@ import { TreeModule } from './tree.component';
     `,
   ],
 })
-export class LearningMapComponent {}
+export class LearningMapComponent {
+  topics$ = of([
+    createTopic({
+      id: 'web-basics',
+      name: 'Web Basics',
+      depth: 0,
+      nextTopics: ['typescript', 'cli'],
+    }),
+    createTopic({
+      id: 'typescript',
+      name: 'Typescript',
+      depth: 1,
+      nextTopics: ['rxjs', 'components'],
+    }),
+    createTopic({
+      id: 'cli',
+      name: 'CLI',
+      depth: 1,
+      nextTopics: ['components'],
+    }),
+    createTopic({
+      id: 'components',
+      name: 'Components',
+      depth: 2,
+      nextTopics: ['pipes'],
+    }),
+    createTopic({
+      id: 'rxjs',
+      name: 'RxJS',
+      depth: 3,
+    }),
+  ]);
+}
 
 @NgModule({
   declarations: [LearningMapComponent],

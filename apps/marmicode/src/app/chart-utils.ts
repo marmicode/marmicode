@@ -4,6 +4,16 @@ const radius = 60;
 const horizontalGap = 40;
 const verticalGap = 20;
 
+export interface TreeNode {
+  id: string;
+  name: string;
+  value: number;
+  fixed: boolean;
+  x: number;
+  y: number;
+  linkWith?: string[];
+}
+
 export function getDepthCountMap(topics: Topic[]) {
   return topics.reduce((map, topic) => {
     map = new Map(map);
@@ -28,7 +38,7 @@ export function getTopicsChartWidth(depthCountMap: Map<number, number>) {
   return maxCount * radius * 2 + (maxCount + 1) * horizontalGap;
 }
 
-export function getTopicsChartSeries(topics: Topic[]) {
+export function getTopicsTreeNodes(topics: Topic[]): TreeNode[] {
   const depthCountMap = getDepthCountMap(topics);
   const chartWidth = getTopicsChartWidth(depthCountMap);
   return topics.map((topic) => {

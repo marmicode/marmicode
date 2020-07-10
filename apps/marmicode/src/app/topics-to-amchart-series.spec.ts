@@ -1,6 +1,6 @@
 import {
   getDepthCountMap,
-  getTopicsChartSeries,
+  getTopicsTreeNodes,
   getTopicsChartWidth,
 } from './chart-utils';
 import { createTopic, Topic } from './topic';
@@ -43,12 +43,12 @@ describe('chart utils', () => {
       ])
   );
 
-  describe('getTopicsChartSeries', () => {
+  describe('getTopicsTreeNodes', () => {
     it('should convert topics list to amchart series', () => {
       /* Radius is 60px and gap is 40px.
        * Largest row is row 1 and it has 2 items
        * which means (60 * 2 * 2) + 40 * 3 = 360 */
-      expect(getTopicsChartSeries(topics)).toEqual([
+      expect(getTopicsTreeNodes(topics)).toEqual([
         {
           id: 'web-basics',
           name: 'Web Basics',
