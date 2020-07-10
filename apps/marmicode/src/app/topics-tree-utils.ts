@@ -79,9 +79,9 @@ export function getTopicsTreeConfig({
   verticalGap = 80,
 }: {
   topics: Topic[];
-  radius: number;
-  horizontalGap: number;
-  verticalGap: number;
+  radius?: number;
+  horizontalGap?: number;
+  verticalGap?: number;
 }): TreeConfig {
   const depthCountMap = getDepthCountMap(topics);
 
