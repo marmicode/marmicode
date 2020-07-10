@@ -29,9 +29,7 @@ function getDepthCountMap(topics: Topic[]) {
 /**
  * Returns the width based after finding the row (depth) with the max topics.
  */
-function getTopicsChartWidth(topics: Topic[]) {
-  const depthCountMap = getDepthCountMap(topics);
-
+function getTopicsChartWidth(depthCountMap: Map<number, number>) {
   const maxCount = Array.from(depthCountMap.entries()).reduce(
     (max, [depth, count]) => {
       return Math.max(max, count);
@@ -47,13 +45,14 @@ function getTopicsChartWidth(topics: Topic[]) {
  */
 function getTopicsChartSeries(topics: Topic[]) {
   const topic = topics[0];
+  const depthCountMap = getDepthCountMap(topics);
   return [
     {
       id: topic.id,
       name: topic.name,
       value: 1,
       fixed: true,
-      x: getTopicsChartWidth(topics) / 2,
+      x: getTopicsChartWidth(depthCountMap) / 2,
       y: radius,
       linkWith: topic.nextTopics,
     },
@@ -139,7 +138,16 @@ describe('chart utils', () => {
 
   describe('getTopicsChartWidth', () => {
     it(`should get largest row's width`, () => {
-      expect(getTopicsChartWidth(topics)).toEqual(360);
+      expect(
+        getTopicsChartWidth(
+          new Map([
+            [0, 1],
+            [1, 2],
+            [2, 1],
+            [3, 1],
+          ])
+        )
+      ).toEqual(360);
     });
   });
 });
