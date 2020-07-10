@@ -69,7 +69,7 @@ export class TreeComponent implements OnInit {
       switchMap((treeNodes) =>
         this._amcore.createFromConfig({
           element: this.containerEl.nativeElement,
-          configFn({ percent }) {
+          configFn: () => {
             return {
               series: [
                 {
