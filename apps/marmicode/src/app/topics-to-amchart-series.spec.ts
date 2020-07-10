@@ -44,10 +44,9 @@ function getTopicsChartWidth(depthCountMap: Map<number, number>) {
  * @deprecated 🚧 Work in progress.
  */
 function getTopicsChartSeries(topics: Topic[]) {
-  const topic = topics[0];
   const depthCountMap = getDepthCountMap(topics);
-  return [
-    {
+  return topics.map((topic) => {
+    return {
       id: topic.id,
       name: topic.name,
       value: 1,
@@ -55,8 +54,8 @@ function getTopicsChartSeries(topics: Topic[]) {
       x: getTopicsChartWidth(depthCountMap) / 2,
       y: radius,
       linkWith: topic.nextTopics,
-    },
-  ];
+    };
+  });
 }
 
 describe('chart utils', () => {
@@ -102,24 +101,26 @@ describe('chart utils', () => {
       /* Radius is 60px and gap is 40px.
        * Largest row is row 1 and it has 2 items
        * which means (60 * 2 * 2) + 40 * 3 = 360 */
-      expect(getTopicsChartSeries(topics)).toEqual([
-        {
-          id: 'web-basics',
-          name: 'Web Basics',
-          value: 1,
-          fixed: true,
-          /* Right in the middle. */
-          x: 180,
-          /* First row so exactly the radius. */
-          y: 60,
-          linkWith: ['typescript', 'cli'],
-        },
-        // expect.objectContaining({
-        //   id: 'typescript',
-        //   x: 100,
-        //   y: 200,
-        // }),
-      ]);
+      expect(getTopicsChartSeries(topics)).toEqual(
+        expect.arrayContaining([
+          {
+            id: 'web-basics',
+            name: 'Web Basics',
+            value: 1,
+            fixed: true,
+            /* Right in the middle. */
+            x: 180,
+            /* First row so exactly the radius. */
+            y: 60,
+            linkWith: ['typescript', 'cli'],
+          },
+          // expect.objectContaining({
+          //   id: 'typescript',
+          //   x: 100,
+          //   y: 200,
+          // }),
+        ])
+      );
     });
   });
 
