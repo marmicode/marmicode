@@ -105,13 +105,47 @@ export class LearningMapComponent {
     createTopic({
       id: 'state-management',
       name: 'State Management',
-      depth: 4
+      depth: 4,
     }),
     createTopic({
       id: 'change-detection',
       name: 'Change Detection',
-      depth: 4
-    })
+      depth: 4,
+      nextTopics: ['performance'],
+    }),
+    createTopic({
+      id: 'architecture',
+      name: 'Architecture',
+      depth: 4,
+      nextTopics: ['monorepo'],
+    }),
+    createTopic({
+      id: 'testing',
+      name: 'Testing',
+      depth: 4,
+      nextTopics: ['router-testing'],
+    }),
+    createTopic({
+      id: 'routing',
+      name: 'Routing',
+      depth: 4,
+      nextTopics: ['router-testing'],
+    }),
+    createTopic({
+      id: 'performance',
+      name: 'Performance',
+      depth: 5,
+    }),
+    createTopic({
+      id: 'monorepo',
+      name: 'Monorepo',
+      depth: 5,
+    }),
+    createTopic({
+      id: 'router-testing',
+      name: 'Router Testing',
+      depth: 5,
+    }),
   ]);
   radius = 60;
   treeConfig$: Observable<TreeConfig>;
