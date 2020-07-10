@@ -47,12 +47,12 @@ import { TreeConfig } from './tree-config';
     >
       RECENTER
     </button>
-    <div class="tree-container">
+    <div #treeContainer class="tree-container">
       <div
+        #tree
         [style.height.px]="treeHeight$ | async"
         [style.width.px]="treeWidth$ | async"
         class="tree"
-        #tree
       ></div>
     </div>`,
   styles: [
@@ -85,6 +85,7 @@ import { TreeConfig } from './tree-config';
 })
 export class TreeComponent implements OnInit {
   @ViewChild('tree', { static: true }) treeEl: ElementRef;
+  @ViewChild('treeContainer', { static: true }) treeContainerEl: ElementRef;
 
   @Input() radius: number;
   @Input() set treeConfig(treeConfig: TreeConfig) {
@@ -157,12 +158,8 @@ export class TreeComponent implements OnInit {
     );
 
     /* Wait for chart to be initialized and use config. */
-    const panZoom$ = combineLatest([
-      this._treeConfig$,
-      this.viewportWidth$,
-      chart$,
-    ]).pipe(
-      switchMap(([treeConfig, viewportWidth]) => {
+    const panZoom$ = chart$.pipe(
+      switchMap(() => {
         const panZoom = createPanZoom(this.treeEl.nativeElement, {
           bounds: true,
           boundsPadding: 0.2,
@@ -182,17 +179,14 @@ export class TreeComponent implements OnInit {
     const effects$ = merge(
       chart$,
       panZoom$,
-      defer(() =>
-        this.viewportWidth$.next(this.treeEl.nativeElement.clientWidth)
-      ),
       combineLatest([
         panZoom$,
-        this.viewportWidth$,
         this._treeConfig$,
         /* Trigger zoom reset the first time. */
         this.recenter$.pipe(startWith(null as void)),
       ]).pipe(
-        tap(([panZoom, viewportWidth, treeConfig]) => {
+        tap(([panZoom, treeConfig]) => {
+          const viewportWidth = this.treeContainerEl.nativeElement.clientWidth;
           panZoom.zoomAbs(0, 0, 1);
           panZoom.moveTo(viewportWidth / 2 - treeConfig.width / 2, 0);
         })
@@ -202,9 +196,9 @@ export class TreeComponent implements OnInit {
     effects$.pipe(untilDestroyed(this)).subscribe();
   }
 
-  @HostListener('window:resize', [])
+  @HostListener('window:resize')
   onResize() {
-    this.viewportWidth$.next(this.treeEl.nativeElement.clientWidth);
+    this.recenter$.next();
   }
 }
 
