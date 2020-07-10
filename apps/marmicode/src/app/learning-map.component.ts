@@ -60,7 +60,9 @@ export class LearningMapComponent {
 
   constructor() {
     this.treeNodes$ = this.topics$.pipe(
-      map((topics) => getTopicsTreeNodes({ topics: topics }))
+      map((topics) =>
+        getTopicsTreeNodes({ topics: topics, radius: this.radius })
+      )
     );
   }
 }
