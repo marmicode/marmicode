@@ -16,17 +16,21 @@ const horizontalGap = 20;
 const verticalGap = 40;
 const rowHeight = 2 * radius;
 
-/**
- * Returns the width based after finding the row (depth) with the max topics.
- */
-function getTopicsChartWidth(topics: Topic[]) {
-  const depthCountMap = topics.reduce((map, topic) => {
+function getDepthCountMap(topics: Topic[]) {
+  return topics.reduce((map, topic) => {
     map = new Map(map);
     const depth = topic.depth;
     const count = (map.get(depth) ?? 0) + 1;
     map.set(depth, count);
     return map;
   }, new Map<number, number>());
+}
+
+/**
+ * Returns the width based after finding the row (depth) with the max topics.
+ */
+function getTopicsChartWidth(topics: Topic[]) {
+  const depthCountMap = getDepthCountMap(topics);
 
   const maxCount = Array.from(depthCountMap.entries()).reduce(
     (max, [depth, count]) => {
@@ -117,6 +121,19 @@ describe('chart utils', () => {
         //   y: 200,
         // }),
       ]);
+    });
+  });
+
+  describe('getDepthCountMap', () => {
+    it('should get items count per depth', () => {
+      expect(getDepthCountMap(topics)).toEqual(
+        new Map([
+          [0, 1],
+          [1, 2],
+          [2, 1],
+          [3, 1],
+        ])
+      );
     });
   });
 
