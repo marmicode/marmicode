@@ -54,6 +54,64 @@ export class LearningMapComponent {
       name: 'RxJS',
       depth: 3,
     }),
+    createTopic({
+      id: 'immutability',
+      name: 'Immutability',
+      depth: 3,
+      nextTopics: ['state-management', 'change-detection'],
+    }),
+    createTopic({
+      id: 'pipes',
+      name: 'Pipes',
+      depth: 3,
+    }),
+    createTopic({
+      id: 'components-interaction',
+      name: 'Components Interaction',
+      depth: 3,
+      nextTopics: ['change-detection', 'architecture'],
+    }),
+    createTopic({
+      id: 'directives',
+      name: 'Directives',
+      depth: 3,
+    }),
+    createTopic({
+      id: 'dependency-injection',
+      name: 'Dependency Injection',
+      depth: 3,
+    }),
+    createTopic({
+      id: 'modules',
+      name: 'Modules',
+      depth: 3,
+      nextTopics: ['testing'],
+    }),
+    createTopic({
+      id: 'i18n',
+      name: 'I18n',
+      depth: 3,
+    }),
+    createTopic({
+      id: 'http-client',
+      name: 'Http Client',
+      depth: 4,
+    }),
+    createTopic({
+      id: 'reactive-forms',
+      name: 'Reactive Forms',
+      depth: 4,
+    }),
+    createTopic({
+      id: 'state-management',
+      name: 'State Management',
+      depth: 4
+    }),
+    createTopic({
+      id: 'change-detection',
+      name: 'Change Detection',
+      depth: 4
+    })
   ]);
   radius = 60;
   treeConfig$: Observable<TreeConfig>;
