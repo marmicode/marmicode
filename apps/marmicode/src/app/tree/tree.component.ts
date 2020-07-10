@@ -40,20 +40,21 @@ import { TreeConfig } from './tree-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.ShadowDom,
   selector: 'mc-tree',
-  template: ` <div>
-      <button
-        (click)="zoomReset$.next()"
-        class="tree-reset-button"
-        type="button"
-      >
-        RESET
-      </button>
-    </div>
-    <div
-      [style.height.px]="treeHeight$ | async"
-      class="tree-container"
-      #container
-    ></div>`,
+  template: ` <button
+      (click)="recenter$.next()"
+      class="tree-recenter-button"
+      type="button"
+    >
+      RECENTER
+    </button>
+    <div class="tree-container">
+      <div
+        [style.height.px]="treeHeight$ | async"
+        [style.width.px]="treeWidth$ | async"
+        class="tree"
+        #tree
+      ></div>
+    </div>`,
   styles: [
     `
       :host {
@@ -62,10 +63,14 @@ import { TreeConfig } from './tree-config';
 
       .tree-container {
         overflow: hidden;
+      }
+
+      .tree {
+        overflow: hidden;
         min-height: 100vh;
       }
 
-      .tree-reset-button {
+      .tree-recenter-button {
         position: fixed;
         bottom: 10px;
         right: 10px;
@@ -79,7 +84,7 @@ import { TreeConfig } from './tree-config';
   ],
 })
 export class TreeComponent implements OnInit {
-  @ViewChild('container', { static: true }) containerEl: ElementRef;
+  @ViewChild('tree', { static: true }) treeEl: ElementRef;
 
   @Input() radius: number;
   @Input() set treeConfig(treeConfig: TreeConfig) {
@@ -89,7 +94,7 @@ export class TreeComponent implements OnInit {
   treeHeight$: Observable<number>;
   treeWidth$: Observable<number>;
   viewportWidth$ = new ReplaySubject<number>(1);
-  zoomReset$ = new Subject<void>();
+  recenter$ = new Subject<void>();
 
   private _treeConfig$ = new ReplaySubject<TreeConfig>(1);
 
@@ -102,7 +107,7 @@ export class TreeComponent implements OnInit {
     const chart$ = this._treeConfig$.pipe(
       switchMap((treeConfig) =>
         this._amcore.createFromConfig({
-          element: this.containerEl.nativeElement,
+          element: this.treeEl.nativeElement,
           configFn: () => {
             return {
               series: [
@@ -158,16 +163,13 @@ export class TreeComponent implements OnInit {
       chart$,
     ]).pipe(
       switchMap(([treeConfig, viewportWidth]) => {
-        const panZoom = createPanZoom(
-          this.containerEl.nativeElement.querySelector('svg'),
-          {
-            bounds: true,
-            boundsPadding: 0.2,
-            minZoom: 0.5,
-            maxZoom: 2,
-            smoothScroll: false,
-          }
-        );
+        const panZoom = createPanZoom(this.treeEl.nativeElement, {
+          bounds: true,
+          boundsPadding: 0.2,
+          minZoom: 0.5,
+          maxZoom: 2,
+          smoothScroll: false,
+        });
 
         /* Using `BehaviorSubject` instead of `of` in order to dispose
          * only on error or unsubscribe. */
@@ -181,14 +183,14 @@ export class TreeComponent implements OnInit {
       chart$,
       panZoom$,
       defer(() =>
-        this.viewportWidth$.next(this.containerEl.nativeElement.clientWidth)
+        this.viewportWidth$.next(this.treeEl.nativeElement.clientWidth)
       ),
       combineLatest([
         panZoom$,
         this.viewportWidth$,
         this._treeConfig$,
         /* Trigger zoom reset the first time. */
-        this.zoomReset$.pipe(startWith(null as void)),
+        this.recenter$.pipe(startWith(null as void)),
       ]).pipe(
         tap(([panZoom, viewportWidth, treeConfig]) => {
           panZoom.zoomAbs(0, 0, 1);
@@ -200,9 +202,9 @@ export class TreeComponent implements OnInit {
     effects$.pipe(untilDestroyed(this)).subscribe();
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.viewportWidth$.next(this.containerEl.nativeElement.clientWidth);
+  @HostListener('window:resize', [])
+  onResize() {
+    this.viewportWidth$.next(this.treeEl.nativeElement.clientWidth);
   }
 }
 
