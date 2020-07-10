@@ -35,7 +35,6 @@ import { TreeConfig } from './tree-config';
     </div>
     <div
       [style.height.px]="height$ | async"
-      [style.width.px]="width$ | async"
       class="chart-container"
       #container
     ></div>`,
@@ -128,8 +127,9 @@ export class TreeComponent implements OnInit {
       shareReplay({ bufferSize: 1, refCount: true })
     );
 
-    const panZoom$ = chart$.pipe(
-      switchMap(() => {
+    /* Wait for chart to be initialized and use config. */
+    const panZoom$ = combineLatest([this._treeConfig$, chart$]).pipe(
+      switchMap(([treeConfig]) => {
         const panZoom = createPanZoom(
           this.containerEl.nativeElement.querySelector('svg>g'),
           {
@@ -140,6 +140,9 @@ export class TreeComponent implements OnInit {
             smoothScroll: false,
           }
         );
+
+        /* Using `BehaviorSubject` instead of `of` in order to dispose
+         * only on error or unsubscribe. */
         return new BehaviorSubject(panZoom).pipe(
           finalize(() => panZoom.dispose())
         );
