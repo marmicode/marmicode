@@ -86,6 +86,14 @@ import { TreeConfig } from './tree-config';
       circle:hover {
         transform: scaleX(1.2) scaleY(0.6);
       }
+
+      text {
+        transition: font-size 0.2s;
+      }
+
+      g:hover > g > g > text {
+        font-size: 1.2em;
+      }
     `,
   ],
 })
