@@ -12,8 +12,8 @@ function createTopic(topic: Topic): Topic {
 }
 
 const radius = 60;
-const horizontalGap = 20;
-const verticalGap = 40;
+const horizontalGap = 40;
+const verticalGap = 20;
 const rowHeight = 2 * radius;
 
 function getDepthCountMap(topics: Topic[]) {
@@ -37,7 +37,7 @@ function getTopicsChartWidth(depthCountMap: Map<number, number>) {
     0
   );
 
-  return maxCount * radius * 2 + (maxCount + 1) * verticalGap;
+  return maxCount * radius * 2 + (maxCount + 1) * horizontalGap;
 }
 
 /**
@@ -46,13 +46,14 @@ function getTopicsChartWidth(depthCountMap: Map<number, number>) {
 function getTopicsChartSeries(topics: Topic[]) {
   const depthCountMap = getDepthCountMap(topics);
   return topics.map((topic) => {
+    const rowIndex = topic.depth;
     return {
       id: topic.id,
       name: topic.name,
       value: 1,
       fixed: true,
       x: getTopicsChartWidth(depthCountMap) / 2,
-      y: radius,
+      y: radius + rowIndex * (2 * radius + verticalGap),
       linkWith: topic.nextTopics,
     };
   });
@@ -114,11 +115,11 @@ describe('chart utils', () => {
             y: 60,
             linkWith: ['typescript', 'cli'],
           },
-          // expect.objectContaining({
-          //   id: 'typescript',
-          //   x: 100,
-          //   y: 200,
-          // }),
+          expect.objectContaining({
+            id: 'typescript',
+            // x: 100,
+            y: 200,
+          }),
         ])
       );
     });
