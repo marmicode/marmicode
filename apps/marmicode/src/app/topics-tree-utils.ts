@@ -44,8 +44,6 @@ export function getTopicsTreeNodes(topics: Topic[]): TreeNode[] {
     return {
       id: topic.id,
       name: topic.name,
-      value: 1,
-      fixed: true,
       x: ((colIndex + 1) * chartWidth) / (rowTopicCount + 1),
       y: radius + rowIndex * (2 * radius + verticalGap),
       linkWith: topic.nextTopics,

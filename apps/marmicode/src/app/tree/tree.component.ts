@@ -74,7 +74,11 @@ export class TreeComponent implements OnInit {
               series: [
                 {
                   type: 'ForceDirectedSeries',
-                  data: treeNodes,
+                  data: treeNodes.map((node) => ({
+                    ...node,
+                    fixed: true,
+                    value: 1,
+                  })),
                   dataFields: {
                     id: 'id',
                     name: 'name',

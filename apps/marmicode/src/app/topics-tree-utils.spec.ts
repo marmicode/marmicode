@@ -52,8 +52,6 @@ describe('chart utils', () => {
         {
           id: 'web-basics',
           name: 'Web Basics',
-          value: 1,
-          fixed: true,
           /* Right in the middle. */
           x: 180,
           /* First row so exactly the radius. */
