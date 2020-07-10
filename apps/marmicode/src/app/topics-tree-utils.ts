@@ -76,6 +76,11 @@ export function getTopicsTreeConfig({
   radius: number;
 }): TreeConfig {
   const depthCountMap = getDepthCountMap(topics);
+
+  const rowCount = depthCountMap.size;
+
+  const height = rowCount * (2 * radius + verticalGap) - verticalGap;
+
   const width = getTopicsTreeWidth({
     depthCountMap: depthCountMap,
     radius,
@@ -83,6 +88,7 @@ export function getTopicsTreeConfig({
 
   return {
     nodes: getTopicsTreeNodes({ topics, radius }),
+    height,
     width,
   };
 }
