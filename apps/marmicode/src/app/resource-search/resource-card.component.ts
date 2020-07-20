@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   NgModule,
   OnChanges,
 } from '@angular/core';
@@ -9,6 +10,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { Resource } from './resource';
 import { ResourceType, resourceTypeColorMap } from './resource-type';
 import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
 import { ResourceCardTriangleModule } from './triangle.component';
@@ -120,21 +122,8 @@ import { MatChipsModule } from '@angular/material/chips';
   ],
 })
 export class ResourceCardComponent implements OnChanges {
-  resource = {
-    author: {
-      name: 'Younes Jaaidi',
-      pictureUri: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-    },
-    pictureUri: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-    summary: `The Shiba Inu is the smallest of the six original and distinct spitz
-          breeds of dog from Japan. A small, agile dog that copes very well with
-          mountainous terrain, the Shiba Inu was originally bred for hunting.`,
-    title: 'Your Angular Module is a SCAM!',
-    type: ResourceType.BlogPost,
-    skills: ['Moduleless Angular', 'SCAM: Single Component Angular Module'],
-    requiredSkills: ['Angular Modules', 'Angular Lazy Loading'],
-  };
-  color: string = resourceTypeColorMap.get(this.resource.type);
+  @Input() resource: Resource;
+  color: string;
 
   ngOnChanges() {
     this.color = resourceTypeColorMap.get(this.resource.type);
