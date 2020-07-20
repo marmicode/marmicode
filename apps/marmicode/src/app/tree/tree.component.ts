@@ -17,10 +17,8 @@ import createPanZoom from 'panzoom';
 import {
   BehaviorSubject,
   combineLatest,
-  defer,
   merge,
   Observable,
-  of,
   ReplaySubject,
   Subject,
 } from 'rxjs';

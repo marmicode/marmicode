@@ -1,15 +1,7 @@
-import { Percent, Sprite } from '@amcharts/amcharts4/core';
+import { Sprite } from '@amcharts/amcharts4/core';
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  combineLatest,
-  defer,
-  Observable,
-  Subject,
-} from 'rxjs';
+import { BehaviorSubject, combineLatest, defer, Observable } from 'rxjs';
 import { finalize, map, switchMap } from 'rxjs/operators';
-
-export type PercentFn = (value: number) => Percent;
 
 @Injectable({
   providedIn: 'root',
