@@ -22,7 +22,7 @@ import { map, shareReplay } from 'rxjs/operators';
         [mode]="(isHandset$ | async) ? 'over' : 'side'"
         [opened]="(isHandset$ | async) === false"
       >
-        <mat-toolbar>Menu</mat-toolbar>
+        <mat-toolbar>Marmicode</mat-toolbar>
         <mat-nav-list>
           <a mat-list-item routerLink="/learning-map">Learning Map</a>
           <a mat-list-item routerLink="/search">Search</a>
@@ -39,7 +39,6 @@ import { map, shareReplay } from 'rxjs/operators';
           >
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
           </button>
-          <span>Marmicode</span>
         </mat-toolbar>
         <ng-content></ng-content>
       </mat-sidenav-content>
