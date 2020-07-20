@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -24,7 +25,10 @@ import { map, shareReplay } from 'rxjs/operators';
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <img height="50" src="/assets/logo-white.svg" />
+      <ng-container *ngIf="(isHandset$ | async) === false">
+        <img height="40" src="/assets/logo-white.svg" />
+        <span fxFlexAlign="end" class="title">Marmicode</span>
+      </ng-container>
     </mat-toolbar>
 
     <mat-sidenav-container class="sidenav-container">
@@ -57,6 +61,11 @@ import { map, shareReplay } from 'rxjs/operators';
       .sidenav {
         width: 200px;
       }
+
+      .title {
+        margin-left: 15px;
+        margin-bottom: 2px;
+      }
     `,
   ],
 })
@@ -82,6 +91,7 @@ export class NavComponent {
     MatIconModule,
     MatButtonModule,
     RouterModule,
+    FlexModule,
   ],
 })
 export class NavModule {}
