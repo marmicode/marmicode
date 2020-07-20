@@ -26,7 +26,7 @@ import { ResourceCardTriangleModule } from './triangle.component';
       <mat-card-header>
         <img [src]="resource.author.pictureUri" mat-card-avatar />
         <mat-card-title>
-          <h2>{{ resource.title }}</h2>
+          <h2 class="mc-title">{{ resource.title }}</h2>
         </mat-card-title>
         <mat-card-subtitle fxLayout="row">
           <span class="mc-author">by {{ resource.author.name }}</span>
@@ -84,6 +84,12 @@ import { ResourceCardTriangleModule } from './triangle.component';
       .mc-resource-card-image {
         height: 200px;
         object-fit: cover;
+      }
+
+      /* Override h2 styling. */
+      .mc-title {
+        margin: 0;
+        font: inherit;
       }
 
       .mc-author {
