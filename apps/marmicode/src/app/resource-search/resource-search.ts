@@ -7,14 +7,21 @@ import { ResourceCardModule } from './resource-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-search',
   template: `
-    <section fxLayout="row wrap" fxLayoutAlign="space-around">
-      <mc-resource-card></mc-resource-card>
-      <mc-resource-card></mc-resource-card>
-      <mc-resource-card></mc-resource-card>
-      <mc-resource-card></mc-resource-card>
-      <mc-resource-card></mc-resource-card>
+    <section fxLayout="row wrap" fxLayoutAlign="center">
+      <mc-resource-card class="mc-resource-card"></mc-resource-card>
+      <mc-resource-card class="mc-resource-card"></mc-resource-card>
+      <mc-resource-card class="mc-resource-card"></mc-resource-card>
+      <mc-resource-card class="mc-resource-card"></mc-resource-card>
+      <mc-resource-card class="mc-resource-card"></mc-resource-card>
     </section>
   `,
+  styles: [
+    `
+      .mc-resource-card {
+        margin: 20px;
+      }
+    `,
+  ],
 })
 export class ResourceSearchComponent {}
 
