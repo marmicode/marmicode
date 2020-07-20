@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'mc-root',
-  template: ` <router-outlet></router-outlet>`,
+  template: `
+    <mc-nav>
+      <router-outlet></router-outlet>
+    </mc-nav>
+  `,
   styles: [
     `
       :host {
