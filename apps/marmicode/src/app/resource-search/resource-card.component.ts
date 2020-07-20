@@ -7,13 +7,16 @@ import { MatCardModule } from '@angular/material/card';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-card',
-  template: `<mat-card>
+  template: ` <mat-card class="mc-resource-card">
     <img
       class="mc-resource-card-image"
       mat-card-image
       src="https://material.angular.io/assets/img/examples/shiba2.jpg"
       alt="Photo of a Shiba Inu"
     />
+    <div class="mc-resource-card-triangle">
+      <span>BLOG POST</span>
+    </div>
 
     <mat-card-header>
       <img
@@ -41,6 +44,31 @@ import { MatCardModule } from '@angular/material/card';
       :host {
         display: block;
         max-width: 600px;
+      }
+
+      .mc-resource-card {
+        overflow: hidden;
+      }
+
+      .mc-resource-card-triangle {
+        display: inline-block;
+        background: purple;
+        color: white;
+        font-weight: bold;
+        position: absolute;
+        text-align: center;
+        vertical-align: bottom;
+        top: -80px;
+        right: -80px;
+        transform: rotateZ(45deg);
+        height: 160px;
+        width: 160px;
+      }
+      .mc-resource-card-triangle span {
+        position: absolute;
+        width: 100%;
+        bottom: 5px;
+        left: 0;
       }
 
       .mc-resource-card-image {
