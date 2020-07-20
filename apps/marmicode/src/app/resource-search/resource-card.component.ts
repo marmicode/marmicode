@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
@@ -31,7 +32,7 @@ import { MatCardModule } from '@angular/material/card';
       </p>
     </mat-card-content>
 
-    <mat-card-actions>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center">
       <button mat-raised-button color="primary">READ</button>
     </mat-card-actions>
   </mat-card>`,
@@ -54,6 +55,6 @@ export class ResourceCardComponent {}
 @NgModule({
   declarations: [ResourceCardComponent],
   exports: [ResourceCardComponent],
-  imports: [CommonModule, MatCardModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, FlexLayoutModule],
 })
 export class ResourceCardModule {}
