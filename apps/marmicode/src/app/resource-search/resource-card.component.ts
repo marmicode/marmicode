@@ -1,10 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  NgModule,
+  OnChanges,
+} from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { ResourceType } from './resource-type';
+import { ResourceType, resourceTypeColorMap } from './resource-type';
 import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
 import { ResourceCardTriangleModule } from './triangle.component';
 import { MatChipsModule } from '@angular/material/chips';
@@ -32,7 +37,7 @@ import { MatChipsModule } from '@angular/material/chips';
         <mat-card-subtitle fxLayout="row">
           <span class="mc-author">by {{ resource.author.name }}</span>
           <span>&nbsp;-&nbsp;</span>
-          <span class="mc-duration">4 minutes read</span>
+          <span [style.color]="color">4 minutes read</span>
         </mat-card-subtitle>
       </mat-card-header>
 
@@ -41,7 +46,7 @@ import { MatChipsModule } from '@angular/material/chips';
           {{ resource.summary }}
         </p>
         <section class="mc-list-container">
-          <h3 class="mc-list-title">Goals</h3>
+          <h3 [style.color]="color" class="mc-list-title">Goals</h3>
           <mat-chip-list>
             <div fxLayout="row wrap">
               <mat-chip
@@ -55,7 +60,7 @@ import { MatChipsModule } from '@angular/material/chips';
           </mat-chip-list>
         </section>
         <section class="mc-list-container">
-          <h3 class="mc-list-title">Required Skills</h3>
+          <h3 [style.color]="color" class="mc-list-title">Required Skills</h3>
           <mat-chip-list>
             <div fxLayout="row wrap">
               <mat-chip
@@ -103,12 +108,7 @@ import { MatChipsModule } from '@angular/material/chips';
         color: grey;
       }
 
-      .mc-duration {
-        color: var(--marmicode-accent);
-      }
-
       .mc-list-title {
-        color: var(--marmicode-accent);
         font-family: Avenir, Roboto, 'Helvetica Neue', sans-serif;
         text-transform: uppercase;
       }
@@ -119,7 +119,7 @@ import { MatChipsModule } from '@angular/material/chips';
     `,
   ],
 })
-export class ResourceCardComponent {
+export class ResourceCardComponent implements OnChanges {
   resource = {
     author: {
       name: 'Younes Jaaidi',
@@ -134,6 +134,11 @@ export class ResourceCardComponent {
     skills: ['Moduleless Angular', 'SCAM: Single Component Angular Module'],
     requiredSkills: ['Angular Modules', 'Angular Lazy Loading'],
   };
+  color: string = resourceTypeColorMap.get(this.resource.type);
+
+  ngOnChanges() {
+    this.color = resourceTypeColorMap.get(this.resource.type);
+  }
 }
 
 @NgModule({
