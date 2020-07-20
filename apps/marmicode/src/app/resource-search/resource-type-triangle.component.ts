@@ -5,7 +5,6 @@ import {
   Input,
   NgModule,
   OnChanges,
-  SimpleChanges,
 } from '@angular/core';
 import {
   ResourceType,

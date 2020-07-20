@@ -46,7 +46,7 @@ import { ResourceCardTriangleModule } from './triangle.component';
     `
       :host {
         display: block;
-        max-width: 600px;
+        width: 600px;
       }
 
       .mc-resource-card {
