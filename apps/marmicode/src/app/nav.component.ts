@@ -13,33 +13,37 @@ import { map, shareReplay } from 'rxjs/operators';
 @Component({
   selector: 'mc-nav',
   template: `
+    <!-- Toolbar. -->
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Marmicode</span>
+    </mat-toolbar>
+
     <mat-sidenav-container class="sidenav-container">
+      <!-- Sidenav. -->
       <mat-sidenav
         #drawer
         class="sidenav"
-        fixedInViewport
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'side'"
         [opened]="(isHandset$ | async) === false"
       >
-        <mat-toolbar>Marmicode</mat-toolbar>
         <mat-nav-list>
           <a mat-list-item routerLink="/learning-map">Learning Map</a>
           <a mat-list-item routerLink="/search">Search</a>
         </mat-nav-list>
       </mat-sidenav>
+
+      <!-- Content. -->
       <mat-sidenav-content>
-        <mat-toolbar color="primary">
-          <button
-            type="button"
-            aria-label="Toggle sidenav"
-            mat-icon-button
-            (click)="drawer.toggle()"
-            *ngIf="isHandset$ | async"
-          >
-            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-          </button>
-        </mat-toolbar>
         <ng-content></ng-content>
       </mat-sidenav-content>
     </mat-sidenav-container>
@@ -47,21 +51,11 @@ import { map, shareReplay } from 'rxjs/operators';
   styles: [
     `
       .sidenav-container {
-        height: 100%;
+        height: calc(100% - 64px);
       }
 
       .sidenav {
         width: 200px;
-      }
-
-      .sidenav .mat-toolbar {
-        background: inherit;
-      }
-
-      .mat-toolbar.mat-primary {
-        position: sticky;
-        top: 0;
-        z-index: 1;
       }
     `,
   ],
