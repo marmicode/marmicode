@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { ResourceType } from './resource-type';
 import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
 import { ResourceCardTriangleModule } from './triangle.component';
@@ -27,7 +28,11 @@ import { ResourceCardTriangleModule } from './triangle.component';
         mat-card-avatar
       />
       <mat-card-title>Your Angular Module is a SCAM!</mat-card-title>
-      <mat-card-subtitle>by Younes Jaaidi</mat-card-subtitle>
+      <mat-card-subtitle fxLayout="row">
+        <span class="mc-author">by Younes Jaaidi</span>
+        <span>&nbsp;-&nbsp;</span>
+        <span class="mc-duration">4 minutes read</span>
+      </mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
@@ -39,7 +44,9 @@ import { ResourceCardTriangleModule } from './triangle.component';
     </mat-card-content>
 
     <mat-card-actions fxLayout="row" fxLayoutAlign="center">
-      <button mat-raised-button color="primary">READ</button>
+      <button mat-raised-button color="primary">
+        READ
+      </button>
     </mat-card-actions>
   </mat-card>`,
   styles: [
@@ -56,6 +63,12 @@ import { ResourceCardTriangleModule } from './triangle.component';
       .mc-resource-card-image {
         height: 200px;
         object-fit: cover;
+      }
+
+      .mc-author {
+      }
+
+      .mc-duration {
       }
     `,
   ],
@@ -74,6 +87,7 @@ export class ResourceCardComponent {
     FlexLayoutModule,
     ResourceCardTriangleModule,
     ResourceTypeTriangleModule,
+    MatIconModule,
   ],
 })
 export class ResourceCardModule {}
