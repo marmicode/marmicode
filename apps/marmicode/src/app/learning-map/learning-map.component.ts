@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { createTopic } from '../topic';
-import { getTopicsTreeConfig } from '../topics-tree-utils';
+import { createTopic } from './topic';
+import { getTopicsTreeConfig } from './topics-tree-utils';
 import { TreeConfig } from '../tree/tree-config';
 import { TreeModule } from '../tree/tree.component';
 

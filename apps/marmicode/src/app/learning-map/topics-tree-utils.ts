@@ -1,4 +1,4 @@
-import { TreeConfig, TreeNode } from './tree/tree-config';
+import { TreeConfig, TreeNode } from '../tree/tree-config';
 import { Topic } from './topic';
 
 export function getDepthCountMap(topics: Topic[]) {
