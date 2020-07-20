@@ -5,6 +5,10 @@ export interface Author {
   pictureUri: string;
 }
 
+export function createAuthor(author: Author) {
+  return { ...author };
+}
+
 export interface Resource {
   id?: string;
   type: ResourceType;
@@ -14,4 +18,8 @@ export interface Resource {
   title: string;
   pictureUri: string;
   summary: string;
+}
+
+export function createResource(resource: Resource) {
+  return { ...resource };
 }

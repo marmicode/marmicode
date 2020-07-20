@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   ResourceSearchComponent,
   ResourceSearchModule,
-} from './resource-search';
+} from './resource-search.component';
 
 export const routes: Routes = [
   {

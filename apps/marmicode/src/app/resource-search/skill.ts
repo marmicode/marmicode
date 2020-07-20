@@ -4,5 +4,5 @@ export interface Skill {
 }
 
 export function createSkill(skill: Skill) {
-  return skill;
+  return { ...skill };
 }
