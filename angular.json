@@ -21,7 +21,7 @@
               "apps/marmicode/src/favicon.ico",
               "apps/marmicode/src/assets"
             ],
-            "styles": ["apps/marmicode/src/styles.css"],
+            "styles": ["apps/marmicode/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -79,7 +79,10 @@
               "apps/marmicode/tsconfig.app.json",
               "apps/marmicode/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/marmicode/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/marmicode/**/*"
+            ]
           }
         },
         "test": {
@@ -114,8 +117,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/marmicode-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/marmicode-e2e/**/*"]
+            "tsConfig": [
+              "apps/marmicode-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/marmicode-e2e/**/*"
+            ]
           }
         }
       }
