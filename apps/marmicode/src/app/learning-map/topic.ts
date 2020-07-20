@@ -8,5 +8,5 @@ export interface Topic {
 }
 
 export function createTopic(topic: Topic): Topic {
-  return topic;
+  return { ...topic };
 }

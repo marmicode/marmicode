@@ -19,7 +19,7 @@ import {
 } from './resource-type';
 import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
 import { SkillLabelModule } from './skill-label.pipe';
-import { ResourceCardTriangleModule } from './triangle.component';
+import { ResourceCardTriangleModule } from '../topics/triangle.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

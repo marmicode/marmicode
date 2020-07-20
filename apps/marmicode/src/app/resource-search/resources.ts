@@ -31,10 +31,7 @@ const yourAngularModuleIsAScam = createResource({
 });
 
 const boostYourTimeToMarketByDancingTheLimbo = createResource({
-  author: {
-    name: 'Younes Jaaidi',
-    pictureUri: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-  },
+  author: younes,
   pictureUri: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
   summary: `The Shiba Inu is the smallest of the six original and distinct spitz
           breeds of dog from Japan. A small, agile dog that copes very well with
