@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { ResourceCardTriangleModule } from './resource-card-triangle.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,9 +15,9 @@ import { MatCardModule } from '@angular/material/card';
       src="https://material.angular.io/assets/img/examples/shiba2.jpg"
       alt="Photo of a Shiba Inu"
     />
-    <div class="mc-resource-card-triangle">
-      <span>BLOG POST</span>
-    </div>
+    <mc-resource-card-triangle>
+      BLOG POST
+    </mc-resource-card-triangle>
 
     <mat-card-header>
       <img
@@ -50,27 +51,6 @@ import { MatCardModule } from '@angular/material/card';
         overflow: hidden;
       }
 
-      .mc-resource-card-triangle {
-        display: inline-block;
-        background: purple;
-        color: white;
-        font-weight: bold;
-        position: absolute;
-        text-align: center;
-        vertical-align: bottom;
-        top: -80px;
-        right: -80px;
-        transform: rotateZ(45deg);
-        height: 160px;
-        width: 160px;
-      }
-      .mc-resource-card-triangle span {
-        position: absolute;
-        width: 100%;
-        bottom: 5px;
-        left: 0;
-      }
-
       .mc-resource-card-image {
         height: 200px;
         object-fit: cover;
@@ -83,6 +63,12 @@ export class ResourceCardComponent {}
 @NgModule({
   declarations: [ResourceCardComponent],
   exports: [ResourceCardComponent],
-  imports: [CommonModule, MatCardModule, MatButtonModule, FlexLayoutModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    ResourceCardTriangleModule,
+  ],
 })
 export class ResourceCardModule {}
