@@ -24,7 +24,7 @@ import { map, shareReplay } from 'rxjs/operators';
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Marmicode</span>
+      <img height="50" src="/assets/logo-white.svg" />
     </mat-toolbar>
 
     <mat-sidenav-container class="sidenav-container">
