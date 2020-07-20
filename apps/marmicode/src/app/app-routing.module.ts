@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LearningMapRoutingModule } from './learning-map-routing.module';
+import { LearningMapRoutingModule } from './learning-map/learning-map-routing.module';
 
 export const routes: Routes = [
   {
