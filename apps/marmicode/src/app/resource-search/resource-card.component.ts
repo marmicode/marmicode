@@ -18,6 +18,7 @@ import {
   resourceTypeTextMap,
 } from './resource-type';
 import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
+import { SkillLabelModule } from './skill-label.pipe';
 import { ResourceCardTriangleModule } from './triangle.component';
 
 @Component({
@@ -60,7 +61,7 @@ import { ResourceCardTriangleModule } from './triangle.component';
                 [disabled]="true"
                 [style.opacity]="1"
               >
-                {{ skill }}
+                {{ skill | skillLabel }}
               </mat-chip>
             </div>
           </mat-chip-list>
@@ -74,7 +75,7 @@ import { ResourceCardTriangleModule } from './triangle.component';
                 [disabled]="true"
                 [style.opacity]="1"
               >
-                {{ skill }}
+                {{ skill | skillLabel }}
               </mat-chip>
             </div>
           </mat-chip-list>
@@ -159,6 +160,7 @@ export class ResourceCardComponent implements OnChanges {
     ResourceTypeTriangleModule,
     MatIconModule,
     MatChipsModule,
+    SkillLabelModule,
   ],
 })
 export class ResourceCardModule {}
