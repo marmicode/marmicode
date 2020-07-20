@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ResourceType } from './resource-type';
 import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
 import { ResourceCardTriangleModule } from './triangle.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,27 +40,33 @@ import { ResourceCardTriangleModule } from './triangle.component';
         <p>
           {{ resource.summary }}
         </p>
-        <section>
-          <h3>Goals</h3>
-          <ul>
-            <li>
-              SCAM: Single Component Angular Module
-            </li>
-            <li>
-              Moduleless Angular
-            </li>
-          </ul>
+        <section class="mc-list-container">
+          <h3 class="mc-list-title">Goals</h3>
+          <mat-chip-list>
+            <div fxLayout="row wrap">
+              <mat-chip
+                *ngFor="let skill of resource.skills"
+                [disabled]="true"
+                [style.opacity]="1"
+              >
+                {{ skill }}
+              </mat-chip>
+            </div>
+          </mat-chip-list>
         </section>
-        <section>
-          <h3>Required Skills</h3>
-          <ul>
-            <li>
-              Angular Modules
-            </li>
-            <li>
-              Angular Lazy Loading
-            </li>
-          </ul>
+        <section class="mc-list-container">
+          <h3 class="mc-list-title">Required Skills</h3>
+          <mat-chip-list>
+            <div fxLayout="row wrap">
+              <mat-chip
+                *ngFor="let skill of resource.requiredSkills"
+                [disabled]="true"
+                [style.opacity]="1"
+              >
+                {{ skill }}
+              </mat-chip>
+            </div>
+          </mat-chip-list>
         </section>
       </mat-card-content>
 
@@ -93,9 +100,21 @@ import { ResourceCardTriangleModule } from './triangle.component';
       }
 
       .mc-author {
+        color: grey;
       }
 
       .mc-duration {
+        color: #5ab3ad;
+      }
+
+      .mc-list-title {
+        color: #5ab3ad;
+        font-family: Avenir, Roboto, 'Helvetica Neue', sans-serif;
+        text-transform: uppercase;
+      }
+
+      .mc-list-container {
+        margin-top: 30px;
       }
     `,
   ],
@@ -112,6 +131,8 @@ export class ResourceCardComponent {
           mountainous terrain, the Shiba Inu was originally bred for hunting.`,
     title: 'Your Angular Module is a SCAM!',
     type: ResourceType.BlogPost,
+    skills: ['Moduleless Angular', 'SCAM: Single Component Angular Module'],
+    requiredSkills: ['Angular Modules', 'Angular Lazy Loading'],
   };
 }
 
@@ -126,6 +147,7 @@ export class ResourceCardComponent {
     ResourceCardTriangleModule,
     ResourceTypeTriangleModule,
     MatIconModule,
+    MatChipsModule,
   ],
 })
 export class ResourceCardModule {}
