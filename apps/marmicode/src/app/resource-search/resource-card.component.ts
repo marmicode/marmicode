@@ -104,11 +104,11 @@ import { MatChipsModule } from '@angular/material/chips';
       }
 
       .mc-duration {
-        color: #5ab3ad;
+        color: var(--marmicode-accent);
       }
 
       .mc-list-title {
-        color: #5ab3ad;
+        color: var(--marmicode-accent);
         font-family: Avenir, Roboto, 'Helvetica Neue', sans-serif;
         text-transform: uppercase;
       }
