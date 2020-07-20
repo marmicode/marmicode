@@ -8,9 +8,16 @@ export const routes: Routes = [
     loadChildren: () => LearningMapRoutingModule,
   },
   {
+    path: 'search',
+    loadChildren: () =>
+      import('./resource-search/resource-search-routing.module').then(
+        (m) => m.ResourceSearchRoutingModule
+      ),
+  },
+  {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'learning-map',
+    redirectTo: 'search',
   },
 ];
 
