@@ -9,12 +9,12 @@ import {
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { Resource } from './resource';
-import { ResourceType, resourceTypeColorMap } from './resource-type';
+import { resourceTypeColorMap } from './resource-type';
 import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
 import { ResourceCardTriangleModule } from './triangle.component';
-import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -78,7 +78,11 @@ import { MatChipsModule } from '@angular/material/chips';
       </mat-card-content>
 
       <mat-card-actions fxLayout="row" fxLayoutAlign="center">
-        <button mat-raised-button color="primary">
+        <button
+          [style.backgroundColor]="color"
+          mat-raised-button
+          color="primary"
+        >
           READ
         </button>
       </mat-card-actions>
@@ -88,7 +92,7 @@ import { MatChipsModule } from '@angular/material/chips';
     `
       :host {
         display: block;
-        width: 600px;
+        width: 550px;
       }
 
       .mc-resource-card {
