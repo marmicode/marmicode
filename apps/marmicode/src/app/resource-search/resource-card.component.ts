@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { ResourceCardTriangleModule } from './resource-card-triangle.component';
+import { ResourceType } from './resource-type';
+import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
+import { ResourceCardTriangleModule } from './triangle.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,9 +17,9 @@ import { ResourceCardTriangleModule } from './resource-card-triangle.component';
       src="https://material.angular.io/assets/img/examples/shiba2.jpg"
       alt="Photo of a Shiba Inu"
     />
-    <mc-resource-card-triangle>
-      BLOG POST
-    </mc-resource-card-triangle>
+    <mc-resource-type-triangle
+      [resourceType]="resourceType"
+    ></mc-resource-type-triangle>
 
     <mat-card-header>
       <img
@@ -58,7 +60,9 @@ import { ResourceCardTriangleModule } from './resource-card-triangle.component';
     `,
   ],
 })
-export class ResourceCardComponent {}
+export class ResourceCardComponent {
+  resourceType = ResourceType.BlogPost;
+}
 
 @NgModule({
   declarations: [ResourceCardComponent],
@@ -69,6 +73,7 @@ export class ResourceCardComponent {}
     MatButtonModule,
     FlexLayoutModule,
     ResourceCardTriangleModule,
+    ResourceTypeTriangleModule,
   ],
 })
 export class ResourceCardModule {}

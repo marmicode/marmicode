@@ -1,9 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+  NgModule,
+} from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-resource-card-triangle',
+  selector: 'mc-triangle',
   template: `<span class="mc-triangle-text">
     <ng-content></ng-content>
   </span>`,
@@ -11,15 +17,15 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
     `
       :host {
         display: inline-block;
-        background: purple;
         color: white;
         font-weight: bold;
         position: absolute;
         text-align: center;
         vertical-align: bottom;
+        transform: rotateZ(45deg);
+        text-transform: uppercase;
         top: -80px;
         right: -80px;
-        transform: rotateZ(45deg);
         height: 160px;
         width: 160px;
       }
@@ -33,11 +39,15 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
     `,
   ],
 })
-export class ResourceCardTriangleComponent {}
+export class TriangleComponent {
+  @HostBinding('style.background')
+  @Input()
+  color: string;
+}
 
 @NgModule({
-  declarations: [ResourceCardTriangleComponent],
-  exports: [ResourceCardTriangleComponent],
+  declarations: [TriangleComponent],
+  exports: [TriangleComponent],
   imports: [CommonModule],
 })
 export class ResourceCardTriangleModule {}
