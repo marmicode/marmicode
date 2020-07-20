@@ -21,3 +21,11 @@ export const resourceTypeTextMap = new Map<ResourceType, string>([
   [ResourceType.Video, 'Video'],
   [ResourceType.Workshop, 'Workshop'],
 ]);
+
+export const resourceTypeActionMap = new Map<ResourceType, string>([
+  [ResourceType.BlogPost, 'Read'],
+  [ResourceType.Recipe, `Let's cook!`],
+  [ResourceType.Snack, `Let's eat!`],
+  [ResourceType.Video, 'Watch'],
+  [ResourceType.Workshop, 'Register'],
+]);
