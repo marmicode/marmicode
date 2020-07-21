@@ -1,18 +1,6 @@
 import { createResource } from './resource';
 import { ResourceType } from './resource-type';
-import {
-  angularCliBasics,
-  angularLazyLoading,
-  angularModules,
-  jasmine,
-  jest,
-  limbo,
-  modulelessAngular,
-  scam,
-  tcr,
-  timeboxedTdd,
-  typescriptBasics,
-} from './skills';
+import { skills } from './skills';
 
 export const younes = {
   name: 'Younes Jaaidi',
@@ -25,7 +13,7 @@ const angularCliOverviewAndCommandReference = createResource({
   duration: 5,
   pictureUri: '/assets/resources/angular.svg',
   requiredSkills: [],
-  skills: [angularCliBasics.id],
+  skills: [skills.angularCliBasics.id],
   summary: `An introduction to the Angular CLI by the Angular team`,
   url: 'https://angular.io/cli#cli-overview-and-command-reference',
 });
@@ -37,8 +25,12 @@ const boostYourTimeToMarketByDancingTheLimbo = createResource({
   duration: 33,
   pictureUri:
     '/assets/resources/boost-your-time-to-market-by-dancing-the-limbo.jpg',
-  requiredSkills: [jasmine.id, jest.id, typescriptBasics.id],
-  skills: [limbo.id, timeboxedTdd.id, tcr.id],
+  requiredSkills: [
+    skills.jasmine.id,
+    skills.jest.id,
+    skills.typescriptBasics.id,
+  ],
+  skills: [skills.limbo.id, skills.timeboxedTdd.id, skills.tcr.id],
   summary: `Stale or long-lived branches, conflicts & huge code reviews can cause technical and human issues in your team. In this talk, Younes demonstrates some alternative and sometimes extreme approaches promoting single-branch development with techniques like Limbo, Timeboxed TDD and Test && Commit || Revert.`,
   url: 'https://www.youtube.com/watch?v=izGz7H-8yIk',
 });
@@ -49,8 +41,8 @@ const yourAngularModuleIsAScam = createResource({
   author: younes,
   duration: 4,
   pictureUri: '/assets/resources/your-angular-module-is-a-scam.gif',
-  requiredSkills: [angularModules.id, angularLazyLoading.id],
-  skills: [modulelessAngular.id, scam.id],
+  requiredSkills: [skills.angularModules.id, skills.angularLazyLoading.id],
+  skills: [skills.modulelessAngular.id, skills.scam.id],
   summary: `Angular modules can bring some complexity to your app.
   Choosing the right modules architecture is tricky... but wait, do we really need modules?`,
   url:
@@ -63,7 +55,7 @@ const typescriptIn5Minutes = createResource({
   duration: 5,
   pictureUri: '/assets/resources/typescript.jpg',
   requiredSkills: [],
-  skills: [typescriptBasics.id],
+  skills: [skills.typescriptBasics.id],
   summary: `Unsurprisingly, the official TypeScript documentation contains one of the best introductions to TypeScript.`,
   url:
     'https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html',

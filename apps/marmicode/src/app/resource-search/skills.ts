@@ -1,73 +1,57 @@
 import { createSkill, Skill } from './skill';
 import { cli, typescript } from '../topics/topics';
 
-export const angularCliBasics = createSkill({
-  id: 'angular-cli-basics',
-  label: 'Angular CLI Basics',
-  topicId: cli.id,
-});
+export const skills = {
+  angularCliBasics: createSkill({
+    id: 'angular-cli-basics',
+    label: 'Angular CLI Basics',
+    topicId: cli.id,
+  }),
+  angularLazyLoading: createSkill({
+    id: 'angular-lazy-loading',
+    label: 'Angular Lazy Loading',
+  }),
+  angularModules: createSkill({
+    id: 'angular-modules',
+    label: 'Angular Modules',
+  }),
+  jasmine: createSkill({
+    id: 'jasmine',
+    label: 'Jasmine',
+  }),
 
-export const angularLazyLoading = createSkill({
-  id: 'angular-lazy-loading',
-  label: 'Angular Lazy Loading',
-});
+  jest: createSkill({
+    id: 'jest',
+    label: 'Jest',
+  }),
 
-export const angularModules = createSkill({
-  id: 'angular-modules',
-  label: 'Angular Modules',
-});
+  limbo: createSkill({
+    id: 'limbo',
+    label: 'Limbo',
+  }),
 
-export const jasmine = createSkill({
-  id: 'jasmine',
-  label: 'Jasmine',
-});
+  modulelessAngular: createSkill({
+    id: 'moduleless-angular',
+    label: 'Moduleless Angular',
+  }),
 
-export const jest = createSkill({
-  id: 'jest',
-  label: 'Jest',
-});
+  scam: createSkill({
+    id: 'scam',
+    label: 'Single Component Angular Module',
+  }),
 
-export const limbo = createSkill({
-  id: 'limbo',
-  label: 'Limbo',
-});
+  tcr: createSkill({
+    id: 'tcr',
+    label: 'TCR',
+  }),
 
-export const modulelessAngular = createSkill({
-  id: 'moduleless-angular',
-  label: 'Moduleless Angular',
-});
-
-export const scam = createSkill({
-  id: 'scam',
-  label: 'Single Component Angular Module',
-});
-
-export const tcr = createSkill({
-  id: 'tcr',
-  label: 'TCR',
-});
-
-export const timeboxedTdd = createSkill({
-  id: 'timeboxed-tdd',
-  label: 'Timeboxed TDD',
-});
-
-export const typescriptBasics = createSkill({
-  id: 'typescript-basics',
-  label: 'TypeScript Basics',
-  topicId: typescript.id,
-});
-
-export const skills: Skill[] = [
-  angularCliBasics,
-  angularLazyLoading,
-  angularModules,
-  jasmine,
-  jest,
-  limbo,
-  modulelessAngular,
-  scam,
-  tcr,
-  timeboxedTdd,
-  typescriptBasics,
-];
+  timeboxedTdd: createSkill({
+    id: 'timeboxed-tdd',
+    label: 'Timeboxed TDD',
+  }),
+  typescriptBasics: createSkill({
+    id: 'typescript-basics',
+    label: 'TypeScript Basics',
+    topicId: typescript.id,
+  }),
+};
