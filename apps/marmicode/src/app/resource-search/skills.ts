@@ -1,5 +1,11 @@
 import { createSkill, Skill } from './skill';
-import { typescript } from '../topics/topics';
+import { cli, typescript } from '../topics/topics';
+
+export const angularCliBasics = createSkill({
+  id: 'angular-cli-basics',
+  label: 'Angular CLI Basics',
+  topicId: cli.id,
+});
 
 export const angularLazyLoading = createSkill({
   id: 'angular-lazy-loading',
@@ -53,6 +59,7 @@ export const typescriptBasics = createSkill({
 });
 
 export const skills: Skill[] = [
+  angularCliBasics,
   angularLazyLoading,
   angularModules,
   jasmine,

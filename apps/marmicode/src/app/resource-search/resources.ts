@@ -1,6 +1,7 @@
 import { createResource } from './resource';
 import { ResourceType } from './resource-type';
 import {
+  angularCliBasics,
   angularLazyLoading,
   angularModules,
   jasmine,
@@ -17,6 +18,17 @@ export const younes = {
   name: 'Younes Jaaidi',
   pictureUri: '/assets/authors/younes.jpg',
 };
+
+const angularCliOverviewAndCommandReference = createResource({
+  type: ResourceType.Documentation,
+  title: 'Angular CLI Overview and Command Reference',
+  duration: 5,
+  pictureUri: '/assets/resources/angular.svg',
+  requiredSkills: [],
+  skills: [angularCliBasics.id],
+  summary: `An introduction to the Angular CLI by the Angular team`,
+  url: 'https://angular.io/cli#cli-overview-and-command-reference',
+});
 
 const boostYourTimeToMarketByDancingTheLimbo = createResource({
   type: ResourceType.Video,
@@ -58,6 +70,7 @@ const typescriptIn5Minutes = createResource({
 });
 
 export const resources = [
+  angularCliOverviewAndCommandReference,
   boostYourTimeToMarketByDancingTheLimbo,
   typescriptIn5Minutes,
   yourAngularModuleIsAScam,
