@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,37 +8,20 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import {
-  BehaviorSubject,
-  combineLatest,
-  Observable,
-  animationFrameScheduler,
-  of,
-} from 'rxjs';
-import {
-  map,
-  shareReplay,
-  observeOn,
-  pairwise,
-  tap,
-  switchMap,
-} from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'mc-nav',
   template: `
     <!-- Toolbar. -->
-    <mat-toolbar
-      [class.toolbar-hidden]="(isToolbarDisplayed$ | async) === false"
-      class="toolbar"
-      color="primary"
-    >
+    <mat-toolbar color="primary">
       <button
-        *ngIf="isHandset$ | async"
-        (click)="toggleSidenav()"
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
+        (click)="toggleSidenav()"
+        *ngIf="isHandset$ | async"
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
@@ -48,10 +31,7 @@ import {
       </ng-container>
     </mat-toolbar>
 
-    <mat-sidenav-container
-      [class.no-toolbar]="(isToolbarDisplayed$ | async) === false"
-      class="sidenav-container"
-    >
+    <mat-sidenav-container class="sidenav-container">
       <!-- Sidenav. -->
       <mat-sidenav
         class="sidenav"
@@ -66,28 +46,15 @@ import {
       </mat-sidenav>
 
       <!-- Content. -->
-      <mat-sidenav-content (scroll)="onScroll($event)">
+      <mat-sidenav-content>
         <ng-content></ng-content>
       </mat-sidenav-content>
     </mat-sidenav-container>
   `,
   styles: [
     `
-      .toolbar {
-        transition: height 0.3s;
-      }
-
-      .toolbar-hidden {
-        height: 0;
-      }
-
       .sidenav-container {
-        transition: height 0.3s;
         height: calc(100% - 64px);
-      }
-
-      .sidenav-container.no-toolbar {
-        height: 100%;
       }
 
       .sidenav {
@@ -101,20 +68,17 @@ import {
     `,
   ],
 })
-export class NavComponent implements OnInit {
+export class NavComponent {
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
       map((result) => result.matches),
       shareReplay()
     );
-  isToolbarDisplayed$: Observable<boolean>;
   /* State of sidenav. */
   isSidenavOpen$: Observable<boolean>;
   /* Internal state of sidenav. */
   private _isSidenavOpen$ = new BehaviorSubject<boolean>(false);
-
-  private _scrollPosition$ = new BehaviorSubject<number>(0);
 
   constructor(private breakpointObserver: BreakpointObserver) {
     this.isSidenavOpen$ = combineLatest([
@@ -128,25 +92,7 @@ export class NavComponent implements OnInit {
         return isSidenavOpen;
       })
     );
-
-    const isScrollingUp$ = this._scrollPosition$.pipe(
-      observeOn(animationFrameScheduler),
-      pairwise(),
-      map(([previous, current]) => current - previous <= 0)
-    );
-
-    this.isToolbarDisplayed$ = this.isHandset$.pipe(
-      switchMap((isHandset) => {
-        if (!isHandset) {
-          return of(true);
-        }
-
-        return isScrollingUp$;
-      })
-    );
   }
-
-  ngOnInit() {}
 
   closeSidenav() {
     this._isSidenavOpen$.next(false);
@@ -154,10 +100,6 @@ export class NavComponent implements OnInit {
 
   toggleSidenav() {
     this._isSidenavOpen$.next(!this._isSidenavOpen$.value);
-  }
-
-  onScroll(event) {
-    this._scrollPosition$.next(event.target.scrollTop);
   }
 }
 
