@@ -15,12 +15,12 @@ import {
 
 export const younes = {
   name: 'Younes Jaaidi',
-  pictureUri: '/assets/author/younes.jpg',
+  pictureUri: '/assets/authors/younes.jpg',
 };
 
 const yourAngularModuleIsAScam = createResource({
   author: younes,
-  pictureUri: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
+  pictureUri: '/assets/resources/your-angular-module-is-a-scam.gif',
   summary: `The Shiba Inu is the smallest of the six original and distinct spitz
           breeds of dog from Japan. A small, agile dog that copes very well with
           mountainous terrain, the Shiba Inu was originally bred for hunting.`,
@@ -34,7 +34,8 @@ const yourAngularModuleIsAScam = createResource({
 
 const boostYourTimeToMarketByDancingTheLimbo = createResource({
   author: younes,
-  pictureUri: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
+  pictureUri:
+    '/assets/resources/boost-your-time-to-market-by-dancing-the-limbo.jpg',
   summary: `The Shiba Inu is the smallest of the six original and distinct spitz
           breeds of dog from Japan. A small, agile dog that copes very well with
           mountainous terrain, the Shiba Inu was originally bred for hunting.`,
