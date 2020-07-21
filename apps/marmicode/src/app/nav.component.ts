@@ -8,7 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
@@ -20,7 +20,7 @@ import { map, shareReplay } from 'rxjs/operators';
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="drawer.toggle()"
+        (click)="toggleSidenav()"
         *ngIf="isHandset$ | async"
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
@@ -34,13 +34,12 @@ import { map, shareReplay } from 'rxjs/operators';
     <mat-sidenav-container class="sidenav-container">
       <!-- Sidenav. -->
       <mat-sidenav
-        #drawer
         class="sidenav"
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'side'"
-        [opened]="(isHandset$ | async) === false"
+        [opened]="isSidenavOpen$ | async"
       >
-        <mat-nav-list>
+        <mat-nav-list (click)="closeSidenav()">
           <a mat-list-item routerLink="/learning-map">Learning Map</a>
           <a mat-list-item routerLink="/search">Search</a>
         </mat-nav-list>
@@ -76,8 +75,32 @@ export class NavComponent {
       map((result) => result.matches),
       shareReplay()
     );
+  /* State of sidenav. */
+  isSidenavOpen$: Observable<boolean>;
+  /* Internal state of sidenav. */
+  private _isSidenavOpen$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    this.isSidenavOpen$ = combineLatest([
+      this._isSidenavOpen$,
+      this.isHandset$,
+    ]).pipe(
+      map(([isSidenavOpen, isHandset]) => {
+        if (!isHandset) {
+          return true;
+        }
+        return isSidenavOpen;
+      })
+    );
+  }
+
+  closeSidenav() {
+    this._isSidenavOpen$.next(false);
+  }
+
+  toggleSidenav() {
+    this._isSidenavOpen$.next(!this._isSidenavOpen$.value);
+  }
 }
 
 @NgModule({
