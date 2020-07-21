@@ -24,8 +24,8 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-card',
-  template: ` <mat-card class="card">
-    <article>
+  template: ` <mat-card class="card" fxLayout="column">
+    <article class="card-article" fxLayout="column">
       <img
         [src]="resource.pictureUri"
         class="picture"
@@ -48,7 +48,7 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
         </mat-card-subtitle>
       </mat-card-header>
 
-      <mat-card-content>
+      <mat-card-content fxFlex>
         <p>
           {{ resource.summary }}
         </p>
@@ -99,12 +99,18 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
   styles: [
     `
       :host {
-        display: block;
+        display: flex;
+        flex-direction: column;
         width: 550px;
       }
 
       .card {
         overflow: hidden;
+        flex: 1;
+      }
+
+      .card-article {
+        flex: 1;
       }
 
       .picture {
