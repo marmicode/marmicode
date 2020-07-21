@@ -1,4 +1,4 @@
-import { createTopic, Topic } from './topic';
+import { createTopic, Topic } from '../topics/topic';
 import {
   getDepthCountMap,
   getTopicsTreeConfig,

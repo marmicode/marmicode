@@ -1,4 +1,4 @@
-import { createTopic } from '../learning-map/topic';
+import { createTopic } from './topic';
 
 export const topics = [
   createTopic({
