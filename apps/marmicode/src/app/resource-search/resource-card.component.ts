@@ -83,14 +83,16 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
       </mat-card-content>
 
       <mat-card-actions fxLayout="row" fxLayoutAlign="center">
-        <button
-          [style.backgroundColor]="color"
-          class="action-button"
-          mat-raised-button
-          color="primary"
-        >
-          {{ actionText }}
-        </button>
+        <a [href]="resource.url" target="_blank">
+          <button
+            [style.backgroundColor]="color"
+            class="action-button"
+            mat-raised-button
+            color="primary"
+          >
+            {{ actionText }}
+          </button>
+        </a>
       </mat-card-actions>
     </article>
   </mat-card>`,

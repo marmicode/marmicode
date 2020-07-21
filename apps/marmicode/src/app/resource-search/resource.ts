@@ -18,6 +18,7 @@ export interface Resource {
   title: string;
   pictureUri: string;
   summary: string;
+  url: string;
 }
 
 export function createResource(resource: Resource) {

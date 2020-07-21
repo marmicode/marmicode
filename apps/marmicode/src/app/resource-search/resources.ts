@@ -28,6 +28,8 @@ const yourAngularModuleIsAScam = createResource({
   type: ResourceType.BlogPost,
   skills: [modulelessAngular.id, scam.id],
   requiredSkills: [angularModules.id, angularLazyLoading.id],
+  url:
+    'https://medium.com/marmicode/your-angular-module-is-a-scam-b4136ca3917b',
 });
 
 const boostYourTimeToMarketByDancingTheLimbo = createResource({
@@ -40,6 +42,7 @@ const boostYourTimeToMarketByDancingTheLimbo = createResource({
   type: ResourceType.Video,
   skills: [limbo.id, timeboxedTdd.id, tcr.id],
   requiredSkills: [jasmine.id, jest.id, typescript.id],
+  url: 'https://www.youtube.com/watch?v=izGz7H-8yIk',
 });
 
 export const resources = [
