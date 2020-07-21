@@ -1,20 +1,20 @@
 import { createTopic } from './topic';
 
-const typescript = createTopic({
+export const typescript = createTopic({
   id: 'typescript',
   name: 'Typescript',
   depth: 1,
   nextTopics: ['rxjs', 'components'],
 });
 
-const cli = createTopic({
+export const cli = createTopic({
   id: 'cli',
   name: 'CLI',
   depth: 1,
   nextTopics: ['components'],
 });
 
-const webBasics = createTopic({
+export const webBasics = createTopic({
   id: 'web-basics',
   name: 'Web Basics',
   depth: 0,

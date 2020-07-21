@@ -1,4 +1,5 @@
 import { createSkill, Skill } from './skill';
+import { typescript } from '../topics/topics';
 
 export const angularLazyLoading = createSkill({
   id: 'angular-lazy-loading',
@@ -48,6 +49,7 @@ export const timeboxedTdd = createSkill({
 export const typescriptBasics = createSkill({
   id: 'typescript-basics',
   label: 'TypeScript Basics',
+  topicId: typescript.id,
 });
 
 export const skills: Skill[] = [
