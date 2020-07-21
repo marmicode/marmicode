@@ -15,7 +15,7 @@ import {
 
 export const younes = {
   name: 'Younes Jaaidi',
-  pictureUri: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
+  pictureUri: '/assets/author/younes.jpg',
 };
 
 const yourAngularModuleIsAScam = createResource({
