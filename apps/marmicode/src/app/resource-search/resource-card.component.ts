@@ -29,9 +29,9 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
       <img
         *ngIf="resource.pictureUri"
         [src]="resource.pictureUri"
+        [alt]="resource.title"
         class="picture"
         mat-card-image
-        alt="Photo of a Shiba Inu"
       />
       <mc-resource-type-triangle
         [resourceType]="resource.type"
