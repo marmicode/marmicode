@@ -38,21 +38,14 @@ import { TreeConfig } from './tree-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.ShadowDom,
   selector: 'mc-tree',
-  template: ` <button
-      (click)="recenter$.next()"
-      class="tree-recenter-button"
-      type="button"
-    >
-      RECENTER
-    </button>
-    <div #treeContainer class="tree-container">
-      <div
-        #tree
-        [style.height.px]="treeHeight$ | async"
-        [style.width.px]="treeWidth$ | async"
-        class="tree"
-      ></div>
-    </div>`,
+  template: ` <div #treeContainer class="tree-container">
+    <div
+      #tree
+      [style.height.px]="treeHeight$ | async"
+      [style.width.px]="treeWidth$ | async"
+      class="tree"
+    ></div>
+  </div>`,
   styles: [
     `
       :host {
@@ -66,13 +59,6 @@ import { TreeConfig } from './tree-config';
       .tree {
         overflow: hidden;
         min-height: 100vh;
-      }
-
-      .tree-recenter-button {
-        position: fixed;
-        bottom: 10px;
-        right: 10px;
-        z-index: 1;
       }
 
       circle {
@@ -224,7 +210,7 @@ export class TreeComponent implements OnInit {
   }
 
   @HostListener('window:resize')
-  onResize() {
+  recenter() {
     this.recenter$.next();
   }
 }
