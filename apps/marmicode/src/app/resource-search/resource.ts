@@ -12,11 +12,12 @@ export function createAuthor(author: Author) {
 export interface Resource {
   id?: string;
   type: ResourceType;
-  author?: Author;
-  skills: string[];
-  requiredSkills: string[];
   title: string;
+  author?: Author;
+  duration: number;
   pictureUri?: string;
+  requiredSkills: string[];
+  skills: string[];
   summary: string;
   url: string;
 }

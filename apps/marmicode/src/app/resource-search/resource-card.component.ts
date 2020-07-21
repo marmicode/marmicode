@@ -51,7 +51,7 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
             <span class="author">by {{ resource.author.name }}</span>
             <span>&nbsp;-&nbsp;</span>
           </ng-container>
-          <span [style.color]="color">4 minutes read</span>
+          <span [style.color]="color">{{ resource.duration }} minutes</span>
         </mat-card-subtitle>
       </mat-card-header>
 
