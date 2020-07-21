@@ -21,9 +21,8 @@ export const younes = {
 const yourAngularModuleIsAScam = createResource({
   author: younes,
   pictureUri: '/assets/resources/your-angular-module-is-a-scam.gif',
-  summary: `The Shiba Inu is the smallest of the six original and distinct spitz
-          breeds of dog from Japan. A small, agile dog that copes very well with
-          mountainous terrain, the Shiba Inu was originally bred for hunting.`,
+  summary: `Angular modules can bring some complexity to your app.
+  Choosing the right modules architecture is tricky... but wait, do we really need modules?`,
   title: 'Your Angular Module is a SCAM!',
   type: ResourceType.BlogPost,
   skills: [modulelessAngular.id, scam.id],
@@ -36,9 +35,7 @@ const boostYourTimeToMarketByDancingTheLimbo = createResource({
   author: younes,
   pictureUri:
     '/assets/resources/boost-your-time-to-market-by-dancing-the-limbo.jpg',
-  summary: `The Shiba Inu is the smallest of the six original and distinct spitz
-          breeds of dog from Japan. A small, agile dog that copes very well with
-          mountainous terrain, the Shiba Inu was originally bred for hunting.`,
+  summary: `Stale or long-lived branches, conflicts & huge code reviews can cause technical and human issues in your team. In this talk, Younes demonstrates some alternative and sometimes extreme approaches promoting single-branch development with techniques like Limbo, Timeboxed TDD and Test && Commit || Revert.`,
   title: 'Boost Your Time to Market by Dancing the Limbo',
   type: ResourceType.Video,
   skills: [limbo.id, timeboxedTdd.id, tcr.id],
