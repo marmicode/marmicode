@@ -1,24 +1,30 @@
 import { createTopic } from './topic';
 
+const typescript = createTopic({
+  id: 'typescript',
+  name: 'Typescript',
+  depth: 1,
+  nextTopics: ['rxjs', 'components'],
+});
+
+const cli = createTopic({
+  id: 'cli',
+  name: 'CLI',
+  depth: 1,
+  nextTopics: ['components'],
+});
+
+const webBasics = createTopic({
+  id: 'web-basics',
+  name: 'Web Basics',
+  depth: 0,
+  nextTopics: [typescript.id, cli.id],
+});
+
 export const topics = [
-  createTopic({
-    id: 'web-basics',
-    name: 'Web Basics',
-    depth: 0,
-    nextTopics: ['typescript', 'cli'],
-  }),
-  createTopic({
-    id: 'typescript',
-    name: 'Typescript',
-    depth: 1,
-    nextTopics: ['rxjs', 'components'],
-  }),
-  createTopic({
-    id: 'cli',
-    name: 'CLI',
-    depth: 1,
-    nextTopics: ['components'],
-  }),
+  webBasics,
+  typescript,
+  cli,
   createTopic({
     id: 'components',
     name: 'Components',

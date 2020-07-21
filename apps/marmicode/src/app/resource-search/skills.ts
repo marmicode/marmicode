@@ -45,9 +45,9 @@ export const timeboxedTdd = createSkill({
   label: 'Timeboxed TDD',
 });
 
-export const typescript = createSkill({
-  id: 'typescript',
-  label: 'Typescript',
+export const typescriptBasics = createSkill({
+  id: 'typescript-basics',
+  label: 'TypeScript Basics',
 });
 
 export const skills: Skill[] = [
@@ -60,5 +60,5 @@ export const skills: Skill[] = [
   scam,
   tcr,
   timeboxedTdd,
-  typescript,
+  typescriptBasics,
 ];

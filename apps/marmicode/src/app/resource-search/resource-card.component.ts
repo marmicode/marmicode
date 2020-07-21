@@ -27,6 +27,7 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
   template: ` <mat-card class="card" fxLayout="column">
     <article class="card-article" fxLayout="column">
       <img
+        *ngIf="resource.pictureUri"
         [src]="resource.pictureUri"
         class="picture"
         mat-card-image
@@ -37,13 +38,19 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
       ></mc-resource-type-triangle>
 
       <mat-card-header>
-        <img [src]="resource.author.pictureUri" mat-card-avatar />
+        <img
+          *ngIf="resource.author"
+          [src]="resource.author.pictureUri"
+          mat-card-avatar
+        />
         <mat-card-title>
           <h2 class="title">{{ resource.title }}</h2>
         </mat-card-title>
         <mat-card-subtitle fxLayout="row">
-          <span class="author">by {{ resource.author.name }}</span>
-          <span>&nbsp;-&nbsp;</span>
+          <ng-container *ngIf="resource.author">
+            <span class="author">by {{ resource.author.name }}</span>
+            <span>&nbsp;-&nbsp;</span>
+          </ng-container>
           <span [style.color]="color">4 minutes read</span>
         </mat-card-subtitle>
       </mat-card-header>
@@ -66,7 +73,10 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
             </div>
           </mat-chip-list>
         </section>
-        <section class="list-container">
+        <section
+          *ngIf="resource.requiredSkills.length > 0"
+          class="list-container"
+        >
           <h3 [style.color]="color" class="list-title">Required Skills</h3>
           <mat-chip-list>
             <div fxLayout="row wrap">
