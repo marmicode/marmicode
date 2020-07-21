@@ -12,6 +12,7 @@ import { Component } from '@angular/core';
       :host {
         display: block;
         font-family: sans-serif;
+        height: 100%;
       }
     `,
   ],
