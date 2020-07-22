@@ -19,32 +19,26 @@ export const skills = {
     id: 'jasmine',
     label: 'Jasmine',
   }),
-
   jest: createSkill({
     id: 'jest',
     label: 'Jest',
   }),
-
   limbo: createSkill({
     id: 'limbo',
     label: 'Limbo',
   }),
-
   modulelessAngular: createSkill({
     id: 'moduleless-angular',
     label: 'Moduleless Angular',
   }),
-
   scam: createSkill({
     id: 'scam',
     label: 'Single Component Angular Module',
   }),
-
   tcr: createSkill({
     id: 'tcr',
     label: 'TCR',
   }),
-
   timeboxedTdd: createSkill({
     id: 'timeboxed-tdd',
     label: 'Timeboxed TDD',
