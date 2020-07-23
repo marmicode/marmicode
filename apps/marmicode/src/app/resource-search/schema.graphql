@@ -1,0 +1,596 @@
+type Query {
+  asset(id: String!, preview: Boolean, locale: String): Asset
+  assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
+  resource(id: String!, preview: Boolean, locale: String): Resource
+  resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ResourceFilter, order: [ResourceOrder]): ResourceCollection
+  skill(id: String!, preview: Boolean, locale: String): Skill
+  skillCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: SkillFilter, order: [SkillOrder]): SkillCollection
+  topic(id: String!, preview: Boolean, locale: String): Topic
+  topicCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TopicFilter, order: [TopicOrder]): TopicCollection
+  author(id: String!, preview: Boolean, locale: String): Author
+  authorCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AuthorFilter, order: [AuthorOrder]): AuthorCollection
+}
+
+"""Represents a binary file in a space. An asset can be any file type."""
+type Asset {
+  sys: Sys!
+  title: String
+  description: String
+  contentType: String
+  fileName: String
+  size: Int
+  url(transform: ImageTransformOptions): String
+  width: Int
+  height: Int
+  linkedFrom: AssetLinkingCollections
+}
+
+type Sys {
+  id: String!
+  spaceId: String!
+  environmentId: String!
+  publishedAt: DateTime
+  firstPublishedAt: DateTime
+  publishedVersion: Int
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z,
+    compliant with the 'date-time' format outlined in section 5.6 of
+    the RFC 3339 profile of the ISO 8601 standard for representation
+    of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+input ImageTransformOptions {
+  """Desired width in pixels. Defaults to the original image width."""
+  width: Dimension
+
+  """Desired height in pixels. Defaults to the original image height."""
+  height: Dimension
+
+  """
+  Desired quality of the image in percents.
+          Used for `PNG8`, `JPG`, `JPG_PROGRESSIVE` and `WEBP` formats.
+  """
+  quality: Quality
+
+  """
+  Desired corner radius in pixels.
+          Results in an image with rounded corners (pass `-1` for a full circle/ellipse).
+          Defaults to `0`. Uses desired background color as padding color,
+          unless the format is `JPG` or `JPG_PROGRESSIVE` and resize strategy is `PAD`, then defaults to white.
+  """
+  cornerRadius: Int
+
+  """Desired resize strategy. Defaults to `FIT`."""
+  resizeStrategy: ImageResizeStrategy
+
+  """Desired resize focus area. Defaults to `CENTER`."""
+  resizeFocus: ImageResizeFocus
+
+  """
+  Desired background color, used with corner radius or `PAD` resize strategy.
+          Defaults to transparent (for `PNG`, `PNG8` and `WEBP`) or white (for `JPG` and `JPG_PROGRESSIVE`).
+  """
+  backgroundColor: HexColor
+
+  """Desired image format. Defaults to the original image format."""
+  format: ImageFormat
+}
+
+"""
+The 'Dimension' type represents dimensions as whole numeric values between `1` and `4000`.
+"""
+scalar Dimension
+
+"""
+The 'Quality' type represents quality as whole numeric values between `1` and `100`.
+"""
+scalar Quality
+
+enum ImageResizeStrategy {
+  """Resizes the image to fit into the specified dimensions."""
+  FIT
+
+  """
+  Resizes the image to the specified dimensions, padding the image if needed.
+          Uses desired background color as padding color.
+  """
+  PAD
+
+  """
+  Resizes the image to the specified dimensions, cropping the image if needed.
+  """
+  FILL
+
+  """
+  Resizes the image to the specified dimensions, changing the original aspect ratio if needed.
+  """
+  SCALE
+
+  """
+  Crops a part of the original image to fit into the specified dimensions.
+  """
+  CROP
+
+  """Creates a thumbnail from the image."""
+  THUMB
+}
+
+enum ImageResizeFocus {
+  """Focus the resizing on the center."""
+  CENTER
+
+  """Focus the resizing on the top."""
+  TOP
+
+  """Focus the resizing on the top right."""
+  TOP_RIGHT
+
+  """Focus the resizing on the right."""
+  RIGHT
+
+  """Focus the resizing on the bottom right."""
+  BOTTOM_RIGHT
+
+  """Focus the resizing on the bottom."""
+  BOTTOM
+
+  """Focus the resizing on the bottom left."""
+  BOTTOM_LEFT
+
+  """Focus the resizing on the left."""
+  LEFT
+
+  """Focus the resizing on the top left."""
+  TOP_LEFT
+
+  """Focus the resizing on the largest face."""
+  FACE
+
+  """Focus the resizing on the area containing all the faces."""
+  FACES
+}
+
+"""The 'HexColor' type represents color in `rgb:ffffff` string format."""
+scalar HexColor
+
+enum ImageFormat {
+  """JPG image format."""
+  JPG
+
+  """
+  Progressive JPG format stores multiple passes of an image in progressively higher detail.
+          When a progressive image is loading, the viewer will first see a lower quality pixelated version which
+          will gradually improve in detail, until the image is fully downloaded. This is to display an image as
+          early as possible to make the layout look as designed.
+  """
+  JPG_PROGRESSIVE
+
+  """PNG image format"""
+  PNG
+
+  """
+  8-bit PNG images support up to 256 colors and weigh less than the standard 24-bit PNG equivalent.
+          The 8-bit PNG format is mostly used for simple images, such as icons or logos.
+  """
+  PNG8
+
+  """WebP image format."""
+  WEBP
+}
+
+type AssetLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceCollection
+  authorCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): AuthorCollection
+}
+
+type EntryCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Entry]!
+}
+
+interface Entry {
+  sys: Sys!
+}
+
+type ResourceCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Resource]!
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource)
+"""
+type Resource implements Entry {
+  sys: Sys!
+  linkedFrom: ResourceLinkingCollections
+  title: String
+  slug: String
+  resourceType: String
+  author(preview: Boolean, locale: String): Author
+  duration: Int
+  picture(preview: Boolean, locale: String): Asset
+  summary: String
+  url: String
+}
+
+type ResourceLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author)
+"""
+type Author implements Entry {
+  sys: Sys!
+  linkedFrom: AuthorLinkingCollections
+  name: String
+  picture(preview: Boolean, locale: String): Asset
+}
+
+type AuthorLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceCollection
+}
+
+type AuthorCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Author]!
+}
+
+input AssetFilter {
+  sys: SysFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  description_exists: Boolean
+  description: String
+  description_not: String
+  description_in: [String]
+  description_not_in: [String]
+  description_contains: String
+  description_not_contains: String
+  url_exists: Boolean
+  url: String
+  url_not: String
+  url_in: [String]
+  url_not_in: [String]
+  url_contains: String
+  url_not_contains: String
+  size_exists: Boolean
+  size: Int
+  size_not: Int
+  size_in: [Int]
+  size_not_in: [Int]
+  size_gt: Int
+  size_gte: Int
+  size_lt: Int
+  size_lte: Int
+  contentType_exists: Boolean
+  contentType: String
+  contentType_not: String
+  contentType_in: [String]
+  contentType_not_in: [String]
+  contentType_contains: String
+  contentType_not_contains: String
+  fileName_exists: Boolean
+  fileName: String
+  fileName_not: String
+  fileName_in: [String]
+  fileName_not_in: [String]
+  fileName_contains: String
+  fileName_not_contains: String
+  width_exists: Boolean
+  width: Int
+  width_not: Int
+  width_in: [Int]
+  width_not_in: [Int]
+  width_gt: Int
+  width_gte: Int
+  width_lt: Int
+  width_lte: Int
+  height_exists: Boolean
+  height: Int
+  height_not: Int
+  height_in: [Int]
+  height_not_in: [Int]
+  height_gt: Int
+  height_gte: Int
+  height_lt: Int
+  height_lte: Int
+  OR: [AssetFilter]
+  AND: [AssetFilter]
+}
+
+input SysFilter {
+  id_exists: Boolean
+  id: String
+  id_not: String
+  id_in: [String]
+  id_not_in: [String]
+  id_contains: String
+  id_not_contains: String
+  publishedAt_exists: Boolean
+  publishedAt: String
+  publishedAt_not: String
+  publishedAt_in: [String]
+  publishedAt_not_in: [String]
+  publishedAt_contains: String
+  publishedAt_not_contains: String
+  firstPublishedAt_exists: Boolean
+  firstPublishedAt: String
+  firstPublishedAt_not: String
+  firstPublishedAt_in: [String]
+  firstPublishedAt_not_in: [String]
+  firstPublishedAt_contains: String
+  firstPublishedAt_not_contains: String
+  publishedVersion_exists: Boolean
+  publishedVersion: String
+  publishedVersion_not: String
+  publishedVersion_in: [String]
+  publishedVersion_not_in: [String]
+  publishedVersion_contains: String
+  publishedVersion_not_contains: String
+}
+
+enum AssetOrder {
+  url_ASC
+  url_DESC
+  size_ASC
+  size_DESC
+  contentType_ASC
+  contentType_DESC
+  fileName_ASC
+  fileName_DESC
+  width_ASC
+  width_DESC
+  height_ASC
+  height_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type AssetCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Asset]!
+}
+
+input ResourceFilter {
+  author: cfAuthorNestedFilter
+  sys: SysFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  resourceType_exists: Boolean
+  resourceType: String
+  resourceType_not: String
+  resourceType_in: [String]
+  resourceType_not_in: [String]
+  resourceType_contains: String
+  resourceType_not_contains: String
+  duration_exists: Boolean
+  duration: Int
+  duration_not: Int
+  duration_in: [Int]
+  duration_not_in: [Int]
+  duration_gt: Int
+  duration_gte: Int
+  duration_lt: Int
+  duration_lte: Int
+  summary_exists: Boolean
+  summary: String
+  summary_not: String
+  summary_in: [String]
+  summary_not_in: [String]
+  summary_contains: String
+  summary_not_contains: String
+  url_exists: Boolean
+  url: String
+  url_not: String
+  url_in: [String]
+  url_not_in: [String]
+  url_contains: String
+  url_not_contains: String
+  OR: [ResourceFilter]
+  AND: [ResourceFilter]
+}
+
+input cfAuthorNestedFilter {
+  sys: SysFilter
+  name_exists: Boolean
+  name: String
+  name_not: String
+  name_in: [String]
+  name_not_in: [String]
+  name_contains: String
+  name_not_contains: String
+  OR: [cfAuthorNestedFilter]
+  AND: [cfAuthorNestedFilter]
+}
+
+enum ResourceOrder {
+  title_ASC
+  title_DESC
+  slug_ASC
+  slug_DESC
+  resourceType_ASC
+  resourceType_DESC
+  duration_ASC
+  duration_DESC
+  url_ASC
+  url_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/skill)
+"""
+type Skill implements Entry {
+  sys: Sys!
+  linkedFrom: SkillLinkingCollections
+  label: String
+  topic(preview: Boolean, locale: String): Topic
+}
+
+type SkillLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/topic)
+"""
+type Topic implements Entry {
+  sys: Sys!
+  linkedFrom: TopicLinkingCollections
+  label: String
+}
+
+type TopicLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  skillCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): SkillCollection
+}
+
+type SkillCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Skill]!
+}
+
+input SkillFilter {
+  topic: cfTopicNestedFilter
+  sys: SysFilter
+  label_exists: Boolean
+  label: String
+  label_not: String
+  label_in: [String]
+  label_not_in: [String]
+  label_contains: String
+  label_not_contains: String
+  OR: [SkillFilter]
+  AND: [SkillFilter]
+}
+
+input cfTopicNestedFilter {
+  sys: SysFilter
+  label_exists: Boolean
+  label: String
+  label_not: String
+  label_in: [String]
+  label_not_in: [String]
+  label_contains: String
+  label_not_contains: String
+  OR: [cfTopicNestedFilter]
+  AND: [cfTopicNestedFilter]
+}
+
+enum SkillOrder {
+  label_ASC
+  label_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input TopicFilter {
+  sys: SysFilter
+  label_exists: Boolean
+  label: String
+  label_not: String
+  label_in: [String]
+  label_not_in: [String]
+  label_contains: String
+  label_not_contains: String
+  OR: [TopicFilter]
+  AND: [TopicFilter]
+}
+
+enum TopicOrder {
+  label_ASC
+  label_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type TopicCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Topic]!
+}
+
+input AuthorFilter {
+  sys: SysFilter
+  name_exists: Boolean
+  name: String
+  name_not: String
+  name_in: [String]
+  name_not_in: [String]
+  name_contains: String
+  name_not_contains: String
+  OR: [AuthorFilter]
+  AND: [AuthorFilter]
+}
+
+enum AuthorOrder {
+  name_ASC
+  name_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}

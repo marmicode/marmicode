@@ -1,0 +1,10 @@
+schema:
+  - https://graphql.contentful.com/content/v1/spaces/gowvxq3b4aid/environments/master?token=_d7Vb4r2lborp1uLTvsv0ne7fB0OMez2FscTnHQux5A:
+      headers:
+        Authorization: Bearer _d7Vb4r2lborp1uLTvsv0ne7fB0OMez2FscTnHQux5A
+extensions:
+  codegen:
+    generates:
+      ./apps/marmicode/src/app/resource-search/schema.graphql:
+        plugins:
+          - schema-ast
