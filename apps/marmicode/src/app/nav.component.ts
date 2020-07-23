@@ -15,20 +15,32 @@ import { map, shareReplay } from 'rxjs/operators';
   selector: 'mc-nav',
   template: `
     <!-- Toolbar. -->
-    <mat-toolbar color="primary">
+    <mat-toolbar class="toolbar" color="primary">
       <ng-container>
         <img height="40" src="/assets/logo-white.svg" />
         <span fxFlexAlign="end" class="title">Marmicode</span>
       </ng-container>
     </mat-toolbar>
 
-    <ng-content></ng-content>
+    <section class="container">
+      <ng-content></ng-content>
+    </section>
   `,
   styles: [
     `
+      .toolbar {
+        position: fixed;
+        top: 0;
+        z-index: 1;
+      }
+
       .title {
         margin-left: 15px;
         margin-bottom: 2px;
+      }
+
+      .container {
+        padding-top: 64px;
       }
     `,
   ],
