@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
+import { Element } from '@angular/compiler';
+import { Component, HostListener, NgModule } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,8 +9,14 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import {
+  animationFrameScheduler,
+  BehaviorSubject,
+  combineLatest,
+  observable,
+  Observable,
+} from 'rxjs';
+import { map, observeOn, pairwise, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'mc-nav',
@@ -28,6 +35,12 @@ import { map, shareReplay } from 'rxjs/operators';
   `,
   styles: [
     `
+      :host {
+        display: block;
+        height: 100%;
+        overflow: scroll;
+      }
+
       .toolbar {
         position: fixed;
         top: 0;
@@ -45,7 +58,24 @@ import { map, shareReplay } from 'rxjs/operators';
     `,
   ],
 })
-export class NavComponent {}
+export class NavComponent {
+  isScrollingUp$: Observable<boolean>;
+
+  private _scrollPosition$ = new BehaviorSubject(0);
+
+  constructor() {
+    this.isScrollingUp$ = this._scrollPosition$.pipe(
+      observeOn(animationFrameScheduler),
+      pairwise(),
+      map(([previous, current]) => current - previous < 0)
+    );
+  }
+
+  @HostListener('scroll', ['$event'])
+  onScroll(event: Event) {
+    this._scrollPosition$.next((event.target as HTMLElement).scrollTop);
+  }
+}
 
 @NgModule({
   declarations: [NavComponent],
