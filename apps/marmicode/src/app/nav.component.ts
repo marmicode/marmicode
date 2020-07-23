@@ -22,7 +22,11 @@ import { map, observeOn, pairwise, shareReplay } from 'rxjs/operators';
   selector: 'mc-nav',
   template: `
     <!-- Toolbar. -->
-    <mat-toolbar class="toolbar" color="primary">
+    <mat-toolbar
+      [class.toolbar-hidden]="isScrollingDown$ | async"
+      class="toolbar"
+      color="primary"
+    >
       <ng-container>
         <img height="40" src="/assets/logo-white.svg" />
         <span fxFlexAlign="end" class="title">Marmicode</span>
@@ -44,7 +48,12 @@ import { map, observeOn, pairwise, shareReplay } from 'rxjs/operators';
       .toolbar {
         position: fixed;
         top: 0;
+        transition: top 0.5s;
         z-index: 1;
+      }
+
+      .toolbar-hidden {
+        top: -64px;
       }
 
       .title {
@@ -59,15 +68,15 @@ import { map, observeOn, pairwise, shareReplay } from 'rxjs/operators';
   ],
 })
 export class NavComponent {
-  isScrollingUp$: Observable<boolean>;
+  isScrollingDown$: Observable<boolean>;
 
   private _scrollPosition$ = new BehaviorSubject(0);
 
   constructor() {
-    this.isScrollingUp$ = this._scrollPosition$.pipe(
+    this.isScrollingDown$ = this._scrollPosition$.pipe(
       observeOn(animationFrameScheduler),
       pairwise(),
-      map(([previous, current]) => current - previous < 0)
+      map(([previous, current]) => current > 64 && current - previous > 0)
     );
   }
 
