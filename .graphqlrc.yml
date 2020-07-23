@@ -5,6 +5,11 @@ schema:
 extensions:
   codegen:
     generates:
-      ./apps/marmicode/src/app/resource-search/schema.graphql:
+      ./apps/marmicode/src/app/graphql/schema.graphql:
         plugins:
           - schema-ast
+      ./apps/marmicode/src/app/graphql/schema.ts:
+        plugins:
+          - typescript
+        config:
+          declarationKind: 'interface'
