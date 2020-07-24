@@ -68,7 +68,7 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
                 [disabled]="true"
                 [style.opacity]="1"
               >
-                {{ skill | skillLabel }}
+                {{ skill?.label || (skill | skillLabel) }}
               </mat-chip>
             </div>
           </mat-chip-list>
@@ -85,7 +85,7 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
                 [disabled]="true"
                 [style.opacity]="1"
               >
-                {{ skill | skillLabel }}
+                {{ skill?.label || (skill | skillLabel) }}
               </mat-chip>
             </div>
           </mat-chip-list>

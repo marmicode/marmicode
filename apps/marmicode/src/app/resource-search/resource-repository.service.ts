@@ -16,11 +16,36 @@ const AllResourcesQuery = gql`
         sys {
           id
         }
+        resourceType
         title
+        author {
+          name
+          picture {
+            url
+          }
+        }
+        duration
         picture {
           url
         }
-        duration
+        requiredSkillCollection(limit: 10) {
+          items {
+            sys {
+              id
+            }
+            label
+            slug
+          }
+        }
+        skillCollection(limit: 10) {
+          items {
+            sys {
+              id
+            }
+            label
+            slug
+          }
+        }
         summary
         url
       }
