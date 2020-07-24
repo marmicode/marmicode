@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import { map } from 'rxjs/operators';
 import { GraphQLModule } from '../graphql.module';
 import { Query } from '../graphql/schema';
-import { createResource, Resource } from './resource';
+import { createAuthor, createResource, Resource } from './resource';
 
 const AllResourcesQuery = gql`
   query Resources {
@@ -30,18 +30,34 @@ export class ResourceRepository {
   constructor(private _apollo: Apollo) {}
 
   getResources() {
-    return this._apollo.query<Query>({
-      query: AllResourcesQuery,
-    });
-    // .pipe(
-    //   map(({ data }) => {
-    //     return data.resourceCollection.items.map((item) => {
-    //       return createResource({
-    //         id: item.sys.id,
-    //       });
-    //     });
-    //   })
-    // );
+    return this._apollo
+      .query<Query>({
+        query: AllResourcesQuery,
+      })
+      .pipe(
+        map(({ data }) =>
+          data.resourceCollection.items.map((item) =>
+            createResource({
+              id: item.sys.id,
+              type: item.resourceType as any,
+              title: item.title,
+              author:
+                item.author &&
+                createAuthor({
+                  name: item.author.name,
+                  pictureUri: item.author.picture.url,
+                }),
+              duration: item.duration,
+              pictureUri: item.picture.url,
+              // @todo
+              requiredSkills: [],
+              skills: [],
+              summary: item.summary,
+              url: item.url,
+            })
+          )
+        )
+      );
   }
 }
 

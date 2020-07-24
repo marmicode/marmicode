@@ -1,12 +1,12 @@
 type Query {
   asset(id: String!, preview: Boolean, locale: String): Asset
   assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
-  resource(id: String!, preview: Boolean, locale: String): Resource
-  resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ResourceFilter, order: [ResourceOrder]): ResourceCollection
-  skill(id: String!, preview: Boolean, locale: String): Skill
-  skillCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: SkillFilter, order: [SkillOrder]): SkillCollection
   topic(id: String!, preview: Boolean, locale: String): Topic
   topicCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TopicFilter, order: [TopicOrder]): TopicCollection
+  skill(id: String!, preview: Boolean, locale: String): Skill
+  skillCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: SkillFilter, order: [SkillOrder]): SkillCollection
+  resource(id: String!, preview: Boolean, locale: String): Resource
+  resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ResourceFilter, order: [ResourceOrder]): ResourceCollection
   author(id: String!, preview: Boolean, locale: String): Author
   authorCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AuthorFilter, order: [AuthorOrder]): AuthorCollection
 }
@@ -217,6 +217,8 @@ type Resource implements Entry {
   author(preview: Boolean, locale: String): Author
   duration: Int
   picture(preview: Boolean, locale: String): Asset
+  requiredSkillsCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceRequiredSkillsCollection
+  skillsCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceSkillsCollection
   summary: String
   url: String
 }
@@ -238,6 +240,58 @@ type Author implements Entry {
 type AuthorLinkingCollections {
   entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceCollection
+}
+
+type ResourceRequiredSkillsCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Skill]!
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/skill)
+"""
+type Skill implements Entry {
+  sys: Sys!
+  linkedFrom: SkillLinkingCollections
+  label: String
+  slug: String
+  topic(preview: Boolean, locale: String): Topic
+}
+
+type SkillLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceCollection
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/topic)
+"""
+type Topic implements Entry {
+  sys: Sys!
+  linkedFrom: TopicLinkingCollections
+  label: String
+  slug: String
+}
+
+type TopicLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  skillCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): SkillCollection
+}
+
+type SkillCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Skill]!
+}
+
+type ResourceSkillsCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Skill]!
 }
 
 type AuthorCollection {
@@ -376,6 +430,104 @@ type AssetCollection {
   items: [Asset]!
 }
 
+input TopicFilter {
+  sys: SysFilter
+  label_exists: Boolean
+  label: String
+  label_not: String
+  label_in: [String]
+  label_not_in: [String]
+  label_contains: String
+  label_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  OR: [TopicFilter]
+  AND: [TopicFilter]
+}
+
+enum TopicOrder {
+  label_ASC
+  label_DESC
+  slug_ASC
+  slug_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type TopicCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Topic]!
+}
+
+input SkillFilter {
+  topic: cfTopicNestedFilter
+  sys: SysFilter
+  label_exists: Boolean
+  label: String
+  label_not: String
+  label_in: [String]
+  label_not_in: [String]
+  label_contains: String
+  label_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  OR: [SkillFilter]
+  AND: [SkillFilter]
+}
+
+input cfTopicNestedFilter {
+  sys: SysFilter
+  label_exists: Boolean
+  label: String
+  label_not: String
+  label_in: [String]
+  label_not_in: [String]
+  label_contains: String
+  label_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  OR: [cfTopicNestedFilter]
+  AND: [cfTopicNestedFilter]
+}
+
+enum SkillOrder {
+  label_ASC
+  label_DESC
+  slug_ASC
+  slug_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
 input ResourceFilter {
   author: cfAuthorNestedFilter
   sys: SysFilter
@@ -459,114 +611,6 @@ enum ResourceOrder {
   sys_firstPublishedAt_DESC
   sys_publishedVersion_ASC
   sys_publishedVersion_DESC
-}
-
-"""
-[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/skill)
-"""
-type Skill implements Entry {
-  sys: Sys!
-  linkedFrom: SkillLinkingCollections
-  label: String
-  topic(preview: Boolean, locale: String): Topic
-}
-
-type SkillLinkingCollections {
-  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
-}
-
-"""
-[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/topic)
-"""
-type Topic implements Entry {
-  sys: Sys!
-  linkedFrom: TopicLinkingCollections
-  label: String
-}
-
-type TopicLinkingCollections {
-  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
-  skillCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): SkillCollection
-}
-
-type SkillCollection {
-  total: Int!
-  skip: Int!
-  limit: Int!
-  items: [Skill]!
-}
-
-input SkillFilter {
-  topic: cfTopicNestedFilter
-  sys: SysFilter
-  label_exists: Boolean
-  label: String
-  label_not: String
-  label_in: [String]
-  label_not_in: [String]
-  label_contains: String
-  label_not_contains: String
-  OR: [SkillFilter]
-  AND: [SkillFilter]
-}
-
-input cfTopicNestedFilter {
-  sys: SysFilter
-  label_exists: Boolean
-  label: String
-  label_not: String
-  label_in: [String]
-  label_not_in: [String]
-  label_contains: String
-  label_not_contains: String
-  OR: [cfTopicNestedFilter]
-  AND: [cfTopicNestedFilter]
-}
-
-enum SkillOrder {
-  label_ASC
-  label_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-}
-
-input TopicFilter {
-  sys: SysFilter
-  label_exists: Boolean
-  label: String
-  label_not: String
-  label_in: [String]
-  label_not_in: [String]
-  label_contains: String
-  label_not_contains: String
-  OR: [TopicFilter]
-  AND: [TopicFilter]
-}
-
-enum TopicOrder {
-  label_ASC
-  label_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-}
-
-type TopicCollection {
-  total: Int!
-  skip: Int!
-  limit: Int!
-  items: [Topic]!
 }
 
 input AuthorFilter {
