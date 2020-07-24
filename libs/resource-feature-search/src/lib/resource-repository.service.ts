@@ -4,20 +4,14 @@ import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GraphQLModule } from './graphql.module';
-import { Query } from './graphql/schema';
 import * as schema from './graphql/schema';
+import { Query } from './graphql/schema';
+import { skillFragment, skillFragmentToSkill } from './graphql/skill-fragment';
 import { createAuthor, createResource, Resource } from './resource';
 import { createSkill, Skill } from './skill';
 
 const allResources = gql`
-  fragment SkillInfo on Skill {
-    sys {
-      id
-    }
-    label
-    slug
-  }
-
+  ${skillFragment}
   query Resources {
     resourceCollection(order: [releasedAt_DESC]) {
       items {
@@ -38,12 +32,12 @@ const allResources = gql`
         }
         requiredSkillCollection(limit: 10) {
           items {
-            ...SkillInfo
+            ...Skill
           }
         }
         skillCollection(limit: 10) {
           items {
-            ...SkillInfo
+            ...Skill
           }
         }
         summary
@@ -88,13 +82,7 @@ export class ResourceRepository {
   }
 
   private _toSkills(skills: { items: schema.Skill[] }): Skill[] {
-    return skills?.items.map((skill) =>
-      createSkill({
-        id: skill.sys.id,
-        label: skill.label,
-        slug: skill.slug,
-      })
-    );
+    return skills?.items.map(skillFragmentToSkill);
   }
 }
 
