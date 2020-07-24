@@ -22,8 +22,8 @@ import { createSkill, Skill } from './skill';
 
       <mat-autocomplete
         #auto="matAutocomplete"
-        [autoActiveFirstOption]="true"
         [displayWith]="getSkillLabel"
+        (closed)="onAutoCompleteClose()"
       >
         <mat-option *ngFor="let skill of skills" [value]="skill">
           {{ skill.label }}
@@ -48,8 +48,11 @@ export class ResourceSearchFormComponent {
   ];
   getSkillLabel = (skill: Skill) => skill?.label;
 
-  constructor() {
-    this.skillControl.valueChanges.subscribe(console.log);
+  onAutoCompleteClose() {
+    /* Reset auto complete if input is not a skill. */
+    if (this.skillControl.value?.id == null) {
+      this.skillControl.reset();
+    }
   }
 }
 
