@@ -3,9 +3,9 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GraphQLModule } from '../graphql.module';
-import { Query } from '../graphql/schema';
-import * as schema from '../graphql/schema';
+import { GraphQLModule } from './graphql.module';
+import { Query } from './graphql/schema';
+import * as schema from './graphql/schema';
 import { createAuthor, createResource, Resource } from './resource';
 import { createSkill, Skill } from './skill';
 

@@ -18,6 +18,9 @@
     "paths": {
       "@marmicode/learning-map-feature-tree": [
         "libs/learning-map-feature-tree/src/index.ts"
+      ],
+      "@marmicode/resource-feature-search": [
+        "libs/resource-feature-search/src/index.ts"
       ]
     }
   },

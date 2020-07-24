@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   ResourceSearchComponent,
   ResourceSearchModule,
-} from './resource-search.component';
+} from '@marmicode/resource-feature-search';
 
 export const routes: Routes = [
   {

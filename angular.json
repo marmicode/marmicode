@@ -198,6 +198,37 @@
         }
       },
       "schematics": {}
+    },
+    "resource-feature-search": {
+      "projectType": "library",
+      "root": "libs/resource-feature-search",
+      "sourceRoot": "libs/resource-feature-search/src",
+      "prefix": "mx",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/resource-feature-search/tsconfig.lib.json",
+              "libs/resource-feature-search/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/resource-feature-search/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/resource-feature-search/jest.config.js",
+            "tsConfig": "libs/resource-feature-search/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/resource-feature-search/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {

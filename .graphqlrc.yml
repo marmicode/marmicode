@@ -5,10 +5,10 @@ schema:
 extensions:
   codegen:
     generates:
-      ./apps/marmicode/src/app/graphql/schema.graphql:
+      ./libs/resource-feature-search/src/lib/graphql/schema.graphql:
         plugins:
           - schema-ast
-      ./apps/marmicode/src/app/graphql/schema.ts:
+      ./libs/resource-feature-search/src/lib/graphql/schema.ts:
         plugins:
           - typescript
         config:
