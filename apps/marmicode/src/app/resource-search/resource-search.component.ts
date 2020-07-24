@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { Resource } from './resource';
+import { of } from 'rxjs';
 import { ResourceCardModule } from './resource-card.component';
 import {
   ResourceRepository,
   ResourceRepositoryModule,
 } from './resource-repository.service';
-import { ResourceType } from './resource-type';
 import { resources } from './resources';
 
 @Component({
@@ -16,7 +15,7 @@ import { resources } from './resources';
   template: `
     <section fxLayout="row wrap" fxLayoutAlign="center">
       <mc-resource-card
-        *ngFor="let resource of resources"
+        *ngFor="let resource of resources$ | async"
         [resource]="resource"
         class="mc-resource-card"
       ></mc-resource-card>
@@ -31,10 +30,10 @@ import { resources } from './resources';
   ],
 })
 export class ResourceSearchComponent {
-  resources = resources;
+  resources$ = of(resources);
+  // resources$ = this._resourceRepository.getResources();
 
-  constructor(private _resourceRepository: ResourceRepository) {
-  }
+  constructor(private _resourceRepository: ResourceRepository) {}
 }
 
 @NgModule({

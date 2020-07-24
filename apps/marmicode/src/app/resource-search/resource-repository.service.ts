@@ -52,10 +52,8 @@ export class ResourceRepository {
                 }),
               duration: item.duration,
               pictureUri: item.picture.url,
-              requiredSkills: item.requiredSkillCollection.items.map(
-                this._toSkill
-              ),
-              skills: item.skillCollection.items.map(this._toSkill),
+              requiredSkills: this._toSkills(item.requiredSkillCollection),
+              skills: this._toSkills(item.skillCollection),
               summary: item.summary,
               url: item.url,
             })
@@ -64,12 +62,14 @@ export class ResourceRepository {
       );
   }
 
-  private _toSkill(skill: schema.Skill): Skill {
-    return createSkill({
-      id: skill.sys.id,
-      label: skill.label,
-      slug: skill.slug,
-    });
+  private _toSkills(skills: { items: schema.Skill[] }): Skill[] {
+    return skills?.items.map((skill) =>
+      createSkill({
+        id: skill.sys.id,
+        label: skill.label,
+        slug: skill.slug,
+      })
+    );
   }
 }
 

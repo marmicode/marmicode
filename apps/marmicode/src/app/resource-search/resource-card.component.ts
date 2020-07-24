@@ -74,7 +74,7 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
           </mat-chip-list>
         </section>
         <section
-          *ngIf="resource.requiredSkills.length > 0"
+          *ngIf="resource.requiredSkills?.length > 0"
           class="list-container"
         >
           <h3 [style.color]="color" class="list-title">Required Skills</h3>
