@@ -1,12 +1,12 @@
 import { Injectable, NgModule } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GraphQLModule } from './graphql.module';
 import { Query } from './graphql/schema';
 import { skillFragment, skillFragmentToSkill } from './graphql/skill-fragment';
-import { createSkill, Skill } from './skill';
+import { Skill } from './skill';
 
 const allSkills = gql`
   ${skillFragment}
