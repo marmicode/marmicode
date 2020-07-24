@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ActivatedRoute } from '@angular/router';
 import { WipModule } from '@marmicode/shared-utils';
+import { map, switchMap } from 'rxjs/operators';
 import { ResourceCardModule } from './resource-card.component';
 import {
   ResourceRepository,
@@ -33,9 +35,17 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
   ],
 })
 export class ResourceSearchComponent {
-  resources$ = this._resourceRepository.getResources();
+  resources$ = this._route.paramMap.pipe(
+    map((params) => params.get('skillSlug')),
+    switchMap((skillSlug) =>
+      this._resourceRepository.getResources({ skillSlug })
+    )
+  );
 
-  constructor(private _resourceRepository: ResourceRepository) {}
+  constructor(
+    private _route: ActivatedRoute,
+    private _resourceRepository: ResourceRepository
+  ) {}
 }
 
 @NgModule({

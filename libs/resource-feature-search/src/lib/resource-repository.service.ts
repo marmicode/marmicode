@@ -1,3 +1,4 @@
+import { A } from '@angular/cdk/keycodes';
 import { Injectable, NgModule } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
@@ -51,7 +52,7 @@ const allResources = gql`
 export class ResourceRepository {
   constructor(private _apollo: Apollo) {}
 
-  getResources(): Observable<Resource[]> {
+  getResources({ skillSlug }: { skillSlug: string }): Observable<Resource[]> {
     return this._apollo
       .query<Query>({
         query: allResources,
