@@ -3,7 +3,7 @@
     {
       "target": "marmicode",
       "predeploy": "yarn build marmicode --prod",
-      "public": "dist/apps/marmicode",
+      "public": "dist/apps/marmicode/browser",
       "ignore": [
         "firebase.json",
         "**/.*",

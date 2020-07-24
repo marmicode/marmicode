@@ -11,7 +11,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/marmicode",
+            "outputPath": "dist/apps/marmicode/browser",
             "index": "apps/marmicode/src/index.html",
             "main": "apps/marmicode/src/main.ts",
             "polyfills": "apps/marmicode/src/polyfills.ts",
@@ -92,6 +92,53 @@
             "tsConfig": "apps/marmicode/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "apps/marmicode/src/test-setup.ts"
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/apps/marmicode/server",
+            "main": "apps/marmicode/server.ts",
+            "tsConfig": "apps/marmicode/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "apps/marmicode/src/environments/environment.ts",
+                  "with": "apps/marmicode/src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "marmicode:build",
+            "serverTarget": "marmicode:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "marmicode:build:production",
+              "serverTarget": "marmicode:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "marmicode:build:production",
+            "serverTarget": "marmicode:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
           }
         }
       }
