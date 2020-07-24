@@ -1,16 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { WipModule } from '@marmicode/shared-utils';
 import { ResourceCardModule } from './resource-card.component';
 import {
   ResourceRepository,
   ResourceRepositoryModule,
 } from './resource-repository.service';
+import { ResourceSearchFormModule } from './resource-search-form.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-search',
   template: `
+    <mc-resource-search-form *mcWip></mc-resource-search-form>
     <section fxLayout="row wrap" fxLayoutAlign="center">
       <mc-resource-card
         *ngFor="let resource of resources$ | async"
@@ -41,6 +44,8 @@ export class ResourceSearchComponent {
     FlexLayoutModule,
     ResourceCardModule,
     ResourceRepositoryModule,
+    ResourceSearchFormModule,
+    WipModule,
   ],
 })
 export class ResourceSearchModule {}
