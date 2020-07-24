@@ -9,7 +9,7 @@ import * as schema from './graphql/schema';
 import { createAuthor, createResource, Resource } from './resource';
 import { createSkill, Skill } from './skill';
 
-const AllResourcesQuery = gql`
+const allResources = gql`
   fragment SkillInfo on Skill {
     sys {
       id
@@ -60,7 +60,7 @@ export class ResourceRepository {
   getResources(): Observable<Resource[]> {
     return this._apollo
       .query<Query>({
-        query: AllResourcesQuery,
+        query: allResources,
       })
       .pipe(
         map(({ data }) =>
