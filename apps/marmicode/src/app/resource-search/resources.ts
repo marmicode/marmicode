@@ -21,7 +21,7 @@ export const resources = [
     url: 'https://angular.io/cli#cli-overview-and-command-reference',
   }),
   createResource({
-    type: ResourceType.Video,
+    type: ResourceType.ExternalVideo,
     title: 'Boost Your Time to Market by Dancing the Limbo',
     author: authors.younes,
     duration: 33,
@@ -48,7 +48,7 @@ export const resources = [
       'https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html',
   }),
   createResource({
-    type: ResourceType.BlogPost,
+    type: ResourceType.ExternalBlogPost,
     title: 'Your Angular Module is a SCAM!',
     author: authors.younes,
     duration: 4,

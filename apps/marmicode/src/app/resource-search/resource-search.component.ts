@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { of } from 'rxjs';
 import { ResourceCardModule } from './resource-card.component';
 import {
   ResourceRepository,
   ResourceRepositoryModule,
 } from './resource-repository.service';
-import { resources } from './resources';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,8 +28,7 @@ import { resources } from './resources';
   ],
 })
 export class ResourceSearchComponent {
-  resources$ = of(resources);
-  // resources$ = this._resourceRepository.getResources();
+  resources$ = this._resourceRepository.getResources();
 
   constructor(private _resourceRepository: ResourceRepository) {
     this._resourceRepository.getResources().subscribe(console.log);
