@@ -50,4 +50,4 @@ export class TriangleComponent {
   exports: [TriangleComponent],
   imports: [CommonModule],
 })
-export class ResourceCardTriangleModule {}
+export class TriangleModule {}

@@ -11,7 +11,7 @@ import {
   resourceTypeColorMap,
   resourceTypeTextMap,
 } from './resource-type';
-import { ResourceCardTriangleModule } from './triangle.component';
+import { TriangleModule } from '@marmicode/shared-ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,6 +32,6 @@ export class ResourceTypeTriangleComponent implements OnChanges {
 @NgModule({
   declarations: [ResourceTypeTriangleComponent],
   exports: [ResourceTypeTriangleComponent],
-  imports: [CommonModule, ResourceCardTriangleModule],
+  imports: [CommonModule, TriangleModule],
 })
 export class ResourceTypeTriangleModule {}

@@ -203,7 +203,7 @@
       "projectType": "library",
       "root": "libs/resource-feature-search",
       "sourceRoot": "libs/resource-feature-search/src",
-      "prefix": "mx",
+      "prefix": "mc",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -225,6 +225,34 @@
             "tsConfig": "libs/resource-feature-search/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/resource-feature-search/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "shared-ui": {
+      "projectType": "library",
+      "root": "libs/shared-ui",
+      "sourceRoot": "libs/shared-ui/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared-ui/tsconfig.lib.json",
+              "libs/shared-ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared-ui/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared-ui/jest.config.js",
+            "tsConfig": "libs/shared-ui/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/shared-ui/src/test-setup.ts"
           }
         }
       },

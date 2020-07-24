@@ -21,7 +21,8 @@
       ],
       "@marmicode/resource-feature-search": [
         "libs/resource-feature-search/src/index.ts"
-      ]
+      ],
+      "@marmicode/shared-ui": ["libs/shared-ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
