@@ -19,7 +19,7 @@ const AllResourcesQuery = gql`
   }
 
   query Resources {
-    resourceCollection {
+    resourceCollection(order: [releasedAt_DESC]) {
       items {
         sys {
           id

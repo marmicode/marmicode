@@ -316,6 +316,7 @@ export interface Resource extends Entry {
   skillCollection?: Maybe<ResourceSkillCollection>;
   summary?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
+  releasedAt?: Maybe<Scalars['DateTime']>;
 }
 
 
@@ -680,6 +681,15 @@ export interface ResourceFilter {
   url_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
   url_contains?: Maybe<Scalars['String']>;
   url_not_contains?: Maybe<Scalars['String']>;
+  releasedAt_exists?: Maybe<Scalars['Boolean']>;
+  releasedAt?: Maybe<Scalars['DateTime']>;
+  releasedAt_not?: Maybe<Scalars['DateTime']>;
+  releasedAt_in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  releasedAt_not_in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  releasedAt_gt?: Maybe<Scalars['DateTime']>;
+  releasedAt_gte?: Maybe<Scalars['DateTime']>;
+  releasedAt_lt?: Maybe<Scalars['DateTime']>;
+  releasedAt_lte?: Maybe<Scalars['DateTime']>;
   OR?: Maybe<Array<Maybe<ResourceFilter>>>;
   AND?: Maybe<Array<Maybe<ResourceFilter>>>;
 }
@@ -708,6 +718,8 @@ export enum ResourceOrder {
   DurationDesc = 'duration_DESC',
   UrlAsc = 'url_ASC',
   UrlDesc = 'url_DESC',
+  ReleasedAtAsc = 'releasedAt_ASC',
+  ReleasedAtDesc = 'releasedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
   SysIdDesc = 'sys_id_DESC',
   SysPublishedAtAsc = 'sys_publishedAt_ASC',

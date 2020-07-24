@@ -221,6 +221,7 @@ type Resource implements Entry {
   skillCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceSkillCollection
   summary: String
   url: String
+  releasedAt: DateTime
 }
 
 type ResourceLinkingCollections {
@@ -477,6 +478,15 @@ input ResourceFilter {
   url_not_in: [String]
   url_contains: String
   url_not_contains: String
+  releasedAt_exists: Boolean
+  releasedAt: DateTime
+  releasedAt_not: DateTime
+  releasedAt_in: [DateTime]
+  releasedAt_not_in: [DateTime]
+  releasedAt_gt: DateTime
+  releasedAt_gte: DateTime
+  releasedAt_lt: DateTime
+  releasedAt_lte: DateTime
   OR: [ResourceFilter]
   AND: [ResourceFilter]
 }
@@ -505,6 +515,8 @@ enum ResourceOrder {
   duration_DESC
   url_ASC
   url_DESC
+  releasedAt_ASC
+  releasedAt_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC
