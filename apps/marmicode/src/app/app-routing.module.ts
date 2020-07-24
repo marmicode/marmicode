@@ -1,23 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LearningMapRoutingModule } from './learning-map/learning-map-routing.module';
+import { ResourceSearchRoutingModule } from './resource-search/resource-search-routing.module';
 
 export const routes: Routes = [
   {
     path: 'learning-map',
-    loadChildren: () => LearningMapRoutingModule,
-  },
-  {
-    path: 'search',
     loadChildren: () =>
-      import('./resource-search/resource-search-routing.module').then(
-        (m) => m.ResourceSearchRoutingModule
+      import('./learning-map/learning-map-routing.module').then(
+        (m) => m.LearningMapRoutingModule
       ),
   },
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'search',
+    loadChildren: () => ResourceSearchRoutingModule,
   },
 ];
 
