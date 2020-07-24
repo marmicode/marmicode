@@ -1,7 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Element } from '@angular/compiler';
 import { Component, HostListener, NgModule } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,14 +7,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import {
-  animationFrameScheduler,
-  BehaviorSubject,
-  combineLatest,
-  observable,
-  Observable,
-} from 'rxjs';
-import { map, observeOn, pairwise, shareReplay } from 'rxjs/operators';
+import { animationFrameScheduler, BehaviorSubject, Observable } from 'rxjs';
+import { map, observeOn, pairwise } from 'rxjs/operators';
 
 @Component({
   selector: 'mc-nav',
