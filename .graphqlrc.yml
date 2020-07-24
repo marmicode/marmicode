@@ -1,5 +1,5 @@
 schema:
-  - https://graphql.contentful.com/content/v1/spaces/gowvxq3b4aid/environments/master?token=_d7Vb4r2lborp1uLTvsv0ne7fB0OMez2FscTnHQux5A:
+  - https://graphql.contentful.com/content/v1/spaces/gowvxq3b4aid/environments/master:
       headers:
         Authorization: Bearer _d7Vb4r2lborp1uLTvsv0ne7fB0OMez2FscTnHQux5A
 extensions:
