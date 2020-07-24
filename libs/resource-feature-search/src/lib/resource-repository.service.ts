@@ -3,7 +3,7 @@ import { Injectable, NgModule } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { GraphQLModule } from './graphql.module';
 import * as schema from './graphql/schema';
 import { Query } from './graphql/schema';
@@ -83,7 +83,13 @@ export class ResourceRepository {
   }
 
   getResourcesBySkillSlug(skillSlug: string) {
-    return this.getResources();
+    return this.getResources().pipe(
+      map((resources) =>
+        resources.filter((resource) =>
+          resource.skills.find((skill) => skill.slug === skillSlug)
+        )
+      )
+    );
   }
 
   private _toSkills(skills: { items: schema.Skill[] }): Skill[] {

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ActivatedRoute } from '@angular/router';
 import { WipModule } from '@marmicode/shared-utils';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { ResourceCardModule } from './resource-card.component';
 import {
   ResourceRepository,

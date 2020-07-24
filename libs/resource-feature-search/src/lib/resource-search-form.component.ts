@@ -104,6 +104,7 @@ export class ResourceSearchFormComponent implements OnInit {
       )
     );
 
+    // @todo fix jest and ivy
     // navigateToSkill$.pipe(untilDestroyed(this)).subscribe();
     navigateToSkill$.subscribe();
   }

@@ -12,7 +12,7 @@ export const routes: Routes = [
     component: ResourceSearchComponent,
   },
   {
-    path: `${resourceSearchRouterHelper.LEARN_PATH}/:slugId`,
+    path: `${resourceSearchRouterHelper.LEARN_PATH}/:skillSlug`,
     component: ResourceSearchComponent,
   },
 ];

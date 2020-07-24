@@ -17,8 +17,8 @@ export interface Resource {
   author?: Author;
   duration: number;
   pictureUri?: string;
-  requiredSkills: (string | Skill)[];
-  skills: (string | Skill)[];
+  requiredSkills: Skill[];
+  skills: Skill[];
   summary: string;
   url: string;
 }
