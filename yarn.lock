@@ -299,6 +299,11 @@
   resolved "https://registry.yarnpkg.com/@angular/router/-/router-9.1.11.tgz#b6d28af55fe5631bbc46f306a0e7866253d4f3b1"
   integrity sha512-D6CCDeSK/F6dWSB/a1g/zB072xG5LadLSV8afQ57oX1KHePx21LcoRG4tUtFMMHh/jZXRc9pMQIR1/9FrrXF3Q==
 
+"@angular/service-worker@^9.1.0":
+  version "9.1.12"
+  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-9.1.12.tgz#2e339ec95012ebec668b40d54319344afa5e50f2"
+  integrity sha512-UsmhPfhIYq9LanuFT6V7Kmkr5Vjl2CMjKkL1gqhChkywNW4vavAYsBkuVji8P76ZKliq41TCG01z6xIAWji8QA==
+
 "@ardatan/aggregate-error@0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@ardatan/aggregate-error/-/aggregate-error-0.0.1.tgz#1403ac5de10d8ca689fc1f65844c27179ae1d44f"

@@ -19,7 +19,8 @@
             "aot": true,
             "assets": [
               "apps/marmicode/src/favicon.ico",
-              "apps/marmicode/src/assets"
+              "apps/marmicode/src/assets",
+              "apps/marmicode/src/manifest.webmanifest"
             ],
             "styles": ["apps/marmicode/src/styles.scss"],
             "scripts": []
@@ -51,7 +52,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "apps/marmicode/ngsw-config.json"
             }
           }
         },
