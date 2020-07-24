@@ -80,4 +80,15 @@ describe('ResourceSearchFormComponent', () => {
       }),
     ]);
   });
+
+  it('should return an empty list if a skill is selected', async () => {
+    component.skillControl.patchValue(
+      createSkill({
+        id: 'xxx',
+        label: 'Angular Testing',
+        slug: 'angular-testing',
+      })
+    );
+    expect(await component.skills$.pipe(take(1)).toPromise()).toEqual([]);
+  });
 });

@@ -64,6 +64,11 @@ export class ResourceSearchFormComponent {
           return skills;
         }
 
+        /* These are not keywords but a selected skill. */
+        if (typeof keywords !== 'string') {
+          return [];
+        }
+
         const keywordsTokenList = this._tokenize(keywords);
 
         return skills.filter((skill) => {
