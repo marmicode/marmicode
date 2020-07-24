@@ -1,12 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  NgModule,
+  OnInit,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
+import { resourceSearchRouterHelper } from './resource-search-router-helper';
 import { combineLatest, concat, defer, Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { createSkill, Skill } from './skill';
+import { filter, map, switchMap } from 'rxjs/operators';
+import { Skill } from './skill';
 import {
   SkillRepository,
   SkillRepositoryModule,
@@ -45,12 +52,15 @@ import {
     `,
   ],
 })
-export class ResourceSearchFormComponent {
+export class ResourceSearchFormComponent implements OnInit {
   skillControl = new FormControl();
   skills$: Observable<Skill[]>;
   getSkillLabel = (skill: Skill) => skill?.label;
 
-  constructor(private _skillRepository: SkillRepository) {
+  constructor(
+    private _router: Router,
+    private _skillRepository: SkillRepository
+  ) {
     this.skills$ = combineLatest([
       this._skillRepository.getSkills(),
       concat(
@@ -82,6 +92,20 @@ export class ResourceSearchFormComponent {
         });
       })
     );
+  }
+
+  ngOnInit() {
+    const navigateToSkill$ = this.skillControl.valueChanges.pipe(
+      filter((value) => typeof value !== 'string'),
+      switchMap((skill: Skill) =>
+        defer(() =>
+          this._router.navigate(resourceSearchRouterHelper.learn(skill.slug))
+        )
+      )
+    );
+
+    // navigateToSkill$.pipe(untilDestroyed(this)).subscribe();
+    navigateToSkill$.subscribe();
   }
 
   onAutoCompleteClose() {

@@ -1,6 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { readAll } from '@nrwl/angular/testing';
 import { of } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -17,6 +19,10 @@ describe('ResourceSearchFormComponent', () => {
       declarations: [ResourceSearchFormComponent],
       imports: [MatAutocompleteModule],
       providers: [
+        {
+          provide: Router,
+          useValue: {},
+        },
         {
           provide: SkillRepository,
           useValue: {
