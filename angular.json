@@ -82,10 +82,7 @@
               "apps/marmicode/tsconfig.app.json",
               "apps/marmicode/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/marmicode/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/marmicode/**/*"]
           }
         },
         "test": {
@@ -136,9 +133,7 @@
           "options": {
             "browserTarget": "marmicode:build:production",
             "serverTarget": "marmicode:server:production",
-            "routes": [
-              "/"
-            ]
+            "routes": ["/"]
           },
           "configurations": {
             "production": {}
@@ -167,16 +162,42 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/marmicode-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/marmicode-e2e/**/*"
-            ]
+            "tsConfig": ["apps/marmicode-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/marmicode-e2e/**/*"]
           }
         }
       }
+    },
+    "learning-map-feature-tree": {
+      "projectType": "library",
+      "root": "libs/learning-map-feature-tree",
+      "sourceRoot": "libs/learning-map-feature-tree/src",
+      "prefix": "marmicode",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/learning-map-feature-tree/tsconfig.lib.json",
+              "libs/learning-map-feature-tree/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/learning-map-feature-tree/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/learning-map-feature-tree/jest.config.js",
+            "tsConfig": "libs/learning-map-feature-tree/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/learning-map-feature-tree/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {

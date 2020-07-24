@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LearningMapComponent, LearningMapModule } from './learning-map.component';
+import {
+  LearningMapComponent,
+  LearningMapModule,
+} from '@marmicode/learning-map-feature-tree';
 
 export const routes: Routes = [
   {
     path: '',
-    component: LearningMapComponent
-  }
-]
+    component: LearningMapComponent,
+  },
+];
 
 @NgModule({
-  imports: [
-    LearningMapModule,
-    RouterModule.forChild(routes)
-  ]
+  imports: [LearningMapModule, RouterModule.forChild(routes)],
 })
-export class LearningMapRoutingModule {
-
-}
+export class LearningMapRoutingModule {}

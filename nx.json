@@ -28,6 +28,9 @@
     "marmicode-e2e": {
       "tags": [],
       "implicitDependencies": ["marmicode"]
+    },
+    "learning-map-feature-tree": {
+      "tags": ["scope:learning-map", "type:feature"]
     }
   }
 }
