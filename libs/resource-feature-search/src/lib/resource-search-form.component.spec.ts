@@ -67,8 +67,7 @@ describe('ResourceSearchFormComponent', () => {
 
   xit('should filter options', async () => {
     component.skillControl.patchValue('tes');
-    fixture.detectChanges();
-    expect(await component.skills$.pipe(take(2)).toPromise()).toEqual([
+    expect(await component.skills$.pipe(take(1)).toPromise()).toEqual([
       createSkill({
         id: 'xxx',
         label: 'Angular Testing',

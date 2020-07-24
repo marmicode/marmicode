@@ -4,6 +4,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { combineLatest, concat, defer, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { createSkill, Skill } from './skill';
 import {
   SkillRepository,
@@ -45,10 +47,43 @@ import {
 })
 export class ResourceSearchFormComponent {
   skillControl = new FormControl();
-  skills$ = this._skillRepository.getSkills();
+  skills$: Observable<Skill[]>;
   getSkillLabel = (skill: Skill) => skill?.label;
 
-  constructor(private _skillRepository: SkillRepository) {}
+  constructor(private _skillRepository: SkillRepository) {
+    this.skills$ = combineLatest([
+      this._skillRepository.getSkills(),
+      concat(
+        defer(() => of(this.skillControl.value)),
+        this.skillControl.valueChanges
+      ),
+    ]).pipe(
+      map(([skills, keywords]) => {
+        /* Nothing to filter. */
+        if (keywords == null) {
+          return skills;
+        }
+
+        const keywordsTokenList = keywords
+          .split(' ')
+          .map((token) => token.toLowerCase());
+
+        return skills.filter((skill) => {
+          /* Tokenize label. */
+          const labelTokenList = skill.label
+            .split(' ')
+            .map((token) => token.toLowerCase());
+
+          /* Check if all keywords match the label. */
+          keywordsTokenList.filter((keywordsToken) =>
+            labelTokenList.find((token) => token.startsWith(keywordsToken))
+          );
+
+          return skill.label.startsWith(keywords);
+        });
+      })
+    );
+  }
 
   onAutoCompleteClose() {
     /* Reset auto complete if input is not a skill. */
