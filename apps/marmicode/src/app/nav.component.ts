@@ -42,7 +42,7 @@ import { map, observeOn, pairwise, shareReplay } from 'rxjs/operators';
       :host {
         display: block;
         height: 100%;
-        overflow: scroll;
+        overflow-y: scroll;
       }
 
       .toolbar {
