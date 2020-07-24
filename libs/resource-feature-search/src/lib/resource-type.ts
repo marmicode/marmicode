@@ -8,9 +8,9 @@ export enum ResourceType {
 }
 
 export const resourceTypeColorMap = new Map<ResourceType, string>([
-  [ResourceType.ExternalBlogPost, '#66985f'],
-  [ResourceType.ExternalVideo, '#eb8053'],
-  [ResourceType.Documentation, '#d42020'],
+  [ResourceType.ExternalBlogPost, '#F1C470'],
+  [ResourceType.ExternalVideo, '#94B0DB'],
+  [ResourceType.Documentation, '#8FDB7C'],
   [ResourceType.Recipe, '#5ab3ad'],
   [ResourceType.Snack, '#f57bb5'],
   [ResourceType.Workshop, '#673ab7'],
