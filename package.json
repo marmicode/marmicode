@@ -60,7 +60,7 @@
     "express": "^4.15.2",
     "graphql-tag": "^2.10.4",
     "panzoom": "^9.2.5",
-    "rxjs": "~6.5.4",
+    "rxjs": "~6.6.0",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
