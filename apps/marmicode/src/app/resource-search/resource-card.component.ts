@@ -11,15 +11,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { Resource } from './resource';
-import {
-  resourceTypeActionMap,
-  resourceTypeColorMap,
-  resourceTypeTextMap,
-} from './resource-type';
-import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
-import { SkillLabelModule } from './skill-label.pipe';
 import { ResourceCardTriangleModule } from '../topics/triangle.component';
+import { Resource } from './resource';
+import { resourceTypeActionMap, resourceTypeColorMap } from './resource-type';
+import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -68,7 +63,7 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
                 [disabled]="true"
                 [style.opacity]="1"
               >
-                {{ skill?.label || (skill | skillLabel) }}
+                {{ skill.label }}
               </mat-chip>
             </div>
           </mat-chip-list>
@@ -85,7 +80,7 @@ import { ResourceCardTriangleModule } from '../topics/triangle.component';
                 [disabled]="true"
                 [style.opacity]="1"
               >
-                {{ skill?.label || (skill | skillLabel) }}
+                {{ skill.label }}
               </mat-chip>
             </div>
           </mat-chip-list>
@@ -178,7 +173,6 @@ export class ResourceCardComponent implements OnChanges {
     ResourceTypeTriangleModule,
     MatIconModule,
     MatChipsModule,
-    SkillLabelModule,
   ],
 })
 export class ResourceCardModule {}

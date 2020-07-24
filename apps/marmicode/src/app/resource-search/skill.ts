@@ -1,12 +1,9 @@
 export interface Skill {
   id: string;
   label: string;
-  /* @todo make this mandatory. */
-  slug?: string;
-  /* @todo make this mandatory. */
-  topicId?: string;
+  slug: string;
 }
 
-export function createSkill(skill: Skill) {
+export function createSkill(skill: Skill): Skill {
   return { ...skill };
 }
