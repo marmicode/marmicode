@@ -5,6 +5,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { createSkill, Skill } from './skill';
+import {
+  SkillRepository,
+  SkillRepositoryModule,
+} from './skill-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,7 +29,7 @@ import { createSkill, Skill } from './skill';
         [displayWith]="getSkillLabel"
         (closed)="onAutoCompleteClose()"
       >
-        <mat-option *ngFor="let skill of skills" [value]="skill">
+        <mat-option *ngFor="let skill of skills$ | async" [value]="skill">
           {{ skill.label }}
         </mat-option>
       </mat-autocomplete>
@@ -41,19 +45,10 @@ import { createSkill, Skill } from './skill';
 })
 export class ResourceSearchFormComponent {
   skillControl = new FormControl();
-  skills = [
-    createSkill({
-      id: 'test',
-      label: 'Test',
-      slug: 'test',
-    }),
-    createSkill({
-      id: 'test',
-      label: 'Test 2',
-      slug: 'test 2',
-    }),
-  ];
+  skills$ = this._skillRepository.getSkills();
   getSkillLabel = (skill: Skill) => skill?.label;
+
+  constructor(private _skillRepository: SkillRepository) {}
 
   onAutoCompleteClose() {
     /* Reset auto complete if input is not a skill. */
@@ -72,6 +67,7 @@ export class ResourceSearchFormComponent {
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    SkillRepositoryModule,
   ],
 })
 export class ResourceSearchFormModule {}
