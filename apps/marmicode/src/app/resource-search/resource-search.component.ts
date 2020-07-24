@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { of } from 'rxjs';
 import { ResourceCardModule } from './resource-card.component';
 import {
   ResourceRepository,
   ResourceRepositoryModule,
 } from './resource-repository.service';
+import { resources } from './resources';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
