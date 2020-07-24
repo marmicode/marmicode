@@ -64,15 +64,11 @@ export class ResourceSearchFormComponent {
           return skills;
         }
 
-        const keywordsTokenList = keywords
-          .split(' ')
-          .map((token) => token.toLowerCase());
+        const keywordsTokenList = this._tokenize(keywords);
 
         return skills.filter((skill) => {
           /* Tokenize label. */
-          const labelTokenList = skill.label
-            .split(' ')
-            .map((token) => token.toLowerCase());
+          const labelTokenList = this._tokenize(skill.label);
 
           /* Check if all keywords match the label. */
           return keywordsTokenList.every((keywordsToken) =>
@@ -88,6 +84,10 @@ export class ResourceSearchFormComponent {
     if (this.skillControl.value?.id == null) {
       this.skillControl.reset();
     }
+  }
+
+  private _tokenize(text: string) {
+    return text.split(' ').map((token) => token.toLowerCase());
   }
 }
 
