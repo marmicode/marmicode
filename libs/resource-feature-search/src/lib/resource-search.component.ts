@@ -13,14 +13,16 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-search',
   template: `
-    <mc-resource-search-form *mcWip></mc-resource-search-form>
-    <section fxLayout="row wrap" fxLayoutAlign="center">
+    <div fxLayout="row" fxLayoutAlign="center">
+      <mc-resource-search-form *mcWip></mc-resource-search-form>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="center">
       <mc-resource-card
         *ngFor="let resource of resources$ | async"
         [resource]="resource"
         class="mc-resource-card"
       ></mc-resource-card>
-    </section>
+    </div>
   `,
   styles: [
     `

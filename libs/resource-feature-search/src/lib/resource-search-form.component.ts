@@ -10,7 +10,7 @@ import { createSkill, Skill } from './skill';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-search-form',
   template: `
-    <mat-form-field>
+    <mat-form-field class="search-input">
       <input
         type="text"
         placeholder="Search by skill"
@@ -31,6 +31,13 @@ import { createSkill, Skill } from './skill';
       </mat-autocomplete>
     </mat-form-field>
   `,
+  styles: [
+    `
+      .search-input {
+        width: 300px;
+      }
+    `,
+  ],
 })
 export class ResourceSearchFormComponent {
   skillControl = new FormControl();
