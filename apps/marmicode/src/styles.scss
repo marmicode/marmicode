@@ -5,5 +5,9 @@ body {
   margin: 0;
 }
 
-html, body { height: 100%; }
+html, body {
+  /* @hack: setting background color to toolbar color to affect ios status bar color. */
+  background-color: #380030;
+  height: 100%;
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -32,6 +32,7 @@ import { map, observeOn, pairwise } from 'rxjs/operators';
   styles: [
     `
       :host {
+        background-color: white;
         display: block;
         height: 100%;
         overflow-y: scroll;
