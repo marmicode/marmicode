@@ -4,7 +4,8 @@ import gql from 'graphql-tag';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GraphQLModule } from './graphql.module';
-import { skillFragment } from './graphql/skill-fragment';
+import { Query } from './graphql/schema';
+import { skillFragment, skillFragmentToSkill } from './graphql/skill-fragment';
 import { createSkill, Skill } from './skill';
 
 const allSkills = gql`
@@ -23,23 +24,13 @@ export class SkillRepository {
   constructor(private _apollo: Apollo) {}
 
   getSkills(): Observable<Skill[]> {
-    // this._apollo
-    //   .query({
-    //     query: allSkills,
-    //   })
-    //   .subscribe(console.log);
-    return of([
-      createSkill({
-        id: 'test',
-        label: 'Test',
-        slug: 'test',
-      }),
-      createSkill({
-        id: 'test',
-        label: 'Test 2',
-        slug: 'test 2',
-      }),
-    ]);
+    return this._apollo
+      .query<Query>({
+        query: allSkills,
+      })
+      .pipe(
+        map(({ data }) => data.skillCollection.items.map(skillFragmentToSkill))
+      );
   }
 }
 
