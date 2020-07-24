@@ -30,9 +30,7 @@ import {
 export class ResourceSearchComponent {
   resources$ = this._resourceRepository.getResources();
 
-  constructor(private _resourceRepository: ResourceRepository) {
-    this._resourceRepository.getResources().subscribe(console.log);
-  }
+  constructor(private _resourceRepository: ResourceRepository) {}
 }
 
 @NgModule({
