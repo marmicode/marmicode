@@ -52,7 +52,7 @@ const allResources = gql`
 export class ResourceRepository {
   constructor(private _apollo: Apollo) {}
 
-  getResources({ skillSlug }: { skillSlug: string }): Observable<Resource[]> {
+  getResources(): Observable<Resource[]> {
     return this._apollo
       .query<Query>({
         query: allResources,
@@ -80,6 +80,10 @@ export class ResourceRepository {
           )
         )
       );
+  }
+
+  getResourcesBySkillSlug(skillSlug: string) {
+    return this.getResources();
   }
 
   private _toSkills(skills: { items: schema.Skill[] }): Skill[] {

@@ -37,9 +37,11 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
 export class ResourceSearchComponent {
   resources$ = this._route.paramMap.pipe(
     map((params) => params.get('skillSlug')),
-    switchMap((skillSlug) =>
-      this._resourceRepository.getResources({ skillSlug })
-    )
+    switchMap((skillSlug) => {
+      return skillSlug != null
+        ? this._resourceRepository.getResourcesBySkillSlug(skillSlug)
+        : this._resourceRepository.getResources();
+    })
   );
 
   constructor(
