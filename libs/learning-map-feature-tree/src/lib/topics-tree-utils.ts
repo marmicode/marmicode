@@ -1,5 +1,5 @@
 import { TreeConfig, TreeNode } from './tree/tree-config';
-import { Topic } from '../../../../apps/marmicode/src/app/topics/topic';
+import { Topic } from './topic';
 
 export function getDepthCountMap(topics: Topic[]) {
   return topics.reduce((map, topic) => {

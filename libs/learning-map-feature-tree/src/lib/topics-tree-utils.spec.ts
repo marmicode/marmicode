@@ -1,7 +1,4 @@
-import {
-  createTopic,
-  Topic,
-} from '../../../../apps/marmicode/src/app/topics/topic';
+import { createTopic, Topic } from './topic';
 import {
   getDepthCountMap,
   getTopicsTreeConfig,

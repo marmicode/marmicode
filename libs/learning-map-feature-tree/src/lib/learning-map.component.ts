@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { topics } from '../../../../apps/marmicode/src/app/topics/topics';
+import { topics } from './topics';
 import { TreeConfig } from './tree/tree-config';
 import { TreeModule } from './tree/tree.component';
 import { getTopicsTreeConfig } from './topics-tree-utils';

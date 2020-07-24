@@ -11,7 +11,7 @@ import {
   resourceTypeColorMap,
   resourceTypeTextMap,
 } from './resource-type';
-import { ResourceCardTriangleModule } from '../topics/triangle.component';
+import { ResourceCardTriangleModule } from './triangle.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

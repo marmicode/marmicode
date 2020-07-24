@@ -172,7 +172,7 @@
       "projectType": "library",
       "root": "libs/learning-map-feature-tree",
       "sourceRoot": "libs/learning-map-feature-tree/src",
-      "prefix": "marmicode",
+      "prefix": "mc",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
