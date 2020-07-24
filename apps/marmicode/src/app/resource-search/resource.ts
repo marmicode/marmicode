@@ -1,4 +1,5 @@
 import { ResourceType } from './resource-type';
+import { Skill } from './skill';
 
 export interface Author {
   name: string;
@@ -16,8 +17,8 @@ export interface Resource {
   author?: Author;
   duration: number;
   pictureUri?: string;
-  requiredSkills: string[];
-  skills: string[];
+  requiredSkills: (string | Skill)[];
+  skills: (string | Skill)[];
   summary: string;
   url: string;
 }

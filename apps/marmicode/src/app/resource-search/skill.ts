@@ -1,9 +1,9 @@
 export interface Skill {
   id: string;
   label: string;
-  /**
-   * @deprecated 🚧 Work in progress.
-   */
+  /* @todo make this mandatory. */
+  slug?: string;
+  /* @todo make this mandatory. */
   topicId?: string;
 }
 

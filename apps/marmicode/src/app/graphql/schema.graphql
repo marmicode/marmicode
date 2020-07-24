@@ -1,12 +1,12 @@
 type Query {
   asset(id: String!, preview: Boolean, locale: String): Asset
   assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
+  resource(id: String!, preview: Boolean, locale: String): Resource
+  resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ResourceFilter, order: [ResourceOrder]): ResourceCollection
   topic(id: String!, preview: Boolean, locale: String): Topic
   topicCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TopicFilter, order: [TopicOrder]): TopicCollection
   skill(id: String!, preview: Boolean, locale: String): Skill
   skillCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: SkillFilter, order: [SkillOrder]): SkillCollection
-  resource(id: String!, preview: Boolean, locale: String): Resource
-  resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ResourceFilter, order: [ResourceOrder]): ResourceCollection
   author(id: String!, preview: Boolean, locale: String): Author
   authorCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AuthorFilter, order: [AuthorOrder]): AuthorCollection
 }
@@ -217,8 +217,8 @@ type Resource implements Entry {
   author(preview: Boolean, locale: String): Author
   duration: Int
   picture(preview: Boolean, locale: String): Asset
-  requiredSkillsCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceRequiredSkillsCollection
-  skillsCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceSkillsCollection
+  requiredSkillCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceRequiredSkillCollection
+  skillCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceSkillCollection
   summary: String
   url: String
 }
@@ -242,7 +242,7 @@ type AuthorLinkingCollections {
   resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceCollection
 }
 
-type ResourceRequiredSkillsCollection {
+type ResourceRequiredSkillCollection {
   total: Int!
   skip: Int!
   limit: Int!
@@ -287,7 +287,7 @@ type SkillCollection {
   items: [Skill]!
 }
 
-type ResourceSkillsCollection {
+type ResourceSkillCollection {
   total: Int!
   skip: Int!
   limit: Int!
@@ -430,6 +430,91 @@ type AssetCollection {
   items: [Asset]!
 }
 
+input ResourceFilter {
+  author: cfAuthorNestedFilter
+  sys: SysFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  resourceType_exists: Boolean
+  resourceType: String
+  resourceType_not: String
+  resourceType_in: [String]
+  resourceType_not_in: [String]
+  resourceType_contains: String
+  resourceType_not_contains: String
+  duration_exists: Boolean
+  duration: Int
+  duration_not: Int
+  duration_in: [Int]
+  duration_not_in: [Int]
+  duration_gt: Int
+  duration_gte: Int
+  duration_lt: Int
+  duration_lte: Int
+  summary_exists: Boolean
+  summary: String
+  summary_not: String
+  summary_in: [String]
+  summary_not_in: [String]
+  summary_contains: String
+  summary_not_contains: String
+  url_exists: Boolean
+  url: String
+  url_not: String
+  url_in: [String]
+  url_not_in: [String]
+  url_contains: String
+  url_not_contains: String
+  OR: [ResourceFilter]
+  AND: [ResourceFilter]
+}
+
+input cfAuthorNestedFilter {
+  sys: SysFilter
+  name_exists: Boolean
+  name: String
+  name_not: String
+  name_in: [String]
+  name_not_in: [String]
+  name_contains: String
+  name_not_contains: String
+  OR: [cfAuthorNestedFilter]
+  AND: [cfAuthorNestedFilter]
+}
+
+enum ResourceOrder {
+  title_ASC
+  title_DESC
+  slug_ASC
+  slug_DESC
+  resourceType_ASC
+  resourceType_DESC
+  duration_ASC
+  duration_DESC
+  url_ASC
+  url_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
 input TopicFilter {
   sys: SysFilter
   label_exists: Boolean
@@ -518,91 +603,6 @@ enum SkillOrder {
   label_DESC
   slug_ASC
   slug_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-}
-
-input ResourceFilter {
-  author: cfAuthorNestedFilter
-  sys: SysFilter
-  title_exists: Boolean
-  title: String
-  title_not: String
-  title_in: [String]
-  title_not_in: [String]
-  title_contains: String
-  title_not_contains: String
-  slug_exists: Boolean
-  slug: String
-  slug_not: String
-  slug_in: [String]
-  slug_not_in: [String]
-  slug_contains: String
-  slug_not_contains: String
-  resourceType_exists: Boolean
-  resourceType: String
-  resourceType_not: String
-  resourceType_in: [String]
-  resourceType_not_in: [String]
-  resourceType_contains: String
-  resourceType_not_contains: String
-  duration_exists: Boolean
-  duration: Int
-  duration_not: Int
-  duration_in: [Int]
-  duration_not_in: [Int]
-  duration_gt: Int
-  duration_gte: Int
-  duration_lt: Int
-  duration_lte: Int
-  summary_exists: Boolean
-  summary: String
-  summary_not: String
-  summary_in: [String]
-  summary_not_in: [String]
-  summary_contains: String
-  summary_not_contains: String
-  url_exists: Boolean
-  url: String
-  url_not: String
-  url_in: [String]
-  url_not_in: [String]
-  url_contains: String
-  url_not_contains: String
-  OR: [ResourceFilter]
-  AND: [ResourceFilter]
-}
-
-input cfAuthorNestedFilter {
-  sys: SysFilter
-  name_exists: Boolean
-  name: String
-  name_not: String
-  name_in: [String]
-  name_not_in: [String]
-  name_contains: String
-  name_not_contains: String
-  OR: [cfAuthorNestedFilter]
-  AND: [cfAuthorNestedFilter]
-}
-
-enum ResourceOrder {
-  title_ASC
-  title_DESC
-  slug_ASC
-  slug_DESC
-  resourceType_ASC
-  resourceType_DESC
-  duration_ASC
-  duration_DESC
-  url_ASC
-  url_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC

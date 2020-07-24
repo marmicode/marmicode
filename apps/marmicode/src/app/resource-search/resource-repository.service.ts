@@ -1,10 +1,13 @@
 import { Injectable, NgModule } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GraphQLModule } from '../graphql.module';
 import { Query } from '../graphql/schema';
+import * as schema from '../graphql/schema';
 import { createAuthor, createResource, Resource } from './resource';
+import { createSkill, Skill } from './skill';
 
 const AllResourcesQuery = gql`
   query Resources {
@@ -29,7 +32,7 @@ const AllResourcesQuery = gql`
 export class ResourceRepository {
   constructor(private _apollo: Apollo) {}
 
-  getResources() {
+  getResources(): Observable<Resource[]> {
     return this._apollo
       .query<Query>({
         query: AllResourcesQuery,
@@ -49,15 +52,24 @@ export class ResourceRepository {
                 }),
               duration: item.duration,
               pictureUri: item.picture.url,
-              // @todo
-              requiredSkills: [],
-              skills: [],
+              requiredSkills: item.requiredSkillCollection.items.map(
+                this._toSkill
+              ),
+              skills: item.skillCollection.items.map(this._toSkill),
               summary: item.summary,
               url: item.url,
             })
           )
         )
       );
+  }
+
+  private _toSkill(skill: schema.Skill): Skill {
+    return createSkill({
+      id: skill.sys.id,
+      label: skill.label,
+      slug: skill.slug,
+    });
   }
 }
 
