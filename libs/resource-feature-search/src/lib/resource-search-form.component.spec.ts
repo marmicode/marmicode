@@ -65,7 +65,7 @@ describe('ResourceSearchFormComponent', () => {
     expect(await component.skills$.pipe(take(1)).toPromise()).toHaveLength(4);
   });
 
-  xit('should filter options', async () => {
+  it('should filter options', async () => {
     component.skillControl.patchValue('tes');
     expect(await component.skills$.pipe(take(1)).toPromise()).toEqual([
       createSkill({

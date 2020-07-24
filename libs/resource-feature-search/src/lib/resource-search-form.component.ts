@@ -75,11 +75,9 @@ export class ResourceSearchFormComponent {
             .map((token) => token.toLowerCase());
 
           /* Check if all keywords match the label. */
-          keywordsTokenList.filter((keywordsToken) =>
+          return keywordsTokenList.every((keywordsToken) =>
             labelTokenList.find((token) => token.startsWith(keywordsToken))
           );
-
-          return skill.label.startsWith(keywords);
         });
       })
     );
