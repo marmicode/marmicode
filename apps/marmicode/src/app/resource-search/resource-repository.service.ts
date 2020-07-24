@@ -10,6 +10,14 @@ import { createAuthor, createResource, Resource } from './resource';
 import { createSkill, Skill } from './skill';
 
 const AllResourcesQuery = gql`
+  fragment SkillInfo on Skill {
+    sys {
+      id
+    }
+    label
+    slug
+  }
+
   query Resources {
     resourceCollection {
       items {
@@ -30,20 +38,12 @@ const AllResourcesQuery = gql`
         }
         requiredSkillCollection(limit: 10) {
           items {
-            sys {
-              id
-            }
-            label
-            slug
+            ...SkillInfo
           }
         }
         skillCollection(limit: 10) {
           items {
-            sys {
-              id
-            }
-            label
-            slug
+            ...SkillInfo
           }
         }
         summary
