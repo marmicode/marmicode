@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { animationFrameScheduler, BehaviorSubject, Observable } from 'rxjs';
 import { map, observeOn, pairwise } from 'rxjs/operators';
+import { appRouterHelper } from './app-router-helper';
 
 @Component({
   selector: 'mc-nav',
@@ -19,10 +20,10 @@ import { map, observeOn, pairwise } from 'rxjs/operators';
       class="toolbar"
       color="primary"
     >
-      <ng-container>
+      <a [routerLink]="appRouterHelper.home()" class="marmicode">
         <img height="40" src="/assets/logo-white.svg" />
         <span fxFlexAlign="end" class="title">Marmicode</span>
-      </ng-container>
+      </a>
     </mat-toolbar>
 
     <section class="container">
@@ -49,6 +50,11 @@ import { map, observeOn, pairwise } from 'rxjs/operators';
         top: -64px;
       }
 
+      .marmicode {
+        color: white;
+        text-decoration: none;
+      }
+
       .title {
         margin-left: 15px;
         margin-bottom: 2px;
@@ -61,6 +67,7 @@ import { map, observeOn, pairwise } from 'rxjs/operators';
   ],
 })
 export class NavComponent {
+  appRouterHelper = appRouterHelper;
   isScrollingDown$: Observable<boolean>;
 
   private _scrollPosition$ = new BehaviorSubject(0);

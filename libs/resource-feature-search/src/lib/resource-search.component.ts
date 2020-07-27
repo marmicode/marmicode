@@ -2,8 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ActivatedRoute } from '@angular/router';
-import { WipModule } from '@marmicode/shared-utils';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Resource } from './resource';
 import { ResourceCardModule } from './resource-card.component';
 import {
@@ -18,7 +17,7 @@ import { resourceSearchRouterHelper } from './resource-search-router-helper';
   selector: 'mc-resource-search',
   template: `
     <div fxLayout="row" fxLayoutAlign="center">
-      <mc-resource-search-form *mcWip></mc-resource-search-form>
+      <mc-resource-search-form></mc-resource-search-form>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="center">
       <mc-resource-card
@@ -63,7 +62,6 @@ export class ResourceSearchComponent {
     ResourceCardModule,
     ResourceRepositoryModule,
     ResourceSearchFormModule,
-    WipModule,
   ],
 })
 export class ResourceSearchModule {}
