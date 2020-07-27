@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ActivatedRoute } from '@angular/router';
 import { WipModule } from '@marmicode/shared-utils';
 import { map, switchMap, tap } from 'rxjs/operators';
+import { Resource } from './resource';
 import { ResourceCardModule } from './resource-card.component';
 import {
   ResourceRepository,
@@ -44,7 +45,7 @@ export class ResourceSearchComponent {
     })
   );
 
-  trackById = (index, item: { id: string }) => item.id;
+  trackById = (index, resource: Resource) => resource.id;
 
   constructor(
     private _route: ActivatedRoute,
