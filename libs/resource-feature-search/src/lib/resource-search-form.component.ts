@@ -100,11 +100,11 @@ export class ResourceSearchFormComponent implements OnInit {
     const navigateToSkill$ = this.skillControl.valueChanges.pipe(
       filter((value) => typeof value !== 'string'),
       switchMap((skill: Skill) =>
-        defer(() => {
-          return this._router.navigate(
+        defer(() =>
+          this._router.navigate(
             resourceSearchRouterHelper.learn(skill?.slug ?? '')
-          );
-        })
+          )
+        )
       )
     );
 
