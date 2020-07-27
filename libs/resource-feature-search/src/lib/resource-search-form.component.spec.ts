@@ -7,10 +7,10 @@ import {
   tick,
 } from '@angular/core/testing';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { readAll } from '@nrwl/angular/testing';
-import { of } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ResourceSearchFormComponent } from './resource-search-form.component';
 import { createSkill } from './skill';
@@ -25,6 +25,12 @@ describe('ResourceSearchFormComponent', () => {
       declarations: [ResourceSearchFormComponent],
       imports: [MatAutocompleteModule],
       providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            paramMap: EMPTY,
+          },
+        },
         {
           provide: Router,
           useValue: {

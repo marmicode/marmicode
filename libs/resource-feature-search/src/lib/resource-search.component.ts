@@ -11,6 +11,7 @@ import {
   ResourceRepositoryModule,
 } from './resource-repository.service';
 import { ResourceSearchFormModule } from './resource-search-form.component';
+import { resourceSearchRouterHelper } from './resource-search-router-helper';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,7 +38,7 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
 })
 export class ResourceSearchComponent {
   resources$ = this._route.paramMap.pipe(
-    map((params) => params.get('skillSlug')),
+    map((params) => params.get(resourceSearchRouterHelper.SKILL_SLUG_PARAM)),
     switchMap((skillSlug) => {
       return skillSlug != null
         ? this._resourceRepository.getResourcesBySkillSlug(skillSlug)

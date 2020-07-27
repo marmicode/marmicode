@@ -12,7 +12,7 @@ export const routes: Routes = [
     component: ResourceSearchComponent,
   },
   {
-    path: `${resourceSearchRouterHelper.LEARN_PATH}/:skillSlug`,
+    path: `${resourceSearchRouterHelper.LEARN_PATH}/:${resourceSearchRouterHelper.SKILL_SLUG_PARAM}`,
     component: ResourceSearchComponent,
   },
 ];

@@ -9,7 +9,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { resourceSearchRouterHelper } from './resource-search-router-helper';
 import { combineLatest, concat, defer, Observable, of } from 'rxjs';
@@ -60,6 +60,7 @@ export class ResourceSearchFormComponent implements OnInit {
   getSkillLabel = (skill: Skill) => skill?.label;
 
   constructor(
+    private _route: ActivatedRoute,
     private _router: Router,
     private _skillRepository: SkillRepository
   ) {
@@ -106,6 +107,10 @@ export class ResourceSearchFormComponent implements OnInit {
           )
         )
       )
+    );
+
+    this._route.paramMap.pipe(
+      map((params) => params.get(resourceSearchRouterHelper.SKILL_SLUG_PARAM))
     );
 
     navigateToSkill$.pipe(untilDestroyed(this)).subscribe();
