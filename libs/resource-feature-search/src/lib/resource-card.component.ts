@@ -15,6 +15,7 @@ import { TriangleModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
 import { resourceTypeActionMap, resourceTypeColorMap } from './resource-type';
 import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
+import { SkillChipModule } from './skill-chip.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -58,13 +59,10 @@ import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
           <h3 [style.color]="color" class="list-title">Goals</h3>
           <mat-chip-list>
             <div fxLayout="row wrap">
-              <mat-chip
+              <mc-skill-chip
                 *ngFor="let skill of resource.skills"
-                [disabled]="true"
-                [style.opacity]="1"
-              >
-                {{ skill.label }}
-              </mat-chip>
+                [skill]="skill"
+              ></mc-skill-chip>
             </div>
           </mat-chip-list>
         </section>
@@ -75,13 +73,10 @@ import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
           <h3 [style.color]="color" class="list-title">Required Skills</h3>
           <mat-chip-list>
             <div fxLayout="row wrap">
-              <mat-chip
+              <mc-skill-chip
                 *ngFor="let skill of resource.requiredSkills"
-                [disabled]="true"
-                [style.opacity]="1"
-              >
-                {{ skill.label }}
-              </mat-chip>
+                [skill]="skill"
+              ></mc-skill-chip>
             </div>
           </mat-chip-list>
         </section>
@@ -173,6 +168,7 @@ export class ResourceCardComponent implements OnChanges {
     ResourceTypeTriangleModule,
     MatIconModule,
     MatChipsModule,
+    SkillChipModule,
   ],
 })
 export class ResourceCardModule {}
