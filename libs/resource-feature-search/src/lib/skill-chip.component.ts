@@ -15,9 +15,10 @@ import { resourceSearchRouterHelper } from './resource-search-router-helper';
   selector: 'mc-skill-chip',
   template: `
     <a
+      [routerLink]="resourceSearchRouterHelper.learn(skill.slug)"
       class="chip"
       mat-ripple
-      [routerLink]="resourceSearchRouterHelper.learn(skill.slug)"
+      routerLinkActive="disabled"
     >
       {{ skill.label }}
     </a>
@@ -36,6 +37,12 @@ import { resourceSearchRouterHelper } from './resource-search-router-helper';
         min-height: 32px;
         padding: 7px 12px;
         text-decoration: none;
+      }
+
+      .chip.disabled {
+        background-color: #f9f9f9;
+        color: #888;
+        cursor: inherit;
       }
     `,
   ],
