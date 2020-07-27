@@ -10,6 +10,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { resourceSearchRouterHelper } from './resource-search-router-helper';
 import { combineLatest, concat, defer, Observable, of } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
@@ -19,6 +20,7 @@ import {
   SkillRepositoryModule,
 } from './skill-repository.service';
 
+@UntilDestroy()
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-search-form',
@@ -104,9 +106,7 @@ export class ResourceSearchFormComponent implements OnInit {
       )
     );
 
-    // @todo fix jest and ivy
-    // navigateToSkill$.pipe(untilDestroyed(this)).subscribe();
-    navigateToSkill$.subscribe();
+    navigateToSkill$.pipe(untilDestroyed(this)).subscribe();
   }
 
   onAutoCompleteClose() {
