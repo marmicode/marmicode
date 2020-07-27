@@ -1,5 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -21,7 +27,9 @@ describe('ResourceSearchFormComponent', () => {
       providers: [
         {
           provide: Router,
-          useValue: {},
+          useValue: {
+            navigate: jest.fn(),
+          },
         },
         {
           provide: SkillRepository,
@@ -58,6 +66,9 @@ describe('ResourceSearchFormComponent', () => {
     }).compileComponents()
   );
 
+  let router: Router;
+  beforeEach(() => (router = TestBed.inject(Router)));
+
   let skillRepository: SkillRepository;
   beforeEach(() => (skillRepository = TestBed.inject(SkillRepository)));
 
@@ -72,7 +83,7 @@ describe('ResourceSearchFormComponent', () => {
   });
 
   it('should filter options', async () => {
-    component.skillControl.patchValue('tes');
+    component.skillControl.setValue('tes');
     expect(await component.skills$.pipe(take(1)).toPromise()).toEqual([
       createSkill({
         id: 'xxx',
@@ -88,7 +99,7 @@ describe('ResourceSearchFormComponent', () => {
   });
 
   it('should return an empty list if a skill is selected', async () => {
-    component.skillControl.patchValue(
+    component.skillControl.setValue(
       createSkill({
         id: 'xxx',
         label: 'Angular Testing',
@@ -97,4 +108,10 @@ describe('ResourceSearchFormComponent', () => {
     );
     expect(await component.skills$.pipe(take(1)).toPromise()).toEqual([]);
   });
+
+  it('should not crash if skill is null', fakeAsync(() => {
+    component.skillControl.setValue(null);
+    tick();
+    expect(router.navigate).toBeCalledWith(['/', 'learn', '']);
+  }));
 });
