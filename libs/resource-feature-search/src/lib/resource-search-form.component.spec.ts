@@ -85,12 +85,14 @@ describe('ResourceSearchFormComponent', () => {
   });
 
   it('should show all options', async () => {
-    expect(await component.skills$.pipe(take(1)).toPromise()).toHaveLength(4);
+    expect(
+      await component.filteredSkills$.pipe(take(1)).toPromise()
+    ).toHaveLength(4);
   });
 
   it('should filter options', async () => {
     component.skillControl.setValue('tes');
-    expect(await component.skills$.pipe(take(1)).toPromise()).toEqual([
+    expect(await component.filteredSkills$.pipe(take(1)).toPromise()).toEqual([
       createSkill({
         id: 'xxx',
         label: 'Angular Testing',
@@ -112,7 +114,9 @@ describe('ResourceSearchFormComponent', () => {
         slug: 'angular-testing',
       })
     );
-    expect(await component.skills$.pipe(take(1)).toPromise()).toEqual([]);
+    expect(await component.filteredSkills$.pipe(take(1)).toPromise()).toEqual(
+      []
+    );
   });
 
   it('should not crash if skill is null', fakeAsync(() => {

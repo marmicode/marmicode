@@ -11,9 +11,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { resourceSearchRouterHelper } from './resource-search-router-helper';
 import { combineLatest, concat, defer, Observable, of } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { filter, map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { resourceSearchRouterHelper } from './resource-search-router-helper';
 import { Skill } from './skill';
 import {
   SkillRepository,
@@ -40,7 +40,10 @@ import {
         [displayWith]="getSkillLabel"
         (closed)="onAutoCompleteClose()"
       >
-        <mat-option *ngFor="let skill of skills$ | async" [value]="skill">
+        <mat-option
+          *ngFor="let skill of filteredSkills$ | async"
+          [value]="skill"
+        >
           {{ skill.label }}
         </mat-option>
       </mat-autocomplete>
@@ -56,7 +59,10 @@ import {
 })
 export class ResourceSearchFormComponent implements OnInit {
   skillControl = new FormControl();
-  skills$: Observable<Skill[]>;
+  allSkills$ = this._skillRepository
+    .getSkills()
+    .pipe(shareReplay({ refCount: true, bufferSize: 1 }));
+  filteredSkills$: Observable<Skill[]>;
   getSkillLabel = (skill: Skill) => skill?.label;
 
   constructor(
@@ -64,8 +70,8 @@ export class ResourceSearchFormComponent implements OnInit {
     private _router: Router,
     private _skillRepository: SkillRepository
   ) {
-    this.skills$ = combineLatest([
-      this._skillRepository.getSkills(),
+    this.filteredSkills$ = combineLatest([
+      this.allSkills$,
       concat(
         defer(() => of(this.skillControl.value)),
         this.skillControl.valueChanges
@@ -98,8 +104,11 @@ export class ResourceSearchFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    const navigateToSkill$ = this.skillControl.valueChanges.pipe(
-      filter((value) => typeof value !== 'string'),
+    const selectedSkill$ = this.skillControl.valueChanges.pipe(
+      filter((value) => typeof value !== 'string')
+    );
+
+    const navigateToSkill$ = selectedSkill$.pipe(
       switchMap((skill: Skill) =>
         defer(() =>
           this._router.navigate(
@@ -109,11 +118,24 @@ export class ResourceSearchFormComponent implements OnInit {
       )
     );
 
-    this._route.paramMap.pipe(
+    const skillSlug$ = this._route.paramMap.pipe(
       map((params) => params.get(resourceSearchRouterHelper.SKILL_SLUG_PARAM))
     );
 
-    navigateToSkill$.pipe(untilDestroyed(this)).subscribe();
+    const updateForm$ = combineLatest([skillSlug$, this.allSkills$]).pipe(
+      map(([skillSlug, skills]) =>
+        skills.find((skill) => skill.slug === skillSlug)
+      ),
+      tap((skill) =>
+        this.skillControl.setValue(skill, {
+          emitEvent: false,
+        })
+      )
+    );
+
+    combineLatest([navigateToSkill$, updateForm$])
+      .pipe(untilDestroyed(this))
+      .subscribe();
   }
 
   onAutoCompleteClose() {
