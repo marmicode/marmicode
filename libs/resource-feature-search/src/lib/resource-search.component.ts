@@ -20,7 +20,7 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="center">
       <mc-resource-card
-        *ngFor="let resource of resources$ | async"
+        *ngFor="let resource of resources$ | async; trackBy: trackById"
         [resource]="resource"
         class="mc-resource-card"
       ></mc-resource-card>
@@ -43,6 +43,8 @@ export class ResourceSearchComponent {
         : this._resourceRepository.getResources();
     })
   );
+
+  trackById = (index, item: { id: string }) => item.id;
 
   constructor(
     private _route: ActivatedRoute,
