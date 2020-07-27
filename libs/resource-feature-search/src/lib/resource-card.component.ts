@@ -57,28 +57,24 @@ import { SkillChipModule } from './skill-chip.component';
         </p>
         <section class="list-container">
           <h3 [style.color]="color" class="list-title">Goals</h3>
-          <mat-chip-list>
-            <div fxLayout="row wrap">
-              <mc-skill-chip
-                *ngFor="let skill of resource.skills"
-                [skill]="skill"
-              ></mc-skill-chip>
-            </div>
-          </mat-chip-list>
+          <div fxLayout="row wrap">
+            <mc-skill-chip
+              *ngFor="let skill of resource.skills"
+              [skill]="skill"
+            ></mc-skill-chip>
+          </div>
         </section>
         <section
           *ngIf="resource.requiredSkills?.length > 0"
           class="list-container"
         >
           <h3 [style.color]="color" class="list-title">Required Skills</h3>
-          <mat-chip-list>
-            <div fxLayout="row wrap">
-              <mc-skill-chip
-                *ngFor="let skill of resource.requiredSkills"
-                [skill]="skill"
-              ></mc-skill-chip>
-            </div>
-          </mat-chip-list>
+          <div fxLayout="row wrap">
+            <mc-skill-chip
+              *ngFor="let skill of resource.requiredSkills"
+              [skill]="skill"
+            ></mc-skill-chip>
+          </div>
         </section>
       </mat-card-content>
 
@@ -161,14 +157,13 @@ export class ResourceCardComponent implements OnChanges {
   exports: [ResourceCardComponent],
   imports: [
     CommonModule,
-    MatCardModule,
-    MatButtonModule,
     FlexLayoutModule,
-    TriangleModule,
-    ResourceTypeTriangleModule,
+    MatButtonModule,
+    MatCardModule,
     MatIconModule,
-    MatChipsModule,
+    ResourceTypeTriangleModule,
     SkillChipModule,
+    TriangleModule,
   ],
 })
 export class ResourceCardModule {}
