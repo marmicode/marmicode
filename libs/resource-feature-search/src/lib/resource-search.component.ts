@@ -1,3 +1,10 @@
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -26,15 +33,19 @@ import { resourceSearchRouterHelper } from './resource-search-router-helper';
     <div fxLayout="row" fxLayoutAlign="center">
       <mc-resource-search-form></mc-resource-search-form>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign="center">
+    <div fxLayout="row" fxLayoutAlign="center">
       <mc-loading *ngIf="isLoading$ | async"></mc-loading>
-      <ng-container *ngIf="(isLoading$ | async) === false">
-        <mc-resource-card
-          *ngFor="let resource of resources$ | async; trackBy: trackById"
-          [resource]="resource"
-          class="mc-resource-card"
-        ></mc-resource-card>
-      </ng-container>
+    </div>
+    <div
+      *ngIf="(isLoading$ | async) === false"
+      fxLayout="row wrap"
+      fxLayoutAlign="center"
+    >
+      <mc-resource-card
+        *ngFor="let resource of resources$ | async; trackBy: trackById"
+        [resource]="resource"
+        class="mc-resource-card"
+      ></mc-resource-card>
     </div>
   `,
   styles: [
@@ -43,6 +54,17 @@ import { resourceSearchRouterHelper } from './resource-search-router-helper';
         margin: 20px;
       }
     `,
+  ],
+  animations: [
+    trigger('scaleOut', [
+      state(
+        'void',
+        style({
+          height: 0,
+        })
+      ),
+      transition('* => void', [animate('.2s')]),
+    ]),
   ],
 })
 export class ResourceSearchComponent {
