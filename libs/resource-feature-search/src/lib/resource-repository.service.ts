@@ -81,29 +81,7 @@ export class ResourceRepository {
       .query<Query>({
         query: allResources,
       })
-      .pipe(
-        map(({ data }) =>
-          data.resourceCollection.items.map((item) =>
-            createResource({
-              id: item.sys.id,
-              type: item.resourceType as any,
-              title: item.title,
-              author:
-                item.author &&
-                createAuthor({
-                  name: item.author.name,
-                  pictureUri: item.author.picture.url,
-                }),
-              duration: item.duration,
-              pictureUri: item.picture.url,
-              requiredSkills: this._toSkills(item.requiredSkillCollection),
-              skills: this._toSkills(item.skillCollection),
-              summary: item.summary,
-              url: item.url,
-            })
-          )
-        )
-      );
+      .pipe(map(({ data }) => this._toResources(data.resourceCollection)));
   }
 
   getResourcesBySkillSlug(skillSlug: string): Observable<Resource[]> {
@@ -115,11 +93,15 @@ export class ResourceRepository {
         },
       })
       .pipe(
-        map(({ data }) => {
-          return this._toResources(
+        map(({ data }) =>
+          this._toResources(
             data.skillCollection.items[0].linkedFrom.resourceCollection
-          );
-        }),
+          )
+        ),
+        /* We have to filter again because the previous query also returns
+         * resource that have this skill in the `skills` field.
+         * AFAIK, there is no way to return only resources that have this
+         * skill in `requiredSkills` field. */
         map((resources) =>
           resources.filter((resource) =>
             resource.skills.find((skill) => skill.slug === skillSlug)
