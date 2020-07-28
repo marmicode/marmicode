@@ -1,7 +1,7 @@
 export { WipService } from './lib/wip.service';
 export { WipModule } from './lib/wip.directive';
 export {
-  DematerializedNotification,
+  MaterializedNotification,
   dematerializeData,
   dematerializeError,
   materializeError,
