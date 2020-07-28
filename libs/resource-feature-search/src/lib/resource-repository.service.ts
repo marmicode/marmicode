@@ -13,7 +13,7 @@ import { createSkill, Skill } from './skill';
 
 const allResources = gql`
   ${skillFragment}
-  query Resources {
+  query {
     resourceCollection(order: [releasedAt_DESC]) {
       items {
         sys {
@@ -43,6 +43,28 @@ const allResources = gql`
         }
         summary
         url
+      }
+    }
+  }
+`;
+
+const resourcesBySkillSlug = gql`
+  ${skillFragment}
+  query($skillSlug: String!) {
+    skillCollection(limit: 1, where: { slug: $skillSlug }) {
+      items {
+        linkedFrom {
+          resourceCollection {
+            items {
+              title
+              skillCollection(limit: 10) {
+                items {
+                  label
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -83,6 +105,13 @@ export class ResourceRepository {
   }
 
   getResourcesBySkillSlug(skillSlug: string) {
+    // @todo work in progress
+    // return this._apollo.query<Query>({
+    //   query: resourcesBySkillSlug,
+    //   variables: {
+    //     skillSlug,
+    //   },
+    // });
     return this.getResources().pipe(
       map((resources) =>
         resources.filter((resource) =>
