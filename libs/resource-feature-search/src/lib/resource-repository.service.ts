@@ -1,15 +1,14 @@
-import { A } from '@angular/cdk/keycodes';
 import { Injectable, NgModule } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { GraphQLModule } from './graphql.module';
 import * as schema from './graphql/schema';
 import { Query } from './graphql/schema';
 import { skillFragment, skillFragmentToSkill } from './graphql/skill-fragment';
 import { createAuthor, createResource, Resource } from './resource';
-import { createSkill, Skill } from './skill';
+import { Skill } from './skill';
 
 const resourceFragment = gql`
   ${skillFragment}
@@ -44,9 +43,9 @@ const resourceFragment = gql`
   }
 `;
 
-const allResources = gql`
+const getAllResources = gql`
   ${resourceFragment}
-  query {
+  query getAllResources {
     resourceCollection(order: [releasedAt_DESC]) {
       items {
         ...ResourceFragment
@@ -55,9 +54,9 @@ const allResources = gql`
   }
 `;
 
-const resourcesBySkillSlug = gql`
+const getResourcesBySkillSlug = gql`
   ${resourceFragment}
-  query($skillSlug: String!) {
+  query getResourcesBySkillSlug($skillSlug: String!) {
     skillCollection(limit: 1, where: { slug: $skillSlug }) {
       items {
         linkedFrom {
@@ -79,7 +78,7 @@ export class ResourceRepository {
   getResources(): Observable<Resource[]> {
     return this._apollo
       .query<Query>({
-        query: allResources,
+        query: getAllResources,
       })
       .pipe(map(({ data }) => this._toResources(data.resourceCollection)));
   }
@@ -87,7 +86,7 @@ export class ResourceRepository {
   getResourcesBySkillSlug(skillSlug: string): Observable<Resource[]> {
     return this._apollo
       .query<Query>({
-        query: resourcesBySkillSlug,
+        query: getResourcesBySkillSlug,
         variables: {
           skillSlug,
         },
