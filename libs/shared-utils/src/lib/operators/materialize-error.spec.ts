@@ -2,6 +2,7 @@ import { TestScheduler } from 'rxjs/testing';
 import { getTestScheduler } from '../testing/get-test-scheduler';
 import {
   dematerializeData,
+  DematerializedNotificationType,
   dematerializeError,
   materializeError,
 } from './materialize-error';
@@ -21,8 +22,8 @@ describe('materializeError', () => {
 
       expectSubscriptions(data$.subscriptions).toBe(expectedSub);
       expectObservable(result$).toBe(expectedObs, {
-        a: { value: 'a', hasValue: true, isError: false },
-        b: { value: 'b', hasValue: true, isError: false },
+        a: { type: DematerializedNotificationType.Next, value: 'a' },
+        b: { type: DematerializedNotificationType.Next, value: 'b' },
       });
     });
   });
@@ -37,8 +38,8 @@ describe('materializeError', () => {
 
       expectSubscriptions(data$.subscriptions).toBe(expectedSub);
       expectObservable(result$).toBe(expectedObs, {
-        a: { value: 'a', hasValue: true, isError: false },
-        e: { error: 'error', hasValue: false, isError: true },
+        a: { type: DematerializedNotificationType.Next, value: 'a' },
+        e: { type: DematerializedNotificationType.Error, error: 'error' },
       });
     });
   });
@@ -46,8 +47,8 @@ describe('materializeError', () => {
   it('should dematerialize data', () => {
     scheduler.run(({ cold, expectObservable, expectSubscriptions }) => {
       const data$ = cold('    --a-(e|)', {
-        a: { value: 'a', hasValue: true, isError: false },
-        e: { error: 'error', hasValue: false, isError: true },
+        a: { type: DematerializedNotificationType.Next, value: 'a' },
+        e: { type: DematerializedNotificationType.Error, error: 'error' },
       });
       const expectedSub = '   ^---!';
       const expectedObs = '   --a-|';
@@ -62,8 +63,8 @@ describe('materializeError', () => {
   it('should dematerialize error', () => {
     scheduler.run(({ cold, expectObservable, expectSubscriptions }) => {
       const data$ = cold('    --a-(e|)', {
-        a: { value: 'a', hasValue: true, isError: false },
-        e: { error: 'error', hasValue: false, isError: true },
+        a: { type: DematerializedNotificationType.Next, value: 'a' },
+        e: { type: DematerializedNotificationType.Error, error: 'error' },
       });
       const expectedSub = '   ^---!';
       const expectedObs = '   ----(e|)';

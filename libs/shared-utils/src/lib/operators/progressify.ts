@@ -7,15 +7,15 @@
 import { concat, of, OperatorFunction } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-export enum ProgressifyStatus {
+export enum ProgressifyEventType {
   Complete = 'complete',
   Error = 'error',
   Next = 'next',
-  Started = 'started'
+  Started = 'started',
 }
 
 export interface ProgressifyEvent<T> {
-  status: ProgressifyStatus;
+  type: ProgressifyEventType;
   value?: T;
   error?: any;
 }
@@ -25,33 +25,33 @@ export interface ProgressifyEvent<T> {
  * Works like `materialize` but triggers an additional event on subscription.
  */
 export const progressify = <T>({
-  ignoreComplete = false
+  ignoreComplete = false,
 }: {
   ignoreComplete?: boolean;
 } = {}): OperatorFunction<T, ProgressifyEvent<T>> => {
-  return source$ =>
+  return (source$) =>
     concat(
       of({
-        status: ProgressifyStatus.Started
+        type: ProgressifyEventType.Started,
       }),
       source$.pipe(
-        map(value => ({
-          status: ProgressifyStatus.Next,
-          value
+        map((value) => ({
+          type: ProgressifyEventType.Next,
+          value,
         }))
       ),
       ...(ignoreComplete
         ? []
         : [
             of({
-              status: ProgressifyStatus.Complete
-            })
+              type: ProgressifyEventType.Complete,
+            }),
           ])
     ).pipe(
-      catchError(error =>
+      catchError((error) =>
         of({
-          status: ProgressifyStatus.Error,
-          error
+          type: ProgressifyEventType.Error,
+          error,
         })
       )
     );

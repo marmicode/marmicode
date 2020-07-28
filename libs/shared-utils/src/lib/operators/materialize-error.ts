@@ -1,11 +1,16 @@
 import { Observable, of, OperatorFunction } from 'rxjs';
 import { catchError, filter, map } from 'rxjs/operators';
 
+export enum DematerializedNotificationType {
+  Complete = 'complete',
+  Error = 'error',
+  Next = 'next',
+}
+
 export interface DematerializedNotification<T> {
+  type: DematerializedNotificationType;
   value?: T;
   error?: unknown;
-  hasValue: boolean;
-  isError: boolean;
 }
 
 /**
@@ -21,8 +26,10 @@ export function materializeError<T>(): OperatorFunction<
     source: Observable<T>
   ): Observable<DematerializedNotification<T>> {
     return source.pipe(
-      map(value => ({ value, hasValue: true, isError: false })),
-      catchError(error => of({ error, hasValue: false, isError: true }))
+      map((value) => ({ type: DematerializedNotificationType.Next, value })),
+      catchError((error) =>
+        of({ type: DematerializedNotificationType.Error, error })
+      )
     );
   };
 }
@@ -34,12 +41,15 @@ export function dematerializeData<T>(): OperatorFunction<
   DematerializedNotification<T>,
   T
 > {
-  return function dematerializeErrorOperation(
+  return function dematerializeDataOperator(
     source: Observable<DematerializedNotification<T>>
   ): Observable<T> {
     return source.pipe(
-      filter(notification => notification.hasValue),
-      map(notification => notification.value)
+      filter(
+        (notification) =>
+          notification.type === DematerializedNotificationType.Next
+      ),
+      map((notification) => notification.value)
     );
   };
 }
@@ -48,12 +58,15 @@ export function dematerializeError<T>(): OperatorFunction<
   DematerializedNotification<T>,
   unknown
 > {
-  return function dematerializeErrorOperation(
+  return function dematerializeErrorOperator(
     source: Observable<DematerializedNotification<T>>
   ): Observable<unknown> {
     return source.pipe(
-      filter(notification => notification.isError),
-      map(notification => notification.error)
+      filter(
+        (notification) =>
+          notification.type === DematerializedNotificationType.Error
+      ),
+      map((notification) => notification.error)
     );
   };
 }

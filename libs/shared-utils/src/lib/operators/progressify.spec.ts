@@ -1,6 +1,6 @@
 import { TestScheduler } from 'rxjs/testing';
 import { getTestScheduler } from '../testing/get-test-scheduler';
-import { progressify, ProgressifyStatus } from './progressify';
+import { progressify, ProgressifyEventType } from './progressify';
 
 describe('progressify', () => {
   let scheduler: TestScheduler;
@@ -14,22 +14,22 @@ describe('progressify', () => {
 
       expectObservable(source$.pipe(progressify())).toBe(expected, {
         x: {
-          status: ProgressifyStatus.Started,
+          type: ProgressifyEventType.Started,
         },
         a: {
-          status: ProgressifyStatus.Next,
+          type: ProgressifyEventType.Next,
           value: 'a',
         },
         b: {
-          status: ProgressifyStatus.Next,
+          type: ProgressifyEventType.Next,
           value: 'b',
         },
         c: {
-          status: ProgressifyStatus.Next,
+          type: ProgressifyEventType.Next,
           value: 'c',
         },
         y: {
-          status: ProgressifyStatus.Complete,
+          type: ProgressifyEventType.Complete,
         },
       });
     });
@@ -42,14 +42,14 @@ describe('progressify', () => {
 
       expectObservable(source$.pipe(progressify())).toBe(expected, {
         x: {
-          status: ProgressifyStatus.Started,
+          type: ProgressifyEventType.Started,
         },
         a: {
-          status: ProgressifyStatus.Next,
+          type: ProgressifyEventType.Next,
           value: 'a',
         },
         b: {
-          status: ProgressifyStatus.Error,
+          type: ProgressifyEventType.Error,
           error: 'error',
         },
       });
