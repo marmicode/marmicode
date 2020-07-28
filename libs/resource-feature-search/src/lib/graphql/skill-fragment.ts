@@ -3,7 +3,7 @@ import { createSkill } from '../skill';
 import * as schema from './schema';
 
 export const skillFragment = gql`
-  fragment Skill on Skill {
+  fragment SkillFragment on Skill {
     sys {
       id
     }

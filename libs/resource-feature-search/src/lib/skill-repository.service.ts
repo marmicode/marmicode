@@ -13,7 +13,7 @@ const allSkills = gql`
   query Skills {
     skillCollection(order: [label_ASC]) {
       items {
-        ...Skill
+        ...SkillFragment
       }
     }
   }
