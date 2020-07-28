@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
+import { LoadingModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
 import { ResourceCardModule } from './resource-card.component';
 import {
@@ -20,6 +21,7 @@ import { resourceSearchRouterHelper } from './resource-search-router-helper';
       <mc-resource-search-form></mc-resource-search-form>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="center">
+<!--      <mc-loading></mc-loading>-->
       <mc-resource-card
         *ngFor="let resource of resources$ | async; trackBy: trackById"
         [resource]="resource"
@@ -62,6 +64,7 @@ export class ResourceSearchComponent {
     ResourceCardModule,
     ResourceRepositoryModule,
     ResourceSearchFormModule,
+    LoadingModule,
   ],
 })
 export class ResourceSearchModule {}
