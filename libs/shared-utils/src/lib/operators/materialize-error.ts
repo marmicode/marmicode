@@ -1,14 +1,14 @@
 import { Observable, of, OperatorFunction } from 'rxjs';
 import { catchError, filter, map } from 'rxjs/operators';
 
-export enum DematerializedNotificationType {
+export enum MaterializedNotificationType {
   Complete = 'complete',
   Error = 'error',
   Next = 'next',
 }
 
 export interface DematerializedNotification<T> {
-  type: DematerializedNotificationType;
+  type: MaterializedNotificationType;
   value?: T;
   error?: unknown;
 }
@@ -26,9 +26,9 @@ export function materializeError<T>(): OperatorFunction<
     source: Observable<T>
   ): Observable<DematerializedNotification<T>> {
     return source.pipe(
-      map((value) => ({ type: DematerializedNotificationType.Next, value })),
+      map((value) => ({ type: MaterializedNotificationType.Next, value })),
       catchError((error) =>
-        of({ type: DematerializedNotificationType.Error, error })
+        of({ type: MaterializedNotificationType.Error, error })
       )
     );
   };
@@ -47,7 +47,7 @@ export function dematerializeData<T>(): OperatorFunction<
     return source.pipe(
       filter(
         (notification) =>
-          notification.type === DematerializedNotificationType.Next
+          notification.type === MaterializedNotificationType.Next
       ),
       map((notification) => notification.value)
     );
@@ -64,7 +64,7 @@ export function dematerializeError<T>(): OperatorFunction<
     return source.pipe(
       filter(
         (notification) =>
-          notification.type === DematerializedNotificationType.Error
+          notification.type === MaterializedNotificationType.Error
       ),
       map((notification) => notification.error)
     );
