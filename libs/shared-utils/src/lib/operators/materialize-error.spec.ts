@@ -5,6 +5,7 @@ import {
   MaterializedNotificationType,
   dematerializeError,
   materializeError,
+  MaterializedNotification,
 } from './materialize-error';
 
 describe('materializeError', () => {
@@ -22,8 +23,8 @@ describe('materializeError', () => {
 
       expectSubscriptions(data$.subscriptions).toBe(expectedSub);
       expectObservable(result$).toBe(expectedObs, {
-        a: { type: MaterializedNotificationType.Next, value: 'a' },
-        b: { type: MaterializedNotificationType.Next, value: 'b' },
+        a: { type: 'next', value: 'a' } as MaterializedNotification<string>,
+        b: { type: 'next', value: 'b' } as MaterializedNotification<string>,
       });
     });
   });
@@ -38,8 +39,10 @@ describe('materializeError', () => {
 
       expectSubscriptions(data$.subscriptions).toBe(expectedSub);
       expectObservable(result$).toBe(expectedObs, {
-        a: { type: MaterializedNotificationType.Next, value: 'a' },
-        e: { type: MaterializedNotificationType.Error, error: 'error' },
+        a: { type: 'next', value: 'a' } as MaterializedNotification<string>,
+        e: { type: 'error', error: 'error' } as MaterializedNotification<
+          string
+        >,
       });
     });
   });
@@ -47,8 +50,10 @@ describe('materializeError', () => {
   it('should dematerialize data', () => {
     scheduler.run(({ cold, expectObservable, expectSubscriptions }) => {
       const data$ = cold('    --a-(e|)', {
-        a: { type: MaterializedNotificationType.Next, value: 'a' },
-        e: { type: MaterializedNotificationType.Error, error: 'error' },
+        a: { type: 'next', value: 'a' } as MaterializedNotification<string>,
+        e: { type: 'error', error: 'error' } as MaterializedNotification<
+          string
+        >,
       });
       const expectedSub = '   ^---!';
       const expectedObs = '   --a-|';
@@ -63,8 +68,10 @@ describe('materializeError', () => {
   it('should dematerialize error', () => {
     scheduler.run(({ cold, expectObservable, expectSubscriptions }) => {
       const data$ = cold('    --a-(e|)', {
-        a: { type: MaterializedNotificationType.Next, value: 'a' },
-        e: { type: MaterializedNotificationType.Error, error: 'error' },
+        a: { type: 'next', value: 'a' } as MaterializedNotification<string>,
+        e: { type: 'error', error: 'error' } as MaterializedNotification<
+          string
+        >,
       });
       const expectedSub = '   ^---!';
       const expectedObs = '   ----(e|)';

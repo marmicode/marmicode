@@ -7,12 +7,7 @@
 import { concat, of, OperatorFunction } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-export enum ProgressifyEventType {
-  Complete = 'complete',
-  Error = 'error',
-  Next = 'next',
-  Started = 'started',
-}
+export type ProgressifyEventType = 'complete' | 'error' | 'next' | 'started';
 
 export interface ProgressifyEvent<T> {
   type: ProgressifyEventType;
@@ -32,27 +27,30 @@ export const progressify = <T>({
   return (source$) =>
     concat(
       of({
-        type: ProgressifyEventType.Started,
-      }),
+        type: 'started',
+      } as ProgressifyEvent<T>),
       source$.pipe(
-        map((value) => ({
-          type: ProgressifyEventType.Next,
-          value,
-        }))
+        map(
+          (value) =>
+            ({
+              type: 'next',
+              value,
+            } as ProgressifyEvent<T>)
+        )
       ),
       ...(ignoreComplete
         ? []
         : [
             of({
-              type: ProgressifyEventType.Complete,
-            }),
+              type: 'complete',
+            } as ProgressifyEvent<T>),
           ])
     ).pipe(
       catchError((error) =>
         of({
-          type: ProgressifyEventType.Error,
+          type: 'error',
           error,
-        })
+        } as ProgressifyEvent<T>)
       )
     );
 };

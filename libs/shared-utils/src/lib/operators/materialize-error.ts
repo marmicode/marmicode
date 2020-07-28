@@ -1,13 +1,9 @@
 import { Observable, of, OperatorFunction } from 'rxjs';
 import { catchError, filter, map } from 'rxjs/operators';
 
-export enum MaterializedNotificationType {
-  Complete = 'complete',
-  Error = 'error',
-  Next = 'next',
-}
+export type MaterializedNotificationType = 'complete' | 'error' | 'next';
 
-export interface DematerializedNotification<T> {
+export interface MaterializedNotification<T> {
   type: MaterializedNotificationType;
   value?: T;
   error?: unknown;
@@ -20,15 +16,15 @@ export interface DematerializedNotification<T> {
  */
 export function materializeError<T>(): OperatorFunction<
   T,
-  DematerializedNotification<T>
+  MaterializedNotification<T>
 > {
   return function materializeErrorOperation(
     source: Observable<T>
-  ): Observable<DematerializedNotification<T>> {
+  ): Observable<MaterializedNotification<T>> {
     return source.pipe(
-      map((value) => ({ type: MaterializedNotificationType.Next, value })),
+      map((value) => ({ type: 'next', value } as MaterializedNotification<T>)),
       catchError((error) =>
-        of({ type: MaterializedNotificationType.Error, error })
+        of({ type: 'error', error } as MaterializedNotification<T>)
       )
     );
   };
@@ -38,34 +34,28 @@ export function materializeError<T>(): OperatorFunction<
  * Filters errors and dematerializes data only.
  */
 export function dematerializeData<T>(): OperatorFunction<
-  DematerializedNotification<T>,
+  MaterializedNotification<T>,
   T
 > {
   return function dematerializeDataOperator(
-    source: Observable<DematerializedNotification<T>>
+    source: Observable<MaterializedNotification<T>>
   ): Observable<T> {
     return source.pipe(
-      filter(
-        (notification) =>
-          notification.type === MaterializedNotificationType.Next
-      ),
+      filter((notification) => notification.type === 'next'),
       map((notification) => notification.value)
     );
   };
 }
 
 export function dematerializeError<T>(): OperatorFunction<
-  DematerializedNotification<T>,
+  MaterializedNotification<T>,
   unknown
 > {
   return function dematerializeErrorOperator(
-    source: Observable<DematerializedNotification<T>>
+    source: Observable<MaterializedNotification<T>>
   ): Observable<unknown> {
     return source.pipe(
-      filter(
-        (notification) =>
-          notification.type === MaterializedNotificationType.Error
-      ),
+      filter((notification) => notification.type === 'error'),
       map((notification) => notification.error)
     );
   };
