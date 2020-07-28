@@ -28,11 +28,13 @@ import { resourceSearchRouterHelper } from './resource-search-router-helper';
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="center">
       <mc-loading *ngIf="isLoading$ | async"></mc-loading>
-      <mc-resource-card
-        *ngFor="let resource of resources$ | async; trackBy: trackById"
-        [resource]="resource"
-        class="mc-resource-card"
-      ></mc-resource-card>
+      <ng-container *ngIf="(isLoading$ | async) === false">
+        <mc-resource-card
+          *ngFor="let resource of resources$ | async; trackBy: trackById"
+          [resource]="resource"
+          class="mc-resource-card"
+        ></mc-resource-card>
+      </ng-container>
     </div>
   `,
   styles: [
@@ -61,8 +63,13 @@ export class ResourceSearchComponent {
             ? this._resourceRepository.getResourcesBySkillSlug(skillSlug)
             : this._resourceRepository.getResources();
 
-        return source$.pipe(shareReplayWithRefCount(), progressify());
-      })
+        return source$.pipe(
+          progressify({
+            ignoreComplete: true,
+          })
+        );
+      }),
+      shareReplayWithRefCount()
     );
 
     this.isLoading$ = resourcesProgress$.pipe(
