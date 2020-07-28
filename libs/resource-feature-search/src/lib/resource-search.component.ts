@@ -15,7 +15,7 @@ import {
   shareReplayWithRefCount,
 } from '@marmicode/shared-utils';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { debounceTime, map, switchMap, throttleTime } from 'rxjs/operators';
 import { LoadingModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
 import { ResourceCardModule } from './resource-card.component';
@@ -54,17 +54,6 @@ import { resourceSearchRouterHelper } from './resource-search-router-helper';
         margin: 20px;
       }
     `,
-  ],
-  animations: [
-    trigger('scaleOut', [
-      state(
-        'void',
-        style({
-          height: 0,
-        })
-      ),
-      transition('* => void', [animate('.2s')]),
-    ]),
   ],
 })
 export class ResourceSearchComponent {
