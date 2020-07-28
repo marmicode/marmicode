@@ -89,9 +89,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/marmicode/jest.config.js",
-            "tsConfig": "apps/marmicode/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "apps/marmicode/src/test-setup.ts"
+            "passWithNoTests": true
           }
         },
         "server": {
@@ -191,9 +189,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/learning-map-feature-tree/jest.config.js",
-            "tsConfig": "libs/learning-map-feature-tree/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/learning-map-feature-tree/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
@@ -222,9 +218,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/resource-feature-search/jest.config.js",
-            "tsConfig": "libs/resource-feature-search/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/resource-feature-search/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
@@ -250,9 +244,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/shared-ui/jest.config.js",
-            "tsConfig": "libs/shared-ui/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/shared-ui/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
@@ -278,9 +270,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/shared-utils/jest.config.js",
-            "tsConfig": "libs/shared-utils/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/shared-utils/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
