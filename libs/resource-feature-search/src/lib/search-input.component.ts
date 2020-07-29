@@ -20,7 +20,7 @@ import {
 } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,20 +38,29 @@ import { BehaviorSubject } from 'rxjs';
       [matAutocomplete]="matAutocomplete"
       aria-label="Search"
       class="input"
+      fxFlex
       type="text"
     />
 
     <!-- Reset button. -->
-    <button (click)="reset()" mat-icon-button>
+    <button
+      *ngIf="control.value"
+      (click)="reset()"
+      class="reset-button"
+      mat-icon-button
+    >
       <mat-icon color="primary">clear</mat-icon>
     </button>
   </div>`,
   styles: [
     `
       .search-input-container {
+        position: relative;
         height: 35px;
         border-radius: 25px;
         background-color: white;
+        overflow: hidden;
+        width: 250px;
       }
 
       .search-icon {
@@ -67,41 +76,20 @@ import { BehaviorSubject } from 'rxjs';
         border: none;
         outline: none;
       }
+
+      .reset-button {
+        position: absolute;
+        right: 0;
+      }
     `,
-  ],
-  animations: [
-    trigger('fullscreen', [
-      state(
-        'true',
-        style({
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          borderRadius: 0,
-          height: '64px',
-          width: '100vw',
-          zIndex: 1,
-        })
-      ),
-      transition('* <=> *', animate(200)),
-    ]),
   ],
 })
 export class SearchInputComponent {
   @Input() control: FormControl;
   @Input() matAutocomplete: MatAutocomplete;
-  isFullscreen$ = new BehaviorSubject<boolean>(false);
 
   reset() {
     this.control.reset();
-  }
-
-  onFocus() {
-    this.isFullscreen$.next(true);
-  }
-
-  onBlur() {
-    this.isFullscreen$.next(false);
   }
 }
 
