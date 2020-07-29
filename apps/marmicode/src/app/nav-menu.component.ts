@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -14,19 +15,26 @@ import { BehaviorSubject } from 'rxjs';
       <mat-icon>menu</mat-icon>
     </button>
 
-    <mat-nav-list
-      *ngIf="isMenuDisplayed$ | async"
-      class="menu mat-elevation-z1"
-    >
-      <a mat-list-item href="https://marmicode.eventbrite.com" target="_blank">
-        <mat-icon class="icon mc-primary-text">school</mat-icon>
-        <span class="mc-primary-text">Workshops</span>
-      </a>
-      <a mat-list-item href="https://marmicode.eventbrite.com" target="_blank">
-        <mat-icon class="icon mc-primary-text">school</mat-icon>
-        <span class="mc-primary-text">Workshops</span>
-      </a>
-    </mat-nav-list>
+    <div *ngIf="isMenuDisplayed$ | async" class="menu mat-elevation-z1">
+      <mat-nav-list *ngIf="isMenuDisplayed$ | async" class="menu-list">
+        <a
+          mat-list-item
+          href="https://marmicode.eventbrite.com"
+          target="_blank"
+        >
+          <mat-icon class="icon mc-primary-text">school</mat-icon>
+          <span class="mc-primary-text">Workshops</span>
+        </a>
+        <a
+          mat-list-item
+          href="https://marmicode.eventbrite.com"
+          target="_blank"
+        >
+          <mat-icon class="icon mc-primary-text">school</mat-icon>
+          <span class="mc-primary-text">Workshops</span>
+        </a>
+      </mat-nav-list>
+    </div>
   `,
   styles: [
     `
@@ -40,6 +48,10 @@ import { BehaviorSubject } from 'rxjs';
         width: 100%;
 
         background-color: white;
+      }
+
+      .menu-list {
+        margin: auto;
       }
 
       .icon {
@@ -65,6 +77,7 @@ export class NavMenuComponent {
     MatIconModule,
     MatButtonModule,
     WipModule,
+    FlexModule,
   ],
 })
 export class NavMenuModule {}
