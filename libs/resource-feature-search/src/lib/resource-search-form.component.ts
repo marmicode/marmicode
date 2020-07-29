@@ -10,6 +10,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
+import { WipModule } from '@marmicode/shared-utils';
+import { SearchInputModule } from './search-input.component';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { combineLatest, concat, defer, Observable, of } from 'rxjs';
 import { filter, map, shareReplay, switchMap, tap } from 'rxjs/operators';
@@ -25,7 +27,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-search-form',
   template: `
-    <mat-form-field class="search-input">
+    <mc-search-input *mcWip></mc-search-input>
+    <mat-form-field *mcNotWip class="search-input">
       <input
         type="text"
         placeholder="Search by skill"
@@ -160,6 +163,8 @@ export class ResourceSearchFormComponent implements OnInit {
     MatInputModule,
     ReactiveFormsModule,
     SkillRepositoryModule,
+    SearchInputModule,
+    WipModule,
   ],
 })
 export class ResourceSearchFormModule {}

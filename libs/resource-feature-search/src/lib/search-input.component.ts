@@ -1,21 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-search-input',
-  template: ` <div class="search">
-    <span class="material-icons search-icon">
-      search
-    </span>
-    <input type="text" class="search-input" />
-    <span class="material-icons clear-icon">
-      clear
-    </span>
-  </div>`,
+  template: ` <mat-icon color="primary">search</mat-icon>
+    <input class="search-input" fxFlex type="text" />
+    <mat-icon color="primary">clear</mat-icon>`,
   styles: [
     `
-      .search {
+      :host {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -23,24 +19,15 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
         width: 260px;
         background-color: white;
         border-radius: 25px;
+        padding: 0 15px;
       }
 
-      .search-icon {
-        color: black;
-        padding-left: 15px;
-      }
       .search-input {
-        display: flex;
-        margin: auto;
-        padding: auto;
+        box-sizing: border-box;
+        height: 100%;
         justify-content: center;
-        height: 20px;
         border: none;
-      }
-
-      .clear-icon {
-        color: black;
-        padding-right: 15px;
+        outline: none;
       }
     `,
   ],
@@ -50,6 +37,6 @@ export class SearchInputComponent {}
 @NgModule({
   declarations: [SearchInputComponent],
   exports: [SearchInputComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule, FlexModule],
 })
 export class SearchInputModule {}

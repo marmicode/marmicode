@@ -1,18 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, NgModule } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { WipModule } from '@marmicode/shared-utils';
+import { ResourceSearchFormModule } from '@marmicode/resource-feature-search';
 import { animationFrameScheduler, BehaviorSubject, Observable } from 'rxjs';
 import { map, observeOn, pairwise } from 'rxjs/operators';
 import { appRouterHelper } from './app-router-helper';
-import { SearchInputModule } from '@marmicode/resource-feature-search';
 import { NavMenuModule } from './nav-menu.component';
 
 @Component({
@@ -29,10 +23,12 @@ import { NavMenuModule } from './nav-menu.component';
         <img height="40" src="/assets/logo-white.svg" />
         <span fxFlexAlign="end" class="title">Marmicode</span>
       </a>
-      <mc-search-input *mcWip></mc-search-input>
 
       <!-- Flex separator. -->
       <div fxFlex></div>
+
+      <!-- Resource search input. -->
+      <mc-resource-search-form></mc-resource-search-form>
 
       <!-- Navigation menu. -->
       <mc-nav-menu></mc-nav-menu>
@@ -107,9 +103,7 @@ export class NavComponent {
     MatToolbarModule,
     NavMenuModule,
     RouterModule,
-    FlexModule,
-    SearchInputModule,
-    WipModule,
+    ResourceSearchFormModule,
   ],
 })
 export class NavModule {}

@@ -31,9 +31,6 @@ import { resourceSearchRouterHelper } from './resource-search-router-helper';
   selector: 'mc-resource-search',
   template: `
     <div fxLayout="row" fxLayoutAlign="center">
-      <mc-resource-search-form></mc-resource-search-form>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="center">
       <mc-loading *ngIf="isLoading$ | async"></mc-loading>
     </div>
     <div

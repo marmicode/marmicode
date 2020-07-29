@@ -2,8 +2,8 @@ export {
   ResourceSearchComponent,
   ResourceSearchModule,
 } from './lib/resource-search.component';
-export { resourceSearchRouterHelper } from './lib/resource-search-router-helper';
 export {
-  SearchInputComponent,
-  SearchInputModule,
-} from './lib/search-input.component';
+  ResourceSearchFormComponent,
+  ResourceSearchFormModule,
+} from './lib/resource-search-form.component';
+export { resourceSearchRouterHelper } from './lib/resource-search-router-helper';
