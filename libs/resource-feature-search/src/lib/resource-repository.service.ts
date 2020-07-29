@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GraphQLModule } from './graphql.module';
+import { GraphQLModule } from './graphql/graphql.module';
 import * as schema from './graphql/schema';
 import { Query } from './graphql/schema';
 import { skillFragment, skillFragmentToSkill } from './graphql/skill-fragment';
