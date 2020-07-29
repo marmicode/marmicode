@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NavMenuComponent } from './nav-menu.component';
 
 describe('NavMenuComponent', () => {
@@ -10,6 +11,7 @@ describe('NavMenuComponent', () => {
   beforeEach(async () => {
     return await TestBed.configureTestingModule({
       declarations: [NavMenuComponent],
+      imports: [NoopAnimationsModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
