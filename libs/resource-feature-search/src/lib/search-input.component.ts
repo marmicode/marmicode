@@ -26,28 +26,22 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-search-input',
   template: ` <div
-    [@fullscreen]="isFullscreen$ | async"
     class="search-input-container"
     fxLayout="row"
     fxLayoutAlign="center center"
   >
+    <!-- Search icon. -->
     <mat-icon class="search-icon" color="primary">search</mat-icon>
-    <div class="input-container" fxFlex>
-      <input
-        [formControl]="control"
-        [matAutocomplete]="matAutocomplete"
-        (blur)="onBlur()"
-        aria-label="Search"
-        class="input"
-        type="text"
-      />
-      <div
-        *ngIf="(isFullscreen$ | async) === false"
-        (click)="onFocus()"
-        class="input-mask"
-      ></div>
-    </div>
 
+    <input
+      [formControl]="control"
+      [matAutocomplete]="matAutocomplete"
+      aria-label="Search"
+      class="input"
+      type="text"
+    />
+
+    <!-- Reset button. -->
     <button (click)="reset()" mat-icon-button>
       <mat-icon color="primary">clear</mat-icon>
     </button>
@@ -64,25 +58,12 @@ import { BehaviorSubject } from 'rxjs';
         margin-left: 10px;
       }
 
-      .input-container {
-        position: relative;
-      }
-
       .input {
         box-sizing: border-box;
         height: 100%;
-        width: 100%;
         justify-content: center;
         border: none;
         outline: none;
-      }
-
-      .input-mask {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
       }
     `,
   ],
