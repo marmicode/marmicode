@@ -32,13 +32,8 @@ import { NavMenuModule } from './nav-menu.component';
       <!-- Flex separator. -->
       <div fxFlex></div>
 
-      <!-- Menu button. -->
-      <div>
-        <mc-nav-menu *ngIf="isMenuDisplayed$ | async"> </mc-nav-menu>
-        <button *mcWip mat-button (click)="toggleMenu()">
-          <mat-icon>menu</mat-icon>
-        </button>
-      </div>
+      <!-- Navigation menu. -->
+      <mc-nav-menu></mc-nav-menu>
     </mat-toolbar>
 
     <section class="container">
@@ -84,7 +79,6 @@ import { NavMenuModule } from './nav-menu.component';
 })
 export class NavComponent {
   appRouterHelper = appRouterHelper;
-  isMenuDisplayed$ = new BehaviorSubject<boolean>(false);
   isScrollingDown$: Observable<boolean>;
 
   private _scrollPosition$ = new BehaviorSubject(0);
@@ -101,10 +95,6 @@ export class NavComponent {
   onScroll(event: Event) {
     this._scrollPosition$.next((event.target as HTMLElement).scrollTop);
   }
-
-  toggleMenu() {
-    this.isMenuDisplayed$.next(!this.isMenuDisplayed$.value);
-  }
 }
 
 @NgModule({
@@ -112,16 +102,10 @@ export class NavComponent {
   exports: [NavComponent],
   imports: [
     CommonModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatIconModule,
-    MatButtonModule,
-    RouterModule,
     FlexModule,
-    WipModule,
+    MatToolbarModule,
     NavMenuModule,
-    MatMenuModule,
+    RouterModule,
   ],
 })
 export class NavModule {}
