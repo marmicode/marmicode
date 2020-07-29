@@ -12,6 +12,7 @@ import { WipModule } from '@marmicode/shared-utils';
 import { animationFrameScheduler, BehaviorSubject, Observable } from 'rxjs';
 import { map, observeOn, pairwise } from 'rxjs/operators';
 import { appRouterHelper } from './app-router-helper';
+import { SearchInputModule } from '@marmicode/resource-feature-search';
 import { NavMenuModule } from './nav-menu.component';
 
 @Component({
@@ -28,6 +29,7 @@ import { NavMenuModule } from './nav-menu.component';
         <img height="40" src="/assets/logo-white.svg" />
         <span fxFlexAlign="end" class="title">Marmicode</span>
       </a>
+      <mc-search-input *mcWip></mc-search-input>
 
       <!-- Flex separator. -->
       <div fxFlex></div>
@@ -35,7 +37,6 @@ import { NavMenuModule } from './nav-menu.component';
       <!-- Navigation menu. -->
       <mc-nav-menu></mc-nav-menu>
     </mat-toolbar>
-
     <section class="container">
       <ng-content></ng-content>
     </section>
@@ -106,6 +107,9 @@ export class NavComponent {
     MatToolbarModule,
     NavMenuModule,
     RouterModule,
+    FlexModule,
+    SearchInputModule,
+    WipModule,
   ],
 })
 export class NavModule {}
