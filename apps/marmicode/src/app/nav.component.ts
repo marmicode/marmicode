@@ -35,8 +35,8 @@ import { NavMenuModule } from './nav-menu.component';
       <!-- Menu button. -->
       <div>
         <mc-nav-menu *ngIf="isMenuDisplayed$ | async">
-          <button mat-menu-item>Birds</button>
-          <button mat-menu-item>Mammals</button>
+          <a mat-list-item href="https://marmicode.eventbrite.com">Workshops</a>
+          <a mat-list-item href="https://marmicode.eventbrite.com">Workshops</a>
         </mc-nav-menu>
         <button *mcWip mat-button (click)="toggleMenu()">
           <mat-icon>menu</mat-icon>
@@ -58,6 +58,7 @@ import { NavMenuModule } from './nav-menu.component';
       }
 
       .toolbar {
+        height: 64px;
         position: fixed;
         top: 0;
         transition: top 0.5s;
