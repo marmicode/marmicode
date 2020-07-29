@@ -14,17 +14,10 @@ import { NavMenuItemModule } from './nav-menu-item.component';
   template: `
     <div *mcWip fxLayout="row">
       <mat-nav-list fxHide fxShow.gt-sm fxLayout="row" role="menu">
-        <a
+        <mc-nav-menu-item
           *ngFor="let entry of entries"
-          [href]="entry.url"
-          class="horizontal-menu-item"
-          mat-list-item
-          role="menuitem"
-          target="_blank"
-        >
-          <mat-icon>{{ entry.icon }}</mat-icon>
-          <span>{{ entry.title }}</span>
-        </a>
+          [entry]="entry"
+        ></mc-nav-menu-item>
       </mat-nav-list>
 
       <button
@@ -55,10 +48,6 @@ import { NavMenuItemModule } from './nav-menu-item.component';
   `,
   styles: [
     `
-      .horizontal-menu-item {
-        color: white;
-      }
-
       .vertical-menu {
         display: flex;
         flex-direction: column;
@@ -87,14 +76,9 @@ export class NavMenuComponent {
       url: 'https://marmicode.eventbrite.com',
     },
     {
-      icon: 'flight_takeof',
-      title: 'Services',
-      url: 'https://marmicode.eventbrite.com',
-    },
-    {
       icon: 'mail',
       title: 'Contact Us',
-      url: 'https://marmicode.eventbrite.com',
+      url: 'mailto:kitchen@marmicode.io',
     },
   ];
 

@@ -19,6 +19,7 @@ export interface NavMenuEntry {
   selector: 'mc-nav-menu-item',
   template: ` <a
     [href]="entry.url"
+    class="nav-menu-link"
     mat-list-item
     role="menuitem"
     target="_blank"
@@ -30,6 +31,10 @@ export interface NavMenuEntry {
   </a>`,
   styles: [
     `
+      .nav-menu-link {
+        color: white;
+      }
+
       .icon {
         margin-right: 10px;
       }
