@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { WipModule } from '@marmicode/shared-utils';
 import { BehaviorSubject } from 'rxjs';
+import { NavMenuItemModule } from './nav-menu-item.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,7 +22,7 @@ import { BehaviorSubject } from 'rxjs';
           role="menuitem"
           target="_blank"
         >
-          <mat-icon class="icon">{{ entry.icon }}</mat-icon>
+          <mat-icon>{{ entry.icon }}</mat-icon>
           <span>{{ entry.title }}</span>
         </a>
       </mat-nav-list>
@@ -44,16 +45,11 @@ import { BehaviorSubject } from 'rxjs';
       fxHide.gt-sm
     >
       <mat-nav-list class="vertical-menu-list" role="menu">
-        <a
+        <mc-nav-menu-item
           *ngFor="let entry of entries"
-          [href]="entry.url"
-          mat-list-item
-          role="menuitem"
-          target="_blank"
-        >
-          <mat-icon class="icon mc-primary-text">{{ entry.icon }}</mat-icon>
-          <span class="mc-primary-text">{{ entry.title }}</span>
-        </a>
+          [entry]="entry"
+          color="primary"
+        ></mc-nav-menu-item>
       </mat-nav-list>
     </div>
   `,
@@ -77,10 +73,6 @@ import { BehaviorSubject } from 'rxjs';
 
       .vertical-menu-list {
         margin: auto;
-      }
-
-      .icon {
-        margin-right: 10px;
       }
     `,
   ],
@@ -121,6 +113,7 @@ export class NavMenuComponent {
     MatIconModule,
     MatButtonModule,
     WipModule,
+    NavMenuItemModule,
   ],
 })
 export class NavMenuModule {}
