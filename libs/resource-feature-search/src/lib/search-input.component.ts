@@ -92,7 +92,7 @@ export class SearchInputComponent {
   @Input() control: FormControl;
   @Input() options: SearchInputOption[];
 
-  getOptionLabel = (option: SearchInputOption) => option.label;
+  getOptionLabel = (option: SearchInputOption) => option?.label;
 
   reset() {
     this.control.reset();
