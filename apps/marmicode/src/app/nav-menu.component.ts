@@ -15,23 +15,17 @@ import { BehaviorSubject } from 'rxjs';
       <mat-icon>menu</mat-icon>
     </button>
 
+    <!-- Overlay menu. -->
     <div *ngIf="isMenuDisplayed$ | async" class="menu mat-elevation-z1">
       <mat-nav-list *ngIf="isMenuDisplayed$ | async" class="menu-list">
         <a
+          *ngFor="let entry of entries"
+          [href]="entry.url"
           mat-list-item
-          href="https://marmicode.eventbrite.com"
           target="_blank"
         >
-          <mat-icon class="icon mc-primary-text">school</mat-icon>
-          <span class="mc-primary-text">Workshops</span>
-        </a>
-        <a
-          mat-list-item
-          href="https://marmicode.eventbrite.com"
-          target="_blank"
-        >
-          <mat-icon class="icon mc-primary-text">school</mat-icon>
-          <span class="mc-primary-text">Workshops</span>
+          <mat-icon class="icon mc-primary-text">{{ entry.icon }}</mat-icon>
+          <span class="mc-primary-text">{{ entry.title }}</span>
         </a>
       </mat-nav-list>
     </div>
@@ -62,6 +56,19 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class NavMenuComponent {
   isMenuDisplayed$ = new BehaviorSubject<boolean>(false);
+
+  entries = [
+    {
+      icon: 'school',
+      title: 'Workshops',
+      url: 'https://marmicode.eventbrite.com',
+    },
+    {
+      icon: 'school',
+      title: 'Workshops',
+      url: 'https://marmicode.eventbrite.com',
+    },
+  ];
 
   toggleMenu() {
     this.isMenuDisplayed$.next(!this.isMenuDisplayed$.value);
