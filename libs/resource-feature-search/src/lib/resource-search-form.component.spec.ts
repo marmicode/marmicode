@@ -122,6 +122,6 @@ describe('ResourceSearchFormComponent', () => {
   it('should not crash if skill is null', fakeAsync(() => {
     component.skillControl.setValue(null);
     tick();
-    expect(router.navigate).toBeCalledWith(['/', 'learn', '']);
+    expect(router.navigate).toBeCalledWith(['/', 'learn', 'everything']);
   }));
 });

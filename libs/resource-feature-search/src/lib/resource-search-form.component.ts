@@ -97,7 +97,9 @@ export class ResourceSearchFormComponent implements OnInit {
       switchMap((skill: Skill) =>
         defer(() =>
           this._router.navigate(
-            resourceSearchRouterHelper.learn(skill?.slug ?? '')
+            resourceSearchRouterHelper.learn(
+              skill?.slug ?? resourceSearchRouterHelper.EVERYTHING
+            )
           )
         )
       )
