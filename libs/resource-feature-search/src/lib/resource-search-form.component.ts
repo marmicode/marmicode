@@ -5,17 +5,13 @@ import {
   NgModule,
   OnInit,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { WipModule } from '@marmicode/shared-utils';
-import { SearchInputModule } from './search-input.component';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { combineLatest, concat, defer, Observable, of } from 'rxjs';
 import { filter, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { resourceSearchRouterHelper } from './resource-search-router-helper';
+import { SearchInputModule } from './search-input.component';
 import { Skill } from './skill';
 import {
   SkillRepository,
@@ -130,15 +126,6 @@ export class ResourceSearchFormComponent implements OnInit {
 @NgModule({
   declarations: [ResourceSearchFormComponent],
   exports: [ResourceSearchFormComponent],
-  imports: [
-    CommonModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    SkillRepositoryModule,
-    SearchInputModule,
-    WipModule,
-  ],
+  imports: [CommonModule, SkillRepositoryModule, SearchInputModule],
 })
 export class ResourceSearchFormModule {}

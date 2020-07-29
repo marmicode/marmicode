@@ -74,7 +74,7 @@ export interface SearchInputOption {
       .input {
         box-sizing: border-box;
         height: 100%;
-        /* Use font-size >= 18px to avoid auto-zoom on mobile. */
+        /* Use font-size >= 19px to avoid auto-zoom on mobile. */
         font-size: 19px;
         justify-content: center;
         border: none;
