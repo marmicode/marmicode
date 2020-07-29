@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, NgModule } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout';
+import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { ResourceSearchFormModule } from '@marmicode/resource-feature-search';
@@ -20,8 +20,10 @@ import { NavMenuModule } from './nav-menu.component';
     >
       <!-- Marmicode logo & text -->
       <a [routerLink]="appRouterHelper.home()" class="marmicode">
-        <img height="40" src="/assets/logo-white.svg" />
-        <span fxFlexAlign="end" class="title">Marmicode</span>
+        <img class="logo" height="40" src="/assets/logo-white.svg" />
+        <span class="title" fxFlexAlign="end" fxHide fxShow.gt-sm
+          >Marmicode</span
+        >
       </a>
 
       <!-- Flex separator. -->
@@ -63,8 +65,11 @@ import { NavMenuModule } from './nav-menu.component';
         text-decoration: none;
       }
 
+      .logo {
+        margin-right: 15px;
+      }
+
       .title {
-        margin-left: 15px;
         margin-bottom: 2px;
       }
 
@@ -104,6 +109,7 @@ export class NavComponent {
     NavMenuModule,
     RouterModule,
     ResourceSearchFormModule,
+    FlexLayoutModule,
   ],
 })
 export class NavModule {}

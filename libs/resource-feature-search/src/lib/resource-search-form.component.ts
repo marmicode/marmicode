@@ -27,30 +27,19 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-search-form',
   template: `
-    <mc-search-input *mcWip></mc-search-input>
-    <mat-form-field *mcNotWip class="search-input">
-      <input
-        type="text"
-        placeholder="Search by skill"
-        aria-label="Number"
-        matInput
-        [formControl]="skillControl"
-        [matAutocomplete]="auto"
-      />
-
-      <mat-autocomplete
-        #auto="matAutocomplete"
-        [displayWith]="getSkillLabel"
-        (closed)="onAutoCompleteClose()"
-      >
-        <mat-option
-          *ngFor="let skill of filteredSkills$ | async"
-          [value]="skill"
-        >
-          {{ skill.label }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+    <mc-search-input
+      [control]="skillControl"
+      [matAutocomplete]="auto"
+    ></mc-search-input>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      [displayWith]="getSkillLabel"
+      (closed)="onAutoCompleteClose()"
+    >
+      <mat-option *ngFor="let skill of filteredSkills$ | async" [value]="skill">
+        {{ skill.label }}
+      </mat-option>
+    </mat-autocomplete>
   `,
   styles: [
     `
