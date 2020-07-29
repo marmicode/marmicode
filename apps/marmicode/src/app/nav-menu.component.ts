@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout';
+import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'mc-nav-menu',
   template: `
     <div *mcWip fxLayout="row">
-      <mat-nav-list fxLayout="row" role="menu">
+      <mat-nav-list fxHide fxShow.gt-sm fxLayout="row" role="menu">
         <a
           *ngFor="let entry of entries"
           [href]="entry.url"
@@ -26,7 +26,13 @@ import { BehaviorSubject } from 'rxjs';
         </a>
       </mat-nav-list>
 
-      <button *mcWip aria-haspopup="true" mat-button (click)="toggleMenu()">
+      <button
+        *mcWip
+        (click)="toggleMenu()"
+        aria-haspopup="true"
+        fxHide.gt-sm
+        mat-button
+      >
         <mat-icon>menu</mat-icon>
       </button>
     </div>
@@ -35,12 +41,9 @@ import { BehaviorSubject } from 'rxjs';
     <div
       *ngIf="isMenuDisplayed$ | async"
       class="vertical-menu mat-elevation-z1"
+      fxHide.gt-sm
     >
-      <mat-nav-list
-        *ngIf="isMenuDisplayed$ | async"
-        class="vertical-menu-list"
-        role="menu"
-      >
+      <mat-nav-list class="vertical-menu-list" role="menu">
         <a
           *ngFor="let entry of entries"
           [href]="entry.url"
@@ -92,8 +95,13 @@ export class NavMenuComponent {
       url: 'https://marmicode.eventbrite.com',
     },
     {
-      icon: 'school',
-      title: 'Workshops',
+      icon: 'flight_takeof',
+      title: 'Services',
+      url: 'https://marmicode.eventbrite.com',
+    },
+    {
+      icon: 'mail',
+      title: 'Contact Us',
       url: 'https://marmicode.eventbrite.com',
     },
   ];
@@ -108,11 +116,11 @@ export class NavMenuComponent {
   exports: [NavMenuComponent],
   imports: [
     CommonModule,
+    FlexLayoutModule,
     MatListModule,
     MatIconModule,
     MatButtonModule,
     WipModule,
-    FlexModule,
   ],
 })
 export class NavMenuModule {}
