@@ -12,6 +12,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { readAll } from '@nrwl/angular/testing';
 import { EMPTY, of } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { ResourceSearchFormComponent } from './resource-search-form.component';
 import { createSkill } from './skill';
 import { SkillRepository } from './skill-repository.service';
@@ -26,9 +27,9 @@ describe('ResourceSearchFormComponent', () => {
       imports: [MatAutocompleteModule],
       providers: [
         {
-          provide: ActivatedRoute,
+          provide: ResourceSearchFacade,
           useValue: {
-            paramMap: EMPTY,
+            selectedSkillSlug$: EMPTY,
           },
         },
         {

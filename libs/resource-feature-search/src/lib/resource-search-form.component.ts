@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { combineLatest, concat, defer, Observable, of } from 'rxjs';
 import { filter, map, shareReplay, switchMap, tap } from 'rxjs/operators';
@@ -40,7 +40,6 @@ export class ResourceSearchFormComponent implements OnInit {
 
   constructor(
     private _resourceSearchFacade: ResourceSearchFacade,
-    private _route: ActivatedRoute,
     private _router: Router,
     private _skillRepository: SkillRepository
   ) {

@@ -17,6 +17,7 @@ import {
 import { Observable } from 'rxjs';
 import { debounceTime, map, switchMap, throttleTime } from 'rxjs/operators';
 import { LoadingModule } from '@marmicode/shared-ui';
+import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { Resource } from './resource';
 import { ResourceCardModule } from './resource-card.component';
 import {
@@ -60,11 +61,10 @@ export class ResourceSearchComponent {
   trackById = (index, resource: Resource) => resource.id;
 
   constructor(
-    private _route: ActivatedRoute,
-    private _resourceRepository: ResourceRepository
+    private _resourceRepository: ResourceRepository,
+    private _resourceSearchFacade: ResourceSearchFacade
   ) {
-    const resourcesProgress$ = this._route.paramMap.pipe(
-      map((params) => params.get(resourceSearchRouterHelper.SKILL_SLUG_PARAM)),
+    const resourcesProgress$ = this._resourceSearchFacade.selectedSkillSlug$.pipe(
       switchMap((skillSlug) => {
         const source$ =
           skillSlug === resourceSearchRouterHelper.EVERYTHING
