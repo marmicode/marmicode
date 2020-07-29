@@ -67,9 +67,9 @@ export class ResourceSearchComponent {
       map((params) => params.get(resourceSearchRouterHelper.SKILL_SLUG_PARAM)),
       switchMap((skillSlug) => {
         const source$ =
-          skillSlug != null
-            ? this._resourceRepository.getResourcesBySkillSlug(skillSlug)
-            : this._resourceRepository.getResources();
+          skillSlug === resourceSearchRouterHelper.EVERYTHING
+            ? this._resourceRepository.getResources()
+            : this._resourceRepository.getResourcesBySkillSlug(skillSlug);
 
         return source$.pipe(
           progressify({

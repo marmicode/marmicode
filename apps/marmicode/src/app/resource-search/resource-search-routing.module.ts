@@ -8,11 +8,7 @@ import {
 
 export const routes: Routes = [
   {
-    path: '',
-    component: ResourceSearchComponent,
-  },
-  {
-    path: `${resourceSearchRouterHelper.LEARN_PATH}/:${resourceSearchRouterHelper.SKILL_SLUG_PARAM}`,
+    path: `:${resourceSearchRouterHelper.SKILL_SLUG_PARAM}`,
     component: ResourceSearchComponent,
   },
 ];
