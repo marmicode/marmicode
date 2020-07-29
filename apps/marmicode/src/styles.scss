@@ -1,13 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 @import './custom-theme.scss';
 
-body {
-  margin: 0;
-}
+$marmicode-primary-color: map-get($marmicode-purple, 500);
 
 html, body {
-  /* @hack: setting background color to toolbar color to affect ios status bar color. */
-  background-color: #380030;
   height: 100%;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  /* @hack: setting background color to toolbar color to affect ios status bar color. */
+  background-color: $marmicode-primary-color;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mc-primary-text {
+  color: $marmicode-primary-color;
+}

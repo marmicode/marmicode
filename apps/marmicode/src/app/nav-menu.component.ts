@@ -5,7 +5,7 @@ import { MatListModule } from '@angular/material/list';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-nav-menu',
-  template: `<mat-nav-list>
+  template: `<mat-nav-list class="mc-primary-text">
     <ng-content></ng-content>
   </mat-nav-list>`,
   styles: [
