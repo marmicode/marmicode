@@ -41,13 +41,6 @@ import {
       </mat-option>
     </mat-autocomplete>
   `,
-  styles: [
-    `
-      .search-input {
-        width: 300px;
-      }
-    `,
-  ],
 })
 export class ResourceSearchFormComponent implements OnInit {
   skillControl = new FormControl();

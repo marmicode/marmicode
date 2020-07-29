@@ -1,3 +1,10 @@
+import {
+  animate,
+  transition,
+  trigger,
+  style,
+  state,
+} from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -13,14 +20,24 @@ import {
 } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { BehaviorSubject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-search-input',
-  template: ` <mat-icon class="search-icon" color="primary">search</mat-icon>
+  template: ` <div
+    [@fullscreen]="isFocused$ | async"
+    class="search-input-container"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+  >
+    <mat-icon class="search-icon" color="primary">search</mat-icon>
     <input
       [formControl]="control"
       [matAutocomplete]="matAutocomplete"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
       aria-label="Search"
       class="search-input"
       fxFlex
@@ -28,16 +45,14 @@ import { MatIconModule } from '@angular/material/icon';
     />
     <button (click)="reset()" mat-icon-button>
       <mat-icon color="primary">clear</mat-icon>
-    </button>`,
+    </button>
+  </div>`,
   styles: [
     `
-      :host {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+      .search-input-container {
         height: 35px;
-        background-color: white;
         border-radius: 25px;
+        background-color: white;
       }
 
       .search-icon {
@@ -53,13 +68,39 @@ import { MatIconModule } from '@angular/material/icon';
       }
     `,
   ],
+  animations: [
+    trigger('fullscreen', [
+      state(
+        'true',
+        style({
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          borderRadius: 0,
+          height: '64px',
+          width: '100vw',
+          zIndex: 1,
+        })
+      ),
+      transition('* <=> *', animate(200)),
+    ]),
+  ],
 })
 export class SearchInputComponent {
   @Input() control: FormControl;
   @Input() matAutocomplete: MatAutocomplete;
+  isFocused$ = new BehaviorSubject<boolean>(false);
 
   reset() {
     this.control.reset();
+  }
+
+  onFocus() {
+    this.isFocused$.next(true);
+  }
+
+  onBlur() {
+    this.isFocused$.next(false);
   }
 }
 
@@ -69,10 +110,10 @@ export class SearchInputComponent {
   imports: [
     CommonModule,
     FlexModule,
-    MatIconModule,
-    ReactiveFormsModule,
     MatButtonModule,
     MatAutocompleteModule,
+    MatIconModule,
+    ReactiveFormsModule,
   ],
 })
 export class SearchInputModule {}
