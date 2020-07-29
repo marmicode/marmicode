@@ -51,7 +51,7 @@
     "@angular/router": "10.0.5",
     "@angular/service-worker": "10.0.5",
     "@ngneat/until-destroy": "^7.3.2",
-    "@nguniversal/express-engine": "9.1.1",
+    "@nguniversal/express-engine": "^10.0.1",
     "@nrwl/angular": "10.0.6",
     "apollo-angular": "^1.10.0",
     "apollo-angular-link-http": "^1.11.0",
