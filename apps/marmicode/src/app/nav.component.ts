@@ -34,32 +34,7 @@ import { NavMenuModule } from './nav-menu.component';
 
       <!-- Menu button. -->
       <div>
-        <mc-nav-menu *ngIf="isMenuDisplayed$ | async">
-          <a
-            mat-list-item
-            href="https://marmicode.eventbrite.com"
-            target="_blank"
-            >Workshops</a
-          >
-          <a
-            mat-list-item
-            href="https://marmicode.eventbrite.com"
-            target="_blank"
-            >Workshops</a
-          >
-          <a
-            mat-list-item
-            href="https://marmicode.eventbrite.com"
-            target="_blank"
-            >Workshops</a
-          >
-          <a
-            mat-list-item
-            href="https://marmicode.eventbrite.com"
-            target="_blank"
-            >Workshops</a
-          >
-        </mc-nav-menu>
+        <mc-nav-menu *ngIf="isMenuDisplayed$ | async"> </mc-nav-menu>
         <button *mcWip mat-button (click)="toggleMenu()">
           <mat-icon>menu</mat-icon>
         </button>
