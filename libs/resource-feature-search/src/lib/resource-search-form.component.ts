@@ -10,6 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { combineLatest, concat, defer, Observable, of } from 'rxjs';
 import { filter, map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { ResourceSearchStateModule } from './+state/resource-search-state.module';
+import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { resourceSearchRouterHelper } from './resource-search-router-helper';
 import { SearchInputModule } from './search-input.component';
 import { Skill } from './skill';
@@ -37,6 +39,7 @@ export class ResourceSearchFormComponent implements OnInit {
   filteredSkills$: Observable<Skill[]>;
 
   constructor(
+    private _resourceSearchFacade: ResourceSearchFacade,
     private _route: ActivatedRoute,
     private _router: Router,
     private _skillRepository: SkillRepository
@@ -91,9 +94,7 @@ export class ResourceSearchFormComponent implements OnInit {
       )
     );
 
-    const skillSlug$ = this._route.paramMap.pipe(
-      map((params) => params.get(resourceSearchRouterHelper.SKILL_SLUG_PARAM))
-    );
+    const skillSlug$ = this._resourceSearchFacade.selectedSkillSlug$;
 
     const updateForm$ = combineLatest([skillSlug$, this.allSkills$]).pipe(
       map(([skillSlug, skills]) =>
@@ -126,6 +127,11 @@ export class ResourceSearchFormComponent implements OnInit {
 @NgModule({
   declarations: [ResourceSearchFormComponent],
   exports: [ResourceSearchFormComponent],
-  imports: [CommonModule, SkillRepositoryModule, SearchInputModule],
+  imports: [
+    CommonModule,
+    ResourceSearchStateModule,
+    SkillRepositoryModule,
+    SearchInputModule,
+  ],
 })
 export class ResourceSearchFormModule {}
