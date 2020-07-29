@@ -62,7 +62,11 @@
     "graphql-tag": "^2.10.4",
     "panzoom": "^9.2.5",
     "rxjs": "6.5.5",
-    "zone.js": "^0.10.2"
+    "zone.js": "^0.10.2",
+    "@ngrx/store": "9.1.0",
+    "@ngrx/effects": "9.1.0",
+    "@ngrx/entity": "9.1.0",
+    "@ngrx/router-store": "9.1.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.1000.4",
@@ -91,6 +95,8 @@
     "ts-jest": "25.2.1",
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
-    "typescript": "3.9.7"
+    "typescript": "3.9.7",
+    "@ngrx/schematics": "9.1.0",
+    "@ngrx/store-devtools": "9.1.0"
   }
 }
