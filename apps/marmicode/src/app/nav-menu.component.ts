@@ -12,12 +12,13 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'mc-nav-menu',
   template: `
     <div *mcWip fxLayout="row">
-      <mat-nav-list fxLayout="row">
+      <mat-nav-list fxLayout="row" role="menu">
         <a
           *ngFor="let entry of entries"
           [href]="entry.url"
           class="horizontal-menu-item"
           mat-list-item
+          role="menuitem"
           target="_blank"
         >
           <mat-icon class="icon">{{ entry.icon }}</mat-icon>
@@ -25,7 +26,7 @@ import { BehaviorSubject } from 'rxjs';
         </a>
       </mat-nav-list>
 
-      <button *mcWip mat-button (click)="toggleMenu()">
+      <button *mcWip aria-haspopup="true" mat-button (click)="toggleMenu()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
@@ -35,11 +36,16 @@ import { BehaviorSubject } from 'rxjs';
       *ngIf="isMenuDisplayed$ | async"
       class="vertical-menu mat-elevation-z1"
     >
-      <mat-nav-list *ngIf="isMenuDisplayed$ | async" class="vertical-menu-list">
+      <mat-nav-list
+        *ngIf="isMenuDisplayed$ | async"
+        class="vertical-menu-list"
+        role="menu"
+      >
         <a
           *ngFor="let entry of entries"
           [href]="entry.url"
           mat-list-item
+          role="menuitem"
           target="_blank"
         >
           <mat-icon class="icon mc-primary-text">{{ entry.icon }}</mat-icon>
