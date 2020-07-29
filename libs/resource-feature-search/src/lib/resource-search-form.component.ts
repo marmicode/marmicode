@@ -29,17 +29,8 @@ import {
   template: `
     <mc-search-input
       [control]="skillControl"
-      [matAutocomplete]="auto"
+      [options]="filteredSkills$ | async"
     ></mc-search-input>
-    <mat-autocomplete
-      #auto="matAutocomplete"
-      [displayWith]="getSkillLabel"
-      (closed)="onAutoCompleteClose()"
-    >
-      <mat-option *ngFor="let skill of filteredSkills$ | async" [value]="skill">
-        {{ skill.label }}
-      </mat-option>
-    </mat-autocomplete>
   `,
 })
 export class ResourceSearchFormComponent implements OnInit {
@@ -48,7 +39,6 @@ export class ResourceSearchFormComponent implements OnInit {
     .getSkills()
     .pipe(shareReplay({ refCount: true, bufferSize: 1 }));
   filteredSkills$: Observable<Skill[]>;
-  getSkillLabel = (skill: Skill) => skill?.label;
 
   constructor(
     private _route: ActivatedRoute,

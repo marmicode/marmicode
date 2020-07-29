@@ -1,10 +1,3 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -20,38 +13,49 @@ import {
 } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { BehaviorSubject, Observable } from 'rxjs';
+
+export interface SearchInputOption {
+  label: string;
+}
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-search-input',
-  template: ` <div
-    class="search-input-container"
-    fxLayout="row"
-    fxLayoutAlign="center center"
-  >
-    <!-- Search icon. -->
-    <mat-icon class="search-icon" color="primary">search</mat-icon>
-
-    <input
-      [formControl]="control"
-      [matAutocomplete]="matAutocomplete"
-      aria-label="Search"
-      class="input"
-      fxFlex
-      type="text"
-    />
-
-    <!-- Reset button. -->
-    <button
-      *ngIf="control.value"
-      (click)="reset()"
-      class="reset-button"
-      mat-icon-button
+  template: `
+    <div
+      class="search-input-container"
+      fxLayout="row"
+      fxLayoutAlign="center center"
     >
-      <mat-icon color="primary">clear</mat-icon>
-    </button>
-  </div>`,
+      <!-- Search icon. -->
+      <mat-icon class="search-icon" color="primary">search</mat-icon>
+
+      <input
+        [formControl]="control"
+        [matAutocomplete]="auto"
+        aria-label="Search"
+        class="input"
+        fxFlex
+        type="text"
+      />
+
+      <!-- Reset button. -->
+      <button
+        *ngIf="control.value"
+        (click)="reset()"
+        class="reset-button"
+        mat-icon-button
+      >
+        <mat-icon color="primary">clear</mat-icon>
+      </button>
+    </div>
+
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionLabel">
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{ option.label }}
+      </mat-option>
+    </mat-autocomplete>
+  `,
   styles: [
     `
       .search-input-container {
@@ -86,7 +90,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class SearchInputComponent {
   @Input() control: FormControl;
-  @Input() matAutocomplete: MatAutocomplete;
+  @Input() options: SearchInputOption[];
+
+  getOptionLabel = (option: SearchInputOption) => option.label;
 
   reset() {
     this.control.reset();
