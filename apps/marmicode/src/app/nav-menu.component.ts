@@ -35,10 +35,15 @@ import { NavMenuItemModule } from './nav-menu-item.component';
       class="vertical-menu mat-elevation-z1"
       fxHide.gt-sm
     >
-      <mat-nav-list class="vertical-menu-list" role="menu">
+      <mat-nav-list
+        class="vertical-menu-list"
+        data-role="vertical-menu"
+        role="menu"
+      >
         <mc-nav-menu-item
           *ngFor="let entry of entries"
           [entry]="entry"
+          (click)="closeMenu()"
           color="primary"
         ></mc-nav-menu-item>
       </mat-nav-list>
@@ -82,6 +87,10 @@ export class NavMenuComponent {
 
   toggleMenu() {
     this.isMenuDisplayed$.next(!this.isMenuDisplayed$.value);
+  }
+
+  closeMenu() {
+    this.isMenuDisplayed$.next(false);
   }
 }
 

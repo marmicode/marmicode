@@ -23,9 +23,10 @@ describe('NavMenuComponent', () => {
   describe('when menu is open', () => {
     beforeEach(() => {
       component.isMenuDisplayed$.next(true);
+      fixture.detectChanges();
     });
 
-    xit('🚧 should close menu when link is clicked', () => {
+    it('should close menu when link is clicked', () => {
       clickFirstLink();
       expect(component.isMenuDisplayed$.value).toBe(false);
     });
@@ -33,7 +34,7 @@ describe('NavMenuComponent', () => {
 
   function clickFirstLink() {
     return fixture.debugElement
-      .query(By.css('mc-nav-menu-item'))
+      .query(By.css('[data-role=vertical-menu] mc-nav-menu-item'))
       .triggerEventHandler('click', {});
   }
 });
