@@ -1,9 +1,9 @@
 import {
   animate,
+  state,
+  style,
   transition,
   trigger,
-  style,
-  state,
 } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import {
@@ -21,28 +21,33 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { BehaviorSubject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-search-input',
   template: ` <div
-    [@fullscreen]="isFocused$ | async"
+    [@fullscreen]="isFullscreen$ | async"
     class="search-input-container"
     fxLayout="row"
     fxLayoutAlign="center center"
   >
     <mat-icon class="search-icon" color="primary">search</mat-icon>
-    <input
-      [formControl]="control"
-      [matAutocomplete]="matAutocomplete"
-      (focus)="onFocus()"
-      (blur)="onBlur()"
-      aria-label="Search"
-      class="search-input"
-      fxFlex
-      type="text"
-    />
+    <div class="input-container" fxFlex>
+      <input
+        [formControl]="control"
+        [matAutocomplete]="matAutocomplete"
+        (blur)="onBlur()"
+        aria-label="Search"
+        class="input"
+        type="text"
+      />
+      <div
+        *ngIf="(isFullscreen$ | async) === false"
+        (click)="onFocus()"
+        class="input-mask"
+      ></div>
+    </div>
+
     <button (click)="reset()" mat-icon-button>
       <mat-icon color="primary">clear</mat-icon>
     </button>
@@ -59,12 +64,25 @@ import { debounceTime } from 'rxjs/operators';
         margin-left: 10px;
       }
 
-      .search-input {
+      .input-container {
+        position: relative;
+      }
+
+      .input {
         box-sizing: border-box;
         height: 100%;
+        width: 100%;
         justify-content: center;
         border: none;
         outline: none;
+      }
+
+      .input-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
       }
     `,
   ],
@@ -89,18 +107,18 @@ import { debounceTime } from 'rxjs/operators';
 export class SearchInputComponent {
   @Input() control: FormControl;
   @Input() matAutocomplete: MatAutocomplete;
-  isFocused$ = new BehaviorSubject<boolean>(false);
+  isFullscreen$ = new BehaviorSubject<boolean>(false);
 
   reset() {
     this.control.reset();
   }
 
   onFocus() {
-    this.isFocused$.next(true);
+    this.isFullscreen$.next(true);
   }
 
   onBlur() {
-    this.isFocused$.next(false);
+    this.isFullscreen$.next(false);
   }
 }
 
