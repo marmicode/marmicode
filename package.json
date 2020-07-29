@@ -72,7 +72,7 @@
     "@graphql-cli/codegen": "^1.17.4",
     "@graphql-codegen/schema-ast": "^1.17.4",
     "@graphql-codegen/typescript": "^1.17.4",
-    "@nguniversal/builders": "^9.1.1",
+    "@nguniversal/builders": "^10.0.1",
     "@nrwl/cypress": "10.0.6",
     "@nrwl/jest": "10.0.6",
     "@nrwl/workspace": "10.0.6",
