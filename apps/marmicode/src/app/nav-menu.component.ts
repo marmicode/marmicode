@@ -11,13 +11,31 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-nav-menu',
   template: `
-    <button *mcWip mat-button (click)="toggleMenu()">
-      <mat-icon>menu</mat-icon>
-    </button>
+    <div *mcWip fxLayout="row">
+      <mat-nav-list fxLayout="row">
+        <a
+          *ngFor="let entry of entries"
+          [href]="entry.url"
+          class="horizontal-menu-item"
+          mat-list-item
+          target="_blank"
+        >
+          <mat-icon class="icon">{{ entry.icon }}</mat-icon>
+          <span>{{ entry.title }}</span>
+        </a>
+      </mat-nav-list>
+
+      <button *mcWip mat-button (click)="toggleMenu()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
 
     <!-- Overlay menu. -->
-    <div *ngIf="isMenuDisplayed$ | async" class="menu mat-elevation-z1">
-      <mat-nav-list *ngIf="isMenuDisplayed$ | async" class="menu-list">
+    <div
+      *ngIf="isMenuDisplayed$ | async"
+      class="vertical-menu mat-elevation-z1"
+    >
+      <mat-nav-list *ngIf="isMenuDisplayed$ | async" class="vertical-menu-list">
         <a
           *ngFor="let entry of entries"
           [href]="entry.url"
@@ -32,7 +50,11 @@ import { BehaviorSubject } from 'rxjs';
   `,
   styles: [
     `
-      .menu {
+      .horizontal-menu-item {
+        color: white;
+      }
+
+      .vertical-menu {
         display: flex;
         flex-direction: column;
 
@@ -44,7 +66,7 @@ import { BehaviorSubject } from 'rxjs';
         background-color: white;
       }
 
-      .menu-list {
+      .vertical-menu-list {
         margin: auto;
       }
 
