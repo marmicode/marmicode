@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { WipModule } from '@marmicode/shared-utils';
 import { BehaviorSubject } from 'rxjs';
 import { NavMenuItemModule } from './nav-menu-item.component';
 
@@ -12,7 +11,7 @@ import { NavMenuItemModule } from './nav-menu-item.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-nav-menu',
   template: `
-    <div *mcWip fxLayout="row">
+    <div fxLayout="row">
       <mat-nav-list fxHide fxShow.gt-sm fxLayout="row" role="menu">
         <mc-nav-menu-item
           *ngFor="let entry of entries"
@@ -21,7 +20,6 @@ import { NavMenuItemModule } from './nav-menu-item.component';
       </mat-nav-list>
 
       <button
-        *mcWip
         (click)="toggleMenu()"
         aria-haspopup="true"
         fxHide.gt-sm
@@ -96,7 +94,6 @@ export class NavMenuComponent {
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    WipModule,
     NavMenuItemModule,
   ],
 })
