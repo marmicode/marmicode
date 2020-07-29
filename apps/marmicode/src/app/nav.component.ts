@@ -7,9 +7,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import { WipModule } from '@marmicode/shared-utils';
 import { animationFrameScheduler, BehaviorSubject, Observable } from 'rxjs';
 import { map, observeOn, pairwise } from 'rxjs/operators';
 import { appRouterHelper } from './app-router-helper';
+import { NavMenuModule } from './nav-menu.component';
 
 @Component({
   selector: 'mc-nav',
@@ -20,11 +22,22 @@ import { appRouterHelper } from './app-router-helper';
       class="toolbar"
       color="primary"
     >
+      <!-- Marmicode logo & text -->
       <a [routerLink]="appRouterHelper.home()" class="marmicode">
         <img height="40" src="/assets/logo-white.svg" />
         <span fxFlexAlign="end" class="title">Marmicode</span>
       </a>
+
+      <!-- Flex separator. -->
+      <div fxFlex></div>
+
+      <!-- Menu button. -->
+      <button *mcWip mat-button>
+        <mat-icon>menu</mat-icon>
+      </button>
     </mat-toolbar>
+
+    <mc-nav-menu *ngIf="isMenuDisplayed$ | async"></mc-nav-menu>
 
     <section class="container">
       <ng-content></ng-content>
@@ -68,6 +81,7 @@ import { appRouterHelper } from './app-router-helper';
 })
 export class NavComponent {
   appRouterHelper = appRouterHelper;
+  isMenuDisplayed$ = new BehaviorSubject<boolean>(false);
   isScrollingDown$: Observable<boolean>;
 
   private _scrollPosition$ = new BehaviorSubject(0);
@@ -98,6 +112,8 @@ export class NavComponent {
     MatButtonModule,
     RouterModule,
     FlexModule,
+    WipModule,
+    NavMenuModule,
   ],
 })
 export class NavModule {}
