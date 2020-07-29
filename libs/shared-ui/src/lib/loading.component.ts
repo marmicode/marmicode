@@ -18,7 +18,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
   ],
 })
 export class LoadingComponent {
-  loadingGifUrl = require('!!file-loader!./loading.gif');
+  loadingGifUrl = require('!!file-loader!./loading.gif').default;
 }
 
 @NgModule({
