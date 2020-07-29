@@ -1,3 +1,10 @@
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -11,6 +18,7 @@ import { NavMenuItemModule } from './nav-menu-item.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-nav-menu',
   template: `
+    <!-- Toolbar links. -->
     <div fxLayout="row">
       <mat-nav-list fxHide fxShow.gt-sm fxLayout="row" role="menu">
         <mc-nav-menu-item
@@ -32,6 +40,7 @@ import { NavMenuItemModule } from './nav-menu-item.component';
     <!-- Overlay menu. -->
     <div
       *ngIf="isMenuDisplayed$ | async"
+      @showHide
       class="vertical-menu mat-elevation-z1"
       fxHide.gt-sm
     >
@@ -61,12 +70,24 @@ import { NavMenuItemModule } from './nav-menu-item.component';
         width: 100%;
 
         background-color: white;
+        overflow: hidden;
       }
 
       .vertical-menu-list {
         margin: auto;
       }
     `,
+  ],
+  animations: [
+    trigger('showHide', [
+      state(
+        'void',
+        style({
+          height: 0,
+        })
+      ),
+      transition('void <=> *', animate('.1s')),
+    ]),
   ],
 })
 export class NavMenuComponent {
