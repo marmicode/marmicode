@@ -4,6 +4,7 @@ import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
@@ -32,12 +33,16 @@ import { NavMenuModule } from './nav-menu.component';
       <div fxFlex></div>
 
       <!-- Menu button. -->
-      <button *mcWip mat-button>
-        <mat-icon>menu</mat-icon>
-      </button>
+      <div>
+        <mc-nav-menu *ngIf="isMenuDisplayed$ | async">
+          <button mat-menu-item>Birds</button>
+          <button mat-menu-item>Mammals</button>
+        </mc-nav-menu>
+        <button *mcWip mat-button (click)="toggleMenu()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
     </mat-toolbar>
-
-    <mc-nav-menu *ngIf="isMenuDisplayed$ | async"></mc-nav-menu>
 
     <section class="container">
       <ng-content></ng-content>
@@ -98,6 +103,10 @@ export class NavComponent {
   onScroll(event: Event) {
     this._scrollPosition$.next((event.target as HTMLElement).scrollTop);
   }
+
+  toggleMenu() {
+    this.isMenuDisplayed$.next(!this.isMenuDisplayed$.value);
+  }
 }
 
 @NgModule({
@@ -114,6 +123,7 @@ export class NavComponent {
     FlexModule,
     WipModule,
     NavMenuModule,
+    MatMenuModule,
   ],
 })
 export class NavModule {}

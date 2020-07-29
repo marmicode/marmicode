@@ -4,7 +4,18 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-nav-menu',
-  template: `🚧 nav-menu`,
+  template: `<ng-content></ng-content>`,
+  styles: [
+    `
+      :host {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        width: 100%;
+      }
+    `,
+  ],
 })
 export class NavMenuComponent {}
 
