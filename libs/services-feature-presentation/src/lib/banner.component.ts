@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { WorkshopsButtonModule } from './workshops-button.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -11,12 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
       We Help You <span class="underline">Cook&nbsp;Better&nbsp;Apps</span>
     </h1>
     <p>with delicious ingredients</p>
-    <a href="https://marmicode.eventbrite.com" target="_blank">
-      <button mat-raised-button color="primary">
-        <mat-icon class="button-icon">school</mat-icon>
-        <span>SEE WORKSHOPS</span>
-      </button>
-    </a>
+    <mc-workshops-button></mc-workshops-button>
   </header>`,
   styles: [
     `
@@ -54,10 +50,6 @@ import { MatIconModule } from '@angular/material/icon';
         text-decoration: underline;
         text-decoration-color: #5db3ad;
       }
-
-      .button-icon {
-        margin-right: 10px;
-      }
     `,
   ],
 })
@@ -66,6 +58,11 @@ export class BannerComponent {}
 @NgModule({
   declarations: [BannerComponent],
   exports: [BannerComponent],
-  imports: [CommonModule, MatButtonModule, MatIconModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    WorkshopsButtonModule,
+  ],
 })
 export class BannerModule {}

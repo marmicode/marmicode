@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { BannerModule } from './banner.component';
 import { SectionModule } from './section.component';
 import { SlantModule } from './slant.component';
+import { WorkshopsButtonModule } from './workshops-button.component';
 
 declare var require;
 
@@ -27,6 +28,7 @@ declare var require;
             you better understand how things work and choose the
             <strong>best ingredients</strong> for your apps.
           </p>
+          <mc-workshops-button></mc-workshops-button>
         </ng-container>
       </mc-section>
 
@@ -74,6 +76,12 @@ export class ServicesComponent {
 @NgModule({
   declarations: [ServicesComponent],
   exports: [ServicesComponent],
-  imports: [CommonModule, BannerModule, SlantModule, SectionModule],
+  imports: [
+    CommonModule,
+    BannerModule,
+    SlantModule,
+    SectionModule,
+    WorkshopsButtonModule,
+  ],
 })
 export class ServicesModule {}

@@ -6,7 +6,7 @@ import { DottyLineModule } from './dotty-line.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-section',
   template: `
-    <section>
+    <section class="section">
       <mc-dotty-line></mc-dotty-line>
 
       <!-- Title. -->
@@ -34,6 +34,11 @@ import { DottyLineModule } from './dotty-line.component';
         line-height: 1.2;
         margin-left: 20px;
         margin-bottom: 20px;
+      }
+
+      .section {
+        max-width: 800px;
+        margin: auto;
       }
 
       .content {
