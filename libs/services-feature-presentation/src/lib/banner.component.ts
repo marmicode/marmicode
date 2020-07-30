@@ -1,40 +1,37 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  NgModule,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { SlantModule } from './slant.component';
 
 declare var require;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-banner',
-  template: ` <div
-      [style.backgroundImage]="backgroundImage"
-      class="banner-container"
-    >
-      <header class="banner-header">
-        <h1 class="title">
-          We Help You <span class="underline">Cook&nbsp;Better&nbsp;Apps</span>
-        </h1>
-        <p>with delicious ingredients</p>
-        <a href="https://marmicode.eventbrite.com" target="_blank">
-          <button mat-raised-button color="primary">
-            <mat-icon class="button-icon">school</mat-icon>
-            <span>SEE WORKSHOPS</span>
-          </button>
-        </a>
-      </header>
-    </div>
-    <mc-slant></mc-slant>`,
+  template: ` <header class="banner-header">
+    <h1 class="title">
+      We Help You <span class="underline">Cook&nbsp;Better&nbsp;Apps</span>
+    </h1>
+    <p>with delicious ingredients</p>
+    <a href="https://marmicode.eventbrite.com" target="_blank">
+      <button mat-raised-button color="primary">
+        <mat-icon class="button-icon">school</mat-icon>
+        <span>SEE WORKSHOPS</span>
+      </button>
+    </a>
+  </header>`,
   styles: [
     `
-      .banner-container {
+      :host {
         display: block;
         height: 600px;
         width: 100%;
         background-attachment: fixed;
-        background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
       }
@@ -75,6 +72,7 @@ declare var require;
   ],
 })
 export class BannerComponent {
+  @HostBinding('style.backgroundImage')
   backgroundImage = `url(${
     require('!!file-loader!./banner-wide.jpg').default
   })`;
@@ -83,6 +81,6 @@ export class BannerComponent {
 @NgModule({
   declarations: [BannerComponent],
   exports: [BannerComponent],
-  imports: [CommonModule, MatButtonModule, MatIconModule, SlantModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule],
 })
 export class BannerModule {}
