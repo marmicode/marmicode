@@ -1,8 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  NgModule,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { WorkshopsButtonModule } from './workshops-button.component';
+
+declare var require;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,6 +27,10 @@ import { WorkshopsButtonModule } from './workshops-button.component';
         display: block;
         height: 600px;
         width: 100%;
+
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
       }
 
       .banner-header {
@@ -53,7 +64,12 @@ import { WorkshopsButtonModule } from './workshops-button.component';
     `,
   ],
 })
-export class BannerComponent {}
+export class BannerComponent {
+  @HostBinding('style.backgroundImage')
+  backgroundImage = `url(${
+    require('!!file-loader!./banner-wide.jpg').default
+  })`;
+}
 
 @NgModule({
   declarations: [BannerComponent],
