@@ -4,14 +4,20 @@ declare var require;
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-banner',
-  template: `<div
+  template: ` <div
     [style.backgroundImage]="backgroundImage"
     class="banner-container"
-  ></div>`,
+  >
+    <header class="banner-header">
+      <h1>We Help You <span class="underline">Cook Better Apps</span></h1>
+      <p>with delicious ingredients</p>
+    </header>
+  </div>`,
   styles: [
     `
       .banner-container {
         display: block;
+        position: relative;
         height: 100vh;
         max-height: 800px;
         width: 100%;
@@ -19,6 +25,18 @@ declare var require;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+      }
+
+      .banner-header {
+        position: absolute;
+        left: 6%;
+        top: 30%;
+        color: white;
+      }
+
+      .underline {
+        text-decoration: underline;
+        text-decoration-color: #5db3ad;
       }
     `,
   ],

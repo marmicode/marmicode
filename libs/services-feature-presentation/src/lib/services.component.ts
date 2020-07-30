@@ -9,13 +9,7 @@ import { BannerModule } from './banner.component';
     <div style="height: 300px; color: red">test</div>
     <div style="height: 300px; color: red">test</div>
     <div style="height: 300px; color: red">test</div>`,
-  styles: [
-    `
-      :host {
-        z-index: 1;
-      }
-    `,
-  ],
+  styles: [``],
 })
 export class ServicesComponent {}
 
