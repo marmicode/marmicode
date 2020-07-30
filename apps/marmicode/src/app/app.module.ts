@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { ScullyLibModule } from '@scullyio/ng-lib';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
     HttpClientModule,
     LayoutModule,
     NavModule,
+    ScullyLibModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
