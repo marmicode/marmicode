@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { BannerModule } from './banner.component';
+import { DottyLineModule } from './dotty-line.component';
 import { SlantModule } from './slant.component';
 
 declare var require;
@@ -11,7 +12,9 @@ declare var require;
   template: `<div class="content" [style.backgroundImage]="backgroundImageUrl">
     <mc-banner></mc-banner>
     <mc-slant></mc-slant>
-    <div class="services-presentation"></div>
+    <div class="services-presentation">
+      <mc-dotty-line></mc-dotty-line>
+    </div>
   </div>`,
   styles: [
     `
@@ -40,6 +43,6 @@ export class ServicesComponent {
 @NgModule({
   declarations: [ServicesComponent],
   exports: [ServicesComponent],
-  imports: [CommonModule, BannerModule, SlantModule],
+  imports: [CommonModule, BannerModule, SlantModule, DottyLineModule],
 })
 export class ServicesModule {}
