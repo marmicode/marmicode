@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { SlantModule } from './slant.component';
 
 declare var require;
 
@@ -24,6 +25,7 @@ declare var require;
         </button>
       </a>
     </header>
+    <mc-slant></mc-slant>
   </div>`,
   styles: [
     `
@@ -84,6 +86,6 @@ export class BannerComponent {
 @NgModule({
   declarations: [BannerComponent],
   exports: [BannerComponent],
-  imports: [CommonModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, SlantModule],
 })
 export class BannerModule {}
