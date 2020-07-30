@@ -9,6 +9,7 @@ import {
 } from '@marmicode/shared-utils';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { TransferStateAdapter } from '../../../shared-utils/src/lib/transfer-state-adapter.service';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { Resource } from './resource';
 import { ResourceCardModule } from './resource-card.component';
@@ -54,7 +55,8 @@ export class ResourceSearchComponent {
 
   constructor(
     private _resourceRepository: ResourceRepository,
-    private _resourceSearchFacade: ResourceSearchFacade
+    private _resourceSearchFacade: ResourceSearchFacade,
+    private _transferState: TransferStateAdapter
   ) {
     const resourcesProgress$ = this._resourceSearchFacade.selectedSkillSlug$.pipe(
       map((skillSlug) => skillSlug ?? resourceSearchRouterHelper.EVERYTHING),
