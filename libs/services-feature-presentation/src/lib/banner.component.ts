@@ -28,6 +28,7 @@ declare var require;
         height: 600px;
         width: 100%;
 
+        background-color: #561f4b;
         background-attachment: fixed;
         background-position: center;
         background-size: cover;
