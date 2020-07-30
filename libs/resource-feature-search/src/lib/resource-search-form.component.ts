@@ -93,9 +93,10 @@ export class ResourceSearchFormComponent implements OnInit {
       )
     );
 
-    const skillSlug$ = this._resourceSearchFacade.selectedSkillSlug$;
-
-    const updateForm$ = combineLatest([skillSlug$, this.allSkills$]).pipe(
+    const updateForm$ = combineLatest([
+      this._resourceSearchFacade.selectedSkillSlug$,
+      this.allSkills$,
+    ]).pipe(
       map(([skillSlug, skills]) =>
         skills.find((skill) => skill.slug === skillSlug)
       ),
@@ -109,13 +110,6 @@ export class ResourceSearchFormComponent implements OnInit {
     combineLatest([navigateToSkill$, updateForm$])
       .pipe(untilDestroyed(this))
       .subscribe();
-  }
-
-  onAutoCompleteClose() {
-    /* Reset auto complete if input is not a skill. */
-    if (this.skillControl.value?.id == null) {
-      this.skillControl.reset();
-    }
   }
 
   private _tokenize(text: string) {
