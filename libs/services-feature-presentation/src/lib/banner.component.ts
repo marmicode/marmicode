@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 declare var require;
 
@@ -16,6 +17,12 @@ declare var require;
         We Help You <span class="underline">Cook Better Apps</span>
       </h1>
       <p>with delicious ingredients</p>
+      <a href="https://marmicode.eventbrite.com" target="_blank">
+        <button mat-raised-button color="primary">
+          <mat-icon class="button-icon">school</mat-icon>
+          <span>SEE WORKSHOPS</span>
+        </button>
+      </a>
     </header>
   </div>`,
   styles: [
@@ -61,6 +68,10 @@ declare var require;
         text-decoration: underline;
         text-decoration-color: #5db3ad;
       }
+
+      .button-icon {
+        margin-right: 10px;
+      }
     `,
   ],
 })
@@ -73,6 +84,6 @@ export class BannerComponent {
 @NgModule({
   declarations: [BannerComponent],
   exports: [BannerComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule],
 })
 export class BannerModule {}
