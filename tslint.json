@@ -64,7 +64,7 @@
             "onlyDependOnLibsWithTags": [
               "type:feature",
               "type:ui",
-              "type:util"
+              "type:utils"
             ]
           },
           {
@@ -72,7 +72,7 @@
             "onlyDependOnLibsWithTags": [
               "type:core",
               "type:ui",
-              "type:util"
+              "type:utils"
             ]
           },
           {
@@ -80,16 +80,16 @@
             "onlyDependOnLibsWithTags": [
               "type:core",
               "type:ui",
-              "type:util"
+              "type:utils"
             ]
           },
           {
             "sourceTag": "type:ui",
-            "onlyDependOnLibsWithTags": ["type:ui", "type:util"]
+            "onlyDependOnLibsWithTags": ["type:ui", "type:utils"]
           },
           {
-            "sourceTag": "type:util",
-            "onlyDependOnLibsWithTags": ["type:util"]
+            "sourceTag": "type:utils",
+            "onlyDependOnLibsWithTags": ["type:utils"]
           },
           {
             "sourceTag": "scope:learning-map",

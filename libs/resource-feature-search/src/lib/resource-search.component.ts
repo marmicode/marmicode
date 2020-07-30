@@ -1,22 +1,14 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ActivatedRoute } from '@angular/router';
+import { LoadingModule } from '@marmicode/shared-ui';
 import {
   dematerializeData,
   progressify,
   shareReplayWithRefCount,
 } from '@marmicode/shared-utils';
 import { Observable } from 'rxjs';
-import { debounceTime, map, switchMap, throttleTime } from 'rxjs/operators';
-import { LoadingModule } from '@marmicode/shared-ui';
+import { map, switchMap } from 'rxjs/operators';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { Resource } from './resource';
 import { ResourceCardModule } from './resource-card.component';
