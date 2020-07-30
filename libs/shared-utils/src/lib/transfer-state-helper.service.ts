@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { concat, Observable } from 'rxjs';
+import { concat, EMPTY, MonoTypeOperatorFunction } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { TransferStateAdapter } from './transfer-state-adapter.service';
 
@@ -13,17 +13,17 @@ export class TransferStateHelper {
    * Decorates the source in order to preload data from transfer state
    * and save it in state after loading it.
    */
-  decorate<T>({
-    key,
-    source,
-  }: {
-    key: string;
-    source: Observable<T>;
-  }): Observable<T> {
-    return concat([
-      /* Check if value is present in the state. */
-      this._transferState.get(key).pipe(filter((value) => value != null)),
-      source.pipe(tap((value) => this._transferState.set(key, value))),
-    ]);
+  transfer<T>(key: string): MonoTypeOperatorFunction<T> {
+    return (source$) => {
+      return concat(
+        /* Check if value is present in the state. */
+        this._transferState.hasKey(key)
+          ? this._transferState
+              .get<T>(key)
+              .pipe(filter((value) => value != null))
+          : EMPTY,
+        source$.pipe(tap((value) => this._transferState.set<T>(key, value)))
+      );
+    };
   }
 }

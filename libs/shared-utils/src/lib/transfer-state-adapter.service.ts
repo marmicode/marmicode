@@ -12,6 +12,10 @@ export class TransferStateAdapter {
     return this._stateTransferService.getState(key);
   }
 
+  hasKey(key: string) {
+    return this._stateTransferService.stateHasKey(key);
+  }
+
   set<T>(key: string, value: T) {
     this._stateTransferService.setState(key, value);
   }
