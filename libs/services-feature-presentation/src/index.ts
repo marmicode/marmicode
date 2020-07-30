@@ -1,1 +1,2 @@
-export * from './lib/services-feature-presentation.module';
+export { ServicesComponent, ServicesModule } from './lib/services.component';
+export { servicesRouterHelper } from './lib/services-router-helper';
