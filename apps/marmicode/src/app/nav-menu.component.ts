@@ -11,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { servicesRouterHelper } from '@marmicode/services-feature-presentation';
 import { BehaviorSubject } from 'rxjs';
 import { NavMenuItemModule } from './nav-menu-item.component';
 
@@ -94,6 +95,11 @@ export class NavMenuComponent {
   isMenuDisplayed$ = new BehaviorSubject<boolean>(false);
 
   entries = [
+    {
+      icon: 'connect_without_contact',
+      title: 'Services',
+      route: servicesRouterHelper.services(),
+    },
     {
       icon: 'school',
       title: 'Workshops',

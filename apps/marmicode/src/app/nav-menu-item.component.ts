@@ -7,32 +7,58 @@ import {
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { RouterModule } from '@angular/router';
 
 export interface NavMenuEntry {
   icon: string;
   title: string;
-  url: string;
+  route?: string[];
+  url?: string;
 }
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-nav-menu-item',
-  template: ` <a
-    [href]="entry.url"
-    class="nav-menu-link"
-    mat-list-item
-    role="menuitem"
-    target="_blank"
-  >
-    <mat-icon [class.mc-primary-text]="color === 'primary'" class="icon">{{
-      entry.icon
-    }}</mat-icon>
-    <span [class.mc-primary-text]="color === 'primary'">{{ entry.title }}</span>
-  </a>`,
+  template: `
+    <!-- Url. -->
+    <a
+      *ngIf="entry.url"
+      [href]="entry.url"
+      mat-list-item
+      role="menuitem"
+      target="_blank"
+    >
+      <ng-container *ngTemplateOutlet="linkContent"></ng-container>
+    </a>
+
+    <!-- Route. -->
+    <a
+      *ngIf="entry.route"
+      [routerLink]="entry.route"
+      mat-list-item
+      role="menuitem"
+      routerLinkActive="active"
+    >
+      <ng-container *ngTemplateOutlet="linkContent"></ng-container>
+    </a>
+
+    <ng-template #linkContent>
+      <mat-icon [class.mc-primary-text]="color === 'primary'" class="icon">{{
+        entry.icon
+      }}</mat-icon>
+      <span [class.mc-primary-text]="color === 'primary'">{{
+        entry.title
+      }}</span>
+    </ng-template>
+  `,
   styles: [
     `
-      .nav-menu-link {
+      a[mat-list-item] {
         color: white;
+      }
+
+      a.active {
+        display: none;
       }
 
       .icon {
@@ -49,6 +75,6 @@ export class NavMenuItemComponent {
 @NgModule({
   declarations: [NavMenuItemComponent],
   exports: [NavMenuItemComponent],
-  imports: [CommonModule, MatListModule, MatIconModule],
+  imports: [CommonModule, MatListModule, MatIconModule, RouterModule],
 })
 export class NavMenuItemModule {}
