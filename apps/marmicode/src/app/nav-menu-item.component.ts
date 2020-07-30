@@ -43,9 +43,12 @@ export interface NavMenuEntry {
     </a>
 
     <ng-template #linkContent>
-      <mat-icon [class.mc-primary-text]="color === 'primary'" class="icon">{{
-        entry.icon
-      }}</mat-icon>
+      <mat-icon
+        *ngIf="showIcon"
+        [class.mc-primary-text]="color === 'primary'"
+        class="icon"
+        >{{ entry.icon }}</mat-icon
+      >
       <span [class.mc-primary-text]="color === 'primary'">{{
         entry.title
       }}</span>
@@ -70,6 +73,7 @@ export interface NavMenuEntry {
 export class NavMenuItemComponent {
   @Input() color: 'primary' | null;
   @Input() entry: NavMenuEntry;
+  @Input() showIcon = true;
 }
 
 @NgModule({

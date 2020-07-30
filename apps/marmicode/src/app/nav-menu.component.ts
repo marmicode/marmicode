@@ -25,6 +25,7 @@ import { NavMenuItemModule } from './nav-menu-item.component';
         <mc-nav-menu-item
           *ngFor="let entry of entries"
           [entry]="entry"
+          [showIcon]="false"
         ></mc-nav-menu-item>
       </mat-nav-list>
 
@@ -96,7 +97,7 @@ export class NavMenuComponent {
 
   entries = [
     {
-      icon: 'connect_without_contact',
+      icon: 'ev_station',
       title: 'Services',
       route: servicesRouterHelper.services(),
     },
