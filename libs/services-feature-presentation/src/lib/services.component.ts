@@ -5,11 +5,7 @@ import { BannerModule } from './banner.component';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-services',
-  template: `<mc-banner></mc-banner>
-    <div style="height: 300px; color: red">test</div>
-    <div style="height: 300px; color: red">test</div>
-    <div style="height: 300px; color: red">test</div>`,
-  styles: [``],
+  template: `<mc-banner></mc-banner>`,
 })
 export class ServicesComponent {}
 
