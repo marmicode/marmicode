@@ -7,12 +7,17 @@ import {
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import {
-  MatAutocomplete,
-  MatAutocompleteModule,
-} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { RxState } from '@rx-angular/state';
+import { merge, Observable, Subject } from 'rxjs';
+import {
+  distinctUntilChanged,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 
 export interface SearchInputOption {
   label: string;
@@ -21,6 +26,7 @@ export interface SearchInputOption {
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-search-input',
+  providers: [RxState],
   template: `
     <div
       class="search-input-container"
@@ -31,7 +37,7 @@ export interface SearchInputOption {
       <mat-icon class="search-icon" color="primary">search</mat-icon>
 
       <input
-        [formControl]="control"
+        [formControl]="control$ | async"
         [matAutocomplete]="auto"
         aria-label="Search"
         class="input"
@@ -41,8 +47,8 @@ export interface SearchInputOption {
 
       <!-- Reset button. -->
       <button
-        *ngIf="control.value"
-        (click)="reset()"
+        *ngIf="value$ | async"
+        (click)="reset$.next()"
         class="reset-button"
         mat-icon-button
       >
@@ -89,13 +95,43 @@ export interface SearchInputOption {
   ],
 })
 export class SearchInputComponent {
-  @Input() control: FormControl;
+  @Input() set control(control: FormControl) {
+    this._state.set({ control });
+  }
   @Input() options: SearchInputOption[];
+
+  control$ = this._state.select('control');
+  value$: Observable<string | SearchInputOption>;
+  reset$ = new Subject();
 
   getOptionLabel = (option: SearchInputOption) => option?.label;
 
-  reset() {
-    this.control.reset();
+  constructor(private _state: RxState<{ control: FormControl }>) {
+    this.value$ = this.control$.pipe(
+      switchMap((control) => {
+        /* @hack watching value changes using `registerOnChange`
+         * because we want to catch all values even when set with
+         * `{emitEvent: false}`.
+         * Of course, `control.value` won't work as change detection won't be
+         * triggered in Push mode. */
+        return merge(
+          control.valueChanges,
+          new Observable<string | SearchInputOption>((observer) => {
+            control.registerOnChange((value) => observer.next(value));
+          })
+        );
+      }),
+      /* Filter duplicates. */
+      distinctUntilChanged()
+    );
+
+    /* Reset. */
+    this._state.hold(
+      this.reset$.pipe(
+        withLatestFrom(this.control$),
+        tap(([_, control]) => control.reset())
+      )
+    );
   }
 }
 

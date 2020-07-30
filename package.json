@@ -51,8 +51,13 @@
     "@angular/router": "10.0.5",
     "@angular/service-worker": "10.0.5",
     "@ngneat/until-destroy": "^7.3.2",
+    "@ngrx/effects": "9.1.0",
+    "@ngrx/entity": "9.1.0",
+    "@ngrx/router-store": "9.1.0",
+    "@ngrx/store": "9.1.0",
     "@nguniversal/express-engine": "^10.0.1",
     "@nrwl/angular": "10.0.6",
+    "@rx-angular/state": "^1.3.4",
     "apollo-angular": "^1.10.0",
     "apollo-angular-link-http": "^1.11.0",
     "apollo-cache-inmemory": "^1.6.0",
@@ -62,11 +67,7 @@
     "graphql-tag": "^2.10.4",
     "panzoom": "^9.2.5",
     "rxjs": "6.5.5",
-    "zone.js": "^0.10.2",
-    "@ngrx/store": "9.1.0",
-    "@ngrx/effects": "9.1.0",
-    "@ngrx/entity": "9.1.0",
-    "@ngrx/router-store": "9.1.0"
+    "zone.js": "^0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.1000.4",
@@ -76,6 +77,8 @@
     "@graphql-cli/codegen": "^1.17.4",
     "@graphql-codegen/schema-ast": "^1.17.4",
     "@graphql-codegen/typescript": "^1.17.4",
+    "@ngrx/schematics": "9.1.0",
+    "@ngrx/store-devtools": "9.1.0",
     "@nguniversal/builders": "^10.0.1",
     "@nrwl/cypress": "10.0.6",
     "@nrwl/jest": "10.0.6",
@@ -95,8 +98,6 @@
     "ts-jest": "25.2.1",
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
-    "typescript": "3.9.7",
-    "@ngrx/schematics": "9.1.0",
-    "@ngrx/store-devtools": "9.1.0"
+    "typescript": "3.9.7"
   }
 }
