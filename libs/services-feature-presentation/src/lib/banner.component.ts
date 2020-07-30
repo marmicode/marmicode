@@ -15,7 +15,7 @@ declare var require;
   >
     <header class="banner-header">
       <h1 class="title">
-        We Help You <span class="underline">Cook Better Apps</span>
+        We Help You <span class="underline">Cook&nbsp;Better&nbsp;Apps</span>
       </h1>
       <p>with delicious ingredients</p>
       <a href="https://marmicode.eventbrite.com" target="_blank">
