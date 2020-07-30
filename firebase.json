@@ -3,7 +3,7 @@
     {
       "target": "marmicode",
       "predeploy": "yarn build marmicode --prod && yarn prerender:scully",
-      "public": "dist/apps/marmicode/browser",
+      "public": "dist/apps/marmicode/static",
       "ignore": [
         "firebase.json",
         "**/.*",
