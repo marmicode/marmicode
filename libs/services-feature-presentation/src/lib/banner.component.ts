@@ -32,8 +32,7 @@ declare var require;
       .banner-container {
         display: block;
         position: relative;
-        height: 100vh;
-        max-height: 800px;
+        height: 600px;
         width: 100%;
         background-attachment: fixed;
         background-repeat: no-repeat;
