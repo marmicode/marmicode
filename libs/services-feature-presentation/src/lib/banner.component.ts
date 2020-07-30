@@ -1,32 +1,32 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-
 declare var require;
-
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-banner',
-  template: `<img
-    class="banner-picture"
-    [src]="bannerPictureUri"
-    alt="Cooking Pot"
-  />`,
+  template: `<div
+    [style.backgroundImage]="backgroundImage"
+    class="banner-container"
+  ></div>`,
   styles: [
     `
-      :host {
-        height: calc(100vh - 64px);
+      .banner-container {
+        display: block;
+        height: 100vh;
+        max-height: 800px;
         width: 100%;
-      }
-
-      .banner-picture {
-        position: fixed;
-        top: 0;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
       }
     `,
   ],
 })
 export class BannerComponent {
-  bannerPictureUri = require('file-loader!./banner-wide.jpg').default;
+  backgroundImage = `url(${
+    require('!!file-loader!./banner-wide.jpg').default
+  })`;
 }
 
 @NgModule({
