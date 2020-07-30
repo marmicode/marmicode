@@ -10,8 +10,8 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
   styles: [
     `
       :host {
-        position: absolute;
-        bottom: 0;
+        display: block;
+        margin-top: -50px;
         height: 50px;
         width: 100%;
       }

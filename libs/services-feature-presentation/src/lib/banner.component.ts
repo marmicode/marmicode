@@ -10,28 +10,27 @@ declare var require;
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-banner',
   template: ` <div
-    [style.backgroundImage]="backgroundImage"
-    class="banner-container"
-  >
-    <header class="banner-header">
-      <h1 class="title">
-        We Help You <span class="underline">Cook&nbsp;Better&nbsp;Apps</span>
-      </h1>
-      <p>with delicious ingredients</p>
-      <a href="https://marmicode.eventbrite.com" target="_blank">
-        <button mat-raised-button color="primary">
-          <mat-icon class="button-icon">school</mat-icon>
-          <span>SEE WORKSHOPS</span>
-        </button>
-      </a>
-    </header>
-    <mc-slant></mc-slant>
-  </div>`,
+      [style.backgroundImage]="backgroundImage"
+      class="banner-container"
+    >
+      <header class="banner-header">
+        <h1 class="title">
+          We Help You <span class="underline">Cook&nbsp;Better&nbsp;Apps</span>
+        </h1>
+        <p>with delicious ingredients</p>
+        <a href="https://marmicode.eventbrite.com" target="_blank">
+          <button mat-raised-button color="primary">
+            <mat-icon class="button-icon">school</mat-icon>
+            <span>SEE WORKSHOPS</span>
+          </button>
+        </a>
+      </header>
+    </div>
+    <mc-slant></mc-slant>`,
   styles: [
     `
       .banner-container {
         display: block;
-        position: relative;
         height: 600px;
         width: 100%;
         background-attachment: fixed;
@@ -41,9 +40,8 @@ declare var require;
       }
 
       .banner-header {
-        position: absolute;
-        left: 6%;
-        top: 30%;
+        padding-top: 30%;
+        padding-left: 6%;
 
         color: white;
         font-family: Times, 'Helvetica Neue', sans-serif;
