@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { ActionButtonModule } from './action-button.component';
 import { BannerModule } from './banner.component';
+import { CoachModule } from './coach.component';
 import { SectionModule } from './section.component';
 import { SlantModule } from './slant.component';
 import { WorkshopsButtonModule } from './workshops-button.component';
@@ -57,6 +58,14 @@ import { WorkshopsButtonModule } from './workshops-button.component';
           </div>
         </ng-container>
       </mc-section>
+
+      <!-- Your Coach. -->
+      <mc-section>
+        <span slot="title">Your Coach</span>
+        <ng-container slot="content">
+          <mc-coach></mc-coach>
+        </ng-container>
+      </mc-section>
     </div>`,
   styles: [
     `
@@ -80,6 +89,7 @@ export class ServicesComponent {}
     FlexLayoutModule,
     MatButtonModule,
     ActionButtonModule,
+    CoachModule,
   ],
 })
 export class ServicesModule {}

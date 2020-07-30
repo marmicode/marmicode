@@ -2,6 +2,11 @@
 @import './custom-theme.scss';
 
 $marmicode-primary-color: map-get($marmicode-purple, 500);
+$marmicode-accent-color: map-get($marmicode-accent, 500);
+
+body {
+  --marmicode-accent-color: #{$marmicode-accent-color};
+}
 
 html, body {
   height: 100%;

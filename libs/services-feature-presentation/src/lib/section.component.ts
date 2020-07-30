@@ -10,9 +10,9 @@ import { DottyLineModule } from './dotty-line.component';
       <mc-dotty-line></mc-dotty-line>
 
       <!-- Title. -->
-      <h2 class="mc-primary-text title">
+      <h1 class="mc-primary-text title">
         <ng-content select="[slot=title]"></ng-content>
-      </h2>
+      </h1>
 
       <!-- Content. -->
       <div class="content">
