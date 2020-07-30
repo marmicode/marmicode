@@ -67,7 +67,7 @@ declare var require;
 export class BannerComponent {
   @HostBinding('style.backgroundImage')
   backgroundImage = `url(${
-    require('!!file-loader!./banner-wide.jpg').default
+    require('!!file-loader!./banner-wide-1024.jpg').default
   })`;
 }
 
