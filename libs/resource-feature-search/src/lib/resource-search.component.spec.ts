@@ -1,14 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ResourceSearchComponent } from '@marmicode/resource-feature-search';
-import { EMPTY, of } from 'rxjs';
+import { EMPTY, of, Subject } from 'rxjs';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { ResourceRepository } from './resource-repository.service';
 
 describe('ResourceSearchComponent', () => {
   let component: ResourceSearchComponent;
   let fixture: ComponentFixture<ResourceSearchComponent>;
+  let selectedSkillSlug$: Subject<string>;
 
   beforeEach(async () => {
+    selectedSkillSlug$ = new Subject<string>();
+
     return await TestBed.configureTestingModule({
       declarations: [ResourceSearchComponent],
       providers: [
@@ -21,7 +24,9 @@ describe('ResourceSearchComponent', () => {
         },
         {
           provide: ResourceSearchFacade,
-          useValue: {},
+          useValue: {
+            selectedSkillSlug$,
+          },
         },
       ],
     }).compileComponents();
@@ -41,10 +46,19 @@ describe('ResourceSearchComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('🚧 should search for all resources if skillSlug is null', () => {
+  it('should not trigger any query until skillSlug parameter is available', () => {
+    expect(resourceRepository.getResources).toBeCalledTimes(0);
+    expect(resourceRepository.getResourcesBySkillSlug).toBeCalledTimes(0);
+  });
+
+  /* This fixes a bug where `getResourcesBySkillSlug` was called with
+   * an undefined value. This happens when user navigates to another route
+   * and ngrx router emits the null value before destroying the component. */
+  it('should search for all resources if skillSlug is null', () => {
     /* Suppose the skillSlug param is null. */
-    jest
-      .spyOn(resourceSearchFacade, 'selectedSkillSlug$', 'get')
-      .mockReturnValue(of(null));
+    selectedSkillSlug$.next(null);
+
+    expect(resourceRepository.getResources).toBeCalledTimes(1);
+    expect(resourceRepository.getResourcesBySkillSlug).toBeCalledTimes(0);
   });
 });

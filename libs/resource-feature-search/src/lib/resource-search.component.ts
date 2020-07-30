@@ -57,6 +57,7 @@ export class ResourceSearchComponent {
     private _resourceSearchFacade: ResourceSearchFacade
   ) {
     const resourcesProgress$ = this._resourceSearchFacade.selectedSkillSlug$.pipe(
+      map((skillSlug) => skillSlug ?? resourceSearchRouterHelper.EVERYTHING),
       switchMap((skillSlug) => {
         const source$ =
           skillSlug === resourceSearchRouterHelper.EVERYTHING
