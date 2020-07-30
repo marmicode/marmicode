@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { BannerModule } from './banner.component';
-import { DottyLineModule } from './dotty-line.component';
+import { SectionModule } from './section.component';
 import { SlantModule } from './slant.component';
 
 declare var require;
@@ -13,7 +13,39 @@ declare var require;
     <mc-banner></mc-banner>
     <mc-slant></mc-slant>
     <div class="services-presentation">
-      <mc-dotty-line></mc-dotty-line>
+      <!-- Workshops. -->
+      <mc-section>
+        <span slot="title">Workshops</span>
+        <ng-container slot="content">
+          <p>
+            Our workshops focus on <strong>best practices</strong> and
+            <strong>progressive architectures</strong>.
+          </p>
+          <p>
+            They offer you the opportunity to
+            <strong>deep dive</strong> in some advanced topics that will help
+            you better understand how things work and choose the
+            <strong>best ingredients</strong> for your apps.
+          </p>
+        </ng-container>
+      </mc-section>
+
+      <!-- Remote Consultations. -->
+      <mc-section>
+        <span slot="title">Coaching</span>
+        <ng-container slot="content">
+          <p>
+            Every team is different. At Marmicode we adapt to your needs and
+            help you build better apps with our technical and organizational
+            skills.
+          </p>
+          <p>
+            Our coaching services will help you find the right balance of spices
+            and the most <strong>pragmatic approach</strong> to produce
+            <strong>high quality apps without compromising velocity</strong>.
+          </p>
+        </ng-container>
+      </mc-section>
     </div>
   </div>`,
   styles: [
@@ -29,7 +61,6 @@ declare var require;
 
       .services-presentation {
         background-color: white;
-        height: 1000px;
       }
     `,
   ],
@@ -43,6 +74,6 @@ export class ServicesComponent {
 @NgModule({
   declarations: [ServicesComponent],
   exports: [ServicesComponent],
-  imports: [CommonModule, BannerModule, SlantModule, DottyLineModule],
+  imports: [CommonModule, BannerModule, SlantModule, SectionModule],
 })
 export class ServicesModule {}
