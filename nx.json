@@ -32,6 +32,9 @@
     "learning-map-feature-tree": {
       "tags": ["scope:learning-map", "type:feature"]
     },
+    "services-feature-presentation": {
+      "tags": ["scope:services", "type:feature"]
+    },
     "resource-feature-search": {
       "tags": ["scope:resource", "type:feature"]
     },
