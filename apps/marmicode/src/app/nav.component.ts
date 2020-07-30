@@ -45,7 +45,7 @@ import { NavMenuModule } from './nav-menu.component';
         background-color: white;
         display: block;
         height: 100%;
-        overflow-y: scroll;
+        overflow-y: auto;
       }
 
       .toolbar {

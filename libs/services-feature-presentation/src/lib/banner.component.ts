@@ -1,14 +1,7 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  NgModule,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
-declare var require;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,13 +24,10 @@ declare var require;
         display: block;
         height: 600px;
         width: 100%;
-        background-attachment: fixed;
-        background-position: center;
-        background-size: cover;
       }
 
       .banner-header {
-        padding-top: 30%;
+        padding-top: 150px;
         padding-left: 6%;
 
         color: white;
@@ -71,12 +61,7 @@ declare var require;
     `,
   ],
 })
-export class BannerComponent {
-  @HostBinding('style.backgroundImage')
-  backgroundImage = `url(${
-    require('!!file-loader!./banner-wide.jpg').default
-  })`;
-}
+export class BannerComponent {}
 
 @NgModule({
   declarations: [BannerComponent],
