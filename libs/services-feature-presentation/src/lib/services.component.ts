@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { ActionButtonModule } from './action-button.component';
 import { BannerModule } from './banner.component';
 import { SectionModule } from './section.component';
 import { SlantModule } from './slant.component';
@@ -28,7 +31,9 @@ declare var require;
             you better understand how things work and choose the
             <strong>best ingredients</strong> for your apps.
           </p>
-          <mc-workshops-button></mc-workshops-button>
+          <div fxLayout="row" fxLayoutAlign="center">
+            <mc-workshops-button></mc-workshops-button>
+          </div>
         </ng-container>
       </mc-section>
 
@@ -46,6 +51,13 @@ declare var require;
             and the most <strong>pragmatic approach</strong> to produce
             <strong>high quality apps without compromising velocity</strong>.
           </p>
+          <div fxLayout="row" fxLayoutAlign="center">
+            <mc-action-button
+              icon="mail"
+              label="GET IN TOUCH"
+              uri="mailto:kitchen@marmicode.io"
+            ></mc-action-button>
+          </div>
         </ng-container>
       </mc-section>
     </div>
@@ -82,6 +94,9 @@ export class ServicesComponent {
     SlantModule,
     SectionModule,
     WorkshopsButtonModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    ActionButtonModule,
   ],
 })
 export class ServicesModule {}
