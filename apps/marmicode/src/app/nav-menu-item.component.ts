@@ -61,7 +61,8 @@ export interface NavMenuEntry {
       }
 
       a.active {
-        display: none;
+        color: var(--marmicode-accent-color);
+        cursor: default;
       }
 
       .icon {
