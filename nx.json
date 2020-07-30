@@ -23,7 +23,7 @@
   },
   "projects": {
     "marmicode": {
-      "tags": []
+      "tags": ["scope:app"]
     },
     "marmicode-e2e": {
       "tags": [],
