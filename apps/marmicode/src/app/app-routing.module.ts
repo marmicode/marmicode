@@ -34,7 +34,7 @@ export const routes: Routes = [
     path: '',
     pathMatch: 'full',
     /* @todo use resourceSearchRouterHelper.learnEverything().join('/'). */
-    redirectTo: '/learn',
+    redirectTo: '/learn/everything',
   },
 ];
 

@@ -9,10 +9,6 @@ export const routes: Routes = [
     path: `:${resourceSearchRouterHelper.SKILL_SLUG_PARAM}`,
     component: ResourceSearchComponent,
   },
-  {
-    path: '',
-    redirectTo: resourceSearchRouterHelper.learnEverything().join('/'),
-  },
 ];
 
 @NgModule({
