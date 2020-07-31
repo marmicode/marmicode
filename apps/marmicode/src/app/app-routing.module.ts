@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { servicesRouterHelper } from '@marmicode/services-feature-presentation';
-import { ServicesRoutingModule } from './services/services-routing.module';
 
 export const routes: Routes = [
   /* Learning map. */
@@ -25,8 +23,12 @@ export const routes: Routes = [
 
   /* Services */
   {
-    path: servicesRouterHelper.SERVICES_PATH,
-    loadChildren: () => ServicesRoutingModule,
+    /* @todo use servicesRouterHelper. */
+    path: 'services',
+    loadChildren: () =>
+      import('@marmicode/services-feature-presentation').then(
+        (m) => m.ServicesRoutingModule
+      ),
   },
 
   /* / redirect. */
