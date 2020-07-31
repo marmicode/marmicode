@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TransferStateService } from '@scullyio/ng-lib';
+import { isScullyRunning, TransferStateService } from '@scullyio/ng-lib';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -18,5 +18,9 @@ export class TransferStateAdapter {
 
   set<T>(key: string, value: T) {
     this._stateTransferService.setState(key, value);
+  }
+
+  isPrerendering() {
+    return isScullyRunning();
   }
 }
