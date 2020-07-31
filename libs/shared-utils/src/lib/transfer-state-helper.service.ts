@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { concat, EMPTY, MonoTypeOperatorFunction } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { catchError, filter, take, tap } from 'rxjs/operators';
 import { TransferStateAdapter } from './transfer-state-adapter.service';
 
 @Injectable({
@@ -22,15 +22,20 @@ export class TransferStateHelper {
         );
       }
 
-      return concat(
-        /* Check if value is present in the state. */
+      /* When running in browser and key is available in state. */
+      if (
+        !this._transferState.isPrerendering() &&
         this._transferState.hasKey(key)
-          ? this._transferState
-              .get<T>(key)
-              .pipe(filter((value) => value != null))
-          : EMPTY,
-        source$
-      );
+      ) {
+        source$ = concat(
+          this._transferState
+            .get<T>(key)
+            .pipe(filter((value) => value != null)),
+          source$
+        );
+      }
+
+      return source$;
     };
   }
 }
