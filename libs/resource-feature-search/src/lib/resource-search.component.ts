@@ -8,7 +8,7 @@ import {
   shareReplayWithRefCount,
 } from '@marmicode/shared-utils';
 import { Observable } from 'rxjs';
-import { map, mapTo, switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { TransferStateHelper } from '../../../shared-utils/src/lib/transfer-state-helper.service';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { Resource } from './resource';
@@ -60,11 +60,19 @@ export class ResourceSearchComponent {
   ) {
     const resourcesProgress$ = this._resourceSearchFacade.selectedSkillSlug$.pipe(
       map((skillSlug) => skillSlug ?? resourceSearchRouterHelper.EVERYTHING),
-      switchMap((skillSlug) => {
-        const source$ =
+      switchMap((skillSlug, index) => {
+        let source$ =
           skillSlug === resourceSearchRouterHelper.EVERYTHING
             ? this._resourceRepository.getResources()
             : this._resourceRepository.getResourcesBySkillSlug(skillSlug);
+
+        /* Transfer state for the first call only.
+         * We run this once to avoid reloading value from state multiple times when slug changes. */
+        if (index === 0) {
+          source$ = source$.pipe(
+            this._transferStateHelper.transfer('resourceSearchResult')
+          );
+        }
 
         return source$.pipe(
           progressify({
@@ -72,7 +80,6 @@ export class ResourceSearchComponent {
           })
         );
       }),
-      this._transferStateHelper.transfer('resourceSearchResult'),
       shareReplayWithRefCount()
     );
 
