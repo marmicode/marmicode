@@ -8,7 +8,7 @@ import {
   shareReplayWithRefCount,
 } from '@marmicode/shared-utils';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, mapTo, switchMap } from 'rxjs/operators';
 import { TransferStateHelper } from '../../../shared-utils/src/lib/transfer-state-helper.service';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { Resource } from './resource';
@@ -67,17 +67,18 @@ export class ResourceSearchComponent {
             : this._resourceRepository.getResourcesBySkillSlug(skillSlug);
 
         return source$.pipe(
-          this._transferStateHelper.transfer('resourceSearchResult'),
           progressify({
             ignoreComplete: true,
           })
         );
       }),
+      this._transferStateHelper.transfer('resourceSearchResult'),
       shareReplayWithRefCount()
     );
 
     this.isLoading$ = resourcesProgress$.pipe(
-      map((notification) => notification.type === 'started')
+      map((notification) => notification.type === 'started'),
+      mapTo(true)
     );
 
     this.resources$ = resourcesProgress$.pipe(dematerializeData());

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ResourceSearchComponent } from '@marmicode/resource-feature-search';
-import { EMPTY, of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { TransferStateAdapter } from '../../../shared-utils/src/lib/transfer-state-adapter.service';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { ResourceRepository } from './resource-repository.service';
@@ -33,6 +33,7 @@ describe('ResourceSearchComponent', () => {
           provide: TransferStateAdapter,
           useValue: {
             hasKey: jest.fn().mockReturnValue(false),
+            isPrerendering: jest.fn().mockReturnValue(false),
           },
         },
       ],
