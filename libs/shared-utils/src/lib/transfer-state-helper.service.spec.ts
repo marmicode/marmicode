@@ -48,8 +48,21 @@ describe('transferStateHelper', () => {
   describe('on browser', () => {
     beforeEach(() => {
       (adapter.isPrerendering as jest.Mock).mockReturnValue(false);
+      (adapter.hasKey as jest.Mock).mockReturnValue(true);
+      (adapter.get as jest.Mock).mockReturnValue(of(42));
     });
 
-    it.todo('🚧 should read state');
+    it('should read state', () => {
+      const source$ = of(4200);
+
+      source$.pipe(helper.transfer('theAnswer')).subscribe(observer);
+
+      expect(observer).toBeCalledTimes(2);
+      expect(observer).toBeCalledWith(42);
+      expect(observer).toBeCalledWith(4200);
+      expect(adapter.hasKey).toBeCalled();
+      expect(adapter.get).toBeCalledWith('theAnswer');
+      expect(adapter.set).not.toBeCalled();
+    });
   });
 });

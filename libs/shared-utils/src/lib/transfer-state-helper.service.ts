@@ -15,6 +15,13 @@ export class TransferStateHelper {
    */
   transfer<T>(key: string): MonoTypeOperatorFunction<T> {
     return (source$) => {
+      /* Update state when prerendering. */
+      if (this._transferState.isPrerendering()) {
+        source$ = source$.pipe(
+          tap((value) => this._transferState.set<T>(key, value))
+        );
+      }
+
       return concat(
         /* Check if value is present in the state. */
         this._transferState.hasKey(key)
@@ -22,7 +29,7 @@ export class TransferStateHelper {
               .get<T>(key)
               .pipe(filter((value) => value != null))
           : EMPTY,
-        source$.pipe(tap((value) => this._transferState.set<T>(key, value)))
+        source$
       );
     };
   }
