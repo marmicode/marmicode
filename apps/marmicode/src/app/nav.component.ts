@@ -1,10 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, NgModule } from '@angular/core';
-import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
+import { Compiler, Component, HostListener, NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { ResourceSearchFormModule } from '@marmicode/resource-feature-search';
-import { animationFrameScheduler, BehaviorSubject, Observable } from 'rxjs';
+import {
+  animationFrameScheduler,
+  BehaviorSubject,
+  defer,
+  Observable,
+} from 'rxjs';
 import { map, observeOn, pairwise } from 'rxjs/operators';
 import { appRouterHelper } from './app-router-helper';
 import { NavMenuModule } from './nav-menu.component';
@@ -30,7 +34,14 @@ import { NavMenuModule } from './nav-menu.component';
       <div fxFlex></div>
 
       <!-- Resource search input. -->
-      <mc-resource-search-form></mc-resource-search-form>
+      <ng-container *ngIf="resourceSearchForm$ | async as cmpInfo">
+        <ng-container
+          *ngComponentOutlet="
+            cmpInfo.component;
+            ngModuleFactory: cmpInfo.ngModule
+          "
+        ></ng-container>
+      </ng-container>
 
       <!-- Navigation menu. -->
       <mc-nav-menu></mc-nav-menu>
@@ -82,10 +93,20 @@ import { NavMenuModule } from './nav-menu.component';
 export class NavComponent {
   appRouterHelper = appRouterHelper;
   isScrollingDown$: Observable<boolean>;
+  resourceSearchForm$ = defer(async () => {
+    const {
+      ResourceSearchFormComponent,
+      ResourceSearchFormModule,
+    } = await import('@marmicode/resource-feature-search');
+    return {
+      component: ResourceSearchFormComponent,
+      ngModule: this._compiler.compileModuleSync(ResourceSearchFormModule),
+    };
+  });
 
   private _scrollPosition$ = new BehaviorSubject(0);
 
-  constructor() {
+  constructor(private _compiler: Compiler) {
     this.isScrollingDown$ = this._scrollPosition$.pipe(
       observeOn(animationFrameScheduler),
       pairwise(),
@@ -104,12 +125,10 @@ export class NavComponent {
   exports: [NavComponent],
   imports: [
     CommonModule,
-    FlexModule,
+    FlexLayoutModule,
     MatToolbarModule,
     NavMenuModule,
     RouterModule,
-    ResourceSearchFormModule,
-    FlexLayoutModule,
   ],
 })
 export class NavModule {}
