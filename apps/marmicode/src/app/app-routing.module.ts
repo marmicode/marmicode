@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { resourceSearchRouterHelper } from '@marmicode/resource-feature-search';
-import {
-  ServicesModule,
-  servicesRouterHelper,
-} from '@marmicode/services-feature-presentation';
-import { ResourceSearchRoutingModule } from './resource-search/resource-search-routing.module';
+import { servicesRouterHelper } from '@marmicode/services-feature-presentation';
 import { ServicesRoutingModule } from './services/services-routing.module';
 
 export const routes: Routes = [
@@ -20,8 +15,12 @@ export const routes: Routes = [
 
   /* Resource search. */
   {
-    path: resourceSearchRouterHelper.LEARN_PATH,
-    loadChildren: () => ResourceSearchRoutingModule,
+    /* @todo use resourceSearchRouterHelper. */
+    path: 'learn',
+    loadChildren: () =>
+      import('@marmicode/resource-feature-search').then(
+        (m) => m.ResourceSearchRoutingModule
+      ),
   },
 
   /* Services */
@@ -34,7 +33,8 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: resourceSearchRouterHelper.learnEverything().join('/'),
+    /* @todo use resourceSearchRouterHelper.learnEverything().join('/'). */
+    redirectTo: '/learn',
   },
 ];
 

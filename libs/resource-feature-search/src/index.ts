@@ -1,7 +1,4 @@
-export {
-  ResourceSearchComponent,
-  ResourceSearchModule,
-} from './lib/resource-search.component';
+export { ResourceSearchRoutingModule } from './lib/resource-search-routing.module';
 export {
   ResourceSearchFormComponent,
   ResourceSearchFormModule,

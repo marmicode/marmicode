@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ResourceSearchComponent } from '@marmicode/resource-feature-search';
+import { ResourceSearchComponent } from './resource-search.component';
 import { Subject } from 'rxjs';
-import { TransferStateAdapter } from '../../../shared-utils/src/lib/transfer-state-adapter.service';
+import { TransferStateAdapter } from '@marmicode/shared-utils';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { ResourceRepository } from './resource-repository.service';
 
