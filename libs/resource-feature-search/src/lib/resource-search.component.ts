@@ -77,8 +77,7 @@ export class ResourceSearchComponent {
     );
 
     this.isLoading$ = resourcesProgress$.pipe(
-      map((notification) => notification.type === 'started'),
-      mapTo(true)
+      map((notification) => notification.type === 'started')
     );
 
     this.resources$ = resourcesProgress$.pipe(dematerializeData());
