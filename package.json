@@ -67,6 +67,7 @@
     "apollo-cache-inmemory": "^1.6.0",
     "apollo-client": "^2.6.0",
     "apollo-link": "^1.2.11",
+    "axios": "^0.19.2",
     "express": "^4.15.2",
     "graphql-tag": "^2.10.4",
     "panzoom": "^9.2.5",
