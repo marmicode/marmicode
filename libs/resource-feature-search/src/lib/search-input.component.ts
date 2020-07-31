@@ -117,7 +117,7 @@ export class SearchInputComponent {
         return merge(
           control.valueChanges,
           new Observable<string | SearchInputOption>((observer) => {
-            control.registerOnChange((value) => observer.next(value));
+            control.registerOnChange((value: string) => observer.next(value));
           })
         );
       }),

@@ -3,13 +3,13 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoadingModule } from '@marmicode/shared-ui';
 import {
-  dematerializeData,
+  TransferStateHelper,
+  deprogressifyData,
   progressify,
   shareReplayWithRefCount,
 } from '@marmicode/shared-utils';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { TransferStateHelper } from '../../../shared-utils/src/lib/transfer-state-helper.service';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { Resource } from './resource';
 import { ResourceCardModule } from './resource-card.component';
@@ -51,7 +51,7 @@ export class ResourceSearchComponent {
   isLoading$: Observable<boolean>;
   resources$: Observable<Resource[]>;
 
-  trackById = (index, resource: Resource) => resource.id;
+  trackById = (index: number, resource: Resource) => resource.id;
 
   constructor(
     private _resourceRepository: ResourceRepository,
@@ -87,7 +87,7 @@ export class ResourceSearchComponent {
       map((notification) => notification.type === 'started')
     );
 
-    this.resources$ = resourcesProgress$.pipe(dematerializeData());
+    this.resources$ = resourcesProgress$.pipe(deprogressifyData());
   }
 }
 

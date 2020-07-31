@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { WorkshopsButtonModule } from './workshops-button.component';
 
-declare var require;
+declare var require: any;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

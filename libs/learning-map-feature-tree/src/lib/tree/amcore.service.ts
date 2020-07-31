@@ -1,7 +1,9 @@
-import { Sprite } from '@amcharts/amcharts4/core';
+import { Percent, Sprite } from '@amcharts/amcharts4/core';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, defer, Observable } from 'rxjs';
 import { finalize, map, switchMap } from 'rxjs/operators';
+
+declare type PercentFn = (value: number) => Percent;
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +30,11 @@ export class Amcore {
     configFn,
   }: {
     element: HTMLElement;
-    configFn: ({ percent: PercentFn }) => { [key: string]: unknown };
+    configFn: ({
+      percent,
+    }: {
+      percent: PercentFn;
+    }) => { [key: string]: unknown };
   }): Observable<Sprite> {
     return combineLatest([this._core$, this._forceDirectedPluginModule$]).pipe(
       switchMap(([core, plugin]) => {

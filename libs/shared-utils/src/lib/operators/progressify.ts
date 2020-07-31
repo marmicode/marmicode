@@ -4,8 +4,9 @@
  *
  */
 
-import { concat, of, OperatorFunction } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { concat, Observable, of, OperatorFunction } from 'rxjs';
+import { catchError, filter, map } from 'rxjs/operators';
+import { MaterializedNotification } from './materialize-error';
 
 export type ProgressifyEventType = 'complete' | 'error' | 'next' | 'started';
 
@@ -54,3 +55,17 @@ export const progressify = <T>({
       )
     );
 };
+
+export function deprogressifyData<T>(): OperatorFunction<
+  ProgressifyEvent<T>,
+  T
+> {
+  return function deprogressifyDataOperator(
+    source: Observable<ProgressifyEvent<T>>
+  ): Observable<T> {
+    return source.pipe(
+      filter((notification) => notification.type === 'next'),
+      map((notification) => notification.value as T)
+    );
+  };
+}

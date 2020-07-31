@@ -27,7 +27,9 @@
       "@marmicode/services-feature-presentation": [
         "libs/services-feature-presentation/src/index.ts"
       ]
-    }
+    },
+    "strict": true,
+    "strictNullChecks": false
   },
   "exclude": ["node_modules", "tmp"]
 }

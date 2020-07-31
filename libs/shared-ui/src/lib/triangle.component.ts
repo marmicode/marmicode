@@ -42,7 +42,7 @@ import {
 export class TriangleComponent {
   @HostBinding('style.background')
   @Input()
-  color: string;
+  color?: string;
 }
 
 @NgModule({

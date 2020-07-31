@@ -1,13 +1,13 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { shareReplayWithRefCount } from '@marmicode/shared-utils';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { DottyLineModule } from './dotty-line.component';
 
-declare var require;
+declare var require: any;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,4 +1,4 @@
-import { ISpriteProperties } from '@amcharts/amcharts4/core';
+import { DataItem, ISpriteProperties } from '@amcharts/amcharts4/core';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -155,8 +155,11 @@ export class TreeComponent implements OnInit {
                       y: 'y',
                     },
                     events: {
-                      hit: (event) =>
-                        console.log(event.target.dataItem.dataContext),
+                      hit: (event: Event) =>
+                        console.log(
+                          ((event.target as any).dataItem as DataItem)
+                            .dataContext
+                        ),
                     },
                   } as ISpriteProperties,
                   minRadius: this.radius,

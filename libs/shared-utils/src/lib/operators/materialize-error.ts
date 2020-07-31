@@ -42,7 +42,7 @@ export function dematerializeData<T>(): OperatorFunction<
   ): Observable<T> {
     return source.pipe(
       filter((notification) => notification.type === 'next'),
-      map((notification) => notification.value)
+      map((notification) => notification.value as T)
     );
   };
 }
