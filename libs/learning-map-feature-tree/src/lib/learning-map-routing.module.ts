@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   LearningMapComponent,
   LearningMapModule,
-} from '@marmicode/learning-map-feature-tree';
+} from './learning-map.component';
 
 export const routes: Routes = [
   {

@@ -6,7 +6,7 @@ export const routes: Routes = [
   {
     path: 'learning-map',
     loadChildren: () =>
-      import('./learning-map/learning-map-routing.module').then(
+      import('@marmicode/learning-map-feature-tree').then(
         (m) => m.LearningMapRoutingModule
       ),
   },

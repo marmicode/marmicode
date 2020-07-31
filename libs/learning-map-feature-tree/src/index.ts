@@ -1,4 +1,1 @@
-export {
-  LearningMapComponent,
-  LearningMapModule,
-} from './lib/learning-map.component';
+export { LearningMapRoutingModule } from './lib/learning-map-routing.module';
