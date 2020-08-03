@@ -18,7 +18,7 @@ import {
   ResourceRepositoryModule,
 } from './resource-repository.service';
 import { ResourceSearchFormModule } from './resource-search-form.component';
-import { resourceSearchRouterHelper } from './resource-search-router-helper';
+import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

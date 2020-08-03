@@ -3,4 +3,4 @@ export {
   ResourceSearchFormComponent,
   ResourceSearchFormModule,
 } from './lib/resource-search-form.component';
-export { resourceSearchRouterHelper } from './lib/resource-search-router-helper';
+export { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';

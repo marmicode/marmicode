@@ -12,7 +12,7 @@ import { combineLatest, concat, defer, Observable, of } from 'rxjs';
 import { filter, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import { ResourceSearchStateModule } from './+state/resource-search-state.module';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
-import { resourceSearchRouterHelper } from './resource-search-router-helper';
+import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
 import { SearchInputModule } from './search-input.component';
 import { Skill } from './skill';
 import {

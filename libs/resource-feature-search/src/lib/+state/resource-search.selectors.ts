@@ -1,7 +1,7 @@
 import * as fromRouter from '@ngrx/router-store';
 import { RouterReducerState } from '@ngrx/router-store';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { resourceSearchRouterHelper } from '../resource-search-router-helper';
+import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
 
 export interface RouterPartialState {
   readonly router: RouterReducerState;

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
 
 export const routes: Routes = [
   /* Learning map. */
@@ -13,8 +14,7 @@ export const routes: Routes = [
 
   /* Resource search. */
   {
-    /* @todo use resourceSearchRouterHelper. */
-    path: 'learn',
+    path: resourceSearchRouterHelper.LEARN_PATH,
     loadChildren: () =>
       import('@marmicode/resource-feature-search').then(
         (m) => m.ResourceSearchRoutingModule

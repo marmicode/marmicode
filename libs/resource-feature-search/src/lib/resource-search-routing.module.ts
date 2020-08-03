@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { resourceSearchRouterHelper } from './resource-search-router-helper';
+import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
 import { ResourceSearchComponent } from './resource-search.component';
 import { ResourceSearchModule } from './resource-search.component';
 

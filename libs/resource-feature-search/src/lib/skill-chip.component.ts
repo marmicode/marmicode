@@ -8,7 +8,7 @@ import {
 import { MatRippleModule } from '@angular/material/core';
 import { RouterModule } from '@angular/router';
 import { Skill } from './skill';
-import { resourceSearchRouterHelper } from './resource-search-router-helper';
+import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

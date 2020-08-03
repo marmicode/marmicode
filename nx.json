@@ -43,6 +43,9 @@
     },
     "shared-utils": {
       "tags": ["scope:shared", "type:utils"]
+    },
+    "shared-router-helpers": {
+      "tags": ["scope:shared", "type:utils"]
     }
   }
 }

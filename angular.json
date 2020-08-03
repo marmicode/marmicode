@@ -361,6 +361,37 @@
         }
       },
       "schematics": {}
+    },
+    "shared-router-helpers": {
+      "projectType": "library",
+      "root": "libs/shared-router-helpers",
+      "sourceRoot": "libs/shared-router-helpers/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared-router-helpers/tsconfig.lib.json",
+              "libs/shared-router-helpers/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared-router-helpers/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared-router-helpers/jest.config.js",
+            "tsConfig": "libs/shared-router-helpers/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/shared-router-helpers/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {
