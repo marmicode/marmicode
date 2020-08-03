@@ -70,7 +70,6 @@ export interface SearchInputOption {
         border-radius: 25px;
         background-color: white;
         overflow: hidden;
-        width: 250px;
       }
 
       .search-icon {
@@ -85,9 +84,22 @@ export interface SearchInputOption {
         justify-content: center;
         border: none;
         outline: none;
+        width: 150px;
+
+        /* Let some space to the reset button. */
+        padding-right: 40px;
+        text-overflow: ellipsis;
+      }
+
+      @media (min-width: 600px) {
+        .input {
+          width: 200px;
+        }
       }
 
       .reset-button {
+        /* Reset button has absolute positioning because we want to be the input
+         * as large as possible so the matAutocomplete has the same width. */
         position: absolute;
         right: 0;
       }
