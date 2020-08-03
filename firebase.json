@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "marmicode",
-      "predeploy": "yarn build marmicode --prod && yarn prerender:scully",
+      "predeploy": "yarn build marmicode --prod && cp apps/marmicode/src/robots-next.txt dist/apps/marmicode/browser/robots.txt && yarn prerender:scully",
       "public": "dist/apps/marmicode/static",
       "ignore": [
         "firebase.json",

@@ -20,7 +20,8 @@
             "assets": [
               "apps/marmicode/src/favicon.ico",
               "apps/marmicode/src/assets",
-              "apps/marmicode/src/manifest.webmanifest"
+              "apps/marmicode/src/manifest.webmanifest",
+              "apps/marmicode/src/robots.txt"
             ],
             "styles": ["apps/marmicode/src/styles.scss"],
             "scripts": [],
