@@ -79,6 +79,11 @@ describe('ResourceSearchFormComponent', () => {
   let skillRepository: SkillRepository;
   beforeEach(() => (skillRepository = TestBed.inject(SkillRepository)));
 
+  let resourceSearchFacade: ResourceSearchFacade;
+  beforeEach(
+    () => (resourceSearchFacade = TestBed.inject(ResourceSearchFacade))
+  );
+
   beforeEach(() => {
     fixture = TestBed.createComponent(ResourceSearchFormComponent);
     component = fixture.componentInstance;
@@ -124,5 +129,24 @@ describe('ResourceSearchFormComponent', () => {
     component.skillControl.setValue(null);
     tick();
     expect(router.navigate).toBeCalledWith(['/', 'learn', 'everything']);
+  }));
+
+  it('should sync route with form value on next tick', fakeAsync(() => {
+    resourceSearchFacade.selectedSkillSlug$ = of('angular-testing');
+
+    jest.spyOn(component.skillControl, 'reset');
+
+    component.ngOnInit();
+
+    expect(component.skillControl.reset).toBeCalledTimes(0);
+
+    tick();
+
+    expect(component.skillControl.reset).toBeCalledTimes(1);
+    expect(component.skillControl.reset).toBeCalledWith({
+      id: 'xxx',
+      label: 'Angular Testing',
+      slug: 'angular-testing',
+    });
   }));
 });

@@ -8,8 +8,22 @@ import {
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { combineLatest, concat, defer, Observable, of } from 'rxjs';
-import { filter, map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import {
+  asapScheduler,
+  combineLatest,
+  concat,
+  defer,
+  Observable,
+  of,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  observeOn,
+  shareReplay,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 import { ResourceSearchStateModule } from './+state/resource-search-state.module';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
@@ -100,11 +114,12 @@ export class ResourceSearchFormComponent implements OnInit {
       map(([skillSlug, skills]) =>
         skills.find((skill) => skill.slug === skillSlug)
       ),
-      tap((skill) =>
-        this.skillControl.setValue(skill, {
-          emitEvent: false,
-        })
-      )
+      /* We want to emit event to autocomplete and update input.
+       * But we don't want to crash the router by navigating to the same
+       * route immediately as a side effect. That's why we schedule this
+       * on the next tick. */
+      observeOn(asapScheduler),
+      tap((skill) => this.skillControl.reset(skill))
     );
 
     combineLatest([navigateToSkill$, updateForm$])
