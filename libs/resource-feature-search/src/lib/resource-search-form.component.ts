@@ -91,11 +91,8 @@ export class ResourceSearchFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    const selectedSkill$ = this.skillControl.valueChanges.pipe(
-      filter((value) => typeof value !== 'string')
-    );
-
-    const navigateToSkill$ = selectedSkill$.pipe(
+    const navigateToSkill$ = this.skillControl.valueChanges.pipe(
+      filter((value) => typeof value !== 'string'),
       switchMap((skill: Skill) =>
         defer(() =>
           this._router.navigate(
