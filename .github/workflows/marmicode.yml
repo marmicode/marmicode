@@ -1,0 +1,50 @@
+name: Marmicode
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - latest
+
+env:
+  CACHE_PATH: node_modules
+
+jobs:
+
+  # Merging all steps in one job might look dirty but this is a way of achieving
+  # faster workflows as downloading node_modules cache takes 40 seconds
+  # lint & test parallelization is not worth it.
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get project name
+        id: project
+        run: |
+          PROJECT=$([ $GITHUB_REF == 'refs/tags/latest' ] && echo marmicode || echo marmicode-next)
+          echo "::set-output name=project::$PROJECT"
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - uses: actions/cache@v1
+        id: node-modules-cache
+        with:
+          path: ${{ env.CACHE_PATH }}
+          key: node_modules-${{ hashFiles('yarn.lock') }}
+      - name: Install
+        run: yarn install --frozen-lockfile
+      - name: Test
+        run: yarn ng test
+      - name: Lint
+        run: yarn ng lint
+      - name: Deploy marmicode.io
+        env:
+          ALLOW_BOTS: ${{ steps.project.outputs.allow_bots }}
+          BASE_URL: ${{ steps.project.outputs.base_url_en }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT: ${{ steps.project.outputs.project }}
+        run: tools/deploy.sh $PROJECT
+      - uses: pioug/le-slack-message@v1.0.0
+        if: failure()
+        with:
+          JOB: ${{ toJson(job) }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
