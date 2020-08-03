@@ -23,4 +23,4 @@ fi
 
 yarn prerender:scully
 
-firebase --project "$PROJECT" deploy
+yarn firebase --project "$PROJECT" deploy
