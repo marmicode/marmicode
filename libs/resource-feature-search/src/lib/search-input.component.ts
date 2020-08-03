@@ -108,19 +108,7 @@ export class SearchInputComponent {
 
   constructor(private _state: RxState<{ control: FormControl }>) {
     this.value$ = this.control$.pipe(
-      switchMap((control) => {
-        /* @hack watching value changes using `registerOnChange`
-         * because we want to catch all values even when set with
-         * `{emitEvent: false}`.
-         * Of course, `control.value` won't work as change detection won't be
-         * triggered in Push mode. */
-        return merge(
-          control.valueChanges,
-          new Observable<string | SearchInputOption>((observer) => {
-            control.registerOnChange((value: string) => observer.next(value));
-          })
-        );
-      }),
+      switchMap((control) => control.valueChanges),
       /* Filter duplicates. */
       distinctUntilChanged()
     );
