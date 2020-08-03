@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
+import {
+  resourceSearchRouterHelper,
+  servicesRouterHelper,
+} from '@marmicode/shared-router-helpers';
 
 export const routes: Routes = [
   /* Learning map. */
@@ -23,8 +26,7 @@ export const routes: Routes = [
 
   /* Services */
   {
-    /* @todo use servicesRouterHelper. */
-    path: 'services',
+    path: servicesRouterHelper.SERVICES_PATH,
     loadChildren: () =>
       import('@marmicode/services-feature-presentation').then(
         (m) => m.ServicesRoutingModule

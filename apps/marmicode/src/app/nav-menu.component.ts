@@ -11,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { servicesRouterHelper } from '@marmicode/shared-router-helpers';
 import { BehaviorSubject } from 'rxjs';
 import { NavMenuItemModule } from './nav-menu-item.component';
 
@@ -98,8 +99,7 @@ export class NavMenuComponent {
     {
       icon: 'ev_station',
       title: 'Services',
-      /* @todo use servicesRouterHelper.services(). */
-      route: ['/', 'services'],
+      route: servicesRouterHelper.services(),
     },
     {
       icon: 'school',
