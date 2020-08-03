@@ -31,7 +31,8 @@
     "build:ssr": "ng build --prod && ng run marmicode:server:production",
     "prerender": "ng run marmicode:prerender",
     "prerender:scully": "yarn scully --project marmicode --removeStaticDist --prod",
-    "deploy": "firebase deploy",
+    "deploy:next": "./tools/deploy.sh marmicode-next",
+    "deploy:prod": "./tools/deploy.sh marmicode",
     "graphql-codegen": "graphql codegen",
     "test:watch": "nx affected:test --watch --all --parallel --maxParallel 100"
   },

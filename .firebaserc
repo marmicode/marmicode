@@ -3,6 +3,13 @@
     "default": "marmicode-next"
   },
   "targets": {
+    "marmicode": {
+      "hosting": {
+        "marmicode": [
+          "marmicode"
+        ]
+      }
+    },
     "marmicode-next": {
       "hosting": {
         "marmicode": [
