@@ -1,0 +1,27 @@
+
+$bullet-diameter: 11px;
+$current-bullet-diameter: 13px;
+
+.bullet {
+  display: block;
+  position: absolute;
+  top: -($bullet-diameter - 1px) / 2;
+  left: 0;
+
+  background-color: #666;
+  border-radius: 50%;
+  height: $bullet-diameter;
+  width: $bullet-diameter;
+}
+
+.previous-bullet {
+  background-color: var(--marmicode-accent-color);
+}
+
+.current-bullet {
+  background-color: white;
+  border: var(--marmicode-accent-color) solid 1px;
+  top: -($current-bullet-diameter - 1px) / 2;
+  height: $current-bullet-diameter;
+  width: $current-bullet-diameter;
+}

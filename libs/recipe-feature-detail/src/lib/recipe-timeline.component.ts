@@ -16,8 +16,8 @@ import { RecipeFrame } from './recipe-repository.service';
       <li *ngFor="let frame of frames; let index = index">
         <a
           [style.left.%]="getFrameChipPosition(index)"
-          [class.previous]="index < selectedFrameIndex"
-          [class.current]="index === selectedFrameIndex"
+          [class.previous-bullet]="index < selectedFrameIndex"
+          [class.current-bullet]="index === selectedFrameIndex"
           class="bullet"
           href="#"
         ></a>
@@ -29,7 +29,6 @@ import { RecipeFrame } from './recipe-repository.service';
       :host {
         display: block;
         margin: 0 15px 0 10px;
-        --chip-diameter: 5px;
       }
 
       .line-container {
@@ -44,32 +43,11 @@ import { RecipeFrame } from './recipe-repository.service';
       .bullet-list {
         list-style-type: none;
       }
-
-      .bullet {
-        display: block;
-        position: absolute;
-        top: -5px;
-        left: 0;
-
-        background-color: #666;
-        border-radius: 50%;
-        height: 11px;
-        width: 11px;
-      }
-
-      .previous {
-        background-color: var(--marmicode-accent-color);
-      }
-
-      .current {
-        background-color: white;
-        border: var(--marmicode-accent-color) solid 1px;
-        top: -6px;
-        height: 13px;
-        width: 13px;
-      }
     `,
   ],
+  /* I hate scss but we are using it here for computing bullet dimensions
+   * and positioning. */
+  styleUrls: ['./recipe-timeline.component.scss'],
 })
 export class RecipeTimelineComponent {
   @Input() frames: RecipeFrame[];
