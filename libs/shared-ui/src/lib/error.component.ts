@@ -29,7 +29,9 @@ declare var require: any;
       }
 
       .error-animation {
+        max-width: 500px;
         width: 100%;
+        margin-bottom: 20px;
       }
 
       .error-message {
