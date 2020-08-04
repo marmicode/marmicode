@@ -10,13 +10,13 @@ import { RecipeFrame } from './recipe-repository.service';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-timeline',
-  template: `<div class="line-container">
+  template: ` <div class="line-container">
     <hr class="main-line" />
-    <ul class="chip-list">
+    <ul class="bullet-list">
       <li *ngFor="let frame of frames; let index = index">
         <a
           [style.left.%]="getFrameChipPosition(index)"
-          class="chip"
+          class="bullet"
           href="#"
         ></a>
       </li>
@@ -39,11 +39,11 @@ import { RecipeFrame } from './recipe-repository.service';
         border: 1px solid #666;
       }
 
-      .chip-list {
+      .bullet-list {
         list-style-type: none;
       }
 
-      .chip {
+      .bullet {
         display: block;
         position: absolute;
         top: -5px;
