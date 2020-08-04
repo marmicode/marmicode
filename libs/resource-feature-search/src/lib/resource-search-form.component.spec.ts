@@ -87,7 +87,6 @@ describe('ResourceSearchFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ResourceSearchFormComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should show all options', async () => {
@@ -125,18 +124,22 @@ describe('ResourceSearchFormComponent', () => {
     );
   });
 
-  it('should not crash if skill is null', fakeAsync(() => {
+  it('should not crash if skill is null', () => {
+    resourceSearchFacade.selectedSkillSlug$ = of('angular-testing');
+
+    fixture.detectChanges();
+
     component.skillControl.setValue(null);
-    tick();
+
     expect(router.navigate).toBeCalledWith(['/', 'learn', 'everything']);
-  }));
+  });
 
   it('should sync route with form value on next tick', fakeAsync(() => {
     resourceSearchFacade.selectedSkillSlug$ = of('angular-testing');
 
     jest.spyOn(component.skillControl, 'reset');
 
-    component.ngOnInit();
+    fixture.detectChanges();
 
     expect(component.skillControl.reset).toBeCalledTimes(0);
 
@@ -154,15 +157,13 @@ describe('ResourceSearchFormComponent', () => {
    * This is critical otherwise, user will not be able to navigate
    * to another route.
    */
-  it('should ignore undefined skill slug', fakeAsync(() => {
+  it('should ignore undefined skill slug', () => {
     resourceSearchFacade.selectedSkillSlug$ = of(undefined);
 
     jest.spyOn(component.skillControl, 'reset');
 
-    component.ngOnInit();
-
-    tick();
+    fixture.detectChanges();
 
     expect(component.skillControl.reset).toBeCalledTimes(0);
-  }));
+  });
 });
