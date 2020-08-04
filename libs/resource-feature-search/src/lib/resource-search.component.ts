@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { LoadingModule } from '@marmicode/shared-ui';
+import { ErrorModule, LoadingModule } from '@marmicode/shared-ui';
 import {
   TransferStateHelper,
   deprogressifyData,
   progressify,
   shareReplayWithRefCount,
 } from '@marmicode/shared-utils';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { Resource } from './resource';
@@ -26,6 +26,9 @@ import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
   template: `
     <div fxLayout="row" fxLayoutAlign="center">
       <mc-loading *ngIf="isLoading$ | async"></mc-loading>
+      <mc-error *ngIf="resourcesNotFound$ | async">
+        Sorry! The resources you are looking for haven't been cooked yet.
+      </mc-error>
     </div>
     <div
       *ngIf="(isLoading$ | async) === false"
@@ -50,6 +53,7 @@ import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
 export class ResourceSearchComponent {
   isLoading$: Observable<boolean>;
   resources$: Observable<Resource[]>;
+  resourcesNotFound$: Observable<boolean>;
 
   trackById = (index: number, resource: Resource) => resource.id;
 
@@ -88,6 +92,15 @@ export class ResourceSearchComponent {
     );
 
     this.resources$ = resourcesProgress$.pipe(deprogressifyData());
+
+    this.resourcesNotFound$ = combineLatest([
+      this.isLoading$,
+      this.resources$,
+    ]).pipe(
+      map(([isLoading, resources]) => {
+        return !isLoading && resources?.length === 0;
+      })
+    );
   }
 }
 
@@ -96,6 +109,7 @@ export class ResourceSearchComponent {
   exports: [ResourceSearchComponent],
   imports: [
     CommonModule,
+    ErrorModule,
     FlexLayoutModule,
     ResourceCardModule,
     ResourceRepositoryModule,
