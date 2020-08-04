@@ -9,6 +9,7 @@ export enum BlockType {
 
 export interface CodeBlock {
   type: BlockType.Code;
+  language: string;
   code: string;
 }
 
@@ -26,6 +27,7 @@ export type RecipeBlock = CodeBlock | PictureBlock | TextBlock;
 
 export interface RecipeFrame {
   duration: number;
+  title: string;
   blocks: RecipeBlock[];
 }
 
@@ -40,6 +42,91 @@ export interface Recipe {
 })
 export class RecipeRepository {
   getRecipe(): Observable<Recipe> {
-    return of(null);
+    return of({
+      id: null,
+      slug: 'setup-express-gateway',
+      title: 'Setup Express Gateway',
+      frames: [
+        {
+          title: 'Install express gateway',
+          duration: 1,
+          blocks: [
+            {
+              type: BlockType.Text,
+              text: `
+# Setup the gateway
+## Install the thingy
+\`\`\`sh
+yarn add express-gateway
+\`\`\`
+
+## Let's do it
+asjdfkashjdf
+a asdklfhjasjkdlfhadshfjkas a
+sdf adsk fhjadsklfhj a
+              `,
+            },
+            {
+              type: BlockType.Code,
+              language: 'typescript',
+              code: `const plugins = {
+  test: 2
+};`,
+            },
+          ],
+        },
+        {
+          title: 'Install express gateway',
+          duration: 1,
+          blocks: [
+            {
+              type: BlockType.Text,
+              text: `
+# Setup the gateway
+## Install the thingy
+\`\`\`sh
+yarn add express-gateway
+\`\`\`
+
+## Let's do it
+asjdfkashjdf
+a asdklfhjasjkdlfhadshfjkas a
+sdf adsk fhjadsklfhj a
+              `,
+            },
+          ],
+        },
+        {
+          title: 'Install express gateway',
+          duration: 1,
+          blocks: [
+            {
+              type: BlockType.Text,
+              text: `
+              
+              
+# Setup the gateway
+## Install the thingy
+\`\`\`sh
+yarn add express-gateway
+\`\`\`
+
+## Let's do it
+asjdfkashjdf
+a asdklfhjasjkdlfhadshfjkas a
+sdf adsk fhjadsklfhj a
+              `,
+            },
+            {
+              type: BlockType.Code,
+              language: 'typescript',
+              code: `const plugins = {
+  test: 2
+};`,
+            },
+          ],
+        },
+      ],
+    });
   }
 }
