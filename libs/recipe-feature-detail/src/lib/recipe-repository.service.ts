@@ -45,7 +45,7 @@ sdf adsk fhjadsklfhj a
             },
             {
               type: BlockType.Code,
-              language: 'typescript',
+              language: 'javascript',
               code: `const plugins = {
   test: 2
 };`,
