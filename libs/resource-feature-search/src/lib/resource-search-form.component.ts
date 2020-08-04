@@ -8,21 +8,14 @@ import {
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import {
-  asapScheduler,
-  combineLatest,
-  concat,
-  defer,
-  Observable,
-  of,
-} from 'rxjs';
+import { combineLatest, concat, defer, Observable, of } from 'rxjs';
 import {
   filter,
   map,
-  observeOn,
   shareReplay,
   switchMap,
   tap,
+  withLatestFrom,
 } from 'rxjs/operators';
 import { ResourceSearchStateModule } from './+state/resource-search-state.module';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
@@ -100,7 +93,16 @@ export class ResourceSearchFormComponent implements OnInit {
   ngOnInit() {
     const navigateToSkill$ = this.skillControl.valueChanges.pipe(
       filter((value) => typeof value !== 'string'),
-      switchMap((skill: Skill) =>
+      withLatestFrom(this._resourceSearchFacade.selectedSkillSlug$),
+      filter(([skill, selectedSkillSlug]) => {
+        selectedSkillSlug =
+          selectedSkillSlug === resourceSearchRouterHelper.EVERYTHING
+            ? undefined
+            : selectedSkillSlug;
+
+        return skill?.slug !== selectedSkillSlug;
+      }),
+      switchMap(([skill]) =>
         defer(() =>
           this._router.navigate(
             resourceSearchRouterHelper.learn(
@@ -112,19 +114,12 @@ export class ResourceSearchFormComponent implements OnInit {
     );
 
     const updateForm$ = combineLatest([
-      this._resourceSearchFacade.selectedSkillSlug$.pipe(
-        filter((skill) => skill !== undefined)
-      ),
+      this._resourceSearchFacade.selectedSkillSlug$,
       this.allSkills$,
     ]).pipe(
       map(([skillSlug, skills]) =>
         skills.find((skill) => skill.slug === skillSlug)
       ),
-      /* We want to emit event to autocomplete and update input.
-       * But we don't want to crash the router by navigating to the same
-       * route immediately as a side effect. That's why we schedule this
-       * on the next tick. */
-      observeOn(asapScheduler),
       tap((skill) => this.skillControl.reset(skill))
     );
 
