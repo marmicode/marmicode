@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { readFirst } from '@nrwl/angular/testing';
 import { RecipeTimelineComponent } from './recipe-timeline.component';
 
 describe('RecipeTimelineComponent', () => {
@@ -18,7 +19,7 @@ describe('RecipeTimelineComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should dispatch bullets on timeline', () => {
+  it('should dispatch bullets on timeline', async () => {
     component.frames = [
       {
         slug: null,
@@ -40,8 +41,16 @@ describe('RecipeTimelineComponent', () => {
       },
     ];
 
-    expect(component.getFrameChipPosition(0)).toEqual(0);
-    expect(component.getFrameChipPosition(1)).toEqual(50);
-    expect(component.getFrameChipPosition(2)).toEqual(100);
+    expect(await readFirst(component.bullets$)).toEqual([
+      expect.objectContaining({
+        position: 0,
+      }),
+      expect.objectContaining({
+        position: 50,
+      }),
+      expect.objectContaining({
+        position: 100,
+      }),
+    ]);
   });
 });

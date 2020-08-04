@@ -24,22 +24,14 @@ import { RecipeFrame } from './recipe-repository.service';
       fxFlex
     >
       <hr class="line" />
-      <hr
-        [style.width.%]="getFrameChipPosition(currentFrameIndex$ | async)"
-        class="past-line"
-      />
+      <hr [style.width.%]="progress$" class="past-line" />
       <ul class="bullet-list">
-        <li *ngFor="let frame of frames$ | async; let index = index">
+        <li *ngFor="let bullet of bullets$ | async">
           <a
-            [style.left.%]="getFrameChipPosition(index)"
-            [class.previous-bullet]="index < (currentFrameIndex$ | async)"
-            [class.current-bullet]="index === (currentFrameIndex$ | async)"
-            [routerLink]="
-              recipeDetailRouterHelper.recipeFrame({
-                recipeSlug: recipeSlug$ | async,
-                frameSlug: frame.slug
-              })
-            "
+            [style.left.%]="bullet.position"
+            [class.previous-bullet]="bullet.isPast"
+            [class.current-bullet]="bullet.isCurrent"
+            [routerLink]="bullet.route"
             class="bullet"
           ></a>
         </li>
@@ -127,6 +119,25 @@ export class RecipeTimelineComponent {
 
   currentFrameIndex$ = this._state.select('currentFrameIndex');
   frames$ = this._state.select('frames');
+  bullets$ = this._state.select(
+    map(({ frames, recipeSlug, currentFrameIndex }) =>
+      frames.map((frame, index) => ({
+        frame,
+        isPast: index < currentFrameIndex,
+        isCurrent: index === currentFrameIndex,
+        position: this._getBulletPosition({ frames, index }),
+        route: recipeDetailRouterHelper.recipeFrame({
+          recipeSlug: recipeSlug,
+          frameSlug: frame.slug,
+        }),
+      }))
+    )
+  );
+  progress$ = this._state.select(
+    map(({ currentFrameIndex, frames }) =>
+      this._getBulletPosition({ frames, index: currentFrameIndex })
+    )
+  );
   recipeSlug$ = this._state.select('recipeSlug');
   isLastFrame$ = this._state.select(
     map(
@@ -146,8 +157,6 @@ export class RecipeTimelineComponent {
     })
   );
 
-  recipeDetailRouterHelper = recipeDetailRouterHelper;
-
   constructor(
     private _state: RxState<{
       frames: RecipeFrame[];
@@ -156,8 +165,14 @@ export class RecipeTimelineComponent {
     }>
   ) {}
 
-  getFrameChipPosition(index: number) {
-    return (index * 100) / ((this._state.get('frames') as any)?.length - 1);
+  private _getBulletPosition({
+    frames,
+    index,
+  }: {
+    frames: RecipeFrame[];
+    index: number;
+  }) {
+    return (index * 100) / (frames.length - 1);
   }
 }
 
