@@ -4,13 +4,15 @@ import { RxState } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { RecipeFrameModule } from './recipe-frame.component';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
+import { RecipeTimelineModule } from './recipe-timeline.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-detail',
   template: `<mc-recipe-frame
-    [frame]="selectedFrame$ | async"
-  ></mc-recipe-frame>`,
+      [frame]="selectedFrame$ | async"
+    ></mc-recipe-frame>
+    <mc-recipe-timeline class="timeline"></mc-recipe-timeline> `,
   providers: [RxState],
 })
 export class RecipeDetailComponent {
@@ -28,6 +30,6 @@ export class RecipeDetailComponent {
 @NgModule({
   declarations: [RecipeDetailComponent],
   exports: [RecipeDetailComponent],
-  imports: [CommonModule, RecipeFrameModule],
+  imports: [CommonModule, RecipeFrameModule, RecipeTimelineModule],
 })
 export class RecipeDetailModule {}
