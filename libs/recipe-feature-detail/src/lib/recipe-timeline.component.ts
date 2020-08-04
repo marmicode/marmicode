@@ -15,15 +15,15 @@ import { RecipeFrame } from './recipe-repository.service';
   template: ` <div *ngIf="frames" class="line-container">
     <hr class="line" />
     <hr
-      [style.width.%]="getFrameChipPosition(selectedFrameIndex)"
+      [style.width.%]="getFrameChipPosition(currentFrameIndex)"
       class="past-line"
     />
     <ul class="bullet-list">
       <li *ngFor="let frame of frames; let index = index">
         <a
           [style.left.%]="getFrameChipPosition(index)"
-          [class.previous-bullet]="index < selectedFrameIndex"
-          [class.current-bullet]="index === selectedFrameIndex"
+          [class.previous-bullet]="index < currentFrameIndex"
+          [class.current-bullet]="index === currentFrameIndex"
           [routerLink]="
             recipeDetailRouterHelper.recipeFrame({
               recipeSlug: recipeSlug,
@@ -74,7 +74,7 @@ import { RecipeFrame } from './recipe-repository.service';
 export class RecipeTimelineComponent {
   @Input() frames: RecipeFrame[];
   @Input() recipeSlug: string;
-  @Input() selectedFrameIndex: number;
+  @Input() currentFrameIndex: number;
 
   recipeDetailRouterHelper = recipeDetailRouterHelper;
 

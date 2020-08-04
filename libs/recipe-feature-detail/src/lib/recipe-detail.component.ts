@@ -12,12 +12,14 @@ import { RecipeTimelineModule } from './recipe-timeline.component';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-detail',
-  template: `<mc-recipe-frame [frame]="currentFrame$ | async"></mc-recipe-frame>
+  template: `
+    <mc-recipe-frame [frame]="currentFrame$ | async"></mc-recipe-frame>
     <mc-recipe-timeline
       [frames]="frames$ | async"
       [recipeSlug]="recipeSlug$ | async"
-      [selectedFrameIndex]="currentFrameIndex$ | async"
-    ></mc-recipe-timeline> `,
+      [currentFrameIndex]="currentFrameIndex$ | async"
+    ></mc-recipe-timeline>
+  `,
   providers: [RxState],
 })
 export class RecipeDetailComponent {
