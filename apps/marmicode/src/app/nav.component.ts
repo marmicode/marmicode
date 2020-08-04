@@ -30,9 +30,6 @@ import { NavMenuModule } from './nav-menu.component';
         >
       </a>
 
-      <!-- Flex separator. -->
-      <div fxFlex fxHide fxShow.gt-sm></div>
-
       <!-- Resource search input. -->
       <ng-container *ngIf="resourceSearchForm$ | async as cmpInfo">
         <ng-container
@@ -73,6 +70,7 @@ import { NavMenuModule } from './nav-menu.component';
 
       .marmicode {
         color: white;
+        margin-right: auto;
         text-decoration: none;
       }
 
