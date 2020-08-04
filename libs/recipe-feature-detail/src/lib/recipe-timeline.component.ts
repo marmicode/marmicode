@@ -12,15 +12,21 @@ import { RecipeFrame } from './recipe-repository.service';
   selector: 'mc-recipe-timeline',
   template: `<hr class="main-line" />
     <ul class="chip-list">
-      <li *ngFor="let frame of frames">
-        <a class="chip" href="#"></a>
+      <li *ngFor="let frame of frames; let index = index">
+        <a
+          [style.left.%]="(index * 100) / (frames.length - 1)"
+          class="chip"
+          href="#"
+        ></a>
       </li>
     </ul>`,
   styles: [
     `
       :host {
+        position: relative;
         display: block;
         margin: 0 10px;
+        --chip-diameter: 5px;
       }
 
       .main-line {
@@ -33,10 +39,14 @@ import { RecipeFrame } from './recipe-repository.service';
 
       .chip {
         display: block;
+        position: absolute;
+        top: -5px;
+        left: 0;
+
         background-color: #666;
         border-radius: 50%;
-        height: 12px;
-        width: 12px;
+        height: 11px;
+        width: 11px;
       }
     `,
   ],
