@@ -148,4 +148,17 @@ describe('ResourceSearchFormComponent', () => {
 
     expect(router.navigate).not.toBeCalled();
   });
+
+  /**
+   * This is critical as it avoids the infinite loop.
+   */
+  it('should not navigate to route when form is reset due to route change', () => {
+    fixture.detectChanges();
+
+    /* Trigger route change.
+     * Value is undefined when navigating to a route without `skillSlug`. */
+    selectedSkillSlug$.next(undefined);
+
+    expect(router.navigate).not.toBeCalled();
+  });
 });
