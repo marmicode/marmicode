@@ -23,12 +23,12 @@ export interface PictureBlock {
   url: string;
 }
 
-export type RecipeBlock = CodeBlock | PictureBlock | TextBlock;
+export type Block = CodeBlock | PictureBlock | TextBlock;
 
 export interface RecipeFrame {
   duration: number;
   title: string;
-  blocks: RecipeBlock[];
+  blocks: Block[];
 }
 
 export interface Recipe {

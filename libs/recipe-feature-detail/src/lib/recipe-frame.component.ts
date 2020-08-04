@@ -6,14 +6,14 @@ import {
   NgModule,
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
-import { RecipeBlockModule } from './recipe-block.component';
+import { BlockModule } from './block.component';
 import { RecipeFrame } from './recipe-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-frame',
   template: `
-    <div fxLayout="row">
+    <div fxLayout="column" fxLayout.gt-sm="row">
       <mc-recipe-block
         *ngFor="let block of frame.blocks"
         [block]="block"
@@ -29,6 +29,6 @@ export class RecipeFrameComponent {
 @NgModule({
   declarations: [RecipeFrameComponent],
   exports: [RecipeFrameComponent],
-  imports: [CommonModule, FlexModule, RecipeBlockModule],
+  imports: [CommonModule, FlexModule, BlockModule],
 })
 export class RecipeFrameModule {}
