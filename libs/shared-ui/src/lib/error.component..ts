@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 
+declare var require: any;
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-loading',
+  selector: 'mc-error',
   template: `<img
-    [src]="loadingGifUrl"
-    class="loading-animation"
-    alt="Loading"
+    [src]="pictureUri"
+    alt="Sad Marmicode"
+    class="error-animation"
   />`,
   styles: [
     `
@@ -15,19 +17,19 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
         max-width: 100%;
       }
 
-      .loading-animation {
+      .error-animation {
         width: 100%;
       }
     `,
   ],
 })
-export class LoadingComponent {
-  loadingGifUrl = require('!!file-loader!./loading.gif').default;
+export class ErrorComponent {
+  pictureUri = require('!!file-loader!./error.gif').default;
 }
 
 @NgModule({
-  declarations: [LoadingComponent],
-  exports: [LoadingComponent],
+  declarations: [ErrorComponent],
+  exports: [ErrorComponent],
   imports: [CommonModule],
 })
-export class LoadingModule {}
+export class ErrorModule {}
