@@ -13,8 +13,14 @@ import { TextBlockModule } from './text-block.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-block',
   template: ` <ng-container [ngSwitch]="block.type">
-    <mc-code-block *ngSwitchCase="BlockType.Code"></mc-code-block>
-    <mc-text-block *ngSwitchCase="BlockType.Text"></mc-text-block>
+    <mc-code-block
+      *ngSwitchCase="BlockType.Code"
+      [block]="block"
+    ></mc-code-block>
+    <mc-text-block
+      *ngSwitchCase="BlockType.Text"
+      [block]="block"
+    ></mc-text-block>
   </ng-container>`,
 })
 export class BlockComponent {

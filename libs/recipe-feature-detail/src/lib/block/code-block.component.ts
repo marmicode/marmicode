@@ -10,7 +10,7 @@ import { CodeBlock } from './block';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-code-block',
-  template: `🚧 code-block`,
+  template: `🚧 mc-code-block`,
 })
 export class CodeBlockComponent {
   @Input() block: CodeBlock;

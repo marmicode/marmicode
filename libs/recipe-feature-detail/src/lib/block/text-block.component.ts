@@ -6,11 +6,12 @@ import {
   NgModule,
 } from '@angular/core';
 import { TextBlock } from './block';
+import { MarkdownPipeModule } from './markdown.pipe';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-text-block',
-  template: `🚧 text-block`,
+  template: `<div [innerHTML]="block.text | markdown"></div>`,
 })
 export class TextBlockComponent {
   @Input() block: TextBlock;
@@ -19,6 +20,6 @@ export class TextBlockComponent {
 @NgModule({
   declarations: [TextBlockComponent],
   exports: [TextBlockComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, MarkdownPipeModule],
 })
 export class TextBlockModule {}

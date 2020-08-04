@@ -93,6 +93,7 @@
     "@nrwl/workspace": "10.0.6",
     "@types/express": "^4.17.0",
     "@types/jest": "25.1.4",
+    "@types/marked": "^1.1.0",
     "@types/node": "~8.9.4",
     "codelyzer": "~5.0.1",
     "cypress": "^4.1.0",
