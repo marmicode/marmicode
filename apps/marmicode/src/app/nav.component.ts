@@ -31,7 +31,7 @@ import { NavMenuModule } from './nav-menu.component';
       </a>
 
       <!-- Flex separator. -->
-      <div fxFlex></div>
+      <div fxFlex fxHide fxShow.gt-sm></div>
 
       <!-- Resource search input. -->
       <ng-container *ngIf="resourceSearchForm$ | async as cmpInfo">

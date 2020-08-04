@@ -44,6 +44,13 @@ import {
       [options]="filteredSkills$ | async"
     ></mc-search-input>
   `,
+  styles: [
+    `
+      :host {
+        flex: 1;
+      }
+    `,
+  ],
 })
 export class ResourceSearchFormComponent implements OnInit {
   skillControl = new FormControl();

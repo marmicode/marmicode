@@ -80,23 +80,18 @@ export interface SearchInputOption {
       .input {
         box-sizing: border-box;
         height: 100%;
+        width: 100%;
+
         /* Use font-size >= 19px to avoid auto-zoom on mobile. */
         font-size: 19px;
         justify-content: center;
         border: none;
         outline: none;
-        width: 190px;
 
         /* Let some space for search icon and reset button. */
         padding-left: 40px;
         padding-right: 40px;
         text-overflow: ellipsis;
-      }
-
-      @media (min-width: 400px) {
-        .input {
-          width: 240px;
-        }
       }
 
       .reset-button {
