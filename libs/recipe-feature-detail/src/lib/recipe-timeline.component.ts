@@ -11,7 +11,11 @@ import { RecipeFrame } from './recipe-repository.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-timeline',
   template: ` <div class="line-container">
-    <hr class="main-line" />
+    <hr class="line" />
+    <hr
+      [style.width.%]="getFrameChipPosition(selectedFrameIndex)"
+      class="past-line"
+    />
     <ul class="bullet-list">
       <li *ngFor="let frame of frames; let index = index">
         <a
@@ -36,8 +40,19 @@ import { RecipeFrame } from './recipe-repository.service';
         position: relative;
       }
 
-      .main-line {
+      .line,
+      .past-line {
+        margin: 0;
+      }
+
+      .line {
         border: 1px solid #666;
+      }
+
+      .past-line {
+        position: absolute;
+        border: 1px solid var(--marmicode-accent-color);
+        top: 0;
       }
 
       .bullet-list {
