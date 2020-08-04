@@ -65,6 +65,8 @@ import { RecipeFrame } from './recipe-repository.service';
       :host {
         position: relative;
         display: block;
+        height: 44px;
+        margin: 0 10px;
       }
 
       .line-container {

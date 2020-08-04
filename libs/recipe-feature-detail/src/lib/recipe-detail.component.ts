@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout';
 import { ActivatedRoute } from '@angular/router';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { RxState, select } from '@rx-angular/state';
@@ -14,6 +15,7 @@ import { RecipeTimelineModule } from './recipe-timeline.component';
   selector: 'mc-recipe-detail',
   template: `
     <mc-recipe-frame [frame]="currentFrame$ | async"></mc-recipe-frame>
+    <div fxFlex></div>
     <mc-recipe-timeline
       class="timeline"
       [frames]="frames$ | async"
@@ -23,11 +25,10 @@ import { RecipeTimelineModule } from './recipe-timeline.component';
   `,
   styles: [
     `
-      .timeline {
-        position: fixed;
-        width: calc(100% - 20px);
-        margin: 0 10px;
-        bottom: 40px;
+      :host {
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 64px);
       }
     `,
   ],
@@ -64,6 +65,6 @@ export class RecipeDetailComponent {
 @NgModule({
   declarations: [RecipeDetailComponent],
   exports: [RecipeDetailComponent],
-  imports: [CommonModule, RecipeFrameModule, RecipeTimelineModule],
+  imports: [CommonModule, RecipeFrameModule, RecipeTimelineModule, FlexModule],
 })
 export class RecipeDetailModule {}
