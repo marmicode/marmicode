@@ -9,6 +9,10 @@ import {
 
 const routes: Routes = [
   {
+    path: `:${recipeDetailRouterHelper.RECIPE_SLUG_PARAM}/${recipeDetailRouterHelper.FRAME_SLUG_PARAM}`,
+    component: RecipeDetailComponent,
+  },
+  {
     path: `:${recipeDetailRouterHelper.RECIPE_SLUG_PARAM}`,
     component: RecipeDetailComponent,
   },

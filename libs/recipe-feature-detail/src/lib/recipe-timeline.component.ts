@@ -5,7 +5,9 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { RecipeFrame } from './recipe-repository.service';
+import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,8 +24,13 @@ import { RecipeFrame } from './recipe-repository.service';
           [style.left.%]="getFrameChipPosition(index)"
           [class.previous-bullet]="index < selectedFrameIndex"
           [class.current-bullet]="index === selectedFrameIndex"
+          [routerLink]="
+            recipeDetailRouterHelper.recipeFrame({
+              recipeSlug: 'TODO',
+              frameSlug: frame.slug
+            })
+          "
           class="bullet"
-          href="#"
         ></a>
       </li>
     </ul>
@@ -68,6 +75,8 @@ export class RecipeTimelineComponent {
   @Input() frames: RecipeFrame[];
   @Input() selectedFrameIndex: number;
 
+  recipeDetailRouterHelper = recipeDetailRouterHelper;
+
   getFrameChipPosition(index: number) {
     return (index * 100) / (this.frames.length - 1);
   }
@@ -76,6 +85,6 @@ export class RecipeTimelineComponent {
 @NgModule({
   declarations: [RecipeTimelineComponent],
   exports: [RecipeTimelineComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
 })
 export class RecipeTimelineModule {}

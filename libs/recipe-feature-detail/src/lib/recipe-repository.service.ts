@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { Block, BlockType } from './block/block';
 
 export interface RecipeFrame {
+  slug: string;
   duration: number;
   title: string;
   blocks: Block[];
@@ -25,6 +26,7 @@ export class RecipeRepository {
       title: 'Setup Express Gateway',
       frames: [
         {
+          slug: 'install-express-gateway-1',
           title: 'Install express gateway',
           duration: 1,
           blocks: [
@@ -53,6 +55,7 @@ sdf adsk fhjadsklfhj a
           ],
         },
         {
+          slug: 'install-express-gateway-2',
           title: 'Install express gateway',
           duration: 1,
           blocks: [
@@ -74,6 +77,7 @@ sdf adsk fhjadsklfhj a
           ],
         },
         {
+          slug: 'install-express-gateway-3',
           title: 'Install express gateway',
           duration: 1,
           blocks: [
