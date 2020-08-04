@@ -37,6 +37,7 @@ declare var require: any;
         font-size: 2em;
         font-weight: 300;
         line-height: 1.2;
+        text-align: center;
       }
     `,
   ],
