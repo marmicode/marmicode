@@ -2,6 +2,10 @@
 $bullet-diameter: 11px;
 $current-bullet-diameter: 13px;
 
+.line-container.full-width {
+  margin-right: $current-bullet-diameter;
+}
+
 .bullet {
   display: block;
   position: absolute;

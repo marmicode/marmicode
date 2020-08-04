@@ -15,11 +15,22 @@ import { RecipeTimelineModule } from './recipe-timeline.component';
   template: `
     <mc-recipe-frame [frame]="currentFrame$ | async"></mc-recipe-frame>
     <mc-recipe-timeline
+      class="timeline"
       [frames]="frames$ | async"
       [recipeSlug]="recipeSlug$ | async"
       [currentFrameIndex]="currentFrameIndex$ | async"
     ></mc-recipe-timeline>
   `,
+  styles: [
+    `
+      .timeline {
+        position: fixed;
+        width: calc(100% - 20px);
+        margin: 0 10px;
+        bottom: 40px;
+      }
+    `,
+  ],
   providers: [RxState],
 })
 export class RecipeDetailComponent {

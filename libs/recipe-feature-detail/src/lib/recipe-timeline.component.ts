@@ -16,7 +16,12 @@ import { RecipeFrame } from './recipe-repository.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-timeline',
   template: `
-    <div *ngIf="frames" class="line-container" fxFlex>
+    <div
+      *ngIf="frames"
+      [class.full-width]="getNextFrameSlug() == null"
+      class="line-container"
+      fxFlex
+    >
       <hr class="line" />
       <hr
         [style.width.%]="getFrameChipPosition(currentFrameIndex)"
@@ -60,8 +65,6 @@ import { RecipeFrame } from './recipe-repository.service';
       :host {
         position: relative;
         display: block;
-        margin-left: 10px;
-        margin-right: 10px;
       }
 
       .line-container {
@@ -69,6 +72,7 @@ import { RecipeFrame } from './recipe-repository.service';
         position: relative;
         margin-top: 20px;
         margin-right: 60px;
+        transition: all 0.3s ease-out;
       }
 
       .line,
