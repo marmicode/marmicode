@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
+import { RxState } from '@rx-angular/state';
+import { map } from 'rxjs/operators';
 import { RecipeFrame } from './recipe-repository.service';
 
 @Component({
@@ -17,25 +19,24 @@ import { RecipeFrame } from './recipe-repository.service';
   selector: 'mc-recipe-timeline',
   template: `
     <div
-      *ngIf="frames"
-      [class.full-width]="getNextFrameSlug() == null"
+      [class.full-width]="isLastFrame$ | async"
       class="line-container"
       fxFlex
     >
       <hr class="line" />
       <hr
-        [style.width.%]="getFrameChipPosition(currentFrameIndex)"
+        [style.width.%]="getFrameChipPosition(currentFrameIndex$ | async)"
         class="past-line"
       />
       <ul class="bullet-list">
-        <li *ngFor="let frame of frames; let index = index">
+        <li *ngFor="let frame of frames$ | async; let index = index">
           <a
             [style.left.%]="getFrameChipPosition(index)"
-            [class.previous-bullet]="index < currentFrameIndex"
-            [class.current-bullet]="index === currentFrameIndex"
+            [class.previous-bullet]="index < (currentFrameIndex$ | async)"
+            [class.current-bullet]="index === (currentFrameIndex$ | async)"
             [routerLink]="
               recipeDetailRouterHelper.recipeFrame({
-                recipeSlug: recipeSlug,
+                recipeSlug: recipeSlug$ | async,
                 frameSlug: frame.slug
               })
             "
@@ -45,14 +46,8 @@ import { RecipeFrame } from './recipe-repository.service';
       </ul>
     </div>
     <a
-      *ngIf="getNextFrameSlug() as nextFrameSlug"
-      disabled
-      [routerLink]="
-        recipeDetailRouterHelper.recipeFrame({
-          recipeSlug: recipeSlug,
-          frameSlug: nextFrameSlug
-        })
-      "
+      *ngIf="nextFrameRoute$ | async as nextFrameRoute"
+      [routerLink]="nextFrameRoute"
       class="next-frame-link"
     >
       <button class="next-frame-button" mat-icon-button>
@@ -117,20 +112,52 @@ import { RecipeFrame } from './recipe-repository.service';
   /* I hate scss but we are using it here for computing bullet dimensions
    * and positioning. */
   styleUrls: ['./recipe-timeline.component.scss'],
+  providers: [RxState],
 })
 export class RecipeTimelineComponent {
-  @Input() frames: RecipeFrame[];
-  @Input() recipeSlug: string;
-  @Input() currentFrameIndex: number;
+  @Input() set frames(frames: RecipeFrame[]) {
+    this._state.set({ frames });
+  }
+  @Input() set recipeSlug(recipeSlug: string) {
+    this._state.set({ recipeSlug });
+  }
+  @Input() set currentFrameIndex(currentFrameIndex: number) {
+    this._state.set({ currentFrameIndex });
+  }
+
+  currentFrameIndex$ = this._state.select('currentFrameIndex');
+  frames$ = this._state.select('frames');
+  recipeSlug$ = this._state.select('recipeSlug');
+  isLastFrame$ = this._state.select(
+    map(
+      ({ frames, currentFrameIndex }) => currentFrameIndex === frames.length - 1
+    )
+  );
+  nextFrameRoute$ = this._state.select(
+    map(({ frames, currentFrameIndex, recipeSlug }) => {
+      const nextFrame = frames[currentFrameIndex + 1];
+      if (nextFrame == null) {
+        return null;
+      }
+      return recipeDetailRouterHelper.recipeFrame({
+        recipeSlug,
+        frameSlug: nextFrame.slug,
+      });
+    })
+  );
 
   recipeDetailRouterHelper = recipeDetailRouterHelper;
 
-  getFrameChipPosition(index: number) {
-    return (index * 100) / (this.frames.length - 1);
-  }
+  constructor(
+    private _state: RxState<{
+      frames: RecipeFrame[];
+      recipeSlug: string;
+      currentFrameIndex: number;
+    }>
+  ) {}
 
-  getNextFrameSlug() {
-    return this.frames[this.currentFrameIndex + 1]?.slug;
+  getFrameChipPosition(index: number) {
+    return (index * 100) / ((this._state.get('frames') as any)?.length - 1);
   }
 }
 
