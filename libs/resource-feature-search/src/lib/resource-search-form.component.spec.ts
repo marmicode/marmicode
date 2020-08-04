@@ -138,14 +138,14 @@ describe('ResourceSearchFormComponent', () => {
   });
 
   /**
-   * This is critical otherwise, user will not be able to navigate
-   * to another route.
+   * This is critical as it avoids the infinite loop.
    */
-  it('should ignore undefined skill slug', () => {
-    jest.spyOn(component.skillControl, 'reset');
-
+  it('should not navigate to route when form is reset due to route change', () => {
     fixture.detectChanges();
 
-    expect(component.skillControl.reset).toBeCalledTimes(0);
+    /* Trigger route change. */
+    selectedSkillSlug$.next('angular-testing');
+
+    expect(router.navigate).not.toBeCalled();
   });
 });
