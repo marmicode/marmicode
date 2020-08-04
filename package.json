@@ -71,7 +71,9 @@
     "axios": "^0.19.2",
     "express": "^4.15.2",
     "graphql-tag": "^2.10.4",
+    "marked": "^1.1.1",
     "panzoom": "^9.2.5",
+    "prismjs": "^1.20.0",
     "rxjs": "6.5.5",
     "zone.js": "^0.10.2"
   },
