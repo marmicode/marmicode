@@ -10,23 +10,29 @@ import { RecipeFrame } from './recipe-repository.service';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-timeline',
-  template: `<hr class="main-line" />
+  template: `<div class="line-container">
+    <hr class="main-line" />
     <ul class="chip-list">
       <li *ngFor="let frame of frames; let index = index">
         <a
-          [style.left.%]="(index * 100) / (frames.length - 1)"
+          [style.left.%]="getFrameChipPosition(index)"
           class="chip"
           href="#"
         ></a>
       </li>
-    </ul>`,
+    </ul>
+  </div>`,
   styles: [
     `
       :host {
-        position: relative;
         display: block;
-        margin: 0 10px;
+        margin: 0 15px 0 10px;
         --chip-diameter: 5px;
+      }
+
+      .line-container {
+        display: block;
+        position: relative;
       }
 
       .main-line {
@@ -53,6 +59,10 @@ import { RecipeFrame } from './recipe-repository.service';
 })
 export class RecipeTimelineComponent {
   @Input() frames: RecipeFrame[];
+
+  getFrameChipPosition(index: number) {
+    return (index * 100) / (this.frames.length - 1);
+  }
 }
 
 @NgModule({
