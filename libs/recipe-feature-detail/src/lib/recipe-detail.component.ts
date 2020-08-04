@@ -1,16 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { RxState } from '@rx-angular/state';
+import { map } from 'rxjs/operators';
+import { RecipeFrameModule } from './recipe-frame.component';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-detail',
-  template: `{{ recipe$ | async | json }}`,
+  template: `<mc-recipe-frame
+    [frame]="selectedFrame$ | async"
+  ></mc-recipe-frame>`,
   providers: [RxState],
 })
 export class RecipeDetailComponent {
   recipe$ = this._state.select('recipe');
+  selectedFrame$ = this.recipe$.pipe(map((recipe) => recipe.frames[0]));
 
   constructor(
     private _recipeRepository: RecipeRepository,
@@ -23,6 +28,6 @@ export class RecipeDetailComponent {
 @NgModule({
   declarations: [RecipeDetailComponent],
   exports: [RecipeDetailComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, RecipeFrameModule],
 })
 export class RecipeDetailModule {}
