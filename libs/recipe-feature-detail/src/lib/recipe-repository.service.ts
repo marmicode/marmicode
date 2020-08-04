@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 
 export enum BlockType {
   Code = 'code',
+  Picture = 'picture',
   Text = 'text',
 }
 
@@ -16,7 +17,12 @@ export interface TextBlock {
   text: string;
 }
 
-export type RecipeBlock = CodeBlock | TextBlock;
+export interface PictureBlock {
+  type: BlockType.Picture;
+  url: string;
+}
+
+export type RecipeBlock = CodeBlock | PictureBlock | TextBlock;
 
 export interface RecipeFrame {
   duration: number;
