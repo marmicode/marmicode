@@ -73,7 +73,8 @@ export interface SearchInputOption {
       }
 
       .search-icon {
-        margin-left: 10px;
+        position: absolute;
+        left: 10px;
       }
 
       .input {
@@ -84,16 +85,17 @@ export interface SearchInputOption {
         justify-content: center;
         border: none;
         outline: none;
-        width: 150px;
+        width: 190px;
 
-        /* Let some space to the reset button. */
+        /* Let some space for search icon and reset button. */
+        padding-left: 40px;
         padding-right: 40px;
         text-overflow: ellipsis;
       }
 
-      @media (min-width: 600px) {
+      @media (min-width: 400px) {
         .input {
-          width: 200px;
+          width: 240px;
         }
       }
 
