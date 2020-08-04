@@ -41,6 +41,7 @@ import {
     `
       :host {
         flex: 1;
+        max-width: 400px;
       }
     `,
   ],
