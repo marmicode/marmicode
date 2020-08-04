@@ -112,7 +112,9 @@ export class ResourceSearchFormComponent implements OnInit {
     );
 
     const updateForm$ = combineLatest([
-      this._resourceSearchFacade.selectedSkillSlug$,
+      this._resourceSearchFacade.selectedSkillSlug$.pipe(
+        filter((skill) => skill !== undefined)
+      ),
       this.allSkills$,
     ]).pipe(
       map(([skillSlug, skills]) =>

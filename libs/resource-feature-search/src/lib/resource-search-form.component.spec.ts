@@ -149,4 +149,20 @@ describe('ResourceSearchFormComponent', () => {
       slug: 'angular-testing',
     });
   }));
+
+  /**
+   * This is critical otherwise, user will not be able to navigate
+   * to another route.
+   */
+  it('should ignore undefined skill slug', fakeAsync(() => {
+    resourceSearchFacade.selectedSkillSlug$ = of(undefined);
+
+    jest.spyOn(component.skillControl, 'reset');
+
+    component.ngOnInit();
+
+    tick();
+
+    expect(component.skillControl.reset).toBeCalledTimes(0);
+  }));
 });
