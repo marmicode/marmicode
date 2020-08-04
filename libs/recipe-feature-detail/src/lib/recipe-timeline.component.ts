@@ -6,13 +6,13 @@ import {
   NgModule,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { RecipeFrame } from './recipe-repository.service';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
+import { RecipeFrame } from './recipe-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-timeline',
-  template: ` <div class="line-container">
+  template: ` <div *ngIf="frames" class="line-container">
     <hr class="line" />
     <hr
       [style.width.%]="getFrameChipPosition(selectedFrameIndex)"

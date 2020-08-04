@@ -22,16 +22,19 @@ describe('RecipeTimelineComponent', () => {
   it('should dispatch bullets on timeline', () => {
     component.frames = [
       {
+        slug: null,
         title: null,
         duration: 1,
         blocks: [],
       },
       {
+        slug: null,
         title: null,
         duration: 1,
         blocks: [],
       },
       {
+        slug: null,
         title: null,
         duration: 1,
         blocks: [],
