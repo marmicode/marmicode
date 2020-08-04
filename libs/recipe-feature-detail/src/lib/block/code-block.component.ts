@@ -13,9 +13,19 @@ import { CodePipeModule } from './code.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.ShadowDom,
   selector: 'mc-code-block',
-  template: `<pre class="language-javascript">
-    <code [innerHTML]="block.code | code:{language: block.language}"></code>
-  </pre>`,
+  template: `<pre
+    class="language-javascript preformatted"
+  ><code class="code" [innerHTML]="block.code | code:{language: block.language}"></code></pre>`,
+  styles: [
+    `
+      :host .preformatted {
+        font-size: 1.2em;
+        height: 100%;
+        border-radius: 10px;
+        margin: 0.5em;
+      }
+    `,
+  ],
   styleUrls: ['../../../../../node_modules/prismjs/themes/prism-tomorrow.css'],
 })
 export class CodeBlockComponent {
