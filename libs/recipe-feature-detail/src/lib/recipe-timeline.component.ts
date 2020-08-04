@@ -58,8 +58,10 @@ import { RecipeFrame } from './recipe-repository.service';
 
       .past-line {
         position: absolute;
-        border: 1px solid var(--marmicode-accent-color);
-        top: 0;
+        border: 1.5px solid var(--marmicode-accent-color);
+        top: -1px;
+        width: 0;
+        transition: width 0.3s ease-out;
       }
 
       .bullet-list {

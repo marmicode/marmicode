@@ -12,6 +12,7 @@ $current-bullet-diameter: 13px;
   border-radius: 50%;
   height: $bullet-diameter;
   width: $bullet-diameter;
+  transition: background-color .3s ease-out, height .3s ease-out, width .3s ease-out;
 }
 
 .previous-bullet {
