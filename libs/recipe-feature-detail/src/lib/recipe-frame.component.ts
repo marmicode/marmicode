@@ -6,7 +6,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
-import { BlockModule } from './block.component';
+import { BlockModule } from './block/block.component';
 import { RecipeFrame } from './recipe-repository.service';
 
 @Component({

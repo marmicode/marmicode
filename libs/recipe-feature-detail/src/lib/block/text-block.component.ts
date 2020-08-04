@@ -5,12 +5,12 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { Block, TextBlock } from './recipe-repository.service';
+import { TextBlock } from './block';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-text-block',
-  template: `🚧 recipe-block-text`,
+  template: `🚧 text-block`,
 })
 export class TextBlockComponent {
   @Input() block: TextBlock;

@@ -5,13 +5,15 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
+import { Block, BlockType } from './block';
+import { CodeBlockModule } from './code-block.component';
 import { TextBlockModule } from './text-block.component';
-import { Block, BlockType } from './recipe-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-block',
   template: ` <ng-container [ngSwitch]="block.type">
+    <mc-code-block *ngSwitchCase="BlockType.Code"></mc-code-block>
     <mc-text-block *ngSwitchCase="BlockType.Text"></mc-text-block>
   </ng-container>`,
 })
@@ -24,6 +26,6 @@ export class BlockComponent {
 @NgModule({
   declarations: [BlockComponent],
   exports: [BlockComponent],
-  imports: [CommonModule, TextBlockModule],
+  imports: [CommonModule, TextBlockModule, CodeBlockModule],
 })
 export class BlockModule {}
