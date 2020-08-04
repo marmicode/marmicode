@@ -12,10 +12,7 @@ import { RecipeTimelineModule } from './recipe-timeline.component';
   template: `<mc-recipe-frame
       [frame]="selectedFrame$ | async"
     ></mc-recipe-frame>
-    <mc-recipe-timeline
-      [frames]="frames$ | async"
-      class="timeline"
-    ></mc-recipe-timeline> `,
+    <mc-recipe-timeline [frames]="frames$ | async"></mc-recipe-timeline> `,
   providers: [RxState],
 })
 export class RecipeDetailComponent {

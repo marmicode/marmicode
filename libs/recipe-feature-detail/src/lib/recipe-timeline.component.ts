@@ -10,7 +10,19 @@ import { RecipeFrame } from './recipe-repository.service';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-timeline',
-  template: `🚧 recipe-timeline ({{ frames.length }})`,
+  template: `<hr class="main-line" />`,
+  styles: [
+    `
+      :host {
+        display: block;
+        margin: 0 10px;
+      }
+
+      .main-line {
+        border: 1px solid #666;
+      }
+    `,
+  ],
 })
 export class RecipeTimelineComponent {
   @Input() frames: RecipeFrame[];
