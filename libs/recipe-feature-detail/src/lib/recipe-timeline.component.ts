@@ -39,7 +39,16 @@ import { RecipeFrame } from './recipe-repository.service';
         </li>
       </ul>
     </div>
-    <a href="">
+    <a
+      *ngIf="getNextFrameSlug() as nextFrameSlug"
+      [routerLink]="
+        recipeDetailRouterHelper.recipeFrame({
+          recipeSlug: recipeSlug,
+          frameSlug: nextFrameSlug
+        })
+      "
+      class="next-frame-button"
+    >
       <button mat-icon-button color="primary">
         <mat-icon>chevron_right</mat-icon>
       </button>
@@ -50,13 +59,13 @@ import { RecipeFrame } from './recipe-repository.service';
       :host {
         display: flex;
         margin: 0 15px 0 10px;
-        flex-display: row;
+        flex-direction: row;
+        align-items: center;
       }
 
       .line-container {
         display: block;
         position: relative;
-        padding-right: 10px;
       }
 
       .line,
@@ -77,6 +86,7 @@ import { RecipeFrame } from './recipe-repository.service';
       }
 
       .bullet-list {
+        margin: 0;
         list-style-type: none;
       }
     `,
@@ -94,6 +104,10 @@ export class RecipeTimelineComponent {
 
   getFrameChipPosition(index: number) {
     return (index * 100) / (this.frames.length - 1);
+  }
+
+  getNextFrameSlug() {
+    return this.frames[this.currentFrameIndex + 1]?.slug;
   }
 }
 
