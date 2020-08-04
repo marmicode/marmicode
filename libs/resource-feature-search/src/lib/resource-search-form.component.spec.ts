@@ -10,7 +10,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { readAll } from '@nrwl/angular/testing';
-import { EMPTY, of } from 'rxjs';
+import { BehaviorSubject, EMPTY, of, ReplaySubject, Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { ResourceSearchFormComponent } from './resource-search-form.component';
@@ -20,8 +20,11 @@ import { SkillRepository } from './skill-repository.service';
 describe('ResourceSearchFormComponent', () => {
   let component: ResourceSearchFormComponent;
   let fixture: ComponentFixture<ResourceSearchFormComponent>;
+  let selectedSkillSlug$: BehaviorSubject<string>;
 
-  beforeEach(async () =>
+  beforeEach(async () => {
+    selectedSkillSlug$ = new BehaviorSubject<string>(undefined);
+
     TestBed.configureTestingModule({
       declarations: [ResourceSearchFormComponent],
       imports: [MatAutocompleteModule],
@@ -29,7 +32,7 @@ describe('ResourceSearchFormComponent', () => {
         {
           provide: ResourceSearchFacade,
           useValue: {
-            selectedSkillSlug$: EMPTY,
+            selectedSkillSlug$,
           },
         },
         {
@@ -70,8 +73,8 @@ describe('ResourceSearchFormComponent', () => {
         },
       ],
       schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents()
-  );
+    }).compileComponents();
+  });
 
   let router: Router;
   beforeEach(() => (router = TestBed.inject(Router)));
@@ -125,7 +128,7 @@ describe('ResourceSearchFormComponent', () => {
   });
 
   it('should not crash if skill is null', () => {
-    resourceSearchFacade.selectedSkillSlug$ = of('angular-testing');
+    selectedSkillSlug$.next('angular-testing');
 
     fixture.detectChanges();
 
@@ -134,32 +137,11 @@ describe('ResourceSearchFormComponent', () => {
     expect(router.navigate).toBeCalledWith(['/', 'learn', 'everything']);
   });
 
-  it('should sync route with form value on next tick', fakeAsync(() => {
-    resourceSearchFacade.selectedSkillSlug$ = of('angular-testing');
-
-    jest.spyOn(component.skillControl, 'reset');
-
-    fixture.detectChanges();
-
-    expect(component.skillControl.reset).toBeCalledTimes(0);
-
-    tick();
-
-    expect(component.skillControl.reset).toBeCalledTimes(1);
-    expect(component.skillControl.reset).toBeCalledWith({
-      id: 'xxx',
-      label: 'Angular Testing',
-      slug: 'angular-testing',
-    });
-  }));
-
   /**
    * This is critical otherwise, user will not be able to navigate
    * to another route.
    */
   it('should ignore undefined skill slug', () => {
-    resourceSearchFacade.selectedSkillSlug$ = of(undefined);
-
     jest.spyOn(component.skillControl, 'reset');
 
     fixture.detectChanges();
