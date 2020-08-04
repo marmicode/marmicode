@@ -26,7 +26,7 @@ import { RecipeFrame } from './recipe-repository.service';
           [class.current-bullet]="index === selectedFrameIndex"
           [routerLink]="
             recipeDetailRouterHelper.recipeFrame({
-              recipeSlug: 'TODO',
+              recipeSlug: recipeSlug,
               frameSlug: frame.slug
             })
           "
@@ -73,6 +73,7 @@ import { RecipeFrame } from './recipe-repository.service';
 })
 export class RecipeTimelineComponent {
   @Input() frames: RecipeFrame[];
+  @Input() recipeSlug: string;
   @Input() selectedFrameIndex: number;
 
   recipeDetailRouterHelper = recipeDetailRouterHelper;

@@ -9,7 +9,7 @@ import {
 
 const routes: Routes = [
   {
-    path: `:${recipeDetailRouterHelper.RECIPE_SLUG_PARAM}/${recipeDetailRouterHelper.FRAME_SLUG_PARAM}`,
+    path: `:${recipeDetailRouterHelper.RECIPE_SLUG_PARAM}/:${recipeDetailRouterHelper.FRAME_SLUG_PARAM}`,
     component: RecipeDetailComponent,
   },
   {
