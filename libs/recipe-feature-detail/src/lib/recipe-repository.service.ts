@@ -1,11 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-export interface TextBlock {
-  type: 'text';
+export enum BlockType {
+  Code = 'code',
+  Text = 'text',
 }
 
-export type RecipeBlock = TextBlock;
+export interface CodeBlock {
+  type: BlockType.Code;
+  code: string;
+}
+
+export interface TextBlock {
+  type: BlockType.Text;
+  text: string;
+}
+
+export type RecipeBlock = CodeBlock | TextBlock;
 
 export interface RecipeFrame {
   duration: number;
@@ -22,8 +33,6 @@ export interface Recipe {
   providedIn: 'root',
 })
 export class RecipeRepository {
-  constructor() {}
-
   getRecipe(): Observable<Recipe> {
     return of(null);
   }
