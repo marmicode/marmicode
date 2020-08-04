@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { RxState } from '@rx-angular/state';
+import { RxState, select } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { RecipeFrameModule } from './recipe-frame.component';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
@@ -12,12 +12,16 @@ import { RecipeTimelineModule } from './recipe-timeline.component';
   template: `<mc-recipe-frame
       [frame]="selectedFrame$ | async"
     ></mc-recipe-frame>
-    <mc-recipe-timeline class="timeline"></mc-recipe-timeline> `,
+    <mc-recipe-timeline
+      [frames]="frames$ | async"
+      class="timeline"
+    ></mc-recipe-timeline> `,
   providers: [RxState],
 })
 export class RecipeDetailComponent {
   recipe$ = this._state.select('recipe');
-  selectedFrame$ = this.recipe$.pipe(map((recipe) => recipe.frames[0]));
+  frames$ = this.recipe$.pipe(select(map((recipe) => recipe.frames)));
+  selectedFrame$ = this.recipe$.pipe(select(map((recipe) => recipe.frames[0])));
 
   constructor(
     private _recipeRepository: RecipeRepository,

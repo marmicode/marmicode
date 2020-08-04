@@ -1,12 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  NgModule,
+} from '@angular/core';
+import { RecipeFrame } from './recipe-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-timeline',
-  template: `🚧 recipe-timeline`,
+  template: `🚧 recipe-timeline ({{ frames.length }})`,
 })
-export class RecipeTimelineComponent {}
+export class RecipeTimelineComponent {
+  @Input() frames: RecipeFrame[];
+}
 
 @NgModule({
   declarations: [RecipeTimelineComponent],
