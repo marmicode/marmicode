@@ -16,6 +16,7 @@ import { RecipeFrame } from './recipe-repository.service';
       <li *ngFor="let frame of frames; let index = index">
         <a
           [style.left.%]="getFrameChipPosition(index)"
+          [class.previous]="index < selectedFrameIndex"
           class="bullet"
           href="#"
         ></a>
@@ -59,6 +60,7 @@ import { RecipeFrame } from './recipe-repository.service';
 })
 export class RecipeTimelineComponent {
   @Input() frames: RecipeFrame[];
+  @Input() selectedFrameIndex: number;
 
   getFrameChipPosition(index: number) {
     return (index * 100) / (this.frames.length - 1);

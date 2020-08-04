@@ -12,18 +12,25 @@ import { RecipeTimelineModule } from './recipe-timeline.component';
   template: `<mc-recipe-frame
       [frame]="selectedFrame$ | async"
     ></mc-recipe-frame>
-    <mc-recipe-timeline [frames]="frames$ | async"></mc-recipe-timeline> `,
+    <mc-recipe-timeline
+      [frames]="frames$ | async"
+      [selectedFrameIndex]="selectedFrameIndex$ | async"
+    ></mc-recipe-timeline> `,
   providers: [RxState],
 })
 export class RecipeDetailComponent {
   recipe$ = this._state.select('recipe');
   frames$ = this.recipe$.pipe(select(map((recipe) => recipe.frames)));
-  selectedFrame$ = this.recipe$.pipe(select(map((recipe) => recipe.frames[0])));
+  selectedFrameIndex$ = this._state.select('selectedFrameIndex');
+  selectedFrame$ = this._state.select(
+    map((state) => state.recipe.frames[state.selectedFrameIndex])
+  );
 
   constructor(
     private _recipeRepository: RecipeRepository,
-    private _state: RxState<{ recipe: Recipe }>
+    private _state: RxState<{ recipe: Recipe; selectedFrameIndex: number }>
   ) {
+    this._state.set({ selectedFrameIndex: 1 });
     this._state.connect('recipe', this._recipeRepository.getRecipe());
   }
 }
