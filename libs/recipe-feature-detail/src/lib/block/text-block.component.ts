@@ -12,6 +12,14 @@ import { MarkdownPipeModule } from './markdown.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-text-block',
   template: `<div [innerHTML]="block.text | markdown"></div>`,
+  styles: [
+    `
+      :host {
+        display: block;
+        margin: 10px;
+      }
+    `,
+  ],
 })
 export class TextBlockComponent {
   @Input() block: TextBlock;
