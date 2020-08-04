@@ -1,1 +1,1 @@
-export * from './lib/recipe-feature-detail.module';
+export { RecipeDetailRoutingModule } from './lib/recipe-detail.routing.module';

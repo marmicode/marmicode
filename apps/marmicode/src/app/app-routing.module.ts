@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
+  recipeDetailRouterHelper,
   resourceSearchRouterHelper,
   servicesRouterHelper,
 } from '@marmicode/shared-router-helpers';
@@ -12,6 +13,15 @@ export const routes: Routes = [
     loadChildren: () =>
       import('@marmicode/learning-map-feature-tree').then(
         (m) => m.LearningMapRoutingModule
+      ),
+  },
+
+  /* Recipe detail. */
+  {
+    path: recipeDetailRouterHelper.RECIPE_DETAIL_PATH,
+    loadChildren: () =>
+      import('@marmicode/recipe-feature-detail').then(
+        (m) => m.RecipeDetailRoutingModule
       ),
   },
 
