@@ -5,6 +5,9 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { RecipeFrame } from './recipe-repository.service';
@@ -12,39 +15,48 @@ import { RecipeFrame } from './recipe-repository.service';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-timeline',
-  template: ` <div *ngIf="frames" class="line-container">
-    <hr class="line" />
-    <hr
-      [style.width.%]="getFrameChipPosition(currentFrameIndex)"
-      class="past-line"
-    />
-    <ul class="bullet-list">
-      <li *ngFor="let frame of frames; let index = index">
-        <a
-          [style.left.%]="getFrameChipPosition(index)"
-          [class.previous-bullet]="index < currentFrameIndex"
-          [class.current-bullet]="index === currentFrameIndex"
-          [routerLink]="
-            recipeDetailRouterHelper.recipeFrame({
-              recipeSlug: recipeSlug,
-              frameSlug: frame.slug
-            })
-          "
-          class="bullet"
-        ></a>
-      </li>
-    </ul>
-  </div>`,
+  template: `
+    <div *ngIf="frames" class="line-container" fxFlex>
+      <hr class="line" />
+      <hr
+        [style.width.%]="getFrameChipPosition(currentFrameIndex)"
+        class="past-line"
+      />
+      <ul class="bullet-list">
+        <li *ngFor="let frame of frames; let index = index">
+          <a
+            [style.left.%]="getFrameChipPosition(index)"
+            [class.previous-bullet]="index < currentFrameIndex"
+            [class.current-bullet]="index === currentFrameIndex"
+            [routerLink]="
+              recipeDetailRouterHelper.recipeFrame({
+                recipeSlug: recipeSlug,
+                frameSlug: frame.slug
+              })
+            "
+            class="bullet"
+          ></a>
+        </li>
+      </ul>
+    </div>
+    <a href="">
+      <button mat-icon-button color="primary">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </a>
+  `,
   styles: [
     `
       :host {
-        display: block;
+        display: flex;
         margin: 0 15px 0 10px;
+        flex-display: row;
       }
 
       .line-container {
         display: block;
         position: relative;
+        padding-right: 10px;
       }
 
       .line,
@@ -88,6 +100,12 @@ export class RecipeTimelineComponent {
 @NgModule({
   declarations: [RecipeTimelineComponent],
   exports: [RecipeTimelineComponent],
-  imports: [CommonModule, RouterModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatButtonModule,
+    MatIconModule,
+    FlexModule,
+  ],
 })
 export class RecipeTimelineModule {}
