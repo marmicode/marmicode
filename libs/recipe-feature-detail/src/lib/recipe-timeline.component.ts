@@ -41,31 +41,34 @@ import { RecipeFrame } from './recipe-repository.service';
     </div>
     <a
       *ngIf="getNextFrameSlug() as nextFrameSlug"
+      disabled
       [routerLink]="
         recipeDetailRouterHelper.recipeFrame({
           recipeSlug: recipeSlug,
           frameSlug: nextFrameSlug
         })
       "
-      class="next-frame-button"
+      class="next-frame-link"
     >
-      <button mat-icon-button color="primary">
-        <mat-icon>chevron_right</mat-icon>
+      <button class="next-frame-button" mat-icon-button>
+        <mat-icon class="next-frame-icon">chevron_right</mat-icon>
       </button>
     </a>
   `,
   styles: [
     `
       :host {
-        display: flex;
-        margin: 0 15px 0 10px;
-        flex-direction: row;
-        align-items: center;
+        position: relative;
+        display: block;
+        margin-left: 10px;
+        margin-right: 10px;
       }
 
       .line-container {
         display: block;
         position: relative;
+        margin-top: 20px;
+        margin-right: 60px;
       }
 
       .line,
@@ -88,6 +91,20 @@ import { RecipeFrame } from './recipe-repository.service';
       .bullet-list {
         margin: 0;
         list-style-type: none;
+      }
+
+      .next-frame-link {
+        position: absolute;
+        right: 0;
+      }
+
+      .next-frame-button {
+        color: var(--marmicode-accent-color);
+        border: solid 1px;
+      }
+
+      .next-frame-icon {
+        margin-bottom: 4px;
       }
     `,
   ],

@@ -16,7 +16,6 @@ describe('RecipeTimelineComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RecipeTimelineComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should dispatch bullets on timeline', () => {
