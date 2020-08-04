@@ -17,6 +17,7 @@ import { RecipeFrame } from './recipe-repository.service';
         <a
           [style.left.%]="getFrameChipPosition(index)"
           [class.previous]="index < selectedFrameIndex"
+          [class.current]="index === selectedFrameIndex"
           class="bullet"
           href="#"
         ></a>
@@ -54,6 +55,18 @@ import { RecipeFrame } from './recipe-repository.service';
         border-radius: 50%;
         height: 11px;
         width: 11px;
+      }
+
+      .previous {
+        background-color: var(--marmicode-accent-color);
+      }
+
+      .current {
+        background-color: white;
+        border: var(--marmicode-accent-color) solid 1px;
+        top: -6px;
+        height: 13px;
+        width: 13px;
       }
     `,
   ],
