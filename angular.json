@@ -393,6 +393,37 @@
         }
       },
       "schematics": {}
+    },
+    "recipe-feature-detail": {
+      "projectType": "library",
+      "root": "libs/recipe-feature-detail",
+      "sourceRoot": "libs/recipe-feature-detail/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/recipe-feature-detail/tsconfig.lib.json",
+              "libs/recipe-feature-detail/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/recipe-feature-detail/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/recipe-feature-detail/jest.config.js",
+            "tsConfig": "libs/recipe-feature-detail/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/recipe-feature-detail/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {

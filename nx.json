@@ -46,6 +46,9 @@
     },
     "shared-router-helpers": {
       "tags": ["scope:shared", "type:utils"]
+    },
+    "recipe-feature-detail": {
+      "tags": ["scope:recipe", "type:feature"]
     }
   }
 }

@@ -29,6 +29,9 @@
       ],
       "@marmicode/shared-router-helpers": [
         "libs/shared-router-helpers/src/index.ts"
+      ],
+      "@marmicode/recipe-feature-detail": [
+        "libs/recipe-feature-detail/src/index.ts"
       ]
     },
     "strict": true,
