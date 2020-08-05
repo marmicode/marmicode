@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -32,6 +32,7 @@ import { RecipeFrame } from './recipe-repository.service';
             [class.previous-bullet]="bullet.isPast"
             [class.current-bullet]="bullet.isCurrent"
             [routerLink]="bullet.route"
+            (click)="scrollTop()"
             class="bullet"
           ></a>
         </li>
@@ -40,6 +41,7 @@ import { RecipeFrame } from './recipe-repository.service';
     <a
       *ngIf="nextFrameRoute$ | async as nextFrameRoute"
       [routerLink]="nextFrameRoute"
+      (click)="scrollTop()"
       class="next-frame-link"
     >
       <button class="next-frame-button" mat-icon-button>
@@ -158,6 +160,7 @@ export class RecipeTimelineComponent {
   );
 
   constructor(
+    private _viewportScroller: ViewportScroller,
     private _state: RxState<{
       frames: RecipeFrame[];
       recipeSlug: string;
@@ -173,6 +176,10 @@ export class RecipeTimelineComponent {
     index: number;
   }) {
     return (index * 100) / (frames.length - 1);
+  }
+
+  scrollTop() {
+    this._viewportScroller.scrollToPosition([0, 0]);
   }
 }
 

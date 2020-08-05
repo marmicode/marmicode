@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import { Compiler, Component, HostListener, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -43,17 +43,15 @@ import { NavMenuModule } from './nav-menu.component';
       <!-- Navigation menu. -->
       <mc-nav-menu></mc-nav-menu>
     </mat-toolbar>
-    <section class="container">
+    <div class="container">
       <ng-content></ng-content>
-    </section>
+    </div>
   `,
   styles: [
     `
       :host {
         background-color: white;
         display: block;
-        height: 100%;
-        overflow-y: auto;
       }
 
       .toolbar {
@@ -104,7 +102,10 @@ export class NavComponent {
 
   private _scrollPosition$ = new BehaviorSubject(0);
 
-  constructor(private _compiler: Compiler) {
+  constructor(
+    private _compiler: Compiler,
+    private _viewportScroller: ViewportScroller
+  ) {
     this.isScrollingDown$ = this._scrollPosition$.pipe(
       observeOn(animationFrameScheduler),
       pairwise(),
@@ -112,9 +113,9 @@ export class NavComponent {
     );
   }
 
-  @HostListener('scroll', ['$event'])
-  onScroll(event: Event) {
-    this._scrollPosition$.next((event.target as HTMLElement).scrollTop);
+  @HostListener('window:scroll')
+  onScroll() {
+    this._scrollPosition$.next(this._viewportScroller.getScrollPosition()[1]);
   }
 }
 
