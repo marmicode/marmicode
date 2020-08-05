@@ -4,6 +4,7 @@ export enum ResourceType {
   ExternalVideo = 'external-video',
   Recipe = 'recipe',
   Snack = 'snack',
+  Tutorial = 'tutorial',
   Workshop = 'workshop',
 }
 
@@ -13,6 +14,7 @@ export const resourceTypeColorMap = new Map<ResourceType, string>([
   [ResourceType.Documentation, '#d42020'],
   [ResourceType.Recipe, '#5ab3ad'],
   [ResourceType.Snack, '#f57bb5'],
+  [ResourceType.Tutorial, '#0f5bf3'],
   [ResourceType.Workshop, '#673ab7'],
 ]);
 
@@ -22,6 +24,7 @@ export const resourceTypeTextMap = new Map<ResourceType, string>([
   [ResourceType.ExternalVideo, 'Video'],
   [ResourceType.Recipe, 'Recipe'],
   [ResourceType.Snack, 'Snack'],
+  [ResourceType.Tutorial, 'Tutorial'],
   [ResourceType.Workshop, 'Workshop'],
 ]);
 
@@ -31,5 +34,6 @@ export const resourceTypeActionMap = new Map<ResourceType, string>([
   [ResourceType.ExternalVideo, 'Watch'],
   [ResourceType.Recipe, `Let's cook!`],
   [ResourceType.Snack, `Let's eat!`],
+  [ResourceType.Tutorial, `Let's try!`],
   [ResourceType.Workshop, 'Register'],
 ]);
