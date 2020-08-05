@@ -1,8 +1,16 @@
 type Query {
   asset(id: String!, preview: Boolean, locale: String): Asset
   assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
+  codeBlock(id: String!, preview: Boolean, locale: String): CodeBlock
+  codeBlockCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: CodeBlockFilter, order: [CodeBlockOrder]): CodeBlockCollection
+  textBlock(id: String!, preview: Boolean, locale: String): TextBlock
+  textBlockCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TextBlockFilter, order: [TextBlockOrder]): TextBlockCollection
   resource(id: String!, preview: Boolean, locale: String): Resource
   resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ResourceFilter, order: [ResourceOrder]): ResourceCollection
+  frame(id: String!, preview: Boolean, locale: String): Frame
+  frameCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: FrameFilter, order: [FrameOrder]): FrameCollection
+  recipe(id: String!, preview: Boolean, locale: String): Recipe
+  recipeCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: RecipeFilter, order: [RecipeOrder]): RecipeCollection
   topic(id: String!, preview: Boolean, locale: String): Topic
   topicCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TopicFilter, order: [TopicOrder]): TopicCollection
   skill(id: String!, preview: Boolean, locale: String): Skill
@@ -216,13 +224,14 @@ type Resource implements Entry {
   resourceType: String
   author(preview: Boolean, locale: String): Author
   duration: Int
+  isWip: Boolean
   picture(preview: Boolean, locale: String): Asset
+  releasedAt: DateTime
   requiredSkillCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceRequiredSkillCollection
   skillCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceSkillCollection
   summary: String
   url: String
-  releasedAt: DateTime
-  isWip: Boolean
+  content(preview: Boolean, locale: String): Recipe
 }
 
 type ResourceLinkingCollections {
@@ -294,6 +303,96 @@ type ResourceSkillCollection {
   skip: Int!
   limit: Int!
   items: [Skill]!
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/recipe)
+"""
+type Recipe implements Entry {
+  sys: Sys!
+  linkedFrom: RecipeLinkingCollections
+  frameCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): RecipeFrameCollection
+}
+
+type RecipeLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceCollection
+}
+
+type RecipeFrameCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Frame]!
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/frame)
+"""
+type Frame implements Entry {
+  sys: Sys!
+  linkedFrom: FrameLinkingCollections
+  title: String
+  slug: String
+  duration: Int
+  blockCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): FrameBlockCollection
+}
+
+type FrameLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  recipeCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): RecipeCollection
+}
+
+type RecipeCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Recipe]!
+}
+
+type FrameBlockCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [FrameBlockItem]!
+}
+
+union FrameBlockItem = CodeBlock | TextBlock
+
+"""
+[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/codeBlock)
+"""
+type CodeBlock implements Entry {
+  sys: Sys!
+  linkedFrom: CodeBlockLinkingCollections
+  code: String
+  language: String
+}
+
+type CodeBlockLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  frameCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): FrameCollection
+}
+
+type FrameCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Frame]!
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/textBlock)
+"""
+type TextBlock implements Entry {
+  sys: Sys!
+  linkedFrom: TextBlockLinkingCollections
+  text: String
+}
+
+type TextBlockLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  frameCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): FrameCollection
 }
 
 type AuthorCollection {
@@ -432,8 +531,80 @@ type AssetCollection {
   items: [Asset]!
 }
 
+input CodeBlockFilter {
+  sys: SysFilter
+  code_exists: Boolean
+  code: String
+  code_not: String
+  code_in: [String]
+  code_not_in: [String]
+  code_contains: String
+  code_not_contains: String
+  language_exists: Boolean
+  language: String
+  language_not: String
+  language_in: [String]
+  language_not_in: [String]
+  language_contains: String
+  language_not_contains: String
+  OR: [CodeBlockFilter]
+  AND: [CodeBlockFilter]
+}
+
+enum CodeBlockOrder {
+  language_ASC
+  language_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type CodeBlockCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [CodeBlock]!
+}
+
+input TextBlockFilter {
+  sys: SysFilter
+  text_exists: Boolean
+  text: String
+  text_not: String
+  text_in: [String]
+  text_not_in: [String]
+  text_contains: String
+  text_not_contains: String
+  OR: [TextBlockFilter]
+  AND: [TextBlockFilter]
+}
+
+enum TextBlockOrder {
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type TextBlockCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [TextBlock]!
+}
+
 input ResourceFilter {
   author: cfAuthorNestedFilter
+  content: cfRecipeNestedFilter
   sys: SysFilter
   title_exists: Boolean
   title: String
@@ -465,6 +636,18 @@ input ResourceFilter {
   duration_gte: Int
   duration_lt: Int
   duration_lte: Int
+  isWip_exists: Boolean
+  isWip: Boolean
+  isWip_not: Boolean
+  releasedAt_exists: Boolean
+  releasedAt: DateTime
+  releasedAt_not: DateTime
+  releasedAt_in: [DateTime]
+  releasedAt_not_in: [DateTime]
+  releasedAt_gt: DateTime
+  releasedAt_gte: DateTime
+  releasedAt_lt: DateTime
+  releasedAt_lte: DateTime
   summary_exists: Boolean
   summary: String
   summary_not: String
@@ -479,18 +662,6 @@ input ResourceFilter {
   url_not_in: [String]
   url_contains: String
   url_not_contains: String
-  releasedAt_exists: Boolean
-  releasedAt: DateTime
-  releasedAt_not: DateTime
-  releasedAt_in: [DateTime]
-  releasedAt_not_in: [DateTime]
-  releasedAt_gt: DateTime
-  releasedAt_gte: DateTime
-  releasedAt_lt: DateTime
-  releasedAt_lte: DateTime
-  isWip_exists: Boolean
-  isWip: Boolean
-  isWip_not: Boolean
   OR: [ResourceFilter]
   AND: [ResourceFilter]
 }
@@ -508,6 +679,12 @@ input cfAuthorNestedFilter {
   AND: [cfAuthorNestedFilter]
 }
 
+input cfRecipeNestedFilter {
+  sys: SysFilter
+  OR: [cfRecipeNestedFilter]
+  AND: [cfRecipeNestedFilter]
+}
+
 enum ResourceOrder {
   title_ASC
   title_DESC
@@ -517,12 +694,75 @@ enum ResourceOrder {
   resourceType_DESC
   duration_ASC
   duration_DESC
-  url_ASC
-  url_DESC
-  releasedAt_ASC
-  releasedAt_DESC
   isWip_ASC
   isWip_DESC
+  releasedAt_ASC
+  releasedAt_DESC
+  url_ASC
+  url_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input FrameFilter {
+  sys: SysFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  duration_exists: Boolean
+  duration: Int
+  duration_not: Int
+  duration_in: [Int]
+  duration_not_in: [Int]
+  duration_gt: Int
+  duration_gte: Int
+  duration_lt: Int
+  duration_lte: Int
+  OR: [FrameFilter]
+  AND: [FrameFilter]
+}
+
+enum FrameOrder {
+  title_ASC
+  title_DESC
+  slug_ASC
+  slug_DESC
+  duration_ASC
+  duration_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input RecipeFilter {
+  sys: SysFilter
+  OR: [RecipeFilter]
+  AND: [RecipeFilter]
+}
+
+enum RecipeOrder {
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC
