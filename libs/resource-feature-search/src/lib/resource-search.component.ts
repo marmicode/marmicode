@@ -44,6 +44,11 @@ import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
   `,
   styles: [
     `
+      :host {
+        display: block;
+        background-color: white;
+      }
+
       .mc-resource-card {
         margin: 20px;
       }

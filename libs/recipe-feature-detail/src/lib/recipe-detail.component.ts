@@ -32,8 +32,9 @@ import { RecipeTitleModule } from './recipe-title.component';
     `
       :host {
         display: flex;
+        background-color: white;
         flex-direction: column;
-        height: 100%;
+        min-height: 100%;
       }
     `,
   ],
