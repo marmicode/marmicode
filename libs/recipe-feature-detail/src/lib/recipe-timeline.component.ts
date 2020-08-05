@@ -112,10 +112,7 @@ export class RecipeTimelineComponent {
         isPast: index < currentFrameIndex,
         isCurrent: index === currentFrameIndex,
         position: this._getBulletPosition({ frames, index }),
-        route: recipeDetailRouterHelper.recipeFrame({
-          recipeSlug: recipeSlug,
-          frameSlug: frame.slug,
-        }),
+        route: this._getFrameRoute(frame.slug),
       }))
     )
   );
@@ -136,10 +133,7 @@ export class RecipeTimelineComponent {
       if (nextFrame == null) {
         return null;
       }
-      return recipeDetailRouterHelper.recipeFrame({
-        recipeSlug,
-        frameSlug: nextFrame.slug,
-      });
+      return this._getFrameRoute(nextFrame.slug);
     })
   );
 
@@ -164,6 +158,11 @@ export class RecipeTimelineComponent {
 
   scrollTop() {
     this._viewportScroller.scrollToPosition([0, 0]);
+  }
+
+  private _getFrameRoute(frameSlug: string) {
+    /* Using relative path to keep the recipe type prefix in the URL. */
+    return ['..', frameSlug];
   }
 }
 
