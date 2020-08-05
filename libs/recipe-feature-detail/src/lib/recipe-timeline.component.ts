@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { RxState } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
-import { RecipeFrame } from './recipe-repository.service';
+import { Frame } from './recipe-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -94,7 +94,7 @@ import { RecipeFrame } from './recipe-repository.service';
   providers: [RxState],
 })
 export class RecipeTimelineComponent {
-  @Input() set frames(frames: RecipeFrame[]) {
+  @Input() set frames(frames: Frame[]) {
     this._state.set({ frames });
   }
   @Input() set recipeSlug(recipeSlug: string) {
@@ -146,7 +146,7 @@ export class RecipeTimelineComponent {
   constructor(
     private _viewportScroller: ViewportScroller,
     private _state: RxState<{
-      frames: RecipeFrame[];
+      frames: Frame[];
       recipeSlug: string;
       currentFrameIndex: number;
     }>
@@ -156,7 +156,7 @@ export class RecipeTimelineComponent {
     frames,
     index,
   }: {
-    frames: RecipeFrame[];
+    frames: Frame[];
     index: number;
   }) {
     return (index * 100) / (frames.length - 1);

@@ -8,11 +8,15 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Block, BlockType } from './block/block';
 
-export interface RecipeFrame {
+export interface Frame {
   slug: string;
   duration: number;
   title: string;
   blocks: Block[];
+}
+
+export function createFrame(frame: Frame): Frame {
+  return frame;
 }
 
 export interface Recipe {
@@ -20,7 +24,11 @@ export interface Recipe {
   type: ResourceType.Recipe | ResourceType.Tutorial;
   title: string;
   slug: string;
-  frames: RecipeFrame[];
+  frames: Frame[];
+}
+
+export function createRecipe(recipe: Recipe): Recipe {
+  return { ...recipe };
 }
 
 const getRecipeFirstFrameSlug = gql`
@@ -98,13 +106,32 @@ export class RecipeRepository {
 
   getRecipe(recipeSlug: string): Observable<Recipe> {
     // @todo wip
-    // return this._apollo
-    //   .query<Query>({
-    //     query: getRecipe,
-    //     variables: {
-    //       recipeSlug
-    //     }
-    //   })
+    this._apollo
+      .query<Query>({
+        query: getRecipe,
+        variables: {
+          recipeSlug,
+        },
+      })
+      .pipe(
+        map(({ data }) => {
+          const resource = data.resourceCollection.items[0];
+          return createRecipe({
+            id: resource.sys.id,
+            slug: resource.slug,
+            title: resource.title,
+            type: resource.resourceType as any,
+            frames: resource.content.frames.map((frame) =>
+              createFrame({
+                blocks: [],
+                duration: frame.duration,
+                slug: frame.slug,
+                title: frame.title,
+              })
+            ),
+          });
+        })
+      );
 
     return of({
       id: null,

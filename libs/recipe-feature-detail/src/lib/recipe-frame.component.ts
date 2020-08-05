@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { BlockModule } from './block/block.component';
-import { RecipeFrame } from './recipe-repository.service';
+import { Frame } from './recipe-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,7 +23,7 @@ import { RecipeFrame } from './recipe-repository.service';
   `,
 })
 export class RecipeFrameComponent {
-  @Input() frame: RecipeFrame;
+  @Input() frame: Frame;
 }
 
 @NgModule({
