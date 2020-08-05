@@ -47,6 +47,7 @@ import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
       :host {
         display: block;
         background-color: white;
+        min-height: 100%;
       }
 
       .mc-resource-card {

@@ -50,7 +50,6 @@ import { NavMenuModule } from './nav-menu.component';
   styles: [
     `
       :host {
-        background-color: white;
         display: block;
         height: 100%;
       }
