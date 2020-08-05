@@ -9,7 +9,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule } from '@marmicode/shared-ui';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { defer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import {
   RecipeRepository,
