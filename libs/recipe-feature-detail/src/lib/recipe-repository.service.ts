@@ -39,6 +39,42 @@ const getRecipeFirstFrameSlug = gql`
   }
 `;
 
+const getRecipe = gql`
+  query getRecipe($recipeSlug: String!) {
+    resourceCollection(limit: 1, where: { slug: $recipeSlug }) {
+      items {
+        sys {
+          id
+        }
+        resourceType
+        slug
+        title
+        content {
+          frameCollection(limit: 1) {
+            items {
+              duration
+              slug
+              title
+              blockCollection {
+                items {
+                  __typename
+                  ... on CodeBlock {
+                    code
+                    language
+                  }
+                  ... on TextBlock {
+                    text
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 @Injectable()
 export class RecipeRepository {
   constructor(private _apollo: Apollo) {}
