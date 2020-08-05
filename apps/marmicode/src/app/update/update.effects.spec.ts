@@ -81,7 +81,9 @@ describe('UpdateEffects', () => {
 
     /* Check prompt is called. */
     expect(matDialog.open).toBeCalledTimes(1);
-    expect(matDialog.open).toBeCalledWith(UpdateDialogComponent);
+    expect(matDialog.open).toBeCalledWith(UpdateDialogComponent, {
+      backdropClass: 'mc-overlay-backdrop',
+    });
     expect(swUpdate.activateUpdate).not.toBeCalled();
 
     subscription.unsubscribe();

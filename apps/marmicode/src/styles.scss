@@ -21,3 +21,9 @@ body {
 .mc-primary-text {
   color: $marmicode-primary-color;
 }
+
+.mc-overlay-backdrop {
+  background-color: rgba(0, 0, 0, .23);
+  backdrop-filter: blur(5px);
+  transition: all .2s ease-out;
+}

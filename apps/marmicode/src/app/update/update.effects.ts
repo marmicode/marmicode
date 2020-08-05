@@ -44,7 +44,9 @@ export class UpdateEffects {
             .compileModuleSync(MatDialogModule)
             .create(this._injector);
           const matDialog = moduleRef.injector.get(MatDialog);
-          matDialog.open(UpdateDialogComponent);
+          matDialog.open(UpdateDialogComponent, {
+            backdropClass: 'mc-overlay-backdrop',
+          });
         })
       ),
     {
