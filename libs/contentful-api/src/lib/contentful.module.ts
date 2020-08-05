@@ -1,8 +1,8 @@
 import { HttpHeaders } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
-import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-angular/http';
+import { InMemoryCache } from '@apollo/client/core';
+import { Apollo, APOLLO_OPTIONS } from 'apollo-angular';
 
 const uri =
   'https://graphql.contentful.com/content/v1/spaces/gowvxq3b4aid/environments/master';
@@ -20,13 +20,13 @@ export function createApollo(httpLink: HttpLink) {
 }
 
 @NgModule({
-  exports: [ApolloModule, HttpLinkModule],
   providers: [
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
       deps: [HttpLink],
     },
+    Apollo,
   ],
 })
 export class ContentfulModule {}

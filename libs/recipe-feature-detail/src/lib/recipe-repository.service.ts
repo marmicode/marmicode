@@ -5,7 +5,7 @@ import { Apollo } from 'apollo-angular';
 
 import gql from 'graphql-tag';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Block, BlockType } from './block/block';
 
 export interface Frame {
@@ -16,7 +16,7 @@ export interface Frame {
 }
 
 export function createFrame(frame: Frame): Frame {
-  return frame;
+  return { ...frame };
 }
 
 export interface Recipe {
@@ -121,7 +121,7 @@ export class RecipeRepository {
             slug: resource.slug,
             title: resource.title,
             type: resource.resourceType as any,
-            frames: resource.content.frames.map((frame) =>
+            frames: resource.content.frameCollection.items.map((frame) =>
               createFrame({
                 blocks: [],
                 duration: frame.duration,
