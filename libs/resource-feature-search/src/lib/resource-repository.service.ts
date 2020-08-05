@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GraphQLModule } from './graphql/graphql.module';
 import * as schema from './graphql/schema';
-import { Query } from './graphql/schema';
+import { Query, ResourceFilter, SkillFilter } from './graphql/schema';
 import { skillFragment, skillFragmentToSkill } from './graphql/skill-fragment';
 import { createAuthor, createResource, Resource } from './resource';
 import { Skill } from './skill';
@@ -45,8 +45,8 @@ const resourceFragment = gql`
 
 const getAllResources = gql`
   ${resourceFragment}
-  query getAllResources {
-    resourceCollection(order: [releasedAt_DESC]) {
+  query getAllResources($filter: ResourceFilter) {
+    resourceCollection(order: [releasedAt_DESC], where: $filter) {
       items {
         ...ResourceFragment
       }
@@ -54,10 +54,10 @@ const getAllResources = gql`
   }
 `;
 
-const getResourcesBySkillSlug = gql`
+const getResourcesBySkill = gql`
   ${resourceFragment}
-  query getResourcesBySkillSlug($skillSlug: String!) {
-    skillCollection(limit: 1, where: { slug: $skillSlug }) {
+  query getResourcesBySkill($skillFilter: SkillFilter) {
+    skillCollection(limit: 1, where: $skillFilter) {
       items {
         linkedFrom {
           resourceCollection {
@@ -79,6 +79,11 @@ export class ResourceRepository {
     return this._apollo
       .query<Query>({
         query: getAllResources,
+        variables: {
+          filter: {
+            isWip_not: true,
+          } as ResourceFilter,
+        },
       })
       .pipe(map(({ data }) => this._toResources(data.resourceCollection)));
   }
@@ -86,9 +91,12 @@ export class ResourceRepository {
   getResourcesBySkillSlug(skillSlug: string): Observable<Resource[]> {
     return this._apollo
       .query<Query>({
-        query: getResourcesBySkillSlug,
+        query: getResourcesBySkill,
         variables: {
-          skillSlug,
+          skillFilter: {
+            slug: skillSlug,
+            isWip_not: true,
+          } as SkillFilter,
         },
       })
       .pipe(

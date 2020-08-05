@@ -317,6 +317,7 @@ export interface Resource extends Entry {
   summary?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
   releasedAt?: Maybe<Scalars['DateTime']>;
+  isWip?: Maybe<Scalars['Boolean']>;
 }
 
 
@@ -690,6 +691,9 @@ export interface ResourceFilter {
   releasedAt_gte?: Maybe<Scalars['DateTime']>;
   releasedAt_lt?: Maybe<Scalars['DateTime']>;
   releasedAt_lte?: Maybe<Scalars['DateTime']>;
+  isWip_exists?: Maybe<Scalars['Boolean']>;
+  isWip?: Maybe<Scalars['Boolean']>;
+  isWip_not?: Maybe<Scalars['Boolean']>;
   OR?: Maybe<Array<Maybe<ResourceFilter>>>;
   AND?: Maybe<Array<Maybe<ResourceFilter>>>;
 }
@@ -720,6 +724,8 @@ export enum ResourceOrder {
   UrlDesc = 'url_DESC',
   ReleasedAtAsc = 'releasedAt_ASC',
   ReleasedAtDesc = 'releasedAt_DESC',
+  IsWipAsc = 'isWip_ASC',
+  IsWipDesc = 'isWip_DESC',
   SysIdAsc = 'sys_id_ASC',
   SysIdDesc = 'sys_id_DESC',
   SysPublishedAtAsc = 'sys_publishedAt_ASC',

@@ -222,6 +222,7 @@ type Resource implements Entry {
   summary: String
   url: String
   releasedAt: DateTime
+  isWip: Boolean
 }
 
 type ResourceLinkingCollections {
@@ -487,6 +488,9 @@ input ResourceFilter {
   releasedAt_gte: DateTime
   releasedAt_lt: DateTime
   releasedAt_lte: DateTime
+  isWip_exists: Boolean
+  isWip: Boolean
+  isWip_not: Boolean
   OR: [ResourceFilter]
   AND: [ResourceFilter]
 }
@@ -517,6 +521,8 @@ enum ResourceOrder {
   url_DESC
   releasedAt_ASC
   releasedAt_DESC
+  isWip_ASC
+  isWip_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC
