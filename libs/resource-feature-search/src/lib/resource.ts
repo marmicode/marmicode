@@ -16,10 +16,7 @@ export interface Resource {
   duration: number;
   pictureUri?: string;
   requiredSkills: Skill[];
-  /**
-   * @deprecated 🚧 Work in progress.
-   */
-  slug?: string;
+  slug: string;
   skills: Skill[];
   summary: string;
   title: string;

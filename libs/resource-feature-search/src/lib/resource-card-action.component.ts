@@ -48,6 +48,10 @@ export class ResourceCardActionComponent implements OnChanges {
       ResourceType.Recipe,
       (slug) => recipeDetailRouterHelper.recipeDetail(slug),
     ],
+    [
+      ResourceType.Tutorial,
+      (slug) => recipeDetailRouterHelper.tutorialDetail(slug),
+    ],
   ]);
 
   @Input() resource: Resource;

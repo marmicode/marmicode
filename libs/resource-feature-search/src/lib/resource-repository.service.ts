@@ -17,8 +17,6 @@ const resourceFragment = gql`
     sys {
       id
     }
-    resourceType
-    title
     author {
       name
       picture {
@@ -35,12 +33,15 @@ const resourceFragment = gql`
         ...SkillFragment
       }
     }
+    resourceType
     skillCollection(limit: 10) {
       items {
         ...SkillFragment
       }
     }
+    slug
     summary
+    title
     url
   }
 `;
@@ -124,8 +125,6 @@ export class ResourceRepository {
     return resourceCollection.items.map((item) =>
       createResource({
         id: item.sys.id,
-        type: item.resourceType as any,
-        title: item.title,
         author:
           item.author &&
           createAuthor({
@@ -137,7 +136,10 @@ export class ResourceRepository {
         pictureUri: item.picture.url,
         requiredSkills: this._toSkills(item.requiredSkillCollection),
         skills: this._toSkills(item.skillCollection),
+        slug: item.slug,
         summary: item.summary,
+        title: item.title,
+        type: item.resourceType as any,
         url: item.url,
       })
     );

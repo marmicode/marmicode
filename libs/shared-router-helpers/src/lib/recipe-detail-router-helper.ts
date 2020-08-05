@@ -15,4 +15,7 @@ export const recipeDetailRouterHelper = {
   recipeDetail(recipeSlug: string) {
     return ['/', this.RECIPE_DETAIL_PATH, recipeSlug];
   },
+  tutorialDetail(tutorialSlug: string) {
+    return ['/', this.TUTORIAL_DETAIL_PATH, tutorialSlug];
+  },
 };
