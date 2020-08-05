@@ -96,7 +96,16 @@ export class RecipeRepository {
       );
   }
 
-  getRecipe(): Observable<Recipe> {
+  getRecipe(recipeSlug: string): Observable<Recipe> {
+    // @todo wip
+    // return this._apollo
+    //   .query<Query>({
+    //     query: getRecipe,
+    //     variables: {
+    //       recipeSlug
+    //     }
+    //   })
+
     return of({
       id: null,
       type: ResourceType.Tutorial,

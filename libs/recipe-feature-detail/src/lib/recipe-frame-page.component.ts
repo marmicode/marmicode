@@ -6,7 +6,7 @@ import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
 import { combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { RecipeFrameModule } from './recipe-frame.component';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
 import { RecipeTimelineModule } from './recipe-timeline.component';
@@ -55,7 +55,13 @@ export class RecipeFramePageComponent {
     private _route: ActivatedRoute,
     private _state: RxState<{ recipe: Recipe; currentFrameSlug: string }>
   ) {
-    this._state.connect('recipe', this._recipeRepository.getRecipe());
+    this._state.connect(
+      'recipe',
+      this._route.paramMap.pipe(
+        map((params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)),
+        switchMap((recipeSlug) => this._recipeRepository.getRecipe(recipeSlug))
+      )
+    );
     this._state.connect(
       'currentFrameSlug',
       this._route.paramMap.pipe(
