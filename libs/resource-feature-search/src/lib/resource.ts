@@ -21,6 +21,7 @@ export interface Resource {
   skills: Skill[];
   summary: string;
   url: string;
+  isWip?: boolean;
 }
 
 export function createResource(resource: Resource) {

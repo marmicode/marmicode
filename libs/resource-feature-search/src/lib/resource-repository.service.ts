@@ -3,10 +3,10 @@ import { WipService } from '@marmicode/shared-utils';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { GraphQLModule } from './graphql/graphql.module';
 import * as schema from './graphql/schema';
-import { Query, ResourceFilter, SkillFilter } from './graphql/schema';
+import { Query } from './graphql/schema';
 import { skillFragment, skillFragmentToSkill } from './graphql/skill-fragment';
 import { createAuthor, createResource, Resource } from './resource';
 import { Skill } from './skill';
@@ -26,6 +26,7 @@ const resourceFragment = gql`
       }
     }
     duration
+    isWip
     picture {
       url
     }
@@ -57,8 +58,8 @@ const getAllResources = gql`
 
 const getResourcesBySkill = gql`
   ${resourceFragment}
-  query getResourcesBySkill($skillFilter: SkillFilter) {
-    skillCollection(limit: 1, where: $skillFilter) {
+  query getResourcesBySkill($skillSlug: String!) {
+    skillCollection(limit: 1, where: { slug: $skillSlug }) {
       items {
         linkedFrom {
           resourceCollection {
@@ -74,9 +75,6 @@ const getResourcesBySkill = gql`
 
 @Injectable()
 export class ResourceRepository {
-  /* Hide wip resources except if we are in wip mode. */
-  private _baseFilter = this._wip.isWip() ? {} : { isWip_not: true };
-
   constructor(private _apollo: Apollo, private _wip: WipService) {}
 
   getResources(): Observable<Resource[]> {
@@ -84,9 +82,8 @@ export class ResourceRepository {
       .query<Query>({
         query: getAllResources,
         variables: {
-          filter: {
-            ...this._baseFilter,
-          } as ResourceFilter,
+          /* Hide wip resources except if we are in wip mode. */
+          filter: this._wip.isWip() ? {} : { isWip_not: true },
         },
       })
       .pipe(map(({ data }) => this._toResources(data.resourceCollection)));
@@ -97,10 +94,7 @@ export class ResourceRepository {
       .query<Query>({
         query: getResourcesBySkill,
         variables: {
-          skillFilter: {
-            slug: skillSlug,
-            ...this._baseFilter,
-          } as SkillFilter,
+          skillSlug,
         },
       })
       .pipe(
@@ -114,8 +108,11 @@ export class ResourceRepository {
          * AFAIK, there is no way to return only resources that have this
          * skill in `requiredSkills` field. */
         map((resources) =>
-          resources.filter((resource) =>
-            resource.skills.find((skill) => skill.slug === skillSlug)
+          resources.filter(
+            (resource) =>
+              resource.skills.find((skill) => skill.slug === skillSlug) &&
+              /* Hide wip resources except if we are in wip mode. */
+              (this._wip.isWip() || resource.isWip !== true)
           )
         )
       );
@@ -136,6 +133,7 @@ export class ResourceRepository {
             pictureUri: item.author.picture.url,
           }),
         duration: item.duration,
+        isWip: item.isWip,
         pictureUri: item.picture.url,
         requiredSkills: this._toSkills(item.requiredSkillCollection),
         skills: this._toSkills(item.skillCollection),
