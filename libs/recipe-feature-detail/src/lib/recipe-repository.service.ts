@@ -11,6 +11,7 @@ export interface RecipeFrame {
 
 export interface Recipe {
   id: string;
+  title: string;
   slug: string;
   frames: RecipeFrame[];
 }

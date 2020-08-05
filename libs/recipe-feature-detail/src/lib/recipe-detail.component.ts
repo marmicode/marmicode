@@ -9,11 +9,13 @@ import { map } from 'rxjs/operators';
 import { RecipeFrameModule } from './recipe-frame.component';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
 import { RecipeTimelineModule } from './recipe-timeline.component';
+import { RecipeTitleModule } from './recipe-title.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-detail',
   template: `
+    <mc-recipe-title [title]="title$ | async"></mc-recipe-title>
     <mc-recipe-frame [frame]="currentFrame$ | async"></mc-recipe-frame>
     <div fxFlex></div>
     <mc-recipe-timeline
@@ -48,6 +50,7 @@ export class RecipeDetailComponent {
   currentFrameIndex$ = combineLatest([this.frames$, this.currentFrame$]).pipe(
     map(([frames, currentFrame]) => frames.indexOf(currentFrame))
   );
+  title$ = this.recipe$.pipe(select(map((recipe) => recipe.title)));
 
   constructor(
     private _recipeRepository: RecipeRepository,
@@ -67,6 +70,12 @@ export class RecipeDetailComponent {
 @NgModule({
   declarations: [RecipeDetailComponent],
   exports: [RecipeDetailComponent],
-  imports: [CommonModule, RecipeFrameModule, RecipeTimelineModule, FlexModule],
+  imports: [
+    CommonModule,
+    RecipeFrameModule,
+    RecipeTimelineModule,
+    FlexModule,
+    RecipeTitleModule,
+  ],
 })
 export class RecipeDetailModule {}
