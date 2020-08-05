@@ -5,13 +5,15 @@ import { Apollo } from 'apollo-angular';
 
 import gql from 'graphql-tag';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { BlockType } from './block/block';
 import { createFrame, Frame } from './frame/frame';
 
+export type RecipeType = ResourceType.Recipe | ResourceType.Tutorial;
+
 export interface Recipe {
   id: string;
-  type: ResourceType.Recipe | ResourceType.Tutorial;
+  type: RecipeType;
   title: string;
   slug: string;
   frames: Frame[];
@@ -125,7 +127,7 @@ export class RecipeRepository {
 
     return of({
       id: null,
-      type: ResourceType.Tutorial,
+      type: ResourceType.Tutorial as RecipeType,
       slug: 'setup-express-gateway',
       title: 'Setup Express Gateway',
       frames: [
@@ -212,7 +214,7 @@ sdf adsk fhjadsklfhj a
           ],
         },
       ],
-    });
+    } as Recipe).pipe(delay(0));
   }
 }
 

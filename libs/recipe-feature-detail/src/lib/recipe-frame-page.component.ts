@@ -21,13 +21,17 @@ import { RecipeTitleModule } from './recipe-title.component';
         [resourceType]="type$ | async"
         [title]="title$ | async"
       ></mc-recipe-title>
-      <mc-frame [frame]="currentFrame$ | async"></mc-frame>
+      <mc-frame
+        *ngIf="currentFrame$ | async as currentFrame"
+        [frame]="currentFrame"
+      ></mc-frame>
       <div fxFlex></div>
       <mc-recipe-timeline
-        class="timeline"
-        [frames]="frames$ | async"
+        *ngIf="frames$ | async as frames"
+        [frames]="frames"
         [recipeSlug]="recipeSlug$ | async"
         [currentFrameIndex]="currentFrameIndex$ | async"
+        class="timeline"
       ></mc-recipe-timeline>
     </mc-page>
   `,
@@ -38,11 +42,16 @@ export class RecipeFramePageComponent {
   recipeSlug$ = this.recipe$.pipe(select(map((recipe) => recipe.slug)));
   frames$ = this.recipe$.pipe(select(map((recipe) => recipe.frames)));
   currentFrame$ = this._state.select(
-    map(
-      ({ currentFrameSlug, recipe }) =>
+    map(({ currentFrameSlug, recipe }) => {
+      if (recipe == null) {
+        return null;
+      }
+
+      return (
         recipe.frames.find((frame) => frame.slug === currentFrameSlug) ??
         recipe.frames[0]
-    )
+      );
+    })
   );
   currentFrameIndex$ = combineLatest([this.frames$, this.currentFrame$]).pipe(
     map(([frames, currentFrame]) => frames.indexOf(currentFrame))
