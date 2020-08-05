@@ -11,8 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import {
-  resourceTypeActionMap,
-  resourceTypeColorMap,
+  getResourceTypeActionText,
+  getResourceTypeColor,
 } from '@marmicode/resource-core';
 import { TriangleModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
@@ -137,8 +137,8 @@ export class ResourceCardComponent implements OnChanges {
   color: string;
 
   ngOnChanges() {
-    this.color = resourceTypeColorMap.get(this.resource.type);
-    this.actionText = resourceTypeActionMap.get(this.resource.type);
+    this.color = getResourceTypeColor(this.resource.type);
+    this.actionText = getResourceTypeActionText(this.resource.type);
   }
 }
 

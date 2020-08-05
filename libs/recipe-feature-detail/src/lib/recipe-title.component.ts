@@ -8,9 +8,9 @@ import {
 import { FlexModule } from '@angular/flex-layout';
 import {
   ResourceType,
-  resourceTypeColorMap,
-  resourceTypeTextMap,
-} from '@marmicode/resource-core';
+  getResourceTypeColor,
+  getResourceTypeText,
+} from '@marmicode/resource-api';
 import { RxState } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 
@@ -70,11 +70,11 @@ export class RecipeTitleComponent {
   @Input() title: string;
 
   badgeColor$ = this._state.select(
-    map(({ resourceType }) => resourceTypeColorMap.get(resourceType))
+    map(({ resourceType }) => getResourceTypeColor(resourceType))
   );
 
   badgeText$ = this._state.select(
-    map(({ resourceType }) => resourceTypeTextMap.get(resourceType))
+    map(({ resourceType }) => getResourceTypeText(resourceType))
   );
 
   constructor(private _state: RxState<{ resourceType: ResourceType }>) {}

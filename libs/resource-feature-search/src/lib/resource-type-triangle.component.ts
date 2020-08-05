@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import {
   ResourceType,
-  resourceTypeColorMap,
-  resourceTypeTextMap,
+  getResourceTypeColor,
+  getResourceTypeText,
 } from '@marmicode/resource-core';
 import { TriangleModule } from '@marmicode/shared-ui';
 
@@ -24,8 +24,8 @@ export class ResourceTypeTriangleComponent implements OnChanges {
   text: string;
 
   ngOnChanges() {
-    this.color = resourceTypeColorMap.get(this.resourceType);
-    this.text = resourceTypeTextMap.get(this.resourceType);
+    this.color = getResourceTypeColor(this.resourceType);
+    this.text = getResourceTypeText(this.resourceType);
   }
 }
 

@@ -32,6 +32,10 @@ export const resourceTypeTextMap = new Map<ResourceType, string>([
   [ResourceType.Workshop, 'Workshop'],
 ]);
 
+export function getResourceTypeText(resourceType: ResourceType) {
+  return resourceTypeTextMap.get(resourceType);
+}
+
 export const resourceTypeActionMap = new Map<ResourceType, string>([
   [ResourceType.Documentation, 'Read'],
   [ResourceType.ExternalBlogPost, 'Read'],

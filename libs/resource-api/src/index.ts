@@ -1,6 +1,6 @@
 export {
   ResourceType,
-  resourceTypeActionMap,
-  resourceTypeColorMap,
-  resourceTypeTextMap,
+  getResourceTypeText,
+  getResourceTypeColor,
+  getResourceTypeActionText,
 } from '@marmicode/resource-core';

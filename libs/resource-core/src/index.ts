@@ -2,7 +2,5 @@ export {
   ResourceType,
   getResourceTypeActionText,
   getResourceTypeColor,
-  resourceTypeActionMap,
-  resourceTypeColorMap,
-  resourceTypeTextMap,
+  getResourceTypeText,
 } from './lib/resource-type';
