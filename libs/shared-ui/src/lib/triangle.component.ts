@@ -28,6 +28,7 @@ import {
         right: -80px;
         height: 160px;
         width: 160px;
+        opacity: 0.9;
       }
 
       .mc-triangle-text {
