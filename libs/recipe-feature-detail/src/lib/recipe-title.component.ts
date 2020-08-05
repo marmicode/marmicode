@@ -6,12 +6,15 @@ import {
   NgModule,
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
+import { ResourceType, resourceTypeTextMap } from '@marmicode/resource-core';
+import { RxState } from '@rx-angular/state';
+import { map } from 'rxjs/operators';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-title',
   template: ` <div fxLayout="row" fxLayoutAlign="center">
-      <div class="badge">RECIPE</div>
+      <div class="badge">{{ badgeText$ | async }}</div>
     </div>
     <h1 class="title">{{ title }}</h1>
     <svg preserveAspectRatio="none" viewBox="0 0 100 100">
@@ -35,6 +38,7 @@ import { FlexModule } from '@angular/flex-layout';
         background-color: #5ab3ad;
         color: #561f4b;
         box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
+        text-transform: uppercase;
       }
 
       .title {
@@ -54,9 +58,19 @@ import { FlexModule } from '@angular/flex-layout';
       }
     `,
   ],
+  providers: [RxState],
 })
 export class RecipeTitleComponent {
+  @Input() set resourceType(resourceType: ResourceType) {
+    this._state.set({ resourceType });
+  }
   @Input() title: string;
+
+  badgeText$ = this._state.select(
+    map(({ resourceType }) => resourceTypeTextMap.get(resourceType))
+  );
+
+  constructor(private _state: RxState<{ resourceType: ResourceType }>) {}
 }
 
 @NgModule({

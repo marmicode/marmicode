@@ -15,7 +15,10 @@ import { RecipeTitleModule } from './recipe-title.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-detail',
   template: `
-    <mc-recipe-title [title]="title$ | async"></mc-recipe-title>
+    <mc-recipe-title
+      [resourceType]="type$ | async"
+      [title]="title$ | async"
+    ></mc-recipe-title>
     <mc-recipe-frame [frame]="currentFrame$ | async"></mc-recipe-frame>
     <div fxFlex></div>
     <mc-recipe-timeline
@@ -50,6 +53,7 @@ export class RecipeDetailComponent {
   currentFrameIndex$ = combineLatest([this.frames$, this.currentFrame$]).pipe(
     map(([frames, currentFrame]) => frames.indexOf(currentFrame))
   );
+  type$ = this.recipe$.pipe(select(map((recipe) => recipe.type)));
   title$ = this.recipe$.pipe(select(map((recipe) => recipe.title)));
 
   constructor(

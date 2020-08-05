@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ResourceType } from '@marmicode/resource-core';
 import { Observable, of } from 'rxjs';
 import { Block, BlockType } from './block/block';
 
@@ -11,6 +12,7 @@ export interface RecipeFrame {
 
 export interface Recipe {
   id: string;
+  type: ResourceType.Recipe | ResourceType.Tutorial;
   title: string;
   slug: string;
   frames: RecipeFrame[];
@@ -23,6 +25,7 @@ export class RecipeRepository {
   getRecipe(): Observable<Recipe> {
     return of({
       id: null,
+      type: ResourceType.Tutorial,
       slug: 'setup-express-gateway',
       title: 'Setup Express Gateway',
       frames: [
