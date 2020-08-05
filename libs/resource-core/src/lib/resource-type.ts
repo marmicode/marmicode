@@ -14,7 +14,7 @@ export const resourceTypeColorMap = new Map<ResourceType, string>([
   [ResourceType.Documentation, '#d42020'],
   [ResourceType.Recipe, '#5ab3ad'],
   [ResourceType.Snack, '#f57bb5'],
-  [ResourceType.Tutorial, '#0f5bf3'],
+  [ResourceType.Tutorial, '#4281ff'],
   [ResourceType.Workshop, '#673ab7'],
 ]);
 

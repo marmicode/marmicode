@@ -6,7 +6,11 @@ import {
   NgModule,
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
-import { ResourceType, resourceTypeTextMap } from '@marmicode/resource-core';
+import {
+  ResourceType,
+  resourceTypeColorMap,
+  resourceTypeTextMap,
+} from '@marmicode/resource-core';
 import { RxState } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 
@@ -14,7 +18,9 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-title',
   template: ` <div fxLayout="row" fxLayoutAlign="center">
-      <div class="badge">{{ badgeText$ | async }}</div>
+      <div [style.backgroundColor]="badgeColor$ | async" class="badge">
+        {{ badgeText$ | async }}
+      </div>
     </div>
     <h1 class="title">{{ title }}</h1>
     <svg preserveAspectRatio="none" viewBox="0 0 100 100">
@@ -35,7 +41,6 @@ import { map } from 'rxjs/operators';
         padding: 0 10px;
         z-index: 1;
 
-        background-color: #5ab3ad;
         color: #561f4b;
         box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
         text-transform: uppercase;
@@ -65,6 +70,10 @@ export class RecipeTitleComponent {
     this._state.set({ resourceType });
   }
   @Input() title: string;
+
+  badgeColor$ = this._state.select(
+    map(({ resourceType }) => resourceTypeColorMap.get(resourceType))
+  );
 
   badgeText$ = this._state.select(
     map(({ resourceType }) => resourceTypeTextMap.get(resourceType))
