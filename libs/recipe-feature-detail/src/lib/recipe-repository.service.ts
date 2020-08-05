@@ -156,5 +156,6 @@ sdf adsk fhjadsklfhj a
 
 @NgModule({
   imports: [ContentfulModule],
+  providers: [RecipeRepository],
 })
 export class RecipeRepositoryModule {}
