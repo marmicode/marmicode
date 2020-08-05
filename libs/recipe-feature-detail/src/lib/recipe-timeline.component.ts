@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { RxState } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
-import { Frame } from './recipe-repository.service';
+import { Frame } from './frame/frame';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

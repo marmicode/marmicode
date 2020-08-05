@@ -5,19 +5,9 @@ import { Apollo } from 'apollo-angular';
 
 import gql from 'graphql-tag';
 import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { Block, BlockType } from './block/block';
-
-export interface Frame {
-  slug: string;
-  duration: number;
-  title: string;
-  blocks: Block[];
-}
-
-export function createFrame(frame: Frame): Frame {
-  return { ...frame };
-}
+import { map } from 'rxjs/operators';
+import { BlockType } from './block/block';
+import { createFrame, Frame } from './frame/frame';
 
 export interface Recipe {
   id: string;

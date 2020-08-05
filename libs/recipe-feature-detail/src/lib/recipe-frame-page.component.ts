@@ -7,7 +7,7 @@ import { PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
 import { combineLatest } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { RecipeFrameModule } from './recipe-frame.component';
+import { FrameModule } from './frame/frame.component';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
 import { RecipeTimelineModule } from './recipe-timeline.component';
 import { RecipeTitleModule } from './recipe-title.component';
@@ -21,7 +21,7 @@ import { RecipeTitleModule } from './recipe-title.component';
         [resourceType]="type$ | async"
         [title]="title$ | async"
       ></mc-recipe-title>
-      <mc-recipe-frame [frame]="currentFrame$ | async"></mc-recipe-frame>
+      <mc-frame [frame]="currentFrame$ | async"></mc-frame>
       <div fxFlex></div>
       <mc-recipe-timeline
         class="timeline"
@@ -78,7 +78,7 @@ export class RecipeFramePageComponent {
     CommonModule,
     FlexModule,
     PageModule,
-    RecipeFrameModule,
+    FrameModule,
     RecipeTimelineModule,
     RecipeTitleModule,
   ],
