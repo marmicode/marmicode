@@ -15,3 +15,4 @@ export {
 export { TransferStateAdapter } from './lib/transfer-state-adapter.service';
 export { TransferStateHelper } from './lib/transfer-state-helper.service';
 export { shareReplayWithRefCount } from './lib/operators/share-replay-with-ref-count';
+export { or } from './lib/route-matchers';

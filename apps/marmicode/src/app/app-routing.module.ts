@@ -5,6 +5,7 @@ import {
   resourceSearchRouterHelper,
   servicesRouterHelper,
 } from '@marmicode/shared-router-helpers';
+import { or } from '@marmicode/shared-utils';
 
 export const routes: Routes = [
   /* Learning map. */
@@ -18,7 +19,10 @@ export const routes: Routes = [
 
   /* Recipe detail. */
   {
-    path: recipeDetailRouterHelper.RECIPE_DETAIL_PATH,
+    matcher: or([
+      recipeDetailRouterHelper.RECIPE_DETAIL_PATH,
+      recipeDetailRouterHelper.TUTORIAL_DETAIL_PATH,
+    ]),
     loadChildren: () =>
       import('@marmicode/recipe-feature-detail').then(
         (m) => m.RecipeDetailRoutingModule
