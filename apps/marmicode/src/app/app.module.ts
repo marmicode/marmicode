@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { NavModule } from './nav.component';
+import { UpdateEffects } from './update.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,7 @@ import { NavModule } from './nav.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'marmicode' }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([UpdateEffects]),
     HttpClientModule,
     LayoutModule,
     NavModule,
