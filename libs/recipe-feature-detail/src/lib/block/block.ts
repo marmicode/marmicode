@@ -10,14 +10,17 @@ export interface CodeBlock {
   code: string;
 }
 
+export function createCodeBlock(block: Omit<CodeBlock, 'type'>): CodeBlock {
+  return { type: BlockType.Code, ...block };
+}
+
 export interface TextBlock {
   type: BlockType.Text;
   text: string;
 }
 
-export interface PictureBlock {
-  type: BlockType.Picture;
-  url: string;
+export function createTextBlock(block: Omit<TextBlock, 'type'>): TextBlock {
+  return { type: BlockType.Text, ...block };
 }
 
-export type Block = CodeBlock | PictureBlock | TextBlock;
+export type Block = CodeBlock | TextBlock;

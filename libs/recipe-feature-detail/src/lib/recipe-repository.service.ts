@@ -6,7 +6,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { BlockType } from './block/block';
+import { BlockType, createCodeBlock, createTextBlock } from './block/block';
 import { createFrame, Frame } from './frame/frame';
 
 export type RecipeType = ResourceType.Recipe | ResourceType.Tutorial;
@@ -97,8 +97,7 @@ export class RecipeRepository {
   }
 
   getRecipe(recipeSlug: string): Observable<Recipe> {
-    // @todo wip
-    this._apollo
+    return this._apollo
       .query<Query>({
         query: getRecipe,
         variables: {
@@ -115,7 +114,21 @@ export class RecipeRepository {
             type: resource.resourceType as any,
             frames: resource.content.frameCollection.items.map((frame) =>
               createFrame({
-                blocks: [],
+                blocks: frame.blockCollection.items.map((block) => {
+                  switch (block.__typename) {
+                    case 'CodeBlock':
+                      return createCodeBlock({
+                        code: block.code,
+                        language: block.language,
+                      });
+                    case 'TextBlock':
+                      return createTextBlock({
+                        text: block.text,
+                      });
+                    default:
+                      return null;
+                  }
+                }),
                 duration: frame.duration,
                 slug: frame.slug,
                 title: frame.title,
@@ -124,97 +137,6 @@ export class RecipeRepository {
           });
         })
       );
-
-    return of({
-      id: null,
-      type: ResourceType.Tutorial as RecipeType,
-      slug: 'setup-express-gateway',
-      title: 'Setup Express Gateway',
-      frames: [
-        {
-          slug: 'install-express-gateway-1',
-          title: 'Install express gateway',
-          duration: 1,
-          blocks: [
-            {
-              type: BlockType.Text,
-              text: `
-# Setup the gateway
-## Install the thingy
-\`\`\`sh
-yarn add express-gateway
-\`\`\`
-
-## Let's do it
-asjdfkashjdf
-a asdklfhjasjkdlfhadshfjkas a
-sdf adsk fhjadsklfhj a
-              `,
-            },
-            {
-              type: BlockType.Code,
-              language: 'javascript',
-              code: `const plugins = {
-  test: 2
-};`,
-            },
-          ],
-        },
-        {
-          slug: 'install-express-gateway-2',
-          title: 'Install express gateway',
-          duration: 1,
-          blocks: [
-            {
-              type: BlockType.Text,
-              text: `
-# Setup the gateway
-## Install the thingy
-\`\`\`sh
-yarn add express-gateway
-\`\`\`
-
-## Let's do it
-asjdfkashjdf
-a asdklfhjasjkdlfhadshfjkas a
-sdf adsk fhjadsklfhj a
-              `,
-            },
-          ],
-        },
-        {
-          slug: 'install-express-gateway-3',
-          title: 'Install express gateway',
-          duration: 1,
-          blocks: [
-            {
-              type: BlockType.Text,
-              text: `
-              
-              
-# Setup the gateway
-## Install the thingy
-\`\`\`sh
-yarn add express-gateway
-\`\`\`
-
-## Let's do it
-asjdfkashjdf
-a asdklfhjasjkdlfhadshfjkas a
-sdf adsk fhjadsklfhj a
-              `,
-            },
-            {
-              type: BlockType.Code,
-              language: 'javascript',
-              code: `const plugins = {
-  test: 2
-};`,
-            },
-          ],
-        },
-      ],
-    } as Recipe).pipe(delay(0));
   }
 }
 
