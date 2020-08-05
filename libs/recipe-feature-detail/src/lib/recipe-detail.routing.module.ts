@@ -12,6 +12,7 @@ const routes: Routes = [
     path: `:${recipeDetailRouterHelper.RECIPE_SLUG_PARAM}/:${recipeDetailRouterHelper.FRAME_SLUG_PARAM}`,
     component: RecipeDetailComponent,
   },
+  /* This will be a different page later. */
   {
     path: `:${recipeDetailRouterHelper.RECIPE_SLUG_PARAM}`,
     component: RecipeDetailComponent,
