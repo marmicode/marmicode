@@ -10,14 +10,16 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   getResourceTypeActionText,
   getResourceTypeColor,
+  ResourceType,
 } from '@marmicode/resource-core';
+import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { LinkModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-card-action',
-  template: ` <mc-link [href]="resource.url">
+  template: ` <mc-link [href]="resource.url" [route]="route">
     <button
       [style.backgroundColor]="color"
       class="action-button"
@@ -38,13 +40,30 @@ import { Resource } from './resource';
   ],
 })
 export class ResourceCardActionComponent implements OnChanges {
+  private static _routeFactoryMap = new Map<
+    ResourceType,
+    (slug: string) => string[]
+  >([
+    [
+      ResourceType.Recipe,
+      (slug) => recipeDetailRouterHelper.recipeDetail(slug),
+    ],
+  ]);
+
   @Input() resource: Resource;
   actionText: string;
   color: string;
+  route: string[];
 
   ngOnChanges() {
     this.actionText = getResourceTypeActionText(this.resource.type);
     this.color = getResourceTypeColor(this.resource.type);
+    this.route = this._getRoute(this.resource);
+  }
+
+  private _getRoute(resource: Resource) {
+    const fn = ResourceCardActionComponent._routeFactoryMap.get(resource.type);
+    return fn != null ? fn(resource.slug) : null;
   }
 }
 

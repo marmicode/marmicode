@@ -12,14 +12,18 @@ export function createAuthor(author: Author) {
 
 export interface Resource {
   id?: string;
-  type: ResourceType;
-  title: string;
   author?: Author;
   duration: number;
   pictureUri?: string;
   requiredSkills: Skill[];
+  /**
+   * @deprecated 🚧 Work in progress.
+   */
+  slug?: string;
   skills: Skill[];
   summary: string;
+  title: string;
+  type: ResourceType;
   url: string;
   isWip?: boolean;
 }

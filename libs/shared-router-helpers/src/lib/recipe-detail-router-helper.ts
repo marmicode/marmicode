@@ -12,4 +12,7 @@ export const recipeDetailRouterHelper = {
   }) {
     return ['/', this.RECIPE_DETAIL_PATH, recipeSlug, frameSlug];
   },
+  recipeDetail(recipeSlug: string) {
+    return ['/', this.RECIPE_DETAIL_PATH, recipeSlug];
+  },
 };
