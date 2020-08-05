@@ -1,4 +1,5 @@
 import { Injectable, NgModule } from '@angular/core';
+import { WipService } from '@marmicode/shared-utils';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
@@ -73,7 +74,10 @@ const getResourcesBySkill = gql`
 
 @Injectable()
 export class ResourceRepository {
-  constructor(private _apollo: Apollo) {}
+  /* Hide wip resources except if we are in wip mode. */
+  private _baseFilter = this._wip.isWip() ? {} : { isWip_not: true };
+
+  constructor(private _apollo: Apollo, private _wip: WipService) {}
 
   getResources(): Observable<Resource[]> {
     return this._apollo
@@ -81,7 +85,7 @@ export class ResourceRepository {
         query: getAllResources,
         variables: {
           filter: {
-            isWip_not: true,
+            ...this._baseFilter,
           } as ResourceFilter,
         },
       })
@@ -95,7 +99,7 @@ export class ResourceRepository {
         variables: {
           skillFilter: {
             slug: skillSlug,
-            isWip_not: true,
+            ...this._baseFilter,
           } as SkillFilter,
         },
       })
