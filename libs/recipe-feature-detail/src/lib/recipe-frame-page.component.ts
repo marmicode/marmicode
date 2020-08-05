@@ -17,15 +17,22 @@ import { RecipeTitleModule } from './recipe-title.component';
   selector: 'mc-recipe-frame-page',
   template: `
     <mc-page fxLayout="column">
+      <!-- Recipe's title. -->
       <mc-recipe-title
         [resourceType]="type$ | async"
         [title]="title$ | async"
       ></mc-recipe-title>
+
+      <!-- Frame with code, text etc... blocks. -->
       <mc-frame
         *ngIf="currentFrame$ | async as currentFrame"
         [frame]="currentFrame"
       ></mc-frame>
+
+      <!-- Spacer to stick the timeline at the bottom. -->
       <div fxFlex></div>
+
+      <!-- THE timeline. -->
       <mc-recipe-timeline
         *ngIf="frames$ | async as frames"
         [frames]="frames"
