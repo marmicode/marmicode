@@ -1,6 +1,5 @@
 import { ApplicationRef, Injectable, NgZone } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { WipService } from '@marmicode/shared-utils';
 import { createEffect } from '@ngrx/effects';
 import { defer, EMPTY, timer } from 'rxjs';
 import { first, switchMap, tap } from 'rxjs/operators';
@@ -39,7 +38,6 @@ export class UpdateEffects {
   constructor(
     private _applicationRef: ApplicationRef,
     private _swUpdate: SwUpdate,
-    private _wipService: WipService,
     private _zone: NgZone
   ) {}
 }

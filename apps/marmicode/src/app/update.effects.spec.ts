@@ -1,12 +1,15 @@
 import { ApplicationRef } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { SwUpdate } from '@angular/service-worker';
-import { EMPTY, of } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { UpdateEffects } from './update.effects';
 
 describe('UpdateEffects', () => {
-  beforeEach(() =>
-    TestBed.configureTestingModule({
+  let updateAvailable$: Subject<unknown>;
+
+  beforeEach(() => {
+    updateAvailable$ = new Subject<unknown>();
+    return TestBed.configureTestingModule({
       providers: [
         {
           provide: ApplicationRef,
@@ -17,14 +20,14 @@ describe('UpdateEffects', () => {
         {
           provide: SwUpdate,
           useValue: {
-            available: EMPTY,
+            available: updateAvailable$,
             checkForUpdate: jest.fn(),
             isEnabled: true,
           },
         },
       ],
-    })
-  );
+    });
+  });
 
   let updateEffects: UpdateEffects;
   beforeEach(() => (updateEffects = TestBed.inject(UpdateEffects)));
@@ -49,4 +52,12 @@ describe('UpdateEffects', () => {
 
     subscription.unsubscribe();
   }));
+
+  xit('should prompt user for reload', () => {
+    const subscription = updateEffects.update$.subscribe();
+
+    // @todo check prompt is called
+
+    subscription.unsubscribe();
+  });
 });
