@@ -34,6 +34,6 @@ export const resourceTypeActionMap = new Map<ResourceType, string>([
   [ResourceType.ExternalVideo, 'Watch'],
   [ResourceType.Recipe, `Let's cook!`],
   [ResourceType.Snack, `Let's eat!`],
-  [ResourceType.Tutorial, `Let's try!`],
+  [ResourceType.Tutorial, `Let's cook!`],
   [ResourceType.Workshop, 'Register'],
 ]);
