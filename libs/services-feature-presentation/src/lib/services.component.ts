@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
+import { PageModule } from '@marmicode/shared-ui';
 import { ActionButtonModule } from './action-button.component';
 import { BannerModule } from './banner.component';
 import { CoachModule } from './coach.component';
@@ -12,7 +13,8 @@ import { WorkshopsButtonModule } from './workshops-button.component';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-services',
-  template: ` <mc-banner></mc-banner>
+  template: ` <mc-page>
+    <mc-banner></mc-banner>
     <mc-slant></mc-slant>
     <div class="services-presentation">
       <!-- Workshops. -->
@@ -66,7 +68,8 @@ import { WorkshopsButtonModule } from './workshops-button.component';
           <mc-coach></mc-coach>
         </ng-container>
       </mc-section>
-    </div>`,
+    </div>
+  </mc-page>`,
   styles: [
     `
       .services-presentation {
@@ -90,6 +93,7 @@ export class ServicesComponent {}
     MatButtonModule,
     ActionButtonModule,
     CoachModule,
+    PageModule,
   ],
 })
 export class ServicesModule {}

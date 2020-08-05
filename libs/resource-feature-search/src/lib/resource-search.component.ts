@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ErrorModule, LoadingModule } from '@marmicode/shared-ui';
+import { ErrorModule, LoadingModule, PageModule } from '@marmicode/shared-ui';
 import {
   TransferStateHelper,
   deprogressifyData,
@@ -24,32 +24,28 @@ import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-search',
   template: `
-    <div fxLayout="row" fxLayoutAlign="center">
-      <mc-loading *ngIf="isLoading$ | async"></mc-loading>
-      <mc-error *ngIf="resourcesNotFound$ | async">
-        Sorry! The resources you are looking for haven't been cooked yet.
-      </mc-error>
-    </div>
-    <div
-      *ngIf="(isLoading$ | async) === false"
-      fxLayout="row wrap"
-      fxLayoutAlign="center"
-    >
-      <mc-resource-card
-        *ngFor="let resource of resources$ | async; trackBy: trackById"
-        [resource]="resource"
-        class="mc-resource-card"
-      ></mc-resource-card>
-    </div>
+    <mc-page>
+      <div fxLayout="row" fxLayoutAlign="center">
+        <mc-loading *ngIf="isLoading$ | async"></mc-loading>
+        <mc-error *ngIf="resourcesNotFound$ | async">
+          Sorry! The resources you are looking for haven't been cooked yet.
+        </mc-error>
+      </div>
+      <div
+        *ngIf="(isLoading$ | async) === false"
+        fxLayout="row wrap"
+        fxLayoutAlign="center"
+      >
+        <mc-resource-card
+          *ngFor="let resource of resources$ | async; trackBy: trackById"
+          [resource]="resource"
+          class="mc-resource-card"
+        ></mc-resource-card>
+      </div>
+    </mc-page>
   `,
   styles: [
     `
-      :host {
-        display: block;
-        background-color: white;
-        min-height: 100%;
-      }
-
       .mc-resource-card {
         margin: 20px;
       }
@@ -117,10 +113,11 @@ export class ResourceSearchComponent {
     CommonModule,
     ErrorModule,
     FlexLayoutModule,
+    LoadingModule,
+    PageModule,
     ResourceCardModule,
     ResourceRepositoryModule,
     ResourceSearchFormModule,
-    LoadingModule,
   ],
 })
 export class ResourceSearchModule {}

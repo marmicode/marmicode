@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { ActivatedRoute } from '@angular/router';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
+import { PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,29 +16,21 @@ import { RecipeTitleModule } from './recipe-title.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-detail',
   template: `
-    <mc-recipe-title
-      [resourceType]="type$ | async"
-      [title]="title$ | async"
-    ></mc-recipe-title>
-    <mc-recipe-frame [frame]="currentFrame$ | async"></mc-recipe-frame>
-    <div fxFlex></div>
-    <mc-recipe-timeline
-      class="timeline"
-      [frames]="frames$ | async"
-      [recipeSlug]="recipeSlug$ | async"
-      [currentFrameIndex]="currentFrameIndex$ | async"
-    ></mc-recipe-timeline>
+    <mc-page fxLayout="column">
+      <mc-recipe-title
+        [resourceType]="type$ | async"
+        [title]="title$ | async"
+      ></mc-recipe-title>
+      <mc-recipe-frame [frame]="currentFrame$ | async"></mc-recipe-frame>
+      <div fxFlex></div>
+      <mc-recipe-timeline
+        class="timeline"
+        [frames]="frames$ | async"
+        [recipeSlug]="recipeSlug$ | async"
+        [currentFrameIndex]="currentFrameIndex$ | async"
+      ></mc-recipe-timeline>
+    </mc-page>
   `,
-  styles: [
-    `
-      :host {
-        display: flex;
-        background-color: white;
-        flex-direction: column;
-        min-height: 100%;
-      }
-    `,
-  ],
   providers: [RxState],
 })
 export class RecipeDetailComponent {
@@ -81,6 +74,7 @@ export class RecipeDetailComponent {
     RecipeTimelineModule,
     FlexModule,
     RecipeTitleModule,
+    PageModule,
   ],
 })
 export class RecipeDetailModule {}

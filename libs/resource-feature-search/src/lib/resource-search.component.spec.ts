@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ResourceSearchComponent } from './resource-search.component';
 import { Subject } from 'rxjs';
@@ -37,6 +38,7 @@ describe('ResourceSearchComponent', () => {
           },
         },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
