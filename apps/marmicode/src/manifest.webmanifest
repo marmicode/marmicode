@@ -3,7 +3,7 @@
   "short_name": "Marmicode",
   "theme_color": "#380030",
   "background_color": "#fafafa",
-  "display": "fullscreen",
+  "display": "standalone",
   "scope": "./",
   "start_url": "./",
   "icons": [
