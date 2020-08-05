@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { NavModule } from './nav.component';
-import { UpdateEffects } from './update.effects';
+import { UpdateEffects } from './update/update.effects';
 
 @NgModule({
   declarations: [AppComponent],
