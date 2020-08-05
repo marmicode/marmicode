@@ -11,12 +11,13 @@ import {
   getResourceTypeActionText,
   getResourceTypeColor,
 } from '@marmicode/resource-core';
+import { LinkModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-card-action',
-  template: `<a [href]="resource.url" target="_blank">
+  template: ` <mc-link [href]="resource.url">
     <button
       [style.backgroundColor]="color"
       class="action-button"
@@ -25,7 +26,7 @@ import { Resource } from './resource';
     >
       {{ actionText }}
     </button>
-  </a>`,
+  </mc-link>`,
   styles: [
     `
       .action-button {
@@ -50,6 +51,6 @@ export class ResourceCardActionComponent implements OnChanges {
 @NgModule({
   declarations: [ResourceCardActionComponent],
   exports: [ResourceCardActionComponent],
-  imports: [CommonModule, MatButtonModule],
+  imports: [CommonModule, MatButtonModule, LinkModule],
 })
 export class ResourceCardActionModule {}
