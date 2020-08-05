@@ -12,7 +12,7 @@ export class UpdateEffects {
   checkForUpdate$ = createEffect(
     () =>
       this._zone.runOutsideAngular(() =>
-        this._wipService.isWip() && this._swUpdate.isEnabled
+        this._swUpdate.isEnabled
           ? this._applicationRef.isStable.pipe(
               first((isStable) => isStable === true),
               switchMap(() => timer(0, 30000)),
