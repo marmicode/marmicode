@@ -4,9 +4,9 @@ import { ResourceType } from '@marmicode/resource-api';
 import { Apollo } from 'apollo-angular';
 
 import gql from 'graphql-tag';
-import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
-import { BlockType, createCodeBlock, createTextBlock } from './block/block';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { createCodeBlock, createTextBlock } from './block/block';
 import { createFrame, Frame } from './frame/frame';
 
 export type RecipeType = ResourceType.Recipe | ResourceType.Tutorial;
