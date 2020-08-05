@@ -34,21 +34,14 @@ export class RecipeDetailComponent implements OnInit {
       .pipe(
         map((params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)),
         switchMap((recipeSlug) =>
-          this._recipeRepository
-            .getRecipeFirstFrameSlug(recipeSlug)
-            .pipe(map((frameSlug) => ({ frameSlug, recipeSlug })))
+          this._recipeRepository.getRecipeFirstFrameSlug(recipeSlug)
         ),
-        switchMap(({ frameSlug, recipeSlug }) =>
-          this._router.navigate(
-            recipeDetailRouterHelper.recipeFrame({
-              recipeSlug,
-              frameSlug,
-            }),
-            {
-              /* Act like a redirect to avoid getting stuck when hitting back. */
-              replaceUrl: true,
-            }
-          )
+        switchMap((frameSlug) =>
+          this._router.navigate([frameSlug], {
+            relativeTo: this._route,
+            /* Act like a redirect to avoid getting stuck when hitting back. */
+            replaceUrl: true,
+          })
         ),
         untilDestroyed(this)
       )
