@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ResourceType } from '@marmicode/resource-core';
+import { ResourceType } from '@marmicode/resource-api';
 import { Observable, of } from 'rxjs';
 import { Block, BlockType } from './block/block';
 
