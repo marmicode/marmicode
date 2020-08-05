@@ -1,8 +1,14 @@
-import { ApplicationRef, Injectable, NgZone } from '@angular/core';
+import {
+  ApplicationRef,
+  Compiler,
+  Injectable,
+  Injector,
+  NgZone,
+} from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { createEffect } from '@ngrx/effects';
-import { defer, EMPTY, timer } from 'rxjs';
-import { first, switchMap, tap } from 'rxjs/operators';
+import { combineLatest, defer, EMPTY, timer } from 'rxjs';
+import { first, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -27,8 +33,19 @@ export class UpdateEffects {
   update$ = createEffect(
     () =>
       this._swUpdate.available.pipe(
-        switchMap(() => defer(() => this._swUpdate.activateUpdate())),
-        tap(() => document.location.reload())
+        switchMap(() =>
+          combineLatest([
+            defer(() => import('@angular/material/dialog')),
+            defer(() => import('./update-dialog.component')),
+          ])
+        ),
+        map(([{ MatDialog, MatDialogModule }, { UpdateDialogComponent }]) => {
+          const moduleRef = this._compiler
+            .compileModuleSync(MatDialogModule)
+            .create(this._injector);
+          const matDialog = moduleRef.injector.get(MatDialog);
+          matDialog.open(UpdateDialogComponent);
+        })
       ),
     {
       dispatch: false,
@@ -37,6 +54,8 @@ export class UpdateEffects {
 
   constructor(
     private _applicationRef: ApplicationRef,
+    private _compiler: Compiler,
+    private _injector: Injector,
     private _swUpdate: SwUpdate,
     private _zone: NgZone
   ) {}
