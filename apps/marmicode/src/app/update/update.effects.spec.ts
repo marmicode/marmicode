@@ -3,7 +3,7 @@ import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SwUpdate } from '@angular/service-worker';
-import { of, Subject } from 'rxjs';
+import { EMPTY, of, Subject } from 'rxjs';
 import { UpdateDialogComponent } from './update-dialog.component';
 import { UpdateEffects } from './update.effects';
 
@@ -94,6 +94,7 @@ describe('UpdateEffects', () => {
 
     (matDialog.open as jest.Mock).mockReturnValue(
       of({
+        /* Close dialog automatically. */
         afterClosed: jest.fn().mockReturnValue(of(undefined)),
       })
     );
@@ -109,5 +110,24 @@ describe('UpdateEffects', () => {
     subscription.unsubscribe();
   }));
 
-  it(`it shouldn't reprompt user after 30s if dialog is open`, () => {});
+  xit(`shouldn't reprompt user after 30s if dialog is open`, fakeAsync(() => {
+    const subscription = updateEffects.update$.subscribe();
+
+    (matDialog.open as jest.Mock).mockReturnValue(
+      of({
+        /* Keep dialog open. */
+        afterClosed: jest.fn().mockReturnValue(EMPTY),
+      })
+    );
+
+    tick(29999);
+
+    expect(matDialog.open).toBeCalledTimes(1);
+
+    tick(30000);
+
+    expect(matDialog.open).toBeCalledTimes(1);
+
+    subscription.unsubscribe();
+  }));
 });
