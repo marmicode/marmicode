@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Query } from '@marmicode/contentful-api';
+import { Injectable, NgModule } from '@angular/core';
+import { ContentfulModule, Query } from '@marmicode/contentful-api';
 import { ResourceType } from '@marmicode/resource-api';
 import { Apollo } from 'apollo-angular';
+
+import gql from 'graphql-tag';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Block, BlockType } from './block/block';
-
-import * as gql from 'graphql-tag';
 
 export interface RecipeFrame {
   slug: string;
@@ -39,9 +39,7 @@ const getRecipeFirstFrameSlug = gql`
   }
 `;
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class RecipeRepository {
   constructor(private _apollo: Apollo) {}
 
@@ -155,3 +153,8 @@ sdf adsk fhjadsklfhj a
     });
   }
 }
+
+@NgModule({
+  imports: [ContentfulModule],
+})
+export class RecipeRepositoryModule {}
