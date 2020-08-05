@@ -88,4 +88,26 @@ describe('UpdateEffects', () => {
 
     subscription.unsubscribe();
   }));
+
+  xit('should reprompt user after 30s', fakeAsync(() => {
+    const subscription = updateEffects.update$.subscribe();
+
+    (matDialog.open as jest.Mock).mockReturnValue(
+      of({
+        afterClosed: jest.fn().mockReturnValue(of(undefined)),
+      })
+    );
+
+    tick(29999);
+
+    expect(matDialog.open).toBeCalledTimes(1);
+
+    tick(30000);
+
+    expect(matDialog.open).toBeCalledTimes(2);
+
+    subscription.unsubscribe();
+  }));
+
+  it(`it shouldn't reprompt user after 30s if dialog is open`, () => {});
 });
