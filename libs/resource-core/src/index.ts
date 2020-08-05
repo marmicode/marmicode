@@ -1,5 +1,7 @@
 export {
   ResourceType,
+  getResourceTypeActionText,
+  getResourceTypeColor,
   resourceTypeActionMap,
   resourceTypeColorMap,
   resourceTypeTextMap,

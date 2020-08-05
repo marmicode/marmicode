@@ -18,6 +18,10 @@ export const resourceTypeColorMap = new Map<ResourceType, string>([
   [ResourceType.Workshop, '#673ab7'],
 ]);
 
+export function getResourceTypeColor(resourceType: ResourceType) {
+  return resourceTypeColorMap.get(resourceType);
+}
+
 export const resourceTypeTextMap = new Map<ResourceType, string>([
   [ResourceType.Documentation, 'Documentation'],
   [ResourceType.ExternalBlogPost, 'Blog Post'],
@@ -37,3 +41,7 @@ export const resourceTypeActionMap = new Map<ResourceType, string>([
   [ResourceType.Tutorial, `Let's cook!`],
   [ResourceType.Workshop, 'Register'],
 ]);
+
+export function getResourceTypeActionText(resourceType: ResourceType) {
+  return resourceTypeActionMap.get(resourceType);
+}

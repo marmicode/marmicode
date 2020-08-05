@@ -16,6 +16,7 @@ import {
 } from '@marmicode/resource-core';
 import { TriangleModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
+import { ResourceCardActionModule } from './resource-card-action.component';
 import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
 import { SkillChipModule } from './skill-chip.component';
 
@@ -81,16 +82,9 @@ import { SkillChipModule } from './skill-chip.component';
       </mat-card-content>
 
       <mat-card-actions fxLayout="row" fxLayoutAlign="center">
-        <a [href]="resource.url" target="_blank">
-          <button
-            [style.backgroundColor]="color"
-            class="action-button"
-            mat-raised-button
-            color="primary"
-          >
-            {{ actionText }}
-          </button>
-        </a>
+        <mc-resource-card-action
+          [resource]="resource"
+        ></mc-resource-card-action>
       </mat-card-actions>
     </article>
   </mat-card>`,
@@ -134,12 +128,6 @@ import { SkillChipModule } from './skill-chip.component';
       .list-container {
         margin-top: 30px;
       }
-
-      .action-button {
-        font-size: 1.1em;
-        min-width: 130px;
-        text-transform: uppercase;
-      }
     `,
   ],
 })
@@ -166,6 +154,7 @@ export class ResourceCardComponent implements OnChanges {
     ResourceTypeTriangleModule,
     SkillChipModule,
     TriangleModule,
+    ResourceCardActionModule,
   ],
 })
 export class ResourceCardModule {}
