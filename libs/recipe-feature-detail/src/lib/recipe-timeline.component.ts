@@ -42,10 +42,9 @@ import { RecipeFrame } from './recipe-repository.service';
       *ngIf="nextFrameRoute$ | async as nextFrameRoute"
       [routerLink]="nextFrameRoute"
       (click)="scrollTop()"
-      class="next-frame-link"
     >
-      <button class="next-frame-button" mat-icon-button>
-        <mat-icon class="next-frame-icon">chevron_right</mat-icon>
+      <button class="next-frame-button" mat-stroked-button>
+        <span>NEXT</span>
       </button>
     </a>
   `,
@@ -62,7 +61,7 @@ import { RecipeFrame } from './recipe-repository.service';
         display: block;
         position: relative;
         margin-top: 20px;
-        margin-right: 60px;
+        margin-right: 20px;
         transition: all 0.3s ease-out;
       }
 
@@ -88,18 +87,8 @@ import { RecipeFrame } from './recipe-repository.service';
         list-style-type: none;
       }
 
-      .next-frame-link {
-        position: absolute;
-        right: 0;
-      }
-
       .next-frame-button {
         color: var(--marmicode-accent-color);
-        border: solid 1px;
-      }
-
-      .next-frame-icon {
-        margin-bottom: 4px;
       }
     `,
   ],
