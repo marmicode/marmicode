@@ -9,11 +9,13 @@ import {
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import {
+  resourceTypeActionMap,
+  resourceTypeColorMap,
+} from '@marmicode/resource-core';
 import { TriangleModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
-import { resourceTypeActionMap, resourceTypeColorMap } from './resource-type';
 import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
 import { SkillChipModule } from './skill-chip.component';
 

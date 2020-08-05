@@ -49,6 +49,12 @@
     },
     "recipe-feature-detail": {
       "tags": ["scope:recipe", "type:feature"]
+    },
+    "resource-core": {
+      "tags": ["scope:resource", "type:core"]
+    },
+    "resource-api": {
+      "tags": ["scope:resource", "type:api"]
     }
   }
 }

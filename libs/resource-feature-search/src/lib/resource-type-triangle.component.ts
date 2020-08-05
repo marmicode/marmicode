@@ -10,7 +10,7 @@ import {
   ResourceType,
   resourceTypeColorMap,
   resourceTypeTextMap,
-} from './resource-type';
+} from '@marmicode/resource-core';
 import { TriangleModule } from '@marmicode/shared-ui';
 
 @Component({
