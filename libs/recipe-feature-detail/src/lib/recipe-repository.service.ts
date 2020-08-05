@@ -50,7 +50,7 @@ const getRecipe = gql`
         slug
         title
         content {
-          frameCollection(limit: 1) {
+          frameCollection {
             items {
               duration
               slug
