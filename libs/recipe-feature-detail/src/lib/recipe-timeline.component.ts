@@ -24,7 +24,7 @@ import { RecipeFrame } from './recipe-repository.service';
       fxFlex
     >
       <hr class="line" />
-      <hr [style.width.%]="progress$" class="past-line" />
+      <hr [style.width.%]="progress$ | async" class="past-line" />
       <ul class="bullet-list">
         <li *ngFor="let bullet of bullets$ | async">
           <a
