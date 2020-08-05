@@ -1,5 +1,10 @@
 import { ApplicationRef } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { SwUpdate } from '@angular/service-worker';
 import { of, Subject } from 'rxjs';
 import { UpdateEffects } from './update.effects';
@@ -10,6 +15,7 @@ describe('UpdateEffects', () => {
   beforeEach(() => {
     updateAvailable$ = new Subject<unknown>();
     return TestBed.configureTestingModule({
+      imports: [MatDialogModule],
       providers: [
         {
           provide: ApplicationRef,
@@ -20,6 +26,7 @@ describe('UpdateEffects', () => {
         {
           provide: SwUpdate,
           useValue: {
+            activateUpdate: jest.fn(),
             available: updateAvailable$,
             checkForUpdate: jest.fn(),
             isEnabled: true,
@@ -28,6 +35,9 @@ describe('UpdateEffects', () => {
       ],
     });
   });
+
+  let matDialog: MatDialog;
+  beforeEach(() => (matDialog = TestBed.inject(MatDialog)));
 
   let updateEffects: UpdateEffects;
   beforeEach(() => (updateEffects = TestBed.inject(UpdateEffects)));
@@ -56,7 +66,14 @@ describe('UpdateEffects', () => {
   xit('should prompt user for reload', () => {
     const subscription = updateEffects.update$.subscribe();
 
-    // @todo check prompt is called
+    expect(matDialog.open).not.toBeCalled();
+
+    /* Trigger update. */
+    updateAvailable$.next();
+
+    /* Check prompt is called. */
+    expect(matDialog.open).toBeCalledTimes(1);
+    expect(swUpdate.activateUpdate).not.toBeCalled();
 
     subscription.unsubscribe();
   });
