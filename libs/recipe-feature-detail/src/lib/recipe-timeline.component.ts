@@ -18,11 +18,7 @@ import { RecipeFrame } from './recipe-repository.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-timeline',
   template: `
-    <div
-      [class.full-width]="isLastFrame$ | async"
-      class="line-container"
-      fxFlex
-    >
+    <div class="line-container" fxFlex>
       <hr class="line" />
       <hr [style.width.%]="progress$ | async" class="past-line" />
       <ul class="bullet-list">
@@ -38,12 +34,12 @@ import { RecipeFrame } from './recipe-repository.service';
         </li>
       </ul>
     </div>
-    <a
-      *ngIf="nextFrameRoute$ | async as nextFrameRoute"
-      [routerLink]="nextFrameRoute"
-      (click)="scrollTop()"
-    >
-      <button class="next-frame-button" mat-stroked-button>
+    <a [routerLink]="nextFrameRoute$ | async" (click)="scrollTop()">
+      <button
+        [disabled]="isLastFrame$ | async"
+        class="next-frame-button"
+        mat-stroked-button
+      >
         <span>NEXT</span>
       </button>
     </a>
@@ -108,7 +104,6 @@ export class RecipeTimelineComponent {
     this._state.set({ currentFrameIndex });
   }
 
-  currentFrameIndex$ = this._state.select('currentFrameIndex');
   frames$ = this._state.select('frames');
   bullets$ = this._state.select(
     map(({ frames, recipeSlug, currentFrameIndex }) =>
