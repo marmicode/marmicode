@@ -39,8 +39,10 @@ export class RecipeDetailComponent {
   recipeSlug$ = this.recipe$.pipe(select(map((recipe) => recipe.slug)));
   frames$ = this.recipe$.pipe(select(map((recipe) => recipe.frames)));
   currentFrame$ = this._state.select(
-    map(({ currentFrameSlug, recipe }) =>
-      recipe.frames.find((frame) => frame.slug === currentFrameSlug)
+    map(
+      ({ currentFrameSlug, recipe }) =>
+        recipe.frames.find((frame) => frame.slug === currentFrameSlug) ??
+        recipe.frames[0]
     )
   );
   currentFrameIndex$ = combineLatest([this.frames$, this.currentFrame$]).pipe(
