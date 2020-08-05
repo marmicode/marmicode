@@ -17,15 +17,15 @@ import { map } from 'rxjs/operators';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-title',
-  template: ` <div fxLayout="row" fxLayoutAlign="center">
+  template: ` <svg preserveAspectRatio="none" viewBox="0 0 100 100">
+      <polygon style="fill: #561f4b" points="0,0 20,0 10,100 0,100" />
+    </svg>
+    <div fxLayout="row" fxLayoutAlign="center">
       <div [style.backgroundColor]="badgeColor$ | async" class="badge">
         {{ badgeText$ | async }}
       </div>
     </div>
-    <h1 class="title">{{ title }}</h1>
-    <svg preserveAspectRatio="none" viewBox="0 0 100 100">
-      <polygon style="fill: #561f4b" points="0,0 20,0 10,100 0,100" />
-    </svg>`,
+    <h1 class="title">{{ title }}</h1>`,
   styles: [
     `
       :host {
@@ -39,7 +39,6 @@ import { map } from 'rxjs/operators';
         height: 20px;
         margin-top: 10px;
         padding: 0 10px;
-        z-index: 1;
 
         color: #561f4b;
         box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
@@ -52,7 +51,6 @@ import { map } from 'rxjs/operators';
         font-weight: 300;
         margin: 10px 0;
         text-align: center;
-        z-index: 1;
       }
 
       svg {
