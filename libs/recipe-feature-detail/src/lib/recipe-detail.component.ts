@@ -43,7 +43,11 @@ export class RecipeDetailComponent implements OnInit {
             recipeDetailRouterHelper.recipeFrame({
               recipeSlug,
               frameSlug,
-            })
+            }),
+            {
+              /* Act like a redirect to avoid getting stuck when hitting back. */
+              replaceUrl: true,
+            }
           )
         ),
         untilDestroyed(this)
