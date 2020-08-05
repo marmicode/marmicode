@@ -52,6 +52,7 @@ import { NavMenuModule } from './nav-menu.component';
       :host {
         background-color: white;
         display: block;
+        height: 100%;
       }
 
       .toolbar {
@@ -82,6 +83,7 @@ import { NavMenuModule } from './nav-menu.component';
 
       .container {
         padding-top: 64px;
+        height: calc(100% - 64px);
       }
     `,
   ],

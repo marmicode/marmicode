@@ -28,7 +28,7 @@ import { RecipeTimelineModule } from './recipe-timeline.component';
       :host {
         display: flex;
         flex-direction: column;
-        min-height: calc(100vh - 64px);
+        height: 100%;
       }
     `,
   ],
