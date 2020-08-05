@@ -480,6 +480,34 @@
         }
       },
       "schematics": {}
+    },
+    "contentful-api": {
+      "projectType": "library",
+      "root": "libs/contentful-api",
+      "sourceRoot": "libs/contentful-api/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/contentful-api/tsconfig.lib.json",
+              "libs/contentful-api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/contentful-api/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/contentful-api/jest.config.js",
+            "tsConfig": "libs/contentful-api/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/contentful-api/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {

@@ -1,15 +1,14 @@
 import { Injectable, NgModule } from '@angular/core';
+import * as contentful from '@marmicode/contentful-api';
+import { ContentfulModule, Query } from '@marmicode/contentful-api';
 import { WipService } from '@marmicode/shared-utils';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { GraphQLModule } from './graphql/graphql.module';
-import * as schema from './graphql/schema';
-import { Query } from './graphql/schema';
-import { skillFragment, skillFragmentToSkill } from './graphql/skill-fragment';
+import { map } from 'rxjs/operators';
 import { createAuthor, createResource, Resource } from './resource';
 import { Skill } from './skill';
+import { skillFragment, skillFragmentToSkill } from './skill-fragment';
 
 const resourceFragment = gql`
   ${skillFragment}
@@ -120,7 +119,7 @@ export class ResourceRepository {
   }
 
   private _toResources(resourceCollection: {
-    items: schema.Resource[];
+    items: contentful.Resource[];
   }): Resource[] {
     return resourceCollection.items.map((item) =>
       createResource({
@@ -145,13 +144,13 @@ export class ResourceRepository {
     );
   }
 
-  private _toSkills(skills: { items: schema.Skill[] }): Skill[] {
+  private _toSkills(skills: { items: contentful.Skill[] }): Skill[] {
     return skills?.items.map(skillFragmentToSkill);
   }
 }
 
 @NgModule({
-  imports: [GraphQLModule],
+  imports: [ContentfulModule],
   providers: [ResourceRepository],
 })
 export class ResourceRepositoryModule {}

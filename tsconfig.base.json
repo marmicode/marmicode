@@ -34,7 +34,8 @@
         "libs/recipe-feature-detail/src/index.ts"
       ],
       "@marmicode/resource-core": ["libs/resource-core/src/index.ts"],
-      "@marmicode/resource-api": ["libs/resource-api/src/index.ts"]
+      "@marmicode/resource-api": ["libs/resource-api/src/index.ts"],
+      "@marmicode/contentful-api": ["libs/contentful-api/src/index.ts"]
     },
     "strict": true,
     "strictNullChecks": false

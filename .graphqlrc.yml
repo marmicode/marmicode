@@ -5,10 +5,10 @@ schema:
 extensions:
   codegen:
     generates:
-      ./libs/resource-feature-search/src/lib/graphql/schema.graphql:
+      ./libs/contentful-api/src/lib/schema.graphql:
         plugins:
           - schema-ast
-      ./libs/resource-feature-search/src/lib/graphql/schema.ts:
+      ./libs/contentful-api/src/lib/schema.ts:
         plugins:
           - typescript
         config:

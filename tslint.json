@@ -70,6 +70,7 @@
           {
             "sourceTag": "type:feature",
             "onlyDependOnLibsWithTags": [
+              "type:api",
               "type:core",
               "type:ui",
               "type:utils"
@@ -78,6 +79,7 @@
           {
             "sourceTag": "type:core",
             "onlyDependOnLibsWithTags": [
+              "type:api",
               "type:core",
               "type:ui",
               "type:utils"
@@ -96,8 +98,12 @@
             "onlyDependOnLibsWithTags": ["scope:learning-map", "scope:shared"]
           },
           {
+            "sourceTag": "scope:recipe",
+            "onlyDependOnLibsWithTags": ["scope:recipe", "scope:shared", "name:resource-api"]
+          },
+          {
             "sourceTag": "scope:resource",
-            "onlyDependOnLibsWithTags": ["scope:resource", "scope:shared"]
+            "onlyDependOnLibsWithTags": ["scope:resource", "scope:shared", "name:contentful-api"]
           }
         ]
       }
