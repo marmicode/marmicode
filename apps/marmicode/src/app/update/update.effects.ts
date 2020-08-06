@@ -6,10 +6,16 @@ import {
   NgZone,
 } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { shareReplayWithRefCount } from '@marmicode/shared-utils';
 import { createEffect } from '@ngrx/effects';
 import { combineLatest, defer, EMPTY, timer } from 'rxjs';
-import { first, map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import {
+  exhaustMap,
+  first,
+  map,
+  mapTo,
+  shareReplay,
+  switchMap,
+} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -37,11 +43,14 @@ export class UpdateEffects {
         switchMap(() =>
           combineLatest([this._dialog$, this._updateDialogComponent$])
         ),
-        tap(([dialog, updateDialogComponent]) => {
-          dialog.open(updateDialogComponent, {
-            backdropClass: 'mc-overlay-backdrop',
-          });
-        })
+        switchMap((args) => timer(0, 30000).pipe(mapTo(args))),
+        exhaustMap(([dialog, updateDialogComponent]) =>
+          dialog
+            .open(updateDialogComponent, {
+              backdropClass: 'mc-overlay-backdrop',
+            })
+            .afterClosed()
+        )
       ),
     {
       dispatch: false,

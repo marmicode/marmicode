@@ -3,7 +3,7 @@ import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SwUpdate } from '@angular/service-worker';
-import { EMPTY, of, Subject } from 'rxjs';
+import { NEVER, of, Subject } from 'rxjs';
 import { UpdateDialogComponent } from './update-dialog.component';
 import { UpdateEffects } from './update.effects';
 
@@ -26,7 +26,9 @@ describe('UpdateEffects', () => {
         {
           provide: MatDialog,
           useValue: {
-            open: jest.fn(),
+            open: jest.fn().mockReturnValue({
+              afterClosed: jest.fn().mockReturnValue(NEVER),
+            }),
           },
         },
         {
@@ -89,15 +91,16 @@ describe('UpdateEffects', () => {
     subscription.unsubscribe();
   }));
 
-  xit('should reprompt user after 30s', fakeAsync(() => {
+  it('should reprompt user after 30s', fakeAsync(() => {
+    (matDialog.open as jest.Mock).mockReturnValue({
+      /* Close dialog automatically. */
+      afterClosed: jest.fn().mockReturnValue(of(undefined)),
+    });
+
     const subscription = updateEffects.update$.subscribe();
 
-    (matDialog.open as jest.Mock).mockReturnValue(
-      of({
-        /* Close dialog automatically. */
-        afterClosed: jest.fn().mockReturnValue(of(undefined)),
-      })
-    );
+    /* Trigger update. */
+    updateAvailable$.next();
 
     tick(29999);
 
@@ -110,15 +113,16 @@ describe('UpdateEffects', () => {
     subscription.unsubscribe();
   }));
 
-  xit(`shouldn't reprompt user after 30s if dialog is open`, fakeAsync(() => {
+  it(`shouldn't reprompt user after 30s if dialog is open`, fakeAsync(() => {
+    (matDialog.open as jest.Mock).mockReturnValue({
+      /* Keep dialog open. */
+      afterClosed: jest.fn().mockReturnValue(NEVER),
+    });
+
     const subscription = updateEffects.update$.subscribe();
 
-    (matDialog.open as jest.Mock).mockReturnValue(
-      of({
-        /* Keep dialog open. */
-        afterClosed: jest.fn().mockReturnValue(EMPTY),
-      })
-    );
+    /* Trigger update. */
+    updateAvailable$.next();
 
     tick(29999);
 
