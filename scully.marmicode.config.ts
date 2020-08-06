@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export const config: ScullyConfig = {
   outDir: 'dist/apps/marmicode/static',
+  routes: {},
   extraRoutes: getExtraRoutes(),
 };
 

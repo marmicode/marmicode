@@ -21,6 +21,6 @@ then
   cp apps/marmicode/src/robots-next.txt dist/apps/marmicode/browser/robots.txt
 fi
 
-yarn prerender:scully
+yarn prerender
 
 yarn firebase --project "$PROJECT" deploy

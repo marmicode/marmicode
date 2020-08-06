@@ -26,15 +26,15 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "dev:ssr": "ng run marmicode:serve-ssr",
-    "serve:ssr": "node dist/marmicode/server/main.js",
-    "build:ssr": "ng build --prod && ng run marmicode:server:production",
-    "prerender": "ng run marmicode:prerender",
-    "prerender:scully": "yarn scully --project marmicode --removeStaticDist --prod",
+    "prerender": "./tools/prerender.sh",
     "deploy:next": "./tools/deploy.sh marmicode-next",
     "deploy:prod": "./tools/deploy.sh marmicode",
     "graphql-codegen": "graphql codegen",
-    "test:watch": "nx affected:test --watch --all --parallel --maxParallel 100"
+    "test:watch": "nx affected:test --watch --all --parallel --maxParallel 100",
+    "_dev:ssr": "ng run marmicode:serve-ssr",
+    "_serve:ssr": "node dist/marmicode/server/main.js",
+    "_build:ssr": "ng build --prod && ng run marmicode:server:production",
+    "_prerender": "ng run marmicode:prerender"
   },
   "private": true,
   "dependencies": {
