@@ -43,7 +43,11 @@ export class UpdateEffects {
         switchMap(() =>
           combineLatest([this._dialog$, this._updateDialogComponent$])
         ),
+        /* Retry every 30s. */
+        /* repeatWhen(() => interval(30000)) would have been shorter
+         * but it didn't play well with fakeAsync. */
         switchMap((args) => timer(0, 30000).pipe(mapTo(args))),
+        /* Wait for dialog to be close to avoid opening multiple dialogs. */
         exhaustMap(([dialog, updateDialogComponent]) =>
           dialog
             .open(updateDialogComponent, {
