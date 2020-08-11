@@ -18,6 +18,11 @@ import { CodePipeModule } from './code.pipe';
   ><code class="code" [innerHTML]="block.code | code:{language: block.language}"></code></pre>`,
   styles: [
     `
+      :host {
+        display: block;
+      }
+
+      /* @hack using more specific selector. */
       :host .preformatted {
         font-size: 1.2em;
         height: 100%;
