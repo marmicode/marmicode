@@ -14,7 +14,8 @@ import { CodePipeModule } from './code.pipe';
   encapsulation: ViewEncapsulation.ShadowDom,
   selector: 'mc-code-block',
   template: `<pre
-    class="language-javascript preformatted"
+    [ngClass]="'language-' + block.language"
+    class="preformatted"
   ><code class="code" [innerHTML]="block.code | code:{language: block.language}"></code></pre>`,
   styles: [
     `
