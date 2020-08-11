@@ -4,6 +4,7 @@ import {
   Component,
   Input,
   NgModule,
+  ViewEncapsulation,
 } from '@angular/core';
 import { TextBlock } from './block';
 import { MarkdownPipeModule } from './markdown.pipe';
@@ -12,6 +13,7 @@ import { MarkdownPipeModule } from './markdown.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-text-block',
   template: `<div [innerHTML]="block.text | markdown"></div>`,
+  encapsulation: ViewEncapsulation.ShadowDom,
   styles: [
     `
       :host {
@@ -26,6 +28,12 @@ import { MarkdownPipeModule } from './markdown.pipe';
         text-rendering: optimizeLegibility;
         word-break: break-word;
         -webkit-font-smoothing: antialiased;
+      }
+
+      code {
+        background-color: #eee;
+        border-radius: 3px;
+        padding: 0 2px;
       }
     `,
   ],
