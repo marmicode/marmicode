@@ -3,6 +3,7 @@ import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import * as Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-yaml';
 
 @Pipe({
   name: 'code',
