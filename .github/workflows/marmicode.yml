@@ -25,8 +25,11 @@ jobs:
           echo "::set-output name=project::$PROJECT"
       - uses: actions/checkout@v2
         with:
+          # Checkout tags so we can use 'affected:* --base=latest'
           fetch-depth: 0
       - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
       - uses: actions/cache@v1
         id: node-modules-cache
         with:
