@@ -355,9 +355,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/services-feature-presentation/jest.config.js",
-            "tsConfig": "libs/services-feature-presentation/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/services-feature-presentation/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
@@ -386,9 +384,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/shared-router-helpers/jest.config.js",
-            "tsConfig": "libs/shared-router-helpers/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/shared-router-helpers/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
@@ -417,9 +413,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/recipe-feature-detail/jest.config.js",
-            "tsConfig": "libs/recipe-feature-detail/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/recipe-feature-detail/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
@@ -445,9 +439,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/resource-core/jest.config.js",
-            "tsConfig": "libs/resource-core/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/resource-core/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
@@ -473,9 +465,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/resource-api/jest.config.js",
-            "tsConfig": "libs/resource-api/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/resource-api/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
@@ -501,9 +491,7 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/contentful-api/jest.config.js",
-            "tsConfig": "libs/contentful-api/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/contentful-api/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
