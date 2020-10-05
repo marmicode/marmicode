@@ -24,6 +24,8 @@ jobs:
           PROJECT=$([ $GITHUB_REF == 'refs/tags/latest' ] && echo marmicode || echo marmicode-next)
           echo "::set-output name=project::$PROJECT"
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v1
       - uses: actions/cache@v1
         id: node-modules-cache
@@ -33,7 +35,7 @@ jobs:
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Test
-        run: yarn affected:test --base=refs/tags/latest --head=HEAD
+        run: yarn affected:test --base=latest --head=HEAD
       - name: Lint
         run: yarn ng lint
       - name: Deploy marmicode.io
