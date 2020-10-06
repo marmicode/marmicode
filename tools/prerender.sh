@@ -11,5 +11,5 @@ yarn scully --project marmicode --removeStaticDist --prod
 # the performance gain isn't crazy.
 cp dist/apps/marmicode/browser/index.html dist/apps/marmicode/static/index.pristine.html
 
-# Update `ngsw-config.json` with the right hashes.
+# Update `ngsw.json` with the right hashes for index.pristine.html.
 yarn ngsw-config dist/apps/marmicode/static apps/marmicode/ngsw-config.json
