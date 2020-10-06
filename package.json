@@ -68,7 +68,7 @@
     "apollo-angular": "^2.0.3",
     "axios": "^0.19.2",
     "express": "^4.15.2",
-    "firebase": "^7.13.1",
+    "firebase": "^7.22.1",
     "graphql-tag": "^2.10.4",
     "marked": "^1.1.1",
     "panzoom": "^9.2.5",
