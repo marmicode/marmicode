@@ -14,9 +14,14 @@ Usage: $(basename $0) PROJECT
   exit 1
 fi
 
-yarn build marmicode --prod
+IS_NEXT=$([ "$PROJECT" = "marmicode-next" ] && echo true || echo false)
 
-if [ "$PROJECT" = "marmicode-next" ]
+# Use next environment variables.
+BUILD_OPTIONS=$([ "$IS_NEXT" = true ] && echo "-c=production,next" || echo "-c=production")
+
+yarn build marmicode $BUILD_OPTIONS
+
+if [ "$IS_NEXT" = true ]
 then
   cp apps/marmicode/src/robots-next.txt dist/apps/marmicode/browser/robots.txt
 fi

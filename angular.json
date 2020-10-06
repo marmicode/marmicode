@@ -74,6 +74,7 @@
               "core-js/modules/es.symbol.iterator",
               "core-js/modules/web.dom-collections.for-each",
               "core-js/modules/web.dom-collections.iterator",
+              "firebase/app",
               "graphql-tag",
               "panzoom",
               "raf",
@@ -111,6 +112,14 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "apps/marmicode/ngsw-config.json"
+            },
+            "next": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/marmicode/src/environments/environment.ts",
+                  "with": "apps/marmicode/src/environments/environment.next.ts"
+                }
+              ]
             }
           }
         },
