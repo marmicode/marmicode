@@ -128,11 +128,11 @@ export class ResourceRepository {
           item.author &&
           createAuthor({
             name: item.author.name,
-            pictureUri: item.author.picture.url,
+            pictureUri: item.author.picture?.url,
           }),
         duration: item.duration,
         isWip: item.isWip,
-        pictureUri: item.picture.url,
+        pictureUri: item.picture?.url,
         requiredSkills: this._toSkills(item.requiredSkillCollection),
         skills: this._toSkills(item.skillCollection),
         slug: item.slug,
