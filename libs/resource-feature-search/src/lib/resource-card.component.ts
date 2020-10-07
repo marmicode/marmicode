@@ -59,7 +59,7 @@ import { SkillChipModule } from './skill-chip.component';
           {{ resource.summary }}
         </p>
         <section class="list-container">
-          <h3 [style.color]="color" class="list-title">Goals</h3>
+          <h3 [style.color]="color" class="list-title">You Will Learn</h3>
           <div fxLayout="row wrap">
             <mc-skill-chip
               *ngFor="let skill of resource.skills"
