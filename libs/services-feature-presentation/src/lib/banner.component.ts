@@ -45,7 +45,7 @@ declare var require: any;
         line-height: 2em;
       }
 
-      @media (min-width: 900px) {
+      @media (min-width: 960px) {
         .banner-header {
           font-size: 3em;
         }

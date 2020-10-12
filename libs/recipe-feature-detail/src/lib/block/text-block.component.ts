@@ -22,12 +22,18 @@ import { MarkdownPipeModule } from './markdown.pipe';
 
         color: #292929;
         font-family: Georgia, 'Times New Roman', Times, serif;
-        font-size: 21px;
+        font-size: 17px;
         font-weight: 400;
         line-height: 32px;
         text-rendering: optimizeLegibility;
         word-break: break-word;
         -webkit-font-smoothing: antialiased;
+      }
+
+      @media (min-width: 960px) {
+        :host {
+          font-size: 20px;
+        }
       }
 
       code {
