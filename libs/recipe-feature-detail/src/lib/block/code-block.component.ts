@@ -4,11 +4,31 @@ import {
   Component,
   Input,
   NgModule,
+  OnChanges,
+  Pipe,
+  PipeTransform,
   ViewEncapsulation,
 } from '@angular/core';
 import { WipService } from '@marmicode/shared-utils';
 import { CodeBlock } from './block';
 import { CodePipeModule } from './code.pipe';
+
+import * as hljs from 'highlight.js';
+import bash from 'highlight.js/lib/languages/bash';
+import javascript from 'highlight.js/lib/languages/javascript';
+import yaml from 'highlight.js/lib/languages/yaml';
+hljs.registerLanguage('bash', bash);
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('yaml', yaml);
+
+@Pipe({
+  name: 'hljs',
+})
+export class HljsPipe implements PipeTransform {
+  transform(code: string, { language }: { language: string }): string {
+    return hljs.highlight(language, code).value;
+  }
+}
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,8 +41,9 @@ import { CodePipeModule } from './code.pipe';
     ><code class="code" [innerHTML]="block.code | code:{language: block.language}"></code></pre>
     <pre
       *ngIf="isWip"
+      [ngClass]="'language-' + block.language"
       class="preformatted"
-    ><code class="code" [innerHTML]="block.code"></code></pre>`,
+    ><code class="code" [innerHTML]="block.code | hljs:{language: block.language}"></code></pre>`,
   styles: [
     `
       :host {
@@ -38,7 +59,10 @@ import { CodePipeModule } from './code.pipe';
       }
     `,
   ],
-  styleUrls: ['../../../../../node_modules/prismjs/themes/prism-tomorrow.css'],
+  styleUrls: [
+    '../../../../../node_modules/prismjs/themes/prism-tomorrow.css',
+    '../../../../../node_modules/highlight.js/styles/agate.css',
+  ],
 })
 export class CodeBlockComponent {
   @Input() block: CodeBlock;
@@ -49,7 +73,7 @@ export class CodeBlockComponent {
 }
 
 @NgModule({
-  declarations: [CodeBlockComponent],
+  declarations: [CodeBlockComponent, HljsPipe],
   exports: [CodeBlockComponent],
   imports: [CommonModule, CodePipeModule],
 })
