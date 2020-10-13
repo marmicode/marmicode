@@ -11,7 +11,7 @@ import { TextBlockModule } from './text-block.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-recipe-block',
+  selector: 'mc-block',
   template: ` <ng-container [ngSwitch]="block.type">
     <mc-code-block
       *ngSwitchCase="BlockType.Code"

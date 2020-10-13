@@ -14,13 +14,22 @@ import { Frame } from './frame';
   selector: 'mc-frame',
   template: `
     <div fxLayout="column" fxLayout.gt-sm="row">
-      <mc-recipe-block
+      <mc-block
         *ngFor="let block of frame.blocks"
         [block]="block"
+        class="block"
         fxFlex
-      ></mc-recipe-block>
+      ></mc-block>
     </div>
   `,
+  styles: [
+    `
+      .block {
+        flex-grow: 1;
+        overflow-x: auto;
+      }
+    `,
+  ],
 })
 export class FrameComponent {
   @Input() frame: Frame;
