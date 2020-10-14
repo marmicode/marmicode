@@ -1,0 +1,20 @@
+/* Cypress doesn't take Shadow DOM snapshots, so this is how we hack our way through.
+ * Emulated encapsulation doesn't work either because prismjs html is generated dynamically.
+ * Cf. https://github.com/cypress-io/cypress/issues/8843 */
+
+mc-code-block {
+  /* @hack using a symbolic link to end with a `.scss` extension instead of `.css`
+   * in order to enable nested import.
+   * Cf. https://sass-lang.com/documentation/at-rules/import#plain-css-imports. */
+  @import './prism-tomorrow.scss';
+
+  display: block;
+
+  /* @hack using more specific selector. */
+  pre.preformatted {
+    font-size: 1.2em;
+    height: 100%;
+    border-radius: 10px;
+    margin: 0.5em;
+  }
+}
