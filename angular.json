@@ -23,7 +23,9 @@
               "apps/marmicode/src/manifest.webmanifest",
               "apps/marmicode/src/robots.txt"
             ],
-            "styles": ["apps/marmicode/src/styles.scss"],
+            "styles": [
+              "apps/marmicode/src/styles.scss"
+            ],
             "scripts": [],
             "allowedCommonJsDependencies": [
               "@babel/runtime/helpers/get",
@@ -150,7 +152,10 @@
               "apps/marmicode/tsconfig.app.json",
               "apps/marmicode/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/marmicode/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/marmicode/**/*"
+            ]
           }
         },
         "test": {
@@ -199,7 +204,9 @@
           "options": {
             "browserTarget": "marmicode:build:production",
             "serverTarget": "marmicode:server:production",
-            "routes": ["/"]
+            "routes": [
+              "/"
+            ]
           },
           "configurations": {
             "production": {}
@@ -228,8 +235,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/marmicode-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/marmicode-e2e/**/*"]
+            "tsConfig": [
+              "apps/marmicode-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/marmicode-e2e/**/*"
+            ]
           }
         }
       }
@@ -305,7 +317,10 @@
               "libs/shared-ui/tsconfig.lib.json",
               "libs/shared-ui/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared-ui/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared-ui/**/*"
+            ]
           }
         },
         "test": {
@@ -331,7 +346,10 @@
               "libs/shared-utils/tsconfig.lib.json",
               "libs/shared-utils/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared-utils/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared-utils/**/*"
+            ]
           }
         },
         "test": {
@@ -444,7 +462,10 @@
               "libs/resource-core/tsconfig.lib.json",
               "libs/resource-core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/resource-core/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/resource-core/**/*"
+            ]
           }
         },
         "test": {
@@ -470,7 +491,10 @@
               "libs/resource-api/tsconfig.lib.json",
               "libs/resource-api/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/resource-api/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/resource-api/**/*"
+            ]
           }
         },
         "test": {
@@ -496,7 +520,10 @@
               "libs/contentful-api/tsconfig.lib.json",
               "libs/contentful-api/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/contentful-api/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/contentful-api/**/*"
+            ]
           }
         },
         "test": {
@@ -522,7 +549,10 @@
               "libs/recipe-core/tsconfig.lib.json",
               "libs/recipe-core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/recipe-core/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/recipe-core/**/*"
+            ]
           }
         },
         "test": {
@@ -546,9 +576,13 @@
           "options": {
             "tsConfig": [
               "libs/recipe-ui/tsconfig.lib.json",
-              "libs/recipe-ui/tsconfig.spec.json"
+              "libs/recipe-ui/tsconfig.spec.json",
+              "libs/recipe-ui/.storybook/tsconfig.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/recipe-ui/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/recipe-ui/**/*"
+            ]
           }
         },
         "test": {
@@ -557,9 +591,71 @@
             "jestConfig": "libs/recipe-ui/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/recipe-ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/recipe-ui",
+            "config": {
+              "configFolder": "libs/recipe-ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
         }
       },
       "schematics": {}
+    },
+    "recipe-ui-e2e": {
+      "root": "apps/recipe-ui-e2e",
+      "sourceRoot": "apps/recipe-ui-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/recipe-ui-e2e/cypress.json",
+            "tsConfig": "apps/recipe-ui-e2e/tsconfig.e2e.json",
+            "devServerTarget": "recipe-ui:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "recipe-ui:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/recipe-ui-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/recipe-ui-e2e/**/*"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
