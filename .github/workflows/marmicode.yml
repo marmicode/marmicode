@@ -40,7 +40,7 @@ jobs:
       - name: Test
         run: yarn affected:test --base=latest --head=HEAD
       - name: e2e
-        run: yarn affected:e2e --base=latest --head=HEAD
+        run: yarn affected:e2e --base=latest --head=HEAD --headless --browser=chrome
       - name: Lint
         run: yarn affected:lint --base=latest --head=HEAD
       - name: Deploy marmicode.io
