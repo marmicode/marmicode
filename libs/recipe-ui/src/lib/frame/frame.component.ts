@@ -5,7 +5,7 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout';
+import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
 import { BlockModule } from '../block/block.component';
 import { Frame } from '@marmicode/recipe-core';
 
@@ -17,8 +17,8 @@ import { Frame } from '@marmicode/recipe-core';
       <mc-block
         *ngFor="let block of frame.blocks"
         [block]="block"
+        [ngClass.gt-sm]="'block'"
         fxFlex
-        ngClass.gt-sm="block"
       ></mc-block>
     </div>
   `,
@@ -37,6 +37,6 @@ export class FrameComponent {
 @NgModule({
   declarations: [FrameComponent],
   exports: [FrameComponent],
-  imports: [CommonModule, FlexModule, BlockModule],
+  imports: [CommonModule, FlexLayoutModule, BlockModule],
 })
 export class FrameModule {}

@@ -1,4 +1,5 @@
 describe('FrameComponent', () => {
-  beforeEach(() => cy.visit('/iframe.html?id=frame--main'));
-  it('should match image snapshot', () => {});
+  it('should match image snapshot', () => {
+    cy.visit('/iframe.html?id=frame--overflow');
+  });
 });
