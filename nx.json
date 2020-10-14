@@ -41,6 +41,12 @@
     "recipe-feature-detail": {
       "tags": ["scope:recipe", "type:feature"]
     },
+    "recipe-core": {
+      "tags": ["scope:recipe", "type:core"]
+    },
+    "recipe-ui": {
+      "tags": ["scope:recipe", "type:ui"]
+    },
     "resource-core": {
       "tags": ["scope:resource", "type:core"]
     },

@@ -11,5 +11,7 @@ module.exports = {
     '<rootDir>/libs/resource-core',
     '<rootDir>/libs/resource-api',
     '<rootDir>/libs/contentful-api',
+    '<rootDir>/libs/recipe-core',
+    '<rootDir>/libs/recipe-ui',
   ],
 };

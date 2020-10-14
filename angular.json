@@ -508,6 +508,58 @@
         }
       },
       "schematics": {}
+    },
+    "recipe-core": {
+      "projectType": "library",
+      "root": "libs/recipe-core",
+      "sourceRoot": "libs/recipe-core/src",
+      "prefix": "marmicode",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/recipe-core/tsconfig.lib.json",
+              "libs/recipe-core/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/recipe-core/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/recipe-core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {}
+    },
+    "recipe-ui": {
+      "projectType": "library",
+      "root": "libs/recipe-ui",
+      "sourceRoot": "libs/recipe-ui/src",
+      "prefix": "marmicode",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/recipe-ui/tsconfig.lib.json",
+              "libs/recipe-ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/recipe-ui/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/recipe-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {
