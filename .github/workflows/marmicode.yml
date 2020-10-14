@@ -7,9 +7,6 @@ on:
     tags:
       - latest
 
-env:
-  CACHE_PATH: node_modules
-
 jobs:
 
   # Merging all steps in one job might look dirty but this is a way of achieving
@@ -33,7 +30,9 @@ jobs:
       - uses: actions/cache@v1
         id: node-modules-cache
         with:
-          path: ${{ env.CACHE_PATH }}
+          path: |
+            node_modules
+            ~/.cache/Cypress
           key: node_modules-${{ hashFiles('yarn.lock') }}
       - name: Install
         run: yarn install --frozen-lockfile
