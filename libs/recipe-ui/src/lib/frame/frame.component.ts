@@ -5,7 +5,7 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { FlexLayoutModule, FlexModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BlockModule } from '../block/block.component';
 import { Frame } from '@marmicode/recipe-core';
 
