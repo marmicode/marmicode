@@ -6,7 +6,6 @@ import {
   NgModule,
   ViewEncapsulation,
 } from '@angular/core';
-import { WipService } from '@marmicode/shared-utils';
 import { CodeBlock } from './block';
 import { CodePipeModule } from './code.pipe';
 
@@ -15,14 +14,9 @@ import { CodePipeModule } from './code.pipe';
   encapsulation: ViewEncapsulation.ShadowDom,
   selector: 'mc-code-block',
   template: `<pre
-      *ngIf="!isWip"
-      [ngClass]="'language-' + block.language"
-      class="preformatted"
-    ><code class="code" [innerHTML]="block.code | code:{language: block.language}"></code></pre>
-    <pre
-      *ngIf="isWip"
-      class="preformatted"
-    ><code class="code" [innerHTML]="block.code"></code></pre>`,
+    [ngClass]="'language-' + block.language"
+    class="preformatted"
+  ><code class="code" [innerHTML]="block.code | code:{language: block.language}"></code></pre>`,
   styles: [
     `
       :host {
@@ -42,10 +36,6 @@ import { CodePipeModule } from './code.pipe';
 })
 export class CodeBlockComponent {
   @Input() block: CodeBlock;
-
-  isWip = this._wip.isWip();
-
-  constructor(private _wip: WipService) {}
 }
 
 @NgModule({
