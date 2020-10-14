@@ -16,23 +16,12 @@ import { CodePipeModule } from './code.pipe';
   template: `<pre
     [ngClass]="'language-' + block.language"
     class="preformatted"
-  ><code class="code" [innerHTML]="block.code | code:{language: block.language}"></code></pre>`,
-  styles: [
-    `
-      :host {
-        display: block;
-      }
-
-      /* @hack using more specific selector. */
-      :host .preformatted {
-        font-size: 1.2em;
-        height: 100%;
-        border-radius: 10px;
-        margin: 0.5em;
-      }
-    `,
+  ><code [innerHTML]="block.code | code:{language: block.language}" class="code"  data-role="code-block"></code></pre>`,
+  styleUrls: [
+    /* @hack storybook doesn't support styles + styleUrls combination. */
+    './code-block.component.css',
+    '../../../../../node_modules/prismjs/themes/prism-tomorrow.css',
   ],
-  styleUrls: ['../../../../../node_modules/prismjs/themes/prism-tomorrow.css'],
 })
 export class CodeBlockComponent {
   @Input() block: CodeBlock;

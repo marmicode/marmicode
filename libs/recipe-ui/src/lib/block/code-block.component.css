@@ -1,0 +1,12 @@
+
+:host {
+    display: block;
+}
+
+/* @hack using more specific selector. */
+:host .preformatted {
+    font-size: 1.2em;
+    height: 100%;
+    border-radius: 10px;
+    margin: 0.5em;
+}

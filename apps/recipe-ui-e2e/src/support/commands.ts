@@ -7,6 +7,7 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
+import '@percy/cypress';
 
 declare namespace Cypress {
   interface Chainable<Subject> {
