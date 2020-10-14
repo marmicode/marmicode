@@ -40,7 +40,7 @@ jobs:
       - name: Test
         run: yarn affected:test --base=latest --head=HEAD
       - name: Lint
-        run: yarn ng lint
+        run: yarn affected:lint --base=latest --head=HEAD
       - name: Deploy marmicode.io
         env:
           ALLOW_BOTS: ${{ steps.project.outputs.allow_bots }}

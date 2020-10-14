@@ -61,11 +61,7 @@
         "depConstraints": [
           {
             "sourceTag": "scope:app",
-            "onlyDependOnLibsWithTags": [
-              "type:feature",
-              "type:ui",
-              "type:utils"
-            ]
+            "onlyDependOnLibsWithTags": ["type:feature", "type:utils"]
           },
           {
             "sourceTag": "type:feature",
@@ -78,10 +74,7 @@
           },
           {
             "sourceTag": "type:core",
-            "onlyDependOnLibsWithTags": [
-              "type:core",
-              "type:utils"
-            ]
+            "onlyDependOnLibsWithTags": ["type:core", "type:utils"]
           },
           {
             "sourceTag": "type:ui",
@@ -97,11 +90,20 @@
           },
           {
             "sourceTag": "scope:recipe",
-            "onlyDependOnLibsWithTags": ["scope:recipe", "scope:shared", "name:resource-api"]
+            "onlyDependOnLibsWithTags": [
+              "scope:recipe",
+              "scope:shared",
+              "name:contentful-api",
+              "name:resource-api"
+            ]
           },
           {
             "sourceTag": "scope:resource",
-            "onlyDependOnLibsWithTags": ["scope:resource", "scope:shared", "name:contentful-api"]
+            "onlyDependOnLibsWithTags": [
+              "scope:resource",
+              "scope:shared",
+              "name:contentful-api"
+            ]
           }
         ]
       }
