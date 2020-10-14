@@ -2709,6 +2709,18 @@
     minimatch "3.0.4"
     tslib "^1.9.3"
 
+"@nrwl/storybook@^10.3.0":
+  version "10.3.0"
+  resolved "https://registry.yarnpkg.com/@nrwl/storybook/-/storybook-10.3.0.tgz#e2b1b9d9708b60844a7b69770b5094667db1fbd5"
+  integrity sha512-bSZ2BFv2ic6t4X9+WTjSa5kjgMHzCzkS0DE/DpwAjfjq7G1h7jJrv2C/dYRP3hbFg7tV3KUwt2524Tf9QPx9oA==
+  dependencies:
+    "@nrwl/cypress" "10.3.0"
+    core-js "^3.6.5"
+    tree-kill "1.2.2"
+    ts-loader "5.4.5"
+    tsconfig-paths-webpack-plugin "3.2.0"
+    webpack-node-externals "1.7.2"
+
 "@nrwl/tao@10.3.0":
   version "10.3.0"
   resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-10.3.0.tgz#1b3478d716317b5a47d95fb4866136a384c1fbdf"
@@ -5791,7 +5803,7 @@ core-js@3.6.4:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.4.tgz#440a83536b458114b9cb2ac1580ba377dc470647"
   integrity sha512-4paDGScNgZP2IXXilaffL9X7968RuvwlkK3xWtZRVqgd8SYNiVKRJvkFd1aqqEuPfN7E68ZHEp9hDj6lHj4Hyw==
 
-core-js@3.6.5, core-js@^3.0.0, core-js@^3.2.1:
+core-js@3.6.5, core-js@^3.0.0, core-js@^3.2.1, core-js@^3.6.5:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
   integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==

@@ -91,6 +91,7 @@
     "@nrwl/cli": "10.3.0",
     "@nrwl/cypress": "10.3.0",
     "@nrwl/jest": "10.3.0",
+    "@nrwl/storybook": "^10.3.0",
     "@nrwl/workspace": "10.3.0",
     "@types/express": "^4.17.0",
     "@types/jest": "26.0.8",
