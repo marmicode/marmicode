@@ -14,7 +14,7 @@
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
-    "affected:e2e": "nx affected:e2e",
+    "affected:e2e": "percy exec nx affected:e2e",
     "affected:test": "nx affected:test",
     "affected:lint": "nx affected:lint",
     "affected:dep-graph": "nx affected:dep-graph",
