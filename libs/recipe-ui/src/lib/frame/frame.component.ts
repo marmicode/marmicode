@@ -13,19 +13,30 @@ import { Frame } from '@marmicode/recipe-core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-frame',
   template: `
-    <div fxLayout="column" fxLayout.gt-sm="row">
-      <mc-block
-        *ngFor="let block of frame.blocks"
-        [block]="block"
-        [ngClass.gt-sm]="'block'"
-        fxFlex
-      ></mc-block>
-    </div>
+    <mc-block
+      *ngFor="let block of frame.blocks"
+      [block]="block"
+      class="block"
+      fxFlex
+    ></mc-block>
   `,
   styles: [
     `
-      .block {
-        overflow-x: auto;
+      /* This is more reliable than fxLayout="column" fxLayout.gt-sm="row"
+       * as it doesn't rely on JavaScript which makes it work on Storybook + Percy. */
+      :host {
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media (min-width: 960px) {
+        :host {
+          flex-direction: row;
+        }
+
+        .block {
+          overflow-x: auto;
+        }
       }
     `,
   ],
