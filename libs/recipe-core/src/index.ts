@@ -1,1 +1,2 @@
-export * from './lib/recipe-core.module';
+export { Block } from './lib/block';
+export { Frame } from './lib/frame';

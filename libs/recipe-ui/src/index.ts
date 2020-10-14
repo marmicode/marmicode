@@ -1,1 +1,1 @@
-export * from './lib/recipe-ui.module';
+export { FrameModule } from './lib/frame/frame.component';

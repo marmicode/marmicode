@@ -7,7 +7,7 @@ import { PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
 import { combineLatest } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { FrameModule } from './frame/frame.component';
+import { FrameModule } from '@marmicode/recipe-ui';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
 import { RecipeTimelineModule } from './recipe-timeline.component';
 import { RecipeTitleModule } from './recipe-title.component';

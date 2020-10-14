@@ -6,7 +6,7 @@ import {
   NgModule,
   ViewEncapsulation,
 } from '@angular/core';
-import { TextBlock } from './block';
+import { TextBlock } from '../../../../recipe-core/src/lib/block';
 import { MarkdownPipeModule } from './markdown.pipe';
 
 @Component({

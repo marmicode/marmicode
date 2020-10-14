@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { BlockModule } from '../block/block.component';
-import { Frame } from './frame';
+import { Frame } from '../../../../recipe-core/src/lib/frame';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

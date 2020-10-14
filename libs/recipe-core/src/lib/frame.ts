@@ -1,4 +1,4 @@
-import { Block } from '../block/block';
+import { Block } from './block';
 
 export interface Frame {
   slug: string;
