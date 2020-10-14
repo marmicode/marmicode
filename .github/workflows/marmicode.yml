@@ -45,8 +45,6 @@ jobs:
         run: yarn affected:lint --base=latest --head=HEAD
       - name: Deploy marmicode.io
         env:
-          ALLOW_BOTS: ${{ steps.project.outputs.allow_bots }}
-          BASE_URL: ${{ steps.project.outputs.base_url_en }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT: ${{ steps.project.outputs.project }}
         run: tools/deploy.sh $PROJECT
