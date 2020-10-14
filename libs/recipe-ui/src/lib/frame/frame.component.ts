@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { BlockModule } from '../block/block.component';
-import { Frame } from '../../../../recipe-core/src/lib/frame';
+import { Frame } from '@marmicode/recipe-core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

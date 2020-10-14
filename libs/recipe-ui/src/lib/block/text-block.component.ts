@@ -6,7 +6,7 @@ import {
   NgModule,
   ViewEncapsulation,
 } from '@angular/core';
-import { TextBlock } from '../../../../recipe-core/src/lib/block';
+import { TextBlock } from '@marmicode/recipe-core';
 import { MarkdownPipeModule } from './markdown.pipe';
 
 @Component({

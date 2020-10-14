@@ -6,7 +6,7 @@ import {
   NgModule,
   ViewEncapsulation,
 } from '@angular/core';
-import { CodeBlock } from '../../../../recipe-core/src/lib/block';
+import { CodeBlock } from '@marmicode/recipe-core';
 import { CodePipeModule } from './code.pipe';
 
 @Component({

@@ -1,2 +1,9 @@
-export { Block } from './lib/block';
-export { Frame } from './lib/frame';
+export {
+  Block,
+  BlockType,
+  CodeBlock,
+  TextBlock,
+  createCodeBlock,
+  createTextBlock,
+} from './lib/block';
+export { Frame, createFrame } from './lib/frame';

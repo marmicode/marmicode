@@ -8,5 +8,5 @@ export const main = () => ({
   moduleMetadata: {
     imports: [FrameModule],
   },
-  component: FrameComponent
+  component: FrameComponent,
 });

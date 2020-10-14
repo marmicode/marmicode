@@ -5,7 +5,7 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { Block, BlockType } from '../../../../recipe-core/src/lib/block';
+import { Block, BlockType } from '@marmicode/recipe-core';
 import { CodeBlockModule } from './code-block.component';
 import { TextBlockModule } from './text-block.component';
 

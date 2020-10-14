@@ -9,10 +9,9 @@ import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
+import { Frame } from '@marmicode/recipe-core';
 import { RxState } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
-import { Frame } from '../../../recipe-core/src/lib/frame';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -97,9 +96,11 @@ export class RecipeTimelineComponent {
   @Input() set frames(frames: Frame[]) {
     this._state.set({ frames });
   }
+
   @Input() set recipeSlug(recipeSlug: string) {
     this._state.set({ recipeSlug });
   }
+
   @Input() set currentFrameIndex(currentFrameIndex: number) {
     this._state.set({ currentFrameIndex });
   }

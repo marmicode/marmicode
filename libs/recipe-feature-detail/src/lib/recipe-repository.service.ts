@@ -1,16 +1,17 @@
 import { Injectable, NgModule } from '@angular/core';
 import { ContentfulModule, Query } from '@marmicode/contentful-api';
+import {
+  createCodeBlock,
+  createFrame,
+  createTextBlock,
+  Frame,
+} from '@marmicode/recipe-core';
 import { ResourceType } from '@marmicode/resource-api';
 import { Apollo } from 'apollo-angular';
 
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {
-  createCodeBlock,
-  createTextBlock,
-} from '../../../recipe-core/src/lib/block';
-import { createFrame, Frame } from '../../../recipe-core/src/lib/frame';
 
 export type RecipeType = ResourceType.Recipe | ResourceType.Tutorial;
 
