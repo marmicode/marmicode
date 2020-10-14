@@ -17,15 +17,14 @@ import { Frame } from './frame';
       <mc-block
         *ngFor="let block of frame.blocks"
         [block]="block"
-        class="block"
         fxFlex
+        ngClass.gt-sm="block"
       ></mc-block>
     </div>
   `,
   styles: [
     `
       .block {
-        flex-grow: 1;
         overflow-x: auto;
       }
     `,
