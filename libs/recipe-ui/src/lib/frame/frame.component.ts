@@ -17,7 +17,6 @@ import { Frame } from '@marmicode/recipe-core';
       *ngFor="let block of frame.blocks"
       [block]="block"
       class="block"
-      fxFlex
     ></mc-block>
   `,
   styles: [
@@ -37,6 +36,11 @@ import { Frame } from '@marmicode/recipe-core';
         .block {
           overflow-x: auto;
         }
+      }
+
+      /* @hack don't use fxFlex as it overrides parent elements flex style. */
+      .block {
+        flex: 1 1 0;
       }
     `,
   ],
