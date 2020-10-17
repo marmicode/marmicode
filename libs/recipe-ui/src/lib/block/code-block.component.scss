@@ -7,6 +7,7 @@ mc-code-block {
    * in order to enable nested import.
    * Cf. https://sass-lang.com/documentation/at-rules/import#plain-css-imports. */
   @import './prism-tomorrow.scss';
+  @import './prism-line-numbers.scss';
 
   display: block;
 

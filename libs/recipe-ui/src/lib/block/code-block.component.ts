@@ -16,6 +16,8 @@ import { Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { CodePipeModule } from './code.pipe';
 
+import 'prismjs/plugins/line-numbers/prism-line-numbers';
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -24,6 +26,7 @@ import { CodePipeModule } from './code.pipe';
   template: `<pre
     #code
     [ngClass]="languageClass$ | async"
+    [class.line-numbers]="false"
     class="preformatted"
   ><code
     class="code"  
