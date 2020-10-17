@@ -33,7 +33,7 @@ jobs:
         id: node-modules-cache
         with:
           path: node_modules
-          key: node_modules-${{ hashFiles('yarn.lock') }}
+          key: node_modules-${{ hashFiles('yarn.lock') }}-2
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Test
