@@ -33,6 +33,8 @@ export class CodeBlockComponent implements OnChanges {
     // @todo highlight lines.
     this.codeEl.nativeElement.classList.add(`language-${this.block.language}`);
     this.codeEl.nativeElement.textContent = this.block.code;
+    /* @hack use `Prism.highlightElement` instead of a pipe with
+     * `Prism.highlight` because it doesn't add line numbers. */
     Prism.highlightElement(this.codeEl.nativeElement);
   }
 }
