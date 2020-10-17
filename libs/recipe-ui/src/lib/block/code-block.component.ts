@@ -25,8 +25,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers';
   providers: [RxState],
   template: ` <pre
     [ngClass]="languageClass$ | async"
-    [class.line-numbers]="withLineNumbers"
-    class="preformatted"
+    class="line-numbers preformatted"
   ><code
     #code
     class="code"
@@ -44,7 +43,6 @@ export class CodeBlockComponent implements AfterViewChecked {
     map(({ block }) => (block ? `language-${block.language}` : null))
   );
   code$ = this._state.select(map(({ block }) => block?.code));
-  withLineNumbers = true;
 
   private _viewChecked$ = new Subject();
 
