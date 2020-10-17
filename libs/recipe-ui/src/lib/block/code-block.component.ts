@@ -29,7 +29,7 @@ export interface HighlightZone {
 }
 
 export interface HighlightInfo {
-  codeHighlightZoneList: HighlightZone[];
+  zones: HighlightZone[];
 }
 
 @Component({
@@ -50,7 +50,9 @@ export class CodeBlockComponent implements AfterViewChecked {
   @Input() set block(block: CodeBlock) {
     this._state.set({ block });
   }
-  @Input() highlight: HighlightInfo;
+  @Input() set highlight(highlightInfo: HighlightInfo) {
+    this._state.set({ highlightInfo });
+  }
 
   @ViewChild('code', { static: true }) codeEl: ElementRef<HTMLElement>;
 
@@ -61,7 +63,9 @@ export class CodeBlockComponent implements AfterViewChecked {
 
   private _viewChecked$ = new Subject();
 
-  constructor(private _state: RxState<{ block: CodeBlock }>) {
+  constructor(
+    private _state: RxState<{ block: CodeBlock; highlightInfo: HighlightInfo }>
+  ) {
     this._state.hold(
       /* Wait for view check. */
       this.code$.pipe(switchMap(() => this._viewChecked$)),
