@@ -14,6 +14,8 @@ jobs:
   # lint & test parallelization is not worth it.
   test-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
     steps:
       - name: Get project name
         id: project
@@ -30,9 +32,7 @@ jobs:
       - uses: actions/cache@v1
         id: node-modules-cache
         with:
-          path: |
-            node_modules
-            ~/.cache/Cypress
+          path: node_modules
           key: node_modules-${{ hashFiles('yarn.lock') }}
       - name: Install
         run: yarn install --frozen-lockfile
