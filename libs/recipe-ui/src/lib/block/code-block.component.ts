@@ -12,6 +12,7 @@ import {
 import { CodeBlock } from '@marmicode/recipe-core';
 import { RxState } from '@rx-angular/state';
 import * as Prism from 'prismjs';
+import { map } from 'rxjs/operators';
 import { CodePipeModule } from './code.pipe';
 
 @Component({
@@ -19,7 +20,11 @@ import { CodePipeModule } from './code.pipe';
   encapsulation: ViewEncapsulation.None,
   selector: 'mc-code-block',
   providers: [RxState],
-  template: `<pre #code class="preformatted"><code
+  template: `<pre
+    #code
+    [ngClass]="languageClass$ | async"
+    class="preformatted"
+  ><code
     class="code"  
     data-role="code-block"></code></pre>`,
   styleUrls: ['./code-block.component.scss'],
@@ -30,6 +35,10 @@ export class CodeBlockComponent implements OnChanges {
   }
 
   @ViewChild('code', { static: true }) codeEl: ElementRef<HTMLElement>;
+
+  languageClass$ = this._state.select(
+    map(({ block }) => (block ? block.language : null))
+  );
 
   constructor(private _state: RxState<{ block: CodeBlock }>) {}
 
