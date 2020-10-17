@@ -18,6 +18,20 @@ import { CodePipeModule } from './code.pipe';
 
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 
+export interface HighlightSection {
+  start: number;
+  end: number;
+}
+
+export interface HighlightZone {
+  color: string;
+  sections: HighlightSection[];
+}
+
+export interface HighlightInfo {
+  codeHighlightZoneList: HighlightZone[];
+}
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -36,6 +50,7 @@ export class CodeBlockComponent implements AfterViewChecked {
   @Input() set block(block: CodeBlock) {
     this._state.set({ block });
   }
+  @Input() highlight: HighlightInfo;
 
   @ViewChild('code', { static: true }) codeEl: ElementRef<HTMLElement>;
 
