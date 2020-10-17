@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewChecked,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -12,7 +13,8 @@ import {
 import { CodeBlock } from '@marmicode/recipe-core';
 import { RxState } from '@rx-angular/state';
 import * as Prism from 'prismjs';
-import { map } from 'rxjs/operators';
+import { asyncScheduler, Subject } from 'rxjs';
+import { map, mapTo, observeOn, switchMap } from 'rxjs/operators';
 import { CodePipeModule } from './code.pipe';
 
 @Component({
@@ -26,10 +28,10 @@ import { CodePipeModule } from './code.pipe';
     class="preformatted"
   ><code
     class="code"  
-    data-role="code-block"></code></pre>`,
+    data-role="code-block">{{code$ | async}}</code></pre>`,
   styleUrls: ['./code-block.component.scss'],
 })
-export class CodeBlockComponent implements OnChanges {
+export class CodeBlockComponent implements AfterViewChecked {
   @Input() set block(block: CodeBlock) {
     this._state.set({ block });
   }
@@ -37,22 +39,27 @@ export class CodeBlockComponent implements OnChanges {
   @ViewChild('code', { static: true }) codeEl: ElementRef<HTMLElement>;
 
   languageClass$ = this._state.select(
-    map(({ block }) => (block ? block.language : null))
+    map(({ block }) => (block ? `language-${block.language}` : null))
   );
+  code$ = this._state.select(map(({ block }) => block?.code));
 
-  constructor(private _state: RxState<{ block: CodeBlock }>) {}
+  private _viewChecked$ = new Subject();
 
-  ngOnChanges() {
-    // @todo use renderer.
-    // @todo add line numbers.
-    // @todo highlight lines.
-    this.codeEl.nativeElement.classList.add(
-      `language-${this._state.get().block.language}`
+  constructor(private _state: RxState<{ block: CodeBlock }>) {
+    this._state.hold(
+      /* Wait for view check. */
+      this.code$.pipe(
+        switchMap(() => this._viewChecked$),
+        observeOn(asyncScheduler)
+      ),
+      /* @hack use `Prism.highlightElement` instead of a pipe with
+       * `Prism.highlight` because it doesn't add line numbers. */
+      () => Prism.highlightElement(this.codeEl.nativeElement)
     );
-    this.codeEl.nativeElement.textContent = this._state.get().block.code;
-    /* @hack use `Prism.highlightElement` instead of a pipe with
-     * `Prism.highlight` because it doesn't add line numbers. */
-    Prism.highlightElement(this.codeEl.nativeElement);
+  }
+
+  ngAfterViewChecked() {
+    this._viewChecked$.next();
   }
 }
 
