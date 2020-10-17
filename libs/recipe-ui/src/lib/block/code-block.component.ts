@@ -6,15 +6,14 @@ import {
   ElementRef,
   Input,
   NgModule,
-  OnChanges,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { CodeBlock } from '@marmicode/recipe-core';
 import { RxState } from '@rx-angular/state';
 import * as Prism from 'prismjs';
-import { asyncScheduler, Subject } from 'rxjs';
-import { map, mapTo, observeOn, switchMap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { CodePipeModule } from './code.pipe';
 
 @Component({
@@ -48,10 +47,7 @@ export class CodeBlockComponent implements AfterViewChecked {
   constructor(private _state: RxState<{ block: CodeBlock }>) {
     this._state.hold(
       /* Wait for view check. */
-      this.code$.pipe(
-        switchMap(() => this._viewChecked$),
-        observeOn(asyncScheduler)
-      ),
+      this.code$.pipe(switchMap(() => this._viewChecked$)),
       /* @hack use `Prism.highlightElement` instead of a pipe with
        * `Prism.highlight` because it doesn't add line numbers. */
       () => Prism.highlightElement(this.codeEl.nativeElement)
