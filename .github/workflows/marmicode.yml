@@ -17,6 +17,8 @@ jobs:
     env:
       CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
     steps:
+      - name: Increase file watchers
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       - name: Get project name
         id: project
         run: |
@@ -33,7 +35,7 @@ jobs:
         id: node-modules-cache
         with:
           path: node_modules
-          key: node_modules-${{ hashFiles('yarn.lock') }}-2
+          key: node-modules-${{ hashFiles('yarn.lock') }}
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Test
