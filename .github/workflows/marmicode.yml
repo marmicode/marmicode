@@ -17,7 +17,7 @@ jobs:
     env:
       CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
     steps:
-      - name: Increase file watchers
+      - name: Increase file watchers to avoid storybook warnings
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       - name: Get project name
         id: project
