@@ -49,6 +49,12 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT: ${{ steps.project.outputs.project }}
         run: tools/deploy.sh $PROJECT
+      - name: Upload build output & Cypress videos on failure
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: dist
+          path: dist
       - uses: pioug/le-slack-message@v1.0.0
         if: failure()
         with:
