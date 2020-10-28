@@ -18,6 +18,10 @@ import { MarkdownPipeModule } from './markdown.pipe';
 })
 export class TextBlockComponent {
   @Input() block: TextBlock;
+
+  static canHandleLink(href: string) {
+    return false;
+  }
 }
 
 @NgModule({
