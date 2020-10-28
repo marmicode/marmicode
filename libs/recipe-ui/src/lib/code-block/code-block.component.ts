@@ -115,7 +115,7 @@ export class CodeBlockComponent implements AfterViewChecked {
         switchMap(
           () =>
             new Observable((observer) => {
-              Prism.highlightElement(this.codeEl.nativeElement, false, () => {
+              Prism.highlightElement(this.codeEl.nativeElement, true, () => {
                 observer.next();
                 observer.complete();
               });

@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-text-block-link',
-  template: `🚧 text-block-link`,
+  template: `🚧 text-block-link 3`,
 })
 export class TextBlockLinkComponent {
   static canHandleLink(href: string) {
