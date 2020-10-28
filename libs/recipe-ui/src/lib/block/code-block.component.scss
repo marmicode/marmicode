@@ -11,6 +11,10 @@ mc-code-block {
 
   display: block;
 
+  .code {
+    z-index: 1;
+  }
+
   .code-container {
     position: relative;
     margin: .5em;
