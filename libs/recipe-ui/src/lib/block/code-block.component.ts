@@ -44,12 +44,13 @@ export function createHighlightInfo(
   selector: 'mc-code-block',
   providers: [RxState],
   template: ` <pre
-    [ngClass]="languageClass$ | async"
-    class="line-numbers preformatted"
-  ><code
-    #code
-    class="code"
-    data-role="code-block">{{code$ | async}}</code></pre>`,
+      [ngClass]="languageClass$ | async"
+      class="line-numbers preformatted"
+    ><code
+      #code
+      class="code"
+      data-role="code-block">{{code$ | async}}</code></pre>
+    <div *ngFor="let coords of highlightCoordsList$ | async"></div>`,
   styleUrls: ['./code-block.component.scss'],
 })
 export class CodeBlockComponent implements AfterViewChecked {
@@ -66,17 +67,20 @@ export class CodeBlockComponent implements AfterViewChecked {
   languageClass$ = this._state.select(
     map(({ block }) => (block ? `language-${block.language}` : null))
   );
-  highlightCoords$ = this._state.select(
+  highlightCoordsList$ = this._state.select(
     map(({ highlightInfo }) => {
       const lineHeight = 28;
-      const coordsList = highlightInfo.zones.map((zone) => {
-        return zone.sections.map((section) => ({
-          start: (section.start - 1) * lineHeight,
-          end: section.end * lineHeight,
-        }));
-      });
-      /* Flatten list */
-      return coordsList.reduce((acc, coords) => [...acc, ...coords], []);
+      return (
+        highlightInfo.zones
+          .map(({ sections }) =>
+            sections.map((section) => ({
+              start: (section.start - 1) * lineHeight,
+              end: section.end * lineHeight,
+            }))
+          )
+          /* Flatten list. */
+          .reduce((acc, coords) => [...acc, ...coords], [])
+      );
     })
   );
 

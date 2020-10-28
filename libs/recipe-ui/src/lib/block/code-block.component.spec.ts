@@ -42,7 +42,9 @@ describe('CodeBlockComponent', () => {
       ],
     });
 
-    expect(await component.highlightCoords$.pipe(first()).toPromise()).toEqual([
+    expect(
+      await component.highlightCoordsList$.pipe(first()).toPromise()
+    ).toEqual([
       {
         start: 28,
         end: 56,
