@@ -55,4 +55,11 @@ describe('CodeBlockComponent', () => {
       },
     ]);
   });
+
+  it('should not crash if no highlight is set', async () => {
+    component.highlight = null;
+    expect(
+      await component.highlightPositions$.pipe(first()).toPromise()
+    ).toEqual([]);
+  });
 });

@@ -50,6 +50,8 @@ export function createHighlightInfo(
       #code
       class="code"
       data-role="code-block">{{code$ | async}}</code></pre>
+
+    <!-- Highlights. -->
     <div
       *ngFor="let coords of highlightPositions$ | async"
       [style.top.px]="coords.start"
@@ -73,6 +75,10 @@ export class CodeBlockComponent implements AfterViewChecked {
   );
   highlightPositions$ = this._state.select(
     map(({ highlightInfo }) => {
+      if (highlightInfo == null) {
+        return [];
+      }
+
       const lineHeight = 28;
       return (
         highlightInfo.zones
