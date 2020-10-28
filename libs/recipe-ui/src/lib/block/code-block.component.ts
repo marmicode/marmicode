@@ -68,8 +68,12 @@ export class CodeBlockComponent implements AfterViewChecked {
   );
   highlightCoords$ = this._state.select(
     map(({ highlightInfo }) => {
+      const lineHeight = 28;
       const coordsList = highlightInfo.zones.map((zone) => {
-        return [];
+        return zone.sections.map((section) => ({
+          start: (section.start - 1) * lineHeight,
+          end: section.end * lineHeight,
+        }));
       });
       /* Flatten list */
       return coordsList.reduce((acc, coords) => [...acc, ...coords], []);

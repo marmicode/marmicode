@@ -23,7 +23,7 @@ describe('CodeBlockComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('🚧 should compute highlight coordinates', async () => {
+  it('should compute highlight coordinates', async () => {
     component.highlight = createHighlightInfo({
       zones: [
         {
