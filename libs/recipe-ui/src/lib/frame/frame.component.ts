@@ -6,7 +6,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { BlockModule } from '../block/block.component';
+import { BlockModule } from '../block.component';
 import { Frame } from '@marmicode/recipe-core';
 
 @Component({

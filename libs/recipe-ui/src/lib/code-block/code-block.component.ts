@@ -12,11 +12,11 @@ import {
 import { CodeBlock } from '@marmicode/recipe-core';
 import { RxState } from '@rx-angular/state';
 import * as Prism from 'prismjs';
-
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import { Observable, Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { CodePipeModule } from './code.pipe';
 
 export interface HighlightSection {
   start: number;
@@ -67,6 +67,7 @@ export class CodeBlockComponent implements AfterViewChecked {
   @Input() set block(block: CodeBlock) {
     this._state.set({ block });
   }
+
   @Input() set highlight(highlightInfo: HighlightInfo) {
     this._state.set({ highlightInfo });
   }
@@ -132,6 +133,6 @@ export class CodeBlockComponent implements AfterViewChecked {
 @NgModule({
   declarations: [CodeBlockComponent],
   exports: [CodeBlockComponent],
-  imports: [CommonModule, CodePipeModule],
+  imports: [CommonModule],
 })
 export class CodeBlockModule {}

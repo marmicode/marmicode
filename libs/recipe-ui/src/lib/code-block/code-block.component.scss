@@ -6,8 +6,8 @@ mc-code-block {
   /* @hack using a symbolic link to end with a `.scss` extension instead of `.css`
    * in order to enable nested import.
    * Cf. https://sass-lang.com/documentation/at-rules/import#plain-css-imports. */
-  @import './prism-tomorrow.scss';
-  @import './prism-line-numbers.scss';
+  @import './prism-tomorrow';
+  @import './prism-line-numbers';
 
   display: block;
 

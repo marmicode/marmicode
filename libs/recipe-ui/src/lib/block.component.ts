@@ -6,8 +6,8 @@ import {
   NgModule,
 } from '@angular/core';
 import { Block, BlockType } from '@marmicode/recipe-core';
-import { CodeBlockModule } from './code-block.component';
-import { TextBlockModule } from './text-block.component';
+import { CodeBlockModule } from './code-block/code-block.component';
+import { TextBlockModule } from './text-block/text-block.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
