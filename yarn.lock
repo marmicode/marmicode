@@ -282,6 +282,13 @@
   dependencies:
     tslib "^2.0.0"
 
+"@angular/elements@^10.2.0":
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/@angular/elements/-/elements-10.2.0.tgz#24ba12aa533be48cb15572195b24a8ca9da7bf6c"
+  integrity sha512-c+1fdFKWXAS3an6M+msz0KoS1hCc1RrjUf7s5T536XtTrJHMW2dAkbFXH+jzHAEbgnxRTQbcS1Vx3df+L4Mv3w==
+  dependencies:
+    tslib "^2.0.0"
+
 "@angular/fire@^6.0.3":
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/@angular/fire/-/fire-6.0.3.tgz#7e4e988409cfc22e3abd4085c7c4b7d6f8f2533a"
@@ -8353,6 +8360,11 @@ doctrine@^3.0.0:
   integrity sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==
   dependencies:
     esutils "^2.0.2"
+
+document-register-element@^1.7.2:
+  version "1.14.10"
+  resolved "https://registry.yarnpkg.com/document-register-element/-/document-register-element-1.14.10.tgz#a7bd025e6b73bd827fec2d8e90aba755e99387f5"
+  integrity sha512-w5UA37hEIrs+9pruo2yR5UD13c4UHDlkqqjt4qurnp7QsBI9b1IOi8WXUim+aCqKBsENX3Z/cso7XMOuwJH1Yw==
 
 dom-converter@^0.2:
   version "0.2.0"

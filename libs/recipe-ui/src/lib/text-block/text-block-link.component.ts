@@ -6,7 +6,11 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
   selector: 'mc-text-block-link',
   template: `🚧 text-block-link`,
 })
-export class TextBlockLinkComponent {}
+export class TextBlockLinkComponent {
+  static canHandleLink(href: string) {
+    return href.startsWith('lines://');
+  }
+}
 
 @NgModule({
   declarations: [TextBlockLinkComponent],

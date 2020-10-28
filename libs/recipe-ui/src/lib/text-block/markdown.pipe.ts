@@ -3,7 +3,7 @@ import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as marked from 'marked';
 import { Renderer } from 'marked';
-import { TextBlockComponent } from './text-block.component';
+import { TextBlockLinkComponent } from './text-block-link.component';
 
 @Pipe({
   name: 'markdown',
@@ -19,7 +19,7 @@ export class MarkdownPipe implements PipeTransform {
       const html = renderLink(href, title, text);
 
       /* Using <mc-text-block-link> if it's a special link. */
-      if (TextBlockComponent.canHandleLink(href)) {
+      if (TextBlockLinkComponent.canHandleLink(href)) {
         return html.replace(/^<a /, '<mc-text-block-link ');
       }
 
