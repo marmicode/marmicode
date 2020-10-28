@@ -1,7 +1,11 @@
 import { createCodeBlock } from '@marmicode/recipe-core';
 
 import { Meta } from '@storybook/angular';
-import { CodeBlockComponent, CodeBlockModule, createHighlightInfo } from './code-block.component';
+import {
+  CodeBlockComponent,
+  CodeBlockModule,
+  createHighlightInfo,
+} from './code-block.component';
 
 export default {
   title: 'CodeBlock',
@@ -26,16 +30,16 @@ export const highlight = () =>
             color: 'red',
             sections: [
               {
-                start:1,
-                end: 1
+                start: 2,
+                end: 2,
               },
               {
-                start: 4,
-                end: 5
-              }
-            ]
-          }
-        ]
-      })
+                start: 8,
+                end: 10,
+              },
+            ],
+          },
+        ],
+      }),
     },
   } as Meta);
