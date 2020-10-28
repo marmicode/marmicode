@@ -43,15 +43,15 @@ describe('CodeBlockComponent', () => {
     });
 
     expect(
-      await component.highlightCoordsList$.pipe(first()).toPromise()
+      await component.highlightPositions$.pipe(first()).toPromise()
     ).toEqual([
       {
         start: 28,
-        end: 56,
+        height: 28,
       },
       {
         start: 196,
-        end: 280,
+        height: 84,
       },
     ]);
   });
