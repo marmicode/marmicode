@@ -1,7 +1,7 @@
 import { BlockType, createFrame } from '@marmicode/recipe-core';
-import { FrameComponent, FrameModule } from './frame.component';
 
 import { Meta } from '@storybook/angular';
+import { FrameComponent, FrameModule } from './frame.component';
 
 export default {
   title: 'Frame',
