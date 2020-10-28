@@ -43,7 +43,8 @@ export function createHighlightInfo(
   encapsulation: ViewEncapsulation.None,
   selector: 'mc-code-block',
   providers: [RxState],
-  template: ` <pre
+  template: ` <div class="code-container">
+    <pre
       [ngClass]="languageClass$ | async"
       class="line-numbers preformatted"
     ><code
@@ -57,7 +58,9 @@ export function createHighlightInfo(
       [style.backgroundColor]="style.color"
       [style.top.px]="style.top"
       [style.height.px]="style.height"
-    ></div>`,
+      class="highlight"
+    ></div>
+  </div>`,
   styleUrls: ['./code-block.component.scss'],
 })
 export class CodeBlockComponent implements AfterViewChecked {
@@ -80,13 +83,14 @@ export class CodeBlockComponent implements AfterViewChecked {
         return [];
       }
 
+      const offset = 18;
       const lineHeight = 28;
       return (
         highlightInfo.zones
           .map(({ color, sections }) =>
             sections.map((section) => ({
               color,
-              top: (section.start - 1) * lineHeight,
+              top: offset + (section.start - 1) * lineHeight,
               height: (section.end - section.start + 1) * lineHeight,
             }))
           )

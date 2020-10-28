@@ -27,7 +27,7 @@ export const highlight = () =>
       highlight: createHighlightInfo({
         zones: [
           {
-            color: 'red',
+            color: '#ff000040',
             sections: [
               {
                 start: 2,
