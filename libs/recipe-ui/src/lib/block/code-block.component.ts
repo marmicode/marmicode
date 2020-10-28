@@ -32,6 +32,10 @@ export interface HighlightInfo {
   zones: HighlightZone[];
 }
 
+export function createHighlightInfo(highlightInfo: HighlightInfo): HighlightInfo {
+  return highlightInfo;
+}
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,

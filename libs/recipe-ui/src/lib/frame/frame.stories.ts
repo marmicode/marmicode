@@ -4,12 +4,12 @@ import { FrameComponent, FrameModule } from './frame.component';
 import { Meta } from '@storybook/angular';
 
 export default {
-  title: 'frame',
+  title: 'Frame',
 };
 
 export const overflow = () =>
   ({
-    title: 'overflow',
+    title: 'Overflow',
     moduleMetadata: {
       imports: [FrameModule],
     },
