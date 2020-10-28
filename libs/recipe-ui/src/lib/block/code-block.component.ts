@@ -12,8 +12,8 @@ import {
 import { CodeBlock } from '@marmicode/recipe-core';
 import { RxState } from '@rx-angular/state';
 import * as Prism from 'prismjs';
-import { Subject } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { bindCallback, EMPTY, Observable, Subject } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { CodePipeModule } from './code.pipe';
 
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
@@ -32,7 +32,9 @@ export interface HighlightInfo {
   zones: HighlightZone[];
 }
 
-export function createHighlightInfo(highlightInfo: HighlightInfo): HighlightInfo {
+export function createHighlightInfo(
+  highlightInfo: HighlightInfo
+): HighlightInfo {
   return highlightInfo;
 }
 
@@ -71,11 +73,21 @@ export class CodeBlockComponent implements AfterViewChecked {
     private _state: RxState<{ block: CodeBlock; highlightInfo: HighlightInfo }>
   ) {
     this._state.hold(
-      /* Wait for view check. */
-      this.code$.pipe(switchMap(() => this._viewChecked$)),
-      /* @hack use `Prism.highlightElement` instead of a pipe with
-       * `Prism.highlight` because it doesn't add line numbers. */
-      () => Prism.highlightElement(this.codeEl.nativeElement)
+      this.code$.pipe(
+        /* Wait for view check. */
+        switchMap(() => this._viewChecked$),
+        /* @hack use `Prism.highlightElement` instead of an angular pipe with
+         * `Prism.highlight` because it doesn't add line numbers. */
+        switchMap(
+          () =>
+            new Observable((observer) => {
+              Prism.highlightElement(this.codeEl.nativeElement, false, () => {
+                observer.next();
+                observer.complete();
+              });
+            })
+        )
+      )
     );
   }
 
