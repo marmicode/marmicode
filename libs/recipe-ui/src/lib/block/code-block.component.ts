@@ -53,9 +53,10 @@ export function createHighlightInfo(
 
     <!-- Highlights. -->
     <div
-      *ngFor="let coords of highlightPositions$ | async"
-      [style.top.px]="coords.start"
-      [style.height.px]="coords.height"
+      *ngFor="let style of highlightStyles$ | async"
+      [style.backgroundColor]="style.color"
+      [style.top.px]="style.top"
+      [style.height.px]="style.height"
     ></div>`,
   styleUrls: ['./code-block.component.scss'],
 })
@@ -73,7 +74,7 @@ export class CodeBlockComponent implements AfterViewChecked {
   languageClass$ = this._state.select(
     map(({ block }) => (block ? `language-${block.language}` : null))
   );
-  highlightPositions$ = this._state.select(
+  highlightStyles$ = this._state.select(
     map(({ highlightInfo }) => {
       if (highlightInfo == null) {
         return [];
@@ -82,9 +83,10 @@ export class CodeBlockComponent implements AfterViewChecked {
       const lineHeight = 28;
       return (
         highlightInfo.zones
-          .map(({ sections }) =>
+          .map(({ color, sections }) =>
             sections.map((section) => ({
-              start: (section.start - 1) * lineHeight,
+              color,
+              top: (section.start - 1) * lineHeight,
               height: (section.end - section.start + 1) * lineHeight,
             }))
           )

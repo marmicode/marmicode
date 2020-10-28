@@ -42,15 +42,15 @@ describe('CodeBlockComponent', () => {
       ],
     });
 
-    expect(
-      await component.highlightPositions$.pipe(first()).toPromise()
-    ).toEqual([
+    expect(await component.highlightStyles$.pipe(first()).toPromise()).toEqual([
       {
-        start: 28,
+        color: 'red',
+        top: 28,
         height: 28,
       },
       {
-        start: 196,
+        color: 'red',
+        top: 196,
         height: 84,
       },
     ]);
@@ -58,8 +58,8 @@ describe('CodeBlockComponent', () => {
 
   it('should not crash if no highlight is set', async () => {
     component.highlight = null;
-    expect(
-      await component.highlightPositions$.pipe(first()).toPromise()
-    ).toEqual([]);
+    expect(await component.highlightStyles$.pipe(first()).toPromise()).toEqual(
+      []
+    );
   });
 });
