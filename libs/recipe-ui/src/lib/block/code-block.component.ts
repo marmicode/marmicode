@@ -12,11 +12,11 @@ import {
 import { CodeBlock } from '@marmicode/recipe-core';
 import { RxState } from '@rx-angular/state';
 import * as Prism from 'prismjs';
-import { bindCallback, EMPTY, Observable, Subject } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
-import { CodePipeModule } from './code.pipe';
 
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
+import { Observable, Subject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { CodePipeModule } from './code.pipe';
 
 export interface HighlightSection {
   start: number;
@@ -62,10 +62,19 @@ export class CodeBlockComponent implements AfterViewChecked {
 
   @ViewChild('code', { static: true }) codeEl: ElementRef<HTMLElement>;
 
+  code$ = this._state.select(map(({ block }) => block?.code));
   languageClass$ = this._state.select(
     map(({ block }) => (block ? `language-${block.language}` : null))
   );
-  code$ = this._state.select(map(({ block }) => block?.code));
+  highlightCoords$ = this._state.select(
+    map(({ highlightInfo }) => {
+      const coordsList = highlightInfo.zones.map((zone) => {
+        return [];
+      });
+      /* Flatten list */
+      return coordsList.reduce((acc, coords) => [...acc, ...coords], []);
+    })
+  );
 
   private _viewChecked$ = new Subject();
 

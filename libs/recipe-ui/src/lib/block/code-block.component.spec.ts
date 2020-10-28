@@ -1,8 +1,10 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import * as marked from 'marked';
-import { CodeBlockComponent } from './code-block.component';
-import Code = marked.Tokens.Code;
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { first } from 'rxjs/operators';
+import {
+  CodeBlockComponent,
+  createHighlightInfo,
+} from './code-block.component';
 
 describe('CodeBlockComponent', () => {
   let fixture: ComponentFixture<CodeBlockComponent>;
@@ -21,5 +23,34 @@ describe('CodeBlockComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should compute highlight coordinates', () => {});
+  xit('🚧 should compute highlight coordinates', async () => {
+    component.highlight = createHighlightInfo({
+      zones: [
+        {
+          color: 'red',
+          sections: [
+            {
+              start: 2,
+              end: 2,
+            },
+            {
+              start: 8,
+              end: 10,
+            },
+          ],
+        },
+      ],
+    });
+
+    expect(await component.highlightCoords$.pipe(first()).toPromise()).toEqual([
+      {
+        start: 28,
+        end: 56,
+      },
+      {
+        start: 196,
+        end: 280,
+      },
+    ]);
+  });
 });
