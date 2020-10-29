@@ -17,18 +17,17 @@ import { TextBlockModule } from './text-block/text-block.component';
     <mc-code-block
       *ngSwitchCase="BlockType.Code"
       [block]="block"
-      [highlight]="highlight"
     ></mc-code-block>
     <mc-text-block
       *ngSwitchCase="BlockType.Text"
+      [availableHighlight]="availableHighlight"
       [block]="block"
-      [highlight]="highlight"
     ></mc-text-block>
   </ng-container>`,
 })
 export class BlockComponent {
+  @Input() availableHighlight: HighlightInfo;
   @Input() block: Block;
-  @Input() highlight: HighlightInfo;
 
   BlockType = BlockType;
 }

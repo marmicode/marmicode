@@ -3,6 +3,7 @@ import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as marked from 'marked';
 import { Renderer } from 'marked';
+import { HighlightInfo } from '../highlight/highlight-info';
 import { TextBlockLinkComponent } from './text-block-link.component';
 
 @Pipe({
@@ -30,7 +31,10 @@ export class MarkdownPipe implements PipeTransform {
     this._renderer = renderer;
   }
 
-  transform(value: string): SafeHtml {
+  transform(
+    value: string,
+    { availableHighlight }: { availableHighlight: HighlightInfo }
+  ): SafeHtml {
     return this._sanitizer.bypassSecurityTrustHtml(
       marked(value, {
         renderer: this._renderer,

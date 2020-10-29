@@ -20,8 +20,8 @@ import { HighlightInfo } from '../highlight/highlight-info';
   template: `
     <mc-block
       *ngFor="let block of (frame$ | async).blocks"
+      [availableHighlight]="availableHighlight$ | async"
       [block]="block"
-      [highlight]="highlight$ | async"
       class="block"
     ></mc-block>
   `,
@@ -57,7 +57,7 @@ export class FrameComponent {
   }
 
   frame$ = this._state.select('frame');
-  highlight$ = this.frame$.pipe(
+  availableHighlight$ = this.frame$.pipe(
     select(map((frame) => extractHighlightInfo(frame)))
   );
 

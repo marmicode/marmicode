@@ -17,12 +17,16 @@ import { TextBlockLinkComponent } from './text-block-link.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   selector: 'mc-text-block',
-  template: ` <div [innerHTML]="block.text | markdown"></div>`,
+  template: ` <div
+    [innerHTML]="
+      block.text | markdown: { availableHighlight: availableHighlight }
+    "
+  ></div>`,
   styleUrls: ['./text-block.component.scss'],
 })
 export class TextBlockComponent {
+  @Input() availableHighlight: HighlightInfo;
   @Input() block: TextBlock;
-  @Input() highlight: HighlightInfo;
 }
 
 @NgModule({
