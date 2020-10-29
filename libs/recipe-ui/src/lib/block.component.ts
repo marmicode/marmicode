@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Block, BlockType } from '@marmicode/recipe-core';
 import { CodeBlockModule } from './code-block/code-block.component';
+import { HighlightInfo } from './highlight/highlight-info';
 import { TextBlockModule } from './text-block/text-block.component';
 
 @Component({
@@ -16,6 +17,7 @@ import { TextBlockModule } from './text-block/text-block.component';
     <mc-code-block
       *ngSwitchCase="BlockType.Code"
       [block]="block"
+      [highlight]="highlight"
     ></mc-code-block>
     <mc-text-block
       *ngSwitchCase="BlockType.Text"
@@ -25,6 +27,7 @@ import { TextBlockModule } from './text-block/text-block.component';
 })
 export class BlockComponent {
   @Input() block: Block;
+  @Input() highlight: HighlightInfo;
 
   BlockType = BlockType;
 }

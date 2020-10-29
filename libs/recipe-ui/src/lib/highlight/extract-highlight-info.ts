@@ -18,7 +18,7 @@ export function extractHighlightInfo(frame: Frame): HighlightInfo {
       }
 
       /* Find all strings between "](" and ")". */
-      const links = block.text.match(/(?<=\]\().+(?=\))/g);
+      const links = block.text.match(/(?<=\]\().+(?=\))/g) ?? [];
 
       /* Get highlight sections for each link. */
       const highlightSectionsList = links

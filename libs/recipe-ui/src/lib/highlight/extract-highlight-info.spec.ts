@@ -1,4 +1,8 @@
-import { BlockType, createFrame } from '@marmicode/recipe-core';
+import {
+  BlockType,
+  createFrame,
+  createTextBlock,
+} from '@marmicode/recipe-core';
 import { extractHighlightInfo } from './extract-highlight-info';
 
 describe('extractHighlightInfo', () => {
@@ -67,5 +71,22 @@ curl http://localhost:8080/farms
         },
       ],
     });
+  });
+
+  it('should not fail if no link', () => {
+    expect(
+      extractHighlightInfo(
+        createFrame({
+          slug: 'test',
+          duration: 1,
+          title: 'test',
+          blocks: [
+            createTextBlock({
+              text: 'test',
+            }),
+          ],
+        })
+      )
+    ).toEqual({ zones: [] });
   });
 });
