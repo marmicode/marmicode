@@ -35,7 +35,15 @@ export function parseLinesHref(href: string): HighlightSection[] {
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-text-block-link',
-  template: `🚧 text-block-link 3`,
+  template: `<ng-content></ng-content>`,
+  styles: [
+    `
+      :host {
+        cursor: pointer;
+        border-bottom: 1px solid currentColor;
+      }
+    `,
+  ],
 })
 export class TextBlockLinkComponent {
   @Input() href: string;
