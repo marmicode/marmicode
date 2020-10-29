@@ -24,9 +24,9 @@ import { TextBlockModule } from './text-block/text-block.component';
   </ng-container>`,
 })
 export class BlockComponent {
-  BlockType = BlockType;
-
   @Input() block: Block;
+
+  BlockType = BlockType;
 }
 
 @NgModule({
