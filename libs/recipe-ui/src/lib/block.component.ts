@@ -22,6 +22,7 @@ import { TextBlockModule } from './text-block/text-block.component';
     <mc-text-block
       *ngSwitchCase="BlockType.Text"
       [block]="block"
+      [highlight]="highlight"
     ></mc-text-block>
   </ng-container>`,
 })

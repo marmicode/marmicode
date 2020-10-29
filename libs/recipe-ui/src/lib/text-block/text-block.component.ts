@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { TextBlock } from '@marmicode/recipe-core';
+import { HighlightInfo } from '../highlight/highlight-info';
 import { MarkdownPipeModule } from './markdown.pipe';
 import { TextBlockLinkComponent } from './text-block-link.component';
 
@@ -22,6 +23,7 @@ import { TextBlockLinkComponent } from './text-block-link.component';
 })
 export class TextBlockComponent {
   @Input() block: TextBlock;
+  @Input() highlight: HighlightInfo;
 }
 
 @NgModule({
