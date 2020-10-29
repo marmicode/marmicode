@@ -17,15 +17,14 @@ import { TextBlockLinkComponent } from './text-block-link.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   selector: 'mc-text-block',
-  template: ` <div
-    [innerHTML]="
-      block.text | markdown: { availableHighlight: availableHighlight }
-    "
-  ></div>`,
+  template: ` <div [innerHTML]="block.text | markdown"></div>`,
   styleUrls: ['./text-block.component.scss'],
 })
 export class TextBlockComponent {
-  @Input() availableHighlight: HighlightInfo;
+  /**
+   * The available zones to highlight.
+   */
+  @Input() highlightable: HighlightInfo;
   @Input() block: TextBlock;
 }
 
