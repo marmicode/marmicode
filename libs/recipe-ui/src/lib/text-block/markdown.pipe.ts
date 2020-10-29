@@ -24,7 +24,7 @@ export class MarkdownPipe implements PipeTransform {
       }
 
       /* Otherwise, just use a basic link and open it in new window. */
-      return html.replace(/^<a /, '<a target="_blank"');
+      return html.replace(/^<a /, '<a target="_blank" ');
     };
 
     this._renderer = renderer;
