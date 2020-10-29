@@ -5,7 +5,6 @@ import {
   Injector,
   Input,
   NgModule,
-  Type,
   ViewEncapsulation,
 } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
