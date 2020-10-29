@@ -1,13 +1,20 @@
 import { BlockType, createFrame, Frame } from '@marmicode/recipe-core';
 import { isTextBlock } from '@marmicode/recipe-core';
 import { createHighlightInfo, HighlightInfo } from './highlight-info';
+import { isHighlightLink } from './parse-highlight-link';
 
 const availableColors = ['purple', 'green', 'orange', 'blue', 'yellow'];
 
 function extractHighlightInfo(frame: Frame): HighlightInfo {
   const zones = frame.blocks
-    .filter(isTextBlock)
+    .filter((block) => isTextBlock(block))
     .map((block) => {
+      /* Find all strings between "](" and ")". */
+      const links = block.text.match(/(?<=\]\().+(?=\))/g);
+
+      // links.filter(link => isHighlightLink(link))
+      //   .map(link)
+
       return [
         {
           color: 'purple',
@@ -55,9 +62,9 @@ describe('extractHighlightInfo', () => {
         {
           type: BlockType.Text,
           text: `Before setting up request validation, we can see that:
-- [the farm detail \`GET /farms/{farmId}\` route is accessible even though it's not defined in the OpenAPI Specification](lines://2),
-- [we can send data in any format and not only \`application/json\` as described in the OpenAPI Specification](lines://5),
-- [we can send any data when creating a farm using the \`POST /farms\` route.](lines://5,8-10)`,
+- [the farm detail \`GET /farms/{farmId}\` route is accessible even though it's not defined in the OpenAPI Specification](highlight://2),
+- [we can send data in any format and not only \`application/json\` as described in the OpenAPI Specification](highlight://5),
+- [we can send any data when creating a farm using the \`POST /farms\` route.](highlight://5,8-10)`,
         },
         {
           type: BlockType.Code,
