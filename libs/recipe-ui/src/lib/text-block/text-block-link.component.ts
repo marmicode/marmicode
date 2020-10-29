@@ -5,7 +5,6 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { extractHighlightableZones } from '../highlight/extract-highlightable-zones';
 import { HighlightZone } from '../highlight/highlight-info';
 import {
   isHighlightLink,
@@ -15,7 +14,7 @@ import {
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-text-block-link',
-  template: `{{ color }}<ng-content></ng-content>`,
+  template: `<ng-content></ng-content>`,
   styles: [
     `
       :host {
