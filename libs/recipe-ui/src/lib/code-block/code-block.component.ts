@@ -16,7 +16,7 @@ import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import { Observable, Subject } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 export interface HighlightSection {
   start: number;
@@ -111,16 +111,10 @@ export class CodeBlockComponent implements AfterViewChecked {
         /* Wait for view check. */
         switchMap(() => this._viewChecked$),
         /* @hack use `Prism.highlightElement` instead of an angular pipe with
-         * `Prism.highlight` because it doesn't add line numbers. */
-        switchMap(
-          () =>
-            new Observable((observer) => {
-              Prism.highlightElement(this.codeEl.nativeElement, true, () => {
-                observer.next();
-                observer.complete();
-              });
-            })
-        )
+         * `Prism.highlight` because it doesn't add line numbers.
+         * We are not using async highlight as it crashes for some reason...
+         * ... maybe a web worker issue? */
+        tap(() => Prism.highlightElement(this.codeEl.nativeElement))
       )
     );
   }
