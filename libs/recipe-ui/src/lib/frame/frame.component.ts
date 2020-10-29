@@ -10,7 +10,7 @@ import { RxState, select } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { BlockModule } from '../block.component';
 import { Frame } from '@marmicode/recipe-core';
-import { extractHighlightInfo } from '../highlight/extract-highlight-info';
+import { extractHighlightableZones } from '../highlight/extract-highlightable-zones';
 import { HighlightInfo } from '../highlight/highlight-info';
 
 @Component({
@@ -20,8 +20,8 @@ import { HighlightInfo } from '../highlight/highlight-info';
   template: `
     <mc-block
       *ngFor="let block of (frame$ | async).blocks"
-      [availableHighlight]="availableHighlight$ | async"
       [block]="block"
+      [highlightableZones]="highlightableZones$ | async"
       class="block"
     ></mc-block>
   `,
@@ -57,8 +57,8 @@ export class FrameComponent {
   }
 
   frame$ = this._state.select('frame');
-  availableHighlight$ = this.frame$.pipe(
-    select(map((frame) => extractHighlightInfo(frame)))
+  highlightableZones$ = this.frame$.pipe(
+    select(map((frame) => extractHighlightableZones(frame)))
   );
 
   constructor(

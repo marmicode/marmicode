@@ -20,14 +20,14 @@ import { TextBlockModule } from './text-block/text-block.component';
     ></mc-code-block>
     <mc-text-block
       *ngSwitchCase="BlockType.Text"
-      [highlightable]="availableHighlight"
+      [highlightable]="highlightableZones"
       [block]="block"
     ></mc-text-block>
   </ng-container>`,
 })
 export class BlockComponent {
-  @Input() availableHighlight: HighlightInfo;
   @Input() block: Block;
+  @Input() highlightableZones: HighlightInfo;
 
   BlockType = BlockType;
 }

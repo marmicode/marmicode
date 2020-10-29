@@ -3,9 +3,9 @@ import {
   createFrame,
   createTextBlock,
 } from '@marmicode/recipe-core';
-import { extractHighlightInfo } from './extract-highlight-info';
+import { extractHighlightableZones } from './extract-highlightable-zones';
 
-describe('extractHighlightInfo', () => {
+describe('extractHighlightableZones', () => {
   it('should extract highlight info from frame', () => {
     const frame = createFrame({
       blocks: [
@@ -36,46 +36,44 @@ curl http://localhost:8080/farms
       title: 'Without validation',
     });
 
-    expect(extractHighlightInfo(frame)).toEqual({
-      zones: [
-        {
-          color: 'purple',
-          sections: [
-            {
-              start: 2,
-              end: 2,
-            },
-          ],
-        },
-        {
-          color: 'green',
-          sections: [
-            {
-              start: 5,
-              end: 5,
-            },
-          ],
-        },
-        {
-          color: 'orange',
-          sections: [
-            {
-              start: 5,
-              end: 5,
-            },
-            {
-              start: 8,
-              end: 10,
-            },
-          ],
-        },
-      ],
-    });
+    expect(extractHighlightableZones(frame)).toEqual([
+      {
+        color: 'purple',
+        sections: [
+          {
+            start: 2,
+            end: 2,
+          },
+        ],
+      },
+      {
+        color: 'green',
+        sections: [
+          {
+            start: 5,
+            end: 5,
+          },
+        ],
+      },
+      {
+        color: 'orange',
+        sections: [
+          {
+            start: 5,
+            end: 5,
+          },
+          {
+            start: 8,
+            end: 10,
+          },
+        ],
+      },
+    ]);
   });
 
   it('should not fail if no link', () => {
     expect(
-      extractHighlightInfo(
+      extractHighlightableZones(
         createFrame({
           slug: 'test',
           duration: 1,
@@ -87,6 +85,6 @@ curl http://localhost:8080/farms
           ],
         })
       )
-    ).toEqual({ zones: [] });
+    ).toEqual([]);
   });
 });
