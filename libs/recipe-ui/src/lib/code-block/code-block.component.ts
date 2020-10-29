@@ -17,26 +17,7 @@ import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import { Subject } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-
-export interface HighlightSection {
-  start: number;
-  end: number;
-}
-
-export interface HighlightZone {
-  color: string;
-  sections: HighlightSection[];
-}
-
-export interface HighlightInfo {
-  zones: HighlightZone[];
-}
-
-export function createHighlightInfo(
-  highlightInfo: HighlightInfo
-): HighlightInfo {
-  return highlightInfo;
-}
+import { HighlightInfo } from '../highlight-info';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

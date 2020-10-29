@@ -1,10 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { first } from 'rxjs/operators';
-import {
-  CodeBlockComponent,
-  createHighlightInfo,
-} from './code-block.component';
+import { createHighlightInfo } from '../highlight-info';
+import { CodeBlockComponent } from './code-block.component';
 
 describe('CodeBlockComponent', () => {
   let fixture: ComponentFixture<CodeBlockComponent>;

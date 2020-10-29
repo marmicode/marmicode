@@ -1,11 +1,8 @@
 import { createCodeBlock } from '@marmicode/recipe-core';
 
 import { Meta } from '@storybook/angular';
-import {
-  CodeBlockComponent,
-  CodeBlockModule,
-  createHighlightInfo,
-} from './code-block.component';
+import { createHighlightInfo } from '../highlight-info';
+import { CodeBlockComponent, CodeBlockModule } from './code-block.component';
 
 export default {
   title: 'CodeBlock',
