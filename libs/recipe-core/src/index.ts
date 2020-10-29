@@ -5,5 +5,6 @@ export {
   TextBlock,
   createCodeBlock,
   createTextBlock,
+  isTextBlock,
 } from './lib/block';
 export { Frame, createFrame } from './lib/frame';

@@ -1,9 +1,12 @@
 import { BlockType, createFrame, Frame } from '@marmicode/recipe-core';
+import { isTextBlock } from '@marmicode/recipe-core';
 import { createHighlightInfo, HighlightInfo } from './highlight-info';
+
+const availableColors = ['purple', 'green', 'orange', 'blue', 'yellow'];
 
 function extractHighlightInfo(frame: Frame): HighlightInfo {
   const zones = frame.blocks
-    .filter((block) => block.type === BlockType.Text)
+    .filter(isTextBlock)
     .map((block) => {
       return [
         {
@@ -25,7 +28,7 @@ function extractHighlightInfo(frame: Frame): HighlightInfo {
           ],
         },
         {
-          color: 'blue',
+          color: 'orange',
           sections: [
             {
               start: 5,
@@ -97,7 +100,7 @@ curl http://localhost:8080/farms
           ],
         },
         {
-          color: 'blue',
+          color: 'orange',
           sections: [
             {
               start: 5,

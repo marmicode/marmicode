@@ -23,4 +23,8 @@ export function createTextBlock(block: Omit<TextBlock, 'type'>): TextBlock {
   return { type: BlockType.Text, ...block };
 }
 
+export function isTextBlock(block: Block): block is TextBlock {
+  return block.type === BlockType.Text;
+}
+
 export type Block = CodeBlock | TextBlock;
