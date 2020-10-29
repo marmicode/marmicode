@@ -17,7 +17,11 @@ import { TextBlockLinkComponent } from './text-block-link.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   selector: 'mc-text-block',
-  template: ` <div [innerHTML]="block.text | markdown"></div>`,
+  template: ` <div
+    [innerHTML]="
+      block.text | markdown: { highlightableZones: highlightableZones }
+    "
+  ></div>`,
   styleUrls: ['./text-block.component.scss'],
 })
 export class TextBlockComponent {
