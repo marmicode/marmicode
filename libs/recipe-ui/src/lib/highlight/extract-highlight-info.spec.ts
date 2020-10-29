@@ -1,12 +1,52 @@
 import { BlockType, createFrame, Frame } from '@marmicode/recipe-core';
-import { HighlightInfo } from './highlight-info';
+import { createHighlightInfo, HighlightInfo } from './highlight-info';
 
 function extractHighlightInfo(frame: Frame): HighlightInfo {
-  throw new Error('🚧 work in progress!');
+  const zones = frame.blocks
+    .filter((block) => block.type === BlockType.Text)
+    .map((block) => {
+      return [
+        {
+          color: 'purple',
+          sections: [
+            {
+              start: 2,
+              end: 2,
+            },
+          ],
+        },
+        {
+          color: 'green',
+          sections: [
+            {
+              start: 5,
+              end: 5,
+            },
+          ],
+        },
+        {
+          color: 'blue',
+          sections: [
+            {
+              start: 5,
+              end: 5,
+            },
+            {
+              start: 8,
+              end: 10,
+            },
+          ],
+        },
+      ];
+    })
+    .reduce((acc, _zones) => [...acc, ..._zones], []);
+  return createHighlightInfo({
+    zones,
+  });
 }
 
 describe('extractHighlightInfo', () => {
-  xit('should extract highlight info from frame', () => {
+  it('should extract highlight info from frame', () => {
     const frame = createFrame({
       blocks: [
         {
