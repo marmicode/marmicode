@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  NgModule,
+} from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -7,6 +12,8 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
   template: `🚧 text-block-link 3`,
 })
 export class TextBlockLinkComponent {
+  @Input() href: string;
+
   static canHandleLink(href: string) {
     return href.startsWith('lines://');
   }

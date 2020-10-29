@@ -15,7 +15,7 @@ import * as Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 export interface HighlightSection {
