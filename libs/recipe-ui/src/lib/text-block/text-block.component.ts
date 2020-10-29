@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { TextBlock } from '@marmicode/recipe-core';
-import { HighlightInfo } from '../highlight/highlight-info';
+import { HighlightZone } from '../highlight/highlight-info';
 import { MarkdownPipeModule } from './markdown.pipe';
 import { TextBlockLinkComponent } from './text-block-link.component';
 
@@ -21,11 +21,11 @@ import { TextBlockLinkComponent } from './text-block-link.component';
   styleUrls: ['./text-block.component.scss'],
 })
 export class TextBlockComponent {
+  @Input() block: TextBlock;
   /**
    * The available zones to highlight.
    */
-  @Input() highlightable: HighlightInfo;
-  @Input() block: TextBlock;
+  @Input() highlightableZones: HighlightZone[];
 }
 
 @NgModule({

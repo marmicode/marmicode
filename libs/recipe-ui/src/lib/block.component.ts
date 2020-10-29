@@ -20,8 +20,8 @@ import { TextBlockModule } from './text-block/text-block.component';
     ></mc-code-block>
     <mc-text-block
       *ngSwitchCase="BlockType.Text"
-      [highlightable]="highlightableZones"
       [block]="block"
+      [highlightableZones]="highlightableZones"
     ></mc-text-block>
   </ng-container>`,
 })
