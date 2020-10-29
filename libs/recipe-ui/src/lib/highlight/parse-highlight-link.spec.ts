@@ -1,8 +1,8 @@
-import { parseLinesHref } from './text-block-link.component';
+import { parseHighlightLink } from './parse-highlight-link';
 
-describe('parseLinesHref', () => {
+describe('parseHighlightLink', () => {
   it('should return highlight sections', () => {
-    expect(parseLinesHref('lines://1,3-4,5')).toEqual([
+    expect(parseHighlightLink('highlight://1,3-4,5')).toEqual([
       {
         start: 1,
         end: 1,
