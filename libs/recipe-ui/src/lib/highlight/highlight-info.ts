@@ -18,6 +18,10 @@ export function createHighlightSection(
   return section;
 }
 
+export function createHighlightZone(zone: HighlightZone): HighlightZone {
+  return zone;
+}
+
 export function createHighlightInfo(
   highlightInfo: HighlightInfo
 ): HighlightInfo {

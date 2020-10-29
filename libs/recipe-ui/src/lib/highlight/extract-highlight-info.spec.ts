@@ -1,7 +1,11 @@
 import { BlockType, createFrame, Frame } from '@marmicode/recipe-core';
 import { isTextBlock } from '@marmicode/recipe-core';
-import { createHighlightInfo, HighlightInfo } from './highlight-info';
-import { isHighlightLink } from './parse-highlight-link';
+import {
+  createHighlightInfo,
+  createHighlightZone,
+  HighlightInfo,
+} from './highlight-info';
+import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 
 const availableColors = ['purple', 'green', 'orange', 'blue', 'yellow'];
 
@@ -9,45 +13,24 @@ function extractHighlightInfo(frame: Frame): HighlightInfo {
   const zones = frame.blocks
     .filter((block) => isTextBlock(block))
     .map((block) => {
+      if (!isTextBlock(block)) {
+        throw new Error();
+      }
+
       /* Find all strings between "](" and ")". */
       const links = block.text.match(/(?<=\]\().+(?=\))/g);
 
-      // links.filter(link => isHighlightLink(link))
-      //   .map(link)
+      /* Get highlight sections for each link. */
+      const highlightSectionsList = links
+        .filter((link) => isHighlightLink(link))
+        .map((link) => parseHighlightLink(link));
 
-      return [
-        {
-          color: 'purple',
-          sections: [
-            {
-              start: 2,
-              end: 2,
-            },
-          ],
-        },
-        {
-          color: 'green',
-          sections: [
-            {
-              start: 5,
-              end: 5,
-            },
-          ],
-        },
-        {
-          color: 'orange',
-          sections: [
-            {
-              start: 5,
-              end: 5,
-            },
-            {
-              start: 8,
-              end: 10,
-            },
-          ],
-        },
-      ];
+      return highlightSectionsList.map((sections, index) => {
+        return createHighlightZone({
+          color: availableColors[index % availableColors.length],
+          sections,
+        });
+      });
     })
     .reduce((acc, _zones) => [...acc, ..._zones], []);
   return createHighlightInfo({
