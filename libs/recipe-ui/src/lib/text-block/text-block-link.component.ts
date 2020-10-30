@@ -2,7 +2,9 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   HostBinding,
+  HostListener,
   Input,
   NgModule,
 } from '@angular/core';
@@ -28,13 +30,6 @@ import {
 export class TextBlockLinkComponent {
   @Input() color: string;
   @Input() href: string;
-
-  /**
-   * Apply color property to element's style.
-   */
-  @HostBinding('style.color') get styleColor() {
-    return this.color;
-  }
 
   static canHandleLink(href: string) {
     return isHighlightLink(href);
@@ -65,6 +60,26 @@ export class TextBlockLinkComponent {
     if (zone != null) {
       return `color="${zone.color}"`;
     }
+  }
+
+  constructor(private _elementRef: ElementRef) {}
+
+  /**
+   * Apply color property to element's style.
+   */
+  @HostBinding('style.color') get styleColor() {
+    return this.color;
+  }
+
+  @HostListener('click') onClick() {
+    this._elementRef.nativeElement.dispatchEvent(
+      new CustomEvent('highlight', {
+        bubbles: true,
+        detail: {
+          zone: parseHighlightLink(this.href),
+        },
+      })
+    );
   }
 }
 
