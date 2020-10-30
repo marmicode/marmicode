@@ -32,6 +32,16 @@ export class TextBlockLinkComponent {
     return isHighlightLink(href);
   }
 
+  /**
+   * This is a hacky function that builds the color attribute
+   * that our custom element will receive.
+   * This hack is the best solution compared to:
+   * - passing highlightableZones as a serialized attribute
+   * - sharing highlightableZones in state management as we would have
+   * to load highlightableZones for all blocks as multiple blocks can
+   * appear on the same page + we don't want our custom elements to
+   * depend on such state.
+   */
   static buildAttributes({
     highlightableZones,
     href,
