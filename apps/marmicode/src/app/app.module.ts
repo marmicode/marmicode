@@ -18,7 +18,6 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { GestureModule } from './gesture.module';
 import { NavModule } from './nav.component';
 import { UpdateEffects } from './update/update.effects';
 
@@ -31,7 +30,6 @@ import { UpdateEffects } from './update/update.effects';
     BrowserAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'marmicode' }),
     EffectsModule.forRoot([UpdateEffects]),
-    GestureModule.forRoot(),
     HttpClientModule,
     LayoutModule,
     NavModule,

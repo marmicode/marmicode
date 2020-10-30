@@ -11,8 +11,8 @@ import { Frame } from '@marmicode/recipe-core';
 import { FrameModule } from '@marmicode/recipe-ui';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule } from '@marmicode/shared-ui';
-import { RxState, select } from '@rx-angular/state';
-import { combineLatest, merge, Subject } from 'rxjs';
+import { RxState, select, selectSlice } from '@rx-angular/state';
+import { combineLatest, Subject } from 'rxjs';
 import {
   filter,
   map,
@@ -26,26 +26,11 @@ import { Recipe, RecipeRepository } from './recipe-repository.service';
 import { RecipeTimelineModule } from './recipe-timeline.component';
 import { RecipeTitleModule } from './recipe-title.component';
 
-export interface SwipeEvent {
-  deltaTime: number;
-}
-
-/**
- * Ignores swipe events that are slower than 300ms.
- * This is useful to allow text selection.
- */
-export const filterFastSwipe = () =>
-  filter<SwipeEvent>((evt) => evt.deltaTime < 300);
-
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-frame-page',
   template: `
-    <mc-page
-      fxLayout="column"
-      (swipeleft)="swipeLeft$.next($event)"
-      (swipeRight)="swipeRight$.next($event)"
-    >
+    <mc-page fxLayout="column">
       <!-- Recipe's title. -->
       <mc-recipe-title
         *ngIf="title$ | async as title"
@@ -117,11 +102,9 @@ export class RecipeFramePageComponent {
   type$ = this.recipe$.pipe(select(pluck('type')));
   title$ = this.recipe$.pipe(select(pluck('title')));
 
-  /*
-   * Key & gesture streams.
+  /**
+   * Stream of pressed keys.
    */
-  swipeLeft$ = new Subject<SwipeEvent>();
-  swipeRight$ = new Subject<SwipeEvent>();
   private _key$ = new Subject<string>();
 
   constructor(
@@ -156,10 +139,8 @@ export class RecipeFramePageComponent {
      * Go to next frame on arrow right.
      */
     this._state.hold(
-      merge(
-        this._key$.pipe(filter((key) => key === 'ArrowRight')),
-        this.swipeLeft$.pipe(filterFastSwipe())
-      ).pipe(
+      this._key$.pipe(
+        filter((key) => key === 'ArrowRight'),
         withLatestFrom(this.nextFrameRoute$),
         switchMap(([_, route]) => this._tryNavigateToRelativeRoute(route))
       )
@@ -169,10 +150,8 @@ export class RecipeFramePageComponent {
      * Go to previous frame on arrow left.
      */
     this._state.hold(
-      merge(
-        this._key$.pipe(filter((key) => key === 'ArrowLeft')),
-        this.swipeRight$.pipe(filterFastSwipe())
-      ).pipe(
+      this._key$.pipe(
+        filter((key) => key === 'ArrowLeft'),
         withLatestFrom(this.previousFrameRoute$),
         switchMap(([_, route]) => this._tryNavigateToRelativeRoute(route))
       )
