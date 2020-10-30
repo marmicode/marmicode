@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  HostBinding,
   Input,
   NgModule,
 } from '@angular/core';
@@ -19,7 +20,7 @@ import {
     `
       :host {
         cursor: pointer;
-        border-bottom: 1px solid currentColor;
+        border-bottom: 1px dashed currentColor;
       }
     `,
   ],
@@ -27,6 +28,10 @@ import {
 export class TextBlockLinkComponent {
   @Input() color: string;
   @Input() href: string;
+
+  @HostBinding('style.color') get styleColor() {
+    return this.color;
+  }
 
   static canHandleLink(href: string) {
     return isHighlightLink(href);
