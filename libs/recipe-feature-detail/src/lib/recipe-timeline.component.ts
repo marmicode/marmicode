@@ -105,7 +105,6 @@ export class RecipeTimelineComponent {
     this._state.set({ currentFrameIndex });
   }
 
-  frames$ = this._state.select('frames');
   bullets$ = this._state.select(
     map(({ frames, recipeSlug, currentFrameIndex }) =>
       frames.map((frame, index) => ({
@@ -122,7 +121,6 @@ export class RecipeTimelineComponent {
       this._getBulletPosition({ frames, index: currentFrameIndex })
     )
   );
-  recipeSlug$ = this._state.select('recipeSlug');
   isLastFrame$ = this._state.select(
     map(
       ({ frames, currentFrameIndex }) => currentFrameIndex === frames.length - 1
