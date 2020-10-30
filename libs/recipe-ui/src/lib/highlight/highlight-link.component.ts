@@ -8,11 +8,9 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { HighlightZone } from '../highlight/highlight-info';
-import {
-  isHighlightLink,
-  parseHighlightLink,
-} from '../highlight/parse-highlight-link';
+import { createHighlightEventDetail } from './highlight-event-detail';
+import { createHighlightZone, HighlightZone } from './highlight-info';
+import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,7 +25,7 @@ import {
     `,
   ],
 })
-export class TextBlockLinkComponent {
+export class HighlightLinkComponent {
   @Input() color: string;
   @Input() href: string;
 
@@ -75,17 +73,20 @@ export class TextBlockLinkComponent {
     this._elementRef.nativeElement.dispatchEvent(
       new CustomEvent('highlight', {
         bubbles: true,
-        detail: {
-          zone: parseHighlightLink(this.href),
-        },
+        detail: createHighlightEventDetail({
+          zone: createHighlightZone({
+            color: this.color,
+            sections: parseHighlightLink(this.href),
+          }),
+        }),
       })
     );
   }
 }
 
 @NgModule({
-  declarations: [TextBlockLinkComponent],
-  exports: [TextBlockLinkComponent],
+  declarations: [HighlightLinkComponent],
+  exports: [HighlightLinkComponent],
   imports: [CommonModule],
 })
 export class TextBlockLinkModule {}

@@ -11,7 +11,7 @@ import { createCustomElement } from '@angular/elements';
 import { TextBlock } from '@marmicode/recipe-core';
 import { HighlightZone } from '../highlight/highlight-info';
 import { MarkdownPipeModule } from './markdown.pipe';
-import { TextBlockLinkComponent } from './text-block-link.component';
+import { HighlightLinkComponent } from '../highlight/highlight-link.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,7 +41,7 @@ export class TextBlockModule {
   constructor(injector: Injector) {
     customElements.define(
       'mc-text-block-link',
-      createCustomElement(TextBlockLinkComponent, {
+      createCustomElement(HighlightLinkComponent, {
         injector,
       })
     );

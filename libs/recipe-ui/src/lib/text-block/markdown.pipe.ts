@@ -4,14 +4,12 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as marked from 'marked';
 import { Renderer } from 'marked';
 import { HighlightZone } from '../highlight/highlight-info';
-import { TextBlockLinkComponent } from './text-block-link.component';
+import { HighlightLinkComponent } from '../highlight/highlight-link.component';
 
 @Pipe({
   name: 'markdown',
 })
 export class MarkdownPipe implements PipeTransform {
-  private _renderer: Renderer;
-
   constructor(private _sanitizer: DomSanitizer) {}
 
   transform(
@@ -25,8 +23,8 @@ export class MarkdownPipe implements PipeTransform {
       const html = renderLink(href, title, text);
 
       /* Using <mc-text-block-link> if it's a special link. */
-      if (TextBlockLinkComponent.canHandleLink(href)) {
-        const attrs = TextBlockLinkComponent.buildAttributes({
+      if (HighlightLinkComponent.canHandleLink(href)) {
+        const attrs = HighlightLinkComponent.buildAttributes({
           href,
           highlightableZones,
         });
