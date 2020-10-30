@@ -6,7 +6,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
@@ -81,6 +81,17 @@ export class RecipeFramePageComponent {
   currentFrameTitle$ = this.currentFrame$.pipe(
     select(map((frame) => frame?.title))
   );
+  nextFrameRoute$ = combineLatest([this.frames$, this.currentFrameIndex$]).pipe(
+    select(
+      map(([frames, currentFrameIndex]) => {
+        const nextFrame = frames[currentFrameIndex + 1];
+        if (nextFrame == null) {
+          return null;
+        }
+        return this._getFrameRoute(nextFrame.slug);
+      })
+    )
+  );
   type$ = this.recipe$.pipe(select(pluck('type')));
   title$ = this.recipe$.pipe(select(pluck('title')));
 
@@ -92,6 +103,7 @@ export class RecipeFramePageComponent {
   constructor(
     private _recipeRepository: RecipeRepository,
     private _route: ActivatedRoute,
+    private _router: Router,
     private _state: RxState<{ recipe: Recipe; currentFrameSlug: string }>
   ) {
     /**
@@ -118,12 +130,27 @@ export class RecipeFramePageComponent {
     /**
      * Go to next frame on arrow right.
      */
-    this._state.hold(this._key$.pipe(filter((key) => key === 'ArrowRight')));
+    this._state.hold(
+      this._key$.pipe(
+        filter((key) => key === 'ArrowRight'),
+        withLatestFrom(this.nextFrameRoute$),
+        map(([_, route]) => route),
+        filter((route) => route != null),
+        switchMap((route) =>
+          this._router.navigate(route, { relativeTo: this._route })
+        )
+      )
+    );
   }
 
   @HostListener('window:keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
     this._key$.next(event.key);
+  }
+
+  private _getFrameRoute(frameSlug: string) {
+    /* Using relative path to keep the recipe type prefix in the URL. */
+    return ['..', frameSlug];
   }
 }
 
