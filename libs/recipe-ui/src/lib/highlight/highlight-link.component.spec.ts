@@ -55,21 +55,21 @@ describe('Component', () => {
   });
 
   xit('should not cancel highlight on mouse leave if clicked', () => {
-    // mouse enter
-    // mouse click
-    // reset mock
-    // mouse leave
-    // check no event is dispatched
+    component.onMouseEnter();
+    component.onClick();
+    mockNativeElement.dispatchEvent.mockReset();
+    component.onMouseLeave();
+    expect(mockNativeElement.dispatchEvent).not.toBeCalled();
   });
 
   /**
    * This happens when user clicks, leaves and hovers again.
    */
   xit('should cancel highlight on mouse leave if clicked before enter', () => {
-    // mouse click
-    // mouse enter
-    // reset mock
-    // mouse leave
-    // check event dispatch with null
+    component.onClick();
+    component.onMouseEnter();
+    mockNativeElement.dispatchEvent.mockReset();
+    component.onMouseLeave();
+    expect(mockNativeElement.dispatchEvent).toBe(null);
   });
 });
