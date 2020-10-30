@@ -71,7 +71,7 @@ export class HighlightLinkComponent {
 
   @HostListener('click') onClick() {
     this._elementRef.nativeElement.dispatchEvent(
-      new CustomEvent('highlight', {
+      new CustomEvent('highlightChange', {
         bubbles: true,
         detail: createHighlightEventDetail({
           zone: createHighlightZone({

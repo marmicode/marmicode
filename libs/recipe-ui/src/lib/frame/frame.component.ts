@@ -22,7 +22,7 @@ import { HighlightEventDetail } from '../highlight/highlight-event-detail';
       *ngFor="let block of (frame$ | async).blocks"
       [block]="block"
       [highlightableZones]="highlightableZones$ | async"
-      (highlight)="onHighlight($event.detail)"
+      (highlightChange)="onHighlight($event.detail)"
       class="block"
     ></mc-block>
   `,
