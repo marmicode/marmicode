@@ -69,6 +69,9 @@ export class HighlightLinkComponent {
     return this.color;
   }
 
+  /* Add `data-role=highlight-link` attribute for testing. */
+  @HostBinding('attr.data-role') dataRole = 'highlight-link';
+
   @HostListener('click') onClick() {
     this._elementRef.nativeElement.dispatchEvent(
       new CustomEvent('highlightZoneChange', {

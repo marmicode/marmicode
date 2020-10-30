@@ -40,6 +40,7 @@ import { HighlightZone } from '../highlight/highlight-zone';
       [style.top.px]="style.top"
       [style.height.px]="style.height"
       class="highlight"
+      data-role="code-highlight"
     ></div>
   </div>`,
   styleUrls: ['./code-block.component.scss'],
