@@ -6,13 +6,12 @@ import {
   NgModule,
 } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { Frame } from '@marmicode/recipe-core';
 import { RxState, select } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { BlockModule } from '../block.component';
-import { Frame } from '@marmicode/recipe-core';
 import { extractHighlightableZones } from '../highlight/extract-highlightable-zones';
 import { HighlightEventDetail } from '../highlight/highlight-event-detail';
-import { HighlightInfo } from '../highlight/highlight-info';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,7 +29,7 @@ import { HighlightInfo } from '../highlight/highlight-info';
   styles: [
     `
       /* This is more reliable than fxLayout="column" fxLayout.gt-sm="row"
-       * as it doesn't rely on JavaScript which makes it work on Storybook + Percy. */
+         * as it doesn't rely on JavaScript which makes it work on Storybook + Percy. */
       :host {
         display: flex;
         flex-direction: column;
@@ -63,9 +62,7 @@ export class FrameComponent {
     select(map((frame) => extractHighlightableZones(frame)))
   );
 
-  constructor(
-    private _state: RxState<{ frame: Frame; highlightInfo: HighlightInfo }>
-  ) {}
+  constructor(private _state: RxState<{ frame: Frame }>) {}
 
   onHighlight({ zone }: HighlightEventDetail) {
     console.log('🚧 work in progress!');

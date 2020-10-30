@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Block, BlockType } from '@marmicode/recipe-core';
 import { CodeBlockModule } from './code-block/code-block.component';
-import { HighlightInfo } from './highlight/highlight-info';
+import { HighlightZone } from './highlight/highlight-info';
 import { TextBlockModule } from './text-block/text-block.component';
 
 @Component({
@@ -27,7 +27,7 @@ import { TextBlockModule } from './text-block/text-block.component';
 })
 export class BlockComponent {
   @Input() block: Block;
-  @Input() highlightableZones: HighlightInfo;
+  @Input() highlightableZones: HighlightZone[];
 
   BlockType = BlockType;
 }
