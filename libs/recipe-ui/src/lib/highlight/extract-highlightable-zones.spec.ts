@@ -38,7 +38,7 @@ curl http://localhost:8080/farms
 
     expect(extractHighlightableZones(frame)).toEqual([
       {
-        color: 'purple',
+        color: 'blueviolet',
         sections: [
           {
             start: 2,
@@ -56,7 +56,7 @@ curl http://localhost:8080/farms
         ],
       },
       {
-        color: 'orange',
+        color: 'darkcyan',
         sections: [
           {
             start: 5,
