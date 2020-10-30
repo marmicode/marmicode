@@ -54,37 +54,46 @@ export class CodeBlockComponent implements AfterViewChecked {
     this._state.set({ highlightZone });
   }
 
+  @Input() set highlightableZones(highlightableZones: HighlightZone[]) {
+    this._state.set({ highlightableZones });
+  }
+
   @ViewChild('code', { static: true }) codeEl: ElementRef<HTMLElement>;
 
   code$: Observable<string>;
   languageClass$: Observable<string>;
+  highlightableStyles$ = this._state.select('highlightableZones').pipe(
+    select(
+      map((highlightableZones) => {
+        if (highlightableZones == null) {
+          return [];
+        }
+
+        return highlightableZones
+          .map((zone) => this._getHighlightStyles(zone))
+          .reduce((acc, styles) => [...acc, ...styles], []);
+      })
+    )
+  );
   highlightStyles$ = this._state.select('highlightZone').pipe(
     select(
       map((highlightZone) => {
         if (highlightZone == null) {
           return [];
         }
-
-        const { color, sections } = highlightZone;
-
-        const offset = 18;
-        const lineHeight = 28;
-        return sections.map((section) => ({
-          color,
-          top: offset + (section.start - 1) * lineHeight,
-          height: (section.end - section.start + 1) * lineHeight,
-        }));
+        return this._getHighlightStyles(highlightZone);
       })
     )
   );
 
   private _block$ = this._state.select('block');
-  private _viewChecked$ = new Subject();
 
+  private _viewChecked$ = new Subject();
   constructor(
     private _state: RxState<{
       block: CodeBlock;
       highlightZone: HighlightZone;
+      highlightableZones: HighlightZone[];
     }>
   ) {
     this.code$ = this._block$.pipe(select('code'));
@@ -108,6 +117,18 @@ export class CodeBlockComponent implements AfterViewChecked {
 
   ngAfterViewChecked() {
     this._viewChecked$.next();
+  }
+
+  private _getHighlightStyles(highlightZone: HighlightZone) {
+    const { color, sections } = highlightZone;
+
+    const offset = 18;
+    const lineHeight = 28;
+    return sections.map((section) => ({
+      color,
+      top: offset + (section.start - 1) * lineHeight,
+      height: (section.end - section.start + 1) * lineHeight,
+    }));
   }
 }
 
