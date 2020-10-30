@@ -69,8 +69,6 @@ export class CodeBlockComponent implements AfterViewChecked {
         return [];
       }
 
-      console.log(highlightZone);
-
       const { color, sections } = highlightZone;
 
       const offset = 18;
