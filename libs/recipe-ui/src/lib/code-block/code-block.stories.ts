@@ -1,7 +1,7 @@
 import { createCodeBlock } from '@marmicode/recipe-core';
 
 import { Meta } from '@storybook/angular';
-import { createHighlightZone } from '../highlight/highlight-info';
+import { createHighlightZone } from '../highlight/highlight-zone';
 import { CodeBlockComponent, CodeBlockModule } from './code-block.component';
 
 export default {

@@ -1,8 +1,8 @@
 import { Frame, isTextBlock } from '@marmicode/recipe-core';
-import { createHighlightZone, HighlightZone } from './highlight-info';
+import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 
-const availableColors = ['purple', 'green', 'orange', 'blue', 'yellow'];
+const availableColors = ['purple', 'green', 'cyan', 'blue'];
 
 export function extractHighlightableZones(frame: Frame): HighlightZone[] {
   return frame.blocks

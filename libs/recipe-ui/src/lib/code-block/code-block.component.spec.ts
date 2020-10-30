@@ -4,7 +4,7 @@ import { first } from 'rxjs/operators';
 import {
   createHighlightInfo,
   createHighlightZone,
-} from '../highlight/highlight-info';
+} from '../highlight/highlight-zone';
 import { CodeBlockComponent } from './code-block.component';
 
 describe('CodeBlockComponent', () => {

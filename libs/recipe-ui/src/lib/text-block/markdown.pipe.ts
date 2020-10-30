@@ -3,7 +3,7 @@ import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as marked from 'marked';
 import { Renderer } from 'marked';
-import { HighlightZone } from '../highlight/highlight-info';
+import { HighlightZone } from '../highlight/highlight-zone';
 import { HighlightLinkComponent } from '../highlight/highlight-link.component';
 
 @Pipe({

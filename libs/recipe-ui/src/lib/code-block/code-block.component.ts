@@ -17,7 +17,7 @@ import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import { Subject } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { HighlightZone } from '../highlight/highlight-info';
+import { HighlightZone } from '../highlight/highlight-zone';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

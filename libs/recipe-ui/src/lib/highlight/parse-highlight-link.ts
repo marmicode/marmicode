@@ -1,4 +1,4 @@
-import { createHighlightSection, HighlightSection } from './highlight-info';
+import { createHighlightSection, HighlightSection } from './highlight-zone';
 
 export const highlightLinkPrefix = 'highlight://';
 

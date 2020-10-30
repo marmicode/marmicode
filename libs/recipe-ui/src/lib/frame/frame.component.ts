@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 import { BlockModule } from '../block.component';
 import { extractHighlightableZones } from '../highlight/extract-highlightable-zones';
 import { HighlightEventDetail } from '../highlight/highlight-event-detail';
-import { HighlightZone } from '../highlight/highlight-info';
+import { HighlightZone } from '../highlight/highlight-zone';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

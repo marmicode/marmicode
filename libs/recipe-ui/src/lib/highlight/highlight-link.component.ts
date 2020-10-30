@@ -9,7 +9,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { createHighlightEventDetail } from './highlight-event-detail';
-import { createHighlightZone, HighlightZone } from './highlight-info';
+import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 
 @Component({

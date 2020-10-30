@@ -12,7 +12,7 @@ import {
 import { createCustomElement } from '@angular/elements';
 import { TextBlock } from '@marmicode/recipe-core';
 import { HighlightEventDetail } from '../highlight/highlight-event-detail';
-import { HighlightZone } from '../highlight/highlight-info';
+import { HighlightZone } from '../highlight/highlight-zone';
 import { MarkdownPipeModule } from './markdown.pipe';
 import { HighlightLinkComponent } from '../highlight/highlight-link.component';
 

@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { Block, BlockType } from '@marmicode/recipe-core';
 import { CodeBlockModule } from './code-block/code-block.component';
-import { HighlightZone } from './highlight/highlight-info';
+import { HighlightZone } from './highlight/highlight-zone';
 import { TextBlockModule } from './text-block/text-block.component';
 
 @Component({
