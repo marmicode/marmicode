@@ -66,7 +66,9 @@ export class FrameComponent {
 
   constructor(
     private _state: RxState<{ frame: Frame; highlightZone: HighlightZone }>
-  ) {}
+  ) {
+    this._state.connect(this.frame$.pipe(map(() => ({ highlightZone: null }))));
+  }
 
   onHighlightZone(highlightZone: HighlightZone) {
     this._state.set({ highlightZone });

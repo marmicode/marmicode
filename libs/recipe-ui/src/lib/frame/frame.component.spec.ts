@@ -40,7 +40,7 @@ describe('FrameComponent', () => {
     );
   });
 
-  xit('should reset highlight zone on frame change', async () => {
+  it('should reset highlight zone on frame change', async () => {
     component.onHighlightZone(
       createHighlightZone({
         color: 'red',
