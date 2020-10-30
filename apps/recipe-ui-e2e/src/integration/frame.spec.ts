@@ -5,12 +5,18 @@ describe('FrameComponent', () => {
     cy.snapshot();
   });
 
-  it('should highlight code on click', () => {
-    cy.visit('/iframe.html?id=frame--highlight');
-    cy.getByDataRole('code-highlight').should('not.exist');
-    cy.snapshot();
-    cy.getByDataRole('highlight-link').first().click();
-    cy.getByDataRole('code-highlight').should('exist');
-    cy.snapshot();
+  describe('with highlight links', () => {
+    beforeEach(() => cy.visit('/iframe.html?id=frame--highlight'));
+
+    it('should not highlight code until click', () => {
+      cy.getByDataRole('code-highlight').should('not.exist');
+      cy.snapshot();
+    });
+
+    it('should highlight code on click', () => {
+      cy.getByDataRole('highlight-link').first().click();
+      cy.getByDataRole('code-highlight').should('exist');
+      cy.snapshot();
+    });
   });
 });
