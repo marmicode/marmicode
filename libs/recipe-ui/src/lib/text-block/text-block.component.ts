@@ -3,15 +3,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Injector,
   Input,
   NgModule,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { createCustomElement } from '@angular/elements';
 import { TextBlock } from '@marmicode/recipe-core';
-import { HighlightLinkComponent } from '../highlight/highlight-link.component';
+import {
+  HighlightLinkComponent,
+  HighlightLinkModule,
+} from '../highlight/highlight-link.component';
 import { HighlightZone } from '../highlight/highlight-zone';
 import { MarkdownPipeModule } from './markdown.pipe';
 
@@ -47,15 +48,6 @@ export class TextBlockComponent {
 @NgModule({
   declarations: [TextBlockComponent],
   exports: [TextBlockComponent],
-  imports: [CommonModule, MarkdownPipeModule],
+  imports: [CommonModule, HighlightLinkModule, MarkdownPipeModule],
 })
-export class TextBlockModule {
-  constructor(injector: Injector) {
-    customElements.define(
-      'mc-text-block-link',
-      createCustomElement(HighlightLinkComponent, {
-        injector,
-      })
-    );
-  }
-}
+export class TextBlockModule {}

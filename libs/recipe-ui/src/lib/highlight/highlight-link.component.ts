@@ -5,17 +5,19 @@ import {
   ElementRef,
   HostBinding,
   HostListener,
+  Injector,
   Input,
   NgModule,
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
+import { createCustomElement } from '@angular/elements';
 import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-text-block-link',
+  selector: 'mc-highlight-link',
   template: `<ng-content></ng-content>`,
   styles: [
     `
@@ -128,4 +130,13 @@ export class HighlightLinkComponent implements OnChanges {
   exports: [HighlightLinkComponent],
   imports: [CommonModule],
 })
-export class TextBlockLinkModule {}
+export class HighlightLinkModule {
+  constructor(injector: Injector) {
+    customElements.define(
+      'mc-highlight-link',
+      createCustomElement(HighlightLinkComponent, {
+        injector,
+      })
+    );
+  }
+}

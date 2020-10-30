@@ -22,13 +22,15 @@ export class MarkdownPipe implements PipeTransform {
     renderer.link = (href, title, text) => {
       const html = renderLink(href, title, text);
 
-      /* Using <mc-text-block-link> if it's a special link. */
+      /* Using <mc-highlight-link> if it's a special link. */
       if (HighlightLinkComponent.canHandleLink(href)) {
         const attrs = HighlightLinkComponent.buildAttributes({
           href,
           highlightableZones,
         });
-        return html.replace(/^<a /, `<mc-text-block-link ${attrs} `);
+        return html
+          .replace(/^<a /, `<mc-highlight-link ${attrs} `)
+          .replace('</a>', '</mc-highlight-link>');
       }
 
       /* Otherwise, just use a basic link and open it in new window. */
