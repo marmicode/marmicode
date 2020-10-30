@@ -1,7 +1,10 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { first } from 'rxjs/operators';
-import { createHighlightInfo } from '../highlight/highlight-info';
+import {
+  createHighlightInfo,
+  createHighlightZone,
+} from '../highlight/highlight-info';
 import { CodeBlockComponent } from './code-block.component';
 
 describe('CodeBlockComponent', () => {
@@ -22,20 +25,16 @@ describe('CodeBlockComponent', () => {
   });
 
   it('should compute highlight coordinates', async () => {
-    component.highlight = createHighlightInfo({
-      zones: [
+    component.highlightZone = createHighlightZone({
+      color: 'red',
+      sections: [
         {
-          color: 'red',
-          sections: [
-            {
-              start: 2,
-              end: 2,
-            },
-            {
-              start: 8,
-              end: 10,
-            },
-          ],
+          start: 2,
+          end: 2,
+        },
+        {
+          start: 8,
+          end: 10,
         },
       ],
     });
@@ -55,7 +54,7 @@ describe('CodeBlockComponent', () => {
   });
 
   it('should not crash if no highlight is set', async () => {
-    component.highlight = null;
+    component.highlightZone = null;
     expect(await component.highlightStyles$.pipe(first()).toPromise()).toEqual(
       []
     );

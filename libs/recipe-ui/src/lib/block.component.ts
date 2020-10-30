@@ -19,12 +19,13 @@ import { TextBlockModule } from './text-block/text-block.component';
     <mc-code-block
       *ngSwitchCase="BlockType.Code"
       [block]="block"
+      [highlightZone]="highlightZone"
     ></mc-code-block>
     <mc-text-block
       *ngSwitchCase="BlockType.Text"
       [block]="block"
       [highlightableZones]="highlightableZones"
-      (highlightChange)="highlightZoneChange.emit($event)"
+      (highlightZoneChange)="highlightZoneChange.emit($event)"
     ></mc-text-block>
   </ng-container>`,
 })

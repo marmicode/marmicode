@@ -17,7 +17,7 @@ import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import { Subject } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { HighlightInfo } from '../highlight/highlight-info';
+import { HighlightInfo, HighlightZone } from '../highlight/highlight-info';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -53,6 +53,10 @@ export class CodeBlockComponent implements AfterViewChecked {
     this._state.set({ highlightInfo });
   }
 
+  @Input() set highlightZone(highlightZone: HighlightZone) {
+    this._state.set({ highlightZone });
+  }
+
   @ViewChild('code', { static: true }) codeEl: ElementRef<HTMLElement>;
 
   code$ = this._state.select(map(({ block }) => block?.code));
@@ -60,32 +64,33 @@ export class CodeBlockComponent implements AfterViewChecked {
     map(({ block }) => (block ? `language-${block.language}` : null))
   );
   highlightStyles$ = this._state.select(
-    map(({ highlightInfo }) => {
-      if (highlightInfo == null) {
+    map(({ highlightZone }) => {
+      if (highlightZone == null) {
         return [];
       }
 
+      console.log(highlightZone);
+
+      const { color, sections } = highlightZone;
+
       const offset = 18;
       const lineHeight = 28;
-      return (
-        highlightInfo.zones
-          .map(({ color, sections }) =>
-            sections.map((section) => ({
-              color,
-              top: offset + (section.start - 1) * lineHeight,
-              height: (section.end - section.start + 1) * lineHeight,
-            }))
-          )
-          /* Flatten list. */
-          .reduce((acc, coords) => [...acc, ...coords], [])
-      );
+      return sections.map((section) => ({
+        color,
+        top: offset + (section.start - 1) * lineHeight,
+        height: (section.end - section.start + 1) * lineHeight,
+      }));
     })
   );
 
   private _viewChecked$ = new Subject();
 
   constructor(
-    private _state: RxState<{ block: CodeBlock; highlightInfo: HighlightInfo }>
+    private _state: RxState<{
+      block: CodeBlock;
+      highlightInfo: HighlightInfo;
+      highlightZone: HighlightZone;
+    }>
   ) {
     this._state.hold(
       this.code$.pipe(

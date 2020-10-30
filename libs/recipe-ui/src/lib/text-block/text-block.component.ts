@@ -40,7 +40,7 @@ export class TextBlockComponent {
    * Convert custom event to Angular output.
    */
   onHighlightZoneChange($event: CustomEvent<HighlightEventDetail>) {
-    $event.preventDefault();
+    $event.stopImmediatePropagation();
     this.highlightZoneChange.emit($event.detail.zone);
   }
 }
