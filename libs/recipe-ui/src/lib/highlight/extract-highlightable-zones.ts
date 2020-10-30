@@ -21,7 +21,12 @@ export function extractHighlightableZones(frame: Frame): HighlightZone[] {
       }
 
       /* Find all strings between "](" and ")". */
-      const links = block.text.match(/(?<=\]\().+(?=\))/g) ?? [];
+      /* @hack Firefox & Safari don't support lookbehind and lookahead
+       * producing "invalid group name error" so let's strip the string
+       * afterwards instead of using a regex like "/(?<=\]\().+(?=\))/g". */
+      const links = (block.text.match(/\]\([^)]+\)/g) ?? []).map((link) =>
+        link.replace(/^\]\(|\)/g, '')
+      );
 
       /* Get highlight sections for each link. */
       const highlightSectionsList = links
