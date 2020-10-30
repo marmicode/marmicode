@@ -29,6 +29,9 @@ export class TextBlockLinkComponent {
   @Input() color: string;
   @Input() href: string;
 
+  /**
+   * Apply color property to element's style.
+   */
   @HostBinding('style.color') get styleColor() {
     return this.color;
   }
