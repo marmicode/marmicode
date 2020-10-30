@@ -134,20 +134,30 @@ export class RecipeTimelineComponent {
     )
   );
 
-  isLastFrame$ = this._state.select(
-    map(
-      ({ frames, currentFrameIndex }) => currentFrameIndex === frames.length - 1
+  isLastFrame$ = combineLatest([
+    this._state.select('frames'),
+    this._state.select('currentFrameIndex'),
+  ]).pipe(
+    select(
+      map(
+        ([frames, currentFrameIndex]) => currentFrameIndex === frames.length - 1
+      )
     )
   );
 
-  nextFrameRoute$ = this._state.select(
-    map(({ frames, currentFrameIndex, recipeSlug }) => {
-      const nextFrame = frames[currentFrameIndex + 1];
-      if (nextFrame == null) {
-        return null;
-      }
-      return this._getFrameRoute(nextFrame.slug);
-    })
+  nextFrameRoute$ = combineLatest([
+    this._state.select('frames'),
+    this._state.select('currentFrameIndex'),
+  ]).pipe(
+    select(
+      map(([frames, currentFrameIndex]) => {
+        const nextFrame = frames[currentFrameIndex + 1];
+        if (nextFrame == null) {
+          return null;
+        }
+        return this._getFrameRoute(nextFrame.slug);
+      })
+    )
   );
 
   constructor(
