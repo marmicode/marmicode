@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Frame } from '@marmicode/recipe-core';
 import { FrameModule } from '@marmicode/recipe-ui';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule } from '@marmicode/shared-ui';
@@ -65,19 +66,11 @@ export class RecipeFramePageComponent {
   recipe$ = this._state.select('recipe');
   recipeSlug$ = this.recipe$.pipe(select(map((recipe) => recipe.slug)));
   frames$ = this.recipe$.pipe(select(map((recipe) => recipe.frames)));
-  currentFrame$ = this._state.select().pipe(
-    select(
-      selectSlice(['recipe', 'currentFrameSlug']),
-      map(({ recipe, currentFrameSlug }) => {
-        if (recipe == null) {
-          return null;
-        }
-
-        return (
-          recipe.frames.find((frame) => frame.slug === currentFrameSlug) ??
-          recipe.frames[0]
-        );
-      })
+  currentFrameSlug$ = this._state.select('currentFrameSlug');
+  currentFrame$ = combineLatest([this.frames$, this.currentFrameSlug$]).pipe(
+    map(
+      ([frames, currentFrameSlug]) =>
+        frames.find((frame) => frame.slug === currentFrameSlug) ?? frames[0]
     )
   );
   currentFrameIndex$ = combineLatest([this.frames$, this.currentFrame$]).pipe(
@@ -88,13 +81,22 @@ export class RecipeFramePageComponent {
   );
   nextFrameRoute$ = combineLatest([this.frames$, this.currentFrameIndex$]).pipe(
     select(
-      map(([frames, currentFrameIndex]) => {
-        const nextFrame = frames[currentFrameIndex + 1];
-        if (nextFrame == null) {
-          return null;
-        }
-        return getRelativeFrameRoute(nextFrame.slug);
-      })
+      map(([frames, currentFrameIndex]) =>
+        this._getFrameRouteByIndex({
+          frames,
+          index: currentFrameIndex + 1,
+        })
+      )
+    )
+  );
+  previousFrameRoute$ = combineLatest([
+    this.frames$,
+    this.currentFrameIndex$,
+  ]).pipe(
+    select(
+      map(([frames, currentFrameIndex]) =>
+        this._getFrameRouteByIndex({ frames, index: currentFrameIndex - 1 })
+      )
     )
   );
   type$ = this.recipe$.pipe(select(pluck('type')));
@@ -161,6 +163,17 @@ export class RecipeFramePageComponent {
 
   private _scrollTop() {
     this._viewportScroller.scrollToPosition([0, 0]);
+  }
+
+  private _getFrameRouteByIndex({
+    frames,
+    index,
+  }: {
+    frames: Frame[];
+    index: number;
+  }) {
+    const frameSlug = frames[index]?.slug;
+    return frameSlug ? getRelativeFrameRoute(frameSlug) : null;
   }
 }
 
