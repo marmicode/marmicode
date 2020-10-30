@@ -161,7 +161,7 @@ export class CodeBlockComponent implements AfterViewChecked {
   }): { color: string; top: number; height: number }[] {
     const { color, sections } = zone;
 
-    const offset = 18;
+    const offset = 20;
     return sections.map((section) => ({
       color,
       top: offset + (section.start - 1) * lineHeight,

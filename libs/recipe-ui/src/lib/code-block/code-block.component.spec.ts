@@ -41,12 +41,12 @@ describe('CodeBlockComponent', () => {
     expect(await component.highlightStyles$.pipe(first()).toPromise()).toEqual([
       {
         color: 'red',
-        top: 46 /* 28 (one line height) + 18 (offset). */,
+        top: 48 /* 28 (one line height) + 20 (offset). */,
         height: 28,
       },
       {
         color: 'red',
-        top: 214 /* 196 (7 * 28) + 18 (offset). */,
+        top: 216 /* 196 (7 * 28) + 20 (offset). */,
         height: 84,
       },
     ]);
