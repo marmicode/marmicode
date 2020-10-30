@@ -12,6 +12,9 @@ import '@percy/cypress';
 declare global {
   namespace Cypress {
     interface Chainable<Subject> {
+      getByDataRole<E extends HTMLElement>(
+        dataRole: string
+      ): Chainable<JQuery<E>>;
       snapshot(name?: string): void;
     }
   }
@@ -32,6 +35,10 @@ declare global {
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('getByDataRole', (dataRole) =>
+  cy.get(`[data-role="${dataRole}"]`)
+);
 
 Cypress.Commands.add('snapshot', (name = undefined) => {
   cy.percySnapshot(name, {
