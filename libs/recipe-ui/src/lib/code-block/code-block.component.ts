@@ -15,8 +15,15 @@ import * as Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
-import { Observable, Subject } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import {
+  animationFrameScheduler,
+  asapScheduler,
+  asyncScheduler,
+  combineLatest,
+  Observable,
+  Subject,
+} from 'rxjs';
+import { map, observeOn, subscribeOn, switchMap, tap } from 'rxjs/operators';
 import { HighlightZone } from '../highlight/highlight-zone';
 
 @Component({
@@ -71,38 +78,45 @@ export class CodeBlockComponent implements AfterViewChecked {
 
   code$: Observable<string>;
   languageClass$: Observable<string>;
-  lineNumberHighlightStyles$ = this._state.select('highlightableZones').pipe(
+  lineNumberHighlightStyles$ = combineLatest([
+    this._state.select('highlightableZones'),
+    this._state.select('lineHeight'),
+  ]).pipe(
     select(
-      map((zones) => {
+      map(([zones, lineHeight]) => {
         if (zones == null) {
           return [];
         }
 
         return zones
-          .map((zone) => this._getHighlightStyles({ zone: zone }))
+          .map((zone) => this._getHighlightStyles({ lineHeight, zone }))
           .reduce((acc, styles) => [...acc, ...styles], []);
       })
     )
   );
-  highlightStyles$ = this._state.select('highlightZone').pipe(
+  highlightStyles$ = combineLatest([
+    this._state.select('highlightZone'),
+    this._state.select('lineHeight'),
+  ]).pipe(
     select(
-      map((zone) => {
+      map(([zone, lineHeight]) => {
         if (zone == null) {
           return [];
         }
-        return this._getHighlightStyles({ zone: zone });
+        return this._getHighlightStyles({ lineHeight, zone });
       })
     )
   );
 
   private _block$ = this._state.select('block');
-
   private _viewChecked$ = new Subject();
+
   constructor(
     private _state: RxState<{
       block: CodeBlock;
       highlightZone: HighlightZone;
       highlightableZones: HighlightZone[];
+      lineHeight: number;
     }>
   ) {
     this.code$ = this._block$.pipe(select('code'));
@@ -111,7 +125,7 @@ export class CodeBlockComponent implements AfterViewChecked {
     );
 
     /* Highlight element when code changes. */
-    this._state.hold(
+    this._state.connect(
       this.code$.pipe(
         /* Wait for view check. */
         switchMap(() => this._viewChecked$),
@@ -119,7 +133,17 @@ export class CodeBlockComponent implements AfterViewChecked {
          * `Prism.highlight` because it doesn't add line numbers.
          * We are not using async highlight as it crashes for some reason...
          * ... maybe a web worker issue? */
-        tap(() => Prism.highlightElement(this.codeEl.nativeElement))
+        tap(() => Prism.highlightElement(this.codeEl.nativeElement)),
+        map(
+          () =>
+            this.codeEl.nativeElement.querySelector('.line-numbers-rows span')
+              .clientHeight
+        ),
+        /* @hack schedule state change for next cycle otherwise
+         * change detection will miss it...
+         * except if we use @rx-angular/template's push. */
+        observeOn(animationFrameScheduler),
+        map((lineHeight) => ({ lineHeight }))
       )
     );
   }
@@ -129,14 +153,15 @@ export class CodeBlockComponent implements AfterViewChecked {
   }
 
   private _getHighlightStyles({
+    lineHeight,
     zone,
   }: {
+    lineHeight: number;
     zone: HighlightZone;
   }): { color: string; top: number; height: number }[] {
     const { color, sections } = zone;
 
     const offset = 18;
-    const lineHeight = 28;
     return sections.map((section) => ({
       color,
       top: offset + (section.start - 1) * lineHeight,

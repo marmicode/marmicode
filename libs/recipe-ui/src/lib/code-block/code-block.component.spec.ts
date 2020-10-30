@@ -19,6 +19,8 @@ describe('CodeBlockComponent', () => {
     fixture = TestBed.createComponent(CodeBlockComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    /* Set line height manually. */
+    component['_state'].set({ lineHeight: 28 });
   });
 
   it('should compute highlight coordinates', async () => {
