@@ -1,4 +1,4 @@
-import { CommonModule, ViewportScroller } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,8 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { Frame } from '@marmicode/recipe-core';
-import { RxState, select } from '@rx-angular/state';
-import { combineLatest } from 'rxjs';
+import { RxState, select, selectSlice } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { getRelativeFrameRoute } from './get-relative-frame-route';
 
@@ -108,12 +107,10 @@ export class RecipeTimelineComponent {
 
   @Input() nextFrameRoute: string;
 
-  bullets$ = combineLatest([
-    this._state.select('frames'),
-    this._state.select('currentFrameIndex'),
-  ]).pipe(
+  bullets$ = this._state.select().pipe(
+    selectSlice(['frames', 'currentFrameIndex']),
     select(
-      map(([frames, currentFrameIndex]) =>
+      map(({ frames, currentFrameIndex }) =>
         frames.map((frame, index) => ({
           frame,
           isPast: index < currentFrameIndex,
@@ -125,16 +122,16 @@ export class RecipeTimelineComponent {
     )
   );
 
-  progress$ = combineLatest([
-    this._state.select('frames'),
-    this._state.select('currentFrameIndex'),
-  ]).pipe(
-    select(
-      map(([frames, currentFrameIndex]) =>
-        this._getBulletPosition({ frames, index: currentFrameIndex })
+  progress$ = this._state
+    .select()
+    .pipe(
+      selectSlice(['frames', 'currentFrameIndex']),
+      select(
+        map(({ frames, currentFrameIndex }) =>
+          this._getBulletPosition({ frames, index: currentFrameIndex })
+        )
       )
-    )
-  );
+    );
 
   constructor(
     private _state: RxState<{

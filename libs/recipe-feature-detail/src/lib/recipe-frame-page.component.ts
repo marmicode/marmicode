@@ -7,9 +7,10 @@ import {
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FrameModule } from '@marmicode/recipe-ui';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule } from '@marmicode/shared-ui';
-import { RxState, select } from '@rx-angular/state';
+import { RxState, select, selectSlice } from '@rx-angular/state';
 import { combineLatest, Subject } from 'rxjs';
 import {
   filter,
@@ -19,7 +20,6 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
-import { FrameModule } from '@marmicode/recipe-ui';
 import { getRelativeFrameRoute } from './get-relative-frame-route';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
 import { RecipeTimelineModule } from './recipe-timeline.component';
@@ -65,10 +65,10 @@ export class RecipeFramePageComponent {
   recipe$ = this._state.select('recipe');
   recipeSlug$ = this.recipe$.pipe(select(map((recipe) => recipe.slug)));
   frames$ = this.recipe$.pipe(select(map((recipe) => recipe.frames)));
-  currentFrameSlug$ = this._state.select('currentFrameSlug');
-  currentFrame$ = combineLatest([this.recipe$, this.currentFrameSlug$]).pipe(
+  currentFrame$ = this._state.select().pipe(
     select(
-      map(([recipe, currentFrameSlug]) => {
+      selectSlice(['recipe', 'currentFrameSlug']),
+      map(({ recipe, currentFrameSlug }) => {
         if (recipe == null) {
           return null;
         }

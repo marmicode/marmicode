@@ -10,20 +10,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CodeBlock } from '@marmicode/recipe-core';
-import { RxState, select } from '@rx-angular/state';
+import { RxState, select, selectSlice } from '@rx-angular/state';
 import * as Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
-import {
-  animationFrameScheduler,
-  asapScheduler,
-  asyncScheduler,
-  combineLatest,
-  Observable,
-  Subject,
-} from 'rxjs';
-import { map, observeOn, subscribeOn, switchMap, tap } from 'rxjs/operators';
+import { animationFrameScheduler, Observable, Subject } from 'rxjs';
+import { map, observeOn, switchMap, tap } from 'rxjs/operators';
 import { HighlightZone } from '../highlight/highlight-zone';
 
 @Component({
@@ -78,32 +71,28 @@ export class CodeBlockComponent implements AfterViewChecked {
 
   code$: Observable<string>;
   languageClass$: Observable<string>;
-  lineNumberHighlightStyles$ = combineLatest([
-    this._state.select('highlightableZones'),
-    this._state.select('lineHeight'),
-  ]).pipe(
+  lineNumberHighlightStyles$ = this._state.select().pipe(
+    selectSlice(['highlightableZones', 'lineHeight']),
     select(
-      map(([zones, lineHeight]) => {
-        if (zones == null) {
+      map(({ highlightableZones, lineHeight }) => {
+        if (highlightableZones == null) {
           return [];
         }
 
-        return zones
+        return highlightableZones
           .map((zone) => this._getHighlightStyles({ lineHeight, zone }))
           .reduce((acc, styles) => [...acc, ...styles], []);
       })
     )
   );
-  highlightStyles$ = combineLatest([
-    this._state.select('highlightZone'),
-    this._state.select('lineHeight'),
-  ]).pipe(
+  highlightStyles$ = this._state.select().pipe(
+    selectSlice(['highlightZone', 'lineHeight']),
     select(
-      map(([zone, lineHeight]) => {
-        if (zone == null) {
+      map(({ highlightZone, lineHeight }) => {
+        if (highlightZone == null) {
           return [];
         }
-        return this._getHighlightStyles({ lineHeight, zone });
+        return this._getHighlightStyles({ zone: highlightZone, lineHeight });
       })
     )
   );
