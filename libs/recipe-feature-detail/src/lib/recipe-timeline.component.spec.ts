@@ -20,6 +20,7 @@ describe('RecipeTimelineComponent', () => {
   });
 
   it('should dispatch bullets on timeline', async () => {
+    component.currentFrameIndex = 0;
     component.frames = [
       {
         slug: null,

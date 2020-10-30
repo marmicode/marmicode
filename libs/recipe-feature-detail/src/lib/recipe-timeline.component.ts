@@ -10,7 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { Frame } from '@marmicode/recipe-core';
-import { RxState } from '@rx-angular/state';
+import { RxState, select } from '@rx-angular/state';
+import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -105,27 +106,40 @@ export class RecipeTimelineComponent {
     this._state.set({ currentFrameIndex });
   }
 
-  bullets$ = this._state.select(
-    map(({ frames, recipeSlug, currentFrameIndex }) =>
-      frames.map((frame, index) => ({
-        frame,
-        isPast: index < currentFrameIndex,
-        isCurrent: index === currentFrameIndex,
-        position: this._getBulletPosition({ frames, index }),
-        route: this._getFrameRoute(frame.slug),
-      }))
+  bullets$ = combineLatest([
+    this._state.select('frames'),
+    this._state.select('currentFrameIndex'),
+  ]).pipe(
+    select(
+      map(([frames, currentFrameIndex]) =>
+        frames.map((frame, index) => ({
+          frame,
+          isPast: index < currentFrameIndex,
+          isCurrent: index === currentFrameIndex,
+          position: this._getBulletPosition({ frames, index }),
+          route: this._getFrameRoute(frame.slug),
+        }))
+      )
     )
   );
-  progress$ = this._state.select(
-    map(({ currentFrameIndex, frames }) =>
-      this._getBulletPosition({ frames, index: currentFrameIndex })
+
+  progress$ = combineLatest([
+    this._state.select('frames'),
+    this._state.select('currentFrameIndex'),
+  ]).pipe(
+    select(
+      map(([frames, currentFrameIndex]) =>
+        this._getBulletPosition({ frames, index: currentFrameIndex })
+      )
     )
   );
+
   isLastFrame$ = this._state.select(
     map(
       ({ frames, currentFrameIndex }) => currentFrameIndex === frames.length - 1
     )
   );
+
   nextFrameRoute$ = this._state.select(
     map(({ frames, currentFrameIndex, recipeSlug }) => {
       const nextFrame = frames[currentFrameIndex + 1];
