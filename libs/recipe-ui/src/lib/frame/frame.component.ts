@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 import { BlockModule } from '../block.component';
 import { Frame } from '@marmicode/recipe-core';
 import { extractHighlightableZones } from '../highlight/extract-highlightable-zones';
+import { HighlightEventDetail } from '../highlight/highlight-event-detail';
 import { HighlightInfo } from '../highlight/highlight-info';
 
 @Component({
@@ -22,6 +23,7 @@ import { HighlightInfo } from '../highlight/highlight-info';
       *ngFor="let block of (frame$ | async).blocks"
       [block]="block"
       [highlightableZones]="highlightableZones$ | async"
+      (highlight)="onHighlight($event.detail)"
       class="block"
     ></mc-block>
   `,
@@ -64,6 +66,10 @@ export class FrameComponent {
   constructor(
     private _state: RxState<{ frame: Frame; highlightInfo: HighlightInfo }>
   ) {}
+
+  onHighlight({ zone }: HighlightEventDetail) {
+    console.log('🚧 work in progress!');
+  }
 }
 
 @NgModule({

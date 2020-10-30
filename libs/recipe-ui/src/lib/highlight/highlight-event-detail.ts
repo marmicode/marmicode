@@ -1,4 +1,4 @@
-import { HighlightSection, HighlightZone } from './highlight-info';
+import { HighlightZone } from './highlight-info';
 
 export interface HighlightEventDetail {
   zone: HighlightZone;
