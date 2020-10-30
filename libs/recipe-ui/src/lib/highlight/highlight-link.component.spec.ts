@@ -18,7 +18,7 @@ describe('Component', () => {
     component.href = 'highlight://1,3-4';
   });
 
-  it('should dispatch event on click', () => {
+  it('should trigger highlight on click', () => {
     component.onClick();
     expect(mockNativeElement.dispatchEvent.mock.calls[0][0].detail).toEqual({
       color: 'red',
@@ -33,5 +33,36 @@ describe('Component', () => {
         },
       ],
     } as HighlightZone);
+  });
+
+  xit('should trigger highlight on mouse enter', () => {
+    // mouse enter
+    // check event dispatch with zone
+  });
+
+  xit('should cancel highlight on mouse leave', () => {
+    // mouse enter
+    // reset mock
+    // mouse leave
+    // check event dispatch with null
+  });
+
+  xit('should not cancel highlight on mouse leave if clicked', () => {
+    // mouse enter
+    // mouse click
+    // reset mock
+    // mouse leave
+    // check no event is dispatched
+  });
+
+  /**
+   * This happens when user clicks, leaves and hovers again.
+   */
+  xit('should cancel highlight on mouse leave if clicked before enter', () => {
+    // mouse click
+    // mouse enter
+    // reset mock
+    // mouse leave
+    // check event dispatch with null
   });
 });
