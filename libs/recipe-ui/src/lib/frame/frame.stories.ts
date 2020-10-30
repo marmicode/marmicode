@@ -63,7 +63,8 @@ export const highlight = () =>
             text: `Before setting up request validation, we can see that:
 - [the farm detail \`GET /farms/{farmId}\` route is accessible](highlight://2) even though it's not defined in the OpenAPI Specification,
 - [we can send data in any format](highlight://5) and not only \`application/json\` as described in the OpenAPI Specification,
-- [we can send any data](highlight://8-10) when creating a farm using the \`POST /farms\` route.`,
+- [we can send any data](highlight://8-10) when creating a farm using the \`POST /farms\` route.
+- This is [another link highlighting the first zone](highlight://2)`,
           },
           {
             type: BlockType.Code,

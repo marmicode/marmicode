@@ -28,8 +28,10 @@ export function extractHighlightableZones(frame: Frame): HighlightZone[] {
         link.replace(/^\]\(|\)/g, '')
       );
 
+      const uniqueLinks = Array.from(new Set(links));
+
       /* Get highlight sections for each link. */
-      const highlightSectionsList = links
+      const highlightSectionsList = uniqueLinks
         .filter((link) => isHighlightLink(link))
         .map((link) => parseHighlightLink(link));
 
