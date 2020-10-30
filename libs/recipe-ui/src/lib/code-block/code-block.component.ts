@@ -73,24 +73,24 @@ export class CodeBlockComponent implements AfterViewChecked {
   languageClass$: Observable<string>;
   lineNumberHighlightStyles$ = this._state.select('highlightableZones').pipe(
     select(
-      map((highlightableZones) => {
-        if (highlightableZones == null) {
+      map((zones) => {
+        if (zones == null) {
           return [];
         }
 
-        return highlightableZones
-          .map((zone) => this._getHighlightStyles(zone))
+        return zones
+          .map((zone) => this._getHighlightStyles({ zone: zone }))
           .reduce((acc, styles) => [...acc, ...styles], []);
       })
     )
   );
   highlightStyles$ = this._state.select('highlightZone').pipe(
     select(
-      map((highlightZone) => {
-        if (highlightZone == null) {
+      map((zone) => {
+        if (zone == null) {
           return [];
         }
-        return this._getHighlightStyles(highlightZone);
+        return this._getHighlightStyles({ zone: zone });
       })
     )
   );
@@ -128,8 +128,12 @@ export class CodeBlockComponent implements AfterViewChecked {
     this._viewChecked$.next();
   }
 
-  private _getHighlightStyles(highlightZone: HighlightZone) {
-    const { color, sections } = highlightZone;
+  private _getHighlightStyles({
+    zone,
+  }: {
+    zone: HighlightZone;
+  }): { color: string; top: number; height: number }[] {
+    const { color, sections } = zone;
 
     const offset = 18;
     const lineHeight = 28;
