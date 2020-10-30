@@ -142,11 +142,18 @@ export class RecipeFramePageComponent {
       this._key$.pipe(
         filter((key) => key === 'ArrowRight'),
         withLatestFrom(this.nextFrameRoute$),
-        map(([_, route]) => route),
-        filter((route) => route != null),
-        switchMap((route) =>
-          this._router.navigate(route, { relativeTo: this._route })
-        )
+        switchMap(([_, route]) => this._tryNavigateToRelativeRoute(route))
+      )
+    );
+
+    /**
+     * Go to previous frame on arrow left.
+     */
+    this._state.hold(
+      this._key$.pipe(
+        filter((key) => key === 'ArrowLeft'),
+        withLatestFrom(this.previousFrameRoute$),
+        switchMap(([_, route]) => this._tryNavigateToRelativeRoute(route))
       )
     );
 
@@ -174,6 +181,13 @@ export class RecipeFramePageComponent {
   }) {
     const frameSlug = frames[index]?.slug;
     return frameSlug ? getRelativeFrameRoute(frameSlug) : null;
+  }
+
+  private async _tryNavigateToRelativeRoute(route: string[]) {
+    if (route == null) {
+      return;
+    }
+    return this._router.navigate(route, { relativeTo: this._route });
   }
 }
 
