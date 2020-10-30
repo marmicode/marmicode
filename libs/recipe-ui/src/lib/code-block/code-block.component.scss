@@ -25,6 +25,12 @@ mc-code-block {
     width: 100%;
   }
 
+  .line-number-highlight {
+    position: absolute;
+    width: 3.7em;
+    opacity: .5;
+  }
+
   /* @hack using more specific selector. */
   pre.preformatted {
     font-size: 1.2em;

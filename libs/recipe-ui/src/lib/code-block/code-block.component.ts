@@ -42,6 +42,15 @@ import { HighlightZone } from '../highlight/highlight-zone';
       class="highlight"
       data-role="code-highlight"
     ></div>
+
+    <!-- Highlight highlightable zones' line numbers. -->
+    <div
+      *ngFor="let style of lineNumberHighlightStyles$ | async"
+      [style.backgroundColor]="style.color"
+      [style.top.px]="style.top"
+      [style.height.px]="style.height"
+      class="line-number-highlight"
+    ></div>
   </div>`,
   styleUrls: ['./code-block.component.scss'],
 })
@@ -62,7 +71,7 @@ export class CodeBlockComponent implements AfterViewChecked {
 
   code$: Observable<string>;
   languageClass$: Observable<string>;
-  highlightableStyles$ = this._state.select('highlightableZones').pipe(
+  lineNumberHighlightStyles$ = this._state.select('highlightableZones').pipe(
     select(
       map((highlightableZones) => {
         if (highlightableZones == null) {
