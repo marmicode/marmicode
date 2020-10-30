@@ -12,7 +12,7 @@ const availableColors = [
   'deeppink',
 ];
 export function extractHighlightableZones(frame: Frame): HighlightZone[] {
-  return frame.blocks
+  const links = frame.blocks
     .filter((block) => isTextBlock(block))
     .map((block) => {
       /* @hack this should not be necessary. */
@@ -24,23 +24,23 @@ export function extractHighlightableZones(frame: Frame): HighlightZone[] {
       /* @hack Firefox & Safari don't support lookbehind and lookahead
        * producing "invalid group name error" so let's strip the string
        * afterwards instead of using a regex like "/(?<=\]\().+(?=\))/g". */
-      const links = (block.text.match(/\]\([^)]+\)/g) ?? []).map((link) =>
+      return (block.text.match(/\]\([^)]+\)/g) ?? []).map((link) =>
         link.replace(/^\]\(|\)/g, '')
       );
-
-      const uniqueLinks = Array.from(new Set(links));
-
-      /* Get highlight sections for each link. */
-      const highlightSectionsList = uniqueLinks
-        .filter((link) => isHighlightLink(link))
-        .map((link) => parseHighlightLink(link));
-
-      return highlightSectionsList.map((sections, index) => {
-        return createHighlightZone({
-          color: availableColors[index % availableColors.length],
-          sections,
-        });
-      });
     })
-    .reduce((acc, _zones) => [...acc, ..._zones], []);
+    .reduce((acc, _links) => [...acc, ..._links], []);
+
+  const uniqueLinks = Array.from(new Set(links));
+
+  /* Get highlight sections for each link. */
+  const highlightSectionsList = uniqueLinks
+    .filter((link) => isHighlightLink(link))
+    .map((link) => parseHighlightLink(link));
+
+  return highlightSectionsList.map((sections, index) => {
+    return createHighlightZone({
+      color: availableColors[index % availableColors.length],
+      sections,
+    });
+  });
 }
