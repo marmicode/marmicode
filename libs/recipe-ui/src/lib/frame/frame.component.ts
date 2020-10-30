@@ -11,7 +11,6 @@ import { RxState, select } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { BlockModule } from '../block.component';
 import { extractHighlightableZones } from '../highlight/extract-highlightable-zones';
-import { HighlightEventDetail } from '../highlight/highlight-event-detail';
 import { HighlightZone } from '../highlight/highlight-zone';
 
 @Component({

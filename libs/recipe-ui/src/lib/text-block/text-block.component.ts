@@ -11,10 +11,9 @@ import {
 } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { TextBlock } from '@marmicode/recipe-core';
-import { HighlightEventDetail } from '../highlight/highlight-event-detail';
+import { HighlightLinkComponent } from '../highlight/highlight-link.component';
 import { HighlightZone } from '../highlight/highlight-zone';
 import { MarkdownPipeModule } from './markdown.pipe';
-import { HighlightLinkComponent } from '../highlight/highlight-link.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,9 +38,9 @@ export class TextBlockComponent {
   /**
    * Convert custom event to Angular output.
    */
-  onHighlightZoneChange($event: CustomEvent<HighlightEventDetail>) {
+  onHighlightZoneChange($event: CustomEvent<HighlightZone>) {
     $event.stopImmediatePropagation();
-    this.highlightZoneChange.emit($event.detail.zone);
+    this.highlightZoneChange.emit($event.detail);
   }
 }
 

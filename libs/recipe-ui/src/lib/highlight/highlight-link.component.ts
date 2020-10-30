@@ -8,7 +8,6 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { createHighlightEventDetail } from './highlight-event-detail';
 import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 
@@ -76,11 +75,9 @@ export class HighlightLinkComponent {
     this._elementRef.nativeElement.dispatchEvent(
       new CustomEvent('highlightZoneChange', {
         bubbles: true,
-        detail: createHighlightEventDetail({
-          zone: createHighlightZone({
-            color: this.color,
-            sections: parseHighlightLink(this.href),
-          }),
+        detail: createHighlightZone({
+          color: this.color,
+          sections: parseHighlightLink(this.href),
         }),
       })
     );
