@@ -8,10 +8,6 @@ export interface HighlightZone {
   sections: HighlightSection[];
 }
 
-export interface HighlightInfo {
-  zones: HighlightZone[];
-}
-
 export function createHighlightSection(
   section: HighlightSection
 ): HighlightSection {
@@ -20,10 +16,4 @@ export function createHighlightSection(
 
 export function createHighlightZone(zone: HighlightZone): HighlightZone {
   return zone;
-}
-
-export function createHighlightInfo(
-  highlightInfo: HighlightInfo
-): HighlightInfo {
-  return highlightInfo;
 }

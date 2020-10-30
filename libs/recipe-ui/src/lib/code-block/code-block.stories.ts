@@ -1,7 +1,7 @@
 import { createCodeBlock } from '@marmicode/recipe-core';
 
 import { Meta } from '@storybook/angular';
-import { createHighlightInfo } from '../highlight/highlight-info';
+import { createHighlightZone } from '../highlight/highlight-info';
 import { CodeBlockComponent, CodeBlockModule } from './code-block.component';
 
 export default {
@@ -21,20 +21,16 @@ export const highlight = () =>
           '# Get a farm.\ncurl http://localhost:8080/farms/P4VU2Xsw\n\n# Create a farm with urlencoded data\ncurl http://localhost:8080/farms -d"name=springfield"\n\n# Create a farm with invalid data.\ncurl http://localhost:8080/farms \\\n  -H "Content-Type: application/json" \\\n  -d \'{"name": 123, "random": "data"}\'',
         language: 'shell',
       }),
-      highlight: createHighlightInfo({
-        zones: [
+      highlightZone: createHighlightZone({
+        color: '#ff000040',
+        sections: [
           {
-            color: '#ff000040',
-            sections: [
-              {
-                start: 2,
-                end: 2,
-              },
-              {
-                start: 8,
-                end: 10,
-              },
-            ],
+            start: 2,
+            end: 2,
+          },
+          {
+            start: 8,
+            end: 10,
           },
         ],
       }),

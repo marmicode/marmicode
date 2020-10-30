@@ -17,7 +17,7 @@ import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import { Subject } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { HighlightInfo, HighlightZone } from '../highlight/highlight-info';
+import { HighlightZone } from '../highlight/highlight-info';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,10 +47,6 @@ import { HighlightInfo, HighlightZone } from '../highlight/highlight-info';
 export class CodeBlockComponent implements AfterViewChecked {
   @Input() set block(block: CodeBlock) {
     this._state.set({ block });
-  }
-
-  @Input() set highlight(highlightInfo: HighlightInfo) {
-    this._state.set({ highlightInfo });
   }
 
   @Input() set highlightZone(highlightZone: HighlightZone) {
@@ -86,7 +82,6 @@ export class CodeBlockComponent implements AfterViewChecked {
   constructor(
     private _state: RxState<{
       block: CodeBlock;
-      highlightInfo: HighlightInfo;
       highlightZone: HighlightZone;
     }>
   ) {
