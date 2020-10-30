@@ -141,10 +141,14 @@ export class RecipeFramePageComponent {
         filter((route) => route != null),
         switchMap((route) =>
           this._router.navigate(route, { relativeTo: this._route })
-        ),
-        tap(() => this._scrollTop())
+        )
       )
     );
+
+    /**
+     * Scroll top on frame change.
+     */
+    this._state.hold(this.currentFrame$.pipe(tap(() => this._scrollTop())));
   }
 
   @HostListener('window:keydown', ['$event'])

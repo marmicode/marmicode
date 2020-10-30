@@ -29,13 +29,12 @@ import { getRelativeFrameRoute } from './get-relative-frame-route';
             [class.previous-bullet]="bullet.isPast"
             [class.current-bullet]="bullet.isCurrent"
             [routerLink]="bullet.route"
-            (click)="scrollTop()"
             class="bullet"
           ></a>
         </li>
       </ul>
     </div>
-    <a [routerLink]="nextFrameRoute" (click)="scrollTop()">
+    <a [routerLink]="nextFrameRoute">
       <button
         [disabled]="nextFrameRoute == null"
         class="next-frame-button"
@@ -138,17 +137,12 @@ export class RecipeTimelineComponent {
   );
 
   constructor(
-    private _viewportScroller: ViewportScroller,
     private _state: RxState<{
       frames: Frame[];
       recipeSlug: string;
       currentFrameIndex: number;
     }>
   ) {}
-
-  scrollTop() {
-    this._viewportScroller.scrollToPosition([0, 0]);
-  }
 
   private _getBulletPosition({
     frames,
