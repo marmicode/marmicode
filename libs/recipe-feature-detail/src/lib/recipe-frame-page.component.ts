@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -106,7 +106,8 @@ export class RecipeFramePageComponent {
     private _recipeRepository: RecipeRepository,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _state: RxState<{ recipe: Recipe; currentFrameSlug: string }>
+    private _state: RxState<{ recipe: Recipe; currentFrameSlug: string }>,
+    private _viewportScroller: ViewportScroller
   ) {
     /**
      * Load recipe.
@@ -140,7 +141,8 @@ export class RecipeFramePageComponent {
         filter((route) => route != null),
         switchMap((route) =>
           this._router.navigate(route, { relativeTo: this._route })
-        )
+        ),
+        tap(() => this._scrollTop())
       )
     );
   }
@@ -148,6 +150,10 @@ export class RecipeFramePageComponent {
   @HostListener('window:keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
     this._key$.next(event.key);
+  }
+
+  private _scrollTop() {
+    this._viewportScroller.scrollToPosition([0, 0]);
   }
 }
 
