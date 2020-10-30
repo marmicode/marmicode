@@ -33,6 +33,7 @@ export class HighlightLinkComponent implements OnChanges {
   /* Add `data-role=highlight-link` attribute for testing. */
   @HostBinding('attr.data-role') dataRole = 'highlight-link';
 
+  private _clicked = false;
   private _zone: HighlightZone;
 
   static canHandleLink(href: string) {
@@ -85,21 +86,31 @@ export class HighlightLinkComponent implements OnChanges {
   }
 
   @HostListener('click') onClick() {
+    this._clicked = true;
     this._highlight();
   }
 
   @HostListener('mouseenter')
   onMouseEnter() {
-    throw new Error('🚧 work in progress!');
+    /* Reset clicked state on mouse enter. */
+    this._clicked = false;
+    this._highlight();
   }
 
   @HostListener('mouseleave')
   onMouseLeave() {
-    throw new Error('🚧 work in progress!');
+    /* Cancel only if not clicked. */
+    if (!this._clicked) {
+      this._cancelHighlight();
+    }
   }
 
   private _highlight() {
     this._dispatchHighlightZoneChange(this._zone);
+  }
+
+  private _cancelHighlight() {
+    this._dispatchHighlightZoneChange(null);
   }
 
   private _dispatchHighlightZoneChange(zone: HighlightZone | null) {
