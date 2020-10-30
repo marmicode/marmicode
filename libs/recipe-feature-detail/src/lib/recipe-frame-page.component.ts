@@ -1,12 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostListener,
+  NgModule,
+} from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { ActivatedRoute } from '@angular/router';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
-import { combineLatest } from 'rxjs';
-import { map, pluck, switchMap } from 'rxjs/operators';
+import { combineLatest, Subject } from 'rxjs';
+import {
+  filter,
+  map,
+  pluck,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { FrameModule } from '@marmicode/recipe-ui';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
 import { RecipeTimelineModule } from './recipe-timeline.component';
@@ -72,11 +84,19 @@ export class RecipeFramePageComponent {
   type$ = this.recipe$.pipe(select(pluck('type')));
   title$ = this.recipe$.pipe(select(pluck('title')));
 
+  /**
+   * Stream of pressed keys.
+   */
+  private _key$ = new Subject<string>();
+
   constructor(
     private _recipeRepository: RecipeRepository,
     private _route: ActivatedRoute,
     private _state: RxState<{ recipe: Recipe; currentFrameSlug: string }>
   ) {
+    /**
+     * Load recipe.
+     */
     this._state.connect(
       'recipe',
       this._route.paramMap.pipe(
@@ -84,12 +104,26 @@ export class RecipeFramePageComponent {
         switchMap((recipeSlug) => this._recipeRepository.getRecipe(recipeSlug))
       )
     );
+
+    /**
+     * Get current frame slug from route.
+     */
     this._state.connect(
       'currentFrameSlug',
       this._route.paramMap.pipe(
         map((params) => params.get(recipeDetailRouterHelper.FRAME_SLUG_PARAM))
       )
     );
+
+    /**
+     * Go to next frame on arrow right.
+     */
+    this._state.hold(this._key$.pipe(filter((key) => key === 'ArrowRight')));
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  onKeydown(event: KeyboardEvent) {
+    this._key$.next(event.key);
   }
 }
 
