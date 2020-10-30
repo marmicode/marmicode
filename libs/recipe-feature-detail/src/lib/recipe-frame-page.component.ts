@@ -65,17 +65,20 @@ export class RecipeFramePageComponent {
   recipe$ = this._state.select('recipe');
   recipeSlug$ = this.recipe$.pipe(select(map((recipe) => recipe.slug)));
   frames$ = this.recipe$.pipe(select(map((recipe) => recipe.frames)));
-  currentFrame$ = this._state.select(
-    map(({ currentFrameSlug, recipe }) => {
-      if (recipe == null) {
-        return null;
-      }
+  currentFrameSlug$ = this._state.select('currentFrameSlug');
+  currentFrame$ = combineLatest([this.recipe$, this.currentFrameSlug$]).pipe(
+    select(
+      map(([recipe, currentFrameSlug]) => {
+        if (recipe == null) {
+          return null;
+        }
 
-      return (
-        recipe.frames.find((frame) => frame.slug === currentFrameSlug) ??
-        recipe.frames[0]
-      );
-    })
+        return (
+          recipe.frames.find((frame) => frame.slug === currentFrameSlug) ??
+          recipe.frames[0]
+        );
+      })
+    )
   );
   currentFrameIndex$ = combineLatest([this.frames$, this.currentFrame$]).pipe(
     map(([frames, currentFrame]) => frames.indexOf(currentFrame))
