@@ -20,6 +20,7 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import { FrameModule } from '@marmicode/recipe-ui';
+import { getRelativeFrameRoute } from './get-relative-frame-route';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
 import { RecipeTimelineModule } from './recipe-timeline.component';
 import { RecipeTitleModule } from './recipe-title.component';
@@ -50,9 +51,10 @@ import { RecipeTitleModule } from './recipe-title.component';
       <!-- THE timeline. -->
       <mc-recipe-timeline
         *ngIf="frames$ | async as frames"
+        [currentFrameIndex]="currentFrameIndex$ | async"
         [frames]="frames"
         [recipeSlug]="recipeSlug$ | async"
-        [currentFrameIndex]="currentFrameIndex$ | async"
+        [nextFrameRoute]="nextFrameRoute$ | async"
         class="timeline"
       ></mc-recipe-timeline>
     </mc-page>
@@ -88,7 +90,7 @@ export class RecipeFramePageComponent {
         if (nextFrame == null) {
           return null;
         }
-        return this._getFrameRoute(nextFrame.slug);
+        return getRelativeFrameRoute(nextFrame.slug);
       })
     )
   );
@@ -146,11 +148,6 @@ export class RecipeFramePageComponent {
   @HostListener('window:keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
     this._key$.next(event.key);
-  }
-
-  private _getFrameRoute(frameSlug: string) {
-    /* Using relative path to keep the recipe type prefix in the URL. */
-    return ['..', frameSlug];
   }
 }
 

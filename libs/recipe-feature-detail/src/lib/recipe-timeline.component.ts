@@ -13,6 +13,7 @@ import { Frame } from '@marmicode/recipe-core';
 import { RxState, select } from '@rx-angular/state';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { getRelativeFrameRoute } from './get-relative-frame-route';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,9 +35,9 @@ import { map } from 'rxjs/operators';
         </li>
       </ul>
     </div>
-    <a [routerLink]="nextFrameRoute$ | async" (click)="scrollTop()">
+    <a [routerLink]="nextFrameRoute" (click)="scrollTop()">
       <button
-        [disabled]="isLastFrame$ | async"
+        [disabled]="nextFrameRoute == null"
         class="next-frame-button"
         mat-stroked-button
       >
@@ -106,6 +107,8 @@ export class RecipeTimelineComponent {
     this._state.set({ currentFrameIndex });
   }
 
+  @Input() nextFrameRoute: string;
+
   bullets$ = combineLatest([
     this._state.select('frames'),
     this._state.select('currentFrameIndex'),
@@ -117,7 +120,7 @@ export class RecipeTimelineComponent {
           isPast: index < currentFrameIndex,
           isCurrent: index === currentFrameIndex,
           position: this._getBulletPosition({ frames, index }),
-          route: this._getFrameRoute(frame.slug),
+          route: getRelativeFrameRoute(frame.slug),
         }))
       )
     )
@@ -131,32 +134,6 @@ export class RecipeTimelineComponent {
       map(([frames, currentFrameIndex]) =>
         this._getBulletPosition({ frames, index: currentFrameIndex })
       )
-    )
-  );
-
-  isLastFrame$ = combineLatest([
-    this._state.select('frames'),
-    this._state.select('currentFrameIndex'),
-  ]).pipe(
-    select(
-      map(
-        ([frames, currentFrameIndex]) => currentFrameIndex === frames.length - 1
-      )
-    )
-  );
-
-  nextFrameRoute$ = combineLatest([
-    this._state.select('frames'),
-    this._state.select('currentFrameIndex'),
-  ]).pipe(
-    select(
-      map(([frames, currentFrameIndex]) => {
-        const nextFrame = frames[currentFrameIndex + 1];
-        if (nextFrame == null) {
-          return null;
-        }
-        return this._getFrameRoute(nextFrame.slug);
-      })
     )
   );
 
@@ -181,11 +158,6 @@ export class RecipeTimelineComponent {
     index: number;
   }) {
     return (index * 100) / (frames.length - 1);
-  }
-
-  private _getFrameRoute(frameSlug: string) {
-    /* Using relative path to keep the recipe type prefix in the URL. */
-    return ['..', frameSlug];
   }
 }
 
