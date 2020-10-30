@@ -17,7 +17,8 @@ import { map } from 'rxjs/operators';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-title',
-  template: ` <svg preserveAspectRatio="none" viewBox="0 0 100 100">
+  template: `
+    <svg preserveAspectRatio="none" viewBox="0 0 100 100">
       <polygon style="fill: #561f4b" points="0,0 20,0 10,100 0,100" />
     </svg>
     <div fxLayout="row" fxLayoutAlign="center">
@@ -25,7 +26,11 @@ import { map } from 'rxjs/operators';
         {{ badgeText$ | async }}
       </div>
     </div>
-    <h1 class="title">{{ title }}</h1>`,
+    <h1 class="title">{{ title }}</h1>
+    <h2 *ngIf="frameTitle" class="title">
+      {{ frameIndex + 1 }} - {{ frameTitle }}
+    </h2>
+  `,
   styles: [
     `
       :host {
@@ -67,6 +72,8 @@ export class RecipeTitleComponent {
   @Input() set resourceType(resourceType: ResourceType) {
     this._state.set({ resourceType });
   }
+  @Input() frameIndex: number;
+  @Input() frameTitle: string;
   @Input() title: string;
 
   badgeColor$ = this._state.select(

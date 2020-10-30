@@ -6,7 +6,7 @@ import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
 import { combineLatest } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, pluck, switchMap } from 'rxjs/operators';
 import { FrameModule } from '@marmicode/recipe-ui';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
 import { RecipeTimelineModule } from './recipe-timeline.component';
@@ -21,6 +21,8 @@ import { RecipeTitleModule } from './recipe-title.component';
       <mc-recipe-title
         [resourceType]="type$ | async"
         [title]="title$ | async"
+        [frameIndex]="currentFrameIndex$ | async"
+        [frameTitle]="currentFrameTitle$ | async"
       ></mc-recipe-title>
 
       <!-- Frame with code, text etc... blocks. -->
@@ -63,8 +65,11 @@ export class RecipeFramePageComponent {
   currentFrameIndex$ = combineLatest([this.frames$, this.currentFrame$]).pipe(
     map(([frames, currentFrame]) => frames.indexOf(currentFrame))
   );
-  type$ = this.recipe$.pipe(select(map((recipe) => recipe.type)));
-  title$ = this.recipe$.pipe(select(map((recipe) => recipe.title)));
+  currentFrameTitle$ = this.currentFrame$.pipe(
+    select(map((frame) => frame?.title))
+  );
+  type$ = this.recipe$.pipe(select(pluck('type')));
+  title$ = this.recipe$.pipe(select(pluck('title')));
 
   constructor(
     private _recipeRepository: RecipeRepository,
