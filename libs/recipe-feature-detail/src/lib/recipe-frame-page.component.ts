@@ -19,8 +19,9 @@ import { RecipeTitleModule } from './recipe-title.component';
     <mc-page fxLayout="column">
       <!-- Recipe's title. -->
       <mc-recipe-title
+        *ngIf="title$ | async as title"
         [resourceType]="type$ | async"
-        [title]="title$ | async"
+        [title]="title"
         [frameIndex]="currentFrameIndex$ | async"
         [frameTitle]="currentFrameTitle$ | async"
       ></mc-recipe-title>
