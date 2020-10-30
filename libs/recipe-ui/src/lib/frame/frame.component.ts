@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 import { BlockModule } from '../block.component';
 import { extractHighlightableZones } from '../highlight/extract-highlightable-zones';
 import { HighlightEventDetail } from '../highlight/highlight-event-detail';
+import { HighlightZone } from '../highlight/highlight-info';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,7 +23,8 @@ import { HighlightEventDetail } from '../highlight/highlight-event-detail';
       *ngFor="let block of (frame$ | async).blocks"
       [block]="block"
       [highlightableZones]="highlightableZones$ | async"
-      (highlightChange)="onHighlight($event.detail)"
+      [highlightZone]="highlightZone$ | async"
+      (highlightZoneChange)="onHighlightZone($event)"
       class="block"
     ></mc-block>
   `,
@@ -58,14 +60,17 @@ export class FrameComponent {
   }
 
   frame$ = this._state.select('frame');
+  highlightZone$ = this._state.select('highlightZone');
   highlightableZones$ = this.frame$.pipe(
     select(map((frame) => extractHighlightableZones(frame)))
   );
 
-  constructor(private _state: RxState<{ frame: Frame }>) {}
+  constructor(
+    private _state: RxState<{ frame: Frame; highlightZone: HighlightZone }>
+  ) {}
 
-  onHighlight({ zone }: HighlightEventDetail) {
-    console.log('🚧 work in progress!');
+  onHighlightZone(highlightZone: HighlightZone) {
+    this._state.set({ highlightZone });
   }
 }
 

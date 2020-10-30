@@ -24,7 +24,7 @@ import { HighlightLinkComponent } from '../highlight/highlight-link.component';
     [innerHTML]="
       block.text | markdown: { highlightableZones: highlightableZones }
     "
-    (highlightChange)="highlightChange.emit($event.detail)"
+    (highlightZoneChange)="onHighlightZoneChange($event)"
   ></div>`,
   styleUrls: ['./text-block.component.scss'],
 })
@@ -34,7 +34,15 @@ export class TextBlockComponent {
    * The available zones to highlight.
    */
   @Input() highlightableZones: HighlightZone[];
-  @Output() highlightChange = new EventEmitter<HighlightEventDetail>();
+  @Output() highlightZoneChange = new EventEmitter<HighlightZone>();
+
+  /**
+   * Convert custom event to Angular output.
+   */
+  onHighlightZoneChange($event: CustomEvent<HighlightEventDetail>) {
+    $event.preventDefault();
+    this.highlightZoneChange.emit($event.detail.zone);
+  }
 }
 
 @NgModule({

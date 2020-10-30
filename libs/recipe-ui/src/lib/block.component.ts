@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   NgModule,
+  Output,
 } from '@angular/core';
 import { Block, BlockType } from '@marmicode/recipe-core';
 import { CodeBlockModule } from './code-block/code-block.component';
@@ -22,12 +24,15 @@ import { TextBlockModule } from './text-block/text-block.component';
       *ngSwitchCase="BlockType.Text"
       [block]="block"
       [highlightableZones]="highlightableZones"
+      (highlightChange)="highlightZoneChange.emit($event)"
     ></mc-text-block>
   </ng-container>`,
 })
 export class BlockComponent {
   @Input() block: Block;
+  @Input() highlightZone: HighlightZone;
   @Input() highlightableZones: HighlightZone[];
+  @Output() highlightZoneChange = new EventEmitter<HighlightZone>();
 
   BlockType = BlockType;
 }
