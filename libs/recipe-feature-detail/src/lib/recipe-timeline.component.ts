@@ -145,6 +145,10 @@ export class RecipeTimelineComponent {
     }>
   ) {}
 
+  scrollTop() {
+    this._viewportScroller.scrollToPosition([0, 0]);
+  }
+
   private _getBulletPosition({
     frames,
     index,
@@ -153,10 +157,6 @@ export class RecipeTimelineComponent {
     index: number;
   }) {
     return (index * 100) / (frames.length - 1);
-  }
-
-  scrollTop() {
-    this._viewportScroller.scrollToPosition([0, 0]);
   }
 
   private _getFrameRoute(frameSlug: string) {
