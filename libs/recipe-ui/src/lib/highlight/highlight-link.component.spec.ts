@@ -1,3 +1,4 @@
+import { SimpleChange } from '@angular/core';
 import { HighlightLinkComponent } from './highlight-link.component';
 import { HighlightZone } from './highlight-zone';
 import mock = jest.mock;
@@ -17,6 +18,9 @@ describe('Component', () => {
     });
     component.color = 'red';
     component.href = 'highlight://1,3-4';
+    component.ngOnChanges({
+      href: new SimpleChange(null, component.href, true),
+    });
   });
 
   it('should trigger highlight on click', () => {

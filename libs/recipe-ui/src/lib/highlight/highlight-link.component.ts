@@ -7,6 +7,8 @@ import {
   HostListener,
   Input,
   NgModule,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
@@ -24,12 +26,14 @@ import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
     `,
   ],
 })
-export class HighlightLinkComponent {
+export class HighlightLinkComponent implements OnChanges {
   @Input() color: string;
   @Input() href: string;
 
   /* Add `data-role=highlight-link` attribute for testing. */
   @HostBinding('attr.data-role') dataRole = 'highlight-link';
+
+  private _zone: HighlightZone;
 
   static canHandleLink(href: string) {
     return isHighlightLink(href);
@@ -64,6 +68,15 @@ export class HighlightLinkComponent {
 
   constructor(private _elementRef: ElementRef) {}
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.href) {
+      this._zone = createHighlightZone({
+        color: this.color,
+        sections: parseHighlightLink(this.href),
+      });
+    }
+  }
+
   /**
    * Apply color property to element's style.
    */
@@ -72,15 +85,7 @@ export class HighlightLinkComponent {
   }
 
   @HostListener('click') onClick() {
-    this._elementRef.nativeElement.dispatchEvent(
-      new CustomEvent('highlightZoneChange', {
-        bubbles: true,
-        detail: createHighlightZone({
-          color: this.color,
-          sections: parseHighlightLink(this.href),
-        }),
-      })
-    );
+    this._highlight();
   }
 
   @HostListener('mouseenter')
@@ -91,6 +96,19 @@ export class HighlightLinkComponent {
   @HostListener('mouseleave')
   onMouseLeave() {
     throw new Error('🚧 work in progress!');
+  }
+
+  private _highlight() {
+    this._dispatchHighlightZoneChange(this._zone);
+  }
+
+  private _dispatchHighlightZoneChange(zone: HighlightZone | null) {
+    this._elementRef.nativeElement.dispatchEvent(
+      new CustomEvent('highlightZoneChange', {
+        bubbles: true,
+        detail: zone,
+      })
+    );
   }
 }
 
