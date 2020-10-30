@@ -28,6 +28,9 @@ export class HighlightLinkComponent {
   @Input() color: string;
   @Input() href: string;
 
+  /* Add `data-role=highlight-link` attribute for testing. */
+  @HostBinding('attr.data-role') dataRole = 'highlight-link';
+
   static canHandleLink(href: string) {
     return isHighlightLink(href);
   }
@@ -68,9 +71,6 @@ export class HighlightLinkComponent {
     return this.color;
   }
 
-  /* Add `data-role=highlight-link` attribute for testing. */
-  @HostBinding('attr.data-role') dataRole = 'highlight-link';
-
   @HostListener('click') onClick() {
     this._elementRef.nativeElement.dispatchEvent(
       new CustomEvent('highlightZoneChange', {
@@ -81,6 +81,16 @@ export class HighlightLinkComponent {
         }),
       })
     );
+  }
+
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    throw new Error('🚧 work in progress!');
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    throw new Error('🚧 work in progress!');
   }
 }
 
