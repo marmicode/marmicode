@@ -1,5 +1,6 @@
 import { HighlightLinkComponent } from './highlight-link.component';
 import { HighlightZone } from './highlight-zone';
+import mock = jest.mock;
 
 describe('Component', () => {
   let component: HighlightLinkComponent;
@@ -20,6 +21,7 @@ describe('Component', () => {
 
   it('should trigger highlight on click', () => {
     component.onClick();
+    expect(mockNativeElement.dispatchEvent).toBeCalledTimes(1);
     expect(mockNativeElement.dispatchEvent.mock.calls[0][0].detail).toEqual({
       color: 'red',
       sections: [
@@ -36,15 +38,20 @@ describe('Component', () => {
   });
 
   xit('should trigger highlight on mouse enter', () => {
-    // mouse enter
-    // check event dispatch with zone
+    component.onMouseEnter();
+    expect(mockNativeElement.dispatchEvent).toBeCalledTimes(1);
+    expect(mockNativeElement.dispatchEvent.mock.calls[0][0].detail).toEqual({
+      color: expect.any(String),
+      sections: expect.any(Array),
+    });
   });
 
   xit('should cancel highlight on mouse leave', () => {
-    // mouse enter
-    // reset mock
-    // mouse leave
-    // check event dispatch with null
+    component.onMouseEnter();
+    mockNativeElement.dispatchEvent.mockReset();
+    component.onMouseLeave();
+    expect(mockNativeElement.dispatchEvent).toBeCalledTimes(1);
+    expect(mockNativeElement.dispatchEvent.mock.calls[0][0].detail).toBe(null);
   });
 
   xit('should not cancel highlight on mouse leave if clicked', () => {
