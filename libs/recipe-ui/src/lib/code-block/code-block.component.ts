@@ -10,12 +10,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CodeBlock } from '@marmicode/recipe-core';
-import { RxState } from '@rx-angular/state';
+import { RxState, select } from '@rx-angular/state';
 import * as Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { HighlightZone } from '../highlight/highlight-zone';
 
@@ -56,28 +56,29 @@ export class CodeBlockComponent implements AfterViewChecked {
 
   @ViewChild('code', { static: true }) codeEl: ElementRef<HTMLElement>;
 
-  code$ = this._state.select(map(({ block }) => block?.code));
-  languageClass$ = this._state.select(
-    map(({ block }) => (block ? `language-${block.language}` : null))
+  code$: Observable<string>;
+  languageClass$: Observable<string>;
+  highlightStyles$ = this._state.select('highlightZone').pipe(
+    select(
+      map((highlightZone) => {
+        if (highlightZone == null) {
+          return [];
+        }
+
+        const { color, sections } = highlightZone;
+
+        const offset = 18;
+        const lineHeight = 28;
+        return sections.map((section) => ({
+          color,
+          top: offset + (section.start - 1) * lineHeight,
+          height: (section.end - section.start + 1) * lineHeight,
+        }));
+      })
+    )
   );
-  highlightStyles$ = this._state.select(
-    map(({ highlightZone }) => {
-      if (highlightZone == null) {
-        return [];
-      }
 
-      const { color, sections } = highlightZone;
-
-      const offset = 18;
-      const lineHeight = 28;
-      return sections.map((section) => ({
-        color,
-        top: offset + (section.start - 1) * lineHeight,
-        height: (section.end - section.start + 1) * lineHeight,
-      }));
-    })
-  );
-
+  private _block$ = this._state.select('block');
   private _viewChecked$ = new Subject();
 
   constructor(
@@ -86,6 +87,12 @@ export class CodeBlockComponent implements AfterViewChecked {
       highlightZone: HighlightZone;
     }>
   ) {
+    this.code$ = this._block$.pipe(select('code'));
+    this.languageClass$ = this._block$.pipe(
+      select(map((block) => (block ? `language-${block.language}` : null)))
+    );
+
+    /* Highlight element when code changes. */
     this._state.hold(
       this.code$.pipe(
         /* Wait for view check. */
