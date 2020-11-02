@@ -44,11 +44,13 @@ describe('SwipeDirective', () => {
 
   xit('🚧 should trigger swipeRight event on swipe', () => {
     /* Start touch. */
+    // @todo check container doesn't have overflow hidden
     // @todo set some position in event
     containerEl.triggerEventHandler('touchstart', {});
 
     // @todo trigger mouse move
     // @todo check container has overflow hidden
     // @todo check content position
+    // @todo check swipeRight event has been emitted
   });
 });
