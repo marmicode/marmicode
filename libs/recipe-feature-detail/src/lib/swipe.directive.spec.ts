@@ -60,7 +60,7 @@ describe('SwipeDirective', () => {
     triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
 
     /* Move to right. */
-    triggerTouchEvent({ eventName: 'mousemove', clientX: 150 });
+    triggerTouchEvent({ eventName: 'touchmove', clientX: 150 });
 
     expect(containerEl.styles).toEqual(
       expect.objectContaining({
@@ -75,7 +75,7 @@ describe('SwipeDirective', () => {
     eventName,
     clientX,
   }: {
-    eventName: 'touchstart' | 'mousemove';
+    eventName: 'touchstart' | 'touchmove';
     clientX: number;
   }) {
     containerEl.triggerEventHandler(eventName, {

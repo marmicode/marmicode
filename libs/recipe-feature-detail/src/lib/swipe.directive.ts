@@ -15,13 +15,23 @@ import { Subject } from 'rxjs';
 })
 export class SwipeDirective implements OnInit {
   private _touchstart$ = new Subject();
+  private _touchmove$ = new Subject();
+  private _touchend$ = new Subject();
 
   constructor(private _elementRef: ElementRef) {}
 
   ngOnInit() {}
 
-  @HostListener('touchstart', ['$event']) onTouchStart(evt: MouseEvent) {
+  @HostListener('touchstart', ['$event']) onTouchstart(evt: TouchEvent) {
     this._touchstart$.next(evt);
+  }
+
+  @HostListener('window:touchmove', ['$event']) onTouchmove(evt: TouchEvent) {
+    this._touchmove$.next(evt);
+  }
+
+  @HostListener('window:touchend', ['$event']) onTouchend(evt: TouchEvent) {
+    this._touchend$.next(evt);
   }
 }
 
