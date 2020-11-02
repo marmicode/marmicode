@@ -5,8 +5,9 @@ import {
   HostListener,
   NgModule,
   OnInit,
+  Renderer2,
 } from '@angular/core';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { concat, Observable, of, Subject } from 'rxjs';
 import {
   first,
@@ -26,7 +27,7 @@ export class SwipeDirective implements OnInit {
   private _touchmove$ = new Subject<TouchEvent>();
   private _touchend$ = new Subject<TouchEvent>();
 
-  constructor(private _elementRef: ElementRef) {
+  constructor(private _elementRef: ElementRef, private _renderer: Renderer2) {
     this._position$ = this._touchstart$.pipe(
       switchMap(() => {
         const position$ = this._touchmove$.pipe(
@@ -45,7 +46,18 @@ export class SwipeDirective implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._position$.pipe(untilDestroyed(this)).subscribe((position) => {
+      const el = this._elementRef.nativeElement;
+      if (position !== 0) {
+        this._renderer.setStyle(el, 'overflow', 'hidden');
+        this._renderer.setStyle(el, 'paddingLeft', `${position}px`);
+      } else {
+        this._renderer.removeStyle(el, 'overflow');
+        this._renderer.removeStyle(el, 'paddingLeft');
+      }
+    });
+  }
 
   @HostListener('touchstart', ['$event']) onTouchstart(evt: TouchEvent) {
     this._touchstart$.next(evt);
