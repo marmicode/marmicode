@@ -7,18 +7,43 @@ import {
   OnInit,
 } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { Subject } from 'rxjs';
+import { concat, Observable, of, Subject } from 'rxjs';
+import {
+  first,
+  map,
+  switchMap,
+  takeUntil,
+  withLatestFrom,
+} from 'rxjs/operators';
 
 @UntilDestroy()
 @Directive({
   selector: '[mcSwipe]',
 })
 export class SwipeDirective implements OnInit {
-  private _touchstart$ = new Subject();
-  private _touchmove$ = new Subject();
-  private _touchend$ = new Subject();
+  private _position$: Observable<number>;
+  private _touchstart$ = new Subject<TouchEvent>();
+  private _touchmove$ = new Subject<TouchEvent>();
+  private _touchend$ = new Subject<TouchEvent>();
 
-  constructor(private _elementRef: ElementRef) {}
+  constructor(private _elementRef: ElementRef) {
+    this._position$ = this._touchstart$.pipe(
+      switchMap(() => {
+        const position$ = this._touchmove$.pipe(
+          map((evt) => evt.touches[0].clientX)
+        );
+        const origin$ = position$.pipe(first());
+        return concat(
+          position$.pipe(
+            withLatestFrom(origin$),
+            map(([position, origin]) => position - origin),
+            takeUntil(this._touchend$)
+          ),
+          of(0)
+        );
+      })
+    );
+  }
 
   ngOnInit() {}
 
