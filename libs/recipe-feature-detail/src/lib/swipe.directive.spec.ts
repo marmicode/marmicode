@@ -1,10 +1,4 @@
-import {
-  Component,
-  DebugElement,
-  ElementRef,
-  EventEmitter,
-  ViewChild,
-} from '@angular/core';
+import { Component, DebugElement, EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SwipeDirective, SwipeDirectiveModule } from './swipe.directive';
@@ -42,15 +36,50 @@ describe('SwipeDirective', () => {
     contentEl = fixture.debugElement.query(By.css('[data-role=content]'));
   });
 
-  xit('🚧 should trigger swipeRight event on swipe', () => {
-    /* Start touch. */
-    // @todo check container doesn't have overflow hidden
-    // @todo set some position in event
-    containerEl.triggerEventHandler('touchstart', {});
+  xit('🚧 should apply overflow hidden when swipe starts', () => {
+    expect(containerEl.styles).not.toEqual(
+      expect.objectContaining({
+        overflow: 'hidden',
+      })
+    );
 
-    // @todo trigger mouse move
-    // @todo check container has overflow hidden
-    // @todo check content position
-    // @todo check swipeRight event has been emitted
+    triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
+
+    expect(containerEl.styles).toEqual(
+      expect.objectContaining({
+        overflow: 'hidden',
+      })
+    );
   });
+
+  xit('🚧 should trigger swipeRight event on swipe', () => {
+    const observer = jest.fn();
+    component.swipeRight$.subscribe(observer);
+
+    /* Start touch. */
+    triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
+
+    /* Move to right. */
+    triggerTouchEvent({ eventName: 'mousemove', clientX: 150 });
+
+    expect(containerEl.styles).toEqual(
+      expect.objectContaining({
+        paddingLeft: '50px',
+      })
+    );
+
+    expect(observer).toBeCalledTimes(1);
+  });
+
+  function triggerTouchEvent({
+    eventName,
+    clientX,
+  }: {
+    eventName: 'touchstart' | 'mousemove';
+    clientX: number;
+  }) {
+    containerEl.triggerEventHandler(eventName, {
+      touches: [{ clientX }],
+    });
+  }
 });
