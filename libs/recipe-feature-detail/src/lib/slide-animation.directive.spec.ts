@@ -10,21 +10,31 @@ describe('SlideAnimationDirective', () => {
   let directive: SlideAnimationDirective;
   let mockPlayLeftToRight: jest.Mock;
   let mockPlayRightToLeft: jest.Mock;
+  let mockPlayInitialAnimation: jest.Mock;
 
   beforeEach(() => {
     mockPlayLeftToRight = jest.fn();
     mockPlayRightToLeft = jest.fn();
+    mockPlayInitialAnimation = jest.fn();
     animationBuilder = {
       build: jest
         .fn()
         .mockReturnValueOnce({
           create: jest.fn().mockReturnValue({
             play: mockPlayLeftToRight,
+            destroy: jest.fn(),
           }),
         })
         .mockReturnValueOnce({
           create: jest.fn().mockReturnValue({
             play: mockPlayRightToLeft,
+            destroy: jest.fn(),
+          }),
+        })
+        .mockReturnValueOnce({
+          create: jest.fn().mockReturnValue({
+            play: mockPlayInitialAnimation,
+            destroy: jest.fn(),
           }),
         }),
     };
@@ -36,8 +46,8 @@ describe('SlideAnimationDirective', () => {
     directive.ngOnInit();
   });
 
-  it('should build left and right animations', () => {
-    expect(animationBuilder.build).toBeCalledTimes(2);
+  it('should build animations', () => {
+    expect(animationBuilder.build).toBeCalledTimes(3);
     /* Left to right animation. */
     expect(animationBuilder.build).toHaveBeenNthCalledWith(
       1,
@@ -66,11 +76,31 @@ describe('SlideAnimationDirective', () => {
         ])
       )
     );
+    /* Initial animation. */
+    expect(animationBuilder.build).toHaveBeenNthCalledWith(
+      3,
+      animate(
+        /* We don't care about animation duration. */
+        expect.any(String),
+        keyframes([
+          style({
+            opacity: 0,
+          }),
+          style({ opacity: 1 }),
+        ])
+      )
+    );
+  });
+
+  it('should run initial animation when index is initialized', () => {
+    directive.slideIndex = 3;
+
+    expect(mockPlayInitialAnimation).toBeCalledTimes(1);
   });
 
   it('should slide in right to left when index increases', () => {
-    directive.slideIndex = 2;
     directive.slideIndex = 3;
+    directive.slideIndex = 4;
 
     expect(mockPlayRightToLeft).toBeCalledTimes(1);
   });

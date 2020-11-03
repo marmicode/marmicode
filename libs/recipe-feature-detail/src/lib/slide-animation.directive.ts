@@ -16,8 +16,15 @@ import {
   OnInit,
 } from '@angular/core';
 import { RxState } from '@rx-angular/state';
-import { Observable } from 'rxjs';
-import { map, pairwise, switchMap, tap } from 'rxjs/operators';
+import { concat, EMPTY, Observable, of } from 'rxjs';
+import {
+  catchError,
+  distinctUntilChanged,
+  map,
+  pairwise,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 
 export enum Direction {
   Left = 'left',
@@ -51,6 +58,7 @@ export class SlideAnimationDirective implements OnInit {
 
   private _leftToRightAnimationFactory: AnimationFactory;
   private _rightToLeftAnimationFactory: AnimationFactory;
+  private _initialAnimationFactory: AnimationFactory;
 
   constructor(
     private _animationBuilder: AnimationBuilder,
@@ -58,13 +66,20 @@ export class SlideAnimationDirective implements OnInit {
     private _state: RxState<{ slideIndex: number }>
   ) {
     this._state.hold(
-      this._slideIndex$.pipe(
+      /* Start with null. */
+      concat(of(null), this._slideIndex$).pipe(
+        distinctUntilChanged(),
         pairwise(),
-        map(([previous, current]) =>
-          current > previous
+        map(([previous, current]) => {
+          /* Run initial animation when directive is loaded. */
+          if (previous == null) {
+            return this._initialAnimationFactory;
+          }
+
+          return current > previous
             ? this._rightToLeftAnimationFactory
-            : this._leftToRightAnimationFactory
-        ),
+            : this._leftToRightAnimationFactory;
+        }),
         switchMap(
           (animationFactory) =>
             new Observable(() => {
@@ -85,6 +100,19 @@ export class SlideAnimationDirective implements OnInit {
     );
     this._rightToLeftAnimationFactory = this._createSlideAnimationFactory(
       Direction.Left
+    );
+    this._initialAnimationFactory = this._animationBuilder.build(
+      animate(
+        '200ms',
+        keyframes([
+          style({
+            opacity: 0,
+          }),
+          style({
+            opacity: 1,
+          }),
+        ])
+      )
     );
   }
 
