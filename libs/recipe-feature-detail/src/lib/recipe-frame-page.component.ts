@@ -35,7 +35,10 @@ import { SwipeModule } from './swipe.directive';
   template: `
     <mc-page class="page" fxLayout="column">
       <!-- Swipable content. -->
+      <!-- Making this flex with fxFlex -->
+      <!-- in order to stick the timeline at the bottom. -->
       <div
+        fxFlex
         fxLayout="column"
         mcSlideAnimation
         mcSwipe
@@ -58,9 +61,6 @@ import { SwipeModule } from './swipe.directive';
           [frame]="currentFrame"
         ></mc-frame>
       </div>
-
-      <!-- Spacer to stick the timeline at the bottom. -->
-      <div fxFlex></div>
 
       <!-- THE timeline. -->
       <mc-recipe-timeline
