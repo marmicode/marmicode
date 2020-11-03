@@ -14,6 +14,7 @@ import { PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
 import { combineLatest, merge, Subject } from 'rxjs';
 import {
+  distinctUntilChanged,
   filter,
   map,
   pluck,
@@ -133,6 +134,7 @@ export class RecipeFramePageComponent {
       'recipe',
       this._route.paramMap.pipe(
         map((params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)),
+        distinctUntilChanged(),
         switchMap((recipeSlug) => this._recipeRepository.getRecipe(recipeSlug))
       )
     );
