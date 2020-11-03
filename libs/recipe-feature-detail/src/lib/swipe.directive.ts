@@ -5,18 +5,29 @@ import {
   HostListener,
   NgModule,
   OnInit,
+  Output,
   Renderer2,
   RendererStyleFlags2,
 } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { concat, Observable, of, Subject } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import {
+  filter,
+  map,
+  mapTo,
+  switchMap,
+  takeUntil,
+  withLatestFrom,
+} from 'rxjs/operators';
 
 @UntilDestroy()
 @Directive({
   selector: '[mcSwipe]',
 })
 export class SwipeDirective implements OnInit {
+  @Output() swipeLeft$: Observable<void>;
+  @Output() swipeRight$: Observable<void>;
+
   private _position$: Observable<number>;
   private _touchstart$ = new Subject<TouchEvent>();
   private _touchmove$ = new Subject<TouchEvent>();
@@ -36,6 +47,12 @@ export class SwipeDirective implements OnInit {
           of(0)
         )
       )
+    );
+
+    this.swipeRight$ = this._touchend$.pipe(
+      withLatestFrom(this._position$),
+      filter(([_, position]) => position > 0),
+      mapTo(undefined)
     );
   }
 

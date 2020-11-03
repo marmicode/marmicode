@@ -6,7 +6,12 @@ import { SwipeDirective, SwipeDirectiveModule } from './swipe.directive';
 
 @Component({
   template: `
-    <div data-role="container" mcSwipe (swipeRight)="swipeRight$.emit($event)">
+    <div
+      data-role="container"
+      mcSwipe
+      (swipeLeft)="swipeLeft$.emit($event)"
+      (swipeRight)="swipeRight$.emit($event)"
+    >
       <div data-role="content">CONTENT</div>
     </div>
   `,
@@ -14,6 +19,7 @@ import { SwipeDirective, SwipeDirectiveModule } from './swipe.directive';
 export class SwipeTestComponent {
   /* A property to propagate the event to our test. */
   swipeRight$ = new EventEmitter();
+  swipeLeft$ = new EventEmitter();
 }
 
 describe('SwipeDirective', () => {
@@ -73,12 +79,24 @@ describe('SwipeDirective', () => {
     expect(containerEl.styles.paddingLeft).toEqual('');
   });
 
+  xit('🚧 should trigger swipeLeft event on swipe', () => {
+    const observer = jest.fn();
+    component.swipeLeft$.subscribe(observer);
+
+    triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
+    triggerTouchEvent({ eventName: 'touchmove', clientX: 50 });
+    triggerTouchEvent({ eventName: 'touchend' });
+
+    expect(observer).toBeCalledTimes(1);
+  });
+
   xit('🚧 should trigger swipeRight event on swipe', () => {
     const observer = jest.fn();
     component.swipeRight$.subscribe(observer);
 
     triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
     triggerTouchEvent({ eventName: 'touchmove', clientX: 150 });
+    triggerTouchEvent({ eventName: 'touchend' });
 
     expect(observer).toBeCalledTimes(1);
   });
