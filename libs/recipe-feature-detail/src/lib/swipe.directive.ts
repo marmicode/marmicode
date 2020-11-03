@@ -60,15 +60,19 @@ export class SwipeDirective implements OnInit {
       )
     );
 
-    this.swipeLeft = touchend$.pipe(
+    const swipeDistance$ = touchend$.pipe(
       withLatestFrom(this._position$),
-      filter(([_, position]) => position < 0),
+      map(([_, position]) => position),
+      filter((position) => Math.abs(position) > 150)
+    );
+
+    this.swipeLeft = swipeDistance$.pipe(
+      filter((distance) => distance < 0),
       mapTo(undefined)
     );
 
-    this.swipeRight = touchend$.pipe(
-      withLatestFrom(this._position$),
-      filter(([_, position]) => position > 0),
+    this.swipeRight = swipeDistance$.pipe(
+      filter((distance) => distance > 0),
       mapTo(undefined)
     );
   }

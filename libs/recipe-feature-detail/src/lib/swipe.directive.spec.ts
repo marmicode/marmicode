@@ -47,8 +47,8 @@ describe('SwipeDirective', () => {
   it('should apply overflow hidden when swipe starts', () => {
     expect(containerEl.styles.overflow).toEqual('');
 
-    triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
-    triggerTouchEvent({ eventName: 'touchmove', clientX: 110 });
+    triggerTouchEvent({ eventName: 'touchstart', clientX: 200 });
+    triggerTouchEvent({ eventName: 'touchmove', clientX: 250 });
 
     expect(containerEl.styles).toEqual(
       expect.objectContaining({
@@ -57,9 +57,9 @@ describe('SwipeDirective', () => {
     );
   });
 
-  it('should move content to right with padding', () => {
-    triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
-    triggerTouchEvent({ eventName: 'touchmove', clientX: 150 });
+  it('should move content to right with margin', () => {
+    triggerTouchEvent({ eventName: 'touchstart', clientX: 200 });
+    triggerTouchEvent({ eventName: 'touchmove', clientX: 250 });
 
     expect(contentEl.styles).toEqual(
       expect.objectContaining({
@@ -69,8 +69,8 @@ describe('SwipeDirective', () => {
   });
 
   it('should reset position on touchend', () => {
-    triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
-    triggerTouchEvent({ eventName: 'touchmove', clientX: 150 });
+    triggerTouchEvent({ eventName: 'touchstart', clientX: 200 });
+    triggerTouchEvent({ eventName: 'touchmove', clientX: 400 });
     triggerTouchEvent({ eventName: 'touchend' });
 
     expect(contentEl.styles.marginLeft).toEqual('');
@@ -80,8 +80,8 @@ describe('SwipeDirective', () => {
     const observer = jest.fn();
     component.swipeLeft$.subscribe(observer);
 
-    triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
-    triggerTouchEvent({ eventName: 'touchmove', clientX: 50 });
+    triggerTouchEvent({ eventName: 'touchstart', clientX: 200 });
+    triggerTouchEvent({ eventName: 'touchmove', clientX: 20 });
     triggerTouchEvent({ eventName: 'touchend' });
 
     expect(observer).toBeCalledTimes(1);
@@ -91,11 +91,22 @@ describe('SwipeDirective', () => {
     const observer = jest.fn();
     component.swipeRight$.subscribe(observer);
 
-    triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
-    triggerTouchEvent({ eventName: 'touchmove', clientX: 150 });
+    triggerTouchEvent({ eventName: 'touchstart', clientX: 200 });
+    triggerTouchEvent({ eventName: 'touchmove', clientX: 400 });
     triggerTouchEvent({ eventName: 'touchend' });
 
     expect(observer).toBeCalledTimes(1);
+  });
+
+  it('should not trigger swipe event if less than 150px', () => {
+    const observer = jest.fn();
+    component.swipeRight$.subscribe(observer);
+
+    triggerTouchEvent({ eventName: 'touchstart', clientX: 200 });
+    triggerTouchEvent({ eventName: 'touchmove', clientX: 320 });
+    triggerTouchEvent({ eventName: 'touchend' });
+
+    expect(observer).not.toBeCalled();
   });
 
   function triggerTouchEvent({
