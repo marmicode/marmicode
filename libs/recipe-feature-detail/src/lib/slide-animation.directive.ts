@@ -2,45 +2,18 @@ import {
   animate,
   AnimationBuilder,
   AnimationFactory,
-  AnimationPlayer,
   keyframes,
   style,
 } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import {
-  Directive,
-  ElementRef,
-  Input,
-  NgModule,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Directive, ElementRef, Input, NgModule, OnInit } from '@angular/core';
 import { RxState } from '@rx-angular/state';
-import { concat, EMPTY, Observable, of } from 'rxjs';
-import {
-  catchError,
-  distinctUntilChanged,
-  map,
-  pairwise,
-  switchMap,
-  tap,
-} from 'rxjs/operators';
+import { concat, Observable, of } from 'rxjs';
+import { distinctUntilChanged, map, pairwise, switchMap } from 'rxjs/operators';
 
 export enum Direction {
   Left = 'left',
   Right = 'right',
-}
-
-export function createSlideInAnimation(direction: Direction) {
-  return animate(
-    '200ms',
-    keyframes([
-      style({
-        transform: `translateX(${direction === 'right' ? '-' : 0}100%)`,
-      }),
-      style({ transform: 'translateX(0)' }),
-    ])
-  );
 }
 
 /**
@@ -53,6 +26,8 @@ export class SlideAnimationDirective implements OnInit {
   @Input() set slideIndex(slideIndex: number) {
     this._state.set({ slideIndex });
   }
+
+  private _animationSpeed = '200ms';
 
   private _slideIndex$ = this._state.select('slideIndex');
 
@@ -103,7 +78,7 @@ export class SlideAnimationDirective implements OnInit {
     );
     this._initialAnimationFactory = this._animationBuilder.build(
       animate(
-        '200ms',
+        this._animationSpeed,
         keyframes([
           style({
             opacity: 0,
@@ -119,7 +94,7 @@ export class SlideAnimationDirective implements OnInit {
   private _createSlideAnimationFactory(direction: Direction) {
     return this._animationBuilder.build(
       animate(
-        '200ms',
+        this._animationSpeed,
         keyframes([
           style({
             transform: `translateX(${
