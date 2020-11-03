@@ -53,14 +53,8 @@ describe('SwipeDirective', () => {
     );
   });
 
-  xit('🚧 should trigger swipeRight event on swipe', () => {
-    const observer = jest.fn();
-    component.swipeRight$.subscribe(observer);
-
-    /* Start touch. */
+  it('should move content to right with padding', () => {
     triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
-
-    /* Move to right. */
     triggerTouchEvent({ eventName: 'touchmove', clientX: 150 });
 
     expect(containerEl.styles).toEqual(
@@ -68,6 +62,14 @@ describe('SwipeDirective', () => {
         paddingLeft: '50px',
       })
     );
+  });
+
+  xit('should trigger swipeRight event on swipe', () => {
+    const observer = jest.fn();
+    component.swipeRight$.subscribe(observer);
+
+    triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
+    triggerTouchEvent({ eventName: 'touchmove', clientX: 150 });
 
     expect(observer).toBeCalledTimes(1);
   });
