@@ -44,19 +44,6 @@ describe('SwipeDirective', () => {
     contentEl = fixture.debugElement.query(By.css('[data-role=content]'));
   });
 
-  it('should apply overflow hidden when swipe starts', () => {
-    expect(containerEl.styles.overflow).toEqual('');
-
-    triggerTouchEvent({ eventName: 'touchstart', clientX: 200 });
-    triggerTouchEvent({ eventName: 'touchmove', clientX: 250 });
-
-    expect(containerEl.styles).toEqual(
-      expect.objectContaining({
-        overflow: 'hidden',
-      })
-    );
-  });
-
   it('should move content to right with margin', () => {
     triggerTouchEvent({ eventName: 'touchstart', clientX: 200 });
     triggerTouchEvent({ eventName: 'touchmove', clientX: 250 });

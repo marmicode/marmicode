@@ -22,7 +22,7 @@ import {
 } from 'rxjs/operators';
 
 /**
- * @warning this directive will set `overflow: hidden` on the parent element.
+ * @warning parent element should be `overflow: hidden`.
  */
 @UntilDestroy()
 @Directive({
@@ -84,9 +84,6 @@ export class SwipeDirective implements OnInit {
       const el = this._elementRef.nativeElement;
       if (position !== 0) {
         /* Set parent's overflow to hidden in order to hide the swipe. */
-        this._applyStyle(el.parentElement, {
-          overflow: 'hidden',
-        });
         this._applyStyle(el, {
           /* Apply filter. */
           filter: this._computeCssFilter({
@@ -100,9 +97,6 @@ export class SwipeDirective implements OnInit {
         });
       } else {
         /* Reset everything. */
-        this._applyStyle(el.parentElement, {
-          overflow: undefined,
-        });
         this._applyStyle(el, {
           filter: undefined,
           ['margin-left']: undefined,
@@ -130,7 +124,7 @@ export class SwipeDirective implements OnInit {
     width: number;
   }) {
     const absPosition = Math.abs(position);
-    return `blur(${5 * absPosition / width}px) grayscale(${
+    return `blur(${(5 * absPosition) / width}px) grayscale(${
       (100 * absPosition) / width
     }%)`;
   }

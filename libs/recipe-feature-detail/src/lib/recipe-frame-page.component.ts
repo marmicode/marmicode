@@ -32,7 +32,7 @@ import { SwipeModule } from './swipe.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-frame-page',
   template: `
-    <mc-page fxLayout="column">
+    <mc-page class="page" fxLayout="column">
       <!-- Swipable content. -->
       <div
         fxLayout="column"
@@ -70,6 +70,14 @@ import { SwipeModule } from './swipe.directive';
       ></mc-recipe-timeline>
     </mc-page>
   `,
+  styles: [
+    `
+      .page {
+        /* Set overflow to hidden to avoid glitches with mcSlideAnimation. */
+        overflow: hidden;
+      }
+    `,
+  ],
   providers: [RxState],
 })
 export class RecipeFramePageComponent {
