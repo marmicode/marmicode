@@ -89,9 +89,18 @@ export class SwipeDirective implements OnInit {
         this._renderer.setStyle(el, 'width', `${el.clientWidth}px`);
         /* Change element's position. */
         this._renderer.setStyle(el, 'margin-left', `${position}px`);
+
+        this._renderer.setStyle(
+          el,
+          'filter',
+          `blur(${Math.abs(position) / 100}px) grayscale(${
+            (100 * Math.abs(position)) / el.clientWidth
+          }%)`
+        );
       } else {
         /* Reset everything. */
         this._renderer.removeStyle(el.parentElement, 'overflow');
+        this._renderer.removeStyle(el, 'filter');
         this._renderer.removeStyle(el, 'width');
         this._renderer.removeStyle(
           el,

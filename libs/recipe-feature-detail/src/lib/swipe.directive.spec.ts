@@ -76,6 +76,25 @@ describe('SwipeDirective', () => {
     expect(contentEl.styles.marginLeft).toEqual('');
   });
 
+  it('should apply CSS filter', () => {
+    triggerTouchEvent({ eventName: 'touchstart', clientX: 200 });
+    triggerTouchEvent({ eventName: 'touchmove', clientX: 250 });
+
+    expect(contentEl.styles).toEqual(
+      expect.objectContaining({
+        filter: expect.stringMatching(/blur\(.*px\) grayscale\(.*%\)/),
+      })
+    );
+  });
+
+  it('should reset CSS filter on touchend', () => {
+    triggerTouchEvent({ eventName: 'touchstart', clientX: 200 });
+    triggerTouchEvent({ eventName: 'touchmove', clientX: 400 });
+    triggerTouchEvent({ eventName: 'touchend' });
+
+    expect(contentEl.styles.filter).toEqual('');
+  });
+
   it('should trigger swipeLeft event on swipe', () => {
     const observer = jest.fn();
     component.swipeLeft$.subscribe(observer);
