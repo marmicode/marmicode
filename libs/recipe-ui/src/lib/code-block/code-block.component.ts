@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  HostListener,
   Input,
   NgModule,
   ViewChild,
@@ -139,6 +140,12 @@ export class CodeBlockComponent implements AfterViewChecked {
 
   ngAfterViewChecked() {
     this._viewChecked$.next();
+  }
+
+  /* @hack prevent touchstart from propagating to parent in order
+   * to allow code horizontal scroll in favor of swipe. */
+  @HostListener('touchstart', ['$event']) onTouchstart(evt: TouchEvent) {
+    evt.stopPropagation();
   }
 
   private _getHighlightStyles({
