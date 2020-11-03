@@ -130,7 +130,7 @@ export class SwipeDirective implements OnInit {
     width: number;
   }) {
     const absPosition = Math.abs(position);
-    return `blur(${absPosition / width}px) grayscale(${
+    return `blur(${5 * absPosition / width}px) grayscale(${
       (100 * absPosition) / width
     }%)`;
   }
