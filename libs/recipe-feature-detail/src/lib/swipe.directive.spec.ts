@@ -1,3 +1,4 @@
+import { isStringImportOrReexport } from '@angular/compiler-cli/ngcc/src/dependencies/esm_dependency_host';
 import { Component, DebugElement, EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -64,7 +65,15 @@ describe('SwipeDirective', () => {
     );
   });
 
-  xit('should trigger swipeRight event on swipe', () => {
+  xit('🚧 should reset position on touchend', () => {
+    triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
+    triggerTouchEvent({ eventName: 'touchmove', clientX: 150 });
+    triggerTouchEvent({ eventName: 'touchend' });
+
+    expect(containerEl.styles.paddingLeft).toBe(undefined);
+  });
+
+  xit('🚧 should trigger swipeRight event on swipe', () => {
     const observer = jest.fn();
     component.swipeRight$.subscribe(observer);
 
@@ -78,23 +87,27 @@ describe('SwipeDirective', () => {
     eventName,
     clientX,
   }: {
-    eventName: 'touchstart' | 'touchmove';
-    clientX: number;
+    eventName: 'touchstart' | 'touchmove' | 'touchend';
+    clientX?: number;
   }) {
+    const touches = clientX
+      ? [
+          {
+            clientX,
+          },
+        ]
+      : [];
+
     /* Dispatch global touchmove event on window manually. */
-    if (eventName === 'touchmove') {
+    if (['touchmove', 'touchend'].includes(eventName)) {
       window.dispatchEvent(
         new TouchEvent(eventName, {
-          touches: [
-            {
-              clientX,
-            },
-          ],
+          touches,
         } as TouchEventInit)
       );
     } else {
       containerEl.triggerEventHandler(eventName, {
-        touches: [{ clientX }],
+        touches,
       });
     }
   }
