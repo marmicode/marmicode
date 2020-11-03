@@ -87,26 +87,27 @@ export class SwipeDirective implements OnInit {
         this._applyStyle(el.parentElement, {
           overflow: 'hidden',
         });
-        /* Fix the width. */
-        this._renderer.setStyle(el, 'width', `${el.clientWidth}px`);
-        /* Change element's position. */
-        this._renderer.setStyle(el, 'margin-left', `${position}px`);
-
-        this._renderer.setStyle(
-          el,
-          'filter',
-          this._computeCssFilter({ position: position, width: el.clientWidth })
-        );
+        this._applyStyle(el, {
+          /* Apply filter. */
+          filter: this._computeCssFilter({
+            position: position,
+            width: el.clientWidth,
+          }),
+          /* Change element's position. */
+          ['margin-left']: `${position}px`,
+          /* Freeze the width. */
+          width: `${el.clientWidth}px`,
+        });
       } else {
         /* Reset everything. */
-        this._renderer.removeStyle(el.parentElement, 'overflow');
-        this._renderer.removeStyle(el, 'filter');
-        this._renderer.removeStyle(el, 'width');
-        this._renderer.removeStyle(
-          el,
-          'margin-left',
-          RendererStyleFlags2.DashCase
-        );
+        this._applyStyle(el.parentElement, {
+          overflow: undefined,
+        });
+        this._applyStyle(el, {
+          filter: undefined,
+          ['margin-left']: undefined,
+          width: undefined,
+        });
       }
     });
   }
@@ -114,9 +115,9 @@ export class SwipeDirective implements OnInit {
   private _applyStyle(el: HTMLElement, styles: { [key: string]: string }) {
     for (const [style, value] of Object.entries(styles)) {
       if (value !== undefined) {
-        this._renderer.setStyle(el, style, value);
+        this._renderer.setStyle(el, style, value, RendererStyleFlags2.DashCase);
       } else {
-        this._renderer.removeStyle(el, style);
+        this._renderer.removeStyle(el, style, RendererStyleFlags2.DashCase);
       }
     }
   }
