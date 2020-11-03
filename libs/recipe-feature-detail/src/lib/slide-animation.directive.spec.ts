@@ -68,14 +68,14 @@ describe('SlideAnimationDirective', () => {
     );
   });
 
-  xit('🚧 should slide in right to left when index increases', () => {
+  it('should slide in right to left when index increases', () => {
     directive.slideIndex = 2;
     directive.slideIndex = 3;
 
     expect(mockPlayRightToLeft).toBeCalledTimes(1);
   });
 
-  xit('🚧 should slide in left to right when index decreases', () => {
+  it('should slide in left to right when index decreases', () => {
     directive.slideIndex = 3;
     directive.slideIndex = 2;
 

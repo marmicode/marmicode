@@ -15,6 +15,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { RxState } from '@rx-angular/state';
+import { map, pairwise } from 'rxjs/operators';
 
 export enum Direction {
   Left = 'left',
@@ -44,6 +45,8 @@ export class SlideAnimationDirective implements OnDestroy, OnInit {
     this._state.set({ slideIndex });
   }
 
+  private _slideIndex$ = this._state.select('slideIndex');
+
   private _leftToRightPlayer: AnimationPlayer;
   private _rightToLeftPlayer: AnimationPlayer;
 
@@ -51,7 +54,17 @@ export class SlideAnimationDirective implements OnDestroy, OnInit {
     private _animationBuilder: AnimationBuilder,
     private _elementRef: ElementRef,
     private _state: RxState<{ slideIndex: number }>
-  ) {}
+  ) {
+    this._state.hold(
+      this._slideIndex$.pipe(
+        pairwise(),
+        map(([previous, current]) =>
+          current > previous ? this._rightToLeftPlayer : this._leftToRightPlayer
+        )
+      ),
+      (player) => player.play()
+    );
+  }
 
   ngOnInit() {
     this._leftToRightPlayer = this._createSlideInPlayer(Direction.Right);
