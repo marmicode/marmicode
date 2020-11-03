@@ -93,9 +93,7 @@ export class SwipeDirective implements OnInit {
         this._renderer.setStyle(
           el,
           'filter',
-          `blur(${Math.abs(position) / 100}px) grayscale(${
-            (100 * Math.abs(position)) / el.clientWidth
-          }%)`
+          this._computeCssFilter(position, el.clientWidth)
         );
       } else {
         /* Reset everything. */
@@ -109,6 +107,13 @@ export class SwipeDirective implements OnInit {
         );
       }
     });
+  }
+
+  private _computeCssFilter(position: number, width: number) {
+    const absPosition = Math.abs(position);
+    return `blur(${absPosition / width}px) grayscale(${
+      (100 * absPosition) / width
+    }%)`;
   }
 }
 
