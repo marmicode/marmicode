@@ -26,6 +26,7 @@ import { getRelativeFrameRoute } from './get-relative-frame-route';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
 import { RecipeTimelineModule } from './recipe-timeline.component';
 import { RecipeTitleModule } from './recipe-title.component';
+import { SlideAnimationModule } from './slide-animation.directive';
 import { SwipeModule } from './swipe.directive';
 
 @Component({
@@ -36,7 +37,9 @@ import { SwipeModule } from './swipe.directive';
       <!-- Swipable content. -->
       <div
         fxLayout="column"
+        mcSlideAnimation
         mcSwipe
+        [slideIndex]="currentFrameIndex$ | async"
         (swipeLeft)="swipeLeft$.next()"
         (swipeRight)="swipeRight$.next()"
       >
@@ -227,6 +230,7 @@ export class RecipeFramePageComponent {
     FrameModule,
     RecipeTimelineModule,
     RecipeTitleModule,
+    SlideAnimationModule,
     SwipeModule,
   ],
 })
