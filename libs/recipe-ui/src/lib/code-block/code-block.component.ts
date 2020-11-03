@@ -29,7 +29,13 @@ import { HighlightZone } from '../highlight/highlight-zone';
     <pre
       [ngClass]="languageClass$ | async"
       class="line-numbers preformatted"
-    ><code
+    ><div
+      *ngFor="let style of lineNumberHighlightStyles$ | async"
+      [style.backgroundColor]="style.color"
+      [style.top.px]="style.top"
+      [style.height.px]="style.height"
+      class="line-number-highlight"
+    ></div><code
       #code
       class="code"
       data-role="code-block">{{code$ | async}}</code></pre>
@@ -42,15 +48,6 @@ import { HighlightZone } from '../highlight/highlight-zone';
       [style.height.px]="style.height"
       class="highlight"
       data-role="code-highlight"
-    ></div>
-
-    <!-- Highlight highlightable zones' line numbers. -->
-    <div
-      *ngFor="let style of lineNumberHighlightStyles$ | async"
-      [style.backgroundColor]="style.color"
-      [style.top.px]="style.top"
-      [style.height.px]="style.height"
-      class="line-number-highlight"
     ></div>
   </div>`,
   styleUrls: ['./code-block.component.scss'],
