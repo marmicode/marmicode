@@ -97,4 +97,4 @@ export class SwipeDirective implements OnInit {
   exports: [SwipeDirective],
   imports: [CommonModule],
 })
-export class SwipeDirectiveModule {}
+export class SwipeModule {}

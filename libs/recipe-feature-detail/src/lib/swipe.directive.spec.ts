@@ -1,7 +1,7 @@
 import { Component, DebugElement, EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { SwipeDirective, SwipeDirectiveModule } from './swipe.directive';
+import { SwipeDirective, SwipeModule } from './swipe.directive';
 
 @Component({
   template: `
@@ -30,7 +30,7 @@ describe('SwipeDirective', () => {
   beforeEach(async () => {
     return TestBed.configureTestingModule({
       declarations: [SwipeTestComponent],
-      imports: [SwipeDirectiveModule],
+      imports: [SwipeModule],
     }).compileComponents();
   });
 
