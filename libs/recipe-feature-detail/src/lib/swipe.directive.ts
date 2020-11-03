@@ -2,21 +2,22 @@ import { CommonModule } from '@angular/common';
 import {
   Directive,
   ElementRef,
-  HostListener,
   NgModule,
   OnInit,
   Output,
   Renderer2,
   RendererStyleFlags2,
 } from '@angular/core';
+import { shareReplayWithRefCount } from '@marmicode/shared-utils';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { concat, fromEvent, Observable, of, Subject } from 'rxjs';
+import { concat, fromEvent, Observable, of } from 'rxjs';
 import {
   filter,
   map,
   mapTo,
   switchMap,
   takeUntil,
+  tap,
   withLatestFrom,
 } from 'rxjs/operators';
 
@@ -57,7 +58,8 @@ export class SwipeDirective implements OnInit {
           ),
           of(0)
         )
-      )
+      ),
+      shareReplayWithRefCount()
     );
 
     const swipeDistance$ = touchend$.pipe(
