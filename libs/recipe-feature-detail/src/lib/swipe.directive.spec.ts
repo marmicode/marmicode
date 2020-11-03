@@ -121,9 +121,11 @@ describe('SwipeDirective', () => {
         } as TouchEventInit)
       );
     } else {
-      contentEl.triggerEventHandler(eventName, {
-        touches,
-      });
+      contentEl.nativeElement.dispatchEvent(
+        new TouchEvent(eventName, {
+          touches,
+        } as TouchEventInit)
+      );
     }
   }
 });

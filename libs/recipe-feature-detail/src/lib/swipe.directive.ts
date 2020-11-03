@@ -10,7 +10,7 @@ import {
   RendererStyleFlags2,
 } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { concat, Observable, of, Subject } from 'rxjs';
+import { concat, fromEvent, Observable, of, Subject } from 'rxjs';
 import {
   filter,
   map,
@@ -32,33 +32,41 @@ export class SwipeDirective implements OnInit {
   @Output() swipeRight: Observable<void>;
 
   private _position$: Observable<number>;
-  private _touchstart$ = new Subject<TouchEvent>();
-  private _touchmove$ = new Subject<TouchEvent>();
-  private _touchend$ = new Subject<TouchEvent>();
 
   constructor(private _elementRef: ElementRef, private _renderer: Renderer2) {
-    this._position$ = this._touchstart$.pipe(
+    /*
+     * Using native events instead of HostListeners in order to avoid
+     * triggering change detection for nothing.
+     */
+    const touchstart$ = fromEvent<TouchEvent>(
+      this._elementRef.nativeElement,
+      'touchstart'
+    );
+    const touchmove$ = fromEvent<TouchEvent>(window, 'touchmove');
+    const touchend$ = fromEvent<TouchEvent>(window, 'touchend');
+
+    this._position$ = touchstart$.pipe(
       switchMap((touchstart) =>
         concat(
-          this._touchmove$.pipe(
+          touchmove$.pipe(
             map(
               (touchmove) =>
                 touchmove.touches[0].clientX - touchstart.touches[0].clientX
             ),
-            takeUntil(this._touchend$)
+            takeUntil(touchend$)
           ),
           of(0)
         )
       )
     );
 
-    this.swipeLeft = this._touchend$.pipe(
+    this.swipeLeft = touchend$.pipe(
       withLatestFrom(this._position$),
       filter(([_, position]) => position < 0),
       mapTo(undefined)
     );
 
-    this.swipeRight = this._touchend$.pipe(
+    this.swipeRight = touchend$.pipe(
       withLatestFrom(this._position$),
       filter(([_, position]) => position > 0),
       mapTo(undefined)
@@ -86,18 +94,6 @@ export class SwipeDirective implements OnInit {
         );
       }
     });
-  }
-
-  @HostListener('touchstart', ['$event']) onTouchstart(evt: TouchEvent) {
-    this._touchstart$.next(evt);
-  }
-
-  @HostListener('window:touchmove', ['$event']) onTouchmove(evt: TouchEvent) {
-    this._touchmove$.next(evt);
-  }
-
-  @HostListener('window:touchend', ['$event']) onTouchend(evt: TouchEvent) {
-    this._touchend$.next(evt);
   }
 }
 
