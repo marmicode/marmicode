@@ -84,7 +84,9 @@ export class SwipeDirective implements OnInit {
       const el = this._elementRef.nativeElement;
       if (position !== 0) {
         /* Set parent's overflow to hidden in order to hide the swipe. */
-        this._renderer.setStyle(el.parentElement, 'overflow', 'hidden');
+        this._applyStyle(el.parentElement, {
+          overflow: 'hidden',
+        });
         /* Fix the width. */
         this._renderer.setStyle(el, 'width', `${el.clientWidth}px`);
         /* Change element's position. */
@@ -93,7 +95,7 @@ export class SwipeDirective implements OnInit {
         this._renderer.setStyle(
           el,
           'filter',
-          this._computeCssFilter(position, el.clientWidth)
+          this._computeCssFilter({ position: position, width: el.clientWidth })
         );
       } else {
         /* Reset everything. */
@@ -109,7 +111,23 @@ export class SwipeDirective implements OnInit {
     });
   }
 
-  private _computeCssFilter(position: number, width: number) {
+  private _applyStyle(el: HTMLElement, styles: { [key: string]: string }) {
+    for (const [style, value] of Object.entries(styles)) {
+      if (value !== undefined) {
+        this._renderer.setStyle(el, style, value);
+      } else {
+        this._renderer.removeStyle(el, style);
+      }
+    }
+  }
+
+  private _computeCssFilter({
+    position,
+    width,
+  }: {
+    position: number;
+    width: number;
+  }) {
     const absPosition = Math.abs(position);
     return `blur(${absPosition / width}px) grayscale(${
       (100 * absPosition) / width
