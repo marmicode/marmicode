@@ -25,8 +25,8 @@ import {
   selector: '[mcSwipe]',
 })
 export class SwipeDirective implements OnInit {
-  @Output() swipeLeft$: Observable<void>;
-  @Output() swipeRight$: Observable<void>;
+  @Output() swipeLeft: Observable<void>;
+  @Output() swipeRight: Observable<void>;
 
   private _position$: Observable<number>;
   private _touchstart$ = new Subject<TouchEvent>();
@@ -49,7 +49,13 @@ export class SwipeDirective implements OnInit {
       )
     );
 
-    this.swipeRight$ = this._touchend$.pipe(
+    this.swipeLeft = this._touchend$.pipe(
+      withLatestFrom(this._position$),
+      filter(([_, position]) => position < 0),
+      mapTo(undefined)
+    );
+
+    this.swipeRight = this._touchend$.pipe(
       withLatestFrom(this._position$),
       filter(([_, position]) => position > 0),
       mapTo(undefined)

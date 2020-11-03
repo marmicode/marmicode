@@ -1,4 +1,3 @@
-import { isStringImportOrReexport } from '@angular/compiler-cli/ngcc/src/dependencies/esm_dependency_host';
 import { Component, DebugElement, EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -79,7 +78,7 @@ describe('SwipeDirective', () => {
     expect(containerEl.styles.paddingLeft).toEqual('');
   });
 
-  xit('🚧 should trigger swipeLeft event on swipe', () => {
+  it('should trigger swipeLeft event on swipe', () => {
     const observer = jest.fn();
     component.swipeLeft$.subscribe(observer);
 
@@ -90,7 +89,7 @@ describe('SwipeDirective', () => {
     expect(observer).toBeCalledTimes(1);
   });
 
-  xit('🚧 should trigger swipeRight event on swipe', () => {
+  it('should trigger swipeRight event on swipe', () => {
     const observer = jest.fn();
     component.swipeRight$.subscribe(observer);
 
