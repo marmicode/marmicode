@@ -6,17 +6,11 @@ import {
   NgModule,
   OnInit,
   Renderer2,
+  RendererStyleFlags2,
 } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { concat, Observable, of, Subject } from 'rxjs';
-import {
-  first,
-  map,
-  switchMap,
-  takeUntil,
-  tap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 @UntilDestroy()
 @Directive({
@@ -35,9 +29,9 @@ export class SwipeDirective implements OnInit {
           this._touchmove$.pipe(
             map(
               (touchmove) =>
-                touchmove.touches[0].clientX - touchstart.touches[0].clientX,
-              takeUntil(this._touchend$)
-            )
+                touchmove.touches[0].clientX - touchstart.touches[0].clientX
+            ),
+            takeUntil(this._touchend$)
           ),
           of(0)
         )
@@ -50,10 +44,14 @@ export class SwipeDirective implements OnInit {
       const el = this._elementRef.nativeElement;
       if (position !== 0) {
         this._renderer.setStyle(el, 'overflow', 'hidden');
-        this._renderer.setStyle(el, 'paddingLeft', `${position}px`);
+        this._renderer.setStyle(el, 'padding-left', `${position}px`);
       } else {
         this._renderer.removeStyle(el, 'overflow');
-        this._renderer.removeStyle(el, 'paddingLeft');
+        this._renderer.removeStyle(
+          el,
+          'padding-left',
+          RendererStyleFlags2.DashCase
+        );
       }
     });
   }

@@ -65,12 +65,12 @@ describe('SwipeDirective', () => {
     );
   });
 
-  xit('🚧 should reset position on touchend', () => {
+  it('should reset position on touchend', () => {
     triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
     triggerTouchEvent({ eventName: 'touchmove', clientX: 150 });
     triggerTouchEvent({ eventName: 'touchend' });
 
-    expect(containerEl.styles.paddingLeft).toBe(undefined);
+    expect(containerEl.styles.paddingLeft).toEqual('');
   });
 
   xit('🚧 should trigger swipeRight event on swipe', () => {
