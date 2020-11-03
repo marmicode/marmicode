@@ -1,4 +1,5 @@
 import { animate, keyframes, style } from '@angular/animations';
+import { ElementRef } from '@angular/core';
 import { RxState } from '@rx-angular/state';
 import { SlideAnimationDirective } from './slide-animation.directive';
 
@@ -29,15 +30,17 @@ describe('SlideAnimationDirective', () => {
     };
     directive = new SlideAnimationDirective(
       animationBuilder,
+      {} as ElementRef,
       new RxState<{ slideIndex: number }>()
     );
+    directive.ngOnInit();
   });
 
-  xit('🚧 should build left and right animations', () => {
+  it('should build left and right animations', () => {
     expect(animationBuilder.build).toBeCalledTimes(2);
     /* Left to right animation. */
     expect(animationBuilder.build).toHaveBeenNthCalledWith(
-      0,
+      1,
       animate(
         /* We don't care about animation duration. */
         expect.any(String),
@@ -51,7 +54,7 @@ describe('SlideAnimationDirective', () => {
     );
     /* Right to left animation. */
     expect(animationBuilder.build).toHaveBeenNthCalledWith(
-      1,
+      2,
       animate(
         /* We don't care about animation duration. */
         expect.any(String),
