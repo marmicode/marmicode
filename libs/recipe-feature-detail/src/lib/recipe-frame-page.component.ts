@@ -11,8 +11,8 @@ import { Frame } from '@marmicode/recipe-core';
 import { FrameModule } from '@marmicode/recipe-ui';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule } from '@marmicode/shared-ui';
-import { RxState, select, selectSlice } from '@rx-angular/state';
-import { combineLatest, Subject } from 'rxjs';
+import { RxState, select } from '@rx-angular/state';
+import { combineLatest, merge, Subject } from 'rxjs';
 import {
   filter,
   map,
@@ -25,26 +25,35 @@ import { getRelativeFrameRoute } from './get-relative-frame-route';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
 import { RecipeTimelineModule } from './recipe-timeline.component';
 import { RecipeTitleModule } from './recipe-title.component';
+import { SwipeModule } from './swipe.directive';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-frame-page',
   template: `
     <mc-page fxLayout="column">
-      <!-- Recipe's title. -->
-      <mc-recipe-title
-        *ngIf="title$ | async as title"
-        [resourceType]="type$ | async"
-        [title]="title"
-        [frameIndex]="currentFrameIndex$ | async"
-        [frameTitle]="currentFrameTitle$ | async"
-      ></mc-recipe-title>
+      <!-- Swipable content. -->
+      <div
+        fxLayout="column"
+        mcSwipe
+        (swipeLeft)="swipeLeft$.next()"
+        (swipeRight)="swipeRight$.next()"
+      >
+        <!-- Recipe's title. -->
+        <mc-recipe-title
+          *ngIf="title$ | async as title"
+          [resourceType]="type$ | async"
+          [title]="title"
+          [frameIndex]="currentFrameIndex$ | async"
+          [frameTitle]="currentFrameTitle$ | async"
+        ></mc-recipe-title>
 
-      <!-- Frame with code, text etc... blocks. -->
-      <mc-frame
-        *ngIf="currentFrame$ | async as currentFrame"
-        [frame]="currentFrame"
-      ></mc-frame>
+        <!-- Frame with code, text etc... blocks. -->
+        <mc-frame
+          *ngIf="currentFrame$ | async as currentFrame"
+          [frame]="currentFrame"
+        ></mc-frame>
+      </div>
 
       <!-- Spacer to stick the timeline at the bottom. -->
       <div fxFlex></div>
@@ -102,6 +111,9 @@ export class RecipeFramePageComponent {
   type$ = this.recipe$.pipe(select(pluck('type')));
   title$ = this.recipe$.pipe(select(pluck('title')));
 
+  swipeLeft$ = new Subject();
+  swipeRight$ = new Subject();
+
   /**
    * Stream of pressed keys.
    */
@@ -136,22 +148,26 @@ export class RecipeFramePageComponent {
     );
 
     /**
-     * Go to next frame on arrow right.
+     * Go to next frame on arrow right or swipe left.
      */
     this._state.hold(
-      this._key$.pipe(
-        filter((key) => key === 'ArrowRight'),
+      merge(
+        this._key$.pipe(filter((key) => key === 'ArrowRight')),
+        this.swipeLeft$
+      ).pipe(
         withLatestFrom(this.nextFrameRoute$),
         switchMap(([_, route]) => this._tryNavigateToRelativeRoute(route))
       )
     );
 
     /**
-     * Go to previous frame on arrow left.
+     * Go to previous frame on arrow left or swipe right.
      */
     this._state.hold(
-      this._key$.pipe(
-        filter((key) => key === 'ArrowLeft'),
+      merge(
+        this._key$.pipe(filter((key) => key === 'ArrowLeft')),
+        this.swipeRight$
+      ).pipe(
         withLatestFrom(this.previousFrameRoute$),
         switchMap(([_, route]) => this._tryNavigateToRelativeRoute(route))
       )
@@ -201,6 +217,7 @@ export class RecipeFramePageComponent {
     FrameModule,
     RecipeTimelineModule,
     RecipeTitleModule,
+    SwipeModule,
   ],
 })
 export class RecipeFramePageModule {}
