@@ -27,7 +27,7 @@ import { map } from 'rxjs/operators';
       </div>
     </div>
     <h1 class="title">{{ title }}</h1>
-    <h2 *ngIf="frameTitle" class="title">
+    <h2 *ngIf="frameTitle" class="subtitle">
       {{ frameIndex + 1 }} - {{ frameTitle }}
     </h2>
   `,
@@ -50,12 +50,22 @@ import { map } from 'rxjs/operators';
         text-transform: uppercase;
       }
 
-      .title {
+      .title,
+      .subtitle {
         position: relative;
         color: white;
         font-weight: 300;
-        margin: 10px 0;
         text-align: center;
+        margin: 0;
+      }
+
+      .title {
+        font-size: 1.2em;
+      }
+
+      .subtitle {
+        font-size: 1.4em;
+        margin-bottom: 5px;
       }
 
       svg {
