@@ -1,6 +1,7 @@
 import {
   animate,
   AnimationBuilder,
+  AnimationFactory,
   AnimationPlayer,
   keyframes,
   style,
@@ -15,7 +16,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { RxState } from '@rx-angular/state';
-import { map, pairwise } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, pairwise, switchMap, tap } from 'rxjs/operators';
 
 export enum Direction {
   Left = 'left',
@@ -40,15 +42,15 @@ export function createSlideInAnimation(direction: Direction) {
 @Directive({
   selector: '[mcSlideAnimation]',
 })
-export class SlideAnimationDirective implements OnDestroy, OnInit {
+export class SlideAnimationDirective implements OnInit {
   @Input() set slideIndex(slideIndex: number) {
     this._state.set({ slideIndex });
   }
 
   private _slideIndex$ = this._state.select('slideIndex');
 
-  private _leftToRightPlayer: AnimationPlayer;
-  private _rightToLeftPlayer: AnimationPlayer;
+  private _leftToRightAnimationFactory: AnimationFactory;
+  private _rightToLeftAnimationFactory: AnimationFactory;
 
   constructor(
     private _animationBuilder: AnimationBuilder,
@@ -59,39 +61,47 @@ export class SlideAnimationDirective implements OnDestroy, OnInit {
       this._slideIndex$.pipe(
         pairwise(),
         map(([previous, current]) =>
-          current > previous ? this._rightToLeftPlayer : this._leftToRightPlayer
+          current > previous
+            ? this._rightToLeftAnimationFactory
+            : this._leftToRightAnimationFactory
+        ),
+        switchMap(
+          (animationFactory) =>
+            new Observable(() => {
+              const player = animationFactory.create(
+                this._elementRef.nativeElement
+              );
+              player.play();
+              return () => player.destroy();
+            })
         )
-      ),
-      (player) => player.play()
+      )
     );
   }
 
   ngOnInit() {
-    this._leftToRightPlayer = this._createSlideInPlayer(Direction.Right);
-    this._rightToLeftPlayer = this._createSlideInPlayer(Direction.Left);
+    this._leftToRightAnimationFactory = this._createSlideAnimationFactory(
+      Direction.Right
+    );
+    this._rightToLeftAnimationFactory = this._createSlideAnimationFactory(
+      Direction.Left
+    );
   }
 
-  ngOnDestroy() {
-    this._leftToRightPlayer.destroy();
-    this._rightToLeftPlayer.destroy();
-  }
-
-  private _createSlideInPlayer(direction: Direction) {
-    return this._animationBuilder
-      .build(
-        animate(
-          '200ms',
-          keyframes([
-            style({
-              transform: `translateX(${
-                direction === Direction.Right ? '-' : ''
-              }100%)`,
-            }),
-            style({ transform: 'translateX(0)' }),
-          ])
-        )
+  private _createSlideAnimationFactory(direction: Direction) {
+    return this._animationBuilder.build(
+      animate(
+        '200ms',
+        keyframes([
+          style({
+            transform: `translateX(${
+              direction === Direction.Right ? '-' : ''
+            }100%)`,
+          }),
+          style({ transform: 'translateX(0)' }),
+        ])
       )
-      .create(this._elementRef.nativeElement);
+    );
   }
 }
 
