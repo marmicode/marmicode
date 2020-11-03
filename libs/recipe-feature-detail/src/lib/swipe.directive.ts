@@ -14,6 +14,7 @@ import {
   map,
   switchMap,
   takeUntil,
+  tap,
   withLatestFrom,
 } from 'rxjs/operators';
 
@@ -29,20 +30,18 @@ export class SwipeDirective implements OnInit {
 
   constructor(private _elementRef: ElementRef, private _renderer: Renderer2) {
     this._position$ = this._touchstart$.pipe(
-      switchMap(() => {
-        const position$ = this._touchmove$.pipe(
-          map((evt) => evt.touches[0].clientX)
-        );
-        const origin$ = position$.pipe(first());
-        return concat(
-          position$.pipe(
-            withLatestFrom(origin$),
-            map(([position, origin]) => position - origin),
-            takeUntil(this._touchend$)
+      switchMap((touchstart) =>
+        concat(
+          this._touchmove$.pipe(
+            map(
+              (touchmove) =>
+                touchmove.touches[0].clientX - touchstart.touches[0].clientX,
+              takeUntil(this._touchend$)
+            )
           ),
           of(0)
-        );
-      })
+        )
+      )
     );
   }
 

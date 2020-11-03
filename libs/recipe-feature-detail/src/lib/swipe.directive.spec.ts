@@ -5,7 +5,7 @@ import { SwipeDirective, SwipeDirectiveModule } from './swipe.directive';
 
 @Component({
   template: `
-    <div data-role="container" *mcSwipe (swipeRight)="swipeRight$.emit($event)">
+    <div data-role="container" mcSwipe (swipeRight)="swipeRight$.emit($event)">
       <div data-role="content">CONTENT</div>
     </div>
   `,
@@ -36,7 +36,7 @@ describe('SwipeDirective', () => {
     contentEl = fixture.debugElement.query(By.css('[data-role=content]'));
   });
 
-  xit('🚧 should apply overflow hidden when swipe starts', () => {
+  it('should apply overflow hidden when swipe starts', () => {
     expect(containerEl.styles).not.toEqual(
       expect.objectContaining({
         overflow: 'hidden',
@@ -44,6 +44,7 @@ describe('SwipeDirective', () => {
     );
 
     triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
+    triggerTouchEvent({ eventName: 'touchmove', clientX: 110 });
 
     expect(containerEl.styles).toEqual(
       expect.objectContaining({
@@ -78,8 +79,21 @@ describe('SwipeDirective', () => {
     eventName: 'touchstart' | 'touchmove';
     clientX: number;
   }) {
-    containerEl.triggerEventHandler(eventName, {
-      touches: [{ clientX }],
-    });
+    /* Dispatch global touchmove event on window manually. */
+    if (eventName === 'touchmove') {
+      window.dispatchEvent(
+        new TouchEvent(eventName, {
+          touches: [
+            {
+              clientX,
+            },
+          ],
+        } as TouchEventInit)
+      );
+    } else {
+      containerEl.triggerEventHandler(eventName, {
+        touches: [{ clientX }],
+      });
+    }
   }
 });
