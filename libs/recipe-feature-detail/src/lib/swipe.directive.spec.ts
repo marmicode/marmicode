@@ -5,13 +5,15 @@ import { SwipeDirective, SwipeModule } from './swipe.directive';
 
 @Component({
   template: `
-    <div
-      data-role="container"
-      mcSwipe
-      (swipeLeft)="swipeLeft$.emit($event)"
-      (swipeRight)="swipeRight$.emit($event)"
-    >
-      <div data-role="content">CONTENT</div>
+    <div data-role="container">
+      <div
+        data-role="content"
+        mcSwipe
+        (swipeLeft)="swipeLeft$.emit($event)"
+        (swipeRight)="swipeRight$.emit($event)"
+      >
+        <div>CONTENT</div>
+      </div>
     </div>
   `,
 })
@@ -43,11 +45,7 @@ describe('SwipeDirective', () => {
   });
 
   it('should apply overflow hidden when swipe starts', () => {
-    expect(containerEl.styles).not.toEqual(
-      expect.objectContaining({
-        overflow: 'hidden',
-      })
-    );
+    expect(containerEl.styles.overflow).toEqual('');
 
     triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
     triggerTouchEvent({ eventName: 'touchmove', clientX: 110 });
@@ -63,9 +61,9 @@ describe('SwipeDirective', () => {
     triggerTouchEvent({ eventName: 'touchstart', clientX: 100 });
     triggerTouchEvent({ eventName: 'touchmove', clientX: 150 });
 
-    expect(containerEl.styles).toEqual(
+    expect(contentEl.styles).toEqual(
       expect.objectContaining({
-        paddingLeft: '50px',
+        marginLeft: '50px',
       })
     );
   });
@@ -75,7 +73,7 @@ describe('SwipeDirective', () => {
     triggerTouchEvent({ eventName: 'touchmove', clientX: 150 });
     triggerTouchEvent({ eventName: 'touchend' });
 
-    expect(containerEl.styles.paddingLeft).toEqual('');
+    expect(contentEl.styles.marginLeft).toEqual('');
   });
 
   it('should trigger swipeLeft event on swipe', () => {
@@ -123,7 +121,7 @@ describe('SwipeDirective', () => {
         } as TouchEventInit)
       );
     } else {
-      containerEl.triggerEventHandler(eventName, {
+      contentEl.triggerEventHandler(eventName, {
         touches,
       });
     }

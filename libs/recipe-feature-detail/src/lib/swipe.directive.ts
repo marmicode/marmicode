@@ -20,6 +20,9 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 
+/**
+ * @warning this directive will set `overflow: hidden` on the parent element.
+ */
 @UntilDestroy()
 @Directive({
   selector: '[mcSwipe]',
@@ -66,13 +69,19 @@ export class SwipeDirective implements OnInit {
     this._position$.pipe(untilDestroyed(this)).subscribe((position) => {
       const el = this._elementRef.nativeElement;
       if (position !== 0) {
-        this._renderer.setStyle(el, 'overflow', 'hidden');
-        this._renderer.setStyle(el, 'padding-left', `${position}px`);
+        /* Set parent's overflow to hidden in order to hide the swipe. */
+        this._renderer.setStyle(el.parentElement, 'overflow', 'hidden');
+        /* Fix the width. */
+        this._renderer.setStyle(el, 'width', `${el.clientWidth}px`);
+        /* Change element's position. */
+        this._renderer.setStyle(el, 'margin-left', `${position}px`);
       } else {
-        this._renderer.removeStyle(el, 'overflow');
+        /* Reset everything. */
+        this._renderer.removeStyle(el.parentElement, 'overflow');
+        this._renderer.removeStyle(el, 'width');
         this._renderer.removeStyle(
           el,
-          'padding-left',
+          'margin-left',
           RendererStyleFlags2.DashCase
         );
       }
