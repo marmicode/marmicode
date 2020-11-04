@@ -38,13 +38,13 @@ import { SwipeModule } from './swipe.directive';
       <!-- Making this flex with fxFlex -->
       <!-- in order to stick the timeline at the bottom. -->
       <div
-        fxFlex
         fxLayout="column"
         mcSlideAnimation
         mcSwipe
         [slideIndex]="currentFrameIndex$ | async"
         (swipeLeft)="swipeLeft$.next()"
         (swipeRight)="swipeRight$.next()"
+        class="swipable-content"
       >
         <!-- Recipe's title. -->
         <mc-recipe-title
@@ -78,6 +78,12 @@ import { SwipeModule } from './swipe.directive';
       .page {
         /* Set overflow to hidden to avoid glitches with mcSlideAnimation. */
         overflow: hidden;
+      }
+
+      .swipable-content {
+        /* Forcing flex-basis to auto as fxFlex sets it to 0px
+         * and doesn't stretch when content is larger than page. */
+        flex: 1 1 auto;
       }
     `,
   ],
