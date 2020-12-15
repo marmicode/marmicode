@@ -17,7 +17,9 @@ fi
 IS_NEXT=$([ "$PROJECT" = "marmicode-next" ] && echo true || echo false)
 
 # Use next environment variables.
-BUILD_OPTIONS=$([ "$IS_NEXT" = true ] && echo "-c=production,next" || echo "-c=production")
+# @todo replace -c=next with -c=production,next and remove duplicate configuration in angular.json
+# once the following issue is solved: https://github.com/nrwl/nx/issues/4296
+BUILD_OPTIONS=$([ "$IS_NEXT" = true ] && echo "-c=next" || echo "-c=production")
 
 yarn build marmicode $BUILD_OPTIONS
 
