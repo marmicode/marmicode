@@ -67,7 +67,10 @@ export interface SearchInputOption {
       .search-input-container {
         position: relative;
         height: 35px;
+        border-color: #888;
         border-radius: 25px;
+        border-style: solid;
+        border-width: 1px;
         background-color: white;
         overflow: hidden;
       }

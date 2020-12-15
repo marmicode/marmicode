@@ -40,10 +40,6 @@ import {
   styles: [
     `
       :host {
-        border-color: #888;
-        border-radius: 5px;
-        border-style: solid;
-        border-width: 1px;
         flex: 1;
         max-width: 400px;
       }
