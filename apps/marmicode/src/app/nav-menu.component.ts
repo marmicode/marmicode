@@ -11,7 +11,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { servicesRouterHelper } from '@marmicode/shared-router-helpers';
+import {
+  resourceSearchRouterHelper,
+  servicesRouterHelper,
+} from '@marmicode/shared-router-helpers';
 import { BehaviorSubject } from 'rxjs';
 import { NavMenuItemModule } from './nav-menu-item.component';
 
@@ -97,14 +100,19 @@ export class NavMenuComponent {
 
   entries = [
     {
-      icon: 'ev_station',
-      title: 'Services',
-      route: servicesRouterHelper.services(),
+      icon: 'article',
+      title: 'Resources',
+      route: resourceSearchRouterHelper.learnEverything(),
     },
     {
       icon: 'school',
       title: 'Workshops',
       url: 'https://marmicode.eventbrite.com',
+    },
+    {
+      icon: 'ev_station',
+      title: 'Services',
+      route: servicesRouterHelper.services(),
     },
     {
       icon: 'mail',
