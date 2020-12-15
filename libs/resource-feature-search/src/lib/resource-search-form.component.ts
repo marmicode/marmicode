@@ -35,6 +35,7 @@ import {
     <mc-search-input
       [control]="skillControl"
       [options]="filteredSkills$ | async"
+      placeholder="Choose a skill..."
     ></mc-search-input>
   `,
   styles: [

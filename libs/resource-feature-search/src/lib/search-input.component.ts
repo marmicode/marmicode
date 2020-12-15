@@ -39,6 +39,7 @@ export interface SearchInputOption {
       <input
         [formControl]="control$ | async"
         [matAutocomplete]="auto"
+        [placeholder]="placeholder"
         aria-label="Search"
         class="input"
         fxFlex
@@ -110,6 +111,7 @@ export class SearchInputComponent {
   @Input() set control(control: FormControl) {
     this._state.set({ control });
   }
+  @Input() placeholder: string;
   @Input() options: SearchInputOption[];
 
   control$ = this._state.select('control');
