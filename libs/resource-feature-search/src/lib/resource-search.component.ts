@@ -8,10 +8,9 @@ import {
   progressify,
   shareReplayWithRefCount,
   TransferStateHelper,
-  WipModule,
 } from '@marmicode/shared-utils';
 import { combineLatest, Observable, throwError } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { Resource } from './resource';
 import { ResourceCardModule } from './resource-card.component';
@@ -26,7 +25,9 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
   selector: 'mc-resource-search',
   template: `
     <mc-page>
-      <mc-resource-search-form *mcWip></mc-resource-search-form>
+      <div fxLayout="row" fxLayoutAlign="center">
+        <mc-resource-search-form></mc-resource-search-form>
+      </div>
 
       <div fxLayout="row" fxLayoutAlign="center">
         <mc-loading *ngIf="isLoading$ | async"></mc-loading>
@@ -131,7 +132,6 @@ export class ResourceSearchComponent {
     ResourceCardModule,
     ResourceRepositoryModule,
     ResourceSearchFormModule,
-    WipModule,
   ],
 })
 export class ResourceSearchModule {}

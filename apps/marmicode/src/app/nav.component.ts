@@ -3,12 +3,7 @@ import { Compiler, Component, HostListener, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import {
-  animationFrameScheduler,
-  BehaviorSubject,
-  defer,
-  Observable,
-} from 'rxjs';
+import { animationFrameScheduler, BehaviorSubject, Observable } from 'rxjs';
 import { map, observeOn, pairwise } from 'rxjs/operators';
 import { appRouterHelper } from './app-router-helper';
 import { NavMenuModule } from './nav-menu.component';
@@ -29,16 +24,6 @@ import { NavMenuModule } from './nav-menu.component';
           >Marmicode</span
         >
       </a>
-
-      <!-- Resource search input. -->
-      <ng-container *ngIf="resourceSearchForm$ | async as cmpInfo">
-        <ng-container
-          *ngComponentOutlet="
-            cmpInfo.component;
-            ngModuleFactory: cmpInfo.ngModule
-          "
-        ></ng-container>
-      </ng-container>
 
       <!-- Navigation menu. -->
       <mc-nav-menu></mc-nav-menu>
@@ -90,16 +75,6 @@ import { NavMenuModule } from './nav-menu.component';
 export class NavComponent {
   appRouterHelper = appRouterHelper;
   isScrollingDown$: Observable<boolean>;
-  resourceSearchForm$ = defer(async () => {
-    const {
-      ResourceSearchFormComponent,
-      ResourceSearchFormModule,
-    } = await import('@marmicode/resource-feature-search');
-    return {
-      component: ResourceSearchFormComponent,
-      ngModule: this._compiler.compileModuleSync(ResourceSearchFormModule),
-    };
-  });
 
   private _scrollPosition$ = new BehaviorSubject(0);
 
