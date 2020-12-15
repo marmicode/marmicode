@@ -26,7 +26,9 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
   template: `
     <mc-page>
       <div fxLayout="row" fxLayoutAlign="center">
-        <mc-resource-search-form></mc-resource-search-form>
+        <mc-resource-search-form
+          class="resource-search-form"
+        ></mc-resource-search-form>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="center">
@@ -46,14 +48,20 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
         <mc-resource-card
           *ngFor="let resource of resources$ | async; trackBy: trackById"
           [resource]="resource"
-          class="mc-resource-card"
+          class="resource-card"
         ></mc-resource-card>
       </div>
     </mc-page>
   `,
   styles: [
     `
-      .mc-resource-card {
+      .resource-search-form {
+        margin-top: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+
+      .resource-card {
         margin: 20px;
       }
     `,
