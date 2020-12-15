@@ -23,7 +23,7 @@
     venn.js "^0.2.20"
     xlsx "^0.15.4"
 
-"@angular-devkit/architect@0.1001.4", "@angular-devkit/architect@>= 0.900 < 0.1100", "@angular-devkit/architect@~0.1001.3":
+"@angular-devkit/architect@0.1001.4", "@angular-devkit/architect@~0.1001.3":
   version "0.1001.4"
   resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1001.4.tgz#a10f11ab34cd76ecb469cbc5b06a95e82c9171da"
   integrity sha512-0U/w+61vWxnEe9Ln/hNOH6O27FVcU+s/sbJAuPREbP875R4bQzK2PX0eYRlISzkDtQyw16GzlsikLWOoJ3vjTA==
