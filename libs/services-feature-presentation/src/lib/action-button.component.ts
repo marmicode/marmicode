@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-action-button',
-  template: ` <a [href]="uri" target="_blank">
+  template: ` <a [href]="uri" rel="noopener" target="_blank">
     <button mat-raised-button color="primary">
       <mat-icon class="button-icon">{{ icon }}</mat-icon>
       <span>{{ label }}</span>

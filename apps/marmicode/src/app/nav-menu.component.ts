@@ -34,6 +34,7 @@ import { NavMenuItemModule } from './nav-menu-item.component';
       <button
         (click)="toggleMenu()"
         class="mc-hide-gt-sm"
+        aria-label="menu"
         aria-haspopup="true"
         mat-button
       >
