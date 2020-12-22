@@ -1,6 +1,5 @@
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { Compiler, Component, HostListener, NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { animationFrameScheduler, BehaviorSubject, Observable } from 'rxjs';
@@ -20,9 +19,7 @@ import { NavMenuModule } from './nav-menu.component';
       <!-- Marmicode logo & text -->
       <a [routerLink]="appRouterHelper.home()" class="marmicode">
         <img class="logo" height="40" src="/assets/logo-white.svg" />
-        <span class="title" fxFlexAlign="end" fxHide fxShow.gt-sm
-          >Marmicode</span
-        >
+        <span class="mc-hide mc-show-gt-sm title">Marmicode</span>
       </a>
 
       <!-- Navigation menu. -->
@@ -98,12 +95,6 @@ export class NavComponent {
 @NgModule({
   declarations: [NavComponent],
   exports: [NavComponent],
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    MatToolbarModule,
-    NavMenuModule,
-    RouterModule,
-  ],
+  imports: [CommonModule, MatToolbarModule, NavMenuModule, RouterModule],
 })
 export class NavModule {}
