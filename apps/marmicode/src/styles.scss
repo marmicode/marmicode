@@ -27,3 +27,20 @@ body {
   backdrop-filter: blur(5px);
   transition: all .2s ease-out;
 }
+
+.mc-flex-row {
+  display: flex !important;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 959px) {
+  .mc-hide.mc-show-gt-sm {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .mc-hide-gt-sm {
+    display: none !important;
+  }
+}

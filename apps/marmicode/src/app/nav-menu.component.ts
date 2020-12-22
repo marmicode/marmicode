@@ -7,7 +7,6 @@ import {
 } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -23,8 +22,8 @@ import { NavMenuItemModule } from './nav-menu-item.component';
   selector: 'mc-nav-menu',
   template: `
     <!-- Toolbar links. -->
-    <div fxLayout="row">
-      <mat-nav-list fxHide fxShow.gt-sm fxLayout="row" role="menu">
+    <div class="mc-flex-row">
+      <mat-nav-list class="mc-flex-row mc-hide mc-show-gt-sm" role="menu">
         <mc-nav-menu-item
           *ngFor="let entry of entries"
           [entry]="entry"
@@ -34,8 +33,8 @@ import { NavMenuItemModule } from './nav-menu-item.component';
 
       <button
         (click)="toggleMenu()"
+        class="mc-hide-gt-sm"
         aria-haspopup="true"
-        fxHide.gt-sm
         mat-button
       >
         <mat-icon>menu</mat-icon>
@@ -46,8 +45,7 @@ import { NavMenuItemModule } from './nav-menu-item.component';
     <div
       *ngIf="isMenuDisplayed$ | async"
       @showHide
-      class="vertical-menu mat-elevation-z1"
-      fxHide.gt-sm
+      class="vertical-menu mat-elevation-z1 mc-hide-gt-sm"
     >
       <mat-nav-list
         class="vertical-menu-list"
@@ -135,7 +133,6 @@ export class NavMenuComponent {
   exports: [NavMenuComponent],
   imports: [
     CommonModule,
-    FlexLayoutModule,
     MatListModule,
     MatIconModule,
     MatButtonModule,
