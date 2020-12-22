@@ -12,7 +12,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ScullyLibModule } from '@scullyio/ng-lib';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -49,7 +48,6 @@ import { UpdateEffects } from './update/update.effects';
       }
     ),
     StoreRouterConnectingModule.forRoot(),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [ScreenTrackingService],
   bootstrap: [AppComponent],
