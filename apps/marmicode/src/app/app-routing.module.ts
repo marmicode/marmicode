@@ -8,15 +8,6 @@ import {
 import { or } from '@marmicode/shared-utils';
 
 export const routes: Routes = [
-  /* Learning map. */
-  {
-    path: 'learning-map',
-    loadChildren: () =>
-      import('@marmicode/learning-map-feature-tree').then(
-        (m) => m.LearningMapRoutingModule
-      ),
-  },
-
   /* Recipe detail. */
   {
     matcher: or([
