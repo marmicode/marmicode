@@ -39,6 +39,7 @@ import { SkillChipModule } from './skill-chip.component';
       <mat-card-header>
         <img
           *ngIf="resource.author"
+          [alt]="resource.author.name"
           [src]="resource.author.pictureUri"
           mat-card-avatar
         />

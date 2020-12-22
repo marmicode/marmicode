@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-link',
-  template: `<a *ngIf="href" [href]="href" target="_blank">
+  template: `<a *ngIf="href" [href]="href" rel="noopener" target="_blank">
       <ng-container *ngTemplateOutlet="templateRef"></ng-container>
     </a>
 

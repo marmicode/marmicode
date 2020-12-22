@@ -25,6 +25,7 @@ export interface NavMenuEntry {
       *ngIf="entry.url"
       [href]="entry.url"
       mat-list-item
+      rel="noopener"
       role="menuitem"
       target="_blank"
     >
