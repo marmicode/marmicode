@@ -1,4 +1,5 @@
 export enum ResourceType {
+  BlogPost = 'blog-post',
   Documentation = 'documentation',
   ExternalBlogPost = 'external-blog-post',
   ExternalVideo = 'external-video',
@@ -9,11 +10,12 @@ export enum ResourceType {
 }
 
 export const resourceTypeColorMap = new Map<ResourceType, string>([
-  [ResourceType.ExternalBlogPost, '#66985f'],
-  [ResourceType.ExternalVideo, '#eb8053'],
+  [ResourceType.BlogPost, '#f57bb5'],
   [ResourceType.Documentation, '#d42020'],
+  [ResourceType.ExternalBlogPost, '#eb8053'],
+  [ResourceType.ExternalVideo, '#d0b736'],
   [ResourceType.Recipe, '#5ab3ad'],
-  [ResourceType.Snack, '#f57bb5'],
+  [ResourceType.Snack, '#66985f'],
   [ResourceType.Tutorial, '#4281ff'],
   [ResourceType.Workshop, '#673ab7'],
 ]);
@@ -23,6 +25,7 @@ export function getResourceTypeColor(resourceType: ResourceType) {
 }
 
 export const resourceTypeTextMap = new Map<ResourceType, string>([
+  [ResourceType.BlogPost, 'Blog Post'],
   [ResourceType.Documentation, 'Documentation'],
   [ResourceType.ExternalBlogPost, 'Blog Post'],
   [ResourceType.ExternalVideo, 'Video'],
@@ -37,6 +40,7 @@ export function getResourceTypeText(resourceType: ResourceType) {
 }
 
 export const resourceTypeActionMap = new Map<ResourceType, string>([
+  [ResourceType.BlogPost, 'Read'],
   [ResourceType.Documentation, 'Read'],
   [ResourceType.ExternalBlogPost, 'Read'],
   [ResourceType.ExternalVideo, 'Watch'],
