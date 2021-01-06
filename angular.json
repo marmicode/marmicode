@@ -653,6 +653,35 @@
           }
         }
       }
+    },
+    "blog-post-feature-detail": {
+      "projectType": "library",
+      "root": "libs/blog-post-feature-detail",
+      "sourceRoot": "libs/blog-post-feature-detail/src",
+      "prefix": "marmicode",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/blog-post-feature-detail/tsconfig.lib.json",
+              "libs/blog-post-feature-detail/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/blog-post-feature-detail/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/blog-post-feature-detail"],
+          "options": {
+            "jestConfig": "libs/blog-post-feature-detail/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -665,6 +694,9 @@
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
     }
   },
   "defaultProject": "marmicode"

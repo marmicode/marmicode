@@ -13,5 +13,6 @@ module.exports = {
     '<rootDir>/libs/contentful-api',
     '<rootDir>/libs/recipe-core',
     '<rootDir>/libs/recipe-ui',
+    '<rootDir>/libs/blog-post-feature-detail',
   ],
 };
