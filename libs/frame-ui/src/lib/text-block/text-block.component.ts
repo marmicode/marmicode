@@ -8,7 +8,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { TextBlock } from '@marmicode/recipe-core';
+import { TextBlock } from '@marmicode/frame-core';
 import {
   HighlightLinkComponent,
   HighlightLinkModule,

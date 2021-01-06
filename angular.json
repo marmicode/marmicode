@@ -592,136 +592,6 @@
       },
       "schematics": {}
     },
-    "recipe-core": {
-      "projectType": "library",
-      "root": "libs/recipe-core",
-      "sourceRoot": "libs/recipe-core/src",
-      "prefix": "marmicode",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/recipe-core/tsconfig.lib.json",
-              "libs/recipe-core/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/recipe-core/**/*"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/recipe-core/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": [
-            "coverage/libs/recipe-core"
-          ]
-        }
-      },
-      "schematics": {}
-    },
-    "recipe-ui": {
-      "projectType": "library",
-      "root": "libs/recipe-ui",
-      "sourceRoot": "libs/recipe-ui/src",
-      "prefix": "marmicode",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/recipe-ui/tsconfig.lib.json",
-              "libs/recipe-ui/tsconfig.spec.json",
-              "libs/recipe-ui/.storybook/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/recipe-ui/**/*"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/recipe-ui/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": [
-            "coverage/libs/recipe-ui"
-          ]
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/recipe-ui/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/recipe-ui",
-            "config": {
-              "configFolder": "libs/recipe-ui/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          },
-          "outputs": [
-            "{options.outputPath}"
-          ]
-        }
-      },
-      "schematics": {}
-    },
-    "recipe-ui-e2e": {
-      "root": "apps/recipe-ui-e2e",
-      "sourceRoot": "apps/recipe-ui-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/recipe-ui-e2e/cypress.json",
-            "tsConfig": "apps/recipe-ui-e2e/tsconfig.e2e.json",
-            "devServerTarget": "recipe-ui:storybook"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "recipe-ui:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/recipe-ui-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/recipe-ui-e2e/**/*"
-            ]
-          }
-        }
-      }
-    },
     "blog-post-feature-detail": {
       "projectType": "library",
       "root": "libs/blog-post-feature-detail",
@@ -838,6 +708,136 @@
           "options": {
             "lintFilePatterns": [
               "apps/blog-post-ui-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "frame-core": {
+      "projectType": "library",
+      "root": "libs/frame-core",
+      "sourceRoot": "libs/frame-core/src",
+      "prefix": "marmicode",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/frame-core/tsconfig.lib.json",
+              "libs/frame-core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/frame-core/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/frame-core/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": [
+            "coverage/libs/frame-core"
+          ]
+        }
+      },
+      "schematics": {}
+    },
+    "frame-ui": {
+      "projectType": "library",
+      "root": "libs/frame-ui",
+      "sourceRoot": "libs/frame-ui/src",
+      "prefix": "marmicode",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/frame-ui/tsconfig.lib.json",
+              "libs/frame-ui/tsconfig.spec.json",
+              "libs/frame-ui/.storybook/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/frame-ui/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/frame-ui/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": [
+            "coverage/libs/frame-ui"
+          ]
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/frame-ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/recipe-ui",
+            "config": {
+              "configFolder": "libs/frame-ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
+        }
+      },
+      "schematics": {}
+    },
+    "frame-ui-e2e": {
+      "root": "apps/frame-ui-e2e",
+      "sourceRoot": "apps/frame-ui-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/frame-ui-e2e/cypress.json",
+            "tsConfig": "apps/frame-ui-e2e/tsconfig.e2e.json",
+            "devServerTarget": "frame-ui:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "frame-ui:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/frame-ui-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/frame-ui-e2e/**/*"
             ]
           }
         }

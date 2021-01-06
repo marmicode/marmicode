@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'recipe-ui',
+  displayName: 'frame-core',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -14,7 +14,7 @@ module.exports = {
       },
     },
   },
-  coverageDirectory: '../../coverage/libs/recipe-ui',
+  coverageDirectory: '../../coverage/libs/frame-core',
   snapshotSerializers: [
     'jest-preset-angular/build/AngularNoNgAttributesSnapshotSerializer.js',
     'jest-preset-angular/build/AngularSnapshotSerializer.js',

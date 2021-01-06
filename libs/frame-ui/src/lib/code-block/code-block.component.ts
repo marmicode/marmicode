@@ -10,7 +10,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { CodeBlock } from '@marmicode/recipe-core';
+import { CodeBlock } from '@marmicode/frame-core';
 import { RxState, select, selectSlice } from '@rx-angular/state';
 import * as Prism from 'prismjs';
 import 'prismjs/components/prism-bash';

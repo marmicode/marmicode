@@ -91,6 +91,7 @@
           {
             "sourceTag": "scope:recipe",
             "onlyDependOnLibsWithTags": [
+              "scope:frame",
               "scope:recipe",
               "scope:shared",
               "name:contentful-api",

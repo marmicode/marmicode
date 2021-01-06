@@ -2,7 +2,7 @@ import {
   BlockType,
   createFrame,
   createTextBlock,
-} from '@marmicode/recipe-core';
+} from '@marmicode/frame-core';
 import { extractHighlightableZones } from './extract-highlightable-zones';
 
 describe('extractHighlightableZones', () => {

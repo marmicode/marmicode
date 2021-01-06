@@ -1,4 +1,4 @@
-import { Frame, isTextBlock } from '@marmicode/recipe-core';
+import { Frame, isTextBlock } from '@marmicode/frame-core';
 import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 

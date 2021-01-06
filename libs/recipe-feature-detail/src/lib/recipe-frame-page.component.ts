@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Frame } from '@marmicode/recipe-core';
-import { FrameModule } from '@marmicode/recipe-ui';
+import { Frame } from '@marmicode/frame-core';
+import { FrameModule } from '@marmicode/frame-ui';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';

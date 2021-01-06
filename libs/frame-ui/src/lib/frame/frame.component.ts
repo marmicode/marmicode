@@ -6,7 +6,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { Frame } from '@marmicode/recipe-core';
+import { Frame } from '@marmicode/frame-core';
 import { RxState, select } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { BlockModule } from '../block.component';

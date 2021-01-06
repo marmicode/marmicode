@@ -1,4 +1,4 @@
-import { BlockType, createFrame } from '@marmicode/recipe-core';
+import { BlockType, createFrame } from '@marmicode/frame-core';
 
 import { Meta } from '@storybook/angular';
 import { FrameComponent, FrameModule } from './frame.component';

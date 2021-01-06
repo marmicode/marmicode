@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BlockType, createFrame } from '@marmicode/recipe-core';
+import { BlockType, createFrame } from '@marmicode/frame-core';
 import { first } from 'rxjs/operators';
 import { createHighlightZone } from '../highlight/highlight-zone';
 import { FrameComponent } from './frame.component';

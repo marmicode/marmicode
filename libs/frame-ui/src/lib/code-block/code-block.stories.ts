@@ -1,4 +1,4 @@
-import { createCodeBlock } from '@marmicode/recipe-core';
+import { createCodeBlock } from '@marmicode/frame-core';
 
 import { Meta } from '@storybook/angular';
 import { createHighlightZone } from '../highlight/highlight-zone';
