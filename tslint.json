@@ -78,11 +78,19 @@
           },
           {
             "sourceTag": "type:ui",
-            "onlyDependOnLibsWithTags": ["type:core", "type:ui", "type:utils"]
+            "onlyDependOnLibsWithTags": [
+              "type:api",
+              "type:core",
+              "type:ui",
+              "type:utils"]
           },
           {
             "sourceTag": "type:utils",
             "onlyDependOnLibsWithTags": ["type:utils"]
+          },
+          {
+            "sourceTag": "scope:blog-post",
+            "onlyDependOnLibsWithTags": ["scope:blog-post", "scope:shared", "name:frame-api"]
           },
           {
             "sourceTag": "scope:learning-map",
