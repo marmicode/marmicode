@@ -91,10 +91,10 @@
           {
             "sourceTag": "scope:recipe",
             "onlyDependOnLibsWithTags": [
-              "scope:frame",
               "scope:recipe",
               "scope:shared",
               "name:contentful-api",
+              "name:frame-api",
               "name:resource-api"
             ]
           },

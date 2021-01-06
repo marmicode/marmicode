@@ -15,5 +15,6 @@ module.exports = {
     '<rootDir>/libs/recipe-ui',
     '<rootDir>/libs/blog-post-feature-detail',
     '<rootDir>/libs/blog-post-ui',
+    '<rootDir>/libs/frame-api',
   ],
 };

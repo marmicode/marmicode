@@ -9,7 +9,7 @@ import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { Frame } from '@marmicode/frame-core';
+import { Frame } from '@marmicode/frame-api';
 import { RxState, select, selectSlice } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { getRelativeFrameRoute } from './get-relative-frame-route';

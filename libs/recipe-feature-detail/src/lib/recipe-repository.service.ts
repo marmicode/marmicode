@@ -5,7 +5,7 @@ import {
   createFrame,
   createTextBlock,
   Frame,
-} from '@marmicode/frame-core';
+} from '@marmicode/frame-api';
 import { ResourceType } from '@marmicode/resource-api';
 import { Apollo } from 'apollo-angular';
 

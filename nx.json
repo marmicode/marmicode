@@ -29,114 +29,64 @@
   },
   "projects": {
     "marmicode": {
-      "tags": [
-        "scope:app"
-      ]
+      "tags": ["scope:app"]
     },
     "marmicode-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "marmicode"
-      ]
+      "implicitDependencies": ["marmicode"]
     },
     "contentful-api": {
-      "tags": [
-        "scope:contentful",
-        "type:api",
-        "name:contentful-api"
-      ]
+      "tags": ["scope:contentful", "type:api", "name:contentful-api"]
     },
     "learning-map-feature-tree": {
-      "tags": [
-        "scope:learning-map",
-        "type:feature"
-      ]
+      "tags": ["scope:learning-map", "type:feature"]
     },
     "resource-feature-search": {
-      "tags": [
-        "scope:resource",
-        "type:feature"
-      ]
+      "tags": ["scope:resource", "type:feature"]
     },
     "recipe-feature-detail": {
-      "tags": [
-        "scope:recipe",
-        "type:feature"
-      ]
+      "tags": ["scope:recipe", "type:feature"]
     },
     "resource-core": {
-      "tags": [
-        "scope:resource",
-        "type:core"
-      ]
+      "tags": ["scope:resource", "type:core"]
     },
     "resource-api": {
-      "tags": [
-        "scope:resource",
-        "type:api",
-        "name:resource-api"
-      ]
+      "tags": ["scope:resource", "type:api", "name:resource-api"]
     },
     "services-feature-presentation": {
-      "tags": [
-        "scope:services",
-        "type:feature"
-      ]
+      "tags": ["scope:services", "type:feature"]
     },
     "shared-router-helpers": {
-      "tags": [
-        "scope:shared",
-        "type:utils"
-      ]
+      "tags": ["scope:shared", "type:utils"]
     },
     "shared-ui": {
-      "tags": [
-        "scope:shared",
-        "type:ui"
-      ]
+      "tags": ["scope:shared", "type:ui"]
     },
     "shared-utils": {
-      "tags": [
-        "scope:shared",
-        "type:utils"
-      ]
+      "tags": ["scope:shared", "type:utils"]
     },
     "blog-post-feature-detail": {
-      "tags": [
-        "scope:blog-post",
-        "type:feature"
-      ]
+      "tags": ["scope:blog-post", "type:feature"]
     },
     "blog-post-ui": {
-      "tags": [
-        "scope:blog-post",
-        "type:ui"
-      ]
+      "tags": ["scope:blog-post", "type:ui"]
     },
     "blog-post-ui-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "blog-post-ui"
-      ]
+      "implicitDependencies": ["blog-post-ui"]
     },
     "frame-core": {
-      "tags": [
-        "scope:frame",
-        "type:core"
-      ]
+      "tags": ["scope:frame", "type:core"]
     },
     "frame-ui": {
-      "tags": [
-        "name:frame-ui",
-        "scope:frame",
-        "type:ui"
-      ]
+      "tags": ["scope:frame", "type:ui"]
     },
     "frame-ui-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "frame-ui"
-      ]
+      "implicitDependencies": ["frame-ui"]
+    },
+    "frame-api": {
+      "tags": ["scope:fame", "name:frame-api", "type:api"]
     }
   }
 }
