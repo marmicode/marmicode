@@ -1,25 +1,10 @@
 import { Meta } from '@storybook/angular';
-import { ResourceType } from '../../../resource-core/src';
+import { createBlogPost } from './blog-post';
 import { BlogPostComponent, BlogPostModule } from './blog-post.component';
 
 export default {
   title: 'BlogPost',
 };
-
-export interface BlogPostContent {
-  text: string;
-}
-
-export interface BlogPost {
-  id: string;
-  type: ResourceType.BlogPost;
-  title: string;
-  content: BlogPostContent;
-}
-
-export function createBlogPost(blogPost: Omit<BlogPost, 'type'>) {
-  return { ...blogPost, type: ResourceType.BlogPost };
-}
 
 export const Default = () =>
   ({
