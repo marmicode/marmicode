@@ -7,7 +7,7 @@ export default {
   title: 'Frame',
 };
 
-export const overflow = () =>
+export const Overflow = () =>
   ({
     title: 'Overflow',
     moduleMetadata: {
@@ -48,7 +48,7 @@ blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla
     },
   } as Meta);
 
-export const highlight = () =>
+export const Highlight = () =>
   ({
     title: 'Highlight',
     moduleMetadata: {

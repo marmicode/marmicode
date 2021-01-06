@@ -8,7 +8,7 @@ export default {
   title: 'CodeBlock',
 };
 
-export const highlight = () =>
+export const Highlight = () =>
   ({
     title: 'Highlight',
     moduleMetadata: {

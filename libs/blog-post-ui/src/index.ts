@@ -1,1 +1,1 @@
-export * from './lib/blog-post-ui.module';
+export { BlogPostComponent, BlogPostModule } from './lib/blog-post.component';
