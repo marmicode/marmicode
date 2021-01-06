@@ -3,7 +3,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 addDecorator(withKnobs);
 
-require('!!style-loader!css-loader!./styles.css');
+import '../../../.storybook/preview';
 
 /**
  * @hack detect when story is changed and reload because custom elements
