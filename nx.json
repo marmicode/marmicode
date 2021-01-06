@@ -77,6 +77,9 @@
     },
     "blog-post-feature-detail": {
       "tags": ["scope:blog-post", "type:feature"]
+    },
+    "blog-post-ui": {
+      "tags": ["scope:blog-post", "type:ui"]
     }
   }
 }

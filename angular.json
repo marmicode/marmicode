@@ -682,6 +682,32 @@
           }
         }
       }
+    },
+    "blog-post-ui": {
+      "projectType": "library",
+      "root": "libs/blog-post-ui",
+      "sourceRoot": "libs/blog-post-ui/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/blog-post-ui/tsconfig.lib.json",
+              "libs/blog-post-ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/blog-post-ui/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/blog-post-ui"],
+          "options": {
+            "jestConfig": "libs/blog-post-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

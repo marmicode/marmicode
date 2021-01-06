@@ -40,7 +40,8 @@
       "@marmicode/recipe-ui": ["libs/recipe-ui/src/index.ts"],
       "@marmicode/blog-post-feature-detail": [
         "libs/blog-post-feature-detail/src/index.ts"
-      ]
+      ],
+      "@marmicode/blog-post-ui": ["libs/blog-post-ui/src/index.ts"]
     },
     "strict": true,
     "strictNullChecks": false
