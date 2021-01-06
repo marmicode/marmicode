@@ -1,10 +1,10 @@
-export function textToFrames(text: string) {
+export function markdownToFrames(text: string) {
   throw new Error('🚧 work in progress!');
 }
 
-describe('textToFrames', () => {
+describe('markdownToFrames', () => {
   xit(`🚧 should convert blog post's text to frames`, () => {
-    const frames = textToFrames(``);
+    const frames = markdownToFrames(``);
 
     expect(frames).toEqual([]);
   });
