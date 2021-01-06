@@ -658,7 +658,7 @@
       "projectType": "library",
       "root": "libs/blog-post-feature-detail",
       "sourceRoot": "libs/blog-post-feature-detail/src",
-      "prefix": "marmicode",
+      "prefix": "mc",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",

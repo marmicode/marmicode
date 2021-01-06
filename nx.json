@@ -76,7 +76,7 @@
       "implicitDependencies": ["recipe-ui"]
     },
     "blog-post-feature-detail": {
-      "tags": ["blog-post", "feature"]
+      "tags": ["scope:blog-post", "type:feature"]
     }
   }
 }
