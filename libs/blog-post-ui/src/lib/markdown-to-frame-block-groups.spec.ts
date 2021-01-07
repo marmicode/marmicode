@@ -200,32 +200,35 @@ Chapter C after code.
     );
 
     /* Chapter C. */
-    // expect(frameBlocksList[3]).toEqual(
-    //   like({
-    //     blocks: [
-    //       like({
-    //         tokens: [
-    //           like({
-    //             type: 'heading',
-    //           }),
-    //           like({
-    //             type: 'paragraph',
-    //           }),
-    //         ],
-    //       } as Partial<MarkdownBlock>),
-    //       like({
-    //         language: 'javascript',
-    //         code: 'Code C',
-    //       } as Partial<CodeBlock>),
-    //       like({
-    //         tokens: [
-    //           like({
-    //             type: 'paragraph',
-    //           }),
-    //         ],
-    //       } as Partial<MarkdownBlock>),
-    //     ],
-    //   })
-    // );
+    expect(frameBlocksList[3]).toEqual(
+      like({
+        blocks: [
+          like({
+            tokens: [
+              like({
+                type: 'heading',
+              }),
+              like({
+                type: 'paragraph',
+              }),
+              like({
+                type: 'space',
+              }),
+            ],
+          } as Partial<MarkdownBlock>),
+          like({
+            language: 'javascript',
+            code: 'Code C',
+          } as Partial<CodeBlock>),
+          like({
+            tokens: [
+              like({
+                type: 'paragraph',
+              }),
+            ],
+          } as Partial<MarkdownBlock>),
+        ],
+      })
+    );
   });
 });
