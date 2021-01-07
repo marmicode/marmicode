@@ -10,6 +10,7 @@ import { Token } from 'marked';
 export enum TokenType {
   Code = 'code',
   Codespan = 'codespan',
+  Emphasis = 'em',
   Link = 'link',
   List = 'list',
   ListItem = 'list_item',
@@ -36,6 +37,12 @@ export enum TokenType {
         [token]="token"
       ></mc-markdown-codespan>
 
+      <!-- Emphasis. -->
+      <mc-markdown-emphasis
+        *ngSwitchCase="TokenType.Emphasis"
+        [token]="token"
+      ></mc-markdown-emphasis>
+
       <!-- Link. -->
       <mc-markdown-link
         *ngSwitchCase="TokenType.Link"
@@ -59,9 +66,6 @@ export enum TokenType {
         *ngSwitchCase="TokenType.Paragraph"
         [token]="token"
       ></mc-markdown-paragraph>
-
-      <!-- Space. -->
-      <br *ngSwitchCase="TokenType.Space" />
 
       <!-- Strong. -->
       <mc-markdown-strong

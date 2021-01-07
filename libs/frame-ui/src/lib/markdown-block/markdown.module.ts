@@ -4,6 +4,7 @@ import { CodeBlockModule } from '../code-block/code-block.component';
 import { HighlightLinkModule } from '../highlight/highlight-link.component';
 import { MarkdownCodeComponent } from './markdown-code.component';
 import { MarkdownCodespanComponent } from './markdown-codespan.component';
+import { MarkdownEmphasisComponent } from './markdown-emphasis.component';
 import { MarkdownLinkComponent } from './markdown-link.component';
 import { MarkdownListItemComponent } from './markdown-list-item.component';
 import { MarkdownListComponent } from './markdown-list.component';
@@ -21,6 +22,7 @@ import { MarkdownTokensComponent } from './markdown-tokens.component';
     MarkdownTokenComponent,
     MarkdownCodeComponent,
     MarkdownCodespanComponent,
+    MarkdownEmphasisComponent,
     MarkdownLinkComponent,
     MarkdownListComponent,
     MarkdownListItemComponent,
