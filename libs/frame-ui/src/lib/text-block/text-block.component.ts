@@ -13,10 +13,7 @@ import {
 import { TextBlock } from '@marmicode/frame-core';
 import { WipModule } from '@marmicode/shared-utils';
 import * as marked from 'marked';
-import {
-  createMarkdownBlock,
-  MarkdownBlock,
-} from '../../../../frame-core/src/lib/block';
+import { createMarkdownBlock, MarkdownBlock } from '@marmicode/frame-core';
 import {
   HighlightLinkComponent,
   HighlightLinkModule,
@@ -37,7 +34,7 @@ import { MarkdownPipeModule } from './markdown.pipe';
       "
       (highlightZoneChange)="onHighlightZoneChange($event)"
     ></div>
-    <mc-markdown-block *mcWip></mc-markdown-block>
+    <mc-markdown-block *mcWip [block]="markdownBlock"></mc-markdown-block>
   `,
   styleUrls: ['./text-block.component.scss'],
 })
