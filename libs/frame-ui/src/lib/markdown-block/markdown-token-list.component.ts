@@ -3,10 +3,10 @@ import { Tokens } from 'marked';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-markdown-list',
+  selector: 'mc-markdown-token-list',
   template: ` <ul>
     <li *ngFor="let item of token.items">
-      {{ item.text }}
+      <mc-markdown-token [token]="item"></mc-markdown-token>
     </li>
   </ul>`,
 })

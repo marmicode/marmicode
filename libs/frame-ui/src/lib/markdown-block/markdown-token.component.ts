@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Token } from 'marked';
 
 export enum TokenType {
+  ListItem = 'list_item',
   List = 'list',
   Paragraph = 'paragraph',
 }
@@ -11,11 +12,17 @@ export enum TokenType {
   selector: 'mc-markdown-token',
   template: `
     <ng-container [ngSwitch]="token.type">
-      <!-- Item list. -->
-      <mc-markdown-list
+      <!-- List. -->
+      <mc-markdown-token-list
         *ngSwitchCase="TokenType.List"
         [token]="token"
-      ></mc-markdown-list>
+      ></mc-markdown-token-list>
+
+      <!-- List item. -->
+      <mc-markdown-token-list-item
+        *ngSwitchCase="TokenType.ListItem"
+        [token]="token"
+      ></mc-markdown-token-list-item>
 
       <!-- Paragraph. -->
       <p *ngSwitchCase="TokenType.Paragraph">{{ token.text }}</p>
