@@ -78,8 +78,6 @@ export enum TokenType {
         *ngSwitchCase="TokenType.Text"
         [token]="token"
       ></mc-markdown-text>
-
-      <div *ngSwitchDefault>🚧 {{ type }}</div>
     </ng-container>
   `,
 })
@@ -93,6 +91,11 @@ export class MarkdownTokenComponent implements OnChanges {
       /* @hack to fix typing issue as `Token` is a union including
        * a `Def` type that doesn't have a `type` property. */
       this.type = 'type' in this.token ? this.token.type : null;
+
+      /* Log unsupported types. */
+      if (!(Object.values(TokenType) as string[]).includes(this.type)) {
+        console.warn(`Unsupported markdown token: ${this.type}.`);
+      }
     }
   }
 }
