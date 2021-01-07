@@ -1,7 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { first } from 'rxjs/operators';
-import { CodeBlockComponent, HighlightZone } from './code-block.component';
+import { createHighlightZone } from '../highlight/highlight-zone';
+import { CodeBlockComponent } from './code-block.component';
 
 describe('CodeBlockComponent', () => {
   let fixture: ComponentFixture<CodeBlockComponent>;
@@ -23,7 +24,7 @@ describe('CodeBlockComponent', () => {
   });
 
   it('should compute highlight coordinates', async () => {
-    component.highlightZone = {
+    component.highlightZone = createHighlightZone({
       color: 'red',
       sections: [
         {
@@ -35,7 +36,7 @@ describe('CodeBlockComponent', () => {
           end: 10,
         },
       ],
-    } as HighlightZone;
+    });
 
     expect(await component.highlightStyles$.pipe(first()).toPromise()).toEqual([
       {

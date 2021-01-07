@@ -791,32 +791,6 @@
           }
         }
       }
-    },
-    "code-ui": {
-      "projectType": "library",
-      "root": "libs/code-ui",
-      "sourceRoot": "libs/code-ui/src",
-      "prefix": "mc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/code-ui/tsconfig.lib.json",
-              "libs/code-ui/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/code-ui/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/code-ui"],
-          "options": {
-            "jestConfig": "libs/code-ui/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
     }
   },
   "cli": {
