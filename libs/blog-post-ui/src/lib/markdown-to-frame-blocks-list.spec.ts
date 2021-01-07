@@ -18,8 +18,9 @@ export function markdownToFrameBlockGroups(text: string): BlockGroup[] {
   return tokens.reduce((blockGroups, token) => {
     const tokenType = getMarkdownTokenType(token);
 
-    /* This is a block breaker, create new block group. */
+    /* This is a block group breaker, create new block group. */
     if (tokenType === MarkdownTokenType.Heading) {
+      return [...blockGroups, createBlockGroup({ blocks: [] })];
     }
 
     /* Append to last block group. */
@@ -61,7 +62,7 @@ Chapter C after code.
 
     const frameBlocksList = markdownToFrameBlockGroups(markdown);
 
-    // expect(frameBlocksList.length).toEqual(4);
+    expect(frameBlocksList.length).toEqual(4);
     // expect(frameBlocksList).toEqual([
     //   /* Intro frame.*/
     //   like({
