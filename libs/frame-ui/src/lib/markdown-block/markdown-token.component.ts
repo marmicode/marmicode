@@ -22,28 +22,28 @@ export enum TokenType {
   template: `
     <ng-container [ngSwitch]="type">
       <!-- Codespan. -->
-      <mc-markdown-token-codespan
+      <mc-markdown-codespan
         *ngSwitchCase="TokenType.Codespan"
         [token]="token"
-      ></mc-markdown-token-codespan>
+      ></mc-markdown-codespan>
 
       <!-- Link. -->
-      <mc-markdown-token-link
+      <mc-markdown-link
         *ngSwitchCase="TokenType.Link"
         [token]="token"
-      ></mc-markdown-token-link>
+      ></mc-markdown-link>
 
       <!-- List. -->
-      <mc-markdown-token-list
+      <mc-markdown-list
         *ngSwitchCase="TokenType.List"
         [token]="token"
-      ></mc-markdown-token-list>
+      ></mc-markdown-list>
 
       <!-- List item. -->
-      <mc-markdown-token-list-item
+      <mc-markdown-list-item
         *ngSwitchCase="TokenType.ListItem"
         [token]="token"
-      ></mc-markdown-token-list-item>
+      ></mc-markdown-list-item>
 
       <!-- Paragraph. -->
       <mc-markdown-paragraph
@@ -52,10 +52,10 @@ export enum TokenType {
       ></mc-markdown-paragraph>
 
       <!-- Text. -->
-      <mc-markdown-token-text
+      <mc-markdown-text
         *ngSwitchCase="TokenType.Text"
         [token]="token"
-      ></mc-markdown-token-text>
+      ></mc-markdown-text>
 
       <div *ngSwitchDefault>🚧 {{ type }}</div>
     </ng-container>

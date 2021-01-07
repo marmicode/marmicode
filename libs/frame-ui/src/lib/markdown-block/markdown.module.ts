@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HighlightLinkModule } from '../highlight/highlight-link.component';
 import { MarkdownParagraphComponent } from './markdown-paragraph.component';
-import { MarkdownTokenCodespanComponent } from './markdown-token-codespan.component';
-import { MarkdownTokenLinkComponent } from './markdown-token-link.component';
-import { MarkdownTokenListItemComponent } from './markdown-token-list-item.component';
-import { MarkdownTokenListComponent } from './markdown-token-list.component';
-import { MarkdownTokenTextComponent } from './markdown-token-text.component';
+import { MarkdownCodespanComponent } from './markdown-codespan.component';
+import { MarkdownLinkComponent } from './markdown-link.component';
+import { MarkdownListItemComponent } from './markdown-list-item.component';
+import { MarkdownListComponent } from './markdown-list.component';
+import { MarkdownTextComponent } from './markdown-text.component';
 import { MarkdownTokenComponent } from './markdown-token.component';
 import { MarkdownTokensComponent } from './markdown-tokens.component';
 
@@ -16,15 +16,15 @@ import { MarkdownTokensComponent } from './markdown-tokens.component';
 @NgModule({
   declarations: [
     MarkdownTokenComponent,
-    MarkdownTokenCodespanComponent,
-    MarkdownTokenLinkComponent,
-    MarkdownTokenListComponent,
-    MarkdownTokenListItemComponent,
+    MarkdownCodespanComponent,
+    MarkdownLinkComponent,
+    MarkdownListComponent,
+    MarkdownListItemComponent,
     MarkdownParagraphComponent,
-    MarkdownTokenTextComponent,
+    MarkdownTextComponent,
     MarkdownTokensComponent,
   ],
   exports: [MarkdownTokensComponent],
   imports: [CommonModule, HighlightLinkModule],
 })
-export class MarkdownTokenModule {}
+export class MarkdownModule {}

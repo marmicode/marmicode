@@ -8,7 +8,7 @@ import {
 import { MarkdownBlock } from '@marmicode/frame-core';
 import { HighlightZone } from '../highlight/highlight-zone';
 import { MarkdownBlockStateService } from './markdown-block-state.service';
-import { MarkdownTokenModule } from './markdown-token.module';
+import { MarkdownModule } from './markdown.module';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,6 +32,6 @@ export class MarkdownBlockComponent {
 @NgModule({
   declarations: [MarkdownBlockComponent],
   exports: [MarkdownBlockComponent],
-  imports: [CommonModule, MarkdownTokenModule],
+  imports: [CommonModule, MarkdownModule],
 })
 export class MarkdownBlockModule {}

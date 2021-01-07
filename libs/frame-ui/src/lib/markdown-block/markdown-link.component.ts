@@ -14,7 +14,7 @@ import { MarkdownBlockStateService } from './markdown-block-state.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-markdown-token-link',
+  selector: 'mc-markdown-link',
   template: ` <mc-highlight-link
       *ngIf="isHighlightLink$ | async"
       [color]="color$ | async"
@@ -30,7 +30,7 @@ import { MarkdownBlockStateService } from './markdown-block-state.service';
     </a>`,
   providers: [RxState],
 })
-export class MarkdownTokenLinkComponent {
+export class MarkdownLinkComponent {
   @Input() set token(token: Tokens.Link) {
     this._state.set({ token });
   }
