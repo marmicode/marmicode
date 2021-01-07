@@ -8,6 +8,7 @@ import {
 import { Token } from 'marked';
 
 export enum TokenType {
+  Code = 'code',
   Codespan = 'codespan',
   Link = 'link',
   List = 'list',
@@ -23,6 +24,12 @@ export enum TokenType {
   selector: 'mc-markdown-token',
   template: `
     <ng-container [ngSwitch]="type">
+      <!-- Code. -->
+      <mc-markdown-code
+        *ngSwitchCase="TokenType.Code"
+        [token]="token"
+      ></mc-markdown-code>
+
       <!-- Codespan. -->
       <mc-markdown-codespan
         *ngSwitchCase="TokenType.Codespan"
