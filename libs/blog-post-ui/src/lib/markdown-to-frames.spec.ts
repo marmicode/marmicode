@@ -1,8 +1,10 @@
-import { createCodeBlock, createTextBlock, Frame } from '@marmicode/frame-api';
+import { CodeBlock, Frame, MarkdownBlock } from '@marmicode/frame-api';
 
 export function markdownToFrames(text: string): Frame[] {
   throw new Error('🚧 work in progress!');
 }
+
+export const like = expect.objectContaining;
 
 describe('markdownToFrames', () => {
   xit(`🚧 should convert blog post's text to blocks`, () => {
@@ -36,61 +38,81 @@ Chapter C after code.
 
     expect(frames.length).toEqual(4);
     expect(frames).toEqual([
-      expect.objectContaining({
+      /* Intro frame.*/
+      like({
         blocks: [
-          createTextBlock({
-            text: `
-Intro.
-      `,
-          }),
+          like({
+            tokens: [
+              like({
+                type: 'paragraph',
+              }),
+            ],
+          } as Partial<MarkdownBlock>),
         ],
       } as Partial<Frame>),
-      expect.objectContaining({
-        blocks: [
-          createTextBlock({
-            text: `
-# Title A
 
-Chapter A.
-      `,
-          }),
-          createCodeBlock({
+      /* Chapter A. */
+      like({
+        blocks: [
+          like({
+            tokens: [
+              like({
+                type: 'header',
+              }),
+              like({
+                type: 'paragraph',
+              }),
+            ],
+          } as Partial<MarkdownBlock>),
+          like({
             language: 'javascript',
-            code: `code A`,
-          }),
+            code: 'Code A',
+          } as Partial<CodeBlock>),
         ],
-      } as Partial<Frame>),
-      expect.objectContaining({
-        blocks: [
-          createTextBlock({
-            text: `
-# Title B
+      }),
 
-Chapter B.
-      `,
-          }),
+      /* Chapter B. */
+      like({
+        blocks: [
+          like({
+            tokens: [
+              like({
+                type: 'header',
+              }),
+              like({
+                type: 'paragraph',
+              }),
+            ],
+          } as Partial<MarkdownBlock>),
         ],
-      } as Partial<Frame>),
-      expect.objectContaining({
-        blocks: [
-          createTextBlock({
-            text: `
-# Title C
+      }),
 
-Chapter C before code.
-        `,
-          }),
-          createCodeBlock({
+      /* Chapter C. */
+      like({
+        blocks: [
+          like({
+            tokens: [
+              like({
+                type: 'header',
+              }),
+              like({
+                type: 'paragraph',
+              }),
+            ],
+          } as Partial<MarkdownBlock>),
+          like({
             language: 'javascript',
-            code: `code C`,
-          }),
-          createTextBlock({
-            text: `
-Chapter C after code.
-`,
-          }),
+            code: 'Code C',
+          } as Partial<CodeBlock>),
+          like({
+            tokens: [
+              like({
+                type: 'paragraph',
+              }),
+            ],
+          } as Partial<MarkdownBlock>),
         ],
-      } as Partial<Frame>),
+      }),
     ]);
   });
 });
