@@ -5,20 +5,11 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { getMarkdownTokenType, MarkdownToken } from '@marmicode/frame-core';
-
-export enum TokenType {
-  Code = 'code',
-  Codespan = 'codespan',
-  Emphasis = 'em',
-  Link = 'link',
-  List = 'list',
-  ListItem = 'list_item',
-  Paragraph = 'paragraph',
-  Space = 'space',
-  Strong = 'strong',
-  Text = 'text',
-}
+import {
+  getMarkdownTokenType,
+  MarkdownToken,
+  MarkdownTokenType,
+} from '@marmicode/frame-core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -83,7 +74,7 @@ export enum TokenType {
 })
 export class MarkdownTokenComponent implements OnChanges {
   @Input() token: MarkdownToken;
-  TokenType = TokenType;
+  TokenType = MarkdownTokenType;
   type: string;
 
   ngOnChanges(changes: SimpleChanges) {
@@ -91,7 +82,7 @@ export class MarkdownTokenComponent implements OnChanges {
       this.type = getMarkdownTokenType(this.token);
 
       /* Log unsupported types. */
-      if (!(Object.values(TokenType) as string[]).includes(this.type)) {
+      if (!(Object.values(MarkdownTokenType) as string[]).includes(this.type)) {
         console.warn(`Unsupported markdown token: ${this.type}.`);
       }
     }

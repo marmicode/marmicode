@@ -13,6 +13,7 @@ export { Frame, createFrame } from './lib/frame';
 export {
   MarkdownToken,
   MarkdownTokens,
+  MarkdownTokenType,
   getMarkdownTokenType,
   parseMarkdown,
 } from './lib/markdown';

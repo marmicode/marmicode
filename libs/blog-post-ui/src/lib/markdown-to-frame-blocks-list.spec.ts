@@ -3,6 +3,7 @@ import {
   getMarkdownTokenType,
   parseMarkdown,
 } from '@marmicode/frame-api';
+import { MarkdownTokenType } from '@marmicode/frame-core';
 
 export interface BlockGroup {
   blocks: Block[];
@@ -16,6 +17,10 @@ export function markdownToFrameBlockGroups(text: string): BlockGroup[] {
   const tokens = parseMarkdown(text);
   return tokens.reduce((blockGroups, token) => {
     const tokenType = getMarkdownTokenType(token);
+
+    /* This is a block breaker, create new block group. */
+    if (tokenType === MarkdownTokenType.Heading) {
+    }
 
     /* Append to last block group. */
     const lastBlockGroup =

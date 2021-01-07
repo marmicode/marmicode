@@ -13,6 +13,20 @@ export namespace MarkdownTokens {
   export type Text = Tokens.Text;
 }
 
+export enum MarkdownTokenType {
+  Code = 'code',
+  Codespan = 'codespan',
+  Emphasis = 'em',
+  Heading = 'heading',
+  Link = 'link',
+  List = 'list',
+  ListItem = 'list_item',
+  Paragraph = 'paragraph',
+  Space = 'space',
+  Strong = 'strong',
+  Text = 'text',
+}
+
 /**
  * @hack stupid hack because there is a `Tokens.Def` type
  * that doesn't have a type.
