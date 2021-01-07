@@ -177,57 +177,30 @@ Chapter C after code.
         ],
       })
     );
-    // expect(frameBlocksList).toEqual([
-    //   /* Intro frame.*/
-    //   like({
-    //     blocks: [
-    //       like({
-    //         tokens: [
-    //           like({
-    //             type: 'paragraph',
-    //           }),
-    //         ],
-    //       } as Partial<MarkdownBlock>),
-    //     ],
-    //   }),
-    //
-    //   /* Chapter A. */
-    //   like({
-    //     blocks: [
-    //       like({
-    //         tokens: [
-    //           like({
-    //             type: 'heading',
-    //           }),
-    //           like({
-    //             type: 'paragraph',
-    //           }),
-    //         ],
-    //       } as Partial<MarkdownBlock>),
-    //       like({
-    //         language: 'javascript',
-    //         code: 'Code A',
-    //       } as Partial<CodeBlock>),
-    //     ],
-    //   }),
-    //
-    //   /* Chapter B. */
-    //   like({
-    //     blocks: [
-    //       like({
-    //         tokens: [
-    //           like({
-    //             type: 'heading',
-    //           }),
-    //           like({
-    //             type: 'paragraph',
-    //           }),
-    //         ],
-    //       } as Partial<MarkdownBlock>),
-    //     ],
-    //   }),
-    //
-    //   /* Chapter C. */
+
+    /* Chapter B. */
+    expect(frameBlocksList[2]).toEqual(
+      like({
+        blocks: [
+          like({
+            tokens: [
+              like({
+                type: 'heading',
+              }),
+              like({
+                type: 'paragraph',
+              }),
+              like({
+                type: 'space',
+              }),
+            ],
+          } as Partial<MarkdownBlock>),
+        ],
+      })
+    );
+
+    /* Chapter C. */
+    // expect(frameBlocksList[3]).toEqual(
     //   like({
     //     blocks: [
     //       like({
@@ -252,7 +225,7 @@ Chapter C after code.
     //         ],
     //       } as Partial<MarkdownBlock>),
     //     ],
-    //   }),
-    // ]);
+    //   })
+    // );
   });
 });
