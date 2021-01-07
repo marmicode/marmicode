@@ -1,9 +1,12 @@
 import {
   Block,
+  CodeBlock,
+  createCodeBlock,
   getMarkdownTokenType,
+  MarkdownBlock,
   parseMarkdown,
 } from '@marmicode/frame-api';
-import { MarkdownTokenType } from '@marmicode/frame-core';
+import { MarkdownTokens, MarkdownTokenType } from '@marmicode/frame-core';
 
 export interface BlockGroup {
   blocks: Block[];
@@ -18,15 +21,38 @@ export function markdownToFrameBlockGroups(text: string): BlockGroup[] {
   return tokens.reduce((blockGroups, token) => {
     const tokenType = getMarkdownTokenType(token);
 
-    /* This is a block group breaker, create new block group. */
-    if (tokenType === MarkdownTokenType.Heading) {
-      return [...blockGroups, createBlockGroup({ blocks: [] })];
+    /*
+     * This will create or extend the given block group by:
+     * - create a code block if the token is a code token,
+     * - create a markdown block if the last block is not markdown,
+     * - extend the last markdown block otherwise
+     */
+    function createOrExtendBlockGroup(blockGroup?: BlockGroup) {
+      return blockGroup;
     }
 
-    /* Append to last block group. */
-    const lastBlockGroup =
-      blockGroups[blockGroups.length - 1] ?? createBlockGroup({ blocks: [] });
-    return [...blockGroups.slice(0, blockGroups.length - 1), lastBlockGroup];
+    if (tokenType === MarkdownTokenType.Code) {
+      const codeToken = token as MarkdownTokens.Code;
+      const codeBlock = createCodeBlock({
+        language: codeToken.lang,
+        code: codeToken.text,
+      });
+    }
+
+    /* This is a block group breaker, create new block group. */
+    if (tokenType === MarkdownTokenType.Heading) {
+      return [...blockGroups, createOrExtendBlockGroup()];
+    }
+
+    /* Append to last block group.
+     * `createOrExtendBlockGroup` will create a new group
+     * if `lastBlockGroup` is null. */
+    const lastBlockGroup = blockGroups[blockGroups.length - 1];
+
+    return [
+      ...blockGroups.slice(0, blockGroups.length - 1),
+      createOrExtendBlockGroup(lastBlockGroup),
+    ];
   }, [] as BlockGroup[]);
 }
 
