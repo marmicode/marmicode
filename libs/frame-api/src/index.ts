@@ -3,6 +3,7 @@ export {
   BlockType,
   CodeBlock,
   Frame,
+  MarkdownBlock,
   TextBlock,
   createCodeBlock,
   createFrame,
