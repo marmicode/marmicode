@@ -13,5 +13,9 @@ export interface MarkdownBlockState {
  */
 @Injectable()
 export class MarkdownBlockStateService extends RxState<MarkdownBlockState> {
-  highlightableZones$ = this.select(pluck('highlightableZones'));
+  readonly highlightableZones$ = this.select(pluck('highlightableZones'));
+
+  setHighlightableZones(highlightableZones: HighlightZone[]) {
+    this.set({ highlightableZones });
+  }
 }

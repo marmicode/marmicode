@@ -34,7 +34,11 @@ import { MarkdownPipeModule } from './markdown.pipe';
       "
       (highlightZoneChange)="onHighlightZoneChange($event)"
     ></div>
-    <mc-markdown-block *mcWip [block]="markdownBlock"></mc-markdown-block>
+    <mc-markdown-block
+      *mcWip
+      [block]="markdownBlock"
+      [highlightableZones]="highlightableZones"
+    ></mc-markdown-block>
   `,
   styleUrls: ['./text-block.component.scss'],
 })
