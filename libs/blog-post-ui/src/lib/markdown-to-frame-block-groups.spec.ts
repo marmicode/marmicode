@@ -134,6 +134,8 @@ Chapter C after code.
     const frameBlocksList = markdownToFrameBlockGroups(markdown);
 
     expect(frameBlocksList.length).toEqual(4);
+
+    /* Intro. */
     expect(frameBlocksList[0]).toEqual(
       like({
         blocks: [
@@ -147,6 +149,31 @@ Chapter C after code.
               }),
             ],
           } as Partial<MarkdownBlock>),
+        ],
+      })
+    );
+
+    /* Chapter A. */
+    expect(frameBlocksList[1]).toEqual(
+      like({
+        blocks: [
+          like({
+            tokens: [
+              like({
+                type: 'heading',
+              }),
+              like({
+                type: 'paragraph',
+              }),
+              like({
+                type: 'space',
+              }),
+            ],
+          } as Partial<MarkdownBlock>),
+          like({
+            language: 'javascript',
+            code: 'Code A',
+          } as Partial<CodeBlock>),
         ],
       })
     );
