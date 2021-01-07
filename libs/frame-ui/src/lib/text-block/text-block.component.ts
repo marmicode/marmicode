@@ -10,32 +10,27 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
-import { TextBlock } from '@marmicode/frame-core';
-import { WipModule } from '@marmicode/shared-utils';
-import * as marked from 'marked';
-import { createMarkdownBlock, MarkdownBlock } from '@marmicode/frame-core';
 import {
-  HighlightLinkComponent,
-  HighlightLinkModule,
-} from '../highlight/highlight-link.component';
+  createMarkdownBlock,
+  MarkdownBlock,
+  TextBlock,
+} from '@marmicode/frame-core';
+import * as marked from 'marked';
+import { HighlightLinkModule } from '../highlight/highlight-link.component';
 import { HighlightZone } from '../highlight/highlight-zone';
 import { MarkdownBlockModule } from '../markdown-block/markdown-block.component';
 import { MarkdownPipeModule } from './markdown.pipe';
 
+/**
+ * This component acts as a proxy that converts markdown text
+ * to markdown components which are forwared to <mc-markdown-block>
+ */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   selector: 'mc-text-block',
   template: `
-    <div
-      *mcNotWip
-      [innerHTML]="
-        block.text | markdown: { highlightableZones: highlightableZones }
-      "
-      (highlightZoneChange)="onHighlightZoneChange($event)"
-    ></div>
     <mc-markdown-block
-      *mcWip
       [block]="markdownBlock"
       [highlightableZones]="highlightableZones"
       (highlightZoneChange)="highlightZoneChange.emit($event)"
@@ -60,14 +55,6 @@ export class TextBlockComponent implements OnChanges {
       });
     }
   }
-
-  /**
-   * Convert custom event to Angular output.
-   */
-  onHighlightZoneChange($event: CustomEvent<HighlightZone>) {
-    $event.stopImmediatePropagation();
-    this.highlightZoneChange.emit($event.detail);
-  }
 }
 
 @NgModule({
@@ -78,7 +65,6 @@ export class TextBlockComponent implements OnChanges {
     HighlightLinkModule,
     MarkdownPipeModule,
     MarkdownBlockModule,
-    WipModule,
   ],
 })
 export class TextBlockModule {}
