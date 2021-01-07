@@ -5,9 +5,9 @@ import { Tokens } from 'marked';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-token-list',
   template: ` <ul>
-    <li *ngFor="let item of token.items">
+    <ng-container *ngFor="let item of token.items">
       <mc-markdown-token [token]="item"></mc-markdown-token>
-    </li>
+    </ng-container>
   </ul>`,
 })
 export class MarkdownTokenListComponent {
