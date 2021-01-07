@@ -11,12 +11,17 @@ import { MarkdownBlock } from '@marmicode/frame-core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-block',
   template: `
-    <ng-container *ngFor="let token of block.tokens" [ngSwitch]="token">
+    <ng-container *ngFor="let token of block.tokens" [ngSwitch]="token.type">
+      <p *ngSwitchCase="tokenType.paragraph">{{ token.text }}</p>
+      <div *ngSwitchDefault>{{ token.type }}</div>
     </ng-container>
   `,
 })
 export class MarkdownBlockComponent {
   @Input() block: MarkdownBlock;
+  tokenType = {
+    paragraph: 'paragraph',
+  };
 }
 
 @NgModule({
