@@ -28,6 +28,7 @@ import { MarkdownBlockStateService } from './markdown-block-state.service';
     >
       <mc-markdown-tokens [tokens]="tokens$ | async"></mc-markdown-tokens>
     </a>`,
+  providers: [RxState],
 })
 export class MarkdownTokenLinkComponent {
   @Input() set token(token: Tokens.Link) {
