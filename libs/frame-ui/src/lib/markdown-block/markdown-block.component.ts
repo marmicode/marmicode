@@ -11,10 +11,7 @@ import { MarkdownTokenModule } from './markdown-token.module';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-block',
-  template: `
-    <mc-markdown-token *ngFor="let token of block.tokens" [token]="token">
-    </mc-markdown-token>
-  `,
+  template: `<mc-markdown-tokens [tokens]="block.tokens"></mc-markdown-tokens>`,
 })
 export class MarkdownBlockComponent {
   @Input() block: MarkdownBlock;

@@ -6,6 +6,7 @@ import { MarkdownTokenListItemComponent } from './markdown-token-list-item.compo
 import { MarkdownTokenListComponent } from './markdown-token-list.component';
 import { MarkdownTokenTextComponent } from './markdown-token-text.component';
 import { MarkdownTokenComponent } from './markdown-token.component';
+import { MarkdownTokensComponent } from './markdown-tokens.component';
 
 /**
  * Using a module because most of these components are recursive.
@@ -18,8 +19,9 @@ import { MarkdownTokenComponent } from './markdown-token.component';
     MarkdownTokenListComponent,
     MarkdownTokenListItemComponent,
     MarkdownTokenTextComponent,
+    MarkdownTokensComponent,
   ],
-  exports: [MarkdownTokenComponent],
+  exports: [MarkdownTokensComponent],
   imports: [CommonModule],
 })
 export class MarkdownTokenModule {}

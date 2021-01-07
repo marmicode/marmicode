@@ -5,10 +5,7 @@ import { Tokens, TokensList } from 'marked';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-token-text',
   template: `<ng-container *ngIf="token.tokens"
-      ><mc-markdown-token
-        *ngFor="let item of token.tokens"
-        [token]="item"
-      ></mc-markdown-token
+      ><mc-markdown-tokens [tokens]="token.tokens"></mc-markdown-tokens
     ></ng-container>
     <span *ngIf="!token.tokens">{{ token.raw }}</span> `,
 })
