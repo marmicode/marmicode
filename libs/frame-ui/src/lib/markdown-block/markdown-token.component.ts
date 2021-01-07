@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Token } from 'marked';
 
 export enum TokenType {
+  Codespan = 'codespan',
   ListItem = 'list_item',
   List = 'list',
   Paragraph = 'paragraph',
@@ -13,6 +14,12 @@ export enum TokenType {
   selector: 'mc-markdown-token',
   template: `
     <ng-container [ngSwitch]="token.type">
+      <!-- Codespan. -->
+      <mc-markdown-token-codespan
+        *ngSwitchCase="TokenType.Codespan"
+        [token]="token"
+      ></mc-markdown-token-codespan>
+
       <!-- List. -->
       <mc-markdown-token-list
         *ngSwitchCase="TokenType.List"
