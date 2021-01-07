@@ -12,5 +12,5 @@ import { Tokens, TokensList } from 'marked';
   </li>`,
 })
 export class MarkdownTokenListItemComponent {
-  @Input() token: Tokens.ListItem & { tokens: TokensList };
+  @Input() token: Tokens.ListItem & { tokens?: TokensList };
 }
