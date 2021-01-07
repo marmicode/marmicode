@@ -44,38 +44,44 @@ export function markdownToFrameBlockGroups(text: string): BlockGroup[] {
      * - extend the last markdown block otherwise
      */
     function createOrExtendBlockGroup(blockGroup?: BlockGroup) {
-      let blocks = blockGroup?.blocks ?? [];
+      const blocks = blockGroup?.blocks ?? [];
 
       /* Create a new code block. */
       if (isCodeToken(token)) {
-        blocks = [
-          ...blocks,
-          createCodeBlock({
-            code: token.text,
-            language: token.lang,
-          }),
-        ];
+        return createBlockGroup({
+          blocks: [
+            ...blocks,
+            createCodeBlock({
+              code: token.text,
+              language: token.lang,
+            }),
+          ],
+        });
       }
 
-      /* Create a markdown block if the last block is not markdown. */
       const lastBlock = blocks[blocks.length - 1];
+
+      /* Create a markdown block if the last block is not markdown. */
       if (lastBlock?.type !== BlockType.Markdown) {
-        blocks = [
-          ...blocks,
-          createMarkdownBlock({
-            tokens: [token],
-          }),
-        ];
-      } else {
-        blocks = [
+        return createBlockGroup({
+          blocks: [
+            ...blocks,
+            createMarkdownBlock({
+              tokens: [token],
+            }),
+          ],
+        });
+      }
+
+      /* Extend the last markdown block otherwise. */
+      return createBlockGroup({
+        blocks: [
           ...blocks.slice(0, blocks.length - 1),
           createMarkdownBlock({
             tokens: [...lastBlock.tokens, token],
           }),
-        ];
-      }
-
-      return createBlockGroup({ blocks });
+        ],
+      });
     }
 
     /* This is a block group breaker, create new block group. */
@@ -107,7 +113,7 @@ Intro.
 Chapter A.
 
 \`\`\`javascript
-code A
+Code A
 \`\`\`
 
 # Title B
@@ -119,7 +125,7 @@ Chapter B.
 Chapter C before code.
 
 \`\`\`javascript
-code C
+Code C
 \`\`\`
 
 Chapter C after code.
@@ -128,6 +134,22 @@ Chapter C after code.
     const frameBlocksList = markdownToFrameBlockGroups(markdown);
 
     expect(frameBlocksList.length).toEqual(4);
+    expect(frameBlocksList[0]).toEqual(
+      like({
+        blocks: [
+          like({
+            tokens: [
+              like({
+                type: 'paragraph',
+              }),
+              like({
+                type: 'space',
+              }),
+            ],
+          } as Partial<MarkdownBlock>),
+        ],
+      })
+    );
     // expect(frameBlocksList).toEqual([
     //   /* Intro frame.*/
     //   like({
@@ -148,7 +170,7 @@ Chapter C after code.
     //       like({
     //         tokens: [
     //           like({
-    //             type: 'header',
+    //             type: 'heading',
     //           }),
     //           like({
     //             type: 'paragraph',
@@ -168,7 +190,7 @@ Chapter C after code.
     //       like({
     //         tokens: [
     //           like({
-    //             type: 'header',
+    //             type: 'heading',
     //           }),
     //           like({
     //             type: 'paragraph',
@@ -184,7 +206,7 @@ Chapter C after code.
     //       like({
     //         tokens: [
     //           like({
-    //             type: 'header',
+    //             type: 'heading',
     //           }),
     //           like({
     //             type: 'paragraph',
