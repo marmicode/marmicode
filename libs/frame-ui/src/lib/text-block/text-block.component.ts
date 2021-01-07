@@ -9,23 +9,29 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { TextBlock } from '@marmicode/frame-core';
+import { WipModule } from '@marmicode/shared-utils';
 import {
   HighlightLinkComponent,
   HighlightLinkModule,
 } from '../highlight/highlight-link.component';
 import { HighlightZone } from '../highlight/highlight-zone';
+import { MarkdownBlockModule } from '../markdown-block/markdown-block.component';
 import { MarkdownPipeModule } from './markdown.pipe';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   selector: 'mc-text-block',
-  template: ` <div
-    [innerHTML]="
-      block.text | markdown: { highlightableZones: highlightableZones }
-    "
-    (highlightZoneChange)="onHighlightZoneChange($event)"
-  ></div>`,
+  template: `
+    <div
+      *mcNotWip
+      [innerHTML]="
+        block.text | markdown: { highlightableZones: highlightableZones }
+      "
+      (highlightZoneChange)="onHighlightZoneChange($event)"
+    ></div>
+    <mc-markdown-block *mcWip></mc-markdown-block>
+  `,
   styleUrls: ['./text-block.component.scss'],
 })
 export class TextBlockComponent {
@@ -48,6 +54,12 @@ export class TextBlockComponent {
 @NgModule({
   declarations: [TextBlockComponent],
   exports: [TextBlockComponent],
-  imports: [CommonModule, HighlightLinkModule, MarkdownPipeModule],
+  imports: [
+    CommonModule,
+    HighlightLinkModule,
+    MarkdownPipeModule,
+    MarkdownBlockModule,
+    WipModule,
+  ],
 })
 export class TextBlockModule {}
