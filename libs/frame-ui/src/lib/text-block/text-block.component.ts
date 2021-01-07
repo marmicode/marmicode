@@ -5,11 +5,18 @@ import {
   EventEmitter,
   Input,
   NgModule,
+  OnChanges,
   Output,
+  SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import { TextBlock } from '@marmicode/frame-core';
 import { WipModule } from '@marmicode/shared-utils';
+import * as marked from 'marked';
+import {
+  createMarkdownBlock,
+  MarkdownBlock,
+} from '../../../../frame-core/src/lib/block';
 import {
   HighlightLinkComponent,
   HighlightLinkModule,
@@ -34,13 +41,23 @@ import { MarkdownPipeModule } from './markdown.pipe';
   `,
   styleUrls: ['./text-block.component.scss'],
 })
-export class TextBlockComponent {
+export class TextBlockComponent implements OnChanges {
   @Input() block: TextBlock;
   /**
    * The available zones to highlight.
    */
   @Input() highlightableZones: HighlightZone[];
   @Output() highlightZoneChange = new EventEmitter<HighlightZone>();
+
+  markdownBlock: MarkdownBlock;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.block) {
+      this.markdownBlock = createMarkdownBlock({
+        tokens: marked.lexer(this.block.text),
+      });
+    }
+  }
 
   /**
    * Convert custom event to Angular output.

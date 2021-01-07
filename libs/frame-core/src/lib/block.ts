@@ -1,5 +1,8 @@
+import { TokensList } from 'marked';
+
 export enum BlockType {
   Code = 'code',
+  Markdown = 'markdown',
   Picture = 'picture',
   Text = 'text',
 }
@@ -11,7 +14,7 @@ export interface CodeBlock {
 }
 
 export function createCodeBlock(block: Omit<CodeBlock, 'type'>): CodeBlock {
-  return { type: BlockType.Code, ...block };
+  return { ...block, type: BlockType.Code };
 }
 
 export interface TextBlock {
@@ -20,11 +23,22 @@ export interface TextBlock {
 }
 
 export function createTextBlock(block: Omit<TextBlock, 'type'>): TextBlock {
-  return { type: BlockType.Text, ...block };
+  return { ...block, type: BlockType.Text };
 }
 
 export function isTextBlock(block: Block): block is TextBlock {
   return block.type === BlockType.Text;
 }
 
-export type Block = CodeBlock | TextBlock;
+export interface MarkdownBlock {
+  type: BlockType.Markdown;
+  tokens: TokensList;
+}
+
+export function createMarkdownBlock(
+  block: Omit<MarkdownBlock, 'type'>
+): MarkdownBlock {
+  return { ...block, type: BlockType.Markdown };
+}
+
+export type Block = CodeBlock | MarkdownBlock | TextBlock;
