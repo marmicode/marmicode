@@ -5,6 +5,7 @@ export namespace MarkdownTokens {
   export type Code = Tokens.Code;
   export type Codespan = Tokens.Codespan;
   export type Em = Tokens.Em;
+  export type Heading = Tokens.Heading;
   export type Link = Tokens.Link;
   export type List = Tokens.List;
   export type ListItem = Tokens.ListItem;

@@ -6,7 +6,11 @@ import {
   MarkdownBlock,
   parseMarkdown,
 } from '@marmicode/frame-api';
-import { MarkdownTokens, MarkdownTokenType } from '@marmicode/frame-core';
+import {
+  MarkdownToken,
+  MarkdownTokens,
+  MarkdownTokenType,
+} from '@marmicode/frame-core';
 
 export interface BlockGroup {
   blocks: Block[];
@@ -16,11 +20,21 @@ export function createBlockGroup(blockGroup: BlockGroup): BlockGroup {
   return { ...blockGroup };
 }
 
+export function isCodeToken(
+  token: MarkdownToken
+): token is MarkdownTokens.Code {
+  return getMarkdownTokenType(token) === MarkdownTokenType.Code;
+}
+
+export function isHeadingToken(
+  token: MarkdownToken
+): token is MarkdownTokens.Heading {
+  return getMarkdownTokenType(token) === MarkdownTokenType.Heading;
+}
+
 export function markdownToFrameBlockGroups(text: string): BlockGroup[] {
   const tokens = parseMarkdown(text);
   return tokens.reduce((blockGroups, token) => {
-    const tokenType = getMarkdownTokenType(token);
-
     /*
      * This will create or extend the given block group by:
      * - create a code block if the token is a code token,
@@ -28,19 +42,24 @@ export function markdownToFrameBlockGroups(text: string): BlockGroup[] {
      * - extend the last markdown block otherwise
      */
     function createOrExtendBlockGroup(blockGroup?: BlockGroup) {
-      return blockGroup;
-    }
+      let blocks = blockGroup?.blocks ?? [];
 
-    if (tokenType === MarkdownTokenType.Code) {
-      const codeToken = token as MarkdownTokens.Code;
-      const codeBlock = createCodeBlock({
-        language: codeToken.lang,
-        code: codeToken.text,
-      });
+      /* Create a new code block. */
+      if (isCodeToken(token)) {
+        blocks = [
+          ...blocks,
+          createCodeBlock({
+            code: token.text,
+            language: token.lang,
+          }),
+        ];
+      }
+
+      return createBlockGroup({ blocks });
     }
 
     /* This is a block group breaker, create new block group. */
-    if (tokenType === MarkdownTokenType.Heading) {
+    if (isHeadingToken(token)) {
       return [...blockGroups, createOrExtendBlockGroup()];
     }
 
