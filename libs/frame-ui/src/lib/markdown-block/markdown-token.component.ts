@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { Token } from 'marked';
 
 export enum TokenType {
@@ -14,7 +20,7 @@ export enum TokenType {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-token',
   template: `
-    <ng-container [ngSwitch]="token?.type">
+    <ng-container [ngSwitch]="type">
       <!-- Codespan. -->
       <mc-markdown-token-codespan
         *ngSwitchCase="TokenType.Codespan"
@@ -50,8 +56,16 @@ export enum TokenType {
     </ng-container>
   `,
 })
-export class MarkdownTokenComponent {
+export class MarkdownTokenComponent implements OnChanges {
   @Input() token: Token;
-
   TokenType = TokenType;
+  type: string;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.token) {
+      /* @hack to fix typing issue as `Token` is a union including
+       * a `Def` type that doesn't have a `type` property. */
+      this.type = 'type' in this.token ? this.token.type : null;
+    }
+  }
 }
