@@ -10,3 +10,4 @@ export {
   isTextBlock,
 } from './lib/block';
 export { Frame, createFrame } from './lib/frame';
+export { MarkdownToken, parseMarkdown } from './lib/markdown';

@@ -13,9 +13,9 @@ import {
 import {
   createMarkdownBlock,
   MarkdownBlock,
+  parseMarkdown,
   TextBlock,
 } from '@marmicode/frame-core';
-import * as marked from 'marked';
 import { HighlightLinkModule } from './highlight/highlight-link.component';
 import { HighlightZone } from './highlight/highlight-zone';
 import { MarkdownBlockModule } from './markdown-block/markdown-block.component';
@@ -49,7 +49,7 @@ export class TextBlockComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.block) {
       this.markdownBlock = createMarkdownBlock({
-        tokens: marked.lexer(this.block.text),
+        tokens: parseMarkdown(this.block.text),
       });
     }
   }

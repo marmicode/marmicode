@@ -1,4 +1,4 @@
-import { TokensList } from 'marked';
+import { MarkdownToken } from './markdown';
 
 export enum BlockType {
   Code = 'code',
@@ -32,7 +32,7 @@ export function isTextBlock(block: Block): block is TextBlock {
 
 export interface MarkdownBlock {
   type: BlockType.Markdown;
-  tokens: TokensList;
+  tokens: MarkdownToken[];
 }
 
 export function createMarkdownBlock(
