@@ -46,13 +46,18 @@ export enum TokenType {
       ></mc-markdown-token-list-item>
 
       <!-- Paragraph. -->
-      <p *ngSwitchCase="TokenType.Paragraph">{{ token.text }}</p>
+      <mc-markdown-paragraph
+        *ngSwitchCase="TokenType.Paragraph"
+        [token]="token"
+      ></mc-markdown-paragraph>
 
       <!-- Text. -->
       <mc-markdown-token-text
         *ngSwitchCase="TokenType.Text"
         [token]="token"
       ></mc-markdown-token-text>
+
+      <div *ngSwitchDefault>🚧 {{ type }}</div>
     </ng-container>
   `,
 })

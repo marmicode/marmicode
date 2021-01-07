@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HighlightLinkModule } from '../highlight/highlight-link.component';
+import { MarkdownParagraphComponent } from './markdown-paragraph.component';
 import { MarkdownTokenCodespanComponent } from './markdown-token-codespan.component';
 import { MarkdownTokenLinkComponent } from './markdown-token-link.component';
 import { MarkdownTokenListItemComponent } from './markdown-token-list-item.component';
@@ -19,6 +20,7 @@ import { MarkdownTokensComponent } from './markdown-tokens.component';
     MarkdownTokenLinkComponent,
     MarkdownTokenListComponent,
     MarkdownTokenListItemComponent,
+    MarkdownParagraphComponent,
     MarkdownTokenTextComponent,
     MarkdownTokensComponent,
   ],
