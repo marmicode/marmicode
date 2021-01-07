@@ -144,7 +144,7 @@ export class HighlightLinkComponent implements OnChanges {
 export class HighlightLinkModule {
   constructor(injector: Injector) {
     customElements.define(
-      'mc-highlight-link',
+      'mce-highlight-link',
       createCustomElement(HighlightLinkComponent, {
         injector,
       })

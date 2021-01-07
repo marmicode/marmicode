@@ -29,8 +29,8 @@ export class MarkdownPipe implements PipeTransform {
           highlightableZones,
         });
         return html
-          .replace(/^<a /, `<mc-highlight-link ${attrs} `)
-          .replace('</a>', '</mc-highlight-link>');
+          .replace(/^<a /, `<mce-highlight-link ${attrs} `)
+          .replace('</a>', '</mce-highlight-link>');
       }
 
       /* Otherwise, just use a basic link and open it in new window. */
