@@ -18,7 +18,16 @@ import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import { animationFrameScheduler, Observable, Subject } from 'rxjs';
 import { map, observeOn, switchMap, tap } from 'rxjs/operators';
-import { HighlightZone } from '../highlight/highlight-zone';
+
+export interface HighlightSection {
+  start: number;
+  end: number;
+}
+
+export interface HighlightZone {
+  color: string;
+  sections: HighlightSection[];
+}
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

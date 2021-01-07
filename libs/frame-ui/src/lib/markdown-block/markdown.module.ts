@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CodeBlockModule } from '../code-block/code-block.component';
+import { CodeBlockModule } from '@marmicode/code-ui';
 import { HighlightLinkModule } from '../highlight/highlight-link.component';
 import { MarkdownCodeComponent } from './markdown-code.component';
 import { MarkdownCodespanComponent } from './markdown-codespan.component';

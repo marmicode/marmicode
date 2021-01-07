@@ -42,7 +42,8 @@
       "@marmicode/blog-post-ui": ["libs/blog-post-ui/src/index.ts"],
       "@marmicode/frame-core": ["libs/frame-core/src/index.ts"],
       "@marmicode/frame-ui": ["libs/frame-ui/src/index.ts"],
-      "@marmicode/frame-api": ["libs/frame-api/src/index.ts"]
+      "@marmicode/frame-api": ["libs/frame-api/src/index.ts"],
+      "@marmicode/code-ui": ["libs/code-ui/src/index.ts"]
     },
     "strict": true,
     "strictNullChecks": false

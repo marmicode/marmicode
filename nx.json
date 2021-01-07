@@ -87,6 +87,9 @@
     },
     "frame-api": {
       "tags": ["scope:fame", "name:frame-api", "type:api"]
+    },
+    "code-ui": {
+      "tags": ["scope:code", "name:code:ui", "type:ui"]
     }
   }
 }
