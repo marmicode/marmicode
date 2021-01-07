@@ -1,5 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { Tokens } from 'marked';
+import { HighlightLinkComponent } from '../highlight/highlight-link.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

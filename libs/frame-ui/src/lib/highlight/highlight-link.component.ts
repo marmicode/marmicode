@@ -53,20 +53,31 @@ export class HighlightLinkComponent implements OnChanges {
    * depend on such state.
    */
   static buildAttributes({
-    highlightableZones,
     href,
+    highlightableZones,
   }: {
-    highlightableZones: HighlightZone[];
     href: string;
+    highlightableZones: HighlightZone[];
+  }) {
+    const color = HighlightLinkComponent.getColor({ href, highlightableZones });
+    if (color != null) {
+      return `color="${color}"`;
+    }
+  }
+
+  static getColor({
+    href,
+    highlightableZones,
+  }: {
+    href: string;
+    highlightableZones: HighlightZone[];
   }) {
     const highlightSections = parseHighlightLink(href);
     const zone = highlightableZones.find(
       (_zone) =>
         JSON.stringify(_zone.sections) === JSON.stringify(highlightSections)
     );
-    if (zone != null) {
-      return `color="${zone.color}"`;
-    }
+    return zone?.color;
   }
 
   constructor(private _elementRef: ElementRef) {}
