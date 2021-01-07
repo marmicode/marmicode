@@ -1,12 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
-import { Tokens } from 'marked';
-import { HighlightLinkComponent } from '../highlight/highlight-link.component';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MarkdownTokens } from '@marmicode/frame-core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,5 +12,5 @@ import { HighlightLinkComponent } from '../highlight/highlight-link.component';
   </ul>`,
 })
 export class MarkdownListComponent {
-  @Input() token: Tokens.List;
+  @Input() token: MarkdownTokens.List;
 }

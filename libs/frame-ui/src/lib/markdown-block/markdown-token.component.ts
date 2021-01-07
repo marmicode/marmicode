@@ -5,7 +5,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { Token } from 'marked';
+import { MarkdownToken } from '@marmicode/frame-core';
 
 export enum TokenType {
   Code = 'code',
@@ -82,7 +82,7 @@ export enum TokenType {
   `,
 })
 export class MarkdownTokenComponent implements OnChanges {
-  @Input() token: Token;
+  @Input() token: MarkdownToken;
   TokenType = TokenType;
   type: string;
 

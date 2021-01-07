@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Tokens, TokensList } from 'marked';
+import { MarkdownToken, MarkdownTokens } from '@marmicode/frame-core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,5 +12,5 @@ import { Tokens, TokensList } from 'marked';
   </li>`,
 })
 export class MarkdownListItemComponent {
-  @Input() token: Tokens.ListItem & { tokens?: TokensList };
+  @Input() token: MarkdownTokens.ListItem & { tokens?: MarkdownToken[] };
 }

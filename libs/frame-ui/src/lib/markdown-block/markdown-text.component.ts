@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Tokens, TokensList } from 'marked';
+import { MarkdownToken, MarkdownTokens } from '@marmicode/frame-core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -10,5 +10,5 @@ import { Tokens, TokensList } from 'marked';
     <span *ngIf="!token.tokens">{{ token.raw }}</span> `,
 })
 export class MarkdownTextComponent {
-  @Input() token: Tokens.Text & { tokens?: TokensList };
+  @Input() token: MarkdownTokens.Text & { tokens?: MarkdownToken[] };
 }

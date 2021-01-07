@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Tokens, TokensList } from 'marked';
+import { MarkdownToken, MarkdownTokens } from '@marmicode/frame-core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-emphasis',
-  template: `<em
-    ><mc-markdown-tokens [tokens]="token.tokens"></mc-markdown-tokens
-  ></em>`,
+  template: `<em>
+    <mc-markdown-tokens [tokens]="token.tokens"></mc-markdown-tokens>
+  </em>`,
 })
 export class MarkdownEmphasisComponent {
-  @Input() token: Tokens.Em & { tokens?: TokensList };
+  @Input() token: MarkdownTokens.Em & { tokens?: MarkdownToken[] };
 }

@@ -1,13 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MarkdownTokens } from '@marmicode/frame-core';
 import { select } from '@ngrx/store';
 import { RxState } from '@rx-angular/state';
-import { Tokens } from 'marked';
 import { combineLatest } from 'rxjs';
 import { HighlightLinkComponent } from '../highlight/highlight-link.component';
 import { MarkdownBlockStateService } from './markdown-block-state.service';
@@ -31,7 +25,7 @@ import { MarkdownBlockStateService } from './markdown-block-state.service';
   providers: [RxState],
 })
 export class MarkdownLinkComponent {
-  @Input() set token(token: Tokens.Link) {
+  @Input() set token(token: MarkdownTokens.Link) {
     this._state.set({ token });
   }
 
@@ -55,6 +49,6 @@ export class MarkdownLinkComponent {
 
   constructor(
     private _markdownBlockStateService: MarkdownBlockStateService,
-    private _state: RxState<{ token: Tokens.Link }>
+    private _state: RxState<{ token: MarkdownTokens.Link }>
   ) {}
 }

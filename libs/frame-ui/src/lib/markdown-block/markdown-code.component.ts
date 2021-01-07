@@ -5,8 +5,11 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { CodeBlock, createCodeBlock } from '@marmicode/frame-core';
-import { Tokens } from 'marked';
+import {
+  CodeBlock,
+  createCodeBlock,
+  MarkdownTokens,
+} from '@marmicode/frame-core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,7 +24,7 @@ import { Tokens } from 'marked';
   template: ` <mc-code-block [block]="codeBlock"></mc-code-block>`,
 })
 export class MarkdownCodeComponent implements OnChanges {
-  @Input() token: Tokens.Code;
+  @Input() token: MarkdownTokens.Code;
   codeBlock: CodeBlock;
 
   ngOnChanges(changes: SimpleChanges) {
