@@ -10,7 +10,7 @@ import { Tokens, TokensList } from 'marked';
         [token]="item"
       ></mc-markdown-token
     ></ng-container>
-    <span *ngIf="!token.tokens">{{ token.text }}</span> `,
+    <span *ngIf="!token.tokens">{{ token.raw }}</span> `,
 })
 export class MarkdownTokenTextComponent {
   @Input() token: Tokens.Text & { tokens?: TokensList };
