@@ -12,9 +12,10 @@ import { HighlightLinkComponent } from '../highlight/highlight-link.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-list',
   template: ` <ul>
-    <ng-container *ngFor="let item of token.items">
-      <mc-markdown-token [token]="item"></mc-markdown-token>
-    </ng-container>
+    <mc-markdown-token
+      *ngFor="let item of token.items"
+      [token]="item"
+    ></mc-markdown-token>
   </ul>`,
 })
 export class MarkdownListComponent {

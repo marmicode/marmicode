@@ -13,6 +13,7 @@ export enum TokenType {
   List = 'list',
   ListItem = 'list_item',
   Paragraph = 'paragraph',
+  Space = 'space',
   Strong = 'strong',
   Text = 'text',
 }
@@ -51,6 +52,9 @@ export enum TokenType {
         *ngSwitchCase="TokenType.Paragraph"
         [token]="token"
       ></mc-markdown-paragraph>
+
+      <!-- Space. -->
+      <br *ngSwitchCase="TokenType.Space" />
 
       <!-- Strong. -->
       <mc-markdown-strong
