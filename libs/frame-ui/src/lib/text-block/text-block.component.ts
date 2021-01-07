@@ -19,7 +19,6 @@ import * as marked from 'marked';
 import { HighlightLinkModule } from '../highlight/highlight-link.component';
 import { HighlightZone } from '../highlight/highlight-zone';
 import { MarkdownBlockModule } from '../markdown-block/markdown-block.component';
-import { MarkdownPipeModule } from './markdown.pipe';
 
 /**
  * This component acts as a proxy that converts markdown text
@@ -60,11 +59,6 @@ export class TextBlockComponent implements OnChanges {
 @NgModule({
   declarations: [TextBlockComponent],
   exports: [TextBlockComponent],
-  imports: [
-    CommonModule,
-    HighlightLinkModule,
-    MarkdownPipeModule,
-    MarkdownBlockModule,
-  ],
+  imports: [CommonModule, HighlightLinkModule, MarkdownBlockModule],
 })
 export class TextBlockModule {}

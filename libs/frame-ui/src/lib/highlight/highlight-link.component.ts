@@ -42,29 +42,6 @@ export class HighlightLinkComponent implements OnChanges {
     return isHighlightLink(href);
   }
 
-  /**
-   * This is a hacky function that builds the color attribute
-   * that our custom element will receive.
-   * This hack is the best solution compared to:
-   * - passing highlightableZones as a serialized attribute
-   * - sharing highlightableZones in state management as we would have
-   * to load highlightableZones for all blocks as multiple blocks can
-   * appear on the same page + we don't want our custom elements to
-   * depend on such state.
-   */
-  static buildAttributes({
-    href,
-    highlightableZones,
-  }: {
-    href: string;
-    highlightableZones: HighlightZone[];
-  }) {
-    const color = HighlightLinkComponent.getColor({ href, highlightableZones });
-    if (color != null) {
-      return `color="${color}"`;
-    }
-  }
-
   static getColor({
     href,
     highlightableZones,
