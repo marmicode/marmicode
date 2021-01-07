@@ -1,10 +1,4 @@
-import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  NgModule,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Tokens } from 'marked';
 
 @Component({
@@ -19,10 +13,3 @@ import { Tokens } from 'marked';
 export class MarkdownTokenListComponent {
   @Input() token: Tokens.List;
 }
-
-@NgModule({
-  declarations: [MarkdownTokenListComponent],
-  exports: [MarkdownTokenListComponent],
-  imports: [CommonModule],
-})
-export class MarkdownTokenListModule {}

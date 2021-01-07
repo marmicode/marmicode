@@ -6,8 +6,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { MarkdownBlock } from '@marmicode/frame-core';
-import { MarkdownTokenListModule } from './markdown-token-list.component';
-import { MarkdownTokenModule } from './markdown-token.component';
+import { MarkdownTokenModule } from './markdown-token.module';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

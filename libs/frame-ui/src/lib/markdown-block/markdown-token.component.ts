@@ -1,12 +1,5 @@
-import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  NgModule,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Token } from 'marked';
-import { MarkdownTokenListModule } from './markdown-token-list.component';
 
 export enum TokenType {
   List = 'list',
@@ -36,10 +29,3 @@ export class MarkdownTokenComponent {
 
   TokenType = TokenType;
 }
-
-@NgModule({
-  declarations: [MarkdownTokenComponent],
-  exports: [MarkdownTokenComponent],
-  imports: [CommonModule, MarkdownTokenListModule],
-})
-export class MarkdownTokenModule {}
