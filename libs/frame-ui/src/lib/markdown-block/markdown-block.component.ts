@@ -6,51 +6,24 @@ import {
   NgModule,
 } from '@angular/core';
 import { MarkdownBlock } from '@marmicode/frame-core';
+import { MarkdownTokenListModule } from './markdown-token-list.component';
+import { MarkdownTokenModule } from './markdown-token.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-block',
   template: `
-    <ng-container *ngFor="let token of block.tokens" [ngSwitch]="token.type">
-      <p *ngSwitchCase="tokenType.paragraph">{{ token.text }}</p>
-      <div *ngSwitchDefault>{{ token.type }}</div>
-    </ng-container>
+    <mc-markdown-token *ngFor="let token of block.tokens" [token]="token">
+    </mc-markdown-token>
   `,
 })
 export class MarkdownBlockComponent {
   @Input() block: MarkdownBlock;
-  tokenType = {
-    paragraph: 'paragraph',
-  };
 }
 
 @NgModule({
   declarations: [MarkdownBlockComponent],
   exports: [MarkdownBlockComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, MarkdownTokenModule],
 })
 export class MarkdownBlockModule {}
-
-// Tokens.Space
-// | Tokens.Code
-// | Tokens.Heading
-// | Tokens.Table
-// | Tokens.Hr
-// | Tokens.Blockquote
-// | Tokens.BlockquoteStart
-// | Tokens.BlockquoteEnd
-// | Tokens.List
-// | Tokens.ListItem
-// | Tokens.Paragraph
-// | Tokens.HTML
-// | Tokens.Text
-// | Tokens.Def
-// | Tokens.Escape
-// | Tokens.Tag
-// | Tokens.Image
-// | Tokens.Link
-// | Tokens.Strong
-// | Tokens.Em
-// | Tokens.Codespan
-// | Tokens.Br
-// | Tokens.Del;
