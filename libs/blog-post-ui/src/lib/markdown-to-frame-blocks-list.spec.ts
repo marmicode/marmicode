@@ -1,7 +1,6 @@
 import {
   Block,
-  CodeBlock,
-  MarkdownBlock,
+  getMarkdownTokenType,
   parseMarkdown,
 } from '@marmicode/frame-api';
 
@@ -15,7 +14,9 @@ export function createBlockGroup(blockGroup: BlockGroup): BlockGroup {
 
 export function markdownToFrameBlockGroups(text: string): BlockGroup[] {
   const tokens = parseMarkdown(text);
-  return tokens.reduce((blockGroups) => {
+  return tokens.reduce((blockGroups, token) => {
+    const tokenType = getMarkdownTokenType(token);
+
     /* Append to last block group. */
     const lastBlockGroup =
       blockGroups[blockGroups.length - 1] ?? createBlockGroup({ blocks: [] });

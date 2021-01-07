@@ -5,7 +5,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { MarkdownToken } from '@marmicode/frame-core';
+import { getMarkdownTokenType, MarkdownToken } from '@marmicode/frame-core';
 
 export enum TokenType {
   Code = 'code',
@@ -88,9 +88,7 @@ export class MarkdownTokenComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.token) {
-      /* @hack to fix typing issue as `Token` is a union including
-       * a `Def` type that doesn't have a `type` property. */
-      this.type = 'type' in this.token ? this.token.type : null;
+      this.type = getMarkdownTokenType(this.token);
 
       /* Log unsupported types. */
       if (!(Object.values(TokenType) as string[]).includes(this.type)) {

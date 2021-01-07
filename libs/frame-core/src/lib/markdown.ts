@@ -13,6 +13,14 @@ export namespace MarkdownTokens {
   export type Text = Tokens.Text;
 }
 
+/**
+ * @hack stupid hack because there is a `Tokens.Def` type
+ * that doesn't have a type.
+ */
+export function getMarkdownTokenType(token: MarkdownToken) {
+  return 'type' in token ? token.type : null;
+}
+
 export function parseMarkdown(text: string): MarkdownToken[] {
   return lexer(text);
 }

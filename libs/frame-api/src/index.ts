@@ -8,6 +8,7 @@ export {
   createCodeBlock,
   createFrame,
   createTextBlock,
+  getMarkdownTokenType,
   isTextBlock,
   parseMarkdown,
 } from '@marmicode/frame-core';
