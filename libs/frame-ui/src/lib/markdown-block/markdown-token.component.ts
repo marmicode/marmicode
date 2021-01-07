@@ -3,8 +3,9 @@ import { Token } from 'marked';
 
 export enum TokenType {
   Codespan = 'codespan',
-  ListItem = 'list_item',
+  Link = 'link',
   List = 'list',
+  ListItem = 'list_item',
   Paragraph = 'paragraph',
   Text = 'text',
 }
@@ -19,6 +20,12 @@ export enum TokenType {
         *ngSwitchCase="TokenType.Codespan"
         [token]="token"
       ></mc-markdown-token-codespan>
+
+      <!-- Link. -->
+      <mc-markdown-token-link
+        *ngSwitchCase="TokenType.Link"
+        [token]="token"
+      ></mc-markdown-token-link>
 
       <!-- List. -->
       <mc-markdown-token-list
