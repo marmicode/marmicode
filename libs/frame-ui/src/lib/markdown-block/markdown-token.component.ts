@@ -14,7 +14,7 @@ export enum TokenType {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-token',
   template: `
-    <ng-container [ngSwitch]="token.type">
+    <ng-container [ngSwitch]="token?.type">
       <!-- Codespan. -->
       <mc-markdown-token-codespan
         *ngSwitchCase="TokenType.Codespan"
@@ -47,8 +47,6 @@ export enum TokenType {
         *ngSwitchCase="TokenType.Text"
         [token]="token"
       ></mc-markdown-token-text>
-
-      <div *ngSwitchDefault>{{ token.type }}</div>
     </ng-container>
   `,
 })
