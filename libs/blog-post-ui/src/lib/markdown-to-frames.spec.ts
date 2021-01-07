@@ -1,6 +1,12 @@
-import { CodeBlock, Frame, MarkdownBlock } from '@marmicode/frame-api';
+import {
+  CodeBlock,
+  Frame,
+  MarkdownBlock,
+  parseMarkdown,
+} from '@marmicode/frame-api';
 
 export function markdownToFrames(text: string): Frame[] {
+  const tokens = parseMarkdown(text);
   throw new Error('🚧 work in progress!');
 }
 
