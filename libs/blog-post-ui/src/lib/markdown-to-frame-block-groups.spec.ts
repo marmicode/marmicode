@@ -1,5 +1,6 @@
 import {
   Block,
+  BlockType,
   CodeBlock,
   createCodeBlock,
   getMarkdownTokenType,
@@ -7,6 +8,7 @@ import {
   parseMarkdown,
 } from '@marmicode/frame-api';
 import {
+  createMarkdownBlock,
   MarkdownToken,
   MarkdownTokens,
   MarkdownTokenType,
@@ -51,6 +53,24 @@ export function markdownToFrameBlockGroups(text: string): BlockGroup[] {
           createCodeBlock({
             code: token.text,
             language: token.lang,
+          }),
+        ];
+      }
+
+      /* Create a markdown block if the last block is not markdown. */
+      const lastBlock = blocks[blocks.length - 1];
+      if (lastBlock?.type !== BlockType.Markdown) {
+        blocks = [
+          ...blocks,
+          createMarkdownBlock({
+            tokens: [token],
+          }),
+        ];
+      } else {
+        blocks = [
+          ...blocks.slice(0, blocks.length - 1),
+          createMarkdownBlock({
+            tokens: [...lastBlock.tokens, token],
           }),
         ];
       }
