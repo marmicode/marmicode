@@ -6,6 +6,7 @@ import { MarkdownCodespanComponent } from './markdown-codespan.component';
 import { MarkdownLinkComponent } from './markdown-link.component';
 import { MarkdownListItemComponent } from './markdown-list-item.component';
 import { MarkdownListComponent } from './markdown-list.component';
+import { MarkdownStrongComponent } from './markdown-strong.component';
 import { MarkdownTextComponent } from './markdown-text.component';
 import { MarkdownTokenComponent } from './markdown-token.component';
 import { MarkdownTokensComponent } from './markdown-tokens.component';
@@ -21,6 +22,7 @@ import { MarkdownTokensComponent } from './markdown-tokens.component';
     MarkdownListComponent,
     MarkdownListItemComponent,
     MarkdownParagraphComponent,
+    MarkdownStrongComponent,
     MarkdownTextComponent,
     MarkdownTokensComponent,
   ],
