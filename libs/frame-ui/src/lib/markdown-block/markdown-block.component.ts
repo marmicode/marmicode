@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  HostListener,
   Input,
   NgModule,
   Output,
@@ -20,6 +19,31 @@ import { MarkdownModule } from './markdown.module';
     [tokens]="block.tokens"
     (highlightZoneChange)="onHighlightZoneChange($event)"
   ></mc-markdown-tokens>`,
+  styles: [
+    `
+      :host {
+        display: block;
+        margin: 10px;
+
+        color: #292929;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-weight: 400;
+        text-rendering: optimizeLegibility;
+        word-break: break-word;
+        -webkit-font-smoothing: antialiased;
+
+        font-size: 18px;
+        line-height: 28px;
+      }
+
+      @media (min-width: 960px) {
+        :host {
+          font-size: 21px;
+          line-height: 31px;
+        }
+      }
+    `,
+  ],
   providers: [MarkdownBlockStateService],
 })
 export class MarkdownBlockComponent {

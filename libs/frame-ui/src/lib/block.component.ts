@@ -10,7 +10,7 @@ import {
 import { Block, BlockType } from '@marmicode/frame-core';
 import { CodeBlockModule } from './code-block/code-block.component';
 import { HighlightZone } from './highlight/highlight-zone';
-import { TextBlockModule } from './text-block/text-block.component';
+import { TextBlockModule } from './text-block.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

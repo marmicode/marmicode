@@ -16,9 +16,9 @@ import {
   TextBlock,
 } from '@marmicode/frame-core';
 import * as marked from 'marked';
-import { HighlightLinkModule } from '../highlight/highlight-link.component';
-import { HighlightZone } from '../highlight/highlight-zone';
-import { MarkdownBlockModule } from '../markdown-block/markdown-block.component';
+import { HighlightLinkModule } from './highlight/highlight-link.component';
+import { HighlightZone } from './highlight/highlight-zone';
+import { MarkdownBlockModule } from './markdown-block/markdown-block.component';
 
 /**
  * This component acts as a proxy that converts markdown text
@@ -35,7 +35,6 @@ import { MarkdownBlockModule } from '../markdown-block/markdown-block.component'
       (highlightZoneChange)="highlightZoneChange.emit($event)"
     ></mc-markdown-block>
   `,
-  styleUrls: ['./text-block.component.scss'],
 })
 export class TextBlockComponent implements OnChanges {
   @Input() block: TextBlock;
