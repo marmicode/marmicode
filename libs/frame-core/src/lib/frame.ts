@@ -1,10 +1,9 @@
-import { Block } from './block';
+import { BlockGroup } from './block-group';
 
-export interface Frame {
+export interface Frame extends BlockGroup {
   slug: string;
   duration: number;
   title: string;
-  blocks: Block[];
 }
 
 export function createFrame(frame: Frame): Frame {

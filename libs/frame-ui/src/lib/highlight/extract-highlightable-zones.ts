@@ -1,4 +1,4 @@
-import { Frame, isTextBlock } from '@marmicode/frame-core';
+import { BlockGroup, isTextBlock } from '@marmicode/frame-core';
 import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 
@@ -11,7 +11,7 @@ const availableColors = [
   'purple',
   'deeppink',
 ];
-export function extractHighlightableZones(frame: Frame): HighlightZone[] {
+export function extractHighlightableZones(frame: BlockGroup): HighlightZone[] {
   const links = frame.blocks
     .filter((block) => isTextBlock(block))
     .map((block) => {

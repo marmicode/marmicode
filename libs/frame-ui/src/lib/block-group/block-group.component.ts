@@ -6,7 +6,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { Frame } from '@marmicode/frame-core';
+import { BlockGroup } from '@marmicode/frame-core';
 import { RxState, select } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { BlockModule } from '../block.component';
@@ -15,11 +15,11 @@ import { HighlightZone } from '../highlight/highlight-zone';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-frame',
+  selector: 'mc-block-group',
   providers: [RxState],
   template: `
     <mc-block
-      *ngFor="let block of (frame$ | async).blocks"
+      *ngFor="let block of (blockGroup$ | async).blocks"
       [block]="block"
       [highlightableZones]="highlightableZones$ | async"
       [highlightZone]="highlightZone$ | async"
@@ -53,21 +53,26 @@ import { HighlightZone } from '../highlight/highlight-zone';
     `,
   ],
 })
-export class FrameComponent {
-  @Input() set frame(frame: Frame) {
-    this._state.set({ frame });
+export class BlockGroupComponent {
+  @Input() set frame(blockGroup: BlockGroup) {
+    this._state.set({ blockGroup });
   }
 
-  frame$ = this._state.select('frame');
+  blockGroup$ = this._state.select('blockGroup');
   highlightZone$ = this._state.select('highlightZone');
-  highlightableZones$ = this.frame$.pipe(
-    select(map((frame) => extractHighlightableZones(frame)))
+  highlightableZones$ = this.blockGroup$.pipe(
+    select(map((blockGroup) => extractHighlightableZones(blockGroup)))
   );
 
   constructor(
-    private _state: RxState<{ frame: Frame; highlightZone: HighlightZone }>
+    private _state: RxState<{
+      blockGroup: BlockGroup;
+      highlightZone: HighlightZone;
+    }>
   ) {
-    this._state.connect(this.frame$.pipe(map(() => ({ highlightZone: null }))));
+    this._state.connect(
+      this.blockGroup$.pipe(map(() => ({ highlightZone: null })))
+    );
   }
 
   onHighlightZone(highlightZone: HighlightZone) {
@@ -76,8 +81,8 @@ export class FrameComponent {
 }
 
 @NgModule({
-  declarations: [FrameComponent],
-  exports: [FrameComponent],
-  imports: [CommonModule, FlexLayoutModule, BlockModule],
+  declarations: [BlockGroupComponent],
+  exports: [BlockGroupComponent],
+  imports: [BlockModule, CommonModule, FlexLayoutModule],
 })
-export class FrameModule {}
+export class BlockGroupModule {}

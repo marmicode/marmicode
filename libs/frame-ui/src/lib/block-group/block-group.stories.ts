@@ -1,21 +1,21 @@
-import { BlockType, createFrame } from '@marmicode/frame-core';
+import { BlockType, createBlockGroup } from '@marmicode/frame-core';
 
 import { Meta } from '@storybook/angular';
-import { FrameComponent, FrameModule } from './frame.component';
+import { BlockGroupComponent, BlockGroupModule } from './block-group.component';
 
 export default {
-  title: 'Frame',
+  title: 'BlockGroup',
 };
 
 export const Overflow = () =>
   ({
     title: 'Overflow',
     moduleMetadata: {
-      imports: [FrameModule],
+      imports: [BlockGroupModule],
     },
-    component: FrameComponent,
+    component: BlockGroupComponent,
     props: {
-      frame: createFrame({
+      frame: createBlockGroup({
         blocks: [
           {
             type: BlockType.Text,
@@ -41,9 +41,6 @@ blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla
             language: 'shell',
           },
         ],
-        duration: 2,
-        slug: 'without-validation',
-        title: 'Without validation',
       }),
     },
   } as Meta);
@@ -52,11 +49,11 @@ export const Highlight = () =>
   ({
     title: 'Highlight',
     moduleMetadata: {
-      imports: [FrameModule],
+      imports: [BlockGroupModule],
     },
-    component: FrameComponent,
+    component: BlockGroupComponent,
     props: {
-      frame: createFrame({
+      frame: createBlockGroup({
         blocks: [
           {
             type: BlockType.Text,
@@ -81,9 +78,6 @@ curl http://localhost:8080/farms
             language: 'shell',
           },
         ],
-        duration: 2,
-        slug: 'without-validation',
-        title: 'Without validation',
       }),
     },
   } as Meta);

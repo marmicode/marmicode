@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Frame, FrameModule } from '@marmicode/frame-api';
+import { Frame, BlockGroupModule } from '@marmicode/frame-api';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
@@ -54,11 +54,11 @@ import { SwipeModule } from './swipe.directive';
           [frameTitle]="currentFrameTitle$ | async"
         ></mc-recipe-title>
 
-        <!-- Frame with code, text etc... blocks. -->
-        <mc-frame
+        <!-- Frame's blocks with code, text etc... -->
+        <mc-block-group
           *ngIf="currentFrame$ | async as currentFrame"
           [frame]="currentFrame"
-        ></mc-frame>
+        ></mc-block-group>
       </div>
 
       <!-- THE timeline. -->
@@ -232,7 +232,7 @@ export class RecipeFramePageComponent {
     CommonModule,
     FlexModule,
     PageModule,
-    FrameModule,
+    BlockGroupModule,
     RecipeTimelineModule,
     RecipeTitleModule,
     SlideAnimationModule,

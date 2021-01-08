@@ -16,4 +16,4 @@ export {
   isTextBlock,
   parseMarkdown,
 } from '@marmicode/frame-core';
-export { FrameModule } from '@marmicode/frame-ui';
+export { BlockGroupModule } from '@marmicode/frame-ui';

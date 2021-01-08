@@ -1,1 +1,1 @@
-export { FrameModule } from './lib/frame/frame.component';
+export { BlockGroupModule } from './lib/block-group/block-group.component';

@@ -2,11 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BlockType, createFrame } from '@marmicode/frame-core';
 import { first } from 'rxjs/operators';
 import { createHighlightZone } from '../highlight/highlight-zone';
-import { FrameComponent } from './frame.component';
+import { BlockGroupComponent } from './block-group.component';
 
 describe('FrameComponent', () => {
-  let component: FrameComponent;
-  let fixture: ComponentFixture<FrameComponent>;
+  let component: BlockGroupComponent;
+  let fixture: ComponentFixture<BlockGroupComponent>;
   const frame = createFrame({
     blocks: [],
     duration: 2,
@@ -16,12 +16,12 @@ describe('FrameComponent', () => {
 
   beforeEach(async () => {
     return TestBed.configureTestingModule({
-      declarations: [FrameComponent],
+      declarations: [BlockGroupComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FrameComponent);
+    fixture = TestBed.createComponent(BlockGroupComponent);
     component = fixture.componentInstance;
     component.frame = frame;
     fixture.detectChanges();
