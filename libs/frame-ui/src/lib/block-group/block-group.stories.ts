@@ -15,7 +15,7 @@ export const Overflow = () =>
     },
     component: BlockGroupComponent,
     props: {
-      frame: createBlockGroup({
+      blockGroup: createBlockGroup({
         blocks: [
           {
             type: BlockType.Text,
@@ -53,7 +53,7 @@ export const Highlight = () =>
     },
     component: BlockGroupComponent,
     props: {
-      frame: createBlockGroup({
+      blockGroup: createBlockGroup({
         blocks: [
           {
             type: BlockType.Text,
