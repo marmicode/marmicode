@@ -54,7 +54,7 @@ import { HighlightZone } from '../highlight/highlight-zone';
   ],
 })
 export class BlockGroupComponent {
-  @Input() set frame(blockGroup: BlockGroup) {
+  @Input() set blockGroup(blockGroup: BlockGroup) {
     this._state.set({ blockGroup });
   }
 

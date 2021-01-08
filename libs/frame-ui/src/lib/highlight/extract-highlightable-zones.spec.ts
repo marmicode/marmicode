@@ -1,13 +1,13 @@
 import {
   BlockType,
-  createFrame,
+  createBlockGroup,
   createTextBlock,
 } from '@marmicode/frame-core';
 import { extractHighlightableZones } from './extract-highlightable-zones';
 
 describe('extractHighlightableZones', () => {
   it('should extract highlight info from frame', () => {
-    const frame = createFrame({
+    const frame = createBlockGroup({
       blocks: [
         {
           type: BlockType.Text,
@@ -32,9 +32,6 @@ curl http://localhost:8080/farms
           language: 'shell',
         },
       ],
-      duration: 2,
-      slug: 'without-validation',
-      title: 'Without validation',
     });
 
     expect(extractHighlightableZones(frame)).toEqual([
@@ -75,10 +72,7 @@ curl http://localhost:8080/farms
   it('should not fail if no link', () => {
     expect(
       extractHighlightableZones(
-        createFrame({
-          slug: 'test',
-          duration: 1,
-          title: 'test',
+        createBlockGroup({
           blocks: [
             createTextBlock({
               text: 'test',

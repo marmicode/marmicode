@@ -1,11 +1,7 @@
 import { Injectable, NgModule } from '@angular/core';
 import { ContentfulModule, Query } from '@marmicode/contentful-api';
-import {
-  createCodeBlock,
-  createFrame,
-  createTextBlock,
-  Frame,
-} from '@marmicode/frame-api';
+import { createCodeBlock, createTextBlock } from '@marmicode/frame-api';
+import { BlockGroup } from '@marmicode/frame-api';
 import { ResourceType } from '@marmicode/resource-api';
 import { Apollo } from 'apollo-angular';
 
@@ -14,6 +10,16 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export type RecipeType = ResourceType.Recipe | ResourceType.Tutorial;
+
+export interface Frame extends BlockGroup {
+  slug: string;
+  duration: number;
+  title: string;
+}
+
+export function createFrame(frame: Frame): Frame {
+  return { ...frame };
+}
 
 export interface Recipe {
   id: string;

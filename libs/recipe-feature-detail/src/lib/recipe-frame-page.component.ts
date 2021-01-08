@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Frame, BlockGroupModule } from '@marmicode/frame-api';
+import { BlockGroupModule } from '@marmicode/frame-api';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
@@ -22,7 +22,7 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import { getRelativeFrameRoute } from './get-relative-frame-route';
-import { Recipe, RecipeRepository } from './recipe-repository.service';
+import { Frame, Recipe, RecipeRepository } from './recipe-repository.service';
 import { RecipeTimelineModule } from './recipe-timeline.component';
 import { RecipeTitleModule } from './recipe-title.component';
 import { SlideAnimationModule } from './slide-animation.directive';
@@ -57,7 +57,7 @@ import { SwipeModule } from './swipe.directive';
         <!-- Frame's blocks with code, text etc... -->
         <mc-block-group
           *ngIf="currentFrame$ | async as currentFrame"
-          [frame]="currentFrame"
+          [blockGroup]="currentFrame"
         ></mc-block-group>
       </div>
 
