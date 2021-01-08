@@ -1,14 +1,14 @@
 import {
   Block,
   BlockType,
-  createCodeBlock,
-  createMarkdownBlock,
-  getMarkdownTokenType,
   MarkdownToken,
   MarkdownTokens,
   MarkdownTokenType,
+  createCodeBlock,
+  createMarkdownBlock,
+  getMarkdownTokenType,
   parseMarkdown,
-} from '@marmicode/frame-core';
+} from '@marmicode/frame-api';
 
 export interface BlockGroup {
   blocks: Block[];
