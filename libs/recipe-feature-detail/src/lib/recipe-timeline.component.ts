@@ -105,7 +105,7 @@ export class RecipeTimelineComponent {
     this._state.set({ currentFrameIndex });
   }
 
-  @Input() nextFrameRoute: string;
+  @Input() nextFrameRoute: string | string[];
 
   bullets$ = this._state.select().pipe(
     selectSlice(['frames', 'currentFrameIndex']),
