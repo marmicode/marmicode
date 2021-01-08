@@ -17,9 +17,8 @@ export const Default = () =>
       blogPost: createBlogPost({
         id: '123',
         title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
-        content: {
-          text: `
-          Life is too short. When searching for something, we can’t afford to type a whole word or sentence in a search field, or filling all the fields then hitting our old keyboard’s half-broken enter key to finally be able to see the first results... or nothing at all because our search criteria were too restrictive.
+        text: `
+Life is too short. When searching for something, we can’t afford to type a whole word or sentence in a search field, or filling all the fields then hitting our old keyboard’s half-broken enter key to finally be able to see the first results... or nothing at all because our search criteria were too restrictive.
 
 Don’t look at me like that! We can probably agree that most of us, if not all, are **used to features like typeahead and live search results**. We get frustrated every time we have to submit a search form.
 
@@ -237,7 +236,6 @@ We have the services you need:
 💻 [Source code](https://github.com/yjaaidi/ng-experiments/tree/http-request-cancelation) Nx monorepo with an Angular app, a NestJS API and custom CPU / Memory graphing app using Angular & GraphQL subscriptions.
 🐦 [@yjaaidi](https://twitter.com/intent/follow?screen_name=yjaaidi) Stay tuned for more posts and upcoming workshops.
           `,
-        },
       }),
     },
   } as Meta);

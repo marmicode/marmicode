@@ -1,11 +1,7 @@
-export interface BlogPostContent {
-  text: string;
-}
-
 export interface BlogPost {
   id: string;
   title: string;
-  content: BlogPostContent;
+  text: string;
 }
 
 export function createBlogPost(blogPost: BlogPost) {

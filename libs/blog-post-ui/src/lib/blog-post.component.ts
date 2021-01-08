@@ -26,11 +26,7 @@ export class BlogPostComponent {
   }
   blockGroups$ = this._state
     .select('blogPost')
-    .pipe(
-      select(
-        map((blogPost) => markdownToFrameBlockGroups(blogPost.content.text))
-      )
-    );
+    .pipe(select(map((blogPost) => markdownToFrameBlockGroups(blogPost.text))));
 
   constructor(private _state: RxState<{ blogPost: BlogPost }>) {}
 }
