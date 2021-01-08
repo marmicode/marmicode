@@ -5,7 +5,7 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { BlockGroupModule } from '@marmicode/block-ui';
+import { BlockGroupModule } from '@marmicode/block-api';
 import { RxState, select } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { BlogPost } from './blog-post';
