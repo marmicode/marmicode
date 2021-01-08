@@ -90,7 +90,7 @@
           },
           {
             "sourceTag": "scope:blog-post",
-            "onlyDependOnLibsWithTags": ["scope:blog-post", "scope:shared", "name:frame-api"]
+            "onlyDependOnLibsWithTags": ["scope:blog-post", "scope:shared", "name:block-api"]
           },
           {
             "sourceTag": "scope:learning-map",
@@ -101,8 +101,8 @@
             "onlyDependOnLibsWithTags": [
               "scope:recipe",
               "scope:shared",
+              "name:block-api",
               "name:contentful-api",
-              "name:frame-api",
               "name:resource-api"
             ]
           },

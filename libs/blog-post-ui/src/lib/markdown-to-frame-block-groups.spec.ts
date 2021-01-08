@@ -1,4 +1,4 @@
-import { CodeBlock, MarkdownBlock } from '@marmicode/frame-api';
+import { CodeBlock, MarkdownBlock } from '@marmicode/block-api';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
 
 export const like = expect.objectContaining;

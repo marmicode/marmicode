@@ -1,7 +1,7 @@
 import { Injectable, NgModule } from '@angular/core';
 import { ContentfulModule, Query } from '@marmicode/contentful-api';
-import { createCodeBlock, createTextBlock } from '@marmicode/frame-api';
-import { BlockGroup } from '@marmicode/frame-api';
+import { createCodeBlock, createTextBlock } from '@marmicode/block-api';
+import { BlockGroup } from '@marmicode/block-api';
 import { ResourceType } from '@marmicode/resource-api';
 import { Apollo } from 'apollo-angular';
 

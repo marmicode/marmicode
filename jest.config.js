@@ -1,12 +1,12 @@
 module.exports = {
   projects: [
     '<rootDir>/apps/marmicode',
+    '<rootDir>/libs/block-api',
+    '<rootDir>/libs/block-core',
+    '<rootDir>/libs/block-ui',
     '<rootDir>/libs/blog-post-feature-detail',
     '<rootDir>/libs/blog-post-ui',
     '<rootDir>/libs/contentful-api',
-    '<rootDir>/libs/frame-api',
-    '<rootDir>/libs/frame-core',
-    '<rootDir>/libs/frame-ui',
     '<rootDir>/libs/learning-map-feature-tree',
     '<rootDir>/libs/recipe-feature-detail',
     '<rootDir>/libs/resource-api',

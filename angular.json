@@ -23,7 +23,9 @@
               "apps/marmicode/src/manifest.webmanifest",
               "apps/marmicode/src/robots.txt"
             ],
-            "styles": ["apps/marmicode/src/styles.scss"],
+            "styles": [
+              "apps/marmicode/src/styles.scss"
+            ],
             "scripts": [],
             "allowedCommonJsDependencies": [
               "@babel/runtime/helpers/get",
@@ -145,7 +147,9 @@
               "ngswConfigPath": "apps/marmicode/ngsw-config.json"
             }
           },
-          "outputs": ["{options.outputPath}"]
+          "outputs": [
+            "{options.outputPath}"
+          ]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -171,7 +175,10 @@
               "apps/marmicode/tsconfig.app.json",
               "apps/marmicode/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/marmicode/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/marmicode/**/*"
+            ]
           }
         },
         "test": {
@@ -180,7 +187,9 @@
             "jestConfig": "apps/marmicode/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/apps/marmicode"]
+          "outputs": [
+            "coverage/apps/marmicode"
+          ]
         },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
@@ -221,7 +230,9 @@
           "options": {
             "browserTarget": "marmicode:build:production",
             "serverTarget": "marmicode:server:production",
-            "routes": ["/"]
+            "routes": [
+              "/"
+            ]
           },
           "configurations": {
             "production": {}
@@ -250,8 +261,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/marmicode-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/marmicode-e2e/**/*"]
+            "tsConfig": [
+              "apps/marmicode-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/marmicode-e2e/**/*"
+            ]
           }
         }
       }
@@ -281,7 +297,9 @@
             "jestConfig": "libs/learning-map-feature-tree/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/learning-map-feature-tree"]
+          "outputs": [
+            "coverage/libs/learning-map-feature-tree"
+          ]
         }
       },
       "schematics": {}
@@ -311,7 +329,9 @@
             "jestConfig": "libs/resource-feature-search/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/resource-feature-search"]
+          "outputs": [
+            "coverage/libs/resource-feature-search"
+          ]
         }
       },
       "schematics": {}
@@ -329,7 +349,10 @@
               "libs/shared-ui/tsconfig.lib.json",
               "libs/shared-ui/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared-ui/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared-ui/**/*"
+            ]
           }
         },
         "test": {
@@ -338,7 +361,9 @@
             "jestConfig": "libs/shared-ui/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/shared-ui"]
+          "outputs": [
+            "coverage/libs/shared-ui"
+          ]
         }
       },
       "schematics": {}
@@ -356,7 +381,10 @@
               "libs/shared-utils/tsconfig.lib.json",
               "libs/shared-utils/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared-utils/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared-utils/**/*"
+            ]
           }
         },
         "test": {
@@ -365,7 +393,9 @@
             "jestConfig": "libs/shared-utils/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/shared-utils"]
+          "outputs": [
+            "coverage/libs/shared-utils"
+          ]
         }
       },
       "schematics": {}
@@ -395,7 +425,9 @@
             "jestConfig": "libs/services-feature-presentation/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/services-feature-presentation"]
+          "outputs": [
+            "coverage/libs/services-feature-presentation"
+          ]
         }
       },
       "schematics": {}
@@ -425,7 +457,9 @@
             "jestConfig": "libs/shared-router-helpers/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/shared-router-helpers"]
+          "outputs": [
+            "coverage/libs/shared-router-helpers"
+          ]
         }
       },
       "schematics": {}
@@ -455,7 +489,9 @@
             "jestConfig": "libs/recipe-feature-detail/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/recipe-feature-detail"]
+          "outputs": [
+            "coverage/libs/recipe-feature-detail"
+          ]
         }
       },
       "schematics": {}
@@ -473,7 +509,10 @@
               "libs/resource-core/tsconfig.lib.json",
               "libs/resource-core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/resource-core/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/resource-core/**/*"
+            ]
           }
         },
         "test": {
@@ -482,7 +521,9 @@
             "jestConfig": "libs/resource-core/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/resource-core"]
+          "outputs": [
+            "coverage/libs/resource-core"
+          ]
         }
       },
       "schematics": {}
@@ -500,7 +541,10 @@
               "libs/resource-api/tsconfig.lib.json",
               "libs/resource-api/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/resource-api/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/resource-api/**/*"
+            ]
           }
         },
         "test": {
@@ -509,7 +553,9 @@
             "jestConfig": "libs/resource-api/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/resource-api"]
+          "outputs": [
+            "coverage/libs/resource-api"
+          ]
         }
       },
       "schematics": {}
@@ -527,7 +573,10 @@
               "libs/contentful-api/tsconfig.lib.json",
               "libs/contentful-api/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/contentful-api/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/contentful-api/**/*"
+            ]
           }
         },
         "test": {
@@ -536,7 +585,9 @@
             "jestConfig": "libs/contentful-api/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/contentful-api"]
+          "outputs": [
+            "coverage/libs/contentful-api"
+          ]
         }
       },
       "schematics": {}
@@ -562,7 +613,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/blog-post-feature-detail"],
+          "outputs": [
+            "coverage/libs/blog-post-feature-detail"
+          ],
           "options": {
             "jestConfig": "libs/blog-post-feature-detail/jest.config.js",
             "passWithNoTests": true
@@ -584,12 +637,17 @@
               "libs/blog-post-ui/tsconfig.spec.json",
               "libs/blog-post-ui/.storybook/tsconfig.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/blog-post-ui/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/blog-post-ui/**/*"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/blog-post-ui"],
+          "outputs": [
+            "coverage/libs/blog-post-ui"
+          ],
           "options": {
             "jestConfig": "libs/blog-post-ui/jest.config.js",
             "passWithNoTests": true
@@ -648,62 +706,105 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/blog-post-ui-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/blog-post-ui-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
     },
-    "frame-core": {
+    "block-api": {
       "projectType": "library",
-      "root": "libs/frame-core",
-      "sourceRoot": "libs/frame-core/src",
+      "root": "libs/block-api",
+      "sourceRoot": "libs/block-api/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/block-api/tsconfig.lib.json",
+              "libs/block-api/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/block-api/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/block-api"
+          ],
+          "options": {
+            "jestConfig": "libs/block-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "block-core": {
+      "projectType": "library",
+      "root": "libs/block-core",
+      "sourceRoot": "libs/block-core/src",
       "prefix": "marmicode",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "libs/frame-core/tsconfig.lib.json",
-              "libs/frame-core/tsconfig.spec.json"
+              "libs/block-core/tsconfig.lib.json",
+              "libs/block-core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/frame-core/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/block-core/**/*"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/frame-core/jest.config.js",
+            "jestConfig": "libs/block-core/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/frame-core"]
+          "outputs": [
+            "coverage/libs/block-core"
+          ]
         }
       },
       "schematics": {}
     },
-    "frame-ui": {
+    "block-ui": {
       "projectType": "library",
-      "root": "libs/frame-ui",
-      "sourceRoot": "libs/frame-ui/src",
+      "root": "libs/block-ui",
+      "sourceRoot": "libs/block-ui/src",
       "prefix": "marmicode",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "libs/frame-ui/tsconfig.lib.json",
-              "libs/frame-ui/tsconfig.spec.json",
-              "libs/frame-ui/.storybook/tsconfig.json"
+              "libs/block-ui/tsconfig.lib.json",
+              "libs/block-ui/tsconfig.spec.json",
+              "libs/block-ui/.storybook/tsconfig.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/frame-ui/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/block-ui/**/*"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/frame-ui/jest.config.js",
+            "jestConfig": "libs/block-ui/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/frame-ui"]
+          "outputs": [
+            "coverage/libs/block-ui"
+          ]
         },
         "storybook": {
           "builder": "@nrwl/storybook:storybook",
@@ -711,7 +812,7 @@
             "uiFramework": "@storybook/angular",
             "port": 4400,
             "config": {
-              "configFolder": "libs/frame-ui/.storybook"
+              "configFolder": "libs/block-ui/.storybook"
             }
           },
           "configurations": {
@@ -726,7 +827,7 @@
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/recipe-ui",
             "config": {
-              "configFolder": "libs/frame-ui/.storybook"
+              "configFolder": "libs/block-ui/.storybook"
             }
           },
           "configurations": {
@@ -734,60 +835,41 @@
               "quiet": true
             }
           },
-          "outputs": ["{options.outputPath}"]
+          "outputs": [
+            "{options.outputPath}"
+          ]
         }
       },
       "schematics": {}
     },
-    "frame-ui-e2e": {
-      "root": "apps/frame-ui-e2e",
-      "sourceRoot": "apps/frame-ui-e2e/src",
+    "block-ui-e2e": {
+      "root": "apps/block-ui-e2e",
+      "sourceRoot": "apps/block-ui-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/frame-ui-e2e/cypress.json",
-            "tsConfig": "apps/frame-ui-e2e/tsconfig.e2e.json",
-            "devServerTarget": "frame-ui:storybook"
+            "cypressConfig": "apps/block-ui-e2e/cypress.json",
+            "tsConfig": "apps/block-ui-e2e/tsconfig.e2e.json",
+            "devServerTarget": "block-ui:storybook"
           },
           "configurations": {
             "ci": {
-              "devServerTarget": "frame-ui:storybook:ci"
+              "devServerTarget": "block-ui:storybook:ci"
             }
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/frame-ui-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/frame-ui-e2e/**/*"]
-          }
-        }
-      }
-    },
-    "frame-api": {
-      "projectType": "library",
-      "root": "libs/frame-api",
-      "sourceRoot": "libs/frame-api/src",
-      "prefix": "mc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
             "tsConfig": [
-              "libs/frame-api/tsconfig.lib.json",
-              "libs/frame-api/tsconfig.spec.json"
+              "apps/block-ui-e2e/tsconfig.e2e.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/frame-api/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/frame-api"],
-          "options": {
-            "jestConfig": "libs/frame-api/jest.config.js",
-            "passWithNoTests": true
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/block-ui-e2e/**/*"
+            ]
           }
         }
       }

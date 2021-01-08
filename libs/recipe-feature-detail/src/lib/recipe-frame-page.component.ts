@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BlockGroupModule } from '@marmicode/frame-api';
+import { BlockGroupModule } from '@marmicode/block-api';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
