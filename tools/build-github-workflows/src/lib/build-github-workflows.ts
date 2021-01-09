@@ -22,7 +22,9 @@ export async function buildGithubWorkflows() {
 
     await promisify(writeFile)(
       workflowPath,
-      dump(workflow, { noRefs: true }),
+      `# DO NOT EDIT: This file was generated.
+
+${dump(workflow, { noRefs: true })}`,
       encoding
     );
   }

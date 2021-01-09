@@ -66,7 +66,9 @@ jobs:
     expect(writeFile).toBeCalledTimes(1);
     expect(writeFile).toBeCalledWith(
       '.github/workflows/test.yml',
-      `name: Test
+      `# DO NOT EDIT: This file was generated.
+
+name: Test
 'on':
   - push
 jobs:
