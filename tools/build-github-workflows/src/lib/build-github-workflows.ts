@@ -1,7 +1,7 @@
 import { readdir, readFile, writeFile } from 'fs';
+import { dump, load } from 'js-yaml';
 import { join } from 'path';
 import { promisify } from 'util';
-import { parse, stringify } from 'yaml';
 
 export async function buildGithubWorkflows() {
   const encoding = 'utf-8';
@@ -16,9 +16,11 @@ export async function buildGithubWorkflows() {
   for (const workflowFileName of workflowFileNames) {
     const workflowSrcPath = join(workflowsSrcPath, workflowFileName);
     const workflowPath = join(workflowsPath, workflowFileName);
-    const workflow = parse(
-      await promisify(readFile)(workflowSrcPath, encoding)
+    const workflow = load(await promisify(readFile)(workflowSrcPath, encoding));
+    await promisify(writeFile)(
+      workflowPath,
+      dump(workflow, { noRefs: true }),
+      encoding
     );
-    // await promisify(writeFile)(workflowPath, stringify(workflow), encoding);
   }
 }

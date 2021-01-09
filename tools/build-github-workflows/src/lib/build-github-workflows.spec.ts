@@ -40,7 +40,7 @@ jobs:
 
     jest.spyOn(fs, 'writeFile').mockImplementation(
       /* eslint-disable @typescript-eslint/no-explicit-any */
-      callbackify(jest.fn()) as any
+      callbackify(jest.fn().mockResolvedValue(undefined)) as any
     );
   });
 
@@ -63,8 +63,8 @@ jobs:
       'utf-8',
       expect.any(Function)
     );
-    // expect(writeFile).toBeCalledTimes(1);
-    //     expect(writeFile).toBeCalledWith(`
+    expect(writeFile).toBeCalledTimes(1);
+    // expect(writeFile).toBeCalledWith(`
     // name: Test
     //
     // on:
