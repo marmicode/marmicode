@@ -37,10 +37,17 @@ jobs:
 `)
       ) as any
     );
+
+    jest.spyOn(fs, 'writeFile').mockImplementation(
+      /* eslint-disable @typescript-eslint/no-explicit-any */
+      callbackify(jest.fn()) as any
+    );
   });
 
   afterEach(() => {
-    (fs.readdir as jest.MockedFunction<any>).mockRestore();
+    (readdir as jest.MockedFunction<any>).mockRestore();
+    (readFile as jest.MockedFunction<any>).mockRestore();
+    (writeFile as jest.MockedFunction<any>).mockRestore();
   });
 
   it('🚧 should convert anchors', async () => {
@@ -56,7 +63,7 @@ jobs:
       'utf-8',
       expect.any(Function)
     );
-    //     expect(writeFile).toBeCalledTimes(1);
+    // expect(writeFile).toBeCalledTimes(1);
     //     expect(writeFile).toBeCalledWith(`
     // name: Test
     //
