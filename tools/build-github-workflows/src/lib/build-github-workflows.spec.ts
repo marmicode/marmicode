@@ -50,8 +50,12 @@ jobs:
       '.github/src/workflows',
       expect.any(Function)
     );
-    //     expect(readFile).toBeCalledTimes(1);
-    //     expect(readFile).toBeCalledWith('./github/src/workflows/test.yml');
+    expect(readFile).toBeCalledTimes(1);
+    expect(readFile).toBeCalledWith(
+      '.github/src/workflows/test.yml',
+      'utf-8',
+      expect.any(Function)
+    );
     //     expect(writeFile).toBeCalledTimes(1);
     //     expect(writeFile).toBeCalledWith(`
     // name: Test

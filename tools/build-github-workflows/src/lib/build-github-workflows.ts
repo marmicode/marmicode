@@ -1,11 +1,18 @@
 import { readdir, readFile } from 'fs';
+import { join } from 'path';
 import { promisify } from 'util';
 import { parse } from 'yaml';
 
 export async function buildGithubWorkflows() {
-  const filePaths = await promisify(readdir)('.github/src/workflows');
-  const workflowPaths = filePaths.filter((file) => file.match(/\.ya?ml$/));
-  for (const workflowPath of workflowPaths) {
+  const workflowsPath = '.github/src/workflows';
+
+  /* Get workflow names. */
+  const fileNames = await promisify(readdir)(workflowsPath);
+  const workflowFileNames = fileNames.filter((file) => file.match(/\.ya?ml$/));
+
+  /* Parse and convert each workflow. */
+  for (const workflowFileName of workflowFileNames) {
+    const workflowPath = join(workflowsPath, workflowFileName);
     const workflow = parse(await promisify(readFile)(workflowPath, 'utf-8'));
   }
 }
