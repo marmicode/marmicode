@@ -143,6 +143,9 @@
       "implicitDependencies": [
         "block-ui"
       ]
+    },
+    "tools-build-github-workflows": {
+      "tags": []
     }
   }
 }

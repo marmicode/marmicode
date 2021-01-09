@@ -66,6 +66,9 @@
       ],
       "@marmicode/block-ui": [
         "libs/block-ui/src/index.ts"
+      ],
+      "@marmicode/tools/build-github-workflows": [
+        "tools/build-github-workflows/src/index.ts"
       ]
     },
     "strict": true,
