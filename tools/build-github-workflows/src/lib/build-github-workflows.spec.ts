@@ -1,7 +1,7 @@
-import { readdir } from 'fs';
 import * as fs from 'fs';
+import { readdir, readFile, writeFile } from 'fs';
 import { callbackify } from 'util';
-import { buildGithubWorkflows, main } from './build-github-workflows';
+import { buildGithubWorkflows } from './build-github-workflows';
 
 jest.mock('fs');
 
@@ -9,7 +9,7 @@ describe('buildGithubWorkflows', () => {
   beforeEach(() => {
     jest.spyOn(fs, 'readdir').mockImplementation(
       /* eslint-disable @typescript-eslint/no-explicit-any */
-      callbackify(jest.fn().mockResolvedValue(['main.yml'])) as any
+      callbackify(jest.fn().mockResolvedValue(['test.yml'])) as any
     );
 
     jest.spyOn(fs, 'readFile').mockImplementation(
@@ -34,9 +34,7 @@ jobs:
       - *setup
       - name: Test
         run: yarn test
-
-
- `)
+`)
       ) as any
     );
   });
@@ -47,8 +45,26 @@ jobs:
 
   xit('🚧 should convert anchors', async () => {
     await buildGithubWorkflows();
-    // check fs.readdir call
-    // check fs.readFile call
-    // check fs.writeFile call
+    expect(readdir).toBeCalledTimes(1);
+    expect(readdir).toBeCalledWith('.github/src/workflows');
+    expect(readFile).toBeCalledTimes(1);
+    expect(readFile).toBeCalledWith('./github/src/workflows/test.yml');
+    expect(writeFile).toBeCalledTimes(1);
+    expect(writeFile).toBeCalledWith(`
+name: Test
+
+on:
+  - push
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup
+        run: yarn install
+      - name: Test
+        run: yarn test
+    `);
   });
 });
