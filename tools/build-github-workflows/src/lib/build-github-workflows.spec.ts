@@ -64,14 +64,10 @@ jobs:
       expect.any(Function)
     );
     expect(writeFile).toBeCalledTimes(1);
-    // expect(writeFile).toBeCalledWith(`
-    // name: Test
-    //
-    // on:
+    //     expect(writeFile).toBeCalledWith(`name: Test
+    // 'on':
     //   - push
-    //
     // jobs:
-    //
     //   test:
     //     runs-on: ubuntu-latest
     //     steps:
@@ -79,6 +75,6 @@ jobs:
     //         run: yarn install
     //       - name: Test
     //         run: yarn test
-    //     `);
+    // `);
   });
 });

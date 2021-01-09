@@ -16,11 +16,25 @@ export async function buildGithubWorkflows() {
   for (const workflowFileName of workflowFileNames) {
     const workflowSrcPath = join(workflowsSrcPath, workflowFileName);
     const workflowPath = join(workflowsPath, workflowFileName);
-    const workflow = load(await promisify(readFile)(workflowSrcPath, encoding));
+    let workflow = load(await promisify(readFile)(workflowSrcPath, encoding));
+
+    workflow = _removeExtraKeys(workflow as { [key: string]: unknown });
+
     await promisify(writeFile)(
       workflowPath,
       dump(workflow, { noRefs: true }),
       encoding
     );
   }
+}
+
+export function _removeExtraKeys(workflow: { [key: string]: unknown }) {
+  return Object.entries(workflow)
+    .filter(([key]) => !key.startsWith('x-'))
+    .reduce((result, [key, value]) => {
+      return {
+        ...result,
+        [key]: value,
+      };
+    }, {});
 }
