@@ -64,17 +64,22 @@ jobs:
       expect.any(Function)
     );
     expect(writeFile).toBeCalledTimes(1);
-    //     expect(writeFile).toBeCalledWith(`name: Test
-    // 'on':
-    //   - push
-    // jobs:
-    //   test:
-    //     runs-on: ubuntu-latest
-    //     steps:
-    //       - name: Setup
-    //         run: yarn install
-    //       - name: Test
-    //         run: yarn test
-    // `);
+    expect(writeFile).toBeCalledWith(
+      '.github/workflows/test.yml',
+      `name: Test
+'on':
+  - push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup
+        run: yarn install
+      - name: Test
+        run: yarn test
+`,
+      'utf-8',
+      expect.any(Function)
+    );
   });
 });
