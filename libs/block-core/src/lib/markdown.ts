@@ -6,6 +6,7 @@ export namespace MarkdownTokens {
   export type Codespan = Tokens.Codespan;
   export type Em = Tokens.Em;
   export type Heading = Tokens.Heading;
+  export type Image = Tokens.Image;
   export type Link = Tokens.Link;
   export type List = Tokens.List;
   export type ListItem = Tokens.ListItem;
@@ -19,6 +20,7 @@ export enum MarkdownTokenType {
   Codespan = 'codespan',
   Emphasis = 'em',
   Heading = 'heading',
+  Image = 'image',
   Link = 'link',
   List = 'list',
   ListItem = 'list_item',

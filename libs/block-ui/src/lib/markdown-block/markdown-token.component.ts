@@ -40,6 +40,12 @@ import {
         [token]="token"
       ></mc-markdown-heading>
 
+      <!-- Image. -->
+      <mc-markdown-image
+        *ngSwitchCase="TokenType.Image"
+        [token]="token"
+      ></mc-markdown-image>
+
       <!-- Link. -->
       <mc-markdown-link
         *ngSwitchCase="TokenType.Link"
