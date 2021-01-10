@@ -3,11 +3,12 @@
 name: Test & Deploy
 'on':
   - push
+env:
+  CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
 jobs:
   e2e:
     runs-on: ubuntu-latest
     env:
-      CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +20,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-2
+          key: node-modules-${{ hashFiles('yarn.lock') }}-3
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Increase file watchers to avoid storybook warnings
@@ -54,7 +55,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-2
+          key: node-modules-${{ hashFiles('yarn.lock') }}-3
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Lint
@@ -77,7 +78,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-2
+          key: node-modules-${{ hashFiles('yarn.lock') }}-3
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Test
@@ -105,7 +106,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-2
+          key: node-modules-${{ hashFiles('yarn.lock') }}-3
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Get project name
