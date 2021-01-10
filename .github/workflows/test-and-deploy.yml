@@ -91,7 +91,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   deploy:
     runs-on: ubuntu-latest
-    if: contains(['refs/heads/master', 'refs/tags/latest'], github.ref)
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/tags/latest'
     needs:
       - e2e
       - lint
