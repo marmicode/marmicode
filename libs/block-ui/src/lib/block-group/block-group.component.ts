@@ -24,7 +24,7 @@ import { HighlightZone } from '../highlight/highlight-zone';
   selector: 'mc-block-group',
   template: `
     <mc-block
-      *ngFor="let block of (blockGroup$ | async).blocks"
+      *ngFor="let block of blocks$ | async"
       [block]="block"
       [highlightableZones]="highlightableZones$ | async"
       [highlightZone]="highlightZone$ | async"
@@ -48,26 +48,22 @@ export class BlockGroupComponent {
   }
 
   /* Convert text blocks to markdown blocks. */
-  blockGroup$ = this._state.select('blockGroup').pipe(
+  blocks$ = this._state.select('blockGroup', 'blocks').pipe(
     select(
-      map((blockGroup) =>
-        createBlockGroup({
-          ...blockGroup,
-          blocks: blockGroup.blocks.map((block) => {
-            if (block.type === BlockType.Text) {
-              return createMarkdownBlock({
+      map((blocks) =>
+        blocks.map((block) =>
+          block.type === BlockType.Text
+            ? createMarkdownBlock({
                 tokens: parseMarkdown(block.text),
-              });
-            }
-            return block;
-          }),
-        })
+              })
+            : block
+        )
       )
     )
   );
   highlightZone$ = this._state.select('highlightZone');
-  highlightableZones$ = this.blockGroup$.pipe(
-    select(map((blockGroup) => extractHighlightableZones(blockGroup)))
+  highlightableZones$ = this.blocks$.pipe(
+    select(map((blocks) => extractHighlightableZones(blocks)))
   );
 
   constructor(
@@ -76,8 +72,9 @@ export class BlockGroupComponent {
       highlightZone: HighlightZone;
     }>
   ) {
+    /* Reset highlight zone when blocks change. */
     this._state.connect(
-      this.blockGroup$.pipe(map(() => ({ highlightZone: null })))
+      this.blocks$.pipe(map(() => ({ highlightZone: null })))
     );
   }
 

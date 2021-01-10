@@ -1,9 +1,7 @@
 import {
-  BlockGroup,
+  Block,
   getMarkdownLinks,
   isMarkdownBlock,
-  isTextBlock,
-  parseMarkdown,
 } from '@marmicode/block-core';
 import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
@@ -17,8 +15,9 @@ const availableColors = [
   'purple',
   'deeppink',
 ];
-export function extractHighlightableZones(frame: BlockGroup): HighlightZone[] {
-  const links = frame.blocks
+
+export function extractHighlightableZones(blocks: Block[]): HighlightZone[] {
+  const links = blocks
     .filter((block) => isMarkdownBlock(block))
     .map((block) => {
       /* @hack this should not be necessary but it is needed by typescript. */
