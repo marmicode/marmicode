@@ -3,6 +3,29 @@ name: Test & Deploy
 on:
   - push
 
+x-steps:
+  checkout: &checkout
+    uses: actions/checkout@v2
+    with:
+      # Checkout tags so we can use 'affected:* --base=latest'
+      fetch-depth: 0
+
+  setup-node: &setup-node
+    uses: actions/setup-node@v1
+    with:
+      node-version: '14.x'
+
+  cache-node-modules: &cache-node-modules
+    uses: actions/cache@v2
+    id: node-modules-cache
+    with:
+      path: node_modules
+      key: node-modules-${{ hashFiles('yarn.lock') }}
+
+  yarn-install: &yarn-install
+    name: Install
+    run: yarn install --frozen-lockfile
+
 jobs:
 
   e2e:
@@ -11,20 +34,10 @@ jobs:
       CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
-        with:
-          # Checkout tags so we can use 'affected:* --base=latest'
-          fetch-depth: 0
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
-      - uses: actions/cache@v2
-        id: node-modules-cache
-        with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}
-      - name: Install
-        run: yarn install --frozen-lockfile
+      - *checkout
+      - *setup-node
+      - *cache-node-modules
+      - *yarn-install
       - name: Increase file watchers to avoid storybook warnings
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       - name: E2E
@@ -39,42 +52,22 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          # Checkout tags so we can use 'affected:* --base=latest'
-          fetch-depth: 0
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
-      - uses: actions/cache@v2
-        id: node-modules-cache
-        with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}
-      - name: Install
-        run: yarn install --frozen-lockfile
+      - *checkout
+      - *setup-node
+      - *cache-node-modules
+      - *yarn-install
       - name: Lint
         run: yarn affected:lint --base=latest --head=HEAD
 
   test:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-          with:
-            # Checkout tags so we can use 'affected:* --base=latest'
-            fetch-depth: 0
-        - uses: actions/setup-node@v1
-          with:
-            node-version: '14.x'
-        - uses: actions/cache@v2
-          id: node-modules-cache
-          with:
-            path: node_modules
-            key: node-modules-${{ hashFiles('yarn.lock') }}
-        - name: Install
-          run: yarn install --frozen-lockfile
-        - name: Test
-          run: yarn affected:test --base=latest --head=HEAD
+    runs-on: ubuntu-latest
+    steps:
+      - *checkout
+      - *setup-node
+      - *cache-node-modules
+      - *yarn-install
+      - name: Test
+        run: yarn affected:test --base=latest --head=HEAD
 
   deploy:
     runs-on: ubuntu-latest
@@ -84,20 +77,11 @@ jobs:
       - lint
       - test
     steps:
-      - uses: actions/checkout@v2
-        with:
-          # Checkout tags so we can use 'affected:* --base=latest'
-          fetch-depth: 0
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
-      - uses: actions/cache@v2
-        id: node-modules-cache
-        with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}
-      - name: Install
-        run: yarn install --frozen-lockfile
+
+      - *checkout
+      - *setup-node
+      - *cache-node-modules
+      - *yarn-install
       - name: Get project name
         id: project
         run: |
