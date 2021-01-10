@@ -1,1 +1,1 @@
-export * from './lib/build-github-workflows';
+export { buildGithubWorkflows } from './lib/build-github-workflows';

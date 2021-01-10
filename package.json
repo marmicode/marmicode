@@ -26,6 +26,7 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "prerender": "./tools/prerender.sh",
+    "build-github-workflows": "ts-node tools/build-github-workflows/src/main.ts",
     "deploy:next": "./tools/deploy.sh marmicode-next",
     "deploy:prod": "./tools/deploy.sh marmicode",
     "graphql-codegen": "graphql codegen",
