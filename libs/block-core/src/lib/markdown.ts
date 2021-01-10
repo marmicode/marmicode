@@ -41,3 +41,10 @@ export function getMarkdownTokenType(token: MarkdownToken) {
 export function parseMarkdown(text: string): MarkdownToken[] {
   return lexer(text);
 }
+
+/**
+ * @deprecated 🚧 Work in progress.
+ */
+export function getMarkdownLinks(tokens: MarkdownToken[]): string[] {
+  return [];
+}

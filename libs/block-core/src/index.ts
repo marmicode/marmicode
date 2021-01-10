@@ -15,6 +15,7 @@ export {
   MarkdownToken,
   MarkdownTokens,
   MarkdownTokenType,
+  getMarkdownLinks,
   getMarkdownTokenType,
   parseMarkdown,
 } from './lib/markdown';

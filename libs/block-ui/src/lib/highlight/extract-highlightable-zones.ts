@@ -1,7 +1,9 @@
 import {
   BlockGroup,
+  getMarkdownLinks,
   isMarkdownBlock,
   isTextBlock,
+  parseMarkdown,
 } from '@marmicode/block-core';
 import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
@@ -39,7 +41,12 @@ export function extractHighlightableZones(frame: BlockGroup): HighlightZone[] {
     ...frame.blocks
       .filter((block) => isMarkdownBlock(block))
       .map((block) => {
-        return [];
+        /* @hack this should not be necessary but it is needed by typescript. */
+        if (!isMarkdownBlock(block)) {
+          throw new Error('Impossible!');
+        }
+
+        return getMarkdownLinks(block.tokens);
       })
       .reduce((acc, _links) => [...acc, ..._links], []),
   ];
