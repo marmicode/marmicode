@@ -11,7 +11,6 @@ import { Block, BlockType } from '@marmicode/block-core';
 import { CodeBlockModule } from './code-block/code-block.component';
 import { HighlightZone } from './highlight/highlight-zone';
 import { MarkdownBlockModule } from './markdown-block/markdown-block.component';
-import { TextBlockModule } from './text-block.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,14 +31,6 @@ import { TextBlockModule } from './text-block.component';
       [highlightableZones]="highlightableZones"
       (highlightZoneChange)="highlightZoneChange.emit($event)"
     ></mc-markdown-block>
-
-    <!-- Text (converts text to markdown tokens and uses <mc-markdown-block>). -->
-    <mc-text-block
-      *ngSwitchCase="BlockType.Text"
-      [block]="block"
-      [highlightableZones]="highlightableZones"
-      (highlightZoneChange)="highlightZoneChange.emit($event)"
-    ></mc-text-block>
   </ng-container>`,
 })
 export class BlockComponent {
@@ -54,11 +45,6 @@ export class BlockComponent {
 @NgModule({
   declarations: [BlockComponent],
   exports: [BlockComponent],
-  imports: [
-    CommonModule,
-    TextBlockModule,
-    CodeBlockModule,
-    MarkdownBlockModule,
-  ],
+  imports: [CommonModule, CodeBlockModule, MarkdownBlockModule],
 })
 export class BlockModule {}
