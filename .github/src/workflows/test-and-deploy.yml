@@ -19,7 +19,7 @@ x-steps:
     uses: actions/cache@v2
     with:
       path: node_modules
-      key: node-modules-${{ hashFiles('yarn.lock') }}
+      key: node-modules-${{ hashFiles('yarn.lock') }}-2
 
   yarn-install: &yarn-install
     name: Install
