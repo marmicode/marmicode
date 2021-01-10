@@ -18,38 +18,17 @@ const availableColors = [
   'deeppink',
 ];
 export function extractHighlightableZones(frame: BlockGroup): HighlightZone[] {
-  let links = frame.blocks
-    .filter((block) => isTextBlock(block))
+  const links = frame.blocks
+    .filter((block) => isMarkdownBlock(block))
     .map((block) => {
-      /* @hack this should not be necessary. */
-      if (!isTextBlock(block)) {
+      /* @hack this should not be necessary but it is needed by typescript. */
+      if (!isMarkdownBlock(block)) {
         throw new Error('Impossible!');
       }
 
-      /* Find all strings between "](" and ")". */
-      /* @hack Firefox & Safari don't support lookbehind and lookahead
-       * producing "invalid group name error" so let's strip the string
-       * afterwards instead of using a regex like "/(?<=\]\().+(?=\))/g". */
-      return (block.text.match(/\]\([^)]+\)/g) ?? []).map((link) =>
-        link.replace(/^\]\(|\)/g, '')
-      );
+      return getMarkdownLinks(block.tokens);
     })
     .reduce((acc, _links) => [...acc, ..._links], []);
-
-  links = [
-    ...links,
-    ...frame.blocks
-      .filter((block) => isMarkdownBlock(block))
-      .map((block) => {
-        /* @hack this should not be necessary but it is needed by typescript. */
-        if (!isMarkdownBlock(block)) {
-          throw new Error('Impossible!');
-        }
-
-        return getMarkdownLinks(block.tokens);
-      })
-      .reduce((acc, _links) => [...acc, ..._links], []),
-  ];
 
   const uniqueLinks = Array.from(new Set(links));
 
