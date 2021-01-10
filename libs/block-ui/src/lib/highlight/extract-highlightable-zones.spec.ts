@@ -1,4 +1,5 @@
 import {
+  Block,
   BlockType,
   createBlockGroup,
   parseMarkdown,
@@ -7,19 +8,18 @@ import { extractHighlightableZones } from './extract-highlightable-zones';
 
 describe('extractHighlightableZones', () => {
   it('should extract highlight info from markdown block', () => {
-    const frame = createBlockGroup({
-      blocks: [
-        {
-          type: BlockType.Markdown,
-          tokens: parseMarkdown(`Before setting up request validation, we can see that:
+    const blocks: Block[] = [
+      {
+        type: BlockType.Markdown,
+        tokens: parseMarkdown(`Before setting up request validation, we can see that:
 - [the farm detail \`GET /farms/{farmId}\` route is accessible](highlight://2) even though it's not defined in the OpenAPI Specification,
 - [we can send data in any format](highlight://5) and not only \`application/json\` as described in the OpenAPI Specification,
 - [we can send any data](highlight://5,8-10) when creating a farm using the \`POST /farms\` route.
 - This is [another link highlighting the first zone](highlight://2)`),
-        },
-        {
-          type: BlockType.Code,
-          code: `# Get a farm.
+      },
+      {
+        type: BlockType.Code,
+        code: `# Get a farm.
 curl http://localhost:8080/farms/P4VU2Xsw
 
 # Create a farm with urlencoded data
@@ -29,12 +29,11 @@ curl http://localhost:8080/farms -d"name=springfield"
 curl http://localhost:8080/farms
     -H "Content-Type: application/json"
     -d \'{"name": 123, "random": "data"}\'`,
-          language: 'shell',
-        },
-      ],
-    });
+        language: 'shell',
+      },
+    ];
 
-    expect(extractHighlightableZones(frame)).toEqual([
+    expect(extractHighlightableZones(blocks)).toEqual([
       {
         color: 'blueviolet',
         sections: [
@@ -71,16 +70,12 @@ curl http://localhost:8080/farms
 
   it('should not fail if no link', () => {
     expect(
-      extractHighlightableZones(
-        createBlockGroup({
-          blocks: [
-            {
-              type: BlockType.Markdown,
-              tokens: parseMarkdown('text'),
-            },
-          ],
-        })
-      )
+      extractHighlightableZones([
+        {
+          type: BlockType.Markdown,
+          tokens: parseMarkdown('text'),
+        },
+      ])
     ).toEqual([]);
   });
 });
