@@ -91,7 +91,6 @@ jobs:
       - lint
       - test
     steps:
-
       - *checkout
       - *setup-node
       - *cache-node-modules
