@@ -25,6 +25,15 @@ x-steps:
     name: Install
     run: yarn install --frozen-lockfile
 
+
+  upload-dist-on-failure: &upload-dist-on-failure
+    name: Upload dist (Cypress videos / build output etc...) on failure
+    uses: actions/upload-artifact@v2
+    if: failure()
+    with:
+      name: dist
+      path: dist
+
 jobs:
 
   e2e:
@@ -41,12 +50,7 @@ jobs:
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       - name: E2E
         run: yarn affected:e2e --base=latest --head=HEAD --headless --browser=chrome
-      - name: Upload Cypress videos on failure
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: dist
-          path: dist
+      - *upload-dist-on-failure
 
   lint:
     runs-on: ubuntu-latest
@@ -91,12 +95,7 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT: ${{ steps.project.outputs.project }}
         run: tools/deploy.sh $PROJECT
-      - name: Upload build output on failure
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: dist
-          path: dist
+      - *upload-dist-on-failure
       - name: Notify on failure
         uses: pioug/le-slack-message@v1.0.0
         if: failure()

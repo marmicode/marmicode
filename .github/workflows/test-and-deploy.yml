@@ -30,7 +30,7 @@ jobs:
         run: >-
           yarn affected:e2e --base=latest --head=HEAD --headless
           --browser=chrome
-      - name: Upload Cypress videos on failure
+      - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
         with:
@@ -102,7 +102,7 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT: ${{ steps.project.outputs.project }}
         run: tools/deploy.sh $PROJECT
-      - name: Upload build output on failure
+      - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
         with:
