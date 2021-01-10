@@ -34,6 +34,12 @@ import {
         [token]="token"
       ></mc-markdown-emphasis>
 
+      <!-- Heading. -->
+      <mc-markdown-heading
+        *ngSwitchCase="TokenType.Heading"
+        [token]="token"
+      ></mc-markdown-heading>
+
       <!-- Link. -->
       <mc-markdown-link
         *ngSwitchCase="TokenType.Link"
