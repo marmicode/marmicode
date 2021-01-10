@@ -36,6 +36,12 @@ jobs:
         with:
           name: dist
           path: dist
+      - name: Notify on failure
+        uses: pioug/le-slack-message@v1.0.0
+        if: failure()
+        with:
+          JOB: ${{ toJson(job) }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -53,6 +59,12 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Lint
         run: yarn affected:lint --base=latest --head=HEAD
+      - name: Notify on failure
+        uses: pioug/le-slack-message@v1.0.0
+        if: failure()
+        with:
+          JOB: ${{ toJson(job) }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   test:
     runs-on: ubuntu-latest
     steps:
@@ -70,6 +82,12 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Test
         run: yarn affected:test --base=latest --head=HEAD
+      - name: Notify on failure
+        uses: pioug/le-slack-message@v1.0.0
+        if: failure()
+        with:
+          JOB: ${{ toJson(job) }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'

@@ -4,6 +4,13 @@ on:
   - push
 
 x-steps:
+
+  cache-node-modules: &cache-node-modules
+    uses: actions/cache@v2
+    with:
+      path: node_modules
+      key: node-modules-${{ hashFiles('yarn.lock') }}-2
+
   checkout: &checkout
     uses: actions/checkout@v2
     with:
@@ -15,16 +22,13 @@ x-steps:
     with:
       node-version: '14.x'
 
-  cache-node-modules: &cache-node-modules
-    uses: actions/cache@v2
+  slack-notify-failure: &slack-notify-failure
+    name: Notify on failure
+    uses: pioug/le-slack-message@v1.0.0
+    if: failure()
     with:
-      path: node_modules
-      key: node-modules-${{ hashFiles('yarn.lock') }}-2
-
-  yarn-install: &yarn-install
-    name: Install
-    run: yarn install --frozen-lockfile
-
+      JOB: ${{ toJson(job) }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   upload-dist-on-failure: &upload-dist-on-failure
     name: Upload dist (Cypress videos / build output etc...) on failure
@@ -33,6 +37,10 @@ x-steps:
     with:
       name: dist
       path: dist
+
+  yarn-install: &yarn-install
+    name: Install
+    run: yarn install --frozen-lockfile
 
 jobs:
 
@@ -51,6 +59,7 @@ jobs:
       - name: E2E
         run: yarn affected:e2e --base=latest --head=HEAD --headless --browser=chrome
       - *upload-dist-on-failure
+      - *slack-notify-failure
 
   lint:
     runs-on: ubuntu-latest
@@ -61,6 +70,7 @@ jobs:
       - *yarn-install
       - name: Lint
         run: yarn affected:lint --base=latest --head=HEAD
+      - *slack-notify-failure
 
   test:
     runs-on: ubuntu-latest
@@ -71,6 +81,7 @@ jobs:
       - *yarn-install
       - name: Test
         run: yarn affected:test --base=latest --head=HEAD
+      - *slack-notify-failure
 
   deploy:
     runs-on: ubuntu-latest
@@ -96,9 +107,4 @@ jobs:
           PROJECT: ${{ steps.project.outputs.project }}
         run: tools/deploy.sh $PROJECT
       - *upload-dist-on-failure
-      - name: Notify on failure
-        uses: pioug/le-slack-message@v1.0.0
-        if: failure()
-        with:
-          JOB: ${{ toJson(job) }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - *slack-notify-failure
