@@ -69,7 +69,7 @@ curl http://localhost:8080/farms
     ]);
   });
 
-  xit('🚧 should extract highlight info from markdown block', () => {
+  it('should extract highlight info from markdown block', () => {
     const frame = createBlockGroup({
       blocks: [
         {

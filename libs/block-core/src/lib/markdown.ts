@@ -1,6 +1,22 @@
 import { lexer, Token, Tokens } from 'marked';
 
-export type MarkdownToken = Token;
+export type MarkdownToken = (
+  | Token
+  /* @todo @hack remove this hack once
+   * https://github.com/DefinitelyTyped/DefinitelyTyped/pull/50508 is merged */
+  | {
+      type: 'list';
+      raw: string;
+      ordered: boolean;
+      start: boolean;
+      loose: boolean;
+      items: MarkdownTokens.ListItem[];
+    }
+) & /* @todo remove this hack once the typing is fixed.
+ * Cf. https://github.com/DefinitelyTyped/DefinitelyTyped/issues/48891 */ {
+  tokens?: MarkdownToken[];
+};
+
 export namespace MarkdownTokens {
   export type Code = Tokens.Code;
   export type Codespan = Tokens.Codespan;
@@ -52,13 +68,23 @@ export function getMarkdownLinks(tokens: MarkdownToken[]): string[] {
         return [token.href];
       }
 
-      // if ('tokens' in token) {
-      //   return getMarkdownLinks(token.tokens);
-      // }
+      if (_isMarkdownTokenList(token)) {
+        return getMarkdownLinks(token.items);
+      }
+
+      if ('tokens' in token) {
+        return getMarkdownLinks(token.tokens);
+      }
 
       return [];
     })
     .reduce((acc, links) => [...acc, ...links], []);
+}
+
+export function _isMarkdownTokenList(
+  token: MarkdownToken
+): token is MarkdownTokens.List {
+  return getMarkdownTokenType(token) === MarkdownTokenType.List;
 }
 
 export function _isMarkdownTokenLink(
