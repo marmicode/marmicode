@@ -28,6 +28,11 @@ body {
   transition: all .2s ease-out;
 }
 
+.mc-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 .mc-flex-row {
   display: flex !important;
   flex-direction: row;
@@ -40,6 +45,10 @@ body {
 }
 
 @media screen and (min-width: 960px) {
+  .mc-flex-row-gt-sm {
+    flex-direction: row;
+  }
+
   .mc-hide-gt-sm {
     display: none !important;
   }

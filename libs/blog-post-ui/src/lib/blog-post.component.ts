@@ -17,6 +17,7 @@ import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
   template: `<mc-block-group
     *ngFor="let blockGroup of blockGroups$ | async"
     [blockGroup]="blockGroup"
+    class="mc-flex-column"
   ></mc-block-group>`,
   providers: [RxState],
 })
