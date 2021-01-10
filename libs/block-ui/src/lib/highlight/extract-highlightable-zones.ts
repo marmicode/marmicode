@@ -1,4 +1,8 @@
-import { BlockGroup, isTextBlock } from '@marmicode/block-core';
+import {
+  BlockGroup,
+  isMarkdownBlock,
+  isTextBlock,
+} from '@marmicode/block-core';
 import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 
@@ -12,7 +16,7 @@ const availableColors = [
   'deeppink',
 ];
 export function extractHighlightableZones(frame: BlockGroup): HighlightZone[] {
-  const links = frame.blocks
+  let links = frame.blocks
     .filter((block) => isTextBlock(block))
     .map((block) => {
       /* @hack this should not be necessary. */
@@ -29,6 +33,16 @@ export function extractHighlightableZones(frame: BlockGroup): HighlightZone[] {
       );
     })
     .reduce((acc, _links) => [...acc, ..._links], []);
+
+  links = [
+    ...links,
+    ...frame.blocks
+      .filter((block) => isMarkdownBlock(block))
+      .map((block) => {
+        return [];
+      })
+      .reduce((acc, _links) => [...acc, ..._links], []),
+  ];
 
   const uniqueLinks = Array.from(new Set(links));
 

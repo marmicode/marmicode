@@ -41,4 +41,8 @@ export function createMarkdownBlock(
   return { ...block, type: BlockType.Markdown };
 }
 
+export function isMarkdownBlock(block: Block): block is MarkdownBlock {
+  return block.type === BlockType.Markdown;
+}
+
 export type Block = CodeBlock | MarkdownBlock | TextBlock;
