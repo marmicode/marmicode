@@ -46,5 +46,23 @@ export function parseMarkdown(text: string): MarkdownToken[] {
  * @deprecated 🚧 Work in progress.
  */
 export function getMarkdownLinks(tokens: MarkdownToken[]): string[] {
-  return [];
+  return tokens
+    .map((token) => {
+      if (_isMarkdownTokenLink(token)) {
+        return [token.href];
+      }
+
+      // if ('tokens' in token) {
+      //   return getMarkdownLinks(token.tokens);
+      // }
+
+      return [];
+    })
+    .reduce((acc, links) => [...acc, ...links], []);
+}
+
+export function _isMarkdownTokenLink(
+  token: MarkdownToken
+): token is MarkdownTokens.Link {
+  return getMarkdownTokenType(token) === MarkdownTokenType.Link;
 }
