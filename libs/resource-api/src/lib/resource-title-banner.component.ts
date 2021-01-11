@@ -26,7 +26,9 @@ import { map } from 'rxjs/operators';
         {{ badgeText$ | async }}
       </div>
     </div>
-    <h1 class="title">{{ title }}</h1>
+
+    <h1 class="title" [class.no-subtitle]="subtitle == null">{{ title }}</h1>
+
     <h2 *ngIf="subtitle" class="subtitle">
       {{ subtitle }}
     </h2>
@@ -62,6 +64,13 @@ import { map } from 'rxjs/operators';
 
       .title {
         font-size: 1.2em;
+      }
+
+      /* Use more space if there is no subtitle. */
+      .title.no-subtitle {
+        font-weight: 350;
+        margin-top: 10px;
+        margin-bottom: 10px;
       }
 
       .subtitle {
