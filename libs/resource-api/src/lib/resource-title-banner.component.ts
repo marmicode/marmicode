@@ -27,7 +27,9 @@ import { map } from 'rxjs/operators';
       </div>
     </div>
 
-    <h1 class="title" [class.no-subtitle]="subtitle == null">{{ title }}</h1>
+    <h1 class="title" [class.without-subtitle]="subtitle == null">
+      {{ title }}
+    </h1>
 
     <h2 *ngIf="subtitle" class="subtitle">
       {{ subtitle }}
@@ -67,7 +69,8 @@ import { map } from 'rxjs/operators';
       }
 
       /* Use more space if there is no subtitle. */
-      .title.no-subtitle {
+      .title.without-subtitle {
+        font-size: 1.5em;
         font-weight: 350;
         margin-top: 10px;
       }
