@@ -50,7 +50,7 @@ jobs:
     (writeFile as jest.MockedFunction<any>).mockRestore();
   });
 
-  it('🚧 should convert anchors', async () => {
+  it('should convert anchors', async () => {
     await buildGithubWorkflows();
     expect(readdir).toBeCalledTimes(1);
     expect(readdir).toBeCalledWith(
