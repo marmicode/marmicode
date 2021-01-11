@@ -82,7 +82,8 @@
               "type:api",
               "type:core",
               "type:ui",
-              "type:utils"]
+              "type:utils"
+            ]
           },
           {
             "sourceTag": "type:utils",
@@ -90,7 +91,12 @@
           },
           {
             "sourceTag": "scope:blog-post",
-            "onlyDependOnLibsWithTags": ["scope:blog-post", "scope:shared", "name:block-api"]
+            "onlyDependOnLibsWithTags": [
+              "scope:blog-post",
+              "scope:shared",
+              "name:block-api",
+              "name:resource-api"
+            ]
           },
           {
             "sourceTag": "scope:learning-map",
