@@ -16,7 +16,7 @@ import { map } from 'rxjs/operators';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-title-banner',
+  selector: 'mc-resource-title-banner',
   template: `
     <svg preserveAspectRatio="none" viewBox="0 0 100 100">
       <polygon style="fill: #561f4b" points="0,0 20,0 10,100 0,100" />
@@ -79,7 +79,7 @@ import { map } from 'rxjs/operators';
   ],
   providers: [RxState],
 })
-export class TitleBannerComponent {
+export class ResourceTitleBannerComponent {
   @Input() set resourceType(resourceType: ResourceType) {
     this._state.set({ resourceType });
   }
@@ -99,8 +99,8 @@ export class TitleBannerComponent {
 }
 
 @NgModule({
-  declarations: [TitleBannerComponent],
-  exports: [TitleBannerComponent],
+  declarations: [ResourceTitleBannerComponent],
+  exports: [ResourceTitleBannerComponent],
   imports: [CommonModule, FlexLayoutModule],
 })
-export class TitleBannerModule {}
+export class ResourceTitleBannerModule {}

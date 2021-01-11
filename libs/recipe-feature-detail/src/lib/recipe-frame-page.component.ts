@@ -9,7 +9,8 @@ import { FlexModule } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlockGroupModule } from '@marmicode/block-api';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
-import { PageModule, TitleBannerModule } from '@marmicode/shared-ui';
+import { PageModule } from '@marmicode/shared-ui';
+import { ResourceTitleBannerModule } from '@marmicode/resource-api';
 import { RxState, select } from '@rx-angular/state';
 import { combineLatest, merge, Subject } from 'rxjs';
 import {
@@ -45,12 +46,12 @@ import { SwipeModule } from './swipe.directive';
         class="swipable-content"
       >
         <!-- Recipe's title. -->
-        <mc-title-banner
+        <mc-resource-title-banner
           *ngIf="title$ | async as title"
           [resourceType]="type$ | async"
           [title]="title"
           [subtitle]="currentFrameTitle$ | async"
-        ></mc-title-banner>
+        ></mc-resource-title-banner>
 
         <!-- Frame's blocks with code, text etc... -->
         <mc-block-group
@@ -237,9 +238,9 @@ export class RecipeFramePageComponent {
     PageModule,
     BlockGroupModule,
     RecipeTimelineModule,
+    ResourceTitleBannerModule,
     SlideAnimationModule,
     SwipeModule,
-    TitleBannerModule,
   ],
 })
 export class RecipeFramePageModule {}
