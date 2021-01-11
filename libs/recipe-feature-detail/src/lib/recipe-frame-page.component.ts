@@ -58,7 +58,6 @@ import { SwipeModule } from './swipe.directive';
         <mc-block-group
           *ngIf="currentFrame$ | async as currentFrame"
           [blockGroup]="currentFrame"
-          class="mc-flex-column mc-flex-row-gt-sm"
         ></mc-block-group>
       </div>
 

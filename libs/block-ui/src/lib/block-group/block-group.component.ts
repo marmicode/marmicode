@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  HostBinding,
   Input,
   NgModule,
 } from '@angular/core';
@@ -45,6 +46,14 @@ import { HighlightZone } from '../highlight/highlight-zone';
 export class BlockGroupComponent {
   @Input() set blockGroup(blockGroup: BlockGroup) {
     this._state.set({ blockGroup });
+  }
+  /* Controls desktop layout. (e.g. blog posts use column layout on desktop).
+   * Mobile is always column. */
+  @Input() desktopLayout: 'column' | 'row' = 'row';
+
+  @HostBinding('class.mc-flex-column') flexColumn = true;
+  @HostBinding('class.mc-flex-row-gt-sm') get flexDesktopRow() {
+    return this.desktopLayout === 'row';
   }
 
   /* Convert text blocks to markdown blocks. */
