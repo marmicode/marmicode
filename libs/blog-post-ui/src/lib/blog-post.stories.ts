@@ -30,6 +30,12 @@ Don’t look at me like that! We can probably agree that most of us, if not all,
 - we should **use observables even for single value streams**,
 - we should **not ignore observables teardown logic**.
 
+# Long Long Long Long Long Heading 1
+
+## Long Long Long Long Long Heading 2
+
+### Long Long Long Long Long Heading 3
+
 # 🚨 Reactive Programming & RxJS to the rescue
 
 Implementing these kinds of features can be tricky, especially if developed from scratch and with an imperative approach. That’s when reactive programming and RxJS come to the rescue. In fact, RxJS provides the right tooling and operators to implement these features in a few lines.

@@ -13,6 +13,15 @@ import { MarkdownToken, MarkdownTokens } from '@marmicode/block-core';
     <h3 *ngIf="token.depth === 3">
       <mc-markdown-tokens [tokens]="token.tokens"></mc-markdown-tokens>
     </h3>`,
+  styles: [
+    `
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2em;
+      }
+    `,
+  ],
 })
 export class MarkdownHeadingComponent {
   @Input() token: MarkdownTokens.Heading & { tokens?: MarkdownToken[] };
