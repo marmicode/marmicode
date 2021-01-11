@@ -70,7 +70,6 @@ import { map } from 'rxjs/operators';
       .title.no-subtitle {
         font-weight: 350;
         margin-top: 10px;
-        margin-bottom: 10px;
       }
 
       .subtitle {
