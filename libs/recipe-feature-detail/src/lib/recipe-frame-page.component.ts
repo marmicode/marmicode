@@ -9,7 +9,7 @@ import { FlexModule } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlockGroupModule } from '@marmicode/block-api';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
-import { PageModule } from '@marmicode/shared-ui';
+import { PageModule, TitleBannerModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
 import { combineLatest, merge, Subject } from 'rxjs';
 import {
@@ -24,7 +24,6 @@ import {
 import { getRelativeFrameRoute } from './get-relative-frame-route';
 import { Frame, Recipe, RecipeRepository } from './recipe-repository.service';
 import { RecipeTimelineModule } from './recipe-timeline.component';
-import { RecipeTitleModule } from './recipe-title.component';
 import { SlideAnimationModule } from './slide-animation.directive';
 import { SwipeModule } from './swipe.directive';
 
@@ -46,13 +45,12 @@ import { SwipeModule } from './swipe.directive';
         class="swipable-content"
       >
         <!-- Recipe's title. -->
-        <mc-recipe-title
+        <mc-title-banner
           *ngIf="title$ | async as title"
           [resourceType]="type$ | async"
           [title]="title"
-          [frameIndex]="currentFrameIndex$ | async"
-          [frameTitle]="currentFrameTitle$ | async"
-        ></mc-recipe-title>
+          [subtitle]="currentFrameTitle$ | async"
+        ></mc-title-banner>
 
         <!-- Frame's blocks with code, text etc... -->
         <mc-block-group
@@ -81,7 +79,7 @@ import { SwipeModule } from './swipe.directive';
 
       .swipable-content {
         /* Forcing flex-basis to auto as fxFlex sets it to 0px
-         * and doesn't stretch when content is larger than page. */
+             * and doesn't stretch when content is larger than page. */
         flex: 1 1 auto;
       }
     `,
@@ -102,8 +100,13 @@ export class RecipeFramePageComponent {
   currentFrameIndex$ = combineLatest([this.frames$, this.currentFrame$]).pipe(
     map(([frames, currentFrame]) => frames.indexOf(currentFrame))
   );
-  currentFrameTitle$ = this.currentFrame$.pipe(
-    select(map((frame) => frame?.title))
+  currentFrameTitle$ = combineLatest([
+    this.currentFrame$,
+    this.currentFrameIndex$,
+  ]).pipe(
+    select(
+      map(([frame, index]) => (frame ? `${index} - ${frame.title}` : null))
+    )
   );
   nextFrameRoute$ = combineLatest([this.frames$, this.currentFrameIndex$]).pipe(
     select(
@@ -234,9 +237,9 @@ export class RecipeFramePageComponent {
     PageModule,
     BlockGroupModule,
     RecipeTimelineModule,
-    RecipeTitleModule,
     SlideAnimationModule,
     SwipeModule,
+    TitleBannerModule,
   ],
 })
 export class RecipeFramePageModule {}

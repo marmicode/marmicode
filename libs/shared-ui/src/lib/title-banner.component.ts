@@ -5,18 +5,18 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
-  ResourceType,
   getResourceTypeColor,
   getResourceTypeText,
-} from '@marmicode/resource-api';
+  ResourceType,
+} from '@marmicode/resource-core';
 import { RxState } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-recipe-title',
+  selector: 'mc-title-banner',
   template: `
     <svg preserveAspectRatio="none" viewBox="0 0 100 100">
       <polygon style="fill: #561f4b" points="0,0 20,0 10,100 0,100" />
@@ -27,13 +27,14 @@ import { map } from 'rxjs/operators';
       </div>
     </div>
     <h1 class="title">{{ title }}</h1>
-    <h2 *ngIf="frameTitle" class="subtitle">
-      {{ frameIndex + 1 }} - {{ frameTitle }}
+    <h2 *ngIf="subtitle" class="subtitle">
+      {{ subtitle }}
     </h2>
   `,
   styles: [
     `
       :host {
+        display: block;
         position: relative;
         background-color: #86527c;
       }
@@ -78,13 +79,13 @@ import { map } from 'rxjs/operators';
   ],
   providers: [RxState],
 })
-export class RecipeTitleComponent {
+export class TitleBannerComponent {
   @Input() set resourceType(resourceType: ResourceType) {
     this._state.set({ resourceType });
   }
-  @Input() frameIndex: number;
-  @Input() frameTitle: string;
+
   @Input() title: string;
+  @Input() subtitle: string;
 
   badgeColor$ = this._state.select(
     map(({ resourceType }) => getResourceTypeColor(resourceType))
@@ -98,8 +99,8 @@ export class RecipeTitleComponent {
 }
 
 @NgModule({
-  declarations: [RecipeTitleComponent],
-  exports: [RecipeTitleComponent],
-  imports: [CommonModule, FlexModule],
+  declarations: [TitleBannerComponent],
+  exports: [TitleBannerComponent],
+  imports: [CommonModule, FlexLayoutModule],
 })
-export class RecipeTitleModule {}
+export class TitleBannerModule {}
