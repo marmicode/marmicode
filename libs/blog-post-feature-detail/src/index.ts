@@ -1,1 +1,1 @@
-export * from './lib/blog-post-feature-detail.module';
+export { BlogPostFeatureDetailRoutingModule } from './lib/blog-post-feature-detail.routing.module';

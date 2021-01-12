@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
+  blogPostDetailRouterHelper,
   recipeDetailRouterHelper,
   resourceSearchRouterHelper,
   servicesRouterHelper,
@@ -8,6 +9,15 @@ import {
 import { or } from '@marmicode/shared-utils';
 
 export const routes: Routes = [
+  /* Blog post detail. */
+  {
+    path: blogPostDetailRouterHelper.BLOG_POST_DETAIL_PATH,
+    loadChildren: () =>
+      import('@marmicode/blog-post-feature-detail').then(
+        (m) => m.BlogPostFeatureDetailRoutingModule
+      ),
+  },
+
   /* Recipe detail. */
   {
     matcher: or([
