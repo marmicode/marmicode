@@ -1,4 +1,6 @@
 describe('BlogPostComponent', () => {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  it('🚧 should show blog', () => {});
+  it('should show blog', () => {
+    cy.visit('/iframe.html?id=blogpost--default');
+    cy.snapshot();
+  });
 });
