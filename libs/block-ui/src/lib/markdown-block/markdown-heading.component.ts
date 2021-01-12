@@ -15,6 +15,12 @@ import { MarkdownToken, MarkdownTokens } from '@marmicode/block-core';
     </h3>`,
   styles: [
     `
+      h1 {
+        font-size: 1.5em;
+        font-weight: 500;
+        margin-top: 30px;
+      }
+
       h1,
       h2,
       h3 {
