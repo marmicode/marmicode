@@ -52,6 +52,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      # The full token is used by `percy-poller`.
+      # You can find it here https://percy.io/api/v1/tokens after signing-in to Percy as an admin.
+      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
     steps:
       - *checkout
       - *setup-node
@@ -61,6 +64,8 @@ jobs:
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       - name: E2E
         run: yarn affected:e2e --base=latest --head=HEAD --headless --browser=chrome
+      - name: Check Percy Review
+        run: yarn percy-review-approved
       - *upload-dist-on-failure
       - *slack-notify-failure
 

@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -31,6 +32,8 @@ jobs:
         run: >-
           yarn affected:e2e --base=latest --head=HEAD --headless
           --browser=chrome
+      - name: Check Percy Review
+        run: yarn percy-review-approved
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
