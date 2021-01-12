@@ -22,7 +22,7 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-resource-search',
+  selector: 'mc-resource-search-page',
   template: `
     <mc-page>
       <div fxLayout="row" fxLayoutAlign="center">
@@ -67,7 +67,7 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
     `,
   ],
 })
-export class ResourceSearchComponent {
+export class ResourceSearchPageComponent {
   error$: Observable<unknown>;
   isLoading$: Observable<boolean>;
   resources$: Observable<Resource[]>;
@@ -129,8 +129,8 @@ export class ResourceSearchComponent {
 }
 
 @NgModule({
-  declarations: [ResourceSearchComponent],
-  exports: [ResourceSearchComponent],
+  declarations: [ResourceSearchPageComponent],
+  exports: [ResourceSearchPageComponent],
   imports: [
     CommonModule,
     ErrorModule,

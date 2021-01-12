@@ -18,10 +18,10 @@ import {
 @UntilDestroy()
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-recipe-detail',
+  selector: 'mc-recipe-detail-page',
   template: `<mc-page></mc-page>`,
 })
-export class RecipeDetailComponent implements OnInit {
+export class RecipeDetailPageComponent implements OnInit {
   constructor(
     private _recipeRepository: RecipeRepository,
     private _route: ActivatedRoute,
@@ -50,8 +50,8 @@ export class RecipeDetailComponent implements OnInit {
 }
 
 @NgModule({
-  declarations: [RecipeDetailComponent],
-  exports: [RecipeDetailComponent],
+  declarations: [RecipeDetailPageComponent],
+  exports: [RecipeDetailPageComponent],
   imports: [CommonModule, PageModule, RecipeRepositoryModule],
 })
 export class RecipeDetailModule {}

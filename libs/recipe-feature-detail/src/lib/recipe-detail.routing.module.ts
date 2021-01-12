@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import {
-  RecipeDetailComponent,
+  RecipeDetailPageComponent,
   RecipeDetailModule,
-} from './recipe-detail.component';
+} from './recipe-detail-page.component';
 import {
   RecipeFramePageComponent,
   RecipeFramePageModule,
@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: `:${recipeDetailRouterHelper.RECIPE_SLUG_PARAM}`,
-    component: RecipeDetailComponent,
+    component: RecipeDetailPageComponent,
   },
 ];
 

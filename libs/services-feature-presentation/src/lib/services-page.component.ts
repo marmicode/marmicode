@@ -12,7 +12,7 @@ import { WorkshopsButtonModule } from './workshops-button.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-services',
+  selector: 'mc-services-page',
   template: ` <mc-page>
     <mc-banner></mc-banner>
     <mc-slant></mc-slant>
@@ -78,11 +78,11 @@ import { WorkshopsButtonModule } from './workshops-button.component';
     `,
   ],
 })
-export class ServicesComponent {}
+export class ServicesPageComponent {}
 
 @NgModule({
-  declarations: [ServicesComponent],
-  exports: [ServicesComponent],
+  declarations: [ServicesPageComponent],
+  exports: [ServicesPageComponent],
   imports: [
     CommonModule,
     BannerModule,

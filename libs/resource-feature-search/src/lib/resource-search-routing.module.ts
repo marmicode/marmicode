@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
-import { ResourceSearchComponent } from './resource-search.component';
-import { ResourceSearchModule } from './resource-search.component';
+import { ResourceSearchPageComponent } from './resource-search-page.component';
+import { ResourceSearchModule } from './resource-search-page.component';
 
 export const routes: Routes = [
   {
     path: `:${resourceSearchRouterHelper.SKILL_SLUG_PARAM}`,
-    component: ResourceSearchComponent,
+    component: ResourceSearchPageComponent,
   },
 ];
 

@@ -1,21 +1,21 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ResourceSearchComponent } from './resource-search.component';
+import { ResourceSearchPageComponent } from './resource-search-page.component';
 import { Subject } from 'rxjs';
 import { TransferStateAdapter } from '@marmicode/shared-utils';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { ResourceRepository } from './resource-repository.service';
 
 describe('ResourceSearchComponent', () => {
-  let component: ResourceSearchComponent;
-  let fixture: ComponentFixture<ResourceSearchComponent>;
+  let component: ResourceSearchPageComponent;
+  let fixture: ComponentFixture<ResourceSearchPageComponent>;
   let selectedSkillSlug$: Subject<string>;
 
   beforeEach(async () => {
     selectedSkillSlug$ = new Subject<string>();
 
     return await TestBed.configureTestingModule({
-      declarations: [ResourceSearchComponent],
+      declarations: [ResourceSearchPageComponent],
       providers: [
         {
           provide: ResourceRepository,
@@ -51,7 +51,7 @@ describe('ResourceSearchComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResourceSearchComponent);
+    fixture = TestBed.createComponent(ResourceSearchPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
