@@ -34,11 +34,11 @@ export class BlogPostComponent {
     this._state.set({ blogPost });
   }
 
-  @Input() resourceType = ResourceType.BlogPost;
-
   blockGroups$ = this._state
     .select('blogPost')
     .pipe(select(map((blogPost) => markdownToFrameBlockGroups(blogPost.text))));
+
+  resourceType = ResourceType.BlogPost;
 
   title$ = this._state.select('blogPost', 'title');
 
