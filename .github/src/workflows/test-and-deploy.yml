@@ -93,7 +93,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master' || github.ref == 'refs/tags/latest'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/tags/latest'
     needs:
       - e2e
       - lint
