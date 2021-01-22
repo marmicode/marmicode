@@ -32,12 +32,12 @@ describe('BlogPostRepository', () => {
 
   it('🚧 should query blog post and convert to `BlogPost` type', async () => {
     const blogPost = await blogPostRepository
-      .getBlogPost('end-to-end-http-request-cancellation-with-rxjs-and-nestjs')
+      .getBlogPost('end-to-end-http-request-cancelation-with-rxjs-and-nestjs')
       .toPromise();
     expect(blogPost).toEqual(
       expect.objectContaining({
         id: '62vt3ifOPzuBOv31JzHdMd',
-        title: 'End-to-End HTTP request cancellation with RxJS & NestJS',
+        title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
         text: expect.stringMatching(/Life is too short/),
       })
     );
