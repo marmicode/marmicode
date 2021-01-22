@@ -1,10 +1,13 @@
 import { Injectable, NgModule } from '@angular/core';
 import { createBlogPost } from '@marmicode/blog-post-ui';
 import { ContentfulModule } from '@marmicode/contentful-api';
+import { Apollo } from 'apollo-angular';
 import { of } from 'rxjs';
 
 @Injectable()
 export class BlogPostRepository {
+  constructor(private _apollo: Apollo) {}
+
   /**
    * @deprecated 🚧 Work in progress.
    * @todo retrieve blog post from API

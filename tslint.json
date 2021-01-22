@@ -95,6 +95,7 @@
               "scope:blog-post",
               "scope:shared",
               "name:block-api",
+              "name:contentful-api",
               "name:resource-api"
             ]
           },
