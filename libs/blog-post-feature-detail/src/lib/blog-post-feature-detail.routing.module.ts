@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { blogPostDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { BlogPostDetailPageComponent } from './blog-post-detail-page.component';
+import { BlogPostRepositoryModule } from './blog-post-repository.service';
 
 export const routes: Routes = [
   /* /blog/:blogPostSlug */
@@ -13,6 +14,10 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [
+    BlogPostRepositoryModule,
+    CommonModule,
+    RouterModule.forChild(routes),
+  ],
 })
 export class BlogPostFeatureDetailRoutingModule {}

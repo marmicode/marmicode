@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { createBlogPost } from '@marmicode/blog-post-ui';
+import { ContentfulModule } from '@marmicode/contentful-api';
 import { of } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class BlogPostRepository {
   /**
    * @deprecated 🚧 Work in progress.
@@ -238,3 +237,9 @@ We have the services you need:
     );
   }
 }
+
+@NgModule({
+  imports: [ContentfulModule],
+  providers: [BlogPostRepository],
+})
+export class BlogPostRepositoryModule {}

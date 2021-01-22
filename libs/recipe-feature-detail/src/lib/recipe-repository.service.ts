@@ -66,28 +66,27 @@ const getRecipe = gql`
         slug
         title
         content {
-            ... on Recipe {
-                frameCollection {
-                    items {
-                        duration
-                        slug
-                        title
-                        blockCollection {
-                            items {
-                                __typename
-                                ... on CodeBlock {
-                                    code
-                                    language
-                                }
-                                ... on TextBlock {
-                                    text
-                                }
-                            }
-                        }
+          ... on Recipe {
+            frameCollection {
+              items {
+                duration
+                slug
+                title
+                blockCollection {
+                  items {
+                    __typename
+                    ... on CodeBlock {
+                      code
+                      language
                     }
+                    ... on TextBlock {
+                      text
+                    }
+                  }
                 }
+              }
             }
-            }
+          }
         }
       }
     }
