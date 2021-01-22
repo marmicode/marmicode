@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Apollo, APOLLO_OPTIONS } from 'apollo-angular';
+import { of } from 'rxjs';
 import {
   BlogPostRepository,
   BlogPostRepositoryModule,
@@ -31,9 +32,26 @@ describe('BlogPostRepository', () => {
   });
 
   it('🚧 should query blog post and convert to `BlogPost` type', async () => {
+    mockResourceCollectionResolver.mockReturnValue(
+      of({
+        items: [
+          {
+            sys: {
+              id: '62vt3ifOPzuBOv31JzHdMd',
+            },
+            title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
+            content: {
+              text: 'Life is too short. ...',
+            },
+          },
+        ],
+      })
+    );
+
     const blogPost = await blogPostRepository
       .getBlogPost('end-to-end-http-request-cancelation-with-rxjs-and-nestjs')
       .toPromise();
+
     expect(blogPost).toEqual(
       expect.objectContaining({
         id: '62vt3ifOPzuBOv31JzHdMd',
@@ -41,5 +59,7 @@ describe('BlogPostRepository', () => {
         text: expect.stringMatching(/Life is too short/),
       })
     );
+
+    // @todo check mock is called with the right slug
   });
 });
