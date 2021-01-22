@@ -26,12 +26,14 @@ export interface Query {
   __typename?: 'Query';
   asset?: Maybe<Asset>;
   assetCollection?: Maybe<AssetCollection>;
-  codeBlock?: Maybe<CodeBlock>;
-  codeBlockCollection?: Maybe<CodeBlockCollection>;
-  textBlock?: Maybe<TextBlock>;
-  textBlockCollection?: Maybe<TextBlockCollection>;
   resource?: Maybe<Resource>;
   resourceCollection?: Maybe<ResourceCollection>;
+  textBlock?: Maybe<TextBlock>;
+  textBlockCollection?: Maybe<TextBlockCollection>;
+  blogPost?: Maybe<BlogPost>;
+  blogPostCollection?: Maybe<BlogPostCollection>;
+  codeBlock?: Maybe<CodeBlock>;
+  codeBlockCollection?: Maybe<CodeBlockCollection>;
   frame?: Maybe<Frame>;
   frameCollection?: Maybe<FrameCollection>;
   recipe?: Maybe<Recipe>;
@@ -62,20 +64,20 @@ export interface QueryAssetCollectionArgs {
 }
 
 
-export interface QueryCodeBlockArgs {
+export interface QueryResourceArgs {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
 
 
-export interface QueryCodeBlockCollectionArgs {
+export interface QueryResourceCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
-  where?: Maybe<CodeBlockFilter>;
-  order?: Maybe<Array<Maybe<CodeBlockOrder>>>;
+  where?: Maybe<ResourceFilter>;
+  order?: Maybe<Array<Maybe<ResourceOrder>>>;
 }
 
 
@@ -96,20 +98,37 @@ export interface QueryTextBlockCollectionArgs {
 }
 
 
-export interface QueryResourceArgs {
+export interface QueryBlogPostArgs {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
 
 
-export interface QueryResourceCollectionArgs {
+export interface QueryBlogPostCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
-  where?: Maybe<ResourceFilter>;
-  order?: Maybe<Array<Maybe<ResourceOrder>>>;
+  where?: Maybe<BlogPostFilter>;
+  order?: Maybe<Array<Maybe<BlogPostOrder>>>;
+}
+
+
+export interface QueryCodeBlockArgs {
+  id: Scalars['String'];
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+export interface QueryCodeBlockCollectionArgs {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  where?: Maybe<CodeBlockFilter>;
+  order?: Maybe<Array<Maybe<CodeBlockOrder>>>;
 }
 
 
@@ -216,6 +235,12 @@ export interface Asset {
 /** Represents a binary file in a space. An asset can be any file type. */
 export interface AssetUrlArgs {
   transform?: Maybe<ImageTransformOptions>;
+}
+
+
+/** Represents a binary file in a space. An asset can be any file type. */
+export interface AssetLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
 
 export interface Sys {
@@ -394,7 +419,31 @@ export interface Resource extends Entry {
   skillCollection?: Maybe<ResourceSkillCollection>;
   summary?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
-  content?: Maybe<Recipe>;
+  content?: Maybe<ResourceContent>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
+export interface ResourceLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
+export interface ResourceTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
+export interface ResourceSlugArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
+export interface ResourceResourceTypeArgs {
+  locale?: Maybe<Scalars['String']>;
 }
 
 
@@ -406,8 +455,26 @@ export interface ResourceAuthorArgs {
 
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
+export interface ResourceDurationArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
+export interface ResourceIsWipArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourcePictureArgs {
   preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
+export interface ResourceReleasedAtArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
@@ -426,6 +493,18 @@ export interface ResourceSkillCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
+export interface ResourceSummaryArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
+export interface ResourceUrlArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
@@ -456,6 +535,18 @@ export interface Author extends Entry {
   linkedFrom?: Maybe<AuthorLinkingCollections>;
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<Asset>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
+export interface AuthorLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
+export interface AuthorNameArgs {
+  locale?: Maybe<Scalars['String']>;
 }
 
 
@@ -507,6 +598,24 @@ export interface Skill extends Entry {
 
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/skill) */
+export interface SkillLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/skill) */
+export interface SkillLabelArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/skill) */
+export interface SkillSlugArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/skill) */
 export interface SkillTopicArgs {
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
@@ -541,6 +650,24 @@ export interface Topic extends Entry {
   linkedFrom?: Maybe<TopicLinkingCollections>;
   label?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/topic) */
+export interface TopicLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/topic) */
+export interface TopicLabelArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/topic) */
+export interface TopicSlugArgs {
+  locale?: Maybe<Scalars['String']>;
 }
 
 export interface TopicLinkingCollections {
@@ -581,12 +708,62 @@ export interface ResourceSkillCollection {
   items: Array<Maybe<Skill>>;
 }
 
+export type ResourceContent = BlogPost | Recipe;
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/blogPost) */
+export interface BlogPost extends Entry {
+  __typename?: 'BlogPost';
+  sys: Sys;
+  linkedFrom?: Maybe<BlogPostLinkingCollections>;
+  text?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/blogPost) */
+export interface BlogPostLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/blogPost) */
+export interface BlogPostTextArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface BlogPostLinkingCollections {
+  __typename?: 'BlogPostLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  resourceCollection?: Maybe<ResourceCollection>;
+}
+
+
+export interface BlogPostLinkingCollectionsEntryCollectionArgs {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+export interface BlogPostLinkingCollectionsResourceCollectionArgs {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+}
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/recipe) */
 export interface Recipe extends Entry {
   __typename?: 'Recipe';
   sys: Sys;
   linkedFrom?: Maybe<RecipeLinkingCollections>;
   frameCollection?: Maybe<RecipeFrameCollection>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/recipe) */
+export interface RecipeLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
 
 
@@ -637,6 +814,30 @@ export interface Frame extends Entry {
   slug?: Maybe<Scalars['String']>;
   duration?: Maybe<Scalars['Int']>;
   blockCollection?: Maybe<FrameBlockCollection>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/frame) */
+export interface FrameLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/frame) */
+export interface FrameTitleArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/frame) */
+export interface FrameSlugArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/frame) */
+export interface FrameDurationArgs {
+  locale?: Maybe<Scalars['String']>;
 }
 
 
@@ -697,6 +898,24 @@ export interface CodeBlock extends Entry {
   language?: Maybe<Scalars['String']>;
 }
 
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/codeBlock) */
+export interface CodeBlockLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/codeBlock) */
+export interface CodeBlockCodeArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/codeBlock) */
+export interface CodeBlockLanguageArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
 export interface CodeBlockLinkingCollections {
   __typename?: 'CodeBlockLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
@@ -733,6 +952,18 @@ export interface TextBlock extends Entry {
   sys: Sys;
   linkedFrom?: Maybe<TextBlockLinkingCollections>;
   text?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/textBlock) */
+export interface TextBlockLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/textBlock) */
+export interface TextBlockTextArgs {
+  locale?: Maybe<Scalars['String']>;
 }
 
 export interface TextBlockLinkingCollections {
@@ -895,6 +1126,177 @@ export interface AssetCollection {
   items: Array<Maybe<Asset>>;
 }
 
+export interface ResourceFilter {
+  author?: Maybe<CfAuthorNestedFilter>;
+  sys?: Maybe<SysFilter>;
+  title_exists?: Maybe<Scalars['Boolean']>;
+  title?: Maybe<Scalars['String']>;
+  title_not?: Maybe<Scalars['String']>;
+  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title_contains?: Maybe<Scalars['String']>;
+  title_not_contains?: Maybe<Scalars['String']>;
+  slug_exists?: Maybe<Scalars['Boolean']>;
+  slug?: Maybe<Scalars['String']>;
+  slug_not?: Maybe<Scalars['String']>;
+  slug_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  slug_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  slug_contains?: Maybe<Scalars['String']>;
+  slug_not_contains?: Maybe<Scalars['String']>;
+  resourceType_exists?: Maybe<Scalars['Boolean']>;
+  resourceType?: Maybe<Scalars['String']>;
+  resourceType_not?: Maybe<Scalars['String']>;
+  resourceType_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  resourceType_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  resourceType_contains?: Maybe<Scalars['String']>;
+  resourceType_not_contains?: Maybe<Scalars['String']>;
+  author_exists?: Maybe<Scalars['Boolean']>;
+  duration_exists?: Maybe<Scalars['Boolean']>;
+  duration?: Maybe<Scalars['Int']>;
+  duration_not?: Maybe<Scalars['Int']>;
+  duration_in?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  duration_not_in?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  duration_gt?: Maybe<Scalars['Int']>;
+  duration_gte?: Maybe<Scalars['Int']>;
+  duration_lt?: Maybe<Scalars['Int']>;
+  duration_lte?: Maybe<Scalars['Int']>;
+  isWip_exists?: Maybe<Scalars['Boolean']>;
+  isWip?: Maybe<Scalars['Boolean']>;
+  isWip_not?: Maybe<Scalars['Boolean']>;
+  picture_exists?: Maybe<Scalars['Boolean']>;
+  releasedAt_exists?: Maybe<Scalars['Boolean']>;
+  releasedAt?: Maybe<Scalars['DateTime']>;
+  releasedAt_not?: Maybe<Scalars['DateTime']>;
+  releasedAt_in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  releasedAt_not_in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  releasedAt_gt?: Maybe<Scalars['DateTime']>;
+  releasedAt_gte?: Maybe<Scalars['DateTime']>;
+  releasedAt_lt?: Maybe<Scalars['DateTime']>;
+  releasedAt_lte?: Maybe<Scalars['DateTime']>;
+  requiredSkillCollection_exists?: Maybe<Scalars['Boolean']>;
+  skillCollection_exists?: Maybe<Scalars['Boolean']>;
+  summary_exists?: Maybe<Scalars['Boolean']>;
+  summary?: Maybe<Scalars['String']>;
+  summary_not?: Maybe<Scalars['String']>;
+  summary_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  summary_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  summary_contains?: Maybe<Scalars['String']>;
+  summary_not_contains?: Maybe<Scalars['String']>;
+  url_exists?: Maybe<Scalars['Boolean']>;
+  url?: Maybe<Scalars['String']>;
+  url_not?: Maybe<Scalars['String']>;
+  url_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  url_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  url_contains?: Maybe<Scalars['String']>;
+  url_not_contains?: Maybe<Scalars['String']>;
+  content_exists?: Maybe<Scalars['Boolean']>;
+  OR?: Maybe<Array<Maybe<ResourceFilter>>>;
+  AND?: Maybe<Array<Maybe<ResourceFilter>>>;
+}
+
+export interface CfAuthorNestedFilter {
+  sys?: Maybe<SysFilter>;
+  name_exists?: Maybe<Scalars['Boolean']>;
+  name?: Maybe<Scalars['String']>;
+  name_not?: Maybe<Scalars['String']>;
+  name_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  name_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  name_contains?: Maybe<Scalars['String']>;
+  name_not_contains?: Maybe<Scalars['String']>;
+  picture_exists?: Maybe<Scalars['Boolean']>;
+  OR?: Maybe<Array<Maybe<CfAuthorNestedFilter>>>;
+  AND?: Maybe<Array<Maybe<CfAuthorNestedFilter>>>;
+}
+
+export enum ResourceOrder {
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  ResourceTypeAsc = 'resourceType_ASC',
+  ResourceTypeDesc = 'resourceType_DESC',
+  DurationAsc = 'duration_ASC',
+  DurationDesc = 'duration_DESC',
+  IsWipAsc = 'isWip_ASC',
+  IsWipDesc = 'isWip_DESC',
+  ReleasedAtAsc = 'releasedAt_ASC',
+  ReleasedAtDesc = 'releasedAt_DESC',
+  UrlAsc = 'url_ASC',
+  UrlDesc = 'url_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export interface TextBlockFilter {
+  sys?: Maybe<SysFilter>;
+  text_exists?: Maybe<Scalars['Boolean']>;
+  text?: Maybe<Scalars['String']>;
+  text_not?: Maybe<Scalars['String']>;
+  text_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  text_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  text_contains?: Maybe<Scalars['String']>;
+  text_not_contains?: Maybe<Scalars['String']>;
+  OR?: Maybe<Array<Maybe<TextBlockFilter>>>;
+  AND?: Maybe<Array<Maybe<TextBlockFilter>>>;
+}
+
+export enum TextBlockOrder {
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export interface TextBlockCollection {
+  __typename?: 'TextBlockCollection';
+  total: Scalars['Int'];
+  skip: Scalars['Int'];
+  limit: Scalars['Int'];
+  items: Array<Maybe<TextBlock>>;
+}
+
+export interface BlogPostFilter {
+  sys?: Maybe<SysFilter>;
+  text_exists?: Maybe<Scalars['Boolean']>;
+  text?: Maybe<Scalars['String']>;
+  text_not?: Maybe<Scalars['String']>;
+  text_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  text_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  text_contains?: Maybe<Scalars['String']>;
+  text_not_contains?: Maybe<Scalars['String']>;
+  OR?: Maybe<Array<Maybe<BlogPostFilter>>>;
+  AND?: Maybe<Array<Maybe<BlogPostFilter>>>;
+}
+
+export enum BlogPostOrder {
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export interface BlogPostCollection {
+  __typename?: 'BlogPostCollection';
+  total: Scalars['Int'];
+  skip: Scalars['Int'];
+  limit: Scalars['Int'];
+  items: Array<Maybe<BlogPost>>;
+}
+
 export interface CodeBlockFilter {
   sys?: Maybe<SysFilter>;
   code_exists?: Maybe<Scalars['Boolean']>;
@@ -936,146 +1338,6 @@ export interface CodeBlockCollection {
   items: Array<Maybe<CodeBlock>>;
 }
 
-export interface TextBlockFilter {
-  sys?: Maybe<SysFilter>;
-  text_exists?: Maybe<Scalars['Boolean']>;
-  text?: Maybe<Scalars['String']>;
-  text_not?: Maybe<Scalars['String']>;
-  text_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  text_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  text_contains?: Maybe<Scalars['String']>;
-  text_not_contains?: Maybe<Scalars['String']>;
-  OR?: Maybe<Array<Maybe<TextBlockFilter>>>;
-  AND?: Maybe<Array<Maybe<TextBlockFilter>>>;
-}
-
-export enum TextBlockOrder {
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
-}
-
-export interface TextBlockCollection {
-  __typename?: 'TextBlockCollection';
-  total: Scalars['Int'];
-  skip: Scalars['Int'];
-  limit: Scalars['Int'];
-  items: Array<Maybe<TextBlock>>;
-}
-
-export interface ResourceFilter {
-  author?: Maybe<CfAuthorNestedFilter>;
-  content?: Maybe<CfRecipeNestedFilter>;
-  sys?: Maybe<SysFilter>;
-  title_exists?: Maybe<Scalars['Boolean']>;
-  title?: Maybe<Scalars['String']>;
-  title_not?: Maybe<Scalars['String']>;
-  title_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  title_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  title_contains?: Maybe<Scalars['String']>;
-  title_not_contains?: Maybe<Scalars['String']>;
-  slug_exists?: Maybe<Scalars['Boolean']>;
-  slug?: Maybe<Scalars['String']>;
-  slug_not?: Maybe<Scalars['String']>;
-  slug_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  slug_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  slug_contains?: Maybe<Scalars['String']>;
-  slug_not_contains?: Maybe<Scalars['String']>;
-  resourceType_exists?: Maybe<Scalars['Boolean']>;
-  resourceType?: Maybe<Scalars['String']>;
-  resourceType_not?: Maybe<Scalars['String']>;
-  resourceType_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  resourceType_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  resourceType_contains?: Maybe<Scalars['String']>;
-  resourceType_not_contains?: Maybe<Scalars['String']>;
-  duration_exists?: Maybe<Scalars['Boolean']>;
-  duration?: Maybe<Scalars['Int']>;
-  duration_not?: Maybe<Scalars['Int']>;
-  duration_in?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  duration_not_in?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  duration_gt?: Maybe<Scalars['Int']>;
-  duration_gte?: Maybe<Scalars['Int']>;
-  duration_lt?: Maybe<Scalars['Int']>;
-  duration_lte?: Maybe<Scalars['Int']>;
-  isWip_exists?: Maybe<Scalars['Boolean']>;
-  isWip?: Maybe<Scalars['Boolean']>;
-  isWip_not?: Maybe<Scalars['Boolean']>;
-  releasedAt_exists?: Maybe<Scalars['Boolean']>;
-  releasedAt?: Maybe<Scalars['DateTime']>;
-  releasedAt_not?: Maybe<Scalars['DateTime']>;
-  releasedAt_in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
-  releasedAt_not_in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
-  releasedAt_gt?: Maybe<Scalars['DateTime']>;
-  releasedAt_gte?: Maybe<Scalars['DateTime']>;
-  releasedAt_lt?: Maybe<Scalars['DateTime']>;
-  releasedAt_lte?: Maybe<Scalars['DateTime']>;
-  summary_exists?: Maybe<Scalars['Boolean']>;
-  summary?: Maybe<Scalars['String']>;
-  summary_not?: Maybe<Scalars['String']>;
-  summary_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  summary_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  summary_contains?: Maybe<Scalars['String']>;
-  summary_not_contains?: Maybe<Scalars['String']>;
-  url_exists?: Maybe<Scalars['Boolean']>;
-  url?: Maybe<Scalars['String']>;
-  url_not?: Maybe<Scalars['String']>;
-  url_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  url_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  url_contains?: Maybe<Scalars['String']>;
-  url_not_contains?: Maybe<Scalars['String']>;
-  OR?: Maybe<Array<Maybe<ResourceFilter>>>;
-  AND?: Maybe<Array<Maybe<ResourceFilter>>>;
-}
-
-export interface CfAuthorNestedFilter {
-  sys?: Maybe<SysFilter>;
-  name_exists?: Maybe<Scalars['Boolean']>;
-  name?: Maybe<Scalars['String']>;
-  name_not?: Maybe<Scalars['String']>;
-  name_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  name_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  name_contains?: Maybe<Scalars['String']>;
-  name_not_contains?: Maybe<Scalars['String']>;
-  OR?: Maybe<Array<Maybe<CfAuthorNestedFilter>>>;
-  AND?: Maybe<Array<Maybe<CfAuthorNestedFilter>>>;
-}
-
-export interface CfRecipeNestedFilter {
-  sys?: Maybe<SysFilter>;
-  OR?: Maybe<Array<Maybe<CfRecipeNestedFilter>>>;
-  AND?: Maybe<Array<Maybe<CfRecipeNestedFilter>>>;
-}
-
-export enum ResourceOrder {
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  SlugAsc = 'slug_ASC',
-  SlugDesc = 'slug_DESC',
-  ResourceTypeAsc = 'resourceType_ASC',
-  ResourceTypeDesc = 'resourceType_DESC',
-  DurationAsc = 'duration_ASC',
-  DurationDesc = 'duration_DESC',
-  IsWipAsc = 'isWip_ASC',
-  IsWipDesc = 'isWip_DESC',
-  ReleasedAtAsc = 'releasedAt_ASC',
-  ReleasedAtDesc = 'releasedAt_DESC',
-  UrlAsc = 'url_ASC',
-  UrlDesc = 'url_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
-}
-
 export interface FrameFilter {
   sys?: Maybe<SysFilter>;
   title_exists?: Maybe<Scalars['Boolean']>;
@@ -1101,6 +1363,7 @@ export interface FrameFilter {
   duration_gte?: Maybe<Scalars['Int']>;
   duration_lt?: Maybe<Scalars['Int']>;
   duration_lte?: Maybe<Scalars['Int']>;
+  blockCollection_exists?: Maybe<Scalars['Boolean']>;
   OR?: Maybe<Array<Maybe<FrameFilter>>>;
   AND?: Maybe<Array<Maybe<FrameFilter>>>;
 }
@@ -1124,6 +1387,7 @@ export enum FrameOrder {
 
 export interface RecipeFilter {
   sys?: Maybe<SysFilter>;
+  frameCollection_exists?: Maybe<Scalars['Boolean']>;
   OR?: Maybe<Array<Maybe<RecipeFilter>>>;
   AND?: Maybe<Array<Maybe<RecipeFilter>>>;
 }
@@ -1199,6 +1463,7 @@ export interface SkillFilter {
   slug_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
   slug_contains?: Maybe<Scalars['String']>;
   slug_not_contains?: Maybe<Scalars['String']>;
+  topic_exists?: Maybe<Scalars['Boolean']>;
   OR?: Maybe<Array<Maybe<SkillFilter>>>;
   AND?: Maybe<Array<Maybe<SkillFilter>>>;
 }
@@ -1247,6 +1512,7 @@ export interface AuthorFilter {
   name_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
   name_contains?: Maybe<Scalars['String']>;
   name_not_contains?: Maybe<Scalars['String']>;
+  picture_exists?: Maybe<Scalars['Boolean']>;
   OR?: Maybe<Array<Maybe<AuthorFilter>>>;
   AND?: Maybe<Array<Maybe<AuthorFilter>>>;
 }
