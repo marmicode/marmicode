@@ -1,5 +1,9 @@
 import { Injectable, NgModule } from '@angular/core';
-import { ContentfulModule, Query } from '@marmicode/contentful-api';
+import {
+  ContentfulModule,
+  Recipe as ContentfulRecipe,
+  Query,
+} from '@marmicode/contentful-api';
 import { createCodeBlock, createTextBlock } from '@marmicode/block-api';
 import { BlockGroup } from '@marmicode/block-api';
 import { ResourceType } from '@marmicode/resource-api';
@@ -38,9 +42,11 @@ const getRecipeFirstFrameSlug = gql`
     resourceCollection(limit: 1, where: { slug: $recipeSlug }) {
       items {
         content {
-          frameCollection(limit: 1) {
-            items {
-              slug
+          ... on Recipe {
+            frameCollection(limit: 1) {
+              items {
+                slug
+              }
             }
           }
         }
@@ -60,25 +66,28 @@ const getRecipe = gql`
         slug
         title
         content {
-          frameCollection {
-            items {
-              duration
-              slug
-              title
-              blockCollection {
-                items {
-                  __typename
-                  ... on CodeBlock {
-                    code
-                    language
-                  }
-                  ... on TextBlock {
-                    text
-                  }
+            ... on Recipe {
+                frameCollection {
+                    items {
+                        duration
+                        slug
+                        title
+                        blockCollection {
+                            items {
+                                __typename
+                                ... on CodeBlock {
+                                    code
+                                    language
+                                }
+                                ... on TextBlock {
+                                    text
+                                }
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
+            }
         }
       }
     }
@@ -100,8 +109,8 @@ export class RecipeRepository {
       .pipe(
         map(
           ({ data }) =>
-            data.resourceCollection.items[0].content.frameCollection.items[0]
-              .slug
+            (data.resourceCollection.items[0].content as ContentfulRecipe)
+              .frameCollection.items[0].slug
         )
       );
   }
@@ -122,27 +131,28 @@ export class RecipeRepository {
             slug: resource.slug,
             title: resource.title,
             type: resource.resourceType as any,
-            frames: resource.content.frameCollection.items.map((frame) =>
-              createFrame({
-                blocks: frame.blockCollection.items.map((block) => {
-                  switch (block.__typename) {
-                    case 'CodeBlock':
-                      return createCodeBlock({
-                        code: block.code,
-                        language: block.language,
-                      });
-                    case 'TextBlock':
-                      return createTextBlock({
-                        text: block.text,
-                      });
-                    default:
-                      return null;
-                  }
-                }),
-                duration: frame.duration,
-                slug: frame.slug,
-                title: frame.title,
-              })
+            frames: (resource.content as ContentfulRecipe).frameCollection.items.map(
+              (frame) =>
+                createFrame({
+                  blocks: frame.blockCollection.items.map((block) => {
+                    switch (block.__typename) {
+                      case 'CodeBlock':
+                        return createCodeBlock({
+                          code: block.code,
+                          language: block.language,
+                        });
+                      case 'TextBlock':
+                        return createTextBlock({
+                          text: block.text,
+                        });
+                      default:
+                        return null;
+                    }
+                  }),
+                  duration: frame.duration,
+                  slug: frame.slug,
+                  title: frame.title,
+                })
             ),
           });
         })
