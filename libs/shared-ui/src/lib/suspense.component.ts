@@ -7,6 +7,7 @@ import {
   NgModule,
   TemplateRef,
 } from '@angular/core';
+import { LoadingModule } from '@marmicode/shared-ui';
 import { LetModule } from '@rx-angular/template';
 import { Observable } from 'rxjs';
 
@@ -19,7 +20,7 @@ import { Observable } from 'rxjs';
         data$;
         let data;
         rxError: errorWrapperTemplate;
-        rxSuspense: suspenseTemplate || placeholderTemplate
+        rxSuspense: suspenseTemplate || defaultSuspenseTemplate
       "
     >
       <ng-container
@@ -29,10 +30,12 @@ import { Observable } from 'rxjs';
     <ng-template #errorWrapperTemplate let-error="$rxError">
       <ng-container
         *ngTemplateOutlet="errorTemplate; context: { $implicit: error }"
-      ></ng-container
-    ></ng-template>
+      ></ng-container>
+    </ng-template>
 
-    <ng-template #placeholderTemplate></ng-template>
+    <ng-template #defaultSuspenseTemplate>
+      <mc-loading></mc-loading>
+    </ng-template>
   `,
 })
 export class SuspenseComponent<T = unknown> {
@@ -45,6 +48,6 @@ export class SuspenseComponent<T = unknown> {
 @NgModule({
   declarations: [SuspenseComponent],
   exports: [SuspenseComponent],
-  imports: [CommonModule, LetModule],
+  imports: [CommonModule, LetModule, LoadingModule],
 })
 export class SuspenseModule {}
