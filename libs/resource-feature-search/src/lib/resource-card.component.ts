@@ -59,7 +59,9 @@ import { SkillChipModule } from './skill-chip.component';
         <p>
           {{ resource.summary }}
         </p>
-        <section class="list-container">
+
+        <!-- Skills. -->
+        <section *ngIf="resource.skills?.length > 0" class="list-container">
           <h3 [style.color]="color" class="list-title">You Will Learn</h3>
           <div fxLayout="row wrap">
             <mc-skill-chip
@@ -68,6 +70,8 @@ import { SkillChipModule } from './skill-chip.component';
             ></mc-skill-chip>
           </div>
         </section>
+
+        <!-- Required skills. -->
         <section
           *ngIf="resource.requiredSkills?.length > 0"
           class="list-container"
