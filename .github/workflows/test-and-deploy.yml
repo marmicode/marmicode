@@ -36,11 +36,11 @@ jobs:
       - name: Should run E2E?
         id: should-run-e2e
         run: >
-          E2E_COUNT=$(yarn --silent nx print-affected
-          --base=deployed/marmicode-next | yarn json projects | grep -c e2e)
+          # `grep -c` fails if list is empty (no e2e tests to run)
 
-          SHOULD_RUN_E2E=$(test "$E2E_COUNT" != 0 && echo true || echo false)
-
+          SHOULD_RUN_E2E=$(yarn --silent nx print-affected
+          --base=deployed/marmicode-next \
+            | yarn json projects | grep -c e2e && echo true || echo false)
           echo "::set-output name=should-run-e2e::$SHOULD_RUN_E2E"
       - name: E2E
         if: steps.should-run-e2e.outputs.should-run-e2e != false
