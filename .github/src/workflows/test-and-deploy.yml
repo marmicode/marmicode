@@ -6,8 +6,6 @@ on:
   push:
     branches:
       - "*"
-    tags:
-      - "*"
     # Ignore deployed/* tags as they are marker of the last deployed version.
     tags-ignore:
       - deployed/*

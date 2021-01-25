@@ -6,8 +6,6 @@ name: Test & Deploy
   push:
     branches:
       - '*'
-    tags:
-      - '*'
     tags-ignore:
       - deployed/*
 env:
