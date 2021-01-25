@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { InMemoryCache } from '@apollo/client/core';
-import { Apollo, APOLLO_OPTIONS } from 'apollo-angular';
 import {
-  BlogPostRepository,
-  BlogPostRepositoryModule,
-} from './blog-post-repository.service';
+  APOLLO_TESTING_CACHE,
+  ApolloTestingModule,
+} from 'apollo-angular/testing';
+import { BlogPostRepository } from './blog-post-repository.service';
 
 describe('BlogPostRepository', () => {
   let blogPostRepository: BlogPostRepository;
@@ -13,26 +13,22 @@ describe('BlogPostRepository', () => {
   beforeEach(async () => {
     mockResourceCollectionResolver = jest.fn();
     await TestBed.configureTestingModule({
-      imports: [BlogPostRepositoryModule],
+      imports: [ApolloTestingModule],
       providers: [
-        Apollo,
+        BlogPostRepository,
         {
-          provide: APOLLO_OPTIONS,
-          useFactory() {
-            return {
-              cache: new InMemoryCache({
-                typePolicies: {
-                  Query: {
-                    fields: {
-                      resourceCollection: {
-                        read: mockResourceCollectionResolver,
-                      },
-                    },
+          provide: APOLLO_TESTING_CACHE,
+          useValue: new InMemoryCache({
+            typePolicies: {
+              Query: {
+                fields: {
+                  resourceCollection: {
+                    read: mockResourceCollectionResolver,
                   },
                 },
-              }),
-            };
-          },
+              },
+            },
+          }),
         },
       ],
     });
