@@ -2,12 +2,8 @@
 
 name: Test & Deploy
 'on':
-  workflow_dispatch: {}
-  push:
-    branches:
-      - '*'
-    tags:
-      - latest
+  - push
+  - workflow_dispatch
 env:
   CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
 jobs:
@@ -108,9 +104,13 @@ jobs:
         with:
           JOB: ${{ toJson(job) }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  deploy:
+  deploy-marmicode-next:
+    name: 🚀 Marmicode Next
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/tags/latest'
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: Marmicode Next
+      url: https://marmicode-next.web.app
     needs:
       - e2e
       - lint
@@ -128,19 +128,61 @@ jobs:
           key: node-modules-${{ hashFiles('yarn.lock') }}-3
       - name: Install
         run: yarn install --frozen-lockfile
-      - name: Get project name
-        id: project
-        run: >
-          PROJECT=$([ $GITHUB_REF == 'refs/tags/latest' ] && echo marmicode ||
-          echo marmicode-next)
-
-          echo "::set-output name=project::$PROJECT"
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: tools/deploy.sh ${{ steps.project.outputs.project }}
-      - name: Tag deployed/marmicode-next or deployed/marmicode
-        run: git tag -f deployed/${{ steps.project.outputs.project }}
+        run: tools/deploy.sh marmicode-next
+      - name: Tag deployed/marmicode-next
+        run: git tag -f deployed/marmicode-next
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          force: true
+          tags: true
+      - name: Upload dist (Cypress videos / build output etc...) on failure
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: dist
+          path: dist
+      - name: Notify on failure
+        uses: pioug/le-slack-message@v1.0.0
+        if: failure()
+        with:
+          JOB: ${{ toJson(job) }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  deploy-marmicode:
+    name: 🚀 Marmicode
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: Marmicode
+      url: https://marmicode.io
+    needs:
+      - e2e
+      - lint
+      - test
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('yarn.lock') }}-3
+      - name: Install
+        run: yarn install --frozen-lockfile
+      - name: Deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: tools/deploy.sh marmicode
+      - name: Tag deployed/marmicode
+        run: git tag -f deployed/marmicode
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:

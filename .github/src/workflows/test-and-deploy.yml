@@ -1,13 +1,9 @@
 name: Test & Deploy
 
 on:
+  - push
   # Allow manual trigger.
-  workflow_dispatch: {}
-  push:
-    branches:
-      - '*'
-    tags:
-      - latest
+  - workflow_dispatch
 
 x-steps:
   cache-node-modules: &cache-node-modules
@@ -115,9 +111,13 @@ jobs:
         run: yarn affected:test --base=deployed/marmicode-next
       - *slack-notify-failure
 
-  deploy:
+  deploy-marmicode-next:
+    name: 🚀 Marmicode Next
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/tags/latest'
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: Marmicode Next
+      url: https://marmicode-next.web.app
     needs:
       - e2e
       - lint
@@ -127,17 +127,39 @@ jobs:
       - *setup-node
       - *cache-node-modules
       - *yarn-install
-      - name: Get project name
-        id: project
-        run: |
-          PROJECT=$([ $GITHUB_REF == 'refs/tags/latest' ] && echo marmicode || echo marmicode-next)
-          echo "::set-output name=project::$PROJECT"
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: tools/deploy.sh ${{ steps.project.outputs.project }}
-      - name: Tag deployed/marmicode-next or deployed/marmicode
-        run: git tag -f deployed/${{ steps.project.outputs.project }}
+        run: tools/deploy.sh marmicode-next
+      - name: Tag deployed/marmicode-next
+        run: git tag -f deployed/marmicode-next
       - *push
       - *upload-dist-on-failure
       - *slack-notify-failure
+
+  deploy-marmicode:
+    name: 🚀 Marmicode
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: Marmicode
+      url: https://marmicode.io
+    needs:
+      - e2e
+      - lint
+      - test
+    steps:
+      - *checkout
+      - *setup-node
+      - *cache-node-modules
+      - *yarn-install
+      - name: Deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: tools/deploy.sh marmicode
+      - name: Tag deployed/marmicode
+        run: git tag -f deployed/marmicode
+      - *push
+      - *upload-dist-on-failure
+      - *slack-notify-failure
+
