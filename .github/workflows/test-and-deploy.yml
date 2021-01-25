@@ -4,6 +4,10 @@ name: Test & Deploy
 'on':
   workflow_dispatch: {}
   push:
+    branches:
+      - '*'
+    tags:
+      - '*'
     tags-ignore:
       - deployed/*
 env:
