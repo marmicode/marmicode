@@ -72,6 +72,25 @@ describe('SuspenseComponent', () => {
 
     expect(fixture.debugElement.nativeElement.textContent).toEqual('💥');
   });
+
+  it('should show default error template', async () => {
+    @Component({
+      template: ` <mc-suspense [data$]="data$">
+        <ng-template #data let-value>{{ value }}</ng-template>
+      </mc-suspense>`,
+    })
+    class TestedComponent {
+      data$ = throwError('💥');
+    }
+
+    const fixture = await render(TestedComponent);
+
+    const errorEl = fixture.debugElement.nativeElement.querySelector(
+      'mc-error'
+    );
+    expect(errorEl).toBeTruthy();
+    expect(errorEl.textContent).toBe('Oups! Something went wrong.');
+  });
 });
 
 async function render(componentType: Type<unknown>) {
