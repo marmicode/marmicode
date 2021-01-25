@@ -138,7 +138,7 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: tools/deploy.sh ${{ steps.project.outputs.project }}
-      - name: Tag deployed/next or deployed/prod
+      - name: Tag deployed/marmicode-next or deployed/marmicode
         run: git tag -f deployed/${{ steps.project.outputs.project }}
       - *push
       - *upload-dist-on-failure
