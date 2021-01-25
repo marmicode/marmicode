@@ -1,6 +1,6 @@
 import { Component, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { SuspenseComponent, SuspenseModule } from './suspense.component';
 
 describe('SuspenseComponent', () => {
@@ -17,6 +17,22 @@ describe('SuspenseComponent', () => {
     const fixture = await render(TestedComponent);
 
     expect(fixture.debugElement.nativeElement.textContent).toEqual('42');
+  });
+
+  it('should show error template', async () => {
+    @Component({
+      template: `<mc-suspense [data$]="data$">
+        <ng-template #data let-value>{{ value }}</ng-template>
+        <ng-template #error let-err>💥</ng-template>
+      </mc-suspense>`,
+    })
+    class TestedComponent {
+      data$ = throwError('💥');
+    }
+
+    const fixture = await render(TestedComponent);
+
+    expect(fixture.debugElement.nativeElement.textContent).toEqual('💥');
   });
 });
 
