@@ -9,7 +9,7 @@ import { Skill } from './skill';
 
 const allSkills = gql`
   ${skillFragment}
-  query Skills {
+  query getAllSkills {
     skillCollection(order: [label_ASC]) {
       items {
         ...SkillFragment
