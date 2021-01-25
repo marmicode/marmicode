@@ -32,7 +32,7 @@
       "tags": ["scope:app"]
     },
     "marmicode-e2e": {
-      "tags": [],
+      "tags": ["scope:e2e"],
       "implicitDependencies": ["marmicode"]
     },
     "contentful-api": {

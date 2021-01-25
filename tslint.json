@@ -64,6 +64,10 @@
             "onlyDependOnLibsWithTags": ["type:feature", "type:utils"]
           },
           {
+            "sourceTag": "scope:e2e",
+            "onlyDependOnLibsWithTags": ["type:feature"]
+          },
+          {
             "sourceTag": "type:feature",
             "onlyDependOnLibsWithTags": [
               "type:api",
