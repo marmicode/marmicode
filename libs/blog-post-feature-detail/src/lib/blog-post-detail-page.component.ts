@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlogPostModule } from '@marmicode/blog-post-ui';
 import { blogPostDetailRouterHelper } from '@marmicode/shared-router-helpers';
-import { PageModule } from '@marmicode/shared-ui';
+import { PageModule, SuspenseModule } from '@marmicode/shared-ui';
 import { map, switchMap } from 'rxjs/operators';
 import { BlogPostRepository } from './blog-post-repository.service';
 
@@ -11,10 +11,11 @@ import { BlogPostRepository } from './blog-post-repository.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-blog-post-detail-page',
   template: ` <mc-page>
-    <mc-blog-post
-      *ngIf="blogPost$ | async as blogPost"
-      [blogPost]="blogPost"
-    ></mc-blog-post>
+    <mc-suspense [data$]="blogPost$">
+      <ng-template #data let-blogPost>
+        <mc-blog-post [blogPost]="blogPost"></mc-blog-post>
+      </ng-template>
+    </mc-suspense>
   </mc-page>`,
 })
 export class BlogPostDetailPageComponent {
@@ -36,6 +37,6 @@ export class BlogPostDetailPageComponent {
 @NgModule({
   declarations: [BlogPostDetailPageComponent],
   exports: [BlogPostDetailPageComponent],
-  imports: [CommonModule, PageModule, BlogPostModule],
+  imports: [CommonModule, PageModule, BlogPostModule, SuspenseModule],
 })
 export class BlogPostDetailPageModule {}
