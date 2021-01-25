@@ -28,11 +28,22 @@ jobs:
         run: >-
           echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
           && sudo sysctl -p
+      - name: Should run E2E?
+        id: should-run-e2e
+        run: >
+          E2E_COUNT=$(yarn --silent nx print-affected --base=latest | yarn json
+          projects | grep -c e2e)
+
+          SHOULD_RUN_E2E=$(test "$E2E_COUNT" != 0 && echo true || echo false)
+
+          echo "::set-output name=should-run-e2e::$SHOULD_RUN_E2E"
       - name: E2E
+        if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: >-
           yarn affected:e2e --base=latest --head=HEAD --headless
           --browser=chrome
       - name: Check Percy Review
+        if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: yarn percy-review-approved
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2

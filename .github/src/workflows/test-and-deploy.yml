@@ -62,9 +62,20 @@ jobs:
       - *yarn-install
       - name: Increase file watchers to avoid storybook warnings
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+        # Check if we should run e2e tests & percy review.
+        # If no tests are ran or if we don't take any snapshots,
+        # percy will fail.
+      - name: Should run E2E?
+        id: should-run-e2e
+        run: |
+          E2E_COUNT=$(yarn --silent nx print-affected --base=latest | yarn json projects | grep -c e2e)
+          SHOULD_RUN_E2E=$(test "$E2E_COUNT" != 0 && echo true || echo false)
+          echo "::set-output name=should-run-e2e::$SHOULD_RUN_E2E"
       - name: E2E
+        if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: yarn affected:e2e --base=latest --head=HEAD --headless --browser=chrome
       - name: Check Percy Review
+        if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: yarn percy-review-approved
       - *upload-dist-on-failure
       - *slack-notify-failure
