@@ -8,7 +8,6 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { LetModule } from '@rx-angular/template';
-import { LetViewContext } from '@rx-angular/template/lib/let';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -29,10 +28,7 @@ import { Observable } from 'rxjs';
     </ng-container>
     <ng-template #errorWrapperTemplate let-error="$rxError">
       <ng-container
-        *ngTemplateOutlet="
-          errorTemplate || placeholderTemplate;
-          context: { $implicit: error }
-        "
+        *ngTemplateOutlet="errorTemplate; context: { $implicit: error }"
       ></ng-container
     ></ng-template>
 
