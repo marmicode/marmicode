@@ -45,20 +45,9 @@ import { Observable } from 'rxjs';
 
     <!-- Default suspense template. -->
     <ng-template #defaultSuspenseTemplate>
-      <div class="loader-container">
-        <mc-loading></mc-loading>
-      </div>
+      <mc-loading></mc-loading>
     </ng-template>
   `,
-  styles: [
-    `
-      .loader-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-      }
-    `,
-  ],
 })
 export class SuspenseComponent<T = unknown> {
   @ContentChild('data') dataTemplate: TemplateRef<{ $implicit: T }>;

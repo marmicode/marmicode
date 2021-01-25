@@ -13,10 +13,10 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
     `
       :host {
         max-width: 100%;
-      }
 
-      .loading-animation {
-        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
       }
     `,
   ],
