@@ -1,9 +1,13 @@
 import { Component, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { of, throwError } from 'rxjs';
+import { NEVER, of, throwError } from 'rxjs';
 import { SuspenseComponent, SuspenseModule } from './suspense.component';
 
 describe('SuspenseComponent', () => {
+  beforeEach(() => jest.spyOn(console, 'error'));
+
+  afterEach(() => jest.resetAllMocks());
+
   it('should subscribe and forward data to projected content', async () => {
     @Component({
       template: `<mc-suspense [data$]="data$">
@@ -17,6 +21,22 @@ describe('SuspenseComponent', () => {
     const fixture = await render(TestedComponent);
 
     expect(fixture.debugElement.nativeElement.textContent).toEqual('42');
+  });
+
+  it('should show suspense template', async () => {
+    @Component({
+      template: `<mc-suspense [data$]="data$">
+        <ng-template #data let-value>{{ value }}</ng-template>
+        <ng-template #suspense>⏳</ng-template>
+      </mc-suspense>`,
+    })
+    class TestedComponent {
+      data$ = NEVER;
+    }
+
+    const fixture = await render(TestedComponent);
+
+    expect(fixture.debugElement.nativeElement.textContent).toEqual('⏳');
   });
 
   it('should show error template', async () => {
