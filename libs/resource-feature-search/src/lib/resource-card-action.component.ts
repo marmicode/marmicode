@@ -12,7 +12,10 @@ import {
   getResourceTypeColor,
   ResourceType,
 } from '@marmicode/resource-core';
-import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
+import {
+  blogPostDetailRouterHelper,
+  recipeDetailRouterHelper,
+} from '@marmicode/shared-router-helpers';
 import { LinkModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
 
@@ -44,6 +47,10 @@ export class ResourceCardActionComponent implements OnChanges {
     ResourceType,
     (slug: string) => string[]
   >([
+    [
+      ResourceType.BlogPost,
+      (slug) => blogPostDetailRouterHelper.blogPostDetail(slug),
+    ],
     [
       ResourceType.Recipe,
       (slug) => recipeDetailRouterHelper.recipeDetail(slug),
