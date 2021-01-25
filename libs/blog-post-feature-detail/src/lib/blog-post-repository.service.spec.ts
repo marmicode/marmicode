@@ -10,9 +10,9 @@ describe('BlogPostRepository', () => {
   let blogPostRepository: BlogPostRepository;
   let mockResourceCollectionResolver: jest.Mock;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     mockResourceCollectionResolver = jest.fn();
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       imports: [ApolloTestingModule],
       providers: [
         BlogPostRepository,
