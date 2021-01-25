@@ -5,5 +5,5 @@ set -e
 
 export PERCY_PROJECT=marmicode/marmicode
 COMMIT_HASH=$(git rev-parse HEAD)
-REVIEW_STATE=$(percy-poller --sha "$COMMIT_HASH" | npx json 'review-state')
+REVIEW_STATE=$(yarn percy-poller --sha "$COMMIT_HASH" | yarn json 'review-state')
 test "$REVIEW_STATE" = "approved"
