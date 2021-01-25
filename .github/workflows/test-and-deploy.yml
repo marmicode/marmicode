@@ -2,7 +2,9 @@
 
 name: Test & Deploy
 'on':
-  - push
+  push:
+    tags-ignore:
+      - deployed/*
 env:
   CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
 jobs:
@@ -40,7 +42,7 @@ jobs:
       - name: E2E
         if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: >-
-          yarn affected:e2e --base=latest --head=HEAD --headless
+          yarn affected:e2e --base=deployed/marmicode-next --headless
           --browser=chrome
       - name: Check Percy Review
         if: steps.should-run-e2e.outputs.should-run-e2e != false
@@ -73,7 +75,7 @@ jobs:
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Lint
-        run: yarn affected:lint --base=latest --head=HEAD
+        run: yarn affected:lint --base=deployed/marmicode-next
       - name: Notify on failure
         uses: pioug/le-slack-message@v1.0.0
         if: failure()
@@ -96,7 +98,7 @@ jobs:
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Test
-        run: yarn affected:test --base=latest --head=HEAD
+        run: yarn affected:test --base=deployed/marmicode-next
       - name: Notify on failure
         uses: pioug/le-slack-message@v1.0.0
         if: failure()
@@ -133,8 +135,16 @@ jobs:
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          PROJECT: ${{ steps.project.outputs.project }}
-        run: tools/deploy.sh $PROJECT
+        run: tools/deploy.sh ${{ steps.project.outputs.project }}
+      - name: Tag deployed/next or deployed/prod
+        run: git tag -f deployed/${{ steps.project.outputs.project }}
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          force: true
+          tag: true
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()

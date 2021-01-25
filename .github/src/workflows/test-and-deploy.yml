@@ -1,7 +1,10 @@
 name: Test & Deploy
 
 on:
-  - push
+  push:
+    # Ignore deployed/* tags as they are marker of the last deployed version.
+    tags-ignore:
+      - deployed/*
 
 x-steps:
 
@@ -16,6 +19,15 @@ x-steps:
     with:
       # Checkout tags so we can use 'affected:* --base=latest'
       fetch-depth: 0
+
+  push: &push
+    name: Push changes
+    uses: ad-m/github-push-action@master
+    with:
+      github_token: ${{ secrets.GITHUB_TOKEN }}
+      branch: ${{ github.ref }}
+      force: true
+      tag: true
 
   setup-node: &setup-node
     uses: actions/setup-node@v1
@@ -73,7 +85,7 @@ jobs:
           echo "::set-output name=should-run-e2e::$SHOULD_RUN_E2E"
       - name: E2E
         if: steps.should-run-e2e.outputs.should-run-e2e != false
-        run: yarn affected:e2e --base=latest --head=HEAD --headless --browser=chrome
+        run: yarn affected:e2e --base=deployed/marmicode-next --headless --browser=chrome
       - name: Check Percy Review
         if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: yarn percy-review-approved
@@ -88,7 +100,7 @@ jobs:
       - *cache-node-modules
       - *yarn-install
       - name: Lint
-        run: yarn affected:lint --base=latest --head=HEAD
+        run: yarn affected:lint --base=deployed/marmicode-next
       - *slack-notify-failure
 
   test:
@@ -99,7 +111,7 @@ jobs:
       - *cache-node-modules
       - *yarn-install
       - name: Test
-        run: yarn affected:test --base=latest --head=HEAD
+        run: yarn affected:test --base=deployed/marmicode-next
       - *slack-notify-failure
 
   deploy:
@@ -122,7 +134,9 @@ jobs:
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          PROJECT: ${{ steps.project.outputs.project }}
-        run: tools/deploy.sh $PROJECT
+        run: tools/deploy.sh ${{ steps.project.outputs.project }}
+      - name: Tag deployed/next or deployed/prod
+        run: git tag -f deployed/${{ steps.project.outputs.project }}
+      - *push
       - *upload-dist-on-failure
       - *slack-notify-failure
