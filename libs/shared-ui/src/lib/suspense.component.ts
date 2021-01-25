@@ -15,11 +15,16 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-suspense',
   template: `
-    <ng-container *rxLet="data$; let data; rxError: errorTemplate">
+    <ng-container *rxLet="data$; let data; rxError: errorWrapperTemplate">
       <ng-container
         *ngTemplateOutlet="dataTemplate; context: { $implicit: data }"
       ></ng-container>
     </ng-container>
+    <ng-template #errorWrapperTemplate let-error="$rxError">
+      <ng-container
+        *ngTemplateOutlet="errorTemplate; context: { $implicit: error }"
+      ></ng-container
+    ></ng-template>
   `,
 })
 export class SuspenseComponent<T = unknown> {

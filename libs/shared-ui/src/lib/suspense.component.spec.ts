@@ -23,7 +23,7 @@ describe('SuspenseComponent', () => {
     @Component({
       template: `<mc-suspense [data$]="data$">
         <ng-template #data let-value>{{ value }}</ng-template>
-        <ng-template #error let-err>💥</ng-template>
+        <ng-template #error let-err>{{ err }}</ng-template>
       </mc-suspense>`,
     })
     class TestedComponent {
