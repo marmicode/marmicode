@@ -6,8 +6,8 @@ name: Test & Deploy
   push:
     branches:
       - '*'
-    tags-ignore:
-      - deployed/*
+    tags:
+      - latest
 env:
   CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
 jobs:

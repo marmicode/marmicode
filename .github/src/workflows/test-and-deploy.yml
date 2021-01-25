@@ -6,9 +6,8 @@ on:
   push:
     branches:
       - "*"
-    # Ignore deployed/* tags as they are marker of the last deployed version.
-    tags-ignore:
-      - deployed/*
+    tags:
+      - latest
 
 x-steps:
 
