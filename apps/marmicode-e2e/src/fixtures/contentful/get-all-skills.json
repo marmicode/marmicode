@@ -1,0 +1,117 @@
+{
+  "data": {
+    "skillCollection": {
+      "items": [
+        {
+          "sys": { "id": "5QhhgFU5KE0eJRWpJoLU8A", "__typename": "Sys" },
+          "label": "Angular CLI Basics",
+          "slug": "angular-cli-basics",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "7Ec0XpecHrUiGWdB7eACQo", "__typename": "Sys" },
+          "label": "Angular Components",
+          "slug": "angular-components",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "45eKVY9T265aPEfP7jLyrb", "__typename": "Sys" },
+          "label": "Angular Lazy Loading",
+          "slug": "angular-lazy-loading",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "5wAEdDJEFeFL8C9W0VgPsl", "__typename": "Sys" },
+          "label": "Angular Modules",
+          "slug": "angular-modules",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "4CJ8EFWXg4I6X6RXZug6dO", "__typename": "Sys" },
+          "label": "Express Gateway Request Validation",
+          "slug": "express-gateway-request-validation",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "QDTym2ntmKSuIdzA5WNdE", "__typename": "Sys" },
+          "label": "Jasmine",
+          "slug": "jasmine",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "27P7hJElhFqY8iXLLPXhqg", "__typename": "Sys" },
+          "label": "Jest",
+          "slug": "jest",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "tp9edT0CX7Eo36tCvBSek", "__typename": "Sys" },
+          "label": "Limbo",
+          "slug": "limbo",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "4Y0B2kkToZ6z17r0lYtR2N", "__typename": "Sys" },
+          "label": "Mocking Angular Services",
+          "slug": "mocking-angular-services",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "58wtD6mbyF8OFGRAWfrDin", "__typename": "Sys" },
+          "label": "Moduleless Angular",
+          "slug": "moduleless-angular",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "3OdKMyrBo5hxbyDCL2Klzq", "__typename": "Sys" },
+          "label": "OpenAPI Specification Basics",
+          "slug": "openapi-specification-basics",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "5hNVJpbqTAQIorIaGPf54l", "__typename": "Sys" },
+          "label": "Propagating HTTP request cancelation",
+          "slug": "propagating-http-request-cancelation",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "31ozuyIOuBP9Q4wENZ9T3d", "__typename": "Sys" },
+          "label": "RxJS Basics",
+          "slug": "rxjs-basics",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "3RPw75Mj487lBFk2DXD9MH", "__typename": "Sys" },
+          "label": "SCAM",
+          "slug": "scam",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "2Y314h47vgRaQzuJBYCVwb", "__typename": "Sys" },
+          "label": "Setup Express Gateway",
+          "slug": "setup-express-gateway",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "7UiTMuaQp1HSjYj0BbAWV", "__typename": "Sys" },
+          "label": "TCR",
+          "slug": "tcr",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "1DBu03vVr53evNRubDJa7a", "__typename": "Sys" },
+          "label": "Timeboxed TDD",
+          "slug": "timeboxed-tdd",
+          "__typename": "Skill"
+        },
+        {
+          "sys": { "id": "7HzsEBMbnVelnuzKdUtsax", "__typename": "Sys" },
+          "label": "TypeScript Basics",
+          "slug": "typescript-basics",
+          "__typename": "Skill"
+        }
+      ],
+      "__typename": "SkillCollection"
+    }
+  }
+}
