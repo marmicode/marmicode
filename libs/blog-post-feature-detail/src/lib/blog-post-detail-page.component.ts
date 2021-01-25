@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BlogPostModule, createBlogPost } from '@marmicode/blog-post-ui';
+import { BlogPostModule } from '@marmicode/blog-post-ui';
 import { blogPostDetailRouterHelper } from '@marmicode/shared-router-helpers';
-import { LoadingModule, PageModule } from '@marmicode/shared-ui';
+import { PageModule } from '@marmicode/shared-ui';
 import { map, switchMap } from 'rxjs/operators';
 import { BlogPostRepository } from './blog-post-repository.service';
 
