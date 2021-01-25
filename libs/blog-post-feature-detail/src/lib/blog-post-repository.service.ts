@@ -30,10 +30,6 @@ export const getBlogPost = gql`
 export class BlogPostRepository {
   constructor(private _apollo: Apollo) {}
 
-  /**
-   * @deprecated 🚧 Work in progress.
-   * @todo retrieve blog post from API
-   */
   getBlogPost(blogPostSlug: string) {
     return this._apollo
       .query<Query>({

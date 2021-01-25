@@ -39,7 +39,7 @@ describe('BlogPostRepository', () => {
     blogPostRepository = TestBed.inject(BlogPostRepository);
   });
 
-  it('🚧 should query blog post and convert to `BlogPost` type', async () => {
+  it('should query blog post and convert to `BlogPost` type', async () => {
     mockResourceCollectionResolver.mockReturnValue({
       items: [
         {
@@ -48,6 +48,7 @@ describe('BlogPostRepository', () => {
           },
           title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
           content: {
+            __typename: 'BlogPost',
             text: 'Life is too short. ...',
           },
         },
@@ -66,6 +67,17 @@ describe('BlogPostRepository', () => {
       })
     );
 
-    // @todo check mock is called with the right slug
+    expect(mockResourceCollectionResolver).toBeCalledTimes(1);
+    expect(mockResourceCollectionResolver).toBeCalledWith(
+      undefined,
+      expect.objectContaining({
+        args: {
+          limit: 1,
+          where: {
+            slug: 'end-to-end-http-request-cancelation-with-rxjs-and-nestjs',
+          },
+        },
+      })
+    );
   });
 });
