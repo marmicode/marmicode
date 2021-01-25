@@ -23,9 +23,7 @@
               "apps/marmicode/src/manifest.webmanifest",
               "apps/marmicode/src/robots.txt"
             ],
-            "styles": [
-              "apps/marmicode/src/styles.scss"
-            ],
+            "styles": ["apps/marmicode/src/styles.scss"],
             "scripts": [],
             "allowedCommonJsDependencies": [
               "@babel/runtime/helpers/get",
@@ -147,9 +145,7 @@
               "ngswConfigPath": "apps/marmicode/ngsw-config.json"
             }
           },
-          "outputs": [
-            "{options.outputPath}"
-          ]
+          "outputs": ["{options.outputPath}"]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -175,10 +171,7 @@
               "apps/marmicode/tsconfig.app.json",
               "apps/marmicode/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/marmicode/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/marmicode/**/*"]
           }
         },
         "test": {
@@ -187,9 +180,7 @@
             "jestConfig": "apps/marmicode/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/apps/marmicode"
-          ]
+          "outputs": ["coverage/apps/marmicode"]
         },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
@@ -230,9 +221,7 @@
           "options": {
             "browserTarget": "marmicode:build:production",
             "serverTarget": "marmicode:server:production",
-            "routes": [
-              "/"
-            ]
+            "routes": ["/"]
           },
           "configurations": {
             "production": {}
@@ -261,13 +250,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/marmicode-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/marmicode-e2e/**/*"
-            ]
+            "tsConfig": ["apps/marmicode-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/marmicode-e2e/**/*"]
           }
         }
       }
@@ -297,9 +281,7 @@
             "jestConfig": "libs/learning-map-feature-tree/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/learning-map-feature-tree"
-          ]
+          "outputs": ["coverage/libs/learning-map-feature-tree"]
         }
       },
       "schematics": {}
@@ -329,9 +311,7 @@
             "jestConfig": "libs/resource-feature-search/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/resource-feature-search"
-          ]
+          "outputs": ["coverage/libs/resource-feature-search"]
         }
       },
       "schematics": {}
@@ -349,10 +329,7 @@
               "libs/shared-ui/tsconfig.lib.json",
               "libs/shared-ui/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared-ui/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/shared-ui/**/*"]
           }
         },
         "test": {
@@ -361,9 +338,7 @@
             "jestConfig": "libs/shared-ui/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/shared-ui"
-          ]
+          "outputs": ["coverage/libs/shared-ui"]
         }
       },
       "schematics": {}
@@ -381,10 +356,7 @@
               "libs/shared-utils/tsconfig.lib.json",
               "libs/shared-utils/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared-utils/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/shared-utils/**/*"]
           }
         },
         "test": {
@@ -393,9 +365,7 @@
             "jestConfig": "libs/shared-utils/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/shared-utils"
-          ]
+          "outputs": ["coverage/libs/shared-utils"]
         }
       },
       "schematics": {}
@@ -425,9 +395,7 @@
             "jestConfig": "libs/services-feature-presentation/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/services-feature-presentation"
-          ]
+          "outputs": ["coverage/libs/services-feature-presentation"]
         }
       },
       "schematics": {}
@@ -457,9 +425,7 @@
             "jestConfig": "libs/shared-router-helpers/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/shared-router-helpers"
-          ]
+          "outputs": ["coverage/libs/shared-router-helpers"]
         }
       },
       "schematics": {}
@@ -489,9 +455,7 @@
             "jestConfig": "libs/recipe-feature-detail/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/recipe-feature-detail"
-          ]
+          "outputs": ["coverage/libs/recipe-feature-detail"]
         }
       },
       "schematics": {}
@@ -509,10 +473,7 @@
               "libs/resource-core/tsconfig.lib.json",
               "libs/resource-core/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/resource-core/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/resource-core/**/*"]
           }
         },
         "test": {
@@ -521,9 +482,7 @@
             "jestConfig": "libs/resource-core/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/resource-core"
-          ]
+          "outputs": ["coverage/libs/resource-core"]
         }
       },
       "schematics": {}
@@ -541,10 +500,7 @@
               "libs/resource-api/tsconfig.lib.json",
               "libs/resource-api/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/resource-api/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/resource-api/**/*"]
           }
         },
         "test": {
@@ -553,9 +509,7 @@
             "jestConfig": "libs/resource-api/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/resource-api"
-          ]
+          "outputs": ["coverage/libs/resource-api"]
         }
       },
       "schematics": {}
@@ -573,10 +527,7 @@
               "libs/contentful-api/tsconfig.lib.json",
               "libs/contentful-api/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/contentful-api/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/contentful-api/**/*"]
           }
         },
         "test": {
@@ -585,9 +536,7 @@
             "jestConfig": "libs/contentful-api/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/contentful-api"
-          ]
+          "outputs": ["coverage/libs/contentful-api"]
         }
       },
       "schematics": {}
@@ -613,9 +562,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/blog-post-feature-detail"
-          ],
+          "outputs": ["coverage/libs/blog-post-feature-detail"],
           "options": {
             "jestConfig": "libs/blog-post-feature-detail/jest.config.js",
             "passWithNoTests": true
@@ -637,17 +584,12 @@
               "libs/blog-post-ui/tsconfig.spec.json",
               "libs/blog-post-ui/.storybook/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/blog-post-ui/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/blog-post-ui/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/blog-post-ui"
-          ],
+          "outputs": ["coverage/libs/blog-post-ui"],
           "options": {
             "jestConfig": "libs/blog-post-ui/jest.config.js",
             "passWithNoTests": true
@@ -706,9 +648,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/blog-post-ui-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/blog-post-ui-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -726,17 +666,12 @@
               "libs/block-api/tsconfig.lib.json",
               "libs/block-api/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/block-api/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/block-api/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/block-api"
-          ],
+          "outputs": ["coverage/libs/block-api"],
           "options": {
             "jestConfig": "libs/block-api/jest.config.js",
             "passWithNoTests": true
@@ -757,10 +692,7 @@
               "libs/block-core/tsconfig.lib.json",
               "libs/block-core/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/block-core/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/block-core/**/*"]
           }
         },
         "test": {
@@ -769,9 +701,7 @@
             "jestConfig": "libs/block-core/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/block-core"
-          ]
+          "outputs": ["coverage/libs/block-core"]
         }
       },
       "schematics": {}
@@ -790,10 +720,7 @@
               "libs/block-ui/tsconfig.spec.json",
               "libs/block-ui/.storybook/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/block-ui/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/block-ui/**/*"]
           }
         },
         "test": {
@@ -802,9 +729,7 @@
             "jestConfig": "libs/block-ui/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/block-ui"
-          ]
+          "outputs": ["coverage/libs/block-ui"]
         },
         "storybook": {
           "builder": "@nrwl/storybook:storybook",
@@ -835,9 +760,7 @@
               "quiet": true
             }
           },
-          "outputs": [
-            "{options.outputPath}"
-          ]
+          "outputs": ["{options.outputPath}"]
         }
       },
       "schematics": {}
@@ -863,13 +786,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/block-ui-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/block-ui-e2e/**/*"
-            ]
+            "tsConfig": ["apps/block-ui-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/block-ui-e2e/**/*"]
           }
         }
       }
@@ -882,18 +800,35 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "tools/build-github-workflows/**/*.ts"
-            ]
+            "lintFilePatterns": ["tools/build-github-workflows/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/tools/build-github-workflows"
-          ],
+          "outputs": ["coverage/tools/build-github-workflows"],
           "options": {
             "jestConfig": "tools/build-github-workflows/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "testing": {
+      "root": "libs/testing",
+      "sourceRoot": "libs/testing/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/testing/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/testing"],
+          "options": {
+            "jestConfig": "libs/testing/jest.config.js",
             "passWithNoTests": true
           }
         }

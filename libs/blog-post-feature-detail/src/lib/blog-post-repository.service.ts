@@ -6,7 +6,7 @@ import {
   Query,
 } from '@marmicode/contentful-api';
 import { Apollo, gql } from 'apollo-angular';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 export const getBlogPost = gql`
   query getBlogPost($blogPostSlug: String!) {

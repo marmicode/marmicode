@@ -1,36 +1,7 @@
-import { Provider } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import {
-  FieldPolicy,
-  FieldReadFunction,
-} from '@apollo/client/cache/inmemory/policies';
-import { InMemoryCache } from '@apollo/client/core';
-import {
-  APOLLO_TESTING_CACHE,
-  ApolloTestingModule,
-} from 'apollo-angular/testing';
+import { provideApolloCacheWithResolvers } from '@marmicode/testing';
+import { ApolloTestingModule } from 'apollo-angular/testing';
 import { BlogPostRepository } from './blog-post-repository.service';
-
-/**
- * This is useful if you really want to test the query and the response
- * mapping logic instead of mocking the whole interaction.
- *
- * @param fields: resolvers
- */
-export function provideApolloCacheWithResolvers(fields: {
-  [fieldName: string]: FieldPolicy | FieldReadFunction;
-}): Provider {
-  return {
-    provide: APOLLO_TESTING_CACHE,
-    useValue: new InMemoryCache({
-      typePolicies: {
-        Query: {
-          fields,
-        },
-      },
-    }),
-  };
-}
 
 describe('BlogPostRepository', () => {
   let blogPostRepository: BlogPostRepository;
