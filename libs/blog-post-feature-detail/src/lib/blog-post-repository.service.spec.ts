@@ -21,10 +21,17 @@ describe('BlogPostRepository', () => {
           provide: APOLLO_OPTIONS,
           useFactory() {
             return {
-              cache: new InMemoryCache(),
-              resolvers: {
-                ResourceCollection: mockResourceCollectionResolver,
-              },
+              cache: new InMemoryCache({
+                typePolicies: {
+                  Query: {
+                    fields: {
+                      resourceCollection: {
+                        read: mockResourceCollectionResolver,
+                      },
+                    },
+                  },
+                },
+              }),
             };
           },
         },
@@ -34,21 +41,19 @@ describe('BlogPostRepository', () => {
   });
 
   it('🚧 should query blog post and convert to `BlogPost` type', async () => {
-    mockResourceCollectionResolver.mockReturnValue(
-      of({
-        items: [
-          {
-            sys: {
-              id: '62vt3ifOPzuBOv31JzHdMd',
-            },
-            title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
-            content: {
-              text: 'Life is too short. ...',
-            },
+    mockResourceCollectionResolver.mockReturnValue({
+      items: [
+        {
+          sys: {
+            id: '62vt3ifOPzuBOv31JzHdMd',
           },
-        ],
-      })
-    );
+          title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
+          content: {
+            text: 'Life is too short. ...',
+          },
+        },
+      ],
+    });
 
     const blogPost = await blogPostRepository
       .getBlogPost('end-to-end-http-request-cancelation-with-rxjs-and-nestjs')

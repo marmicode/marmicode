@@ -1,8 +1,26 @@
 import { Injectable, NgModule } from '@angular/core';
 import { createBlogPost } from '@marmicode/blog-post-ui';
-import { ContentfulModule } from '@marmicode/contentful-api';
-import { Apollo } from 'apollo-angular';
-import { of } from 'rxjs';
+import { ContentfulModule, Query } from '@marmicode/contentful-api';
+import { Apollo, gql } from 'apollo-angular';
+import { map, tap } from 'rxjs/operators';
+
+export const getBlogPost = gql`
+  query getBlogPost($blogPostSlug: String!) {
+    resourceCollection(limit: 1, where: { slug: $blogPostSlug }) {
+      items {
+        sys {
+          id
+        }
+        title
+        content {
+          ... on BlogPost {
+            text
+          }
+        }
+      }
+    }
+  }
+`;
 
 @Injectable()
 export class BlogPostRepository {
@@ -13,11 +31,19 @@ export class BlogPostRepository {
    * @todo retrieve blog post from API
    */
   getBlogPost(blogPostSlug: string) {
-    return of(
-      createBlogPost({
-        id: '62vt3ifOPzuBOv31JzHdMd',
-        title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
-        text: `
+    return this._apollo
+      .query<Query>({
+        query: getBlogPost,
+        variables: {
+          blogPostSlug,
+        },
+      })
+      .pipe(
+        map(({ data }) => {
+          return createBlogPost({
+            id: '62vt3ifOPzuBOv31JzHdMd',
+            title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
+            text: `
 Life is too short. When searching for something, we can’t afford to type a whole word or sentence in a search field, or filling all the fields then hitting our old keyboard’s half-broken enter key to finally be able to see the first results... or nothing at all because our search criteria were too restrictive.
 
 Don’t look at me like that! We can probably agree that most of us, if not all, are **used to features like typeahead and live search results**. We get frustrated every time we have to submit a search form.
@@ -236,8 +262,9 @@ We have the services you need:
 💻 [Source code](https://github.com/yjaaidi/ng-experiments/tree/http-request-cancelation) Nx monorepo with an Angular app, a NestJS API and custom CPU / Memory graphing app using Angular & GraphQL subscriptions.
 🐦 [@yjaaidi](https://twitter.com/intent/follow?screen_name=yjaaidi) Stay tuned for more posts and upcoming workshops.
           `,
-      })
-    );
+          });
+        })
+      );
   }
 }
 
