@@ -1,7 +1,8 @@
 describe('marmicode', () => {
   beforeEach(() => cy.visit('/'));
 
-  xit('should display welcome message', () => {
-    throw new Error('🚧 work in progress!');
+  it('should list resources', () => {
+    cy.location('pathname').should('eq', '/learn/everything');
+    cy.snapshot();
   });
 });
