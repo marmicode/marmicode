@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { InMemoryCache } from '@apollo/client/core';
 import { Apollo, APOLLO_OPTIONS } from 'apollo-angular';
-import { of } from 'rxjs';
 import {
   BlogPostRepository,
   BlogPostRepositoryModule,
