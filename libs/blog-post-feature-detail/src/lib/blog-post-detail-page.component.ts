@@ -3,15 +3,18 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlogPostModule, createBlogPost } from '@marmicode/blog-post-ui';
 import { blogPostDetailRouterHelper } from '@marmicode/shared-router-helpers';
-import { PageModule } from '@marmicode/shared-ui';
+import { LoadingModule, PageModule } from '@marmicode/shared-ui';
 import { map, switchMap } from 'rxjs/operators';
 import { BlogPostRepository } from './blog-post-repository.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-blog-post-detail-page',
-  template: `<mc-page>
-    <mc-blog-post [blogPost]="blogPost$ | async"></mc-blog-post>
+  template: ` <mc-page>
+    <mc-blog-post
+      *ngIf="blogPost$ | async as blogPost"
+      [blogPost]="blogPost"
+    ></mc-blog-post>
   </mc-page>`,
 })
 export class BlogPostDetailPageComponent {

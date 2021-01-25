@@ -1,11 +1,12 @@
 import { Injectable, NgModule } from '@angular/core';
-import { createBlogPost } from '@marmicode/blog-post-ui';
+import { BlogPost, createBlogPost } from '@marmicode/blog-post-ui';
 import {
   BlogPost as ContentfulBlogPost,
   ContentfulModule,
   Query,
 } from '@marmicode/contentful-api';
 import { Apollo, gql } from 'apollo-angular';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export const getBlogPost = gql`
@@ -30,7 +31,7 @@ export const getBlogPost = gql`
 export class BlogPostRepository {
   constructor(private _apollo: Apollo) {}
 
-  getBlogPost(blogPostSlug: string) {
+  getBlogPost(blogPostSlug: string): Observable<BlogPost> {
     return this._apollo
       .query<Query>({
         query: getBlogPost,
