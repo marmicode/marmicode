@@ -1,3 +1,6 @@
+import { ResourceCardHarness } from '@marmicode/resource-feature-search';
+import { getAllHarnesses } from '@jscutlery/cypress-harness';
+
 describe('resource search', () => {
   beforeEach(() => {
     const responseMap = new Map([
@@ -35,7 +38,8 @@ describe('resource search', () => {
   it('should list resources', () => {
     cy.location('pathname').should('eq', '/learn/everything');
     /* Wait for resources to appear. */
-    cy.get('mc-resource-card').its('length').should('eq', 13);
+    getAllHarnesses(ResourceCardHarness);
+    getAllHarnesses(ResourceCardHarness).its('length').should('eq', 13);
     cy.snapshot();
   });
 });
