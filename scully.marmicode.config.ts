@@ -17,33 +17,31 @@ async function _getExtraRoutes() {
 }
 
 async function _getLearnBySkillRoutes() {
-  const { data } = await _queryContentful({
-    content_type: 'skill',
-    select: 'fields.slug',
-  });
-  const skillSlugs = [
-    'everything',
-    ...data.items.map((item) => item.fields.slug),
-  ];
-  return skillSlugs.map((slug) => `/learn/${slug}`);
+  const slugs = await _querySlugs({ content_type: 'skill' });
+  return ['everything', ...slugs].map((slug) => `/learn/${slug}`);
 }
 
 async function _getBlogPostRoutes() {
-  const { data } = await _queryContentful({
+  const slugs = await _querySlugs({
     content_type: 'resource',
     'fields.resourceType': 'blog-post',
-    select: 'fields.slug',
   });
-  return data.items.map((item) => `/blog/${item.fields.slug}`);
+  return slugs.map((slug) => `/blog/${slug}`);
 }
 
 async function _getRecipeRoutes() {
-  const { data } = await _queryContentful({
+  const slugs = await _querySlugs({
     content_type: 'resource',
     'fields.resourceType': 'recipe',
-    select: 'fields.slug',
   });
-  return data.items.map((item) => `/recipe/${item.fields.slug}`);
+  return slugs.map((slug) => `/recipe/${slug}`);
+}
+
+async function _querySlugs(params: {
+  [key: string]: string;
+}): Promise<string[]> {
+  const { data } = await _queryContentful({ ...params, select: 'fields.slug' });
+  return data.items.map((item) => item.fields.slug);
 }
 
 async function _queryContentful(params: { [key: string]: string }) {
