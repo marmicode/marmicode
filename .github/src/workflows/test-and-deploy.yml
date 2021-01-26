@@ -59,8 +59,6 @@ jobs:
   e2e:
     runs-on: ubuntu-latest
     env:
-      # This will avoid errors when no snapshots are taken.
-      PERCY_PARTIAL_BUILD: 1
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       # The full token is used by `percy-poller`.
       # You can find it here https://percy.io/api/v1/tokens after signing-in to Percy as an admin.
@@ -72,9 +70,21 @@ jobs:
       - *yarn-install
       - name: Increase file watchers to avoid storybook warnings
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+        # Check if we should run e2e tests & percy review.
+        # If no tests are ran or if we don't take any snapshots,
+        # percy will fail.
+      - name: Should run E2E?
+        id: should-run-e2e
+        run: |
+          # `grep -c` fails if list is empty (no e2e tests to run)
+          SHOULD_RUN_E2E=$(yarn --silent nx print-affected --base=deployed/marmicode-next \
+            | yarn json projects | grep -c e2e && echo true || echo false)
+          echo "::set-output name=should-run-e2e::$SHOULD_RUN_E2E"
       - name: E2E
+        if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: yarn affected:e2e --base=deployed/marmicode-next --headless --browser=chrome
       - name: Check Percy Review
+        if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: yarn percy-review-approved
       - *upload-dist-on-failure
       - *slack-notify-failure
