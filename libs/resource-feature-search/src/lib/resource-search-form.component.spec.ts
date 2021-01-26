@@ -1,16 +1,8 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import {
-  async,
-  ComponentFixture,
-  fakeAsync,
-  TestBed,
-  tick,
-} from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { ActivatedRoute, Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { readAll } from '@nrwl/angular/testing';
-import { BehaviorSubject, EMPTY, of, ReplaySubject, Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, of } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { ResourceSearchFormComponent } from './resource-search-form.component';
@@ -25,7 +17,7 @@ describe('ResourceSearchFormComponent', () => {
   beforeEach(async () => {
     selectedSkillSlug$ = new BehaviorSubject<string>(undefined);
 
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       declarations: [ResourceSearchFormComponent],
       imports: [MatAutocompleteModule],
       providers: [

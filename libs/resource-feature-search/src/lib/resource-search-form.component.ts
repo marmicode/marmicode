@@ -1,13 +1,9 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  NgModule,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
+import { RxState } from '@rx-angular/state';
 import { combineLatest, concat, defer, Observable, of } from 'rxjs';
 import {
   filter,
@@ -19,7 +15,6 @@ import {
 } from 'rxjs/operators';
 import { ResourceSearchStateModule } from './+state/resource-search-state.module';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
-import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
 import { SearchInputModule } from './search-input.component';
 import { Skill } from './skill';
 import {
@@ -27,7 +22,6 @@ import {
   SkillRepositoryModule,
 } from './skill-repository.service';
 
-@UntilDestroy()
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-search-form',
@@ -46,8 +40,9 @@ import {
       }
     `,
   ],
+  providers: [RxState],
 })
-export class ResourceSearchFormComponent implements OnInit {
+export class ResourceSearchFormComponent {
   skillControl = new FormControl();
   allSkills$ = this._skillRepository
     .getSkills()
@@ -57,7 +52,8 @@ export class ResourceSearchFormComponent implements OnInit {
   constructor(
     private _resourceSearchFacade: ResourceSearchFacade,
     private _router: Router,
-    private _skillRepository: SkillRepository
+    private _skillRepository: SkillRepository,
+    private _state: RxState<{}>
   ) {
     this.filteredSkills$ = combineLatest([
       this.allSkills$,
@@ -90,9 +86,7 @@ export class ResourceSearchFormComponent implements OnInit {
         });
       })
     );
-  }
 
-  ngOnInit() {
     const navigateToSkill$ = this.skillControl.valueChanges.pipe(
       filter((value) => typeof value !== 'string'),
       withLatestFrom(this._resourceSearchFacade.selectedSkillSlug$),
@@ -125,9 +119,8 @@ export class ResourceSearchFormComponent implements OnInit {
       tap((skill) => this.skillControl.reset(skill))
     );
 
-    combineLatest([navigateToSkill$, updateForm$])
-      .pipe(untilDestroyed(this))
-      .subscribe();
+    this._state.hold(navigateToSkill$);
+    this._state.hold(updateForm$);
   }
 
   private _tokenize(text: string) {
