@@ -7,7 +7,8 @@ import {
   NgModule,
   TemplateRef,
 } from '@angular/core';
-import { ErrorModule, LoadingModule } from '@marmicode/shared-ui';
+import { ErrorModule } from './error.component';
+import { LoadingModule } from './loading.component';
 import { LetModule } from '@rx-angular/template';
 import { Observable } from 'rxjs';
 
