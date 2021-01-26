@@ -12,16 +12,8 @@ async function _getExtraRoutes() {
     '/services',
     ...(await _getLearnBySkillRoutes()),
     ...(await _getBlogPostRoutes()),
+    ...(await _getRecipeRoutes()),
   ];
-}
-
-async function _getBlogPostRoutes() {
-  const { data } = await _queryContentful({
-    content_type: 'resource',
-    'fields.resourceType': 'blog-post',
-    select: 'fields.slug',
-  });
-  return data.items.map((item) => `/blog/${item.fields.slug}`);
 }
 
 async function _getLearnBySkillRoutes() {
@@ -34,6 +26,24 @@ async function _getLearnBySkillRoutes() {
     ...data.items.map((item) => item.fields.slug),
   ];
   return skillSlugs.map((slug) => `/learn/${slug}`);
+}
+
+async function _getBlogPostRoutes() {
+  const { data } = await _queryContentful({
+    content_type: 'resource',
+    'fields.resourceType': 'blog-post',
+    select: 'fields.slug',
+  });
+  return data.items.map((item) => `/blog/${item.fields.slug}`);
+}
+
+async function _getRecipeRoutes() {
+  const { data } = await _queryContentful({
+    content_type: 'resource',
+    'fields.resourceType': 'recipe',
+    select: 'fields.slug',
+  });
+  return data.items.map((item) => `/recipe/${item.fields.slug}`);
 }
 
 async function _queryContentful(params: { [key: string]: string }) {
