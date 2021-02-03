@@ -4,6 +4,7 @@ import {
   Component,
   Input,
   NgModule,
+  OnDestroy,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RxState } from '@rx-angular/state';
@@ -24,10 +25,12 @@ import { map } from 'rxjs/operators';
   ],
   providers: [RxState],
 })
-export class PageComponent {
+export class PageComponent implements OnDestroy {
   @Input() set title(title: string) {
     this._state.set({ title });
   }
+
+  private _defaultTitle = 'Marmicode';
 
   constructor(
     private _state: RxState<{ title: string; test: boolean }>,
@@ -35,12 +38,20 @@ export class PageComponent {
   ) {
     /* Initialize title. */
     this._state.set({ title: null });
+
+    /* Sync input with page title. */
     this._state.hold(
       this._state
         .select('title')
-        .pipe(map((title) => (title ? `${title} | Marmicode` : 'Marmicode'))),
+        .pipe(
+          map((title) => (title ? `${title} | Marmicode` : this._defaultTitle))
+        ),
       (title) => this._titleService.setTitle(title)
     );
+  }
+
+  ngOnDestroy() {
+    this._titleService.setTitle(this._defaultTitle);
   }
 }
 

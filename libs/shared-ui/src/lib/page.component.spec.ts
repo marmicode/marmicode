@@ -47,9 +47,10 @@ describe('PageComponent', () => {
     expect(titleService.setTitle).toHaveBeenLastCalledWith('🍔 | Marmicode');
   });
 
-  xit('🚧 should set page title to default on destroy', () => {
+  it('should set page title to default on destroy', () => {
+    component.title = '🍔';
     fixture.destroy();
-    expect(titleService.setTitle).toBeCalledTimes(2);
+    expect(titleService.setTitle).toBeCalledTimes(3);
     expect(titleService.setTitle).toHaveBeenLastCalledWith('Marmicode');
   });
 });
