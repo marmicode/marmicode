@@ -6,6 +6,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { RxState } from '@rx-angular/state';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,10 +21,13 @@ import { Title } from '@angular/platform-browser';
       }
     `,
   ],
+  providers: [RxState],
 })
 export class PageComponent {
   @Input() set title(title: string) {
-    this._titleService.setTitle(title);
+    this._titleService.setTitle(
+      title ? `${title} | Marmicode` : '👨🏻‍🍳 Marmicode'
+    );
   }
 
   constructor(private _titleService: Title) {}

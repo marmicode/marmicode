@@ -14,9 +14,20 @@ describe('PageComponent', () => {
     component = new PageComponent(titleService);
   });
 
-  it('should set page title', () => {
-    component.title = '👨🏻‍🍳';
+  xit('🚧 should set page title to "Marmicode" by default', () => {
     expect(titleService.setTitle).toBeCalledTimes(1);
-    expect(titleService.setTitle).toBeCalledWith('👨🏻‍🍳');
+    expect(titleService.setTitle).toHaveBeenLastCalledWith('👨🏻‍🍳 Marmicode');
+  });
+
+  it('should set page title', () => {
+    component.title = '🍔';
+    expect(titleService.setTitle).toBeCalledTimes(1);
+    expect(titleService.setTitle).toHaveBeenLastCalledWith('🍔 | Marmicode');
+  });
+
+  xit('🚧 should set page title to default ond estroy', () => {
+    // component.ngOnDestroy();
+    // expect(titleService.setTitle).toBeCalledTimes(2);
+    // expect(titleService.setTitle).toHaveBeenLastCalledWith('👨🏻‍🍳 Marmicode');
   });
 });
