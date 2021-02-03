@@ -22,11 +22,21 @@ import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
       [resourceType]="resourceType"
       [title]="title$ | async"
     ></mc-resource-title-banner>
-    <mc-block-group
-      *ngFor="let blockGroup of blockGroups$ | async"
-      [blockGroup]="blockGroup"
-      desktopLayout="column"
-    ></mc-block-group>`,
+    <div class="content">
+      <mc-block-group
+        *ngFor="let blockGroup of blockGroups$ | async"
+        [blockGroup]="blockGroup"
+        desktopLayout="column"
+      ></mc-block-group>
+    </div>`,
+  styles: [
+    `
+      .content {
+        margin: auto;
+        max-width: 1000px;
+      }
+    `,
+  ],
   providers: [RxState],
 })
 export class BlogPostComponent {
