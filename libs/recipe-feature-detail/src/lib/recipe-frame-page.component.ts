@@ -32,7 +32,7 @@ import { SwipeModule } from './swipe.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-frame-page',
   template: `
-    <mc-page [title]="title$ | async" class="page" fxLayout="column">
+    <mc-page [title]="pageTitle$ | async" class="page" fxLayout="column">
       <!-- Swipable content. -->
       <!-- Making this flex with fxFlex -->
       <!-- in order to stick the timeline at the bottom. -->
@@ -131,6 +131,10 @@ export class RecipeFramePageComponent {
   );
   type$ = this.recipe$.pipe(select(pluck('type')));
   title$ = this.recipe$.pipe(select(pluck('title')));
+
+  pageTitle$ = combineLatest([this.title$, this.currentFrameTitle$]).pipe(
+    map(([title, currentFrameTitle]) => `${title} > ${currentFrameTitle}`)
+  );
 
   swipeLeft$ = new Subject();
   swipeRight$ = new Subject();

@@ -1,5 +1,5 @@
 import { ViewportScroller } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -29,7 +29,7 @@ describe('RecipeFramePageComponent', () => {
                 title: 'Setup Express Gateway',
                 frames: [
                   {
-                    title: '0 - Install Express Gateway',
+                    title: 'Install Express Gateway',
                     slug: 'install-express-gateway',
                   },
                 ],
@@ -48,8 +48,7 @@ describe('RecipeFramePageComponent', () => {
           },
         },
       ],
-
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
@@ -58,7 +57,7 @@ describe('RecipeFramePageComponent', () => {
     component = fixture.componentInstance;
   });
 
-  xit('🚧 should combine recipe & frame titles', () => {
+  it('should combine recipe & frame titles', () => {
     fixture.detectChanges();
     const title = fixture.debugElement.query(By.css('mc-page')).properties
       .title;
