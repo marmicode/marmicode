@@ -30,7 +30,10 @@ export class PageComponent {
     );
   }
 
-  constructor(private _titleService: Title) {}
+  constructor(
+    private _state: RxState<{ title: string }>,
+    private _titleService: Title
+  ) {}
 }
 
 @NgModule({
