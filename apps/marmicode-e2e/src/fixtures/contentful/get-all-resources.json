@@ -53,7 +53,7 @@
             "__typename": "Author"
           },
           "duration": 5,
-          "isWip": true,
+          "isWip": null,
           "picture": null,
           "requiredSkillCollection": {
             "items": [],
@@ -91,7 +91,7 @@
             "__typename": "Author"
           },
           "duration": 11,
-          "isWip": false,
+          "isWip": null,
           "picture": {
             "url": "https://images.ctfassets.net/gowvxq3b4aid/17KaAncNOI81I5uym5mPyo/899b5313731807d3d82c1b8e8bad3ce7/express-gateway-and-openapi.png",
             "__typename": "Asset"
@@ -151,7 +151,7 @@
             "__typename": "Author"
           },
           "duration": 11,
-          "isWip": false,
+          "isWip": null,
           "picture": {
             "url": "https://images.ctfassets.net/gowvxq3b4aid/pi4BZYk0TV3mzst444yfS/d17aad67d4c4dc3967d03dc05b63d0f8/express-gateway.png",
             "__typename": "Asset"
@@ -192,7 +192,7 @@
             "__typename": "Author"
           },
           "duration": 25,
-          "isWip": false,
+          "isWip": null,
           "picture": {
             "url": "https://images.ctfassets.net/gowvxq3b4aid/4y5SswcVUAVDQI27TwG4Uf/6611ec5c4a3e6032bde13e382b373edb/what-happens-when-you-cancel-an-http-request.png",
             "__typename": "Asset"
@@ -236,7 +236,7 @@
           "sys": { "id": "1sYd85BXmCsTvXIV3XhXgT", "__typename": "Sys" },
           "author": null,
           "duration": 3,
-          "isWip": false,
+          "isWip": null,
           "picture": {
             "url": "https://images.ctfassets.net/gowvxq3b4aid/6aflAFviTkJqy9LsHtZSTk/1b6f13413dc2c759fe6aee09a296cb27/openapi.png",
             "__typename": "Asset"
