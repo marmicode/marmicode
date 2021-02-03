@@ -101,10 +101,8 @@ export class RecipeFramePageComponent {
   currentFrameIndex$ = combineLatest([this.frames$, this.currentFrame$]).pipe(
     map(([frames, currentFrame]) => frames.indexOf(currentFrame))
   );
-  currentFrameTitle$ = combineLatest([
-    this.currentFrame$,
-    this.currentFrameIndex$,
-  ]).pipe(
+  currentFrameTitle$ = this.currentFrame$.pipe(
+    withLatestFrom(this.currentFrameIndex$),
     select(
       map(([frame, index]) => (frame ? `${index} - ${frame.title}` : null))
     )
