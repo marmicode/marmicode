@@ -30,17 +30,24 @@ import { HighlightZone } from '../highlight/highlight-zone';
       [highlightableZones]="highlightableZones$ | async"
       [highlightZone]="highlightZone$ | async"
       (highlightZoneChange)="onHighlightZone($event)"
+      [class.is-row]="desktopLayout === 'row'"
       class="block"
     ></mc-block>
   `,
   styles: [
     `
+      /* Make sure blocks respect the flex allowed space.
+       * Cf. block-ui-e2e > frame.spec.ts > should apply horizontal scroll if code overflows
+       * We shouldn't apply it on column display otherwise the height would be 0. */
+      @media screen and (min-width: 960px) {
+        .block.is-row {
+          overflow-x: auto;
+        }
+      }
+
       /* @hack don't use fxFlex as it overrides parent elements flex style. */
       .block {
         flex: 1 1 0;
-        /* Make sure blocks respect the flex allowed space. 
-         * Cf. block-ui-e2e > frame.spec.ts > should apply horizontal scroll if code overflows */
-        overflow-x: auto;
       }
     `,
   ],
@@ -54,6 +61,7 @@ export class BlockGroupComponent {
    * Mobile is always column. */
   @Input() desktopLayout: 'column' | 'row' = 'row';
 
+  /* @hack this is always true but it's the ng-way of setting the class on host. */
   @HostBinding('class.mc-flex-column') flexColumn = true;
   @HostBinding('class.mc-flex-row-gt-sm') get flexDesktopRow() {
     return this.desktopLayout === 'row';
