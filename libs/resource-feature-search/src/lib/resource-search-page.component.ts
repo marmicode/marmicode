@@ -24,7 +24,7 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-search-page',
   template: `
-    <mc-page>
+    <mc-page title="Resources">
       <div fxLayout="row" fxLayoutAlign="center">
         <mc-resource-search-form
           class="resource-search-form"

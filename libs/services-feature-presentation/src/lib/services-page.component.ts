@@ -13,7 +13,7 @@ import { WorkshopsButtonModule } from './workshops-button.component';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-services-page',
-  template: ` <mc-page>
+  template: ` <mc-page title="Services">
     <mc-banner></mc-banner>
     <mc-slant></mc-slant>
     <div class="services-presentation">

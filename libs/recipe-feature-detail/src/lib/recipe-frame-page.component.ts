@@ -32,18 +32,18 @@ import { SwipeModule } from './swipe.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-frame-page',
   template: `
-    <mc-page class="page" fxLayout="column">
+    <mc-page [title]="title$ | async" class="page" fxLayout="column">
       <!-- Swipable content. -->
       <!-- Making this flex with fxFlex -->
       <!-- in order to stick the timeline at the bottom. -->
       <div
-        fxLayout="column"
-        mcSlideAnimation
-        mcSwipe
         [slideIndex]="currentFrameIndex$ | async"
         (swipeLeft)="swipeLeft$.next()"
         (swipeRight)="swipeRight$.next()"
         class="swipable-content"
+        fxLayout="column"
+        mcSlideAnimation
+        mcSwipe
       >
         <!-- Recipe's title. -->
         <mc-resource-title-banner
