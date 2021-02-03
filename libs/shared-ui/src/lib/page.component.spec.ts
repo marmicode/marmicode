@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Title } from '@angular/platform-browser';
-import { PageComponent, PageModule } from '@marmicode/shared-ui';
-
-import 'jest-mock';
+import { PageComponent } from '@marmicode/shared-ui';
 
 describe('PageComponent', () => {
   let component: PageComponent;
@@ -14,7 +12,7 @@ describe('PageComponent', () => {
       setTitle: jest.fn(),
     } as any;
     await TestBed.configureTestingModule({
-      imports: [PageModule],
+      declarations: [PageComponent],
       providers: [
         {
           provide: Title,
