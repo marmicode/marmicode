@@ -82,7 +82,7 @@ jobs:
           echo "::set-output name=should-run-e2e::$SHOULD_RUN_E2E"
       - name: E2E
         if: steps.should-run-e2e.outputs.should-run-e2e != false
-        run: yarn affected:e2e --base=deployed/marmicode-next --headless --browser=chrome
+        run: PERCY_TARGET_COMMIT=$(git rev-parse deployed/marmicode-next) yarn affected:e2e --base=deployed/marmicode-next --headless --browser=chrome
       - name: Check Percy Review
         if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: yarn percy-review-approved
