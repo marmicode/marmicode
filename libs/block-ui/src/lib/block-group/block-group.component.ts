@@ -38,6 +38,9 @@ import { HighlightZone } from '../highlight/highlight-zone';
       /* @hack don't use fxFlex as it overrides parent elements flex style. */
       .block {
         flex: 1 1 0;
+        /* Make sure blocks respect the flex allowed space. 
+         * Cf. block-ui-e2e > frame.spec.ts > should apply horizontal scroll if code overflows */
+        overflow-x: auto;
       }
     `,
   ],
