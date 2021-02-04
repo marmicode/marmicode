@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BlockType, createBlockGroup } from '@marmicode/block-core';
+import { PushModule } from '@rx-angular/template';
 import { first } from 'rxjs/operators';
 import { createHighlightZone } from '../highlight/highlight-zone';
 import { BlockGroupComponent } from './block-group.component';
@@ -16,6 +17,7 @@ describe('FrameComponent', () => {
   beforeEach(async () => {
     return TestBed.configureTestingModule({
       declarations: [BlockGroupComponent],
+      imports: [PushModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
@@ -53,7 +55,7 @@ describe('FrameComponent', () => {
     expect(await component.highlightZone$.pipe(first()).toPromise()).toBe(null);
   });
 
-  xit(`🚧 should set '<mc-block>' highlightZone without ZoneJS`, () => {
+  it(`should set '<mc-block>' highlightZone without ZoneJS`, async () => {
     component.blockGroup = createBlockGroup({
       blocks: [
         {
@@ -64,7 +66,7 @@ describe('FrameComponent', () => {
       ],
     });
 
-    fixture.detectChanges();
+    await flushRequestAnimationFrame();
 
     component.onHighlightZone(
       createHighlightZone({
@@ -72,6 +74,8 @@ describe('FrameComponent', () => {
         sections: [],
       })
     );
+
+    await flushRequestAnimationFrame();
 
     /* Check that the highlight zone is passed to the child component
      * without having to manually trigger the change detection.
@@ -85,3 +89,9 @@ describe('FrameComponent', () => {
     });
   });
 });
+
+/* Wait for `requestAnimationFrame` to be triggered.
+ * This is clearly not the best way but it works. */
+export async function flushRequestAnimationFrame() {
+  await new Promise(setImmediate);
+}

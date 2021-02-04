@@ -26,10 +26,10 @@ import { HighlightZone } from '../highlight/highlight-zone';
   selector: 'mc-block-group',
   template: `
     <mc-block
-      *ngFor="let block of blocks$ | async"
+      *ngFor="let block of blocks$ | push"
       [block]="block"
-      [highlightableZones]="highlightableZones$ | async"
-      [highlightZone]="highlightZone$ | async"
+      [highlightableZones]="highlightableZones$ | push"
+      [highlightZone]="highlightZone$ | push"
       (highlightZoneChange)="onHighlightZone($event)"
       [class.is-row]="desktopLayout === 'row'"
       class="block"
