@@ -36,6 +36,7 @@ export enum MarkdownTokenType {
   Codespan = 'codespan',
   Emphasis = 'em',
   Heading = 'heading',
+  HorizontalRule = 'hr',
   Image = 'image',
   Link = 'link',
   List = 'list',

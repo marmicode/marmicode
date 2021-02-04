@@ -40,6 +40,9 @@ import {
         [token]="token"
       ></mc-markdown-heading>
 
+      <!-- Horizontal Rule. -->
+      <hr *ngSwitchCase="TokenType.HorizontalRule" />
+
       <!-- Image. -->
       <mc-markdown-image
         *ngSwitchCase="TokenType.Image"
