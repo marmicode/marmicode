@@ -28,6 +28,8 @@ import { HighlightZone } from '../highlight/highlight-zone';
   template: ` <div class="code-container">
     <pre
       [ngClass]="languageClass$ | async"
+      [style.paddingTop.px]="verticalPadding"
+      [style.paddingBottom.px]="verticalPadding"
       class="line-numbers preformatted"
     ><div
       *ngFor="let style of lineNumberHighlightStyles$ | async"
@@ -94,6 +96,7 @@ export class CodeBlockComponent implements AfterViewChecked {
       })
     )
   );
+  readonly verticalPadding = 10;
 
   private _block$ = this._state.select('block');
   private _viewChecked$ = new Subject();
@@ -141,7 +144,6 @@ export class CodeBlockComponent implements AfterViewChecked {
 
   /* @hack prevent touchstart from propagating to parent in order
    * to allow code horizontal scroll in favor of swipe. */
-
   @HostListener('touchstart', ['$event']) onTouchstart(evt: TouchEvent) {
     evt.stopPropagation();
   }
@@ -154,7 +156,7 @@ export class CodeBlockComponent implements AfterViewChecked {
   }): { color: string; top: number; height: number }[] {
     const { color, sections } = zone;
 
-    const offset = 20;
+    const offset = this.verticalPadding;
     return sections.map((section) => ({
       color,
       top: offset + (section.start - 1) * lineHeight,
