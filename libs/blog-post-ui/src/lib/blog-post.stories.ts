@@ -17,6 +17,8 @@ export const Default = () =>
       blogPost: createBlogPost({
         id: '123',
         title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
+        pictureUri:
+          'https://images.ctfassets.net/gowvxq3b4aid/7IC9BlKufXjqRWb5ISDS9h/95e4e3730e896a24e5f41b12e72fc832/end-to-end-http-request-cancelation-with-rxjs-and-nestjs.jpg',
         text: `
 Life is too short. When searching for something, we can’t afford to type a whole word or sentence in a search field, or filling all the fields then hitting our old keyboard’s half-broken enter key to finally be able to see the first results... or nothing at all because our search criteria were too restrictive.
 

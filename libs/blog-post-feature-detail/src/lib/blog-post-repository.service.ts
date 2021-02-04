@@ -17,6 +17,9 @@ export const getBlogPost = gql`
           id
         }
         title
+        picture {
+          url
+        }
         content {
           ... on BlogPost {
             text
@@ -44,6 +47,7 @@ export class BlogPostRepository {
           const resource = data.resourceCollection.items[0];
           return createBlogPost({
             id: resource.sys.id,
+            pictureUri: resource.picture.url,
             title: resource.title,
             text: (resource.content as ContentfulBlogPost).text,
           });

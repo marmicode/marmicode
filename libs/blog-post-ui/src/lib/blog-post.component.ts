@@ -23,6 +23,15 @@ import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
       [title]="title$ | async"
     ></mc-resource-title-banner>
     <div class="content">
+      <div class="picture-container">
+        <img
+          *ngIf="pictureUri$ | async as pictureUri"
+          [alt]="title$ | async"
+          [src]="pictureUri"
+          class="picture"
+        />
+      </div>
+
       <mc-block-group
         *ngFor="let blockGroup of blockGroups$ | async"
         [blockGroup]="blockGroup"
@@ -34,6 +43,15 @@ import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
       .content {
         margin: auto;
         max-width: 1000px;
+      }
+
+      .picture-container {
+        text-align: center;
+        width: 100%;
+      }
+
+      .picture {
+        max-width: 100%;
       }
     `,
   ],
@@ -47,6 +65,8 @@ export class BlogPostComponent {
   blockGroups$ = this._state
     .select('blogPost')
     .pipe(select(map((blogPost) => markdownToFrameBlockGroups(blogPost.text))));
+
+  pictureUri$ = this._state.select('blogPost', 'pictureUri');
 
   resourceType = ResourceType.BlogPost;
 
