@@ -1,5 +1,7 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { createBlockGroup } from '@marmicode/block-core';
+import { By } from '@angular/platform-browser';
+import { BlockType, createBlockGroup } from '@marmicode/block-core';
 import { first } from 'rxjs/operators';
 import { createHighlightZone } from '../highlight/highlight-zone';
 import { BlockGroupComponent } from './block-group.component';
@@ -14,6 +16,7 @@ describe('FrameComponent', () => {
   beforeEach(async () => {
     return TestBed.configureTestingModule({
       declarations: [BlockGroupComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
@@ -48,5 +51,37 @@ describe('FrameComponent', () => {
       blocks: [],
     });
     expect(await component.highlightZone$.pipe(first()).toPromise()).toBe(null);
+  });
+
+  xit(`🚧 should set '<mc-block>' highlightZone without ZoneJS`, () => {
+    component.blockGroup = createBlockGroup({
+      blocks: [
+        {
+          type: BlockType.Code,
+          code: `const younes = '👨🏻‍🍳';`,
+          language: 'javascript',
+        },
+      ],
+    });
+
+    fixture.detectChanges();
+
+    component.onHighlightZone(
+      createHighlightZone({
+        color: 'red',
+        sections: [],
+      })
+    );
+
+    /* Check that the highlight zone is passed to the child component
+     * without having to manually trigger the change detection.
+     * We have to make sure of this because this is a custom event
+     * and it runs outside of zones (and we are preparing our way out
+     * of zones so we don't want to run it in zones). */
+    const blockEl = fixture.debugElement.query(By.css('mc-block'));
+    expect(blockEl.properties.highlightZone).toEqual({
+      color: 'red',
+      sections: [],
+    });
   });
 });

@@ -15,6 +15,7 @@ import {
   parseMarkdown,
 } from '@marmicode/block-core';
 import { RxState, select } from '@rx-angular/state';
+import { PushModule } from '@rx-angular/template';
 import { map } from 'rxjs/operators';
 import { BlockModule } from '../block.component';
 import { extractHighlightableZones } from '../highlight/extract-highlightable-zones';
@@ -106,6 +107,6 @@ export class BlockGroupComponent {
 @NgModule({
   declarations: [BlockGroupComponent],
   exports: [BlockGroupComponent],
-  imports: [BlockModule, CommonModule, FlexLayoutModule],
+  imports: [BlockModule, CommonModule, FlexLayoutModule, PushModule],
 })
 export class BlockGroupModule {}
