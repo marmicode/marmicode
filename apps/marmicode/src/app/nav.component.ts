@@ -68,6 +68,10 @@ import { NavMenuModule } from './nav-menu.component';
       }
 
       .container {
+        /* position relative & z-index 0 prevent code or anything else from overlapping on toolbar. */
+        position: relative;
+        z-index: 0;
+
         padding-top: 64px;
         height: calc(100% - 64px);
       }
