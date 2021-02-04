@@ -17,14 +17,7 @@ import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import { animationFrameScheduler, Observable, Subject } from 'rxjs';
-import {
-  finalize,
-  first,
-  map,
-  observeOn,
-  switchMap,
-  tap,
-} from 'rxjs/operators';
+import { first, map, observeOn, switchMap, tap } from 'rxjs/operators';
 import { HighlightZone } from '../highlight/highlight-zone';
 
 @Component({
