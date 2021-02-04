@@ -17,7 +17,14 @@ import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import { animationFrameScheduler, Observable, Subject } from 'rxjs';
-import { map, observeOn, switchMap, tap } from 'rxjs/operators';
+import {
+  finalize,
+  first,
+  map,
+  observeOn,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 import { HighlightZone } from '../highlight/highlight-zone';
 
 @Component({
@@ -115,7 +122,7 @@ export class CodeBlockComponent implements AfterViewChecked {
     this._state.connect(
       this.code$.pipe(
         /* Wait for view check. */
-        switchMap(() => this._viewChecked$),
+        switchMap(() => this._viewChecked$.pipe(first())),
         /* @hack use `Prism.highlightElement` instead of an angular pipe with
          * `Prism.highlight` because it doesn't add line numbers.
          * We are not using async highlight as it crashes for some reason...
@@ -141,10 +148,10 @@ export class CodeBlockComponent implements AfterViewChecked {
 
   /* @hack prevent touchstart from propagating to parent in order
    * to allow code horizontal scroll in favor of swipe. */
+
   @HostListener('touchstart', ['$event']) onTouchstart(evt: TouchEvent) {
     evt.stopPropagation();
   }
-
   private _getHighlightStyles({
     lineHeight,
     zone,
