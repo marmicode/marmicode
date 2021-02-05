@@ -7,11 +7,15 @@ import { PageModule, SuspenseModule } from '@marmicode/shared-ui';
 import { shareReplayWithRefCount } from '@marmicode/shared-utils';
 import { map, pluck, switchMap } from 'rxjs/operators';
 import { BlogPostRepository } from './blog-post-repository.service';
+import { blogPostToMeta } from './blog-post-to-meta';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-blog-post-detail-page',
-  template: ` <mc-page [title]="blogPostTitle$ | async">
+  template: ` <mc-page
+    [title]="blogPostTitle$ | async"
+    [info]="pageInfo$ | async"
+  >
     <mc-suspense [data$]="blogPost$">
       <ng-template #data let-blogPost>
         <mc-blog-post [blogPost]="blogPost"></mc-blog-post>
@@ -31,6 +35,8 @@ export class BlogPostDetailPageComponent {
   );
 
   blogPostTitle$ = this.blogPost$.pipe(pluck('title'));
+
+  pageInfo$ = this.blogPost$.pipe(map(blogPostToMeta));
 
   constructor(
     private _route: ActivatedRoute,

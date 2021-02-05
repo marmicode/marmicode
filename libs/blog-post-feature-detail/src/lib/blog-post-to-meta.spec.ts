@@ -1,12 +1,5 @@
-import { BlogPost, createBlogPost } from '@marmicode/blog-post-ui';
-import { createArticlePageMeta } from '@marmicode/shared-ui';
-
-function blogPostToMeta(blogPost: BlogPost) {
-  return createArticlePageMeta({
-    title: blogPost.title,
-    pictureUri: blogPost.pictureUri,
-  });
-}
+import { createBlogPost } from '@marmicode/blog-post-ui';
+import { blogPostToMeta } from './blog-post-to-meta';
 
 describe('blogPostToMeta', () => {
   it('should convert blog post to meta', () => {

@@ -10,7 +10,7 @@ import { Title } from '@angular/platform-browser';
 import { RxState } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 
-export interface ArticlePageMeta {
+export interface ArticlePageInfo {
   type: 'article';
   author?: {
     name: string;
@@ -23,8 +23,8 @@ export interface ArticlePageMeta {
 }
 
 export function createArticlePageMeta(
-  meta: Omit<ArticlePageMeta, 'type'>
-): ArticlePageMeta {
+  meta: Omit<ArticlePageInfo, 'type'>
+): ArticlePageInfo {
   return {
     ...meta,
     type: 'article',
@@ -51,10 +51,14 @@ export class PageComponent implements OnDestroy {
     this._state.set({ title });
   }
 
+  @Input() set info(info: ArticlePageInfo) {
+    this._state.set({ info });
+  }
+
   private _defaultTitle = 'Marmicode';
 
   constructor(
-    private _state: RxState<{ title: string; test: boolean }>,
+    private _state: RxState<{ title: string; info: ArticlePageInfo }>,
     private _titleService: Title
   ) {
     /* Initialize title. */
