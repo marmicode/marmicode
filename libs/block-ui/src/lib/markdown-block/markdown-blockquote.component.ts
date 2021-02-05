@@ -13,6 +13,7 @@ import { MarkdownToken } from '@marmicode/block-core';
         color: rgba(117, 117, 117, 1);
         font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
         font-size: 1.5em;
+        line-height: 1.5em;
       }
     `,
   ],
