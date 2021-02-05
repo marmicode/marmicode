@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 import { PageComponent } from '@marmicode/shared-ui';
+import { createArticlePageMeta } from './page.component';
 
 describe('PageComponent', () => {
   let component: PageComponent;
@@ -64,17 +65,19 @@ describe('PageComponent', () => {
   });
 
   xit('🚧 should set opengraph & twitter meta', () => {
-    // component.meta = {
-    //   type: 'article',
-    //   author: {
-    //     name: 'Younes Jaaidi',
-    //     twitter: 'yjaaidi',
-    //   },
-    //   description: 'Description',
-    //   pictureUri: 'https://picture.url',
-    //   publishedAt: new Date(Date.UTC(2020, 1, 1)),
-    //   title: 'Title',
-    // };
+    const meta = createArticlePageMeta({
+      author: {
+        name: 'Younes Jaaidi',
+        twitter: 'yjaaidi',
+      },
+      description: 'Description',
+      pictureUri: 'https://picture.url',
+      publishedAt: new Date(Date.UTC(2020, 1, 1)),
+      title: 'Title',
+    });
+
+    // @todo
+    // component.meta = meta;
 
     expect(metaService.addTags).toBeCalledTimes(1);
     expect(metaService.addTags).toBeCalledWith([

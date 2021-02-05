@@ -10,6 +10,27 @@ import { Title } from '@angular/platform-browser';
 import { RxState } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 
+export interface ArticlePageMeta {
+  type: 'article';
+  author?: {
+    name: string;
+    twitter?: string;
+  };
+  description?: string;
+  pictureUri?: string;
+  publishedAt?: Date;
+  title?: string;
+}
+
+export function createArticlePageMeta(
+  meta: Omit<ArticlePageMeta, 'type'>
+): ArticlePageMeta {
+  return {
+    ...meta,
+    type: 'article',
+  };
+}
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-page',
