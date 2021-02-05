@@ -125,6 +125,11 @@ describe('PageComponent', () => {
     ] as MetaDefinition[]);
   });
 
+  it('should reset meta when set to null', () => {
+    component.info = null;
+    expect(metaService.removeTag).toBeCalled();
+  });
+
   it('should remove all meta on destroy', () => {
     fixture.destroy();
     expect(metaService.removeTag.mock.calls).toEqual([

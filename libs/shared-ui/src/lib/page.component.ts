@@ -77,6 +77,13 @@ export class PageComponent implements OnDestroy {
 
     /* Update meta data. */
     this._state.hold(this._state.select('info'), (info) => {
+      this._resetMeta();
+
+      /* Nothing to do. */
+      if (info == null) {
+        return;
+      }
+
       const twitter = info.author?.twitter;
       const tags = [
         { name: 'author', content: info.author?.name },
@@ -107,6 +114,11 @@ export class PageComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
+    this._resetMeta();
+    this._titleService.setTitle(this._defaultTitle);
+  }
+
+  private _resetMeta() {
     this._metaService.removeTag('author');
     this._metaService.removeTag('description');
     this._metaService.removeTag('og:type');
@@ -118,7 +130,6 @@ export class PageComponent implements OnDestroy {
     this._metaService.removeTag('twitter:creator');
     this._metaService.removeTag('twitter:description');
     this._metaService.removeTag('twitter:title');
-    this._titleService.setTitle(this._defaultTitle);
   }
 }
 
