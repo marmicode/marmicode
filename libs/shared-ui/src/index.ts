@@ -5,7 +5,7 @@ export {
   ArticlePageInfo,
   PageComponent,
   PageModule,
-  createArticlePageMeta,
+  createArticlePageInfo,
 } from './lib/page.component';
 export { LinkComponent, LinkModule } from './lib/link.component';
 export { SuspenseModule } from './lib/suspense.component';

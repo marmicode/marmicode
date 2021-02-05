@@ -7,7 +7,7 @@ import { PageModule, SuspenseModule } from '@marmicode/shared-ui';
 import { shareReplayWithRefCount } from '@marmicode/shared-utils';
 import { map, pluck, switchMap } from 'rxjs/operators';
 import { BlogPostRepository } from './blog-post-repository.service';
-import { blogPostToMeta } from './blog-post-to-meta';
+import { blogPostToPageInfo } from './blog-post-to-page-info';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,7 +36,7 @@ export class BlogPostDetailPageComponent {
 
   blogPostTitle$ = this.blogPost$.pipe(pluck('title'));
 
-  pageInfo$ = this.blogPost$.pipe(map(blogPostToMeta));
+  pageInfo$ = this.blogPost$.pipe(map(blogPostToPageInfo));
 
   constructor(
     private _route: ActivatedRoute,

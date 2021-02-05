@@ -1,5 +1,5 @@
 import { createBlogPost } from '@marmicode/blog-post-ui';
-import { blogPostToMeta } from './blog-post-to-meta';
+import { blogPostToPageInfo } from './blog-post-to-page-info';
 
 describe('blogPostToMeta', () => {
   it('should convert blog post to meta', () => {
@@ -10,7 +10,7 @@ describe('blogPostToMeta', () => {
       text: 'content',
     });
 
-    expect(blogPostToMeta(blogPost)).toEqual({
+    expect(blogPostToPageInfo(blogPost)).toEqual({
       type: 'article',
       title: 'Title',
       pictureUri: 'https://picture.url',
