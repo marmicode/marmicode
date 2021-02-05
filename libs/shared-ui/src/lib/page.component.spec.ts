@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 import { PageComponent } from '@marmicode/shared-ui';
-import { createArticlePageMeta } from './page.component';
+import { createArticlePageInfo } from './page.component';
 
 describe('PageComponent', () => {
   let component: PageComponent;
@@ -64,20 +64,17 @@ describe('PageComponent', () => {
     expect(titleService.setTitle).toHaveBeenLastCalledWith('Marmicode');
   });
 
-  xit('🚧 should set opengraph & twitter meta', () => {
-    const meta = createArticlePageMeta({
+  it('should set opengraph & twitter meta', () => {
+    component.info = createArticlePageInfo({
       author: {
         name: 'Younes Jaaidi',
         twitter: 'yjaaidi',
       },
       description: 'Description',
       pictureUri: 'https://picture.url',
-      publishedAt: new Date(Date.UTC(2020, 1, 1)),
+      publishedAt: new Date(Date.UTC(2020, 0, 1)),
       title: 'Title',
     });
-
-    // @todo
-    // component.meta = meta;
 
     expect(metaService.addTags).toBeCalledTimes(1);
     expect(metaService.addTags).toBeCalledWith([
@@ -103,7 +100,7 @@ describe('PageComponent', () => {
       },
       {
         property: 'article:published_time',
-        content: '2020-01-01T00:00:00Z',
+        content: '2020-01-01T00:00:00.000Z',
       },
       {
         property: 'article:author',
@@ -128,10 +125,20 @@ describe('PageComponent', () => {
     ] as MetaDefinition[]);
   });
 
-  xit('🚧 should remove all meta on destroy', () => {
+  it('should remove all meta on destroy', () => {
     fixture.destroy();
     expect(metaService.removeTag.mock.calls).toEqual([
-      /* @todo */
+      ['author'],
+      ['description'],
+      ['og:type'],
+      ['og:description'],
+      ['og:image'],
+      ['article:published_time'],
+      ['article:author'],
+      ['twitter:card'],
+      ['twitter:creator'],
+      ['twitter:description'],
+      ['twitter:title'],
     ]);
   });
 });
