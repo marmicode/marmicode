@@ -240,6 +240,11 @@ We have the services you need:
 
 📨 kitchen at marmicode.io
 
+> Some quoted content
+>
+> Blablabla
+
+
 # 🔗 Links
 💻 [Source code](https://github.com/yjaaidi/ng-experiments/tree/http-request-cancelation) Nx monorepo with an Angular app, a NestJS API and custom CPU / Memory graphing app using Angular & GraphQL subscriptions.
 🐦 [@yjaaidi](https://twitter.com/intent/follow?screen_name=yjaaidi) Stay tuned for more posts and upcoming workshops.

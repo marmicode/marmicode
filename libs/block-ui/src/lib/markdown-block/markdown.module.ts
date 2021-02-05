@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CodeBlockModule } from '../code-block/code-block.component';
 import { HighlightLinkModule } from '../highlight/highlight-link.component';
+import { MarkdownBlockquoteComponent } from './markdown-blockquote.component';
 import { MarkdownCodeComponent } from './markdown-code.component';
 import { MarkdownCodespanComponent } from './markdown-codespan.component';
 import { MarkdownEmphasisComponent } from './markdown-emphasis.component';
@@ -22,6 +23,7 @@ import { MarkdownTokensComponent } from './markdown-tokens.component';
 @NgModule({
   declarations: [
     MarkdownTokenComponent,
+    MarkdownBlockquoteComponent,
     MarkdownCodeComponent,
     MarkdownCodespanComponent,
     MarkdownEmphasisComponent,

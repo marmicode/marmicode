@@ -18,6 +18,7 @@ export type MarkdownToken = (
 };
 
 export namespace MarkdownTokens {
+  export type Blockquote = Tokens.Blockquote;
   export type Code = Tokens.Code;
   export type Codespan = Tokens.Codespan;
   export type Em = Tokens.Em;
@@ -32,6 +33,7 @@ export namespace MarkdownTokens {
 }
 
 export enum MarkdownTokenType {
+  Blockquote = 'blockquote',
   Code = 'code',
   Codespan = 'codespan',
   Emphasis = 'em',

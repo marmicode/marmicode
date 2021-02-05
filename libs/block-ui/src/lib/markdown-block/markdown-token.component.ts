@@ -17,6 +17,12 @@ import {
   template: `
     <ng-container [ngSwitch]="type">
       <!-- Code. -->
+      <mc-markdown-blockquote
+        *ngSwitchCase="TokenType.Blockquote"
+        [token]="token"
+      ></mc-markdown-blockquote>
+
+      <!-- Code. -->
       <mc-markdown-code
         *ngSwitchCase="TokenType.Code"
         [token]="token"
