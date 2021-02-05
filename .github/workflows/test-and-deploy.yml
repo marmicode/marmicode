@@ -41,9 +41,8 @@ jobs:
       - name: E2E
         if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: >-
-          PERCY_TARGET_COMMIT=$(git rev-parse deployed/marmicode-next) yarn nx
-          run-many --all --target=e2e --base=deployed/marmicode-next --headless
-          --browser=chrome
+          PERCY_TARGET_COMMIT=$(git rev-parse deployed/marmicode-next) yarn
+          e2e-all --base=deployed/marmicode-next --headless --browser=chrome
       - name: Check Percy Review
         if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: yarn percy-review-approved
