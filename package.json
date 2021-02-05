@@ -29,6 +29,7 @@
     "build-github-workflows": "ts-node tools/build-github-workflows/src/main.ts",
     "deploy:next": "./tools/deploy.sh marmicode-next",
     "deploy:prod": "./tools/deploy.sh marmicode",
+    "e2e-all": "percy exec nx run-many --all --target=e2e",
     "graphql-codegen": "graphql codegen",
     "percy-review-approved": "./tools/percy-review-approved.sh",
     "test:watch": "nx affected:test --watch --all --parallel --maxParallel 100",
