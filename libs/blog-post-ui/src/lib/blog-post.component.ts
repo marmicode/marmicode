@@ -46,6 +46,7 @@ import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
       }
 
       .picture-container {
+        margin-top: 20px;
         text-align: center;
         width: 100%;
       }
