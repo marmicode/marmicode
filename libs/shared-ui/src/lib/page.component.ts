@@ -47,6 +47,10 @@ export function createArticlePageInfo(
   providers: [RxState],
 })
 export class PageComponent implements OnDestroy {
+  /**
+   * @deprecated use {@Link PageComponent.info} instead
+   * @param title
+   */
   @Input() set title(title: string) {
     this._state.set({ title });
   }
@@ -119,17 +123,17 @@ export class PageComponent implements OnDestroy {
   }
 
   private _resetMeta() {
-    this._metaService.removeTag('author');
-    this._metaService.removeTag('description');
-    this._metaService.removeTag('og:type');
-    this._metaService.removeTag('og:description');
-    this._metaService.removeTag('og:image');
-    this._metaService.removeTag('article:published_time');
-    this._metaService.removeTag('article:author');
-    this._metaService.removeTag('twitter:card');
-    this._metaService.removeTag('twitter:creator');
-    this._metaService.removeTag('twitter:description');
-    this._metaService.removeTag('twitter:title');
+    this._metaService.removeTag('name="author"');
+    this._metaService.removeTag('name="description"');
+    this._metaService.removeTag('property="og:type"');
+    this._metaService.removeTag('property="og:description"');
+    this._metaService.removeTag('property="og:image"');
+    this._metaService.removeTag('property="article:published_time"');
+    this._metaService.removeTag('property="article:author"');
+    this._metaService.removeTag('property="twitter:card"');
+    this._metaService.removeTag('property="twitter:creator"');
+    this._metaService.removeTag('property="twitter:description"');
+    this._metaService.removeTag('property="twitter:title"');
   }
 }
 

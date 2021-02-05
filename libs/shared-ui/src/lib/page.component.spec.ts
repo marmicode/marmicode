@@ -133,17 +133,17 @@ describe('PageComponent', () => {
   it('should remove all meta on destroy', () => {
     fixture.destroy();
     expect(metaService.removeTag.mock.calls).toEqual([
-      ['author'],
-      ['description'],
-      ['og:type'],
-      ['og:description'],
-      ['og:image'],
-      ['article:published_time'],
-      ['article:author'],
-      ['twitter:card'],
-      ['twitter:creator'],
-      ['twitter:description'],
-      ['twitter:title'],
+      ['name="author"'],
+      ['name="description"'],
+      ['property="og:type"'],
+      ['property="og:description"'],
+      ['property="og:image"'],
+      ['property="article:published_time"'],
+      ['property="article:author"'],
+      ['property="twitter:card"'],
+      ['property="twitter:creator"'],
+      ['property="twitter:description"'],
+      ['property="twitter:title"'],
     ]);
   });
 });
