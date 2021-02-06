@@ -2,7 +2,12 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
-import { ErrorModule, LoadingModule, PageModule } from '@marmicode/shared-ui';
+import {
+  createBasicPageInfo,
+  ErrorModule,
+  LoadingModule,
+  PageModule,
+} from '@marmicode/shared-ui';
 import {
   deprogressifyData,
   progressify,
@@ -24,7 +29,7 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-search-page',
   template: `
-    <mc-page title="Resources">
+    <mc-page [info]="pageInfo">
       <div fxLayout="row" fxLayoutAlign="center">
         <mc-resource-search-form
           class="resource-search-form"
@@ -68,6 +73,11 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
   ],
 })
 export class ResourceSearchPageComponent {
+  pageInfo = createBasicPageInfo({
+    title: 'Resources',
+    description: 'JavaScript, Angular & Testing Resources',
+  });
+
   error$: Observable<unknown>;
   isLoading$: Observable<boolean>;
   resources$: Observable<Resource[]>;

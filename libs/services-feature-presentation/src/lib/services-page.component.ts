@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
-import { PageModule } from '@marmicode/shared-ui';
+import { createBasicPageInfo, PageModule } from '@marmicode/shared-ui';
 import { ActionButtonModule } from './action-button.component';
 import { BannerModule } from './banner.component';
 import { CoachModule } from './coach.component';
@@ -13,7 +13,7 @@ import { WorkshopsButtonModule } from './workshops-button.component';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-services-page',
-  template: ` <mc-page title="Services">
+  template: ` <mc-page [info]="pageInfo">
     <mc-banner></mc-banner>
     <mc-slant></mc-slant>
     <div class="services-presentation">
@@ -78,7 +78,12 @@ import { WorkshopsButtonModule } from './workshops-button.component';
     `,
   ],
 })
-export class ServicesPageComponent {}
+export class ServicesPageComponent {
+  pageInfo = createBasicPageInfo({
+    title: 'Services',
+    description: 'We help you cook better apps.',
+  });
+}
 
 @NgModule({
   declarations: [ServicesPageComponent],
