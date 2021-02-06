@@ -8,9 +8,9 @@ import {
 import { FlexModule } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlockGroupModule } from '@marmicode/block-api';
-import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
-import { PageModule } from '@marmicode/shared-ui';
 import { ResourceTitleBannerModule } from '@marmicode/resource-api';
+import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
+import { createBasicPageInfo, PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
 import { combineLatest, merge, Subject } from 'rxjs';
 import {
@@ -32,7 +32,7 @@ import { SwipeModule } from './swipe.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-frame-page',
   template: `
-    <mc-page [title]="pageTitle$ | async" class="page" fxLayout="column">
+    <mc-page [info]="pageInfo$ | async" class="page" fxLayout="column">
       <!-- Swipable content. -->
       <!-- Making this flex with fxFlex -->
       <!-- in order to stick the timeline at the bottom. -->
@@ -80,7 +80,7 @@ import { SwipeModule } from './swipe.directive';
 
       .swipable-content {
         /* Forcing flex-basis to auto as fxFlex sets it to 0px
-             * and doesn't stretch when content is larger than page. */
+                 * and doesn't stretch when content is larger than page. */
         flex: 1 1 auto;
       }
     `,
@@ -130,8 +130,12 @@ export class RecipeFramePageComponent {
   type$ = this.recipe$.pipe(select(pluck('type')));
   title$ = this.recipe$.pipe(select(pluck('title')));
 
-  pageTitle$ = combineLatest([this.title$, this.currentFrameTitle$]).pipe(
-    map(([title, currentFrameTitle]) => `${title} > ${currentFrameTitle}`)
+  pageInfo$ = combineLatest([this.title$, this.currentFrameTitle$]).pipe(
+    map(([title, currentFrameTitle]) =>
+      createBasicPageInfo({
+        title: `${title} > ${currentFrameTitle}`,
+      })
+    )
   );
 
   swipeLeft$ = new Subject();

@@ -59,7 +59,7 @@ describe('RecipeFramePageComponent', () => {
 
   it('should combine recipe & frame titles', () => {
     fixture.detectChanges();
-    const title = fixture.debugElement.query(By.css('mc-page')).properties
+    const title = fixture.debugElement.query(By.css('mc-page')).properties.info
       .title;
     expect(title).toEqual(
       'Setup Express Gateway > 0 - Install Express Gateway'
