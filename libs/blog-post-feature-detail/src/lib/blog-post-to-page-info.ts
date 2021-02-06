@@ -3,7 +3,9 @@ import { createArticlePageInfo } from '@marmicode/shared-ui';
 
 export function blogPostToPageInfo(blogPost: BlogPost) {
   return createArticlePageInfo({
-    title: blogPost.title,
+    author: blogPost.author,
+    description: blogPost.summary,
     pictureUri: blogPost.pictureUri,
+    title: blogPost.title,
   });
 }

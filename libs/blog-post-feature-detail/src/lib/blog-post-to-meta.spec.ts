@@ -5,15 +5,23 @@ describe('blogPostToMeta', () => {
   it('should convert blog post to meta', () => {
     const blogPost = createBlogPost({
       id: 'blog-post-id',
-      title: 'Title',
+      author: {
+        name: 'Younes Jaaidi',
+      },
       pictureUri: 'https://picture.url',
+      summary: 'Life is too short...',
+      title: 'Title',
       text: 'content',
     });
 
     expect(blogPostToPageInfo(blogPost)).toEqual({
       type: 'article',
-      title: 'Title',
+      author: {
+        name: 'Younes Jaaidi',
+      },
+      description: 'Life is too short...',
       pictureUri: 'https://picture.url',
+      title: 'Title',
     });
   });
 });

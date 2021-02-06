@@ -28,10 +28,14 @@ describe('BlogPostRepository', () => {
           sys: {
             id: '62vt3ifOPzuBOv31JzHdMd',
           },
-          title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
+          author: {
+            name: 'Younes Jaaidi',
+          },
           picture: {
             url: 'https://picture.url/e2e-http-request-cancelation',
           },
+          summary: `Life is too short...`,
+          title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
           content: {
             __typename: 'BlogPost',
             text: 'Life is too short. ...',
@@ -47,7 +51,11 @@ describe('BlogPostRepository', () => {
     expect(blogPost).toEqual(
       expect.objectContaining({
         id: '62vt3ifOPzuBOv31JzHdMd',
+        author: {
+          name: 'Younes Jaaidi',
+        },
         pictureUri: 'https://picture.url/e2e-http-request-cancelation',
+        summary: 'Life is too short...',
         title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
         text: expect.stringMatching(/Life is too short/),
       })
