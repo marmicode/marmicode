@@ -72,10 +72,7 @@ export class PageComponent implements OnDestroy {
 
     /* Sync input with page title. */
     this._state.hold(
-      this._state.select('info').pipe(
-        map((info) => info?.title),
-        map((title) => (title ? `${title} | Marmicode` : this._defaultTitle))
-      ),
+      this._state.select('info').pipe(map((info) => this._infoToTitle(info))),
       (title) => this._titleService.setTitle(title)
     );
 
@@ -95,7 +92,7 @@ export class PageComponent implements OnDestroy {
         { property: 'og:image', content: info.pictureUri },
         { property: 'twitter:card', content: 'summary_large_image' },
         { property: 'twitter:description', content: info.description },
-        { property: 'twitter:title', content: info.title },
+        { property: 'twitter:title', content: this._infoToTitle(info) },
       ];
 
       /* Article. */
@@ -132,6 +129,10 @@ export class PageComponent implements OnDestroy {
   ngOnDestroy() {
     this._resetMeta();
     this._titleService.setTitle(this._defaultTitle);
+  }
+
+  private _infoToTitle(info: PageInfo) {
+    return info?.title ? `${info.title} | Marmicode` : this._defaultTitle;
   }
 
   private _resetMeta() {

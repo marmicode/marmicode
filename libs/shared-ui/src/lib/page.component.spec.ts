@@ -94,7 +94,7 @@ describe('PageComponent', () => {
       { property: 'og:image', content: 'https://picture.url' },
       { property: 'twitter:card', content: 'summary_large_image' },
       { property: 'twitter:description', content: 'Description' },
-      { property: 'twitter:title', content: 'Title' },
+      { property: 'twitter:title', content: 'Title | Marmicode' },
       { name: 'author', content: 'Younes Jaaidi' },
       { property: 'og:type', content: 'article' },
       {
