@@ -8,7 +8,8 @@ import {
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RxState } from '@rx-angular/state';
-import { map } from 'rxjs/operators';
+import { EMPTY, merge } from 'rxjs';
+import { catchError, finalize, map, pluck, tap } from 'rxjs/operators';
 
 export interface ArticlePageInfo {
   type: 'article';
@@ -71,11 +72,12 @@ export class PageComponent implements OnDestroy {
 
     /* Sync input with page title. */
     this._state.hold(
-      this._state
-        .select('title')
-        .pipe(
-          map((title) => (title ? `${title} | Marmicode` : this._defaultTitle))
-        ),
+      merge(
+        this._state.select('title'),
+        this._state.select('info').pipe(map((info) => info?.title))
+      ).pipe(
+        map((title) => (title ? `${title} | Marmicode` : this._defaultTitle))
+      ),
       (title) => this._titleService.setTitle(title)
     );
 
