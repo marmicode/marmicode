@@ -78,50 +78,20 @@ describe('PageComponent', () => {
 
     expect(metaService.addTags).toBeCalledTimes(1);
     expect(metaService.addTags).toBeCalledWith([
-      {
-        name: 'author',
-        content: 'Younes Jaaidi',
-      },
-      {
-        name: 'description',
-        content: 'Description',
-      },
-      {
-        property: 'og:type',
-        content: 'article',
-      },
-      {
-        property: 'og:description',
-        content: 'Description',
-      },
-      {
-        property: 'og:image',
-        content: 'https://picture.url',
-      },
+      { name: 'description', content: 'Description' },
+      { property: 'og:description', content: 'Description' },
+      { property: 'og:image', content: 'https://picture.url' },
+      { property: 'twitter:card', content: 'summary_large_image' },
+      { property: 'twitter:description', content: 'Description' },
+      { property: 'twitter:title', content: 'Title' },
+      { name: 'author', content: 'Younes Jaaidi' },
+      { property: 'og:type', content: 'article' },
       {
         property: 'article:published_time',
         content: '2020-01-01T00:00:00.000Z',
       },
-      {
-        property: 'article:author',
-        content: 'https://twitter.com/yjaaidi',
-      },
-      {
-        property: 'twitter:card',
-        content: 'summary_large_image',
-      },
-      {
-        property: 'twitter:creator',
-        content: '@yjaaidi',
-      },
-      {
-        property: 'twitter:description',
-        content: 'Description',
-      },
-      {
-        property: 'twitter:title',
-        content: 'Title',
-      },
+      { property: 'article:author', content: 'https://twitter.com/yjaaidi' },
+      { property: 'twitter:creator', content: '@yjaaidi' },
     ] as MetaDefinition[]);
   });
 

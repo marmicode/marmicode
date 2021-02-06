@@ -8,19 +8,26 @@ import {
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RxState } from '@rx-angular/state';
-import { EMPTY, merge } from 'rxjs';
-import { catchError, finalize, map, pluck, tap } from 'rxjs/operators';
+import { merge } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-export interface ArticlePageInfo {
+export interface BasicPageInfo {
+  description?: string;
+  pictureUri?: string;
+  title?: string;
+}
+
+export function createBasicPageInfo(pageInfo: BasicPageInfo) {
+  return pageInfo;
+}
+
+export interface ArticlePageInfo extends BasicPageInfo {
   type: 'article';
   author?: {
     name: string;
     twitter?: string;
   };
-  description?: string;
-  pictureUri?: string;
   publishedAt?: Date;
-  title?: string;
 }
 
 export function createArticlePageInfo(
@@ -31,6 +38,8 @@ export function createArticlePageInfo(
     type: 'article',
   };
 }
+
+export type PageInfo = BasicPageInfo | ArticlePageInfo;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -56,7 +65,7 @@ export class PageComponent implements OnDestroy {
     this._state.set({ title });
   }
 
-  @Input() set info(info: ArticlePageInfo) {
+  @Input() set info(info: PageInfo) {
     this._state.set({ info });
   }
 
@@ -64,7 +73,7 @@ export class PageComponent implements OnDestroy {
 
   constructor(
     private _metaService: Meta,
-    private _state: RxState<{ title: string; info: ArticlePageInfo }>,
+    private _state: RxState<{ title: string; info: PageInfo }>,
     private _titleService: Title
   ) {
     /* Initialize title. */
@@ -90,32 +99,44 @@ export class PageComponent implements OnDestroy {
         return;
       }
 
-      const twitter = info.author?.twitter;
-      const tags = [
-        { name: 'author', content: info.author?.name },
+      /* Basic info. */
+      let tags = [
         { name: 'description', content: info.description },
-        { property: 'og:type', content: info.type },
         { property: 'og:description', content: info.description },
         { property: 'og:image', content: info.pictureUri },
-        {
-          property: 'article:published_time',
-          content: info.publishedAt?.toISOString(),
-        },
-        {
-          property: 'article:author',
-          content: twitter ? `https://twitter.com/${twitter}` : null,
-        },
         { property: 'twitter:card', content: 'summary_large_image' },
-        {
-          property: 'twitter:creator',
-          content: twitter ? `@${twitter}` : null,
-        },
         { property: 'twitter:description', content: info.description },
         { property: 'twitter:title', content: info.title },
-      ]
-        /* Ignore null values. */
-        .filter((tag) => tag.content != null);
-      this._metaService.addTags(tags);
+      ];
+
+      /* Article. */
+      if ('type' in info && info.type === 'article') {
+        const twitter = info.author?.twitter;
+        tags = [
+          ...tags,
+
+          { name: 'author', content: info.author?.name },
+          { property: 'og:type', content: info.type },
+          {
+            property: 'article:published_time',
+            content: info.publishedAt?.toISOString(),
+          },
+          {
+            property: 'article:author',
+            content: twitter ? `https://twitter.com/${twitter}` : null,
+          },
+          {
+            property: 'twitter:creator',
+            content: twitter ? `@${twitter}` : null,
+          },
+        ];
+      }
+
+      this._metaService.addTags(
+        tags
+          /* Ignore null values. */
+          .filter((tag) => tag.content != null)
+      );
     });
   }
 
