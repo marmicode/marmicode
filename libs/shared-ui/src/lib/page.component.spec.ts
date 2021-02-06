@@ -45,20 +45,31 @@ describe('PageComponent', () => {
     expect(titleService.setTitle).toHaveBeenLastCalledWith('Marmicode');
   });
 
-  it('should set default page title if title is null', () => {
-    component.title = null;
+  it('should set default page title if info is null', () => {
+    component.info = null;
     expect(titleService.setTitle).toBeCalledTimes(1);
     expect(titleService.setTitle).toHaveBeenLastCalledWith('Marmicode');
   });
 
+  it('should set default page title if title is null', () => {
+    component.info = {
+      title: null,
+    };
+    expect(titleService.setTitle).toHaveBeenLastCalledWith('Marmicode');
+  });
+
   it('should set page title', () => {
-    component.title = '🍔';
+    component.info = {
+      title: '🍔',
+    };
     expect(titleService.setTitle).toBeCalledTimes(2);
     expect(titleService.setTitle).toHaveBeenLastCalledWith('🍔 | Marmicode');
   });
 
   it('should set page title to default on destroy', () => {
-    component.title = '🍔';
+    component.info = {
+      title: '🍔',
+    };
     fixture.destroy();
     expect(titleService.setTitle).toBeCalledTimes(3);
     expect(titleService.setTitle).toHaveBeenLastCalledWith('Marmicode');
@@ -101,6 +112,7 @@ describe('PageComponent', () => {
   });
 
   it('should remove all meta on destroy', () => {
+    metaService.removeTag.mockReset();
     fixture.destroy();
     expect(metaService.removeTag.mock.calls).toEqual([
       ['name="author"'],

@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RxState } from '@rx-angular/state';
-import { merge } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface BasicPageInfo {
@@ -57,14 +56,6 @@ export type PageInfo = BasicPageInfo | ArticlePageInfo;
   providers: [RxState],
 })
 export class PageComponent implements OnDestroy {
-  /**
-   * @deprecated use {@Link PageComponent.info} instead
-   * @param title
-   */
-  @Input() set title(title: string) {
-    this._state.set({ title });
-  }
-
   @Input() set info(info: PageInfo) {
     this._state.set({ info });
   }
@@ -73,18 +64,16 @@ export class PageComponent implements OnDestroy {
 
   constructor(
     private _metaService: Meta,
-    private _state: RxState<{ title: string; info: PageInfo }>,
+    private _state: RxState<{ info: PageInfo }>,
     private _titleService: Title
   ) {
-    /* Initialize title. */
-    this._state.set({ title: null });
+    /* Intialize info. */
+    this._state.set({ info: null });
 
     /* Sync input with page title. */
     this._state.hold(
-      merge(
-        this._state.select('title'),
-        this._state.select('info').pipe(map((info) => info?.title))
-      ).pipe(
+      this._state.select('info').pipe(
+        map((info) => info?.title),
         map((title) => (title ? `${title} | Marmicode` : this._defaultTitle))
       ),
       (title) => this._titleService.setTitle(title)
