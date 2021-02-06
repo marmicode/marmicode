@@ -1,6 +1,8 @@
 type Query {
   asset(id: String!, preview: Boolean, locale: String): Asset
   assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
+  author(id: String!, preview: Boolean, locale: String): Author
+  authorCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AuthorFilter, order: [AuthorOrder]): AuthorCollection
   resource(id: String!, preview: Boolean, locale: String): Resource
   resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: ResourceFilter, order: [ResourceOrder]): ResourceCollection
   textBlock(id: String!, preview: Boolean, locale: String): TextBlock
@@ -17,8 +19,6 @@ type Query {
   topicCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TopicFilter, order: [TopicOrder]): TopicCollection
   skill(id: String!, preview: Boolean, locale: String): Skill
   skillCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: SkillFilter, order: [SkillOrder]): SkillCollection
-  author(id: String!, preview: Boolean, locale: String): Author
-  authorCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AuthorFilter, order: [AuthorOrder]): AuthorCollection
 }
 
 """Represents a binary file in a space. An asset can be any file type."""
@@ -193,8 +193,8 @@ enum ImageFormat {
 
 type AssetLinkingCollections {
   entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
-  resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceCollection
   authorCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): AuthorCollection
+  resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceCollection
 }
 
 type EntryCollection {
@@ -206,6 +206,29 @@ type EntryCollection {
 
 interface Entry {
   sys: Sys!
+}
+
+type AuthorCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Author]!
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author)
+"""
+type Author implements Entry {
+  sys: Sys!
+  linkedFrom(allowedLocales: [String]): AuthorLinkingCollections
+  name(locale: String): String
+  picture(preview: Boolean, locale: String): Asset
+  twitter(locale: String): String
+}
+
+type AuthorLinkingCollections {
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceCollection
 }
 
 type ResourceCollection {
@@ -238,21 +261,6 @@ type Resource implements Entry {
 
 type ResourceLinkingCollections {
   entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
-}
-
-"""
-[See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author)
-"""
-type Author implements Entry {
-  sys: Sys!
-  linkedFrom(allowedLocales: [String]): AuthorLinkingCollections
-  name(locale: String): String
-  picture(preview: Boolean, locale: String): Asset
-}
-
-type AuthorLinkingCollections {
-  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
-  resourceCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ResourceCollection
 }
 
 type ResourceRequiredSkillCollection {
@@ -413,13 +421,6 @@ type TextBlockLinkingCollections {
   frameCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): FrameCollection
 }
 
-type AuthorCollection {
-  total: Int!
-  skip: Int!
-  limit: Int!
-  items: [Author]!
-}
-
 input AssetFilter {
   sys: SysFilter
   title_exists: Boolean
@@ -549,6 +550,42 @@ type AssetCollection {
   items: [Asset]!
 }
 
+input AuthorFilter {
+  sys: SysFilter
+  name_exists: Boolean
+  name: String
+  name_not: String
+  name_in: [String]
+  name_not_in: [String]
+  name_contains: String
+  name_not_contains: String
+  picture_exists: Boolean
+  twitter_exists: Boolean
+  twitter: String
+  twitter_not: String
+  twitter_in: [String]
+  twitter_not_in: [String]
+  twitter_contains: String
+  twitter_not_contains: String
+  OR: [AuthorFilter]
+  AND: [AuthorFilter]
+}
+
+enum AuthorOrder {
+  name_ASC
+  name_DESC
+  twitter_ASC
+  twitter_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
 input ResourceFilter {
   author: cfAuthorNestedFilter
   sys: SysFilter
@@ -627,6 +664,13 @@ input cfAuthorNestedFilter {
   name_contains: String
   name_not_contains: String
   picture_exists: Boolean
+  twitter_exists: Boolean
+  twitter: String
+  twitter_not: String
+  twitter_in: [String]
+  twitter_not_in: [String]
+  twitter_contains: String
+  twitter_not_contains: String
   OR: [cfAuthorNestedFilter]
   AND: [cfAuthorNestedFilter]
 }
@@ -912,33 +956,6 @@ enum SkillOrder {
   label_DESC
   slug_ASC
   slug_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-}
-
-input AuthorFilter {
-  sys: SysFilter
-  name_exists: Boolean
-  name: String
-  name_not: String
-  name_in: [String]
-  name_not_in: [String]
-  name_contains: String
-  name_not_contains: String
-  picture_exists: Boolean
-  OR: [AuthorFilter]
-  AND: [AuthorFilter]
-}
-
-enum AuthorOrder {
-  name_ASC
-  name_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC

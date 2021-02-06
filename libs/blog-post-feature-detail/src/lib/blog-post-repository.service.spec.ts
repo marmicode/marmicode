@@ -30,6 +30,7 @@ describe('BlogPostRepository', () => {
           },
           author: {
             name: 'Younes Jaaidi',
+            twitter: 'yjaaidi',
           },
           picture: {
             url: 'https://picture.url/e2e-http-request-cancelation',
@@ -53,6 +54,7 @@ describe('BlogPostRepository', () => {
         id: '62vt3ifOPzuBOv31JzHdMd',
         author: {
           name: 'Younes Jaaidi',
+          twitter: 'yjaaidi',
         },
         pictureUri: 'https://picture.url/e2e-http-request-cancelation',
         summary: 'Life is too short...',

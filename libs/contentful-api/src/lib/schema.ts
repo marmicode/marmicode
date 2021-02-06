@@ -26,6 +26,8 @@ export interface Query {
   __typename?: 'Query';
   asset?: Maybe<Asset>;
   assetCollection?: Maybe<AssetCollection>;
+  author?: Maybe<Author>;
+  authorCollection?: Maybe<AuthorCollection>;
   resource?: Maybe<Resource>;
   resourceCollection?: Maybe<ResourceCollection>;
   textBlock?: Maybe<TextBlock>;
@@ -42,8 +44,6 @@ export interface Query {
   topicCollection?: Maybe<TopicCollection>;
   skill?: Maybe<Skill>;
   skillCollection?: Maybe<SkillCollection>;
-  author?: Maybe<Author>;
-  authorCollection?: Maybe<AuthorCollection>;
 }
 
 
@@ -61,6 +61,23 @@ export interface QueryAssetCollectionArgs {
   locale?: Maybe<Scalars['String']>;
   where?: Maybe<AssetFilter>;
   order?: Maybe<Array<Maybe<AssetOrder>>>;
+}
+
+
+export interface QueryAuthorArgs {
+  id: Scalars['String'];
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+export interface QueryAuthorCollectionArgs {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  where?: Maybe<AuthorFilter>;
+  order?: Maybe<Array<Maybe<AuthorOrder>>>;
 }
 
 
@@ -197,23 +214,6 @@ export interface QuerySkillCollectionArgs {
   locale?: Maybe<Scalars['String']>;
   where?: Maybe<SkillFilter>;
   order?: Maybe<Array<Maybe<SkillOrder>>>;
-}
-
-
-export interface QueryAuthorArgs {
-  id: Scalars['String'];
-  preview?: Maybe<Scalars['Boolean']>;
-  locale?: Maybe<Scalars['String']>;
-}
-
-
-export interface QueryAuthorCollectionArgs {
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-  preview?: Maybe<Scalars['Boolean']>;
-  locale?: Maybe<Scalars['String']>;
-  where?: Maybe<AuthorFilter>;
-  order?: Maybe<Array<Maybe<AuthorOrder>>>;
 }
 
 /** Represents a binary file in a space. An asset can be any file type. */
@@ -354,8 +354,8 @@ export enum ImageFormat {
 export interface AssetLinkingCollections {
   __typename?: 'AssetLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
-  resourceCollection?: Maybe<ResourceCollection>;
   authorCollection?: Maybe<AuthorCollection>;
+  resourceCollection?: Maybe<ResourceCollection>;
 }
 
 
@@ -367,7 +367,7 @@ export interface AssetLinkingCollectionsEntryCollectionArgs {
 }
 
 
-export interface AssetLinkingCollectionsResourceCollectionArgs {
+export interface AssetLinkingCollectionsAuthorCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
@@ -375,7 +375,7 @@ export interface AssetLinkingCollectionsResourceCollectionArgs {
 }
 
 
-export interface AssetLinkingCollectionsAuthorCollectionArgs {
+export interface AssetLinkingCollectionsResourceCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
@@ -392,6 +392,71 @@ export interface EntryCollection {
 
 export interface Entry {
   sys: Sys;
+}
+
+export interface AuthorCollection {
+  __typename?: 'AuthorCollection';
+  total: Scalars['Int'];
+  skip: Scalars['Int'];
+  limit: Scalars['Int'];
+  items: Array<Maybe<Author>>;
+}
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
+export interface Author extends Entry {
+  __typename?: 'Author';
+  sys: Sys;
+  linkedFrom?: Maybe<AuthorLinkingCollections>;
+  name?: Maybe<Scalars['String']>;
+  picture?: Maybe<Asset>;
+  twitter?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
+export interface AuthorLinkedFromArgs {
+  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
+export interface AuthorNameArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
+export interface AuthorPictureArgs {
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
+export interface AuthorTwitterArgs {
+  locale?: Maybe<Scalars['String']>;
+}
+
+export interface AuthorLinkingCollections {
+  __typename?: 'AuthorLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  resourceCollection?: Maybe<ResourceCollection>;
+}
+
+
+export interface AuthorLinkingCollectionsEntryCollectionArgs {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+}
+
+
+export interface AuthorLinkingCollectionsResourceCollectionArgs {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  preview?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
 }
 
 export interface ResourceCollection {
@@ -522,56 +587,6 @@ export interface ResourceLinkingCollections {
 
 
 export interface ResourceLinkingCollectionsEntryCollectionArgs {
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-  preview?: Maybe<Scalars['Boolean']>;
-  locale?: Maybe<Scalars['String']>;
-}
-
-/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
-export interface Author extends Entry {
-  __typename?: 'Author';
-  sys: Sys;
-  linkedFrom?: Maybe<AuthorLinkingCollections>;
-  name?: Maybe<Scalars['String']>;
-  picture?: Maybe<Asset>;
-}
-
-
-/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
-export interface AuthorLinkedFromArgs {
-  allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
-}
-
-
-/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
-export interface AuthorNameArgs {
-  locale?: Maybe<Scalars['String']>;
-}
-
-
-/** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
-export interface AuthorPictureArgs {
-  preview?: Maybe<Scalars['Boolean']>;
-  locale?: Maybe<Scalars['String']>;
-}
-
-export interface AuthorLinkingCollections {
-  __typename?: 'AuthorLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-  resourceCollection?: Maybe<ResourceCollection>;
-}
-
-
-export interface AuthorLinkingCollectionsEntryCollectionArgs {
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-  preview?: Maybe<Scalars['Boolean']>;
-  locale?: Maybe<Scalars['String']>;
-}
-
-
-export interface AuthorLinkingCollectionsResourceCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
@@ -988,14 +1003,6 @@ export interface TextBlockLinkingCollectionsFrameCollectionArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
-export interface AuthorCollection {
-  __typename?: 'AuthorCollection';
-  total: Scalars['Int'];
-  skip: Scalars['Int'];
-  limit: Scalars['Int'];
-  items: Array<Maybe<Author>>;
-}
-
 export interface AssetFilter {
   sys?: Maybe<SysFilter>;
   title_exists?: Maybe<Scalars['Boolean']>;
@@ -1126,6 +1133,42 @@ export interface AssetCollection {
   items: Array<Maybe<Asset>>;
 }
 
+export interface AuthorFilter {
+  sys?: Maybe<SysFilter>;
+  name_exists?: Maybe<Scalars['Boolean']>;
+  name?: Maybe<Scalars['String']>;
+  name_not?: Maybe<Scalars['String']>;
+  name_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  name_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  name_contains?: Maybe<Scalars['String']>;
+  name_not_contains?: Maybe<Scalars['String']>;
+  picture_exists?: Maybe<Scalars['Boolean']>;
+  twitter_exists?: Maybe<Scalars['Boolean']>;
+  twitter?: Maybe<Scalars['String']>;
+  twitter_not?: Maybe<Scalars['String']>;
+  twitter_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  twitter_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  twitter_contains?: Maybe<Scalars['String']>;
+  twitter_not_contains?: Maybe<Scalars['String']>;
+  OR?: Maybe<Array<Maybe<AuthorFilter>>>;
+  AND?: Maybe<Array<Maybe<AuthorFilter>>>;
+}
+
+export enum AuthorOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  TwitterAsc = 'twitter_ASC',
+  TwitterDesc = 'twitter_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
 export interface ResourceFilter {
   author?: Maybe<CfAuthorNestedFilter>;
   sys?: Maybe<SysFilter>;
@@ -1204,6 +1247,13 @@ export interface CfAuthorNestedFilter {
   name_contains?: Maybe<Scalars['String']>;
   name_not_contains?: Maybe<Scalars['String']>;
   picture_exists?: Maybe<Scalars['Boolean']>;
+  twitter_exists?: Maybe<Scalars['Boolean']>;
+  twitter?: Maybe<Scalars['String']>;
+  twitter_not?: Maybe<Scalars['String']>;
+  twitter_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  twitter_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  twitter_contains?: Maybe<Scalars['String']>;
+  twitter_not_contains?: Maybe<Scalars['String']>;
   OR?: Maybe<Array<Maybe<CfAuthorNestedFilter>>>;
   AND?: Maybe<Array<Maybe<CfAuthorNestedFilter>>>;
 }
@@ -1493,33 +1543,6 @@ export enum SkillOrder {
   LabelDesc = 'label_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
-}
-
-export interface AuthorFilter {
-  sys?: Maybe<SysFilter>;
-  name_exists?: Maybe<Scalars['Boolean']>;
-  name?: Maybe<Scalars['String']>;
-  name_not?: Maybe<Scalars['String']>;
-  name_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  name_not_in?: Maybe<Array<Maybe<Scalars['String']>>>;
-  name_contains?: Maybe<Scalars['String']>;
-  name_not_contains?: Maybe<Scalars['String']>;
-  picture_exists?: Maybe<Scalars['Boolean']>;
-  OR?: Maybe<Array<Maybe<AuthorFilter>>>;
-  AND?: Maybe<Array<Maybe<AuthorFilter>>>;
-}
-
-export enum AuthorOrder {
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
   SysIdAsc = 'sys_id_ASC',
   SysIdDesc = 'sys_id_DESC',
   SysPublishedAtAsc = 'sys_publishedAt_ASC',

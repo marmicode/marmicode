@@ -2,6 +2,7 @@ export interface BlogPost {
   id: string;
   author: {
     name: string;
+    twitter: string;
   };
   pictureUri: string;
   summary: string;

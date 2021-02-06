@@ -18,6 +18,7 @@ export const getBlogPost = gql`
         }
         author {
           name
+          twitter
         }
         picture {
           url
@@ -53,6 +54,7 @@ export class BlogPostRepository {
             id: resource.sys.id,
             author: {
               name: resource.author.name,
+              twitter: resource.author.twitter,
             },
             pictureUri: resource.picture.url,
             summary: resource.summary,
