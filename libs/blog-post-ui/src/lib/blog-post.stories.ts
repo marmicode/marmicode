@@ -133,18 +133,18 @@ function getFiles(directoryPath) {
 }
 
 function readLines(filePath) {
-return new Observable(observer => {
-  ...
-  return () => reader.close();
-}
+  return new Observable(observer => {
+    ...
+    return () => reader.close();
+  }
 }
 
 function search(): Observable<Line[]> {
-return getFiles(nodeModulesPath)
-  .pipe(
-    mergeMap(file => readLines(file)),
-    ...
-  );
+  return getFiles(nodeModulesPath)
+    .pipe(
+      mergeMap(file => readLines(file)),
+      ...
+    );
 }
 \`\`\`
 
@@ -184,9 +184,9 @@ and it looks like this:
 \`\`\`javascript
 @Injectable()
 export class NoopInterceptor implements NestInterceptor {
-intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
-  return next.handle();
-}
+  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
+    return next.handle();
+  }
 }
 \`\`\`
 
@@ -206,17 +206,17 @@ The final interceptor should look like this:
 \`\`\`javascript
 @Injectable()
 export class UnsubscribeOnCloseInterceptor implements NestInterceptor {
-intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
-  if (context.getType() !== 'http') {
-    return next.handle();
+  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
+    if (context.getType() !== 'http') {
+      return next.handle();
+    }
+
+    const request = context.switchToHttp().getRequest() as Request;
+
+    const close$ = fromEvent(request, 'close');
+
+    return next.handle().pipe(takeUntil(close$));
   }
-
-  const request = context.switchToHttp().getRequest() as Request;
-
-  const close$ = fromEvent(request, 'close');
-
-  return next.handle().pipe(takeUntil(close$));
-}
 }
 \`\`\`
 
