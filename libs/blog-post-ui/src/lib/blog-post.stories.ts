@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/angular';
+import { Story } from '@storybook/angular';
 import { createBlogPost } from './blog-post';
 import { BlogPostComponent, BlogPostModule } from './blog-post.component';
 
@@ -6,25 +6,27 @@ export default {
   title: 'BlogPost',
 };
 
-export const Default = () =>
-  ({
-    title: 'Default',
-    moduleMetadata: {
-      imports: [BlogPostModule],
+const Template: Story<BlogPostComponent> = (args) => ({
+  moduleMetadata: {
+    imports: [BlogPostModule],
+  },
+  component: BlogPostComponent,
+  props: args,
+});
+
+export const Default = Template.bind({});
+Default.args = {
+  blogPost: createBlogPost({
+    id: '123',
+    author: {
+      name: 'Younes Jaaidi',
+      twitter: 'yjaaidi',
     },
-    component: BlogPostComponent,
-    props: {
-      blogPost: createBlogPost({
-        id: '123',
-        author: {
-          name: 'Younes Jaaidi',
-          twitter: 'yjaaidi',
-        },
-        pictureUri:
-          'https://images.ctfassets.net/gowvxq3b4aid/7IC9BlKufXjqRWb5ISDS9h/95e4e3730e896a24e5f41b12e72fc832/end-to-end-http-request-cancelation-with-rxjs-and-nestjs.jpg',
-        summary: 'Life is too short...',
-        title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
-        text: `
+    pictureUri:
+      'https://images.ctfassets.net/gowvxq3b4aid/7IC9BlKufXjqRWb5ISDS9h/95e4e3730e896a24e5f41b12e72fc832/end-to-end-http-request-cancelation-with-rxjs-and-nestjs.jpg',
+    summary: 'Life is too short...',
+    title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
+    text: `
 Life is too short. When searching for something, we can’t afford to type a whole word or sentence in a search field, or filling all the fields then hitting our old keyboard’s half-broken enter key to finally be able to see the first results... or nothing at all because our search criteria were too restrictive.
 
 Don’t look at me like that! We can probably agree that most of us, if not all, are **used to features like typeahead and live search results**. We get frustrated every time we have to submit a search form.
@@ -53,15 +55,15 @@ That’s when we end up with this common recipe:
 \`\`\`javascript
 keywords$ = this.keywordsControl.valueChanges;
 data$ = keywords$.pipe(
-  /* Wait for the user to stop typing for 100ms and emit last value. */
-  debounceTime(100),
-  /* Ignore identical successive values
-   * (e.g. user pastes the same value in the input). */
-  distinctUntilChanged(), 
-  /* when new keywords are emitted, this unsubscribes from the previous
-   * search result (canceling the underlying http request)
-   * and subscribes to the new one. */
-  switchMap(keywords => this.search(keywords))
+/* Wait for the user to stop typing for 100ms and emit last value. */
+debounceTime(100),
+/* Ignore identical successive values
+ * (e.g. user pastes the same value in the input). */
+distinctUntilChanged(), 
+/* when new keywords are emitted, this unsubscribes from the previous
+ * search result (canceling the underlying http request)
+ * and subscribes to the new one. */
+switchMap(keywords => this.search(keywords))
 )
 \`\`\`
 
@@ -95,12 +97,12 @@ Here’s an example of wrapping \`setInterval\` in an observable:
 
 \`\`\`javascript
 function interval(period) {
-  return new Observable(observer => {
-    let i = 0;
-    const handle = setInterval(() => observer.next(i++), period);
-    /* This is the teardown logic. */
-    return () => clearInterval(handle);
-  });
+return new Observable(observer => {
+  let i = 0;
+  const handle = setInterval(() => observer.next(i++), period);
+  /* This is the teardown logic. */
+  return () => clearInterval(handle);
+});
 }
 \`\`\`
 
@@ -122,25 +124,25 @@ The implementation looks something like this and as you can see, the **teardown 
 
 \`\`\`javascript
 function getFiles(directoryPath) {
-  return new Observable(observer => {
-    ...
-    return () => walker.pause();
-  }
+return new Observable(observer => {
+  ...
+  return () => walker.pause();
+}
 }
 
 function readLines(filePath) {
-  return new Observable(observer => {
-    ...
-    return () => reader.close();
-  }
+return new Observable(observer => {
+  ...
+  return () => reader.close();
+}
 }
 
 function search(): Observable<Line[]> {
-  return getFiles(nodeModulesPath)
-    .pipe(
-      mergeMap(file => readLines(file)),
-      ...
-    );
+return getFiles(nodeModulesPath)
+  .pipe(
+    mergeMap(file => readLines(file)),
+    ...
+  );
 }
 \`\`\`
 
@@ -154,12 +156,12 @@ In the animation below, we can observe high CPU usage and an exponential memory 
 By diving a little bit in [Nest’s source code](https://github.com/nestjs/nest/blob/8755571094524f28e2792472cac4cc0171b29e1b/packages/core/router/router-response-controller.ts#L49:L54), we can see that our observable is converted to a promise using \`toPromise\` method. In fact, Nest has to adapt to frameworks like ExpressJS that don’t handle observables.
 
 \`\`\`javascript
-  public async transformToResult(resultOrDeferred: any) {
-    if (resultOrDeferred && isFunction(resultOrDeferred.subscribe)) {
-      return resultOrDeferred.toPromise();
-    }
-    return resultOrDeferred;
+public async transformToResult(resultOrDeferred: any) {
+  if (resultOrDeferred && isFunction(resultOrDeferred.subscribe)) {
+    return resultOrDeferred.toPromise();
   }
+  return resultOrDeferred;
+}
 \`\`\`
 
 # 🔍 Detecting request cancelation
@@ -180,9 +182,9 @@ and it looks like this:
 \`\`\`javascript
 @Injectable()
 export class NoopInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
-    return next.handle();
-  }
+intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
+  return next.handle();
+}
 }
 \`\`\`
 
@@ -202,17 +204,17 @@ The final interceptor should look like this:
 \`\`\`javascript
 @Injectable()
 export class UnsubscribeOnCloseInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
-    if (context.getType() !== 'http') {
-      return next.handle();
-    }
-
-    const request = context.switchToHttp().getRequest() as Request;
-
-    const close$ = fromEvent(request, 'close');
-
-    return next.handle().pipe(takeUntil(close$));
+intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
+  if (context.getType() !== 'http') {
+    return next.handle();
   }
+
+  const request = context.switchToHttp().getRequest() as Request;
+
+  const close$ = fromEvent(request, 'close');
+
+  return next.handle().pipe(takeUntil(close$));
+}
 }
 \`\`\`
 
@@ -253,7 +255,6 @@ We have the services you need:
 # 🔗 Links
 💻 [Source code](https://github.com/yjaaidi/ng-experiments/tree/http-request-cancelation) Nx monorepo with an Angular app, a NestJS API and custom CPU / Memory graphing app using Angular & GraphQL subscriptions.
 🐦 [@yjaaidi](https://twitter.com/intent/follow?screen_name=yjaaidi) Stay tuned for more posts and upcoming workshops.
-          `,
-      }),
-    },
-  } as Meta);
+        `,
+  }),
+};
