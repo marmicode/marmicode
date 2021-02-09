@@ -1,15 +1,17 @@
-import { Story } from '@storybook/angular';
+import { Meta, Story, moduleMetadata } from '@storybook/angular';
 import { createBlogPost } from './blog-post';
 import { BlogPostComponent, BlogPostModule } from './blog-post.component';
 
 export default {
   title: 'BlogPost',
-};
+  decorators: [
+    moduleMetadata({
+      imports: [BlogPostModule],
+    }),
+  ],
+} as Meta;
 
 const Template: Story<BlogPostComponent> = (args) => ({
-  moduleMetadata: {
-    imports: [BlogPostModule],
-  },
   component: BlogPostComponent,
   props: args,
 });
@@ -55,15 +57,15 @@ That’s when we end up with this common recipe:
 \`\`\`javascript
 keywords$ = this.keywordsControl.valueChanges;
 data$ = keywords$.pipe(
-/* Wait for the user to stop typing for 100ms and emit last value. */
-debounceTime(100),
-/* Ignore identical successive values
- * (e.g. user pastes the same value in the input). */
-distinctUntilChanged(), 
-/* when new keywords are emitted, this unsubscribes from the previous
- * search result (canceling the underlying http request)
- * and subscribes to the new one. */
-switchMap(keywords => this.search(keywords))
+  /* Wait for the user to stop typing for 100ms and emit last value. */
+  debounceTime(100),
+  /* Ignore identical successive values
+  * (e.g. user pastes the same value in the input). */
+  distinctUntilChanged(), 
+  /* when new keywords are emitted, this unsubscribes from the previous
+  * search result (canceling the underlying http request)
+  * and subscribes to the new one. */
+  switchMap(keywords => this.search(keywords))
 )
 \`\`\`
 
@@ -97,12 +99,12 @@ Here’s an example of wrapping \`setInterval\` in an observable:
 
 \`\`\`javascript
 function interval(period) {
-return new Observable(observer => {
-  let i = 0;
-  const handle = setInterval(() => observer.next(i++), period);
-  /* This is the teardown logic. */
-  return () => clearInterval(handle);
-});
+  return new Observable(observer => {
+    let i = 0;
+    const handle = setInterval(() => observer.next(i++), period);
+    /* This is the teardown logic. */
+    return () => clearInterval(handle);
+  });
 }
 \`\`\`
 
@@ -124,10 +126,10 @@ The implementation looks something like this and as you can see, the **teardown 
 
 \`\`\`javascript
 function getFiles(directoryPath) {
-return new Observable(observer => {
-  ...
-  return () => walker.pause();
-}
+  return new Observable(observer => {
+    ...
+    return () => walker.pause();
+  }
 }
 
 function readLines(filePath) {
