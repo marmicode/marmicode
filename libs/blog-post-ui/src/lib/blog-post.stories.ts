@@ -60,11 +60,11 @@ data$ = keywords$.pipe(
   /* Wait for the user to stop typing for 100ms and emit last value. */
   debounceTime(100),
   /* Ignore identical successive values
-  * (e.g. user pastes the same value in the input). */
+   * (e.g. user pastes the same value in the input). */
   distinctUntilChanged(), 
   /* when new keywords are emitted, this unsubscribes from the previous
-  * search result (canceling the underlying http request)
-  * and subscribes to the new one. */
+   * search result (canceling the underlying http request)
+   * and subscribes to the new one. */
   switchMap(keywords => this.search(keywords))
 )
 \`\`\`
