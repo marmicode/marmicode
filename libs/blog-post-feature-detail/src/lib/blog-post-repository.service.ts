@@ -56,7 +56,7 @@ export class BlogPostRepository {
               name: resource.author.name,
               twitter: resource.author.twitter,
             },
-            pictureUri: resource.picture.url,
+            pictureUri: resource.picture?.url,
             summary: resource.summary,
             title: resource.title,
             text: (resource.content as ContentfulBlogPost).text,

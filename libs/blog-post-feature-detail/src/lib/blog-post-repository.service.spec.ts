@@ -76,4 +76,33 @@ describe('BlogPostRepository', () => {
       })
     );
   });
+
+  it('should not crash if picture is not set', async () => {
+    mockResourceCollectionResolver.mockReturnValue({
+      items: [
+        {
+          sys: {
+            id: '62vt3ifOPzuBOv31JzHdMd',
+          },
+          author: {
+            name: 'Younes Jaaidi',
+            twitter: 'yjaaidi',
+          },
+          picture: null,
+          summary: `Life is too short...`,
+          title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
+          content: {
+            __typename: 'BlogPost',
+            text: 'Life is too short. ...',
+          },
+        },
+      ],
+    });
+
+    const blogPost = await blogPostRepository
+      .getBlogPost('end-to-end-http-request-cancelation-with-rxjs-and-nestjs')
+      .toPromise();
+
+    expect(blogPost.pictureUri).toBeUndefined();
+  });
 });
