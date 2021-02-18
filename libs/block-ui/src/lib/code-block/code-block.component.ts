@@ -14,6 +14,7 @@ import { CodeBlock } from '@marmicode/block-core';
 import { RxState, select, selectSlice } from '@rx-angular/state';
 import * as Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import { animationFrameScheduler, Observable, Subject } from 'rxjs';
