@@ -104,6 +104,12 @@ export class NavMenuComponent {
       route: resourceSearchRouterHelper.learnEverything(),
     },
     {
+      icon: 'email',
+      title: 'Newsletter',
+      url:
+        'https://gmail.us3.list-manage.com/subscribe?u=915d6ba70c9c00912ba326214&id=71255f30c7',
+    },
+    {
       icon: 'school',
       title: 'Workshops',
       url: 'https://marmicode.eventbrite.com',
@@ -114,7 +120,7 @@ export class NavMenuComponent {
       route: servicesRouterHelper.services(),
     },
     {
-      icon: 'mail',
+      icon: 'phone',
       title: 'Contact Us',
       url: 'mailto:kitchen@marmicode.io',
     },
