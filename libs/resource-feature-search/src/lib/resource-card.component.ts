@@ -101,6 +101,8 @@ import { SkillChipModule } from './skill-chip.component';
       .picture {
         height: 200px;
         object-fit: cover;
+        /* Cancel useless margin as the resource header has a padding. */
+        margin-bottom: 0;
       }
 
       .list-title {

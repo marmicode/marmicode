@@ -40,7 +40,7 @@ import { getResourceTypeColor, ResourceInfo } from '@marmicode/resource-core';
         display: flex;
         flex-direction: row;
         align-items: center;
-        margin-bottom: 10px;
+        padding: 10px 0;
       }
 
       .picture {
