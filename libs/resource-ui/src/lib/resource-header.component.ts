@@ -22,7 +22,7 @@ import { getResourceTypeColor, ResourceInfo } from '@marmicode/resource-core';
     <mat-card-title>
       <h2 class="title">{{ resourceInfo.title }}</h2>
     </mat-card-title>
-    <mat-card-subtitle class="card-subtitle" fxLayout="row">
+    <mat-card-subtitle class="card-subtitle">
       <ng-container *ngIf="resourceInfo.author">
         <span>by {{ resourceInfo.author.name }}</span>
         <span>&nbsp;•&nbsp;</span>
@@ -34,6 +34,15 @@ import { getResourceTypeColor, ResourceInfo } from '@marmicode/resource-core';
       <span [style.color]="color">{{ resourceInfo.duration }} minutes</span>
     </mat-card-subtitle>
   </mat-card-header>`,
+  styles: [
+    `
+      /* Override h2 styling. */
+      .title {
+        margin: 0;
+        font: inherit;
+      }
+    `,
+  ],
 })
 export class ResourceHeaderComponent implements OnChanges {
   @Input() resourceInfo: ResourceInfo;

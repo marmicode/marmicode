@@ -41,30 +41,8 @@ import { SkillChipModule } from './skill-chip.component';
         [resourceType]="resource.type"
       ></mc-resource-type-triangle>
 
-      <mat-card-header *mcNotWip>
-        <img
-          *ngIf="resource.author"
-          [alt]="resource.author.name"
-          [src]="resource.author.pictureUri"
-          mat-card-avatar
-        />
-        <mat-card-title>
-          <h2 class="title">{{ resource.title }}</h2>
-        </mat-card-title>
-        <mat-card-subtitle class="card-subtitle" fxLayout="row">
-          <ng-container *ngIf="resource.author">
-            <span>by {{ resource.author.name }}</span>
-            <span>&nbsp;•&nbsp;</span>
-          </ng-container>
-          <ng-container *ngIf="resource.releasedAt">
-            <span>{{ resource.releasedAt | date }}</span>
-            <span>&nbsp;•&nbsp;</span>
-          </ng-container>
-          <span [style.color]="color">{{ resource.duration }} minutes</span>
-        </mat-card-subtitle>
-      </mat-card-header>
-
-      <mc-resource-header *mcWip [resourceInfo]="resource"></mc-resource-header>
+      <!-- Resource header with author info. -->
+      <mc-resource-header [resourceInfo]="resource"></mc-resource-header>
 
       <mat-card-content fxFlex>
         <p>
@@ -124,16 +102,6 @@ import { SkillChipModule } from './skill-chip.component';
       .picture {
         height: 200px;
         object-fit: cover;
-      }
-
-      /* Override h2 styling. */
-      .title {
-        margin: 0;
-        font: inherit;
-      }
-
-      .card-subtitle {
-        color: grey;
       }
 
       .list-title {
