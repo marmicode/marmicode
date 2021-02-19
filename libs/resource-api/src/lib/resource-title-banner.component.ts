@@ -6,13 +6,8 @@ import {
   NgModule,
 } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {
-  getResourceTypeColor,
-  getResourceTypeText,
-  ResourceType,
-} from '@marmicode/resource-core';
-import { RxState } from '@rx-angular/state';
-import { map } from 'rxjs/operators';
+import { ResourceType } from '@marmicode/resource-core';
+import { ResourceBadgeModule } from '@marmicode/resource-ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,9 +17,10 @@ import { map } from 'rxjs/operators';
       <polygon style="fill: #561f4b" points="0,0 20,0 10,100 0,100" />
     </svg>
     <div fxLayout="row" fxLayoutAlign="center">
-      <div [style.backgroundColor]="badgeColor$ | async" class="badge">
-        {{ badgeText$ | async }}
-      </div>
+      <mc-resource-badge
+        [resourceType]="resourceType"
+        class="badge"
+      ></mc-resource-badge>
     </div>
 
     <h1 class="title" [class.without-subtitle]="subtitle == null">
@@ -44,15 +40,7 @@ import { map } from 'rxjs/operators';
       }
 
       .badge {
-        position: relative;
-        border-radius: 10px;
-        height: 20px;
         margin-top: 10px;
-        padding: 0 10px;
-
-        color: #561f4b;
-        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
-        text-transform: uppercase;
       }
 
       .title,
@@ -88,30 +76,16 @@ import { map } from 'rxjs/operators';
       }
     `,
   ],
-  providers: [RxState],
 })
 export class ResourceTitleBannerComponent {
-  @Input() set resourceType(resourceType: ResourceType) {
-    this._state.set({ resourceType });
-  }
-
+  @Input() resourceType: ResourceType;
   @Input() title: string;
   @Input() subtitle: string;
-
-  badgeColor$ = this._state.select(
-    map(({ resourceType }) => getResourceTypeColor(resourceType))
-  );
-
-  badgeText$ = this._state.select(
-    map(({ resourceType }) => getResourceTypeText(resourceType))
-  );
-
-  constructor(private _state: RxState<{ resourceType: ResourceType }>) {}
 }
 
 @NgModule({
   declarations: [ResourceTitleBannerComponent],
   exports: [ResourceTitleBannerComponent],
-  imports: [CommonModule, FlexLayoutModule],
+  imports: [CommonModule, FlexLayoutModule, ResourceBadgeModule],
 })
 export class ResourceTitleBannerModule {}

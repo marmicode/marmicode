@@ -9,11 +9,16 @@ import {
 } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { getResourceTypeColor, ResourceInfo } from '@marmicode/resource-core';
+import { ResourceBadgeModule } from './resource-badge.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-header',
   template: `
+    <div *ngIf="isLarge" fxLayout="row" fxLayoutAlign="center">
+      <mc-resource-badge [resourceType]="resourceInfo.type"></mc-resource-badge>
+    </div>
+
     <div fxLayout="row" fxLayoutAlign="start center">
       <img
         *ngIf="resourceInfo.author"
@@ -106,6 +111,6 @@ export class ResourceHeaderComponent implements OnChanges {
 @NgModule({
   declarations: [ResourceHeaderComponent],
   exports: [ResourceHeaderComponent],
-  imports: [CommonModule, FlexModule],
+  imports: [CommonModule, FlexModule, ResourceBadgeModule],
 })
 export class ResourceHeaderModule {}
