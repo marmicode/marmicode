@@ -67,7 +67,7 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
       }
 
       .resource-card {
-        margin: 20px;
+        margin: 20px 5px;
       }
     `,
   ],
