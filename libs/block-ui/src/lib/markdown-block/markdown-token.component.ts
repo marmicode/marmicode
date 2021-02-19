@@ -19,31 +19,31 @@ import {
       <!-- Code. -->
       <mc-markdown-blockquote
         *ngSwitchCase="TokenType.Blockquote"
-        [token]="token"
+        [token]="tokenAsAny"
       ></mc-markdown-blockquote>
 
       <!-- Code. -->
       <mc-markdown-code
         *ngSwitchCase="TokenType.Code"
-        [token]="token"
+        [token]="tokenAsAny"
       ></mc-markdown-code>
 
       <!-- Codespan. -->
       <mc-markdown-codespan
         *ngSwitchCase="TokenType.Codespan"
-        [token]="token"
+        [token]="tokenAsAny"
       ></mc-markdown-codespan>
 
       <!-- Emphasis. -->
       <mc-markdown-emphasis
         *ngSwitchCase="TokenType.Emphasis"
-        [token]="token"
+        [token]="tokenAsAny"
       ></mc-markdown-emphasis>
 
       <!-- Heading. -->
       <mc-markdown-heading
         *ngSwitchCase="TokenType.Heading"
-        [token]="token"
+        [token]="tokenAsAny"
       ></mc-markdown-heading>
 
       <!-- Horizontal Rule. -->
@@ -51,43 +51,43 @@ import {
       <!-- Link. -->
       <mc-markdown-link
         *ngSwitchCase="TokenType.Link"
-        [token]="token"
+        [token]="tokenAsAny"
       ></mc-markdown-link>
 
       <!-- List. -->
       <mc-markdown-list
         *ngSwitchCase="TokenType.List"
-        [token]="token"
+        [token]="tokenAsAny"
       ></mc-markdown-list>
 
       <!-- List item. -->
       <mc-markdown-list-item
         *ngSwitchCase="TokenType.ListItem"
-        [token]="token"
+        [token]="tokenAsAny"
       ></mc-markdown-list-item>
 
       <!-- Media: Image or Video. -->
       <mc-markdown-media
         *ngSwitchCase="TokenType.Media"
-        [token]="token"
+        [token]="tokenAsAny"
       ></mc-markdown-media>
 
       <!-- Paragraph. -->
       <mc-markdown-paragraph
         *ngSwitchCase="TokenType.Paragraph"
-        [token]="token"
+        [token]="tokenAsAny"
       ></mc-markdown-paragraph>
 
       <!-- Strong. -->
       <mc-markdown-strong
         *ngSwitchCase="TokenType.Strong"
-        [token]="token"
+        [token]="tokenAsAny"
       ></mc-markdown-strong>
 
       <!-- Text. -->
       <mc-markdown-text
         *ngSwitchCase="TokenType.Text"
-        [token]="token"
+        [token]="tokenAsAny"
       ></mc-markdown-text>
     </ng-container>
   `,
@@ -106,5 +106,10 @@ export class MarkdownTokenComponent implements OnChanges {
         console.warn(`Unsupported markdown token: ${this.type}.`);
       }
     }
+  }
+
+  /* @hack bypass typing as we will dynamically choose the child component. */
+  get tokenAsAny() {
+    return this.token as any;
   }
 }

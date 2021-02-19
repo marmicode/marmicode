@@ -229,7 +229,7 @@ export class RecipeFramePageComponent {
 
   private async _tryNavigateToRelativeRoute(route: string[]) {
     if (route == null) {
-      return;
+      return false;
     }
     return this._router.navigate(route, { relativeTo: this._route });
   }

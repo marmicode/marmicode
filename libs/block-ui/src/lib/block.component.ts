@@ -7,7 +7,12 @@ import {
   NgModule,
   Output,
 } from '@angular/core';
-import { Block, BlockType } from '@marmicode/block-core';
+import {
+  Block,
+  BlockType,
+  CodeBlock,
+  MarkdownBlock,
+} from '@marmicode/block-core';
 import { CodeBlockModule } from './code-block/code-block.component';
 import { HighlightZone } from './highlight/highlight-zone';
 import { MarkdownBlockModule } from './markdown-block/markdown-block.component';
@@ -19,7 +24,7 @@ import { MarkdownBlockModule } from './markdown-block/markdown-block.component';
     <!-- Code. -->
     <mc-code-block
       *ngSwitchCase="BlockType.Code"
-      [block]="block"
+      [block]="codeBlock"
       [highlightableZones]="highlightableZones"
       [highlightZone]="highlightZone"
     ></mc-code-block>
@@ -27,7 +32,7 @@ import { MarkdownBlockModule } from './markdown-block/markdown-block.component';
     <!-- Markdown. -->
     <mc-markdown-block
       *ngSwitchCase="BlockType.Markdown"
-      [block]="block"
+      [block]="markdownBlock"
       [highlightableZones]="highlightableZones"
       (highlightZoneChange)="highlightZoneChange.emit($event)"
     ></mc-markdown-block>
@@ -40,6 +45,14 @@ export class BlockComponent {
   @Output() highlightZoneChange = new EventEmitter<HighlightZone>();
 
   BlockType = BlockType;
+
+  get codeBlock() {
+    return this.block as CodeBlock;
+  }
+
+  get markdownBlock() {
+    return this.block as MarkdownBlock;
+  }
 }
 
 @NgModule({
