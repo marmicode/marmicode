@@ -1,3 +1,4 @@
+export { Author, ResourceInfo } from './lib/resource-info';
 export {
   ResourceType,
   getResourceTypeActionText,

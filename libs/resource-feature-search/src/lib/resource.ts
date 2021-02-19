@@ -1,27 +1,12 @@
-import { ResourceType } from '@marmicode/resource-core';
+import { ResourceInfo } from '@marmicode/resource-core';
 import { Skill } from './skill';
 
-export interface Author {
-  name: string;
-  pictureUri: string;
-}
-
-export function createAuthor(author: Author) {
-  return { ...author };
-}
-
-export interface Resource {
+export interface Resource extends ResourceInfo {
   id?: string;
-  author?: Author;
-  duration: number;
-  pictureUri?: string;
-  releasedAt: Date;
   requiredSkills: Skill[];
   slug: string;
   skills: Skill[];
   summary: string;
-  title: string;
-  type: ResourceType;
   url: string;
   isWip?: boolean;
 }

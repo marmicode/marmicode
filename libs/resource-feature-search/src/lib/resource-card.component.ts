@@ -16,6 +16,7 @@ import {
 } from '@marmicode/resource-core';
 import { ResourceHeaderModule } from '@marmicode/resource-ui';
 import { TriangleModule } from '@marmicode/shared-ui';
+import { WipModule } from '@marmicode/shared-utils';
 import { Resource } from './resource';
 import { ResourceCardActionModule } from './resource-card-action.component';
 import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
@@ -63,7 +64,7 @@ import { SkillChipModule } from './skill-chip.component';
         </mat-card-subtitle>
       </mat-card-header>
 
-      <mc-resource-header *mcWip></mc-resource-header>
+      <mc-resource-header *mcWip [resourceInfo]="resource"></mc-resource-header>
 
       <mat-card-content fxFlex>
         <p>
@@ -166,11 +167,12 @@ export class ResourceCardComponent implements OnChanges {
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    ResourceCardActionModule,
+    ResourceHeaderModule,
     ResourceTypeTriangleModule,
     SkillChipModule,
     TriangleModule,
-    ResourceCardActionModule,
-    ResourceHeaderModule,
+    WipModule,
   ],
 })
 export class ResourceCardModule {}
