@@ -15,6 +15,7 @@ export interface Resource {
   author?: Author;
   duration: number;
   pictureUri?: string;
+  releasedAt: Date;
   requiredSkills: Skill[];
   slug: string;
   skills: Skill[];

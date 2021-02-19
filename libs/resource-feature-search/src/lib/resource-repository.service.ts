@@ -27,6 +27,7 @@ const resourceFragment = gql`
     picture {
       url
     }
+    releasedAt
     requiredSkillCollection(limit: 10) {
       items {
         ...SkillFragment
@@ -133,6 +134,7 @@ export class ResourceRepository {
         duration: item.duration,
         isWip: item.isWip,
         pictureUri: item.picture?.url,
+        releasedAt: item.releasedAt && new Date(Date.parse(item.releasedAt)),
         requiredSkills: this._toSkills(item.requiredSkillCollection),
         skills: this._toSkills(item.skillCollection),
         slug: item.slug,

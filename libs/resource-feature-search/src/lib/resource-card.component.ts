@@ -46,10 +46,14 @@ import { SkillChipModule } from './skill-chip.component';
         <mat-card-title>
           <h2 class="title">{{ resource.title }}</h2>
         </mat-card-title>
-        <mat-card-subtitle fxLayout="row">
+        <mat-card-subtitle class="card-subtitle" fxLayout="row">
           <ng-container *ngIf="resource.author">
-            <span class="author">by {{ resource.author.name }}</span>
-            <span>&nbsp;-&nbsp;</span>
+            <span>by {{ resource.author.name }}</span>
+            <span>&nbsp;•&nbsp;</span>
+          </ng-container>
+          <ng-container *ngIf="resource.releasedAt">
+            <span>{{ resource.releasedAt | date }}</span>
+            <span>&nbsp;•&nbsp;</span>
           </ng-container>
           <span [style.color]="color">{{ resource.duration }} minutes</span>
         </mat-card-subtitle>
@@ -121,7 +125,7 @@ import { SkillChipModule } from './skill-chip.component';
         font: inherit;
       }
 
-      .author {
+      .card-subtitle {
         color: grey;
       }
 
