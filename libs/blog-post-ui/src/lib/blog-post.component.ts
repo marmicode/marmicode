@@ -20,31 +20,26 @@ import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-blog-post',
-  template: ` <mc-resource-title-banner
-      *mcNotWip
-      [resourceType]="resourceType"
-      [title]="title$ | async"
-    ></mc-resource-title-banner>
-    <div class="content">
-      <mc-resource-header
-        *mcWip
-        [resourceInfo]="resourceInfo$ | async"
-      ></mc-resource-header>
-      <div class="picture-container">
-        <img
-          *ngIf="pictureUri$ | async as pictureUri"
-          [alt]="title$ | async"
-          [src]="pictureUri"
-          class="picture"
-        />
-      </div>
+  template: ` <div class="content">
+    <mc-resource-header
+      [resourceInfo]="resourceInfo$ | async"
+      mode="large"
+    ></mc-resource-header>
+    <div class="picture-container">
+      <img
+        *ngIf="pictureUri$ | async as pictureUri"
+        [alt]="title$ | async"
+        [src]="pictureUri"
+        class="picture"
+      />
+    </div>
 
-      <mc-block-group
-        *ngFor="let blockGroup of blockGroups$ | async"
-        [blockGroup]="blockGroup"
-        desktopLayout="column"
-      ></mc-block-group>
-    </div>`,
+    <mc-block-group
+      *ngFor="let blockGroup of blockGroups$ | async"
+      [blockGroup]="blockGroup"
+      desktopLayout="column"
+    ></mc-block-group>
+  </div>`,
   styles: [
     `
       .content {
@@ -100,7 +95,6 @@ export class BlogPostComponent {
     BlockGroupModule,
     ResourceTitleBannerModule,
     ResourceHeaderModule,
-    WipModule,
   ],
 })
 export class BlogPostModule {}
