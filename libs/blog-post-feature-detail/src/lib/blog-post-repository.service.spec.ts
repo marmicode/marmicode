@@ -6,6 +6,33 @@ import { BlogPostRepository } from './blog-post-repository.service';
 describe('BlogPostRepository', () => {
   let blogPostRepository: BlogPostRepository;
   let mockResourceCollectionResolver: jest.Mock;
+  const fakeGraphqlResponse = {
+    items: [
+      {
+        sys: {
+          id: '62vt3ifOPzuBOv31JzHdMd',
+        },
+        author: {
+          name: 'Younes Jaaidi',
+          picture: {
+            url: 'https://picture.url/younes',
+          },
+          twitter: 'yjaaidi',
+        },
+        duration: 6,
+        picture: {
+          url: 'https://picture.url/e2e-http-request-cancelation',
+        },
+        releasedAt: new Date(2021, 0, 0),
+        summary: `Life is too short...`,
+        title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
+        content: {
+          __typename: 'BlogPost',
+          text: 'Life is too short. ...',
+        },
+      },
+    ],
+  };
 
   beforeEach(() => {
     mockResourceCollectionResolver = jest.fn();
@@ -22,33 +49,7 @@ describe('BlogPostRepository', () => {
   });
 
   it('should query blog post and convert to `BlogPost` type', async () => {
-    mockResourceCollectionResolver.mockReturnValue({
-      items: [
-        {
-          sys: {
-            id: '62vt3ifOPzuBOv31JzHdMd',
-          },
-          author: {
-            name: 'Younes Jaaidi',
-            picture: {
-              url: 'https://picture.url/younes',
-            },
-            twitter: 'yjaaidi',
-          },
-          duration: 6,
-          picture: {
-            url: 'https://picture.url/e2e-http-request-cancelation',
-          },
-          releasedAt: new Date(2021, 0, 0),
-          summary: `Life is too short...`,
-          title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
-          content: {
-            __typename: 'BlogPost',
-            text: 'Life is too short. ...',
-          },
-        },
-      ],
-    });
+    mockResourceCollectionResolver.mockReturnValue(fakeGraphqlResponse);
 
     const blogPost = await blogPostRepository
       .getBlogPost('end-to-end-http-request-cancelation-with-rxjs-and-nestjs')
@@ -87,27 +88,11 @@ describe('BlogPostRepository', () => {
 
   it('should not crash if picture is not set', async () => {
     mockResourceCollectionResolver.mockReturnValue({
+      ...fakeGraphqlResponse,
       items: [
         {
-          sys: {
-            id: '62vt3ifOPzuBOv31JzHdMd',
-          },
-          author: {
-            name: 'Younes Jaaidi',
-            picture: {
-              url: 'https://picture.url/younes',
-            },
-            twitter: 'yjaaidi',
-          },
-          duration: 6,
+          ...fakeGraphqlResponse.items[0],
           picture: null,
-          releasedAt: new Date(2021, 0, 0),
-          summary: `Life is too short...`,
-          title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
-          content: {
-            __typename: 'BlogPost',
-            text: 'Life is too short. ...',
-          },
         },
       ],
     });
