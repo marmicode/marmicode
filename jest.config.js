@@ -18,5 +18,6 @@ module.exports = {
     '<rootDir>/libs/shared-utils',
     '<rootDir>/tools/build-github-workflows',
     '<rootDir>/libs/testing',
+    '<rootDir>/libs/resource-ui',
   ],
 };

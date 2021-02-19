@@ -93,6 +93,9 @@
     },
     "tools-build-github-workflows": {
       "tags": []
+    },
+    "resource-ui": {
+      "tags": ["scope:resource", "type:ui"]
     }
   }
 }

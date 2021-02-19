@@ -833,6 +833,32 @@
           }
         }
       }
+    },
+    "resource-ui": {
+      "projectType": "library",
+      "root": "libs/resource-ui",
+      "sourceRoot": "libs/resource-ui/src",
+      "prefix": "marmicode",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/resource-ui/tsconfig.lib.json",
+              "libs/resource-ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/resource-ui/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/resource-ui"],
+          "options": {
+            "jestConfig": "libs/resource-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -14,6 +14,7 @@ import {
   getResourceTypeActionText,
   getResourceTypeColor,
 } from '@marmicode/resource-core';
+import { ResourceHeaderModule } from '@marmicode/resource-ui';
 import { TriangleModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
 import { ResourceCardActionModule } from './resource-card-action.component';
@@ -25,6 +26,7 @@ import { SkillChipModule } from './skill-chip.component';
   selector: 'mc-resource-card',
   template: ` <mat-card class="card" fxLayout="column">
     <article class="card-article" fxLayout="column">
+      <!-- Resource picture. -->
       <img
         *ngIf="resource.pictureUri"
         [src]="resource.pictureUri"
@@ -32,11 +34,13 @@ import { SkillChipModule } from './skill-chip.component';
         class="picture"
         mat-card-image
       />
+
+      <!-- Resource triangle. -->
       <mc-resource-type-triangle
         [resourceType]="resource.type"
       ></mc-resource-type-triangle>
 
-      <mat-card-header>
+      <mat-card-header *mcNotWip>
         <img
           *ngIf="resource.author"
           [alt]="resource.author.name"
@@ -58,6 +62,8 @@ import { SkillChipModule } from './skill-chip.component';
           <span [style.color]="color">{{ resource.duration }} minutes</span>
         </mat-card-subtitle>
       </mat-card-header>
+
+      <mc-resource-header *mcWip></mc-resource-header>
 
       <mat-card-content fxFlex>
         <p>
@@ -164,6 +170,7 @@ export class ResourceCardComponent implements OnChanges {
     SkillChipModule,
     TriangleModule,
     ResourceCardActionModule,
+    ResourceHeaderModule,
   ],
 })
 export class ResourceCardModule {}
