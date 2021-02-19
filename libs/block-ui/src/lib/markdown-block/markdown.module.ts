@@ -7,7 +7,7 @@ import { MarkdownCodeComponent } from './markdown-code.component';
 import { MarkdownCodespanComponent } from './markdown-codespan.component';
 import { MarkdownEmphasisComponent } from './markdown-emphasis.component';
 import { MarkdownHeadingComponent } from './markdown-heading.component';
-import { MarkdownImageComponent } from './markdown-image.component';
+import { MarkdownMediaComponent } from './markdown-media.component';
 import { MarkdownLinkComponent } from './markdown-link.component';
 import { MarkdownListItemComponent } from './markdown-list-item.component';
 import { MarkdownListComponent } from './markdown-list.component';
@@ -28,7 +28,7 @@ import { MarkdownTokensComponent } from './markdown-tokens.component';
     MarkdownCodespanComponent,
     MarkdownEmphasisComponent,
     MarkdownHeadingComponent,
-    MarkdownImageComponent,
+    MarkdownMediaComponent,
     MarkdownLinkComponent,
     MarkdownListComponent,
     MarkdownListItemComponent,

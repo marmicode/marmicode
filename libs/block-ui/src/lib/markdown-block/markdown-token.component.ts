@@ -48,13 +48,6 @@ import {
 
       <!-- Horizontal Rule. -->
       <hr *ngSwitchCase="TokenType.HorizontalRule" />
-
-      <!-- Image. -->
-      <mc-markdown-image
-        *ngSwitchCase="TokenType.Image"
-        [token]="token"
-      ></mc-markdown-image>
-
       <!-- Link. -->
       <mc-markdown-link
         *ngSwitchCase="TokenType.Link"
@@ -72,6 +65,12 @@ import {
         *ngSwitchCase="TokenType.ListItem"
         [token]="token"
       ></mc-markdown-list-item>
+
+      <!-- Media: Image or Video. -->
+      <mc-markdown-media
+        *ngSwitchCase="TokenType.Media"
+        [token]="token"
+      ></mc-markdown-media>
 
       <!-- Paragraph. -->
       <mc-markdown-paragraph

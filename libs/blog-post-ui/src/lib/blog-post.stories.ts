@@ -260,3 +260,21 @@ We have the services you need:
         `,
   }),
 };
+
+export const Video = Template.bind({});
+Video.args = {
+  blogPost: createBlogPost({
+    id: '123',
+    author: {
+      name: 'Younes Jaaidi',
+      twitter: 'yjaaidi',
+    },
+    pictureUri: null,
+    summary: 'Life is too short...',
+    title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
+    text: `
+# This is a video
+![JSCutlery Cypress Mount](//videos.ctfassets.net/gowvxq3b4aid/3AGudY8hGMwRmFvZ1xzJvi/3ba2ba62c5109c2537246d82787821b2/jscutlery-cypress-mount.mp4)
+    `,
+  }),
+};
