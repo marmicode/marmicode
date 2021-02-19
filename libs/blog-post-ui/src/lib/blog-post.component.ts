@@ -10,7 +10,7 @@ import {
   ResourceTitleBannerModule,
   ResourceType,
 } from '@marmicode/resource-api';
-import { ResourceHeaderModule } from '@marmicode/resource-ui';
+import { ResourceHeaderModule } from '@marmicode/resource-api';
 import { WipModule } from '@marmicode/shared-utils';
 import { RxState, select } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
