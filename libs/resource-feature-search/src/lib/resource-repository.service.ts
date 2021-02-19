@@ -6,7 +6,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { createAuthor } from '../../../resource-core/src/lib/resource-info';
+import { createAuthor } from '@marmicode/resource-core';
 import { createResource, Resource } from './resource';
 import { Skill } from './skill';
 import { skillFragment, skillFragmentToSkill } from './skill-fragment';
