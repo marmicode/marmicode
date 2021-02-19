@@ -10,6 +10,8 @@ import {
   ResourceTitleBannerModule,
   ResourceType,
 } from '@marmicode/resource-api';
+import { ResourceHeaderModule } from '@marmicode/resource-ui';
+import { WipModule } from '@marmicode/shared-utils';
 import { RxState, select } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { BlogPost } from './blog-post';
@@ -19,10 +21,15 @@ import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-blog-post',
   template: ` <mc-resource-title-banner
+      *mcNotWip
       [resourceType]="resourceType"
       [title]="title$ | async"
     ></mc-resource-title-banner>
     <div class="content">
+      <mc-resource-header
+        *mcWip
+        [resourceInfo]="resourceInfo$ | async"
+      ></mc-resource-header>
       <div class="picture-container">
         <img
           *ngIf="pictureUri$ | async as pictureUri"
@@ -69,6 +76,15 @@ export class BlogPostComponent {
 
   pictureUri$ = this._state.select('blogPost', 'pictureUri');
 
+  resourceInfo$ = this._state.select('blogPost').pipe(
+    select(
+      map((blogPost) => ({
+        type: ResourceType.BlogPost,
+        ...blogPost,
+      }))
+    )
+  );
+
   resourceType = ResourceType.BlogPost;
 
   title$ = this._state.select('blogPost', 'title');
@@ -79,6 +95,12 @@ export class BlogPostComponent {
 @NgModule({
   declarations: [BlogPostComponent],
   exports: [BlogPostComponent],
-  imports: [CommonModule, BlockGroupModule, ResourceTitleBannerModule],
+  imports: [
+    CommonModule,
+    BlockGroupModule,
+    ResourceTitleBannerModule,
+    ResourceHeaderModule,
+    WipModule,
+  ],
 })
 export class BlogPostModule {}
