@@ -25,7 +25,8 @@ import { getResourceTypeColor, ResourceInfo } from '@marmicode/resource-core';
     <mat-card-subtitle class="card-subtitle">
       <ng-container *ngIf="resourceInfo.author">
         <span>by {{ resourceInfo.author.name }}</span>
-        <span>&nbsp;•&nbsp;</span>
+        <span class="mc-hide mc-show-gt-xs">&nbsp;•&nbsp;</span>
+        <br class="mc-hide-gt-xs" />
       </ng-container>
       <ng-container *ngIf="resourceInfo.releasedAt">
         <span>{{ resourceInfo.releasedAt | date }}</span>

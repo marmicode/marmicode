@@ -38,6 +38,18 @@ body {
   flex-direction: row;
 }
 
+@media screen and (max-width: 599px) {
+  .mc-hide.mc-show-gt-xs {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .mc-hide-gt-xs {
+    display: none !important;
+  }
+}
+
 @media screen and (max-width: 959px) {
   .mc-hide.mc-show-gt-sm {
     display: none !important;
