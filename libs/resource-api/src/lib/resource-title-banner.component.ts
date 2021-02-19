@@ -11,7 +11,6 @@ import {
   getResourceTypeText,
   ResourceType,
 } from '@marmicode/resource-core';
-import { WipModule } from '@marmicode/shared-utils';
 import { RxState } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 
@@ -113,6 +112,6 @@ export class ResourceTitleBannerComponent {
 @NgModule({
   declarations: [ResourceTitleBannerComponent],
   exports: [ResourceTitleBannerComponent],
-  imports: [CommonModule, FlexLayoutModule, WipModule],
+  imports: [CommonModule, FlexLayoutModule],
 })
 export class ResourceTitleBannerModule {}

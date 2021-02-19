@@ -16,7 +16,6 @@ import {
 } from '@marmicode/resource-core';
 import { ResourceHeaderModule } from '@marmicode/resource-ui';
 import { TriangleModule } from '@marmicode/shared-ui';
-import { WipModule } from '@marmicode/shared-utils';
 import { Resource } from './resource';
 import { ResourceCardActionModule } from './resource-card-action.component';
 import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
@@ -140,7 +139,6 @@ export class ResourceCardComponent implements OnChanges {
     ResourceTypeTriangleModule,
     SkillChipModule,
     TriangleModule,
-    WipModule,
   ],
 })
 export class ResourceCardModule {}
