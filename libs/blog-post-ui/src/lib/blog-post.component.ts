@@ -5,26 +5,31 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
+import { MatDividerModule } from '@angular/material/divider';
 import { BlockGroupModule } from '@marmicode/block-api';
 import {
+  ResourceHeaderModule,
   ResourceTitleBannerModule,
   ResourceType,
 } from '@marmicode/resource-api';
-import { ResourceHeaderModule } from '@marmicode/resource-api';
 import { WipModule } from '@marmicode/shared-utils';
 import { RxState, select } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { BlogPost } from './blog-post';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
+import { ShareButtonsModule } from './share-buttons.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-blog-post',
   template: ` <div class="content">
+    <!-- Resource title / badge / author etc... -->
     <mc-resource-header
       [resourceInfo]="resourceInfo$ | async"
       mode="large"
     ></mc-resource-header>
+
+    <!-- Picture. -->
     <div class="picture-container">
       <img
         *ngIf="pictureUri$ | async as pictureUri"
@@ -34,11 +39,18 @@ import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
       />
     </div>
 
+    <!-- Blog content. -->
     <mc-block-group
       *ngFor="let blockGroup of blockGroups$ | async"
       [blockGroup]="blockGroup"
       desktopLayout="column"
     ></mc-block-group>
+
+    <ng-container *mcWip>
+      <mat-divider></mat-divider>
+
+      <mc-share-buttons></mc-share-buttons>
+    </ng-container>
   </div>`,
   styles: [
     `
@@ -93,8 +105,11 @@ export class BlogPostComponent {
   imports: [
     CommonModule,
     BlockGroupModule,
+    MatDividerModule,
     ResourceTitleBannerModule,
     ResourceHeaderModule,
+    ShareButtonsModule,
+    WipModule,
   ],
 })
 export class BlogPostModule {}
