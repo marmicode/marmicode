@@ -7,9 +7,12 @@ describe('blogPostToMeta', () => {
       id: 'blog-post-id',
       author: {
         name: 'Younes Jaaidi',
+        pictureUri: null,
         twitter: 'yjaaidi',
       },
+      duration: 6,
       pictureUri: 'https://picture.url',
+      releasedAt: null,
       summary: 'Life is too short...',
       title: 'Title',
       text: 'content',
@@ -19,6 +22,7 @@ describe('blogPostToMeta', () => {
       type: 'article',
       author: {
         name: 'Younes Jaaidi',
+        pictureUri: null,
         twitter: 'yjaaidi',
       },
       description: 'Life is too short...',

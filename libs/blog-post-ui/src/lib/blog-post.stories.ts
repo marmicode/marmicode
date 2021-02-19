@@ -22,10 +22,14 @@ Default.args = {
     id: '123',
     author: {
       name: 'Younes Jaaidi',
+      pictureUri:
+        'https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/b4b75f0113a2b4c0b4029bef4926d88c/younes-marmicode-1024.jpeg',
       twitter: 'yjaaidi',
     },
+    duration: 6,
     pictureUri:
       'https://images.ctfassets.net/gowvxq3b4aid/7IC9BlKufXjqRWb5ISDS9h/95e4e3730e896a24e5f41b12e72fc832/end-to-end-http-request-cancelation-with-rxjs-and-nestjs.jpg',
+    releasedAt: new Date(2021, 0, 0),
     summary: 'Life is too short...',
     title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
     text: `
@@ -267,9 +271,13 @@ Video.args = {
     id: '123',
     author: {
       name: 'Younes Jaaidi',
+      pictureUri:
+        'https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/b4b75f0113a2b4c0b4029bef4926d88c/younes-marmicode-1024.jpeg',
       twitter: 'yjaaidi',
     },
+    duration: 6,
     pictureUri: null,
+    releasedAt: new Date(2021, 0, 0),
     summary: 'Life is too short...',
     title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
     text: `
