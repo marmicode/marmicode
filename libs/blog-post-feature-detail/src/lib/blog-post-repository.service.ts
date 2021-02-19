@@ -18,11 +18,16 @@ export const getBlogPost = gql`
         }
         author {
           name
+          picture {
+            url
+          }
           twitter
         }
+        duration
         picture {
           url
         }
+        releasedAt
         summary
         title
         content {
@@ -54,9 +59,13 @@ export class BlogPostRepository {
             id: resource.sys.id,
             author: {
               name: resource.author.name,
+              pictureUri: resource.author.picture?.url,
               twitter: resource.author.twitter,
             },
+            duration: resource.duration,
             pictureUri: resource.picture?.url,
+            releasedAt:
+              resource.releasedAt && new Date(Date.parse(resource.releasedAt)),
             summary: resource.summary,
             title: resource.title,
             text: (resource.content as ContentfulBlogPost).text,

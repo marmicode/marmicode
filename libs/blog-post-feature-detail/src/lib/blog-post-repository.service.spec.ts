@@ -30,11 +30,16 @@ describe('BlogPostRepository', () => {
           },
           author: {
             name: 'Younes Jaaidi',
+            picture: {
+              url: 'https://picture.url/younes',
+            },
             twitter: 'yjaaidi',
           },
+          duration: 6,
           picture: {
             url: 'https://picture.url/e2e-http-request-cancelation',
           },
+          releasedAt: new Date(2021, 0, 0),
           summary: `Life is too short...`,
           title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
           content: {
@@ -54,9 +59,12 @@ describe('BlogPostRepository', () => {
         id: '62vt3ifOPzuBOv31JzHdMd',
         author: {
           name: 'Younes Jaaidi',
+          pictureUri: 'https://picture.url/younes',
           twitter: 'yjaaidi',
         },
+        duration: 6,
         pictureUri: 'https://picture.url/e2e-http-request-cancelation',
+        releasedAt: new Date(2021, 0, 0),
         summary: 'Life is too short...',
         title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
         text: expect.stringMatching(/Life is too short/),
@@ -86,9 +94,14 @@ describe('BlogPostRepository', () => {
           },
           author: {
             name: 'Younes Jaaidi',
+            picture: {
+              url: 'https://picture.url/younes',
+            },
             twitter: 'yjaaidi',
           },
+          duration: 6,
           picture: null,
+          releasedAt: new Date(2021, 0, 0),
           summary: `Life is too short...`,
           title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
           content: {
