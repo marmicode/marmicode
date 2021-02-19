@@ -4,7 +4,7 @@ describe('BlogPostComponent', () => {
     cy.snapshot();
   });
 
-  xit('🚧 should show video', () => {
+  it('should show video', () => {
     cy.visit('/iframe.html?id=blogpost--video');
     cy.snapshot();
   });

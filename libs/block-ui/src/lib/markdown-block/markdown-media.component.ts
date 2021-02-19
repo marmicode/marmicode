@@ -1,10 +1,28 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { MarkdownTokens } from '@marmicode/block-core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-media',
-  template: `<img [src]="token.href" [alt]="token.text" class="image" />`,
+  template: `<img
+      *ngIf="!isVideo"
+      [alt]="token.text"
+      [src]="token.href"
+      class="image"
+    />
+    <video
+      *ngIf="isVideo"
+      [src]="token.href"
+      [title]="token.text"
+      class="video"
+      controls
+    ></video> `,
   styles: [
     `
       :host {
@@ -12,12 +30,24 @@ import { MarkdownTokens } from '@marmicode/block-core';
         text-align: center;
       }
 
-      .image {
+      .image,
+      .video {
         max-width: 100%;
+      }
+
+      .video {
+        outline: none;
       }
     `,
   ],
 })
-export class MarkdownMediaComponent {
+export class MarkdownMediaComponent implements OnChanges {
   @Input() token: MarkdownTokens.Media;
+  isVideo: boolean;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.token) {
+      this.isVideo = this.token.href?.endsWith('.mp4');
+    }
+  }
 }
