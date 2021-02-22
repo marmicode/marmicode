@@ -4,8 +4,6 @@ import {
   Component,
   Input,
   NgModule,
-  OnChanges,
-  SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
@@ -18,11 +16,7 @@ import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { RxState, select, selectSlice } from '@rx-angular/state';
 import { ShareButtonsModule as NgxShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { map } from 'rxjs/operators';
-
-export interface AuthorSocialInfo {
-  name: string;
-  twitter: string;
-}
+import { AuthorSocialInfo } from './author-social-info';
 
 export type Size = 'normal' | 'small';
 

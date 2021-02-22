@@ -16,9 +16,9 @@ import {
 import { RxState, select } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { BlogPost } from './blog-post';
-import { FollowButtonModule } from './follow-button.component';
+import { FollowButtonModule } from './social/follow-button.component';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
-import { ShareButtonsModule } from './share-buttons.component';
+import { ShareButtonsModule } from './social/share-buttons.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

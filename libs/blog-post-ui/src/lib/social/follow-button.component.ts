@@ -8,11 +8,7 @@ import {
 import { FlexModule } from '@angular/flex-layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-
-export interface AuthorSocialInfo {
-  name: string;
-  twitter: string;
-}
+import { AuthorSocialInfo } from './author-social-info';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
