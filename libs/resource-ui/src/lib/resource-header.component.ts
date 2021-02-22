@@ -29,7 +29,7 @@ import { ResourceBadgeModule } from './resource-badge.component';
         [src]="resourceInfo.author.pictureUri"
         class="picture"
       />
-      <div>
+      <div fxFlex>
         <h1 *ngIf="isLarge" class="title">{{ resourceInfo.title }}</h1>
         <h2 *ngIf="!isLarge" class="title">{{ resourceInfo.title }}</h2>
         <div class="subtitle">
