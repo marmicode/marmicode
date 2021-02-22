@@ -16,6 +16,7 @@ import {
 import { RxState, select } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { BlogPost } from './blog-post';
+import { FollowButtonModule } from './follow-button.component';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
 import { ShareButtonsModule } from './share-buttons.component';
 
@@ -57,11 +58,15 @@ import { ShareButtonsModule } from './share-buttons.component';
 
     <mat-divider></mat-divider>
 
-    <div fxLayout="row" fxLayoutAlign="center">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <!-- Social share buttons. -->
       <mc-share-buttons
         [author]="author$ | async"
         [title]="title$ | async"
       ></mc-share-buttons>
+
+      <!-- Follow button. -->
+      <mc-follow-button [author]="author$ | async"></mc-follow-button>
     </div>
   </div>`,
   styles: [
@@ -124,6 +129,7 @@ export class BlogPostComponent {
     ResourceHeaderModule,
     ResourceTitleBannerModule,
     ShareButtonsModule,
+    FollowButtonModule,
   ],
 })
 export class BlogPostModule {}
