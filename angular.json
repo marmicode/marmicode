@@ -636,13 +636,7 @@
           "builder": "@nrwl/cypress:cypress",
           "options": {
             "cypressConfig": "apps/blog-post-ui-e2e/cypress.json",
-            "tsConfig": "apps/blog-post-ui-e2e/tsconfig.e2e.json",
-            "devServerTarget": "blog-post-ui:storybook"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "blog-post-ui:storybook:ci"
-            }
+            "tsConfig": "apps/blog-post-ui-e2e/tsconfig.e2e.json"
           }
         },
         "lint": {

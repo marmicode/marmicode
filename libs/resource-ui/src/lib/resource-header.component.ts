@@ -30,7 +30,8 @@ import { ResourceBadgeModule } from './resource-badge.component';
         class="picture"
       />
       <div>
-        <h2 class="title">{{ resourceInfo.title }}</h2>
+        <h1 *ngIf="isLarge" class="title">{{ resourceInfo.title }}</h1>
+        <h2 *ngIf="!isLarge" class="title">{{ resourceInfo.title }}</h2>
         <div class="subtitle">
           <ng-container *ngIf="resourceInfo.author">
             <span>by {{ resourceInfo.author.name }}</span>

@@ -11,7 +11,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<BlogPostComponent> = (args) => ({
+const Template: Story = (args) => ({
   component: BlogPostComponent,
   props: args,
 });
