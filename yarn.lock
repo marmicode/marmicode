@@ -3392,20 +3392,20 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@jscutlery/cypress-angular-preprocessor@^0.4.2":
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/@jscutlery/cypress-angular-preprocessor/-/cypress-angular-preprocessor-0.4.2.tgz#9ea42a688af68def646774b4d679be061620dd94"
-  integrity sha512-ulaWw5Mw0TnDg97+Z2lal6zdGpoC9XugUN8neRJlZlSkjzzNsuIrlYVCq8FI67lVjYQO+mLfnemEqWfS8ofzLA==
+"@jscutlery/cypress-angular-preprocessor@^0.4.3":
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/@jscutlery/cypress-angular-preprocessor/-/cypress-angular-preprocessor-0.4.3.tgz#2be798cb4e1ac48a9e572997f339ed6845f8927f"
+  integrity sha512-Wnv9mOe/nPKsDRfv9H0SYoXq8RO8IQETt/QoX45DYX0AKDGMjk1OJEoG5K0CgYDJmeXbAQdL9PCRmrYB++Mf9A==
 
 "@jscutlery/cypress-harness@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@jscutlery/cypress-harness/-/cypress-harness-0.2.0.tgz#c1314b26f3cf910d621f30e98c8ed9d7bee7f344"
   integrity sha512-1GmQuZhhn6dE2E3HRgQaWfWWtqtL/aLfh0PbT88N8hfGnh4b1YwQYMnvn4MfGM8b4lYy7rkzMcoRojbuq+1vpQ==
 
-"@jscutlery/cypress-mount@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@jscutlery/cypress-mount/-/cypress-mount-0.6.0.tgz#216651d84808e1ab5c51e43f54509f55cb7ceb6a"
-  integrity sha512-d2JIi04HH2JP4Xguf2ZIDw/7CuvXOyi/6Mt8AqGVFF3o6TJXz5W/aOj5EMkPAPR6UYdwR/TgF6GAYOnVE72F7A==
+"@jscutlery/cypress-mount@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@jscutlery/cypress-mount/-/cypress-mount-0.7.0.tgz#31b351d8c5c93531381d625149555af033166553"
+  integrity sha512-NNQ19/WC+MAQxWHtrrduN1fq4LU/lbNIhTT8DSm7lGeJuDrk6f72azFw1laRnN4I1WRQSgdiRQlEJ0YQKd2UDA==
   dependencies:
     ng-dynamic-component "^8.0.1"
   optionalDependencies:
