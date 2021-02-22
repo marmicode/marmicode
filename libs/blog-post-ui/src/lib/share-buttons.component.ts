@@ -24,6 +24,8 @@ export interface AuthorSocialInfo {
   twitter: string;
 }
 
+export type Size = 'normal' | 'small';
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   /* @hack we would like to apply the theme locally using ShadowDOM but
@@ -35,6 +37,7 @@ export interface AuthorSocialInfo {
     <share-button
       [autoSetMeta]="true"
       [description]="twitterTitle$ | async"
+      [size]="buttonSize$ | async"
       [theme]="theme"
       button="twitter"
     ></share-button>
@@ -43,6 +46,7 @@ export interface AuthorSocialInfo {
       [description]="defaultTitle$ | async"
       [title]="defaultTitle$ | async"
       [include]="buttons"
+      [size]="buttonSize$ | async"
       [theme]="theme"
       style="display: inline-block;"
     ></share-buttons>
@@ -56,6 +60,18 @@ export class ShareButtonsComponent {
   @Input() set title(title: string) {
     this._state.set({ title });
   }
+  @Input() set size(size: Size) {
+    this._state.set({ size });
+  }
+
+  buttonSize$ = this._state.select('size').pipe(
+    map((size) => {
+      if (size === 'small') {
+        return -6;
+      }
+      return 0;
+    })
+  );
 
   defaultTitle$ = this._state.select(
     selectSlice(['author', 'title']),
@@ -101,7 +117,11 @@ export class ShareButtonsComponent {
 
   constructor(
     iconLibrary: FaIconLibrary,
-    private _state: RxState<{ title: string; author: AuthorSocialInfo }>
+    private _state: RxState<{
+      title: string;
+      author: AuthorSocialInfo;
+      size: Size;
+    }>
   ) {
     /* @hack add icons dynamically because `ShareIconsModule` needs
      * to be added to `AppModule` as it's not lazy loading friendly.*/
@@ -109,6 +129,9 @@ export class ShareButtonsComponent {
     iconLibrary.addIcons(faLink);
     iconLibrary.addIcons(faLinkedinIn);
     iconLibrary.addIcons(faFacebookF);
+
+    /* Set default size. */
+    this._state.set({ size: 'normal' });
   }
 }
 

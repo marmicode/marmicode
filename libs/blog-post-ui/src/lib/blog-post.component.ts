@@ -13,7 +13,6 @@ import {
   ResourceTitleBannerModule,
   ResourceType,
 } from '@marmicode/resource-api';
-import { WipModule } from '@marmicode/shared-utils';
 import { RxState, select } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 import { BlogPost } from './blog-post';
@@ -29,6 +28,15 @@ import { ShareButtonsModule } from './share-buttons.component';
       [resourceInfo]="resourceInfo$ | async"
       mode="large"
     ></mc-resource-header>
+
+    <!-- Top social share buttons. -->
+    <div fxLayout="row" fxLayoutAlign="center">
+      <mc-share-buttons
+        [author]="author$ | async"
+        [title]="title$ | async"
+        size="small"
+      ></mc-share-buttons>
+    </div>
 
     <!-- Picture. -->
     <div class="picture-container">
