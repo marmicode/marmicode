@@ -1,1 +1,5 @@
-@import '../../../../../node_modules/ngx-sharebuttons/themes/outline/outline-theme';
+@import '~ngx-sharebuttons/themes/outline/outline-theme';
+
+body {
+  color: red;
+}
