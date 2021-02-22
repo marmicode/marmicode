@@ -16,7 +16,10 @@ import { ResourceBadgeModule } from './resource-badge.component';
   selector: 'mc-resource-header',
   template: `
     <div *ngIf="isLarge" fxLayout="row" fxLayoutAlign="center">
-      <mc-resource-badge [resourceType]="resourceInfo.type"></mc-resource-badge>
+      <mc-resource-badge
+        [resourceType]="resourceInfo.type"
+        class="resource-badge"
+      ></mc-resource-badge>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="start center">
@@ -48,6 +51,10 @@ import { ResourceBadgeModule } from './resource-badge.component';
       :host {
         display: block;
         padding: 10px 0;
+      }
+
+      .resource-badge {
+        margin-bottom: 10px;
       }
 
       .picture {

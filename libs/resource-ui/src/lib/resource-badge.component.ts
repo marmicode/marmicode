@@ -30,7 +30,6 @@ import { map } from 'rxjs/operators';
         padding: 0 10px;
 
         color: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
         text-transform: uppercase;
       }
     `,

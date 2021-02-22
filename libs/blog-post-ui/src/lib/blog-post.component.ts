@@ -5,6 +5,7 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
+import { FlexModule } from '@angular/flex-layout';
 import { MatDividerModule } from '@angular/material/divider';
 import { BlockGroupModule } from '@marmicode/block-api';
 import {
@@ -49,7 +50,9 @@ import { ShareButtonsModule } from './share-buttons.component';
     <ng-container *mcWip>
       <mat-divider></mat-divider>
 
-      <mc-share-buttons></mc-share-buttons>
+      <div fxLayout="row" fxLayoutAlign="center">
+        <mc-share-buttons></mc-share-buttons>
+      </div>
     </ng-container>
   </div>`,
   styles: [
@@ -110,6 +113,7 @@ export class BlogPostComponent {
     ResourceHeaderModule,
     ShareButtonsModule,
     WipModule,
+    FlexModule,
   ],
 })
 export class BlogPostModule {}
