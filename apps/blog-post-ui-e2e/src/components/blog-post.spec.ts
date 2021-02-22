@@ -14,6 +14,10 @@ describe('BlogPostComponent', () => {
     /* eslint-disable-next-line @typescript-eslint/no-var-requires */
     require('!!raw-loader!../../../../node_modules/@fortawesome/fontawesome-svg-core/styles.css')
       .default,
+    /* eslint-disable-next-line @typescript-eslint/no-var-requires */
+    require('!!raw-loader!sass-loader!../../../../apps/marmicode/src/styles.scss')
+      .default,
+    `body { background-color: white !important; }`,
   ];
 
   it('should show blog', () => {
