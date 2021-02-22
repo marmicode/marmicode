@@ -52,7 +52,7 @@ import { ShareButtonsModule } from './share-buttons.component';
 
       <div fxLayout="row" fxLayoutAlign="center">
         <mc-share-buttons
-          [authorInfo]="author$ | async"
+          [author]="author$ | async"
           [title]="title$ | async"
         ></mc-share-buttons>
       </div>

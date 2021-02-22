@@ -15,7 +15,14 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { RxState, select, selectSlice } from '@rx-angular/state';
 import { ShareButtonsModule as NgxShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { map } from 'rxjs/operators';
+
+export interface AuthorSocialInfo {
+  name: string;
+  twitter: string;
+}
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,35 +32,81 @@ import { ShareButtonsModule as NgxShareButtonsModule } from 'ngx-sharebuttons/bu
   selector: 'mc-share-buttons',
   styleUrls: ['./share-buttons.component.scss'],
   template: `
+    <share-button
+      [autoSetMeta]="true"
+      [title]="twitterTitle$ | async"
+      [theme]="theme"
+      button="twitter"
+    ></share-button>
     <share-buttons
       [autoSetMeta]="true"
       [include]="buttons"
-      [title]="title"
-      theme="outline"
+      [title]="defaultTitle$ | async"
+      [theme]="theme"
     ></share-buttons>
   `,
+  providers: [RxState],
 })
-export class ShareButtonsComponent implements OnChanges {
-  @Input() authorInfo: {
-    twitter: string;
-  };
-  @Input() title: string;
-  buttons = ['twitter', 'linkedin', 'facebook', 'copy'];
-  socialTitle: string;
+export class ShareButtonsComponent {
+  @Input() set author(author: AuthorSocialInfo) {
+    this._state.set({ author });
+  }
+  @Input() set title(title: string) {
+    this._state.set({ title });
+  }
 
-  constructor(iconLibrary: FaIconLibrary) {
+  defaultTitle$ = this._state.select(
+    selectSlice(['author', 'title']),
+    select(
+      map(({ author, title }) => {
+        if (title == null) {
+          return null;
+        }
+
+        const authorName = author?.name;
+
+        return (
+          title + (authorName ? ` by ${authorName}` : '') + this._titleSuffix
+        );
+      })
+    )
+  );
+  twitterTitle$ = this._state.select(
+    selectSlice(['author', 'title']),
+    select(
+      map(({ author, title }) => {
+        if (title == null) {
+          return null;
+        }
+
+        const authorName = author?.twitter
+          ? author?.twitter
+            ? `@${author?.twitter}`
+            : ''
+          : author?.name;
+
+        return (
+          title + (authorName ? ` by ${authorName}` : '') + this._titleSuffix
+        );
+      })
+    )
+  );
+
+  buttons = ['linkedin', 'facebook', 'copy'];
+  theme = 'outline';
+
+  private _titleSuffix = ' on @Marmicode';
+
+  constructor(
+    iconLibrary: FaIconLibrary,
+    private _state: RxState<{ title: string; author: AuthorSocialInfo }>
+  ) {
     /* @hack add icons dynamically because `ShareIconsModule` needs
      * to be added to `AppModule` as it's not lazy loading friendly.*/
     iconLibrary.addIcons(faTwitter);
     iconLibrary.addIcons(faLink);
     iconLibrary.addIcons(faLinkedinIn);
     iconLibrary.addIcons(faFacebookF);
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.title) {
-      this.socialTitle = this.title ? `${this.title} by @Marmicode` : null;
-    }
   }
 }
 

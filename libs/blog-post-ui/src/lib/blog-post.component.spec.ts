@@ -48,7 +48,7 @@ describe('BlogPostComponent', () => {
       fixture.debugElement.query(By.css('mc-share-buttons')).properties
     ).toEqual(
       expect.objectContaining({
-        authorInfo: expect.objectContaining({
+        author: expect.objectContaining({
           twitter: 'yjaaidi',
         }),
         title: 'Title',
