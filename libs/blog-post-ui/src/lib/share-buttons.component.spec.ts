@@ -29,13 +29,13 @@ describe('ShareButtonsComponent', () => {
 
   it('should construct title', () => {
     expect(
-      fixture.debugElement.query(By.css('share-buttons')).properties.title
+      fixture.debugElement.query(By.css('share-buttons')).properties.description
     ).toEqual('Component Testing by Younes Jaaidi on @Marmicode');
   });
 
   it('should construct twitter title', () => {
     expect(
-      fixture.debugElement.query(By.css('share-button')).properties.title
+      fixture.debugElement.query(By.css('share-button')).properties.description
     ).toEqual('Component Testing by @yjaaidi on @Marmicode');
   });
 });

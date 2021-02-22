@@ -33,13 +33,16 @@ export interface AuthorSocialInfo {
   styleUrls: ['./share-buttons.component.scss'],
   template: `
     <share-button
-      [title]="twitterTitle$ | async"
+      [autoSetMeta]="true"
+      [description]="twitterTitle$ | async"
       [theme]="theme"
       button="twitter"
     ></share-button>
     <share-buttons
-      [include]="buttons"
+      [autoSetMeta]="true"
+      [description]="defaultTitle$ | async"
       [title]="defaultTitle$ | async"
+      [include]="buttons"
       [theme]="theme"
       style="display: inline-block;"
     ></share-buttons>
