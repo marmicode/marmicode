@@ -51,7 +51,10 @@ import { ShareButtonsModule } from './share-buttons.component';
       <mat-divider></mat-divider>
 
       <div fxLayout="row" fxLayoutAlign="center">
-        <mc-share-buttons></mc-share-buttons>
+        <mc-share-buttons
+          [authorInfo]="author$ | async"
+          [title]="title$ | async"
+        ></mc-share-buttons>
       </div>
     </ng-container>
   </div>`,
@@ -79,6 +82,8 @@ export class BlogPostComponent {
   @Input() set blogPost(blogPost: BlogPost) {
     this._state.set({ blogPost });
   }
+
+  author$ = this._state.select('blogPost', 'author');
 
   blockGroups$ = this._state
     .select('blogPost')

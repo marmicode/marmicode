@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   NgModule,
+  OnChanges,
+  SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
@@ -22,10 +25,22 @@ import { ShareButtonsModule as NgxShareButtonsModule } from 'ngx-sharebuttons/bu
   selector: 'mc-share-buttons',
   styleUrls: ['./share-buttons.component.scss'],
   template: `
-    <share-buttons [include]="buttons" theme="outline"></share-buttons>
+    <share-buttons
+      [autoSetMeta]="true"
+      [include]="buttons"
+      [title]="title"
+      theme="outline"
+    ></share-buttons>
   `,
 })
-export class ShareButtonsComponent {
+export class ShareButtonsComponent implements OnChanges {
+  @Input() authorInfo: {
+    twitter: string;
+  };
+  @Input() title: string;
+  buttons = ['twitter', 'linkedin', 'facebook', 'copy'];
+  socialTitle: string;
+
   constructor(iconLibrary: FaIconLibrary) {
     /* @hack add icons dynamically because `ShareIconsModule` needs
      * to be added to `AppModule` as it's not lazy loading friendly.*/
@@ -35,7 +50,11 @@ export class ShareButtonsComponent {
     iconLibrary.addIcons(faFacebookF);
   }
 
-  buttons = ['twitter', 'linkedin', 'facebook', 'copy'];
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.title) {
+      this.socialTitle = this.title ? `${this.title} by @Marmicode` : null;
+    }
+  }
 }
 
 @NgModule({
