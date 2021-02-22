@@ -3402,10 +3402,10 @@
   resolved "https://registry.yarnpkg.com/@jscutlery/cypress-harness/-/cypress-harness-0.2.0.tgz#c1314b26f3cf910d621f30e98c8ed9d7bee7f344"
   integrity sha512-1GmQuZhhn6dE2E3HRgQaWfWWtqtL/aLfh0PbT88N8hfGnh4b1YwQYMnvn4MfGM8b4lYy7rkzMcoRojbuq+1vpQ==
 
-"@jscutlery/cypress-mount@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@jscutlery/cypress-mount/-/cypress-mount-0.7.0.tgz#31b351d8c5c93531381d625149555af033166553"
-  integrity sha512-NNQ19/WC+MAQxWHtrrduN1fq4LU/lbNIhTT8DSm7lGeJuDrk6f72azFw1laRnN4I1WRQSgdiRQlEJ0YQKd2UDA==
+"@jscutlery/cypress-mount@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@jscutlery/cypress-mount/-/cypress-mount-0.8.0.tgz#d2bf99031cbf5fff422a673099fc21a5ca1d33bf"
+  integrity sha512-Xv9p/yMjwf6742bSFuJSbCGR/kz0a+U639nk2aB0hSyCgozSA+w11rkGlrNd+hf0MjVqrX26KoF3lKR0CM6mjg==
   dependencies:
     ng-dynamic-component "^8.0.1"
   optionalDependencies:
