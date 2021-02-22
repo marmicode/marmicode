@@ -47,16 +47,14 @@ import { ShareButtonsModule } from './share-buttons.component';
       desktopLayout="column"
     ></mc-block-group>
 
-    <ng-container *mcWip>
-      <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
-      <div fxLayout="row" fxLayoutAlign="center">
-        <mc-share-buttons
-          [author]="author$ | async"
-          [title]="title$ | async"
-        ></mc-share-buttons>
-      </div>
-    </ng-container>
+    <div fxLayout="row" fxLayoutAlign="center">
+      <mc-share-buttons
+        [author]="author$ | async"
+        [title]="title$ | async"
+      ></mc-share-buttons>
+    </div>
   </div>`,
   styles: [
     `
@@ -111,14 +109,13 @@ export class BlogPostComponent {
   declarations: [BlogPostComponent],
   exports: [BlogPostComponent],
   imports: [
-    CommonModule,
     BlockGroupModule,
-    MatDividerModule,
-    ResourceTitleBannerModule,
-    ResourceHeaderModule,
-    ShareButtonsModule,
-    WipModule,
+    CommonModule,
     FlexModule,
+    MatDividerModule,
+    ResourceHeaderModule,
+    ResourceTitleBannerModule,
+    ShareButtonsModule,
   ],
 })
 export class BlogPostModule {}

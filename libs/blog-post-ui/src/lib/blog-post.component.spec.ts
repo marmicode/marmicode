@@ -2,7 +2,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BlogPostComponent, createBlogPost } from '@marmicode/blog-post-ui';
-import { WipModule, WipService } from '@marmicode/shared-utils';
 
 describe('BlogPostComponent', () => {
   let component: BlogPostComponent;
@@ -11,13 +10,6 @@ describe('BlogPostComponent', () => {
   beforeEach(async () => {
     return TestBed.configureTestingModule({
       declarations: [BlogPostComponent],
-      providers: [
-        {
-          provide: WipService,
-          useValue: { isWip: jest.fn().mockReturnValue(true) },
-        },
-      ],
-      imports: [WipModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
@@ -27,7 +19,7 @@ describe('BlogPostComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('🚧 should pass the right information to share buttons', () => {
+  it('should pass the right information to share buttons', () => {
     component.blogPost = createBlogPost({
       id: 'blog-post-id',
       author: {
