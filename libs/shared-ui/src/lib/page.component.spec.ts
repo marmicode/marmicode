@@ -40,21 +40,24 @@ describe('PageComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should set page title to "Marmicode" by default', () => {
-    expect(titleService.setTitle).toBeCalledTimes(1);
-    expect(titleService.setTitle).toHaveBeenLastCalledWith('Marmicode');
+  /* Tests issue where page title was set to default title
+   * because `info` is null, meanwhile page info is loaded.. */
+  it('should not touch page title until page info is given', () => {
+    expect(titleService.setTitle).not.toBeCalled();
   });
 
-  it('should set default page title if info is null', () => {
+  /* Tests issue where page title was set to default title
+   * because `info` is null, meanwhile page info is loaded.. */
+  it('should not touch page title if info is null', () => {
     component.info = null;
-    expect(titleService.setTitle).toBeCalledTimes(1);
-    expect(titleService.setTitle).toHaveBeenLastCalledWith('Marmicode');
+    expect(titleService.setTitle).not.toBeCalled();
   });
 
   it('should set default page title if title is null', () => {
     component.info = {
       title: null,
     };
+    expect(titleService.setTitle).toBeCalledTimes(1);
     expect(titleService.setTitle).toHaveBeenLastCalledWith('Marmicode');
   });
 
@@ -62,7 +65,7 @@ describe('PageComponent', () => {
     component.info = {
       title: '🍔',
     };
-    expect(titleService.setTitle).toBeCalledTimes(2);
+    expect(titleService.setTitle).toBeCalledTimes(1);
     expect(titleService.setTitle).toHaveBeenLastCalledWith('🍔 | Marmicode');
   });
 
@@ -71,7 +74,7 @@ describe('PageComponent', () => {
       title: '🍔',
     };
     fixture.destroy();
-    expect(titleService.setTitle).toBeCalledTimes(3);
+    expect(titleService.setTitle).toBeCalledTimes(2);
     expect(titleService.setTitle).toHaveBeenLastCalledWith('Marmicode');
   });
 

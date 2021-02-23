@@ -67,14 +67,17 @@ export class PageComponent implements OnDestroy {
     private _state: RxState<{ info: PageInfo }>,
     private _titleService: Title
   ) {
-    /* Intialize info. */
-    this._state.set({ info: null });
-
     /* Sync input with page title. */
-    this._state.hold(
-      this._state.select('info').pipe(map((info) => this._infoToTitle(info))),
-      (title) => this._titleService.setTitle(title)
-    );
+    this._state.hold(this._state.select('info'), (info) => {
+      /* Fixes issue where title was set to default value when component was loaded
+       * and meanwhile info is set. This affects analytics stats. */
+      if (info == null) {
+        return;
+      }
+
+      const title = this._infoToTitle(info);
+      this._titleService.setTitle(title);
+    });
 
     /* Update meta data. */
     this._state.hold(this._state.select('info'), (info) => {
@@ -132,7 +135,7 @@ export class PageComponent implements OnDestroy {
   }
 
   private _infoToTitle(info: PageInfo) {
-    return info?.title ? `${info.title} | Marmicode` : this._defaultTitle;
+    return info.title ? `${info.title} | Marmicode` : this._defaultTitle;
   }
 
   private _resetMeta() {
