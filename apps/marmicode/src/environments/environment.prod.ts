@@ -8,6 +8,6 @@ export const environment = {
     storageBucket: 'marmicode.appspot.com',
     messagingSenderId: '321890888055',
     appId: '1:321890888055:web:e1ac2a33fd7a2877a35972',
-    measurementId: 'G-D55KNBZ2NM',
+    measurementId: 'G-2Y8PCZNC1B',
   },
 };
