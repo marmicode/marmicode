@@ -5,17 +5,12 @@ import {
   Injector,
   NgZone,
 } from '@angular/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SwUpdate } from '@angular/service-worker';
 import { createEffect } from '@ngrx/effects';
-import { combineLatest, defer, EMPTY, timer } from 'rxjs';
-import {
-  exhaustMap,
-  first,
-  map,
-  mapTo,
-  shareReplay,
-  switchMap,
-} from 'rxjs/operators';
+import { defer, EMPTY, timer } from 'rxjs';
+import { exhaustMap, first, switchMap } from 'rxjs/operators';
+import { UpdateDialogComponent } from './update-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -40,17 +35,14 @@ export class UpdateEffects {
   update$ = createEffect(
     () =>
       this._swUpdate.available.pipe(
-        switchMap(() =>
-          combineLatest([this._dialog$, this._updateDialogComponent$])
-        ),
         /* Retry every 30s. */
         /* repeatWhen(() => interval(30000)) would have been shorter
          * but it didn't play well with fakeAsync. */
-        switchMap((args) => timer(0, 30000).pipe(mapTo(args))),
+        switchMap(() => timer(0, 30000)),
         /* Wait for dialog to be close to avoid opening multiple dialogs. */
-        exhaustMap(([dialog, updateDialogComponent]) =>
-          dialog
-            .open(updateDialogComponent, {
+        exhaustMap(() =>
+          this._getDialogService()
+            .open(UpdateDialogComponent, {
               backdropClass: 'mc-overlay-backdrop',
             })
             .afterClosed()
@@ -61,23 +53,6 @@ export class UpdateEffects {
     }
   );
 
-  private _dialog$ = defer(() => import('@angular/material/dialog')).pipe(
-    map(({ MatDialog, MatDialogModule }) => {
-      const moduleRef = this._compiler
-        .compileModuleSync(MatDialogModule)
-        .create(this._injector);
-      return moduleRef.injector.get(MatDialog);
-    }),
-    shareReplay()
-  );
-
-  private _updateDialogComponent$ = defer(() =>
-    import('./update-dialog.component')
-  ).pipe(
-    map(({ UpdateDialogComponent }) => UpdateDialogComponent),
-    shareReplay()
-  );
-
   constructor(
     private _applicationRef: ApplicationRef,
     private _compiler: Compiler,
@@ -85,4 +60,11 @@ export class UpdateEffects {
     private _swUpdate: SwUpdate,
     private _zone: NgZone
   ) {}
+
+  private _getDialogService(): MatDialog {
+    const moduleRef = this._compiler
+      .compileModuleSync(MatDialogModule)
+      .create(this._injector);
+    return moduleRef.injector.get(MatDialog);
+  }
 }
