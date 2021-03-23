@@ -1,26 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <title>Marmicode</title>
-  <base href="/"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&amp;display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="apple-touch-icon" href="/assets/icons/icon-512.jpg">
-  <link rel="icon" href="/assets/logo.svg"/>
-  <link rel="shortcut icon" href="/assets/icons/icon-512.jpg">
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#380030">
+  <head>
+    <meta charset="utf-8" />
+    <title>Marmicode</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="apple-touch-icon" href="/assets/icons/icon-512.jpg" />
+    <link rel="icon" href="/assets/logo.svg" />
+    <link rel="shortcut icon" href="/assets/icons/icon-512.jpg" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#380030" />
 
-  <meta property="og:site_name" content="Marmicode">
-  <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Marmicode" />
+    <meta property="og:locale" content="en_US" />
 
-  <meta name="twitter:site" content="@marmicode">
-</head>
-<body class="mat-typography">
-<mc-root></mc-root>
-  <noscript>Please enable JavaScript to continue using this application.</noscript>
-</body>
+    <meta name="twitter:site" content="@marmicode" />
+  </head>
+  <body class="mat-typography">
+    <mc-root>
+      <!-- This error will be display in case `index.html` is loaded from cache -->
+      <!-- but dependencies like `main.xxx.js` have been evicted by the browser -->
+      <!-- Cf. https://angular.io/guide/service-worker-communications#handling-an-unrecoverable-state -->
+      <div
+        id="error-fallback"
+        style="
+          display: none;
+          color: white;
+          height: 100%;
+          width: 100%;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-size: 2em;
+          font-weight: 300;
+          line-height: 1.2;
+          text-align: center;
+        "
+      >
+        <div
+          style="
+            font-size: 2em;
+            font-weight: 300;
+            line-height: 1.2;
+            text-align: center;
+          "
+        >
+          <span>🤯 Oups!</span>
+          <br />
+          <span>Something went wrong.</span>
+        </div>
+        <button
+          style="
+            background-color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #380030;
+            margin-top: 10px;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.2em;
+          "
+          onclick="document.location.reload()"
+        >
+          RELOAD
+        </button>
+      </div>
+      <script lang="javascript">
+        setTimeout(() => {
+          const errorEl = document.querySelector('#error-fallback');
+          if (errorEl == null) { return; }
+          errorEl.style.display = 'flex';
+        }, 5000);
+      </script>
+    </mc-root>
+    <noscript
+      >Please enable JavaScript to continue using this application.</noscript
+    >
+  </body>
 </html>
