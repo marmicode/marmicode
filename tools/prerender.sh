@@ -5,11 +5,11 @@ set -e
 
 yarn scully --project marmicode --removeStaticDist --prod
 
-# `index.pristine.html` will serve as the index of the PWA.
+# `index.html` will serve as the index of the PWA. Let's not prerender it.
 # This will avoid blinking effect where the pre-rendered /index.html is displayed first for all routes.
 # We could also generate a prerendered app-shell.html but as this index file only serves once the PWA is installed,
 # the performance gain isn't crazy.
-cp dist/apps/marmicode/browser/index.html dist/apps/marmicode/static/index.pristine.html
-
-# Update `ngsw.json` with the right hashes for index.pristine.html.
-yarn ngsw-config dist/apps/marmicode/static apps/marmicode/ngsw-config.json
+# First, we had another index file called `index.pristine.html`, but due to 
+# the following issue https://github.com/angular/angular/issues/41085
+# we'll be using index.html.
+cp dist/apps/marmicode/browser/index.html dist/apps/marmicode/static/index.html

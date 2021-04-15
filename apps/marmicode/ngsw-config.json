@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/@angular/service-worker/config/schema.json",
-  "index": "/index.pristine.html",
+  "index": "/index.html",
   "assetGroups": [
     {
       "name": "app",
@@ -8,13 +8,14 @@
       "resources": {
         "files": [
           "/favicon.ico",
-          "/index.pristine.html",
+          "/index.html",
           "/manifest.webmanifest",
           "/*.css",
           "/*.js"
         ]
       }
-    }, {
+    },
+    {
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
