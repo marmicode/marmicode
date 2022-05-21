@@ -22,7 +22,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-3
+          key: node-modules-${{ hashFiles('yarn.lock') }}-4
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Increase file watchers to avoid storybook warnings
@@ -70,7 +70,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-3
+          key: node-modules-${{ hashFiles('yarn.lock') }}-4
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Lint
@@ -93,7 +93,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-3
+          key: node-modules-${{ hashFiles('yarn.lock') }}-4
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Test
@@ -125,7 +125,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-3
+          key: node-modules-${{ hashFiles('yarn.lock') }}-4
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Deploy
@@ -174,7 +174,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-3
+          key: node-modules-${{ hashFiles('yarn.lock') }}-4
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Deploy

@@ -10,7 +10,7 @@ x-steps:
     uses: actions/cache@v2
     with:
       path: node_modules
-      key: node-modules-${{ hashFiles('yarn.lock') }}-3
+      key: node-modules-${{ hashFiles('yarn.lock') }}-4
 
   checkout: &checkout
     uses: actions/checkout@v2
@@ -162,4 +162,3 @@ jobs:
       - *push
       - *upload-dist-on-failure
       - *slack-notify-failure
-
