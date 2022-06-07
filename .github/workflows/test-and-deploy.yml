@@ -2,9 +2,9 @@
 
 name: Test & Deploy
 'on':
-  - repository_dispatch: null
-    types:
-      - contentful-publish
+  - repository_dispatch:
+      types:
+        - contentful-publish
   - push
   - workflow_dispatch
 env:
