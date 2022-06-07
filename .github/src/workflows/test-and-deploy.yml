@@ -1,7 +1,8 @@
 name: Test & Deploy
 
 on:
-  - contentful-publish
+  - repository_dispatch:
+    types: [contentful-publish]
   - push
   # Allow manual trigger.
   - workflow_dispatch
