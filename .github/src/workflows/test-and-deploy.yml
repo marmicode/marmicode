@@ -1,11 +1,11 @@
 name: Test & Deploy
 
 on:
-  - repository_dispatch:
-      types: [contentful-publish]
-  - push
+  repository_dispatch:
+    types: [contentful-publish]
+  push: {}
   # Allow manual trigger.
-  - workflow_dispatch
+  workflow_dispatch: {}
 
 x-steps:
   cache-node-modules: &cache-node-modules

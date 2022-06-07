@@ -2,11 +2,11 @@
 
 name: Test & Deploy
 'on':
-  - repository_dispatch:
-      types:
-        - contentful-publish
-  - push
-  - workflow_dispatch
+  repository_dispatch:
+    types:
+      - contentful-publish
+  push: {}
+  workflow_dispatch: {}
 env:
   CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
 jobs:
