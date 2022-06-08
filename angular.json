@@ -8,13 +8,12 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/block-api/tsconfig.lib.json",
-              "libs/block-api/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/block-api/**/*"]
+            "lintFilePatterns": [
+              "libs/block-api/src/**/*.ts",
+              "libs/block-api/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -34,13 +33,12 @@
       "prefix": "marmicode",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/block-core/tsconfig.lib.json",
-              "libs/block-core/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/block-core/**/*"]
+            "lintFilePatterns": [
+              "libs/block-core/src/**/*.ts",
+              "libs/block-core/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -61,14 +59,12 @@
       "prefix": "marmicode",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/block-ui/tsconfig.lib.json",
-              "libs/block-ui/tsconfig.spec.json",
-              "libs/block-ui/.storybook/tsconfig.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/block-ui/**/*"]
+            "lintFilePatterns": [
+              "libs/block-ui/src/**/*.ts",
+              "libs/block-ui/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -132,10 +128,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": ["apps/block-ui-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/block-ui-e2e/**/*"]
+            "lintFilePatterns": [
+              "apps/block-ui-e2e/src/**/*.ts",
+              "apps/block-ui-e2e/src/**/*.html"
+            ]
           }
         }
       }
@@ -147,15 +145,11 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/blog-post-feature-detail/tsconfig.lib.json",
-              "libs/blog-post-feature-detail/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/blog-post-feature-detail/**/*"
+            "lintFilePatterns": [
+              "libs/blog-post-feature-detail/src/**/*.ts",
+              "libs/blog-post-feature-detail/src/**/*.html"
             ]
           }
         },
@@ -176,14 +170,12 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/blog-post-ui/tsconfig.lib.json",
-              "libs/blog-post-ui/tsconfig.spec.json",
-              "libs/blog-post-ui/.storybook/tsconfig.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/blog-post-ui/**/*"]
+            "lintFilePatterns": [
+              "libs/blog-post-ui/src/**/*.ts",
+              "libs/blog-post-ui/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -254,13 +246,12 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/contentful-api/tsconfig.lib.json",
-              "libs/contentful-api/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/contentful-api/**/*"]
+            "lintFilePatterns": [
+              "libs/contentful-api/src/**/*.ts",
+              "libs/contentful-api/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -281,15 +272,11 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/learning-map-feature-tree/tsconfig.lib.json",
-              "libs/learning-map-feature-tree/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/learning-map-feature-tree/**/*"
+            "lintFilePatterns": [
+              "libs/learning-map-feature-tree/src/**/*.ts",
+              "libs/learning-map-feature-tree/src/**/*.html"
             ]
           }
         },
@@ -468,13 +455,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "apps/marmicode/tsconfig.app.json",
-              "apps/marmicode/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/marmicode/**/*"]
+            "lintFilePatterns": [
+              "apps/marmicode/src/**/*.ts",
+              "apps/marmicode/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -551,10 +537,10 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "tsConfig": ["apps/marmicode-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/marmicode-e2e/**/*"]
+            "lintFilePatterns": ["apps/marmicode-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -855,6 +841,29 @@
             "passWithNoTests": true
           }
         }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "marmicode",
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
+    },
+    "@nrwl/cypress": {
+      "convert-tslint-to-eslint": {
+        "ignoreExistingTslintConfig": true,
+        "removeTSLintIfNoMoreTSLintTargets": false,
+        "skipFormat": false
       }
     }
   }
