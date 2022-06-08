@@ -552,15 +552,11 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/recipe-feature-detail/tsconfig.lib.json",
-              "libs/recipe-feature-detail/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/recipe-feature-detail/**/*"
+            "lintFilePatterns": [
+              "libs/recipe-feature-detail/src/**/*.ts",
+              "libs/recipe-feature-detail/src/**/*.html"
             ]
           }
         },
@@ -582,13 +578,12 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/resource-api/tsconfig.lib.json",
-              "libs/resource-api/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/resource-api/**/*"]
+            "lintFilePatterns": [
+              "libs/resource-api/src/**/*.ts",
+              "libs/resource-api/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -609,13 +604,12 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/resource-core/tsconfig.lib.json",
-              "libs/resource-core/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/resource-core/**/*"]
+            "lintFilePatterns": [
+              "libs/resource-core/src/**/*.ts",
+              "libs/resource-core/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -636,15 +630,11 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/resource-feature-search/tsconfig.lib.json",
-              "libs/resource-feature-search/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/resource-feature-search/**/*"
+            "lintFilePatterns": [
+              "libs/resource-feature-search/src/**/*.ts",
+              "libs/resource-feature-search/src/**/*.html"
             ]
           }
         },
@@ -666,13 +656,12 @@
       "prefix": "marmicode",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/resource-ui/tsconfig.lib.json",
-              "libs/resource-ui/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/resource-ui/**/*"]
+            "lintFilePatterns": [
+              "libs/resource-ui/src/**/*.ts",
+              "libs/resource-ui/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -692,15 +681,11 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/services-feature-presentation/tsconfig.lib.json",
-              "libs/services-feature-presentation/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/services-feature-presentation/**/*"
+            "lintFilePatterns": [
+              "libs/services-feature-presentation/src/**/*.ts",
+              "libs/services-feature-presentation/src/**/*.html"
             ]
           }
         },
@@ -722,15 +707,11 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/shared-router-helpers/tsconfig.lib.json",
-              "libs/shared-router-helpers/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared-router-helpers/**/*"
+            "lintFilePatterns": [
+              "libs/shared-router-helpers/src/**/*.ts",
+              "libs/shared-router-helpers/src/**/*.html"
             ]
           }
         },
@@ -752,13 +733,12 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/shared-ui/tsconfig.lib.json",
-              "libs/shared-ui/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/shared-ui/**/*"]
+            "lintFilePatterns": [
+              "libs/shared-ui/src/**/*.ts",
+              "libs/shared-ui/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -779,13 +759,12 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/shared-utils/tsconfig.lib.json",
-              "libs/shared-utils/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/shared-utils/**/*"]
+            "lintFilePatterns": [
+              "libs/shared-utils/src/**/*.ts",
+              "libs/shared-utils/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -858,13 +837,6 @@
     },
     "@nrwl/angular:component": {
       "style": "css"
-    },
-    "@nrwl/cypress": {
-      "convert-tslint-to-eslint": {
-        "ignoreExistingTslintConfig": true,
-        "removeTSLintIfNoMoreTSLintTargets": false,
-        "skipFormat": false
-      }
     }
   }
 }
