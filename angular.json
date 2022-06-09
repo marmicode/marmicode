@@ -24,7 +24,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:block", "name:block-api", "type:api"]
     },
     "block-core": {
       "projectType": "library",
@@ -50,7 +51,8 @@
           "outputs": ["coverage/libs/block-core"]
         }
       },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:block", "type:core"]
     },
     "block-ui": {
       "projectType": "library",
@@ -107,7 +109,8 @@
           "outputs": ["{options.outputPath}"]
         }
       },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:block", "type:ui"]
     },
     "block-ui-e2e": {
       "root": "apps/block-ui-e2e",
@@ -136,7 +139,9 @@
             ]
           }
         }
-      }
+      },
+      "tags": [],
+      "implicitDependencies": ["block-ui"]
     },
     "blog-post-feature-detail": {
       "projectType": "library",
@@ -161,7 +166,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:blog-post", "type:feature"]
     },
     "blog-post-ui": {
       "projectType": "library",
@@ -216,7 +222,8 @@
             }
           }
         }
-      }
+      },
+      "tags": ["scope:blog-post", "type:ui"]
     },
     "blog-post-ui-e2e": {
       "root": "apps/blog-post-ui-e2e",
@@ -237,7 +244,9 @@
           },
           "outputs": ["{options.outputFile}"]
         }
-      }
+      },
+      "tags": [],
+      "implicitDependencies": ["blog-post-ui"]
     },
     "contentful-api": {
       "projectType": "library",
@@ -263,7 +272,8 @@
           "outputs": ["coverage/libs/contentful-api"]
         }
       },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:contentful", "type:api", "name:contentful-api"]
     },
     "learning-map-feature-tree": {
       "projectType": "library",
@@ -289,7 +299,8 @@
           "outputs": ["coverage/libs/learning-map-feature-tree"]
         }
       },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:learning-map", "type:feature"]
     },
     "marmicode": {
       "projectType": "application",
@@ -516,7 +527,8 @@
             "production": {}
           }
         }
-      }
+      },
+      "tags": ["scope:app"]
     },
     "marmicode-e2e": {
       "root": "apps/marmicode-e2e",
@@ -543,7 +555,9 @@
             "lintFilePatterns": ["apps/marmicode-e2e/**/*.{js,ts}"]
           }
         }
-      }
+      },
+      "tags": ["scope:e2e"],
+      "implicitDependencies": ["marmicode"]
     },
     "recipe-feature-detail": {
       "projectType": "library",
@@ -569,7 +583,8 @@
           "outputs": ["coverage/libs/recipe-feature-detail"]
         }
       },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:recipe", "type:feature"]
     },
     "resource-api": {
       "projectType": "library",
@@ -595,7 +610,8 @@
           "outputs": ["coverage/libs/resource-api"]
         }
       },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:resource", "type:api", "name:resource-api"]
     },
     "resource-core": {
       "projectType": "library",
@@ -621,7 +637,8 @@
           "outputs": ["coverage/libs/resource-core"]
         }
       },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:resource", "type:core"]
     },
     "resource-feature-search": {
       "projectType": "library",
@@ -647,7 +664,8 @@
           "outputs": ["coverage/libs/resource-feature-search"]
         }
       },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:resource", "type:feature"]
     },
     "resource-ui": {
       "projectType": "library",
@@ -672,7 +690,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:resource", "type:ui"]
     },
     "services-feature-presentation": {
       "projectType": "library",
@@ -698,7 +717,8 @@
           "outputs": ["coverage/libs/services-feature-presentation"]
         }
       },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:services", "type:feature"]
     },
     "shared-router-helpers": {
       "projectType": "library",
@@ -724,7 +744,8 @@
           "outputs": ["coverage/libs/shared-router-helpers"]
         }
       },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:shared", "type:utils"]
     },
     "shared-ui": {
       "projectType": "library",
@@ -750,7 +771,8 @@
           "outputs": ["coverage/libs/shared-ui"]
         }
       },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:shared", "type:ui"]
     },
     "shared-utils": {
       "projectType": "library",
@@ -776,7 +798,8 @@
           "outputs": ["coverage/libs/shared-utils"]
         }
       },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:shared", "type:utils"]
     },
     "testing": {
       "root": "libs/testing",
@@ -798,7 +821,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:utils"]
     },
     "tools-build-github-workflows": {
       "root": "tools/build-github-workflows",
@@ -820,23 +844,8 @@
             "passWithNoTests": true
           }
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
-  },
-  "defaultProject": "marmicode",
-  "schematics": {
-    "@nrwl/angular:application": {
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:component": {
-      "style": "css"
+      },
+      "tags": []
     }
   }
 }
