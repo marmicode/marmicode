@@ -39,7 +39,6 @@ describe('SwipeDirective', () => {
     fixture = TestBed.createComponent(SwipeTestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    containerEl = fixture.debugElement.query(By.css('[data-role=container]'));
     contentEl = fixture.debugElement.query(By.css('[data-role=content]'));
   });
 
