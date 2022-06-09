@@ -9,14 +9,14 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "parserOptions": {
-        "project": ["libs/block-ui/tsconfig.*?.json"]
+        "project": ["libs/block-ui/tsconfig.*?.json", "libs/block-ui/.storybook/tsconfig.json"]
       },
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
           {
             "type": "attribute",
-            "prefix": "marmicode",
+            "prefix": "mc",
             "style": "camelCase"
           }
         ],
@@ -24,7 +24,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "marmicode",
+            "prefix": "mc",
             "style": "kebab-case"
           }
         ]

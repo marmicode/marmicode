@@ -6,13 +6,13 @@
 
 import { concat, Observable, of, OperatorFunction } from 'rxjs';
 import { catchError, filter, map } from 'rxjs/operators';
-import { MaterializedNotification } from './materialize-error';
 
 export type ProgressifyEventType = 'complete' | 'error' | 'next' | 'started';
 
 export interface ProgressifyEvent<T> {
   type: ProgressifyEventType;
   value?: T;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
 }
 

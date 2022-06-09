@@ -23,6 +23,7 @@ import { ResourceBadgeModule } from '@marmicode/resource-ui';
       ></mc-resource-badge>
     </div>
 
+    <!-- eslint-disable-next-line @angular-eslint/template/eqeqeq -->
     <h1 class="title" [class.without-subtitle]="subtitle == null">
       {{ title }}
     </h1>

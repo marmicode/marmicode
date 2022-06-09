@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
-import { PageComponent } from '@marmicode/shared-ui';
+import { PageComponent } from './page.component';
 import { createArticlePageInfo } from './page.component';
 
 describe('PageComponent', () => {
@@ -13,10 +13,12 @@ describe('PageComponent', () => {
     metaService = {
       addTags: jest.fn(),
       removeTag: jest.fn(),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any;
 
     titleService = {
       setTitle: jest.fn(),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any;
 
     await TestBed.configureTestingModule({

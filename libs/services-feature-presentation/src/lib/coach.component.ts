@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DottyLineModule } from './dotty-line.component';
 
-declare var require: any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare let require: any;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -56,9 +57,7 @@ declare var require: any;
       writing articles or speaking at meetups or conferences… and sometimes
       sailing.
     </p>
-    <p>
-      His favorite trick? Adding features by removing code.
-    </p>
+    <p>His favorite trick? Adding features by removing code.</p>
   </section>`,
   styles: [
     `
@@ -92,6 +91,7 @@ declare var require: any;
   ],
 })
 export class CoachComponent {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   coachPictureUri = require('!!file-loader!./coach.jpg').default;
   name = 'Younes Jaaidi';
   isDesktop$ = this._breakpointObserver.observe('(min-width: 960px)').pipe(

@@ -22,6 +22,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
   ],
 })
 export class LoadingComponent {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   loadingGifUrl = require('!!file-loader!./loading.gif').default;
 }
 
