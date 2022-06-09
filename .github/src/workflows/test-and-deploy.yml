@@ -3,6 +3,7 @@ name: Test & Deploy
 on:
   repository_dispatch:
     types: [contentful-publish]
+  pull_request: {}
   push: {}
   # Allow manual trigger.
   workflow_dispatch: {}
