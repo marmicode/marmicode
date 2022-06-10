@@ -1,6 +1,307 @@
 {
   "version": 1,
   "projects": {
+    "block-api": {
+      "projectType": "library",
+      "root": "libs/block-api",
+      "sourceRoot": "libs/block-api/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/block-api/src/**/*.ts",
+              "libs/block-api/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/block-api"],
+          "options": {
+            "jestConfig": "libs/block-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:block", "name:block-api", "type:api"]
+    },
+    "block-core": {
+      "projectType": "library",
+      "root": "libs/block-core",
+      "sourceRoot": "libs/block-core/src",
+      "prefix": "marmicode",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/block-core/src/**/*.ts",
+              "libs/block-core/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/block-core/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/block-core"]
+        }
+      },
+      "schematics": {},
+      "tags": ["scope:block", "type:core"]
+    },
+    "block-ui": {
+      "projectType": "library",
+      "root": "libs/block-ui",
+      "sourceRoot": "libs/block-ui/src",
+      "prefix": "marmicode",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/block-ui/src/**/*.ts",
+              "libs/block-ui/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/block-ui/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/block-ui"]
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/block-ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/recipe-ui",
+            "config": {
+              "configFolder": "libs/block-ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          },
+          "outputs": ["{options.outputPath}"]
+        }
+      },
+      "schematics": {},
+      "tags": ["scope:block", "type:ui"]
+    },
+    "block-ui-e2e": {
+      "root": "apps/block-ui-e2e",
+      "sourceRoot": "apps/block-ui-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/block-ui-e2e/cypress.json",
+            "tsConfig": "apps/block-ui-e2e/tsconfig.e2e.json",
+            "devServerTarget": "block-ui:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "block-ui:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/block-ui-e2e/src/**/*.ts",
+              "apps/block-ui-e2e/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["block-ui"]
+    },
+    "blog-post-feature-detail": {
+      "projectType": "library",
+      "root": "libs/blog-post-feature-detail",
+      "sourceRoot": "libs/blog-post-feature-detail/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/blog-post-feature-detail/src/**/*.ts",
+              "libs/blog-post-feature-detail/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/blog-post-feature-detail"],
+          "options": {
+            "jestConfig": "libs/blog-post-feature-detail/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:blog-post", "type:feature"]
+    },
+    "blog-post-ui": {
+      "projectType": "library",
+      "root": "libs/blog-post-ui",
+      "sourceRoot": "libs/blog-post-ui/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/blog-post-ui/src/**/*.ts",
+              "libs/blog-post-ui/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/blog-post-ui"],
+          "options": {
+            "jestConfig": "libs/blog-post-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/blog-post-ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/blog-post-ui",
+            "config": {
+              "configFolder": "libs/blog-post-ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": ["scope:blog-post", "type:ui"]
+    },
+    "blog-post-ui-e2e": {
+      "root": "apps/blog-post-ui-e2e",
+      "sourceRoot": "apps/blog-post-ui-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/blog-post-ui-e2e/cypress.json",
+            "tsConfig": "apps/blog-post-ui-e2e/tsconfig.e2e.json"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/blog-post-ui-e2e/**/*.{js,ts}"]
+          },
+          "outputs": ["{options.outputFile}"]
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["blog-post-ui"]
+    },
+    "contentful-api": {
+      "projectType": "library",
+      "root": "libs/contentful-api",
+      "sourceRoot": "libs/contentful-api/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/contentful-api/src/**/*.ts",
+              "libs/contentful-api/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/contentful-api/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/contentful-api"]
+        }
+      },
+      "schematics": {},
+      "tags": ["scope:contentful", "type:api", "name:contentful-api"]
+    },
+    "learning-map-feature-tree": {
+      "projectType": "library",
+      "root": "libs/learning-map-feature-tree",
+      "sourceRoot": "libs/learning-map-feature-tree/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/learning-map-feature-tree/src/**/*.ts",
+              "libs/learning-map-feature-tree/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/learning-map-feature-tree/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/learning-map-feature-tree"]
+        }
+      },
+      "schematics": {},
+      "tags": ["scope:learning-map", "type:feature"]
+    },
     "marmicode": {
       "projectType": "application",
       "schematics": {},
@@ -165,13 +466,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "apps/marmicode/tsconfig.app.json",
-              "apps/marmicode/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/marmicode/**/*"]
+            "lintFilePatterns": [
+              "apps/marmicode/src/**/*.ts",
+              "apps/marmicode/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -227,7 +527,8 @@
             "production": {}
           }
         }
-      }
+      },
+      "tags": ["scope:app"]
     },
     "marmicode-e2e": {
       "root": "apps/marmicode-e2e",
@@ -248,187 +549,15 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "tsConfig": ["apps/marmicode-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/marmicode-e2e/**/*"]
+            "lintFilePatterns": ["apps/marmicode-e2e/**/*.{js,ts}"]
           }
-        }
-      }
-    },
-    "learning-map-feature-tree": {
-      "projectType": "library",
-      "root": "libs/learning-map-feature-tree",
-      "sourceRoot": "libs/learning-map-feature-tree/src",
-      "prefix": "mc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/learning-map-feature-tree/tsconfig.lib.json",
-              "libs/learning-map-feature-tree/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/learning-map-feature-tree/**/*"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/learning-map-feature-tree/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/learning-map-feature-tree"]
         }
       },
-      "schematics": {}
-    },
-    "resource-feature-search": {
-      "projectType": "library",
-      "root": "libs/resource-feature-search",
-      "sourceRoot": "libs/resource-feature-search/src",
-      "prefix": "mc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/resource-feature-search/tsconfig.lib.json",
-              "libs/resource-feature-search/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/resource-feature-search/**/*"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/resource-feature-search/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/resource-feature-search"]
-        }
-      },
-      "schematics": {}
-    },
-    "shared-ui": {
-      "projectType": "library",
-      "root": "libs/shared-ui",
-      "sourceRoot": "libs/shared-ui/src",
-      "prefix": "mc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/shared-ui/tsconfig.lib.json",
-              "libs/shared-ui/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/shared-ui/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/shared-ui/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/shared-ui"]
-        }
-      },
-      "schematics": {}
-    },
-    "shared-utils": {
-      "projectType": "library",
-      "root": "libs/shared-utils",
-      "sourceRoot": "libs/shared-utils/src",
-      "prefix": "mc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/shared-utils/tsconfig.lib.json",
-              "libs/shared-utils/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/shared-utils/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/shared-utils/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/shared-utils"]
-        }
-      },
-      "schematics": {}
-    },
-    "services-feature-presentation": {
-      "projectType": "library",
-      "root": "libs/services-feature-presentation",
-      "sourceRoot": "libs/services-feature-presentation/src",
-      "prefix": "mc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/services-feature-presentation/tsconfig.lib.json",
-              "libs/services-feature-presentation/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/services-feature-presentation/**/*"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/services-feature-presentation/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/services-feature-presentation"]
-        }
-      },
-      "schematics": {}
-    },
-    "shared-router-helpers": {
-      "projectType": "library",
-      "root": "libs/shared-router-helpers",
-      "sourceRoot": "libs/shared-router-helpers/src",
-      "prefix": "mc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/shared-router-helpers/tsconfig.lib.json",
-              "libs/shared-router-helpers/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared-router-helpers/**/*"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/shared-router-helpers/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/shared-router-helpers"]
-        }
-      },
-      "schematics": {}
+      "tags": ["scope:e2e"],
+      "implicitDependencies": ["marmicode"]
     },
     "recipe-feature-detail": {
       "projectType": "library",
@@ -437,15 +566,11 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/recipe-feature-detail/tsconfig.lib.json",
-              "libs/recipe-feature-detail/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/recipe-feature-detail/**/*"
+            "lintFilePatterns": [
+              "libs/recipe-feature-detail/src/**/*.ts",
+              "libs/recipe-feature-detail/src/**/*.html"
             ]
           }
         },
@@ -458,34 +583,8 @@
           "outputs": ["coverage/libs/recipe-feature-detail"]
         }
       },
-      "schematics": {}
-    },
-    "resource-core": {
-      "projectType": "library",
-      "root": "libs/resource-core",
-      "sourceRoot": "libs/resource-core/src",
-      "prefix": "mc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/resource-core/tsconfig.lib.json",
-              "libs/resource-core/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/resource-core/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/resource-core/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/resource-core"]
-        }
-      },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:recipe", "type:feature"]
     },
     "resource-api": {
       "projectType": "library",
@@ -494,13 +593,12 @@
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/resource-api/tsconfig.lib.json",
-              "libs/resource-api/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/resource-api/**/*"]
+            "lintFilePatterns": [
+              "libs/resource-api/src/**/*.ts",
+              "libs/resource-api/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -512,321 +610,62 @@
           "outputs": ["coverage/libs/resource-api"]
         }
       },
-      "schematics": {}
+      "schematics": {},
+      "tags": ["scope:resource", "type:api", "name:resource-api"]
     },
-    "contentful-api": {
+    "resource-core": {
       "projectType": "library",
-      "root": "libs/contentful-api",
-      "sourceRoot": "libs/contentful-api/src",
+      "root": "libs/resource-core",
+      "sourceRoot": "libs/resource-core/src",
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/contentful-api/tsconfig.lib.json",
-              "libs/contentful-api/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/contentful-api/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/contentful-api/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/contentful-api"]
-        }
-      },
-      "schematics": {}
-    },
-    "blog-post-feature-detail": {
-      "projectType": "library",
-      "root": "libs/blog-post-feature-detail",
-      "sourceRoot": "libs/blog-post-feature-detail/src",
-      "prefix": "mc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/blog-post-feature-detail/tsconfig.lib.json",
-              "libs/blog-post-feature-detail/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/blog-post-feature-detail/**/*"
+            "lintFilePatterns": [
+              "libs/resource-core/src/**/*.ts",
+              "libs/resource-core/src/**/*.html"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/blog-post-feature-detail"],
           "options": {
-            "jestConfig": "libs/blog-post-feature-detail/jest.config.js",
+            "jestConfig": "libs/resource-core/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/resource-core"]
         }
-      }
+      },
+      "schematics": {},
+      "tags": ["scope:resource", "type:core"]
     },
-    "blog-post-ui": {
+    "resource-feature-search": {
       "projectType": "library",
-      "root": "libs/blog-post-ui",
-      "sourceRoot": "libs/blog-post-ui/src",
+      "root": "libs/resource-feature-search",
+      "sourceRoot": "libs/resource-feature-search/src",
       "prefix": "mc",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/blog-post-ui/tsconfig.lib.json",
-              "libs/blog-post-ui/tsconfig.spec.json",
-              "libs/blog-post-ui/.storybook/tsconfig.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/blog-post-ui/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/blog-post-ui"],
-          "options": {
-            "jestConfig": "libs/blog-post-ui/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/blog-post-ui/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/blog-post-ui",
-            "config": {
-              "configFolder": "libs/blog-post-ui/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "blog-post-ui-e2e": {
-      "root": "apps/blog-post-ui-e2e",
-      "sourceRoot": "apps/blog-post-ui-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/blog-post-ui-e2e/cypress.json",
-            "tsConfig": "apps/blog-post-ui-e2e/tsconfig.e2e.json"
-          }
-        },
-        "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/blog-post-ui-e2e/**/*.{js,ts}"]
-          }
-        }
-      }
-    },
-    "block-api": {
-      "projectType": "library",
-      "root": "libs/block-api",
-      "sourceRoot": "libs/block-api/src",
-      "prefix": "mc",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/block-api/tsconfig.lib.json",
-              "libs/block-api/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/block-api/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/block-api"],
-          "options": {
-            "jestConfig": "libs/block-api/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "block-core": {
-      "projectType": "library",
-      "root": "libs/block-core",
-      "sourceRoot": "libs/block-core/src",
-      "prefix": "marmicode",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/block-core/tsconfig.lib.json",
-              "libs/block-core/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/block-core/**/*"]
+            "lintFilePatterns": [
+              "libs/resource-feature-search/src/**/*.ts",
+              "libs/resource-feature-search/src/**/*.html"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/block-core/jest.config.js",
+            "jestConfig": "libs/resource-feature-search/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/block-core"]
+          "outputs": ["coverage/libs/resource-feature-search"]
         }
       },
-      "schematics": {}
-    },
-    "block-ui": {
-      "projectType": "library",
-      "root": "libs/block-ui",
-      "sourceRoot": "libs/block-ui/src",
-      "prefix": "marmicode",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/block-ui/tsconfig.lib.json",
-              "libs/block-ui/tsconfig.spec.json",
-              "libs/block-ui/.storybook/tsconfig.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/block-ui/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/block-ui/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/block-ui"]
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/block-ui/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/recipe-ui",
-            "config": {
-              "configFolder": "libs/block-ui/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          },
-          "outputs": ["{options.outputPath}"]
-        }
-      },
-      "schematics": {}
-    },
-    "block-ui-e2e": {
-      "root": "apps/block-ui-e2e",
-      "sourceRoot": "apps/block-ui-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/block-ui-e2e/cypress.json",
-            "tsConfig": "apps/block-ui-e2e/tsconfig.e2e.json",
-            "devServerTarget": "block-ui:storybook"
-          },
-          "configurations": {
-            "ci": {
-              "devServerTarget": "block-ui:storybook:ci"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["apps/block-ui-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/block-ui-e2e/**/*"]
-          }
-        }
-      }
-    },
-    "tools-build-github-workflows": {
-      "root": "tools/build-github-workflows",
-      "sourceRoot": "tools/build-github-workflows/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["tools/build-github-workflows/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/tools/build-github-workflows"],
-          "options": {
-            "jestConfig": "tools/build-github-workflows/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "testing": {
-      "root": "libs/testing",
-      "sourceRoot": "libs/testing/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/testing/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/testing"],
-          "options": {
-            "jestConfig": "libs/testing/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
+      "schematics": {},
+      "tags": ["scope:resource", "type:feature"]
     },
     "resource-ui": {
       "projectType": "library",
@@ -835,13 +674,12 @@
       "prefix": "marmicode",
       "architect": {
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": [
-              "libs/resource-ui/tsconfig.lib.json",
-              "libs/resource-ui/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/resource-ui/**/*"]
+            "lintFilePatterns": [
+              "libs/resource-ui/src/**/*.ts",
+              "libs/resource-ui/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -852,23 +690,162 @@
             "passWithNoTests": true
           }
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
-  },
-  "schematics": {
-    "@nrwl/angular:application": {
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
+      },
+      "tags": ["scope:resource", "type:ui"]
     },
-    "@nrwl/angular:library": {
-      "unitTestRunner": "jest"
+    "services-feature-presentation": {
+      "projectType": "library",
+      "root": "libs/services-feature-presentation",
+      "sourceRoot": "libs/services-feature-presentation/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/services-feature-presentation/src/**/*.ts",
+              "libs/services-feature-presentation/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/services-feature-presentation/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/services-feature-presentation"]
+        }
+      },
+      "schematics": {},
+      "tags": ["scope:services", "type:feature"]
     },
-    "@nrwl/angular:component": {
-      "style": "css"
+    "shared-router-helpers": {
+      "projectType": "library",
+      "root": "libs/shared-router-helpers",
+      "sourceRoot": "libs/shared-router-helpers/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared-router-helpers/src/**/*.ts",
+              "libs/shared-router-helpers/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared-router-helpers/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/shared-router-helpers"]
+        }
+      },
+      "schematics": {},
+      "tags": ["scope:shared", "type:utils"]
+    },
+    "shared-ui": {
+      "projectType": "library",
+      "root": "libs/shared-ui",
+      "sourceRoot": "libs/shared-ui/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared-ui/src/**/*.ts",
+              "libs/shared-ui/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared-ui/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/shared-ui"]
+        }
+      },
+      "schematics": {},
+      "tags": ["scope:shared", "type:ui"]
+    },
+    "shared-utils": {
+      "projectType": "library",
+      "root": "libs/shared-utils",
+      "sourceRoot": "libs/shared-utils/src",
+      "prefix": "mc",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared-utils/src/**/*.ts",
+              "libs/shared-utils/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared-utils/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/shared-utils"]
+        }
+      },
+      "schematics": {},
+      "tags": ["scope:shared", "type:utils"]
+    },
+    "testing": {
+      "root": "libs/testing",
+      "sourceRoot": "libs/testing/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/testing/**/*.ts"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/testing"],
+          "options": {
+            "jestConfig": "libs/testing/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:utils"]
+    },
+    "tools-build-github-workflows": {
+      "root": "tools/build-github-workflows",
+      "sourceRoot": "tools/build-github-workflows/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["tools/build-github-workflows/**/*.ts"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/tools/build-github-workflows"],
+          "options": {
+            "jestConfig": "tools/build-github-workflows/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     }
-  },
-  "defaultProject": "marmicode"
+  }
 }

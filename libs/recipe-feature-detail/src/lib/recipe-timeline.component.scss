@@ -1,3 +1,4 @@
+@use 'sass:math';
 
 $bullet-diameter: 15px;
 $current-bullet-diameter: 17px;
@@ -5,14 +6,15 @@ $current-bullet-diameter: 17px;
 .bullet {
   display: block;
   position: absolute;
-  top: -($bullet-diameter - 1px) / 2;
+  top: math.div(-($bullet-diameter - 1px), 2);
   left: 0;
 
   background-color: #666;
   border-radius: 50%;
   height: $bullet-diameter;
   width: $bullet-diameter;
-  transition: background-color .3s ease-out, height .3s ease-out, width .3s ease-out;
+  transition: background-color 0.3s ease-out, height 0.3s ease-out,
+    width 0.3s ease-out;
 }
 
 .previous-bullet {
@@ -22,7 +24,7 @@ $current-bullet-diameter: 17px;
 .current-bullet {
   background-color: white;
   border: var(--marmicode-accent-color) solid 1px;
-  top: -($current-bullet-diameter - 1px) / 2;
+  top: math.div(-($current-bullet-diameter - 1px), 2);
   height: $current-bullet-diameter;
   width: $current-bullet-diameter;
 }

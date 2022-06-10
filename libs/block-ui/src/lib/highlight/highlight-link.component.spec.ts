@@ -1,7 +1,6 @@
 import { SimpleChange } from '@angular/core';
 import { HighlightLinkComponent } from './highlight-link.component';
 import { HighlightZone } from './highlight-zone';
-import mock = jest.mock;
 
 describe('Component', () => {
   let component: HighlightLinkComponent;

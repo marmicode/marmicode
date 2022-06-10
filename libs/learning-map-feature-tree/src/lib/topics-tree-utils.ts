@@ -24,6 +24,7 @@ export function getTopicsTreeWidth({
   horizontalGap: number;
 }) {
   const maxCount = Array.from(depthCountMap.entries()).reduce(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (max, [depth, count]) => {
       return Math.max(max, count);
     },

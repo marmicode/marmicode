@@ -21,41 +21,41 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@marmicode/block-api": ["libs/block-api/src/index.ts"],
+      "@marmicode/block-core": ["libs/block-core/src/index.ts"],
+      "@marmicode/block-ui": ["libs/block-ui/src/index.ts"],
+      "@marmicode/blog-post-feature-detail": [
+        "libs/blog-post-feature-detail/src/index.ts"
+      ],
+      "@marmicode/blog-post-ui": ["libs/blog-post-ui/src/index.ts"],
+      "@marmicode/contentful-api": ["libs/contentful-api/src/index.ts"],
       "@marmicode/learning-map-feature-tree": [
         "libs/learning-map-feature-tree/src/index.ts"
       ],
+      "@marmicode/recipe-feature-detail": [
+        "libs/recipe-feature-detail/src/index.ts"
+      ],
+      "@marmicode/resource-api": ["libs/resource-api/src/index.ts"],
+      "@marmicode/resource-core": ["libs/resource-core/src/index.ts"],
       "@marmicode/resource-feature-search": [
         "libs/resource-feature-search/src/index.ts"
       ],
       "@marmicode/resource-feature-search/testing": [
         "libs/resource-feature-search/src/testing/index.ts"
       ],
-      "@marmicode/shared-ui": ["libs/shared-ui/src/index.ts"],
-      "@marmicode/shared-utils": ["libs/shared-utils/src/index.ts"],
+      "@marmicode/resource-ui": ["libs/resource-ui/src/index.ts"],
       "@marmicode/services-feature-presentation": [
         "libs/services-feature-presentation/src/index.ts"
       ],
       "@marmicode/shared-router-helpers": [
         "libs/shared-router-helpers/src/index.ts"
       ],
-      "@marmicode/recipe-feature-detail": [
-        "libs/recipe-feature-detail/src/index.ts"
-      ],
-      "@marmicode/resource-core": ["libs/resource-core/src/index.ts"],
-      "@marmicode/resource-api": ["libs/resource-api/src/index.ts"],
-      "@marmicode/contentful-api": ["libs/contentful-api/src/index.ts"],
-      "@marmicode/blog-post-feature-detail": [
-        "libs/blog-post-feature-detail/src/index.ts"
-      ],
-      "@marmicode/blog-post-ui": ["libs/blog-post-ui/src/index.ts"],
-      "@marmicode/block-api": ["libs/block-api/src/index.ts"],
-      "@marmicode/block-core": ["libs/block-core/src/index.ts"],
-      "@marmicode/block-ui": ["libs/block-ui/src/index.ts"],
+      "@marmicode/shared-ui": ["libs/shared-ui/src/index.ts"],
+      "@marmicode/shared-utils": ["libs/shared-utils/src/index.ts"],
+      "@marmicode/testing": ["libs/testing/src/index.ts"],
       "@marmicode/tools/build-github-workflows": [
         "tools/build-github-workflows/src/index.ts"
-      ],
-      "@marmicode/testing": ["libs/testing/src/index.ts"],
-      "@marmicode/resource-ui": ["libs/resource-ui/src/index.ts"]
+      ]
     },
     "strict": true,
     "strictNullChecks": false,

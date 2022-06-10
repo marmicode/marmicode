@@ -1,6 +1,5 @@
 import {
   Directive,
-  Injectable,
   NgModule,
   OnInit,
   TemplateRef,
