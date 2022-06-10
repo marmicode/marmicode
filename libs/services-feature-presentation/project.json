@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "root": "libs/services-feature-presentation",
+  "sourceRoot": "libs/services-feature-presentation/src",
+  "prefix": "mc",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/services-feature-presentation/src/**/*.ts",
+          "libs/services-feature-presentation/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/services-feature-presentation/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/services-feature-presentation"]
+    }
+  },
+  "generators": {},
+  "tags": ["scope:services", "type:feature"]
+}

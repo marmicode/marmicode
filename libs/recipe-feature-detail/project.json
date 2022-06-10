@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "root": "libs/recipe-feature-detail",
+  "sourceRoot": "libs/recipe-feature-detail/src",
+  "prefix": "mc",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/recipe-feature-detail/src/**/*.ts",
+          "libs/recipe-feature-detail/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/recipe-feature-detail/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/recipe-feature-detail"]
+    }
+  },
+  "generators": {},
+  "tags": ["scope:recipe", "type:feature"]
+}

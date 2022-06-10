@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "root": "libs/shared-ui",
+  "sourceRoot": "libs/shared-ui/src",
+  "prefix": "mc",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared-ui/src/**/*.ts",
+          "libs/shared-ui/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/shared-ui/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/shared-ui"]
+    }
+  },
+  "generators": {},
+  "tags": ["scope:shared", "type:ui"]
+}

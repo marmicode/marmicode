@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "root": "libs/block-core",
+  "sourceRoot": "libs/block-core/src",
+  "prefix": "marmicode",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/block-core/src/**/*.ts",
+          "libs/block-core/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/block-core/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/block-core"]
+    }
+  },
+  "generators": {},
+  "tags": ["scope:block", "type:core"]
+}

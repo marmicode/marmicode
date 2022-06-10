@@ -1,0 +1,23 @@
+{
+  "root": "tools/build-github-workflows",
+  "sourceRoot": "tools/build-github-workflows/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["tools/build-github-workflows/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/tools/build-github-workflows"],
+      "options": {
+        "jestConfig": "tools/build-github-workflows/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

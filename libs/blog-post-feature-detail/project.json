@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/blog-post-feature-detail",
+  "sourceRoot": "libs/blog-post-feature-detail/src",
+  "prefix": "mc",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/blog-post-feature-detail/src/**/*.ts",
+          "libs/blog-post-feature-detail/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/blog-post-feature-detail"],
+      "options": {
+        "jestConfig": "libs/blog-post-feature-detail/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:blog-post", "type:feature"]
+}

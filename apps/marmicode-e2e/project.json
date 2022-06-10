@@ -1,0 +1,29 @@
+{
+  "root": "apps/marmicode-e2e",
+  "sourceRoot": "apps/marmicode-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/marmicode-e2e/cypress.json",
+        "tsConfig": "apps/marmicode-e2e/tsconfig.e2e.json",
+        "devServerTarget": "marmicode:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "marmicode:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/marmicode-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": ["scope:e2e"],
+  "implicitDependencies": ["marmicode"]
+}

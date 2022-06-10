@@ -1,0 +1,228 @@
+{
+  "projectType": "application",
+  "generators": {},
+  "root": "apps/marmicode",
+  "sourceRoot": "apps/marmicode/src",
+  "prefix": "mc",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/marmicode/browser",
+        "index": "apps/marmicode/src/index.html",
+        "main": "apps/marmicode/src/main.ts",
+        "polyfills": "apps/marmicode/src/polyfills.ts",
+        "tsConfig": "apps/marmicode/tsconfig.app.json",
+        "aot": true,
+        "assets": [
+          "apps/marmicode/src/favicon.ico",
+          "apps/marmicode/src/assets",
+          "apps/marmicode/src/manifest.webmanifest",
+          "apps/marmicode/src/robots.txt"
+        ],
+        "styles": ["apps/marmicode/src/styles.scss"],
+        "scripts": [],
+        "allowedCommonJsDependencies": [
+          "@babel/runtime/helpers/get",
+          "@babel/runtime/helpers/inherits",
+          "@babel/runtime/helpers/possibleConstructorReturn",
+          "@babel/runtime/helpers/slicedToArray",
+          "@babel/runtime/helpers/toConsumableArray",
+          "@babel/runtime/regenerator",
+          "@firebase/auth",
+          "@firebase/component",
+          "@firebase/util",
+          "amator",
+          "core-js/modules/es.array.concat",
+          "core-js/modules/es.array.every",
+          "core-js/modules/es.array.fill",
+          "core-js/modules/es.array.filter",
+          "core-js/modules/es.array.for-each",
+          "core-js/modules/es.array.from",
+          "core-js/modules/es.array.includes",
+          "core-js/modules/es.array.index-of",
+          "core-js/modules/es.array.iterator",
+          "core-js/modules/es.array.join",
+          "core-js/modules/es.array.map",
+          "core-js/modules/es.array.reduce",
+          "core-js/modules/es.array.reverse",
+          "core-js/modules/es.array.slice",
+          "core-js/modules/es.array.some",
+          "core-js/modules/es.function.name",
+          "core-js/modules/es.map",
+          "core-js/modules/es.number.constructor",
+          "core-js/modules/es.object.get-own-property-descriptor",
+          "core-js/modules/es.object.get-own-property-descriptors",
+          "core-js/modules/es.object.keys",
+          "core-js/modules/es.object.to-string",
+          "core-js/modules/es.promise",
+          "core-js/modules/es.reflect.apply",
+          "core-js/modules/es.reflect.construct",
+          "core-js/modules/es.reflect.delete-property",
+          "core-js/modules/es.reflect.get-prototype-of",
+          "core-js/modules/es.regexp.exec",
+          "core-js/modules/es.regexp.to-string",
+          "core-js/modules/es.string.includes",
+          "core-js/modules/es.string.iterator",
+          "core-js/modules/es.string.match",
+          "core-js/modules/es.string.replace",
+          "core-js/modules/es.string.split",
+          "core-js/modules/es.string.starts-with",
+          "core-js/modules/es.string.trim",
+          "core-js/modules/es.symbol",
+          "core-js/modules/es.symbol.description",
+          "core-js/modules/es.symbol.iterator",
+          "core-js/modules/web.dom-collections.for-each",
+          "core-js/modules/web.dom-collections.iterator",
+          "firebase/app",
+          "graphql-tag",
+          "panzoom",
+          "raf",
+          "xlsx",
+          "zen-observable"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/marmicode/src/environments/environment.ts",
+              "with": "apps/marmicode/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "800kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "3kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "serviceWorker": true,
+          "ngswConfigPath": "apps/marmicode/ngsw-config.json"
+        },
+        "next": {
+          "fileReplacements": [
+            {
+              "replace": "apps/marmicode/src/environments/environment.ts",
+              "with": "apps/marmicode/src/environments/environment.next.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "700kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "3kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "serviceWorker": true,
+          "ngswConfigPath": "apps/marmicode/ngsw-config.json"
+        }
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "marmicode:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "marmicode:build:production"
+        }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "marmicode:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/marmicode/src/**/*.ts",
+          "apps/marmicode/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "apps/marmicode/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/apps/marmicode"]
+    },
+    "server": {
+      "executor": "@angular-devkit/build-angular:server",
+      "options": {
+        "outputPath": "dist/apps/marmicode/server",
+        "main": "apps/marmicode/server.ts",
+        "tsConfig": "apps/marmicode/tsconfig.server.json"
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media",
+          "fileReplacements": [
+            {
+              "replace": "apps/marmicode/src/environments/environment.ts",
+              "with": "apps/marmicode/src/environments/environment.prod.ts"
+            }
+          ],
+          "sourceMap": false,
+          "optimization": true
+        }
+      }
+    },
+    "serve-ssr": {
+      "executor": "@nguniversal/builders:ssr-dev-server",
+      "options": {
+        "browserTarget": "marmicode:build",
+        "serverTarget": "marmicode:server"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "marmicode:build:production",
+          "serverTarget": "marmicode:server:production"
+        }
+      }
+    },
+    "prerender": {
+      "executor": "@nguniversal/builders:prerender",
+      "options": {
+        "browserTarget": "marmicode:build:production",
+        "serverTarget": "marmicode:server:production",
+        "routes": ["/"]
+      },
+      "configurations": {
+        "production": {}
+      }
+    }
+  },
+  "tags": ["scope:app"]
+}

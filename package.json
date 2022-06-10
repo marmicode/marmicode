@@ -112,7 +112,7 @@
     "@nrwl/jest": "13.2.3",
     "@nrwl/node": "13.2.3",
     "@nrwl/storybook": "13.2.3",
-    "@nrwl/tao": "12.10.1",
+    "@nrwl/tao": "13.2.3",
     "@nrwl/workspace": "13.2.3",
     "@percy/cypress": "^2.3.2",
     "@percy/poller": "^0.1.0",
@@ -153,4 +153,3 @@
     "typescript": "4.4.4"
   }
 }
-

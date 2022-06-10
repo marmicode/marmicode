@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/resource-ui",
+  "sourceRoot": "libs/resource-ui/src",
+  "prefix": "marmicode",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/resource-ui/src/**/*.ts",
+          "libs/resource-ui/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/resource-ui"],
+      "options": {
+        "jestConfig": "libs/resource-ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:resource", "type:ui"]
+}

@@ -1,0 +1,58 @@
+{
+  "projectType": "library",
+  "root": "libs/block-ui",
+  "sourceRoot": "libs/block-ui/src",
+  "prefix": "marmicode",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/block-ui/src/**/*.ts",
+          "libs/block-ui/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/block-ui/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/block-ui"]
+    },
+    "storybook": {
+      "executor": "@nrwl/storybook:storybook",
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "port": 4400,
+        "config": {
+          "configFolder": "libs/block-ui/.storybook"
+        }
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nrwl/storybook:build",
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "outputPath": "dist/storybook/recipe-ui",
+        "config": {
+          "configFolder": "libs/block-ui/.storybook"
+        }
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      },
+      "outputs": ["{options.outputPath}"]
+    }
+  },
+  "generators": {},
+  "tags": ["scope:block", "type:ui"]
+}

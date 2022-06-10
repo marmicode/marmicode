@@ -1,0 +1,23 @@
+{
+  "root": "apps/blog-post-ui-e2e",
+  "sourceRoot": "apps/blog-post-ui-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/blog-post-ui-e2e/cypress.json",
+        "tsConfig": "apps/blog-post-ui-e2e/tsconfig.e2e.json"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/blog-post-ui-e2e/**/*.{js,ts}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["blog-post-ui"]
+}

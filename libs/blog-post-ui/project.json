@@ -1,0 +1,56 @@
+{
+  "projectType": "library",
+  "root": "libs/blog-post-ui",
+  "sourceRoot": "libs/blog-post-ui/src",
+  "prefix": "mc",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/blog-post-ui/src/**/*.ts",
+          "libs/blog-post-ui/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/blog-post-ui"],
+      "options": {
+        "jestConfig": "libs/blog-post-ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "storybook": {
+      "executor": "@nrwl/storybook:storybook",
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "port": 4400,
+        "config": {
+          "configFolder": "libs/blog-post-ui/.storybook"
+        }
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nrwl/storybook:build",
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "outputPath": "dist/storybook/blog-post-ui",
+        "config": {
+          "configFolder": "libs/blog-post-ui/.storybook"
+        }
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    }
+  },
+  "tags": ["scope:blog-post", "type:ui"]
+}
