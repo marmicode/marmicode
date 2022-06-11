@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/shared-ui",
   "sourceRoot": "libs/shared-ui/src",
   "prefix": "mc",
   "targets": {
@@ -16,7 +15,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/shared-ui/jest.config.js",
+        "jestConfig": "libs/shared-ui/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/shared-ui"]

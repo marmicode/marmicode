@@ -1,4 +1,5 @@
-module.exports = {
+/* eslint-disable */
+export default {
   displayName: 'tools-build-github-workflows',
   preset: '../../jest.preset.js',
   globals: {

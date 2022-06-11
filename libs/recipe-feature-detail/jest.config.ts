@@ -1,4 +1,5 @@
-module.exports = {
+/* eslint-disable */
+export default {
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,9 +9,9 @@ module.exports = {
       tsconfig: '<rootDir>/tsconfig.spec.json',
     },
   },
-  coverageDirectory: '../../coverage/libs/services-feature-presentation',
+  coverageDirectory: '../../coverage/libs/recipe-feature-detail',
 
-  displayName: 'services-feature-presentation',
+  displayName: 'recipe-feature-detail',
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

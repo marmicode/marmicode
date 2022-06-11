@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/block-core",
   "sourceRoot": "libs/block-core/src",
   "prefix": "marmicode",
   "targets": {
@@ -16,7 +15,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/block-core/jest.config.js",
+        "jestConfig": "libs/block-core/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/block-core"]

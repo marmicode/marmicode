@@ -43,7 +43,7 @@ import {
   providers: [RxState],
 })
 export class ResourceSearchFormComponent {
-  skillControl = new FormControl();
+  skillControl = new FormControl<string>();
   allSkills$ = this._skillRepository
     .getSkills()
     .pipe(shareReplay({ refCount: true, bufferSize: 1 }));

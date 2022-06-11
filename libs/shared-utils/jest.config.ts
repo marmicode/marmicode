@@ -1,6 +1,8 @@
-module.exports = {
-  displayName: 'blog-post-feature-detail',
+/* eslint-disable */
+export default {
   preset: '../../jest.preset.js',
+  coverageDirectory: '../../coverage/libs/shared-utils',
+
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -9,7 +11,7 @@ module.exports = {
       tsconfig: '<rootDir>/tsconfig.spec.json',
     },
   },
-  coverageDirectory: '../../coverage/libs/blog-post-feature-detail',
+  displayName: 'shared-utils',
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

@@ -1,7 +1,6 @@
-module.exports = {
+/* eslint-disable */
+export default {
   preset: '../../jest.preset.js',
-  coverageDirectory: '../../coverage/libs/resource-feature-search',
-
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -10,7 +9,9 @@ module.exports = {
       tsconfig: '<rootDir>/tsconfig.spec.json',
     },
   },
-  displayName: 'resource-feature-search',
+  coverageDirectory: '../../coverage/libs/shared-router-helpers',
+
+  displayName: 'shared-router-helpers',
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

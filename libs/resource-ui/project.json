@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/resource-ui",
   "sourceRoot": "libs/resource-ui/src",
   "prefix": "marmicode",
   "targets": {
@@ -17,7 +16,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/resource-ui"],
       "options": {
-        "jestConfig": "libs/resource-ui/jest.config.js",
+        "jestConfig": "libs/resource-ui/jest.config.ts",
         "passWithNoTests": true
       }
     }

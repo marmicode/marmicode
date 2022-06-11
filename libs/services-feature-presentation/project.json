@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/services-feature-presentation",
   "sourceRoot": "libs/services-feature-presentation/src",
   "prefix": "mc",
   "targets": {
@@ -16,7 +15,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/services-feature-presentation/jest.config.js",
+        "jestConfig": "libs/services-feature-presentation/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/services-feature-presentation"]

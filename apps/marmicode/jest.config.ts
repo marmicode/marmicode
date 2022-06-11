@@ -1,5 +1,8 @@
-module.exports = {
+/* eslint-disable */
+export default {
   preset: '../../jest.preset.js',
+  coverageDirectory: '../../coverage/apps/marmicode',
+
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,9 +11,7 @@ module.exports = {
       tsconfig: '<rootDir>/tsconfig.spec.json',
     },
   },
-  coverageDirectory: '../../coverage/libs/contentful-api',
-
-  displayName: 'contentful-api',
+  displayName: 'marmicode',
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

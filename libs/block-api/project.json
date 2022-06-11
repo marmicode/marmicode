@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/block-api",
   "sourceRoot": "libs/block-api/src",
   "prefix": "mc",
   "targets": {
@@ -17,7 +16,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/block-api"],
       "options": {
-        "jestConfig": "libs/block-api/jest.config.js",
+        "jestConfig": "libs/block-api/jest.config.ts",
         "passWithNoTests": true
       }
     }

@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/blog-post-feature-detail",
   "sourceRoot": "libs/blog-post-feature-detail/src",
   "prefix": "mc",
   "targets": {
@@ -17,7 +16,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/blog-post-feature-detail"],
       "options": {
-        "jestConfig": "libs/blog-post-feature-detail/jest.config.js",
+        "jestConfig": "libs/blog-post-feature-detail/jest.config.ts",
         "passWithNoTests": true
       }
     }

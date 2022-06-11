@@ -1,7 +1,7 @@
-module.exports = {
+/* eslint-disable */
+export default {
+  displayName: 'block-core',
   preset: '../../jest.preset.js',
-  coverageDirectory: '../../coverage/libs/learning-map-feature-tree',
-
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -10,7 +10,7 @@ module.exports = {
       tsconfig: '<rootDir>/tsconfig.spec.json',
     },
   },
-  displayName: 'learning-map-feature-tree',
+  coverageDirectory: '../../coverage/libs/block-core',
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

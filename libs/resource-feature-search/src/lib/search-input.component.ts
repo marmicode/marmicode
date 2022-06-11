@@ -108,7 +108,7 @@ export interface SearchInputOption {
   ],
 })
 export class SearchInputComponent {
-  @Input() set control(control: FormControl) {
+  @Input() set control(control: FormControl<string>) {
     this._state.set({ control });
   }
   @Input() placeholder: string;
@@ -120,7 +120,7 @@ export class SearchInputComponent {
 
   getOptionLabel = (option: SearchInputOption) => option?.label;
 
-  constructor(private _state: RxState<{ control: FormControl }>) {
+  constructor(private _state: RxState<{ control: FormControl<string> }>) {
     this.value$ = this.control$.pipe(
       switchMap((control) => control.valueChanges),
       /* Filter duplicates. */
