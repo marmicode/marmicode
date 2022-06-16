@@ -1,8 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { createBlogPost } from './blog-post';
-import { BlogPostComponent } from './blog-post.component';
+import { BlogPostComponent, createBlogPost } from '@marmicode/blog-post-ui';
 
 describe('BlogPostComponent', () => {
   let component: BlogPostComponent;

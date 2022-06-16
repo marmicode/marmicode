@@ -7,6 +7,7 @@ import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { ResourceRepository } from './resource-repository.service';
 
 describe('ResourceSearchComponent', () => {
+  let component: ResourceSearchPageComponent;
   let fixture: ComponentFixture<ResourceSearchPageComponent>;
   let selectedSkillSlug$: Subject<string>;
 
@@ -44,8 +45,14 @@ describe('ResourceSearchComponent', () => {
   let resourceRepository: ResourceRepository;
   beforeEach(() => (resourceRepository = TestBed.inject(ResourceRepository)));
 
+  let resourceSearchFacade: ResourceSearchFacade;
+  beforeEach(
+    () => (resourceSearchFacade = TestBed.inject(ResourceSearchFacade))
+  );
+
   beforeEach(() => {
     fixture = TestBed.createComponent(ResourceSearchPageComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 

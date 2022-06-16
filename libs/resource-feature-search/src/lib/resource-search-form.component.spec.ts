@@ -71,6 +71,14 @@ describe('ResourceSearchFormComponent', () => {
   let router: Router;
   beforeEach(() => (router = TestBed.inject(Router)));
 
+  let skillRepository: SkillRepository;
+  beforeEach(() => (skillRepository = TestBed.inject(SkillRepository)));
+
+  let resourceSearchFacade: ResourceSearchFacade;
+  beforeEach(
+    () => (resourceSearchFacade = TestBed.inject(ResourceSearchFacade))
+  );
+
   beforeEach(() => {
     fixture = TestBed.createComponent(ResourceSearchFormComponent);
     component = fixture.componentInstance;

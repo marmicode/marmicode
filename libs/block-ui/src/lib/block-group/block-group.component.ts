@@ -10,6 +10,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   BlockGroup,
   BlockType,
+  createBlockGroup,
   createMarkdownBlock,
   parseMarkdown,
 } from '@marmicode/block-core';

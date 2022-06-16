@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { concat, MonoTypeOperatorFunction } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { concat, EMPTY, MonoTypeOperatorFunction } from 'rxjs';
+import { catchError, filter, take, tap } from 'rxjs/operators';
 import { TransferStateAdapter } from './transfer-state-adapter.service';
 
 @Injectable({

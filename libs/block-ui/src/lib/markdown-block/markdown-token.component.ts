@@ -110,7 +110,6 @@ export class MarkdownTokenComponent implements OnChanges {
 
   /* @hack bypass typing as we will dynamically choose the child component. */
   get tokenAsAny() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return this.token as any;
   }
 }

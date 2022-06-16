@@ -4,10 +4,11 @@ import {
   Component,
   Input,
   NgModule,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RxState } from '@rx-angular/state';
+import { map } from 'rxjs/operators';
 
 export interface BasicPageInfo {
   description?: string;

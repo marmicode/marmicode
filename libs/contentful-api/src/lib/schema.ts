@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -47,11 +46,13 @@ export interface Query {
   skillCollection?: Maybe<SkillCollection>;
 }
 
+
 export interface QueryAssetArgs {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface QueryAssetCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -62,11 +63,13 @@ export interface QueryAssetCollectionArgs {
   order?: Maybe<Array<Maybe<AssetOrder>>>;
 }
 
+
 export interface QueryAuthorArgs {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface QueryAuthorCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -77,11 +80,13 @@ export interface QueryAuthorCollectionArgs {
   order?: Maybe<Array<Maybe<AuthorOrder>>>;
 }
 
+
 export interface QueryResourceArgs {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface QueryResourceCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -92,11 +97,13 @@ export interface QueryResourceCollectionArgs {
   order?: Maybe<Array<Maybe<ResourceOrder>>>;
 }
 
+
 export interface QueryTextBlockArgs {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface QueryTextBlockCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -107,11 +114,13 @@ export interface QueryTextBlockCollectionArgs {
   order?: Maybe<Array<Maybe<TextBlockOrder>>>;
 }
 
+
 export interface QueryBlogPostArgs {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface QueryBlogPostCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -122,11 +131,13 @@ export interface QueryBlogPostCollectionArgs {
   order?: Maybe<Array<Maybe<BlogPostOrder>>>;
 }
 
+
 export interface QueryCodeBlockArgs {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface QueryCodeBlockCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -137,11 +148,13 @@ export interface QueryCodeBlockCollectionArgs {
   order?: Maybe<Array<Maybe<CodeBlockOrder>>>;
 }
 
+
 export interface QueryFrameArgs {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface QueryFrameCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -152,11 +165,13 @@ export interface QueryFrameCollectionArgs {
   order?: Maybe<Array<Maybe<FrameOrder>>>;
 }
 
+
 export interface QueryRecipeArgs {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface QueryRecipeCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -167,11 +182,13 @@ export interface QueryRecipeCollectionArgs {
   order?: Maybe<Array<Maybe<RecipeOrder>>>;
 }
 
+
 export interface QueryTopicArgs {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface QueryTopicCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -182,11 +199,13 @@ export interface QueryTopicCollectionArgs {
   order?: Maybe<Array<Maybe<TopicOrder>>>;
 }
 
+
 export interface QuerySkillArgs {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface QuerySkillCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -212,10 +231,12 @@ export interface Asset {
   linkedFrom?: Maybe<AssetLinkingCollections>;
 }
 
+
 /** Represents a binary file in a space. An asset can be any file type. */
 export interface AssetUrlArgs {
   transform?: Maybe<ImageTransformOptions>;
 }
+
 
 /** Represents a binary file in a space. An asset can be any file type. */
 export interface AssetLinkedFromArgs {
@@ -231,6 +252,7 @@ export interface Sys {
   firstPublishedAt?: Maybe<Scalars['DateTime']>;
   publishedVersion?: Maybe<Scalars['Int']>;
 }
+
 
 export interface ImageTransformOptions {
   /** Desired width in pixels. Defaults to the original image width. */
@@ -262,6 +284,8 @@ export interface ImageTransformOptions {
   format?: Maybe<ImageFormat>;
 }
 
+
+
 export enum ImageResizeStrategy {
   /** Resizes the image to fit into the specified dimensions. */
   Fit = 'FIT',
@@ -277,7 +301,7 @@ export enum ImageResizeStrategy {
   /** Crops a part of the original image to fit into the specified dimensions. */
   Crop = 'CROP',
   /** Creates a thumbnail from the image. */
-  Thumb = 'THUMB',
+  Thumb = 'THUMB'
 }
 
 export enum ImageResizeFocus {
@@ -302,8 +326,9 @@ export enum ImageResizeFocus {
   /** Focus the resizing on the largest face. */
   Face = 'FACE',
   /** Focus the resizing on the area containing all the faces. */
-  Faces = 'FACES',
+  Faces = 'FACES'
 }
+
 
 export enum ImageFormat {
   /** JPG image format. */
@@ -323,7 +348,7 @@ export enum ImageFormat {
    */
   Png8 = 'PNG8',
   /** WebP image format. */
-  Webp = 'WEBP',
+  Webp = 'WEBP'
 }
 
 export interface AssetLinkingCollections {
@@ -333,6 +358,7 @@ export interface AssetLinkingCollections {
   resourceCollection?: Maybe<ResourceCollection>;
 }
 
+
 export interface AssetLinkingCollectionsEntryCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
@@ -340,12 +366,14 @@ export interface AssetLinkingCollectionsEntryCollectionArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
+
 export interface AssetLinkingCollectionsAuthorCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface AssetLinkingCollectionsResourceCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -384,21 +412,25 @@ export interface Author extends Entry {
   twitter?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
 export interface AuthorLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
 export interface AuthorNameArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
 export interface AuthorPictureArgs {
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/author) */
 export interface AuthorTwitterArgs {
@@ -411,12 +443,14 @@ export interface AuthorLinkingCollections {
   resourceCollection?: Maybe<ResourceCollection>;
 }
 
+
 export interface AuthorLinkingCollectionsEntryCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface AuthorLinkingCollectionsResourceCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -453,25 +487,30 @@ export interface Resource extends Entry {
   content?: Maybe<ResourceContent>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourceLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourceTitleArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourceSlugArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourceResourceTypeArgs {
   locale?: Maybe<Scalars['String']>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourceAuthorArgs {
@@ -479,15 +518,18 @@ export interface ResourceAuthorArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourceDurationArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourceIsWipArgs {
   locale?: Maybe<Scalars['String']>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourcePictureArgs {
@@ -495,10 +537,12 @@ export interface ResourcePictureArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourceReleasedAtArgs {
   locale?: Maybe<Scalars['String']>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourceRequiredSkillCollectionArgs {
@@ -508,6 +552,7 @@ export interface ResourceRequiredSkillCollectionArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourceSkillCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -516,15 +561,18 @@ export interface ResourceSkillCollectionArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourceSummaryArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourceUrlArgs {
   locale?: Maybe<Scalars['String']>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/resource) */
 export interface ResourceContentArgs {
@@ -536,6 +584,7 @@ export interface ResourceLinkingCollections {
   __typename?: 'ResourceLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
 }
+
 
 export interface ResourceLinkingCollectionsEntryCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -562,20 +611,24 @@ export interface Skill extends Entry {
   topic?: Maybe<Topic>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/skill) */
 export interface SkillLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/skill) */
 export interface SkillLabelArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/skill) */
 export interface SkillSlugArgs {
   locale?: Maybe<Scalars['String']>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/skill) */
 export interface SkillTopicArgs {
@@ -589,12 +642,14 @@ export interface SkillLinkingCollections {
   resourceCollection?: Maybe<ResourceCollection>;
 }
 
+
 export interface SkillLinkingCollectionsEntryCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface SkillLinkingCollectionsResourceCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -612,15 +667,18 @@ export interface Topic extends Entry {
   slug?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/topic) */
 export interface TopicLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/topic) */
 export interface TopicLabelArgs {
   locale?: Maybe<Scalars['String']>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/topic) */
 export interface TopicSlugArgs {
@@ -633,12 +691,14 @@ export interface TopicLinkingCollections {
   skillCollection?: Maybe<SkillCollection>;
 }
 
+
 export interface TopicLinkingCollectionsEntryCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface TopicLinkingCollectionsSkillCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -673,10 +733,12 @@ export interface BlogPost extends Entry {
   text?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/blogPost) */
 export interface BlogPostLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/blogPost) */
 export interface BlogPostTextArgs {
@@ -689,12 +751,14 @@ export interface BlogPostLinkingCollections {
   resourceCollection?: Maybe<ResourceCollection>;
 }
 
+
 export interface BlogPostLinkingCollectionsEntryCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface BlogPostLinkingCollectionsResourceCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -711,10 +775,12 @@ export interface Recipe extends Entry {
   frameCollection?: Maybe<RecipeFrameCollection>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/recipe) */
 export interface RecipeLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/recipe) */
 export interface RecipeFrameCollectionArgs {
@@ -730,12 +796,14 @@ export interface RecipeLinkingCollections {
   resourceCollection?: Maybe<ResourceCollection>;
 }
 
+
 export interface RecipeLinkingCollectionsEntryCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface RecipeLinkingCollectionsResourceCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -763,25 +831,30 @@ export interface Frame extends Entry {
   blockCollection?: Maybe<FrameBlockCollection>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/frame) */
 export interface FrameLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/frame) */
 export interface FrameTitleArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/frame) */
 export interface FrameSlugArgs {
   locale?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/frame) */
 export interface FrameDurationArgs {
   locale?: Maybe<Scalars['String']>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/frame) */
 export interface FrameBlockCollectionArgs {
@@ -797,12 +870,14 @@ export interface FrameLinkingCollections {
   recipeCollection?: Maybe<RecipeCollection>;
 }
 
+
 export interface FrameLinkingCollectionsEntryCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface FrameLinkingCollectionsRecipeCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -838,15 +913,18 @@ export interface CodeBlock extends Entry {
   language?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/codeBlock) */
 export interface CodeBlockLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/codeBlock) */
 export interface CodeBlockCodeArgs {
   locale?: Maybe<Scalars['String']>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/codeBlock) */
 export interface CodeBlockLanguageArgs {
@@ -859,12 +937,14 @@ export interface CodeBlockLinkingCollections {
   frameCollection?: Maybe<FrameCollection>;
 }
 
+
 export interface CodeBlockLinkingCollectionsEntryCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface CodeBlockLinkingCollectionsFrameCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -889,10 +969,12 @@ export interface TextBlock extends Entry {
   text?: Maybe<Scalars['String']>;
 }
 
+
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/textBlock) */
 export interface TextBlockLinkedFromArgs {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 }
+
 
 /** [See type definition](https://app.contentful.com/spaces/gowvxq3b4aid/content_types/textBlock) */
 export interface TextBlockTextArgs {
@@ -905,12 +987,14 @@ export interface TextBlockLinkingCollections {
   frameCollection?: Maybe<FrameCollection>;
 }
 
+
 export interface TextBlockLinkingCollectionsEntryCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 }
+
 
 export interface TextBlockLinkingCollectionsFrameCollectionArgs {
   skip?: Maybe<Scalars['Int']>;
@@ -1038,7 +1122,7 @@ export enum AssetOrder {
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
 export interface AssetCollection {
@@ -1082,7 +1166,7 @@ export enum AuthorOrder {
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
 export interface ResourceFilter {
@@ -1196,7 +1280,7 @@ export enum ResourceOrder {
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
 export interface TextBlockFilter {
@@ -1220,7 +1304,7 @@ export enum TextBlockOrder {
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
 export interface TextBlockCollection {
@@ -1252,7 +1336,7 @@ export enum BlogPostOrder {
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
 export interface BlogPostCollection {
@@ -1293,7 +1377,7 @@ export enum CodeBlockOrder {
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
 export interface CodeBlockCollection {
@@ -1348,7 +1432,7 @@ export enum FrameOrder {
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
 export interface RecipeFilter {
@@ -1366,7 +1450,7 @@ export enum RecipeOrder {
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
 export interface TopicFilter {
@@ -1401,7 +1485,7 @@ export enum TopicOrder {
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
 export interface TopicCollection {
@@ -1466,5 +1550,5 @@ export enum SkillOrder {
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }

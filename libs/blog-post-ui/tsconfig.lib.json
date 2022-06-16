@@ -7,7 +7,10 @@
     "declarationMap": true,
     "inlineSources": true,
     "types": [],
-    "lib": ["dom", "es2018"]
+    "lib": [
+      "dom",
+      "es2018"
+    ]
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
@@ -17,9 +20,10 @@
   "exclude": [
     "src/test-setup.ts",
     "**/*.spec.ts",
-    "**/*.test.ts",
     "**/*.stories.ts",
     "**/*.stories.js"
   ],
-  "include": ["**/*.ts"]
+  "include": [
+    "**/*.ts"
+  ]
 }

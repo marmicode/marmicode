@@ -184,7 +184,6 @@ export class RecipeFramePageComponent {
         this.swipeLeft$
       ).pipe(
         withLatestFrom(this.nextFrameRoute$),
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         switchMap(([_, route]) => this._tryNavigateToRelativeRoute(route))
       )
     );
@@ -198,7 +197,6 @@ export class RecipeFramePageComponent {
         this.swipeRight$
       ).pipe(
         withLatestFrom(this.previousFrameRoute$),
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         switchMap(([_, route]) => this._tryNavigateToRelativeRoute(route))
       )
     );

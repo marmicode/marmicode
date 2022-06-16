@@ -1,4 +1,5 @@
 import { BlockType, createBlockGroup } from '@marmicode/block-core';
+
 import { Meta } from '@storybook/angular';
 import { BlockGroupComponent, BlockGroupModule } from './block-group.component';
 
@@ -34,7 +35,7 @@ curl http://localhost:8080/farms -d"name=springfield"
 # Create a farm with invalid data.
 curl http://localhost:8080/farms
     -H "Content-Type: application/json"
-    -d \\'{"name": 123, "random": "data"}\\'
+    -d \'{"name": 123, "random": "data"}\'
   
 blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla`,
             language: 'shell',
@@ -73,7 +74,7 @@ curl http://localhost:8080/farms -d"name=springfield"
 # Create a farm with invalid data.
 curl http://localhost:8080/farms
     -H "Content-Type: application/json"
-    -d \\'{"name": 123, "random": "data"}\\'`,
+    -d \'{"name": 123, "random": "data"}\'`,
             language: 'shell',
           },
         ],

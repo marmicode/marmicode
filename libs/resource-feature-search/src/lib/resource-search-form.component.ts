@@ -53,8 +53,7 @@ export class ResourceSearchFormComponent {
     private _resourceSearchFacade: ResourceSearchFacade,
     private _router: Router,
     private _skillRepository: SkillRepository,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    private _state: RxState<any>
+    private _state: RxState<{}>
   ) {
     this.filteredSkills$ = combineLatest([
       this.allSkills$,

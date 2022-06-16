@@ -141,7 +141,6 @@ export class ResourceRepository {
         slug: item.slug,
         summary: item.summary,
         title: item.title,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         type: item.resourceType as any,
         url: item.url,
       })

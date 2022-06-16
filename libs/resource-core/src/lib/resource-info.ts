@@ -1,4 +1,4 @@
-import { ResourceType } from './resource-type';
+import { ResourceType } from '@marmicode/resource-core';
 
 export interface Author {
   name: string;

@@ -1,7 +1,11 @@
 import { TestScheduler } from 'rxjs/testing';
 import { getTestScheduler } from '../testing/get-test-scheduler';
 import {
-  dematerializeData, dematerializeError, MaterializedNotification, materializeError
+  dematerializeData,
+  MaterializedNotificationType,
+  dematerializeError,
+  materializeError,
+  MaterializedNotification,
 } from './materialize-error';
 
 describe('materializeError', () => {
@@ -36,10 +40,9 @@ describe('materializeError', () => {
       expectSubscriptions(data$.subscriptions).toBe(expectedSub);
       expectObservable(result$).toBe(expectedObs, {
         a: { type: 'next', value: 'a' } as MaterializedNotification<string>,
-        e: {
-          type: 'error',
-          error: 'error',
-        } as MaterializedNotification<string>,
+        e: { type: 'error', error: 'error' } as MaterializedNotification<
+          string
+        >,
       });
     });
   });
@@ -48,10 +51,9 @@ describe('materializeError', () => {
     scheduler.run(({ cold, expectObservable, expectSubscriptions }) => {
       const data$ = cold('    --a-(e|)', {
         a: { type: 'next', value: 'a' } as MaterializedNotification<string>,
-        e: {
-          type: 'error',
-          error: 'error',
-        } as MaterializedNotification<string>,
+        e: { type: 'error', error: 'error' } as MaterializedNotification<
+          string
+        >,
       });
       const expectedSub = '   ^---!';
       const expectedObs = '   --a-|';
@@ -67,10 +69,9 @@ describe('materializeError', () => {
     scheduler.run(({ cold, expectObservable, expectSubscriptions }) => {
       const data$ = cold('    --a-(e|)', {
         a: { type: 'next', value: 'a' } as MaterializedNotification<string>,
-        e: {
-          type: 'error',
-          error: 'error',
-        } as MaterializedNotification<string>,
+        e: { type: 'error', error: 'error' } as MaterializedNotification<
+          string
+        >,
       });
       const expectedSub = '   ^---!';
       const expectedObs = '   ----(e|)';

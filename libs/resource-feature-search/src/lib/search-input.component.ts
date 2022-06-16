@@ -131,7 +131,6 @@ export class SearchInputComponent {
     this._state.hold(
       this.reset$.pipe(
         withLatestFrom(this.control$),
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         tap(([_, control]) => control.reset())
       )
     );

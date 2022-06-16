@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  Component, NgModule
+  Component,
+  Input,
+  NgModule,
 } from '@angular/core';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare let require: any;
+declare var require: any;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,7 +45,6 @@ declare let require: any;
   ],
 })
 export class ErrorComponent {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   pictureUri = require('!!file-loader!./error.gif').default;
 }
 

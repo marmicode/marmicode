@@ -9,8 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { WorkshopsButtonModule } from './workshops-button.component';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare let require: any;
+declare var require: any;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -69,7 +68,6 @@ declare let require: any;
 export class BannerComponent {
   @HostBinding('style.backgroundImage')
   backgroundImage = `url(${
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     require('!!file-loader!./banner-wide-1024.jpg').default
   })`;
 }

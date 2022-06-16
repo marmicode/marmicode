@@ -157,7 +157,6 @@ export class TreeComponent implements OnInit {
                     events: {
                       hit: (event: Event) =>
                         console.log(
-                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
                           ((event.target as any).dataItem as DataItem)
                             .dataContext
                         ),

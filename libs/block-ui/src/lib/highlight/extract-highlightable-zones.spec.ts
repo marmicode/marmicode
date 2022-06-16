@@ -1,4 +1,9 @@
-import { Block, BlockType, parseMarkdown } from '@marmicode/block-core';
+import {
+  Block,
+  BlockType,
+  createBlockGroup,
+  parseMarkdown,
+} from '@marmicode/block-core';
 import { extractHighlightableZones } from './extract-highlightable-zones';
 
 describe('extractHighlightableZones', () => {
@@ -6,8 +11,7 @@ describe('extractHighlightableZones', () => {
     const blocks: Block[] = [
       {
         type: BlockType.Markdown,
-        tokens:
-          parseMarkdown(`Before setting up request validation, we can see that:
+        tokens: parseMarkdown(`Before setting up request validation, we can see that:
 - [the farm detail \`GET /farms/{farmId}\` route is accessible](highlight://2) even though it's not defined in the OpenAPI Specification,
 - [we can send data in any format](highlight://5) and not only \`application/json\` as described in the OpenAPI Specification,
 - [we can send any data](highlight://5,8-10) when creating a farm using the \`POST /farms\` route.
@@ -24,7 +28,7 @@ curl http://localhost:8080/farms -d"name=springfield"
 # Create a farm with invalid data.
 curl http://localhost:8080/farms
     -H "Content-Type: application/json"
-    -d \\'{"name": 123, "random": "data"}\\'`,
+    -d \'{"name": 123, "random": "data"}\'`,
         language: 'shell',
       },
     ];
