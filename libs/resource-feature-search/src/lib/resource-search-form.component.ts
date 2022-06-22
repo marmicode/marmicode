@@ -43,7 +43,7 @@ import {
   providers: [RxState],
 })
 export class ResourceSearchFormComponent {
-  skillControl = new FormControl<string>();
+  skillControl = new FormControl<Skill | string>(null);
   allSkills$ = this._skillRepository
     .getSkills()
     .pipe(shareReplay({ refCount: true, bufferSize: 1 }));
@@ -88,8 +88,12 @@ export class ResourceSearchFormComponent {
       })
     );
 
-    const navigateToSkill$ = this.skillControl.valueChanges.pipe(
-      filter((value) => typeof value !== 'string'),
+    /* @hack forcing type because `filter` doesn't infer type properly. */
+    const skillChanges$ = this.skillControl.valueChanges.pipe(
+      filter((value) => typeof value !== 'string')
+    ) as Observable<Skill>;
+
+    const navigateToSkill$ = skillChanges$.pipe(
       withLatestFrom(this._resourceSearchFacade.selectedSkillSlug$),
       filter(([skill, selectedSkillSlug]) => {
         selectedSkillSlug =

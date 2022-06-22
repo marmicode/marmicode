@@ -1,3 +1,4 @@
+import { Skill } from './skill';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -108,7 +109,7 @@ export interface SearchInputOption {
   ],
 })
 export class SearchInputComponent {
-  @Input() set control(control: FormControl<string>) {
+  @Input() set control(control: FormControl<Skill | string>) {
     this._state.set({ control });
   }
   @Input() placeholder: string;
@@ -120,7 +121,7 @@ export class SearchInputComponent {
 
   getOptionLabel = (option: SearchInputOption) => option?.label;
 
-  constructor(private _state: RxState<{ control: FormControl<string> }>) {
+  constructor(private _state: RxState<{ control: FormControl<Skill | string> }>) {
     this.value$ = this.control$.pipe(
       switchMap((control) => control.valueChanges),
       /* Filter duplicates. */
