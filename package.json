@@ -26,7 +26,7 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "prerender": "./tools/prerender.sh",
-    "build-github-workflows": "ts-node tools/build-github-workflows/src/main.ts",
+    "build-github-workflows": "ts-node -P tools/build-github-workflows/tsconfig.lib.json tools/build-github-workflows/src/main.ts",
     "deploy:next": "./tools/deploy.sh marmicode-next",
     "deploy:prod": "./tools/deploy.sh marmicode",
     "e2e-all": "percy exec nx run-many --all --target=e2e",
