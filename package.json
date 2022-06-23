@@ -74,6 +74,7 @@
     "@scullyio/init": "^1.0.0-beta.0",
     "@scullyio/ng-lib": "^1.0.0-beta.0",
     "@scullyio/scully": "^1.0.0-beta.0",
+    "@storybook/core-server": "~6.4.12",
     "apollo-angular": "^2.0.3",
     "axios": "^0.19.2",
     "document-register-element": "^1.7.2",
@@ -86,8 +87,7 @@
     "prismjs": "^1.20.0",
     "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
-    "zone.js": "0.11.5",
-    "@storybook/core-server": "~6.4.12"
+    "zone.js": "0.11.5"
   },
   "devDependencies": {
     "@angular-devkit/architect": "0.1400.1",
@@ -98,12 +98,14 @@
     "@angular/cli": "~14.0.0",
     "@angular/compiler-cli": "14.0.1",
     "@angular/language-service": "14.0.1",
+    "@cypress/webpack-batteries-included-preprocessor": "^2.2.3",
+    "@cypress/webpack-preprocessor": "^5.12.0",
     "@graphql-cli/codegen": "^1.17.4",
     "@graphql-codegen/schema-ast": "^1.17.4",
     "@graphql-codegen/typescript": "^1.17.4",
-    "@jscutlery/cypress-angular-preprocessor": "^0.4.3",
-    "@jscutlery/cypress-harness": "^0.2.0",
-    "@jscutlery/cypress-mount": "^0.8.0",
+    "@jscutlery/cypress-angular-preprocessor": "^0.5.0",
+    "@jscutlery/cypress-harness": "^0.3.11",
+    "@jscutlery/cypress-mount": "^0.12.4",
     "@ngrx/schematics": "13.2.0",
     "@ngrx/store-devtools": "13.2.0",
     "@nguniversal/builders": "^10.0.1",
@@ -130,7 +132,7 @@
     "@types/webpack": "4.41.21",
     "@typescript-eslint/eslint-plugin": "4.31.2",
     "@typescript-eslint/parser": "4.31.2",
-    "cypress": "^6.4.0",
+    "cypress": "^9.0.0",
     "cypress-pipe": "^2.0.0",
     "dotenv": "10.0.0",
     "eslint": "7.22.0",
@@ -146,11 +148,15 @@
     "jest-preset-angular": "11.1.2",
     "js-yaml": "^4.0.0",
     "json": "^10.0.0",
+    "nx": "14.2.4",
     "open": "^7.0.3",
     "prettier": "2.6.2",
     "ts-jest": "27.1.4",
     "ts-node": "10.8.1",
-    "typescript": "4.7.3",
-    "nx": "14.2.4"
+    "typescript": "4.7.3"
+  },
+  "resolutions": {
+    "webpack": "^5.0.0",
+    "webpack-virtual-modules": "^0.4.3"
   }
 }

@@ -9,6 +9,5 @@
   "videosFolder": "../../dist/cypress/apps/blog-post-ui-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/apps/blog-post-ui-e2e/screenshots",
   "chromeWebSecurity": false,
-  "componentFolder": "./src/components",
-  "experimentalComponentTesting": true
+  "componentFolder": "./src/components"
 }
