@@ -43,3 +43,4 @@ Thumbs.db
 /scully.log
 
 /.yarn-cache
+/.yarn/cache
