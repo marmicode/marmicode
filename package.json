@@ -116,6 +116,7 @@
     "@nrwl/nx-cloud": "14.2.0",
     "@nrwl/storybook": "14.4.3",
     "@nrwl/workspace": "14.4.3",
+    "@percy/cli": "^1.6.1",
     "@percy/cypress": "^2.3.2",
     "@percy/poller": "^0.1.0",
     "@storybook/addon-essentials": "6.5.9",
