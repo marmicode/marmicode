@@ -4,7 +4,8 @@ on:
   repository_dispatch:
     types: [contentful-publish]
   pull_request: {}
-  push: {}
+  push:
+    branches: [main]
   # Allow manual trigger.
   workflow_dispatch: {}
 
