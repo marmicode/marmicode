@@ -5,7 +5,6 @@ name: Test & Deploy
   repository_dispatch:
     types:
       - contentful-publish
-  pull_request: {}
   push: {}
   workflow_dispatch: {}
 env:
