@@ -28,14 +28,6 @@
       }
     }
   },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
-  },
   "cli": {
     "defaultCollection": "@nrwl/angular"
   },
@@ -50,6 +42,11 @@
     },
     "@nrwl/angular:component": {
       "style": "css"
+    }
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"]
     }
   }
 }
