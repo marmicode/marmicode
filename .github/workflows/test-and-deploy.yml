@@ -26,10 +26,12 @@ jobs:
           node-version: 14.x
       - uses: actions/cache@v2
         with:
-          path: .yarn-cache
+          path: |
+            .yarn-cache
+            node_modules/.cache/cypress
           key: yarn-cache
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Increase file watchers to avoid storybook warnings
         run: >-
           echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
@@ -74,10 +76,12 @@ jobs:
           node-version: 14.x
       - uses: actions/cache@v2
         with:
-          path: .yarn-cache
+          path: |
+            .yarn-cache
+            node_modules/.cache/cypress
           key: yarn-cache
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Lint
         run: yarn affected:lint --base=deployed/marmicode-next
       - name: Notify on failure
@@ -97,10 +101,12 @@ jobs:
           node-version: 14.x
       - uses: actions/cache@v2
         with:
-          path: .yarn-cache
+          path: |
+            .yarn-cache
+            node_modules/.cache/cypress
           key: yarn-cache
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Test
         run: yarn affected:test --base=deployed/marmicode-next
       - name: Notify on failure
@@ -129,10 +135,12 @@ jobs:
           node-version: 14.x
       - uses: actions/cache@v2
         with:
-          path: .yarn-cache
+          path: |
+            .yarn-cache
+            node_modules/.cache/cypress
           key: yarn-cache
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
@@ -178,10 +186,12 @@ jobs:
           node-version: 14.x
       - uses: actions/cache@v2
         with:
-          path: .yarn-cache
+          path: |
+            .yarn-cache
+            node_modules/.cache/cypress
           key: yarn-cache
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

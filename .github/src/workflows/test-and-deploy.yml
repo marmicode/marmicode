@@ -9,10 +9,12 @@ on:
   workflow_dispatch: {}
 
 x-steps:
-  cache-yarn-cache: &cache-yarn-cache
+  cache: &cache
     uses: actions/cache@v2
     with:
-      path: .yarn-cache
+      path: |
+        .yarn-cache
+        node_modules/.cache/cypress
       key: yarn-cache
 
   checkout: &checkout
@@ -53,7 +55,7 @@ x-steps:
 
   yarn-install: &yarn-install
     name: Install
-    run: yarn install --frozen-lockfile
+    run: yarn install --immutable
 
 env:
   CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
@@ -70,7 +72,7 @@ jobs:
     steps:
       - *checkout
       - *setup-node
-      - *cache-yarn-cache
+      - *cache
       - *yarn-install
       - name: Increase file watchers to avoid storybook warnings
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
@@ -98,7 +100,7 @@ jobs:
     steps:
       - *checkout
       - *setup-node
-      - *cache-yarn-cache
+      - *cache
       - *yarn-install
       - name: Lint
         run: yarn affected:lint --base=deployed/marmicode-next
@@ -109,7 +111,7 @@ jobs:
     steps:
       - *checkout
       - *setup-node
-      - *cache-yarn-cache
+      - *cache
       - *yarn-install
       - name: Test
         run: yarn affected:test --base=deployed/marmicode-next
@@ -129,7 +131,7 @@ jobs:
     steps:
       - *checkout
       - *setup-node
-      - *cache-yarn-cache
+      - *cache
       - *yarn-install
       - name: Deploy
         env:
@@ -155,7 +157,7 @@ jobs:
     steps:
       - *checkout
       - *setup-node
-      - *cache-yarn-cache
+      - *cache
       - *yarn-install
       - name: Deploy
         env:
