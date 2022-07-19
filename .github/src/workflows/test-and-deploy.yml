@@ -15,7 +15,7 @@ x-steps:
     with:
       path: |
         .yarn-cache
-        node_modules/.cache/cypress
+        node_modules
       key: yarn-cache
 
   checkout: &checkout
