@@ -10,11 +10,11 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
-    "e2e": "percy exec ng e2e",
+    "e2e": "ng e2e",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
-    "affected:e2e": "percy exec nx affected:e2e",
+    "affected:e2e": "nx affected:e2e",
     "affected:test": "nx affected:test",
     "affected:lint": "nx affected:lint",
     "affected:dep-graph": "nx affected:dep-graph",
@@ -29,7 +29,6 @@
     "build-github-workflows": "ts-node -P tools/build-github-workflows/tsconfig.lib.json tools/build-github-workflows/src/main.ts",
     "deploy:next": "./tools/deploy.sh marmicode-next",
     "deploy:prod": "./tools/deploy.sh marmicode",
-    "e2e-all": "percy exec nx run-many --all --target=e2e",
     "graphql-codegen": "graphql codegen",
     "percy-review-approved": "./tools/percy-review-approved.sh",
     "test:watch": "nx affected:test --watch --all --parallel --maxParallel 100",
@@ -117,9 +116,6 @@
     "@nrwl/nx-cloud": "14.2.0",
     "@nrwl/storybook": "14.4.3",
     "@nrwl/workspace": "14.4.3",
-    "@percy/cli": "^1.6.1",
-    "@percy/cypress": "^2.3.2",
-    "@percy/poller": "^0.1.0",
     "@storybook/addon-essentials": "6.5.9",
     "@storybook/addon-knobs": "~6.3.0",
     "@storybook/angular": "6.5.9",
@@ -158,7 +154,6 @@
     "typescript": "4.7.3"
   },
   "resolutions": {
-    "@percy/agent": "~0.27.0",
     "webpack": "^5.0.0",
     "webpack-virtual-modules": "^0.4.3"
   }
