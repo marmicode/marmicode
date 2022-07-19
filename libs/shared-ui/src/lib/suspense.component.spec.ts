@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { LetModule } from '@rx-angular/template';
 import { NEVER, of, throwError } from 'rxjs';
-import { SuspenseComponent, SuspenseModule } from './suspense.component';
+import { SuspenseComponent } from './suspense.component';
 
 describe('SuspenseComponent', () => {
   beforeEach(() => jest.spyOn(console, 'error'));
