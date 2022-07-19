@@ -138,8 +138,8 @@ export class RecipeFramePageComponent {
     )
   );
 
-  swipeLeft$ = new Subject();
-  swipeRight$ = new Subject();
+  swipeLeft$ = new Subject<void>();
+  swipeRight$ = new Subject<void>();
 
   /**
    * Stream of pressed keys.

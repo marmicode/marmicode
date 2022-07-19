@@ -117,7 +117,7 @@ export class SearchInputComponent {
 
   control$ = this._state.select('control');
   value$: Observable<string | SearchInputOption>;
-  reset$ = new Subject();
+  reset$ = new Subject<void>();
 
   getOptionLabel = (option: SearchInputOption) => option?.label;
 

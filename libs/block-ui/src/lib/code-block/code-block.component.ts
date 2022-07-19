@@ -100,7 +100,7 @@ export class CodeBlockComponent implements AfterViewChecked {
   readonly verticalPadding = 10;
 
   private _block$ = this._state.select('block');
-  private _viewChecked$ = new Subject();
+  private _viewChecked$ = new Subject<void>();
 
   constructor(
     private _state: RxState<{
