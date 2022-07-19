@@ -8,8 +8,15 @@ import {
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SwUpdate } from '@angular/service-worker';
 import { createEffect } from '@ngrx/effects';
-import { defer, EMPTY, timer } from 'rxjs';
-import { exhaustMap, first, switchMap } from 'rxjs/operators';
+import {
+  defer,
+  EMPTY,
+  exhaustMap,
+  filter,
+  first,
+  switchMap,
+  timer,
+} from 'rxjs';
 import { UpdateDialogComponent } from './update-dialog.component';
 
 @Injectable({
@@ -34,10 +41,12 @@ export class UpdateEffects {
 
   update$ = createEffect(
     () =>
-      this._swUpdate.available.pipe(
-        /* Retry every 30s. */
-        /* repeatWhen(() => interval(30000)) would have been shorter
-         * but it didn't play well with fakeAsync. */
+      this._swUpdate.versionUpdates.pipe(
+        filter((update) => update.type === 'VERSION_READY'),
+        /* Keep prompting user every 30s.
+         * Otherwise, we might have some trouble if user keeps using an old version.
+         * Even though `checkForUpdate` is triggered every 30s, it will probably
+         * trigger `versionUpdates` only once. */
         switchMap(() => timer(0, 30000)),
         /* Wait for dialog to be close to avoid opening multiple dialogs. */
         exhaustMap(() =>
