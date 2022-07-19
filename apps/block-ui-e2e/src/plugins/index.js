@@ -1,1 +1,3 @@
-module.exports = require('../../../cypress-plugins');
+module.exports = (on, config) => {
+  return config;
+};

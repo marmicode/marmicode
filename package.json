@@ -68,6 +68,7 @@
     "@ngrx/store": "14.0.2",
     "@nguniversal/express-engine": "^10.0.1",
     "@nrwl/angular": "14.4.3",
+    "@percy/cypress": "^3.1.2",
     "@rx-angular/cdk": "^1.0.0-beta.3",
     "@rx-angular/state": "^1.6.1",
     "@rx-angular/template": "^1.0.0-beta.33",
