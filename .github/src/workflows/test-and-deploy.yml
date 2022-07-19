@@ -92,7 +92,9 @@ jobs:
         run: npx @percy/cli exec -- $(npm bin)/nx run-many --all --target=e2e --base=deployed/marmicode-next --browser=chrome
       - name: Check Percy Review
         if: steps.should-run-e2e.outputs.should-run-e2e != false
-        run: PERCY_TOKEN=$PERCY_FULL_TOKEN npx @percy/cli build:wait --project marmicode/marmicode --commit "$(git rev-parse HEAD)" --fail-on-changes
+        run: |
+          echo npx @percy/cli build:wait --project marmicode/marmicode --commit "$(git rev-parse HEAD)" --fail-on-changes
+          PERCY_TOKEN=$PERCY_FULL_TOKEN npx @percy/cli build:wait --project marmicode/marmicode --commit "$(git rev-parse HEAD)" --fail-on-changes
       - *upload-dist-on-failure
       - *slack-notify-failure
 
