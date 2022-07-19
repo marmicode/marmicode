@@ -56,7 +56,7 @@ jobs:
         if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: >-
           PERCY_TOKEN=$PERCY_FULL_TOKEN npx @percy/cli build:wait --project
-          marmicode/marmicode --commit "$(git rev-parse HEAD) --fail-on-changes"
+          marmicode/marmicode --commit "$(git rev-parse HEAD)" --fail-on-changes
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
