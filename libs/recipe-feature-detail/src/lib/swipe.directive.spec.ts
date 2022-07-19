@@ -1,7 +1,7 @@
 import { Component, DebugElement, EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { SwipeDirective, SwipeModule } from './swipe.directive';
+import { SwipeModule } from './swipe.directive';
 
 @Component({
   template: `
@@ -26,7 +26,6 @@ export class SwipeTestComponent {
 describe('SwipeDirective', () => {
   let component: SwipeTestComponent;
   let fixture: ComponentFixture<SwipeTestComponent>;
-  let containerEl: DebugElement;
   let contentEl: DebugElement;
 
   beforeEach(async () => {
@@ -40,7 +39,6 @@ describe('SwipeDirective', () => {
     fixture = TestBed.createComponent(SwipeTestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    containerEl = fixture.debugElement.query(By.css('[data-role=container]'));
     contentEl = fixture.debugElement.query(By.css('[data-role=content]'));
   });
 

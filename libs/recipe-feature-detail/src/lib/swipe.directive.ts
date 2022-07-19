@@ -17,7 +17,6 @@ import {
   mapTo,
   switchMap,
   takeUntil,
-  tap,
   withLatestFrom,
 } from 'rxjs/operators';
 
@@ -64,6 +63,7 @@ export class SwipeDirective implements OnInit {
 
     const swipeDistance$ = touchend$.pipe(
       withLatestFrom(this._position$),
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       map(([_, position]) => position),
       filter((position) => Math.abs(position) > 150)
     );
