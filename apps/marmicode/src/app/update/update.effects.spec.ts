@@ -1,5 +1,5 @@
 import { ApplicationRef } from '@angular/core';
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import {
   MatDialog,
   MatDialogModule,
@@ -7,40 +7,42 @@ import {
 } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
+import { createObserver } from '@marmicode/testing';
 import { of, Subject } from 'rxjs';
 import { UpdateDialogComponent } from './update-dialog.component';
 import { UpdateEffects } from './update.effects';
 
 jest.mock('@angular/material/dialog');
 
+jest.useFakeTimers();
+
 describe('UpdateEffects', () => {
-  it('should check for updates every 30s', fakeAsync(() => {
-    const { mockSwUpdate, unsubscribe } = setUpCheckForUpdate();
+  const { observe } = createObserver();
 
-    tick();
+  it('should check for updates every 30s', () => {
+    const { mockSwUpdate } = setUpCheckForUpdate();
 
-    expect(mockSwUpdate.checkForUpdate).toBeCalledTimes(1);
-
-    tick(29999);
+    jest.advanceTimersToNextTimer();
 
     expect(mockSwUpdate.checkForUpdate).toBeCalledTimes(1);
 
-    tick(30000);
+    jest.advanceTimersByTime(29999);
+
+    expect(mockSwUpdate.checkForUpdate).toBeCalledTimes(1);
+
+    jest.advanceTimersByTime(30000);
 
     expect(mockSwUpdate.checkForUpdate).toBeCalledTimes(2);
+  });
 
-    unsubscribe();
-  }));
-
-  it('should prompt user for reload', fakeAsync(() => {
-    const { mockDialog, mockSwUpdate, triggerUpdateAvailable, unsubscribe } =
-      setUpUpdate();
+  it('should prompt user for reload', () => {
+    const { mockDialog, mockSwUpdate, triggerUpdateAvailable } = setUpUpdate();
 
     expect(mockDialog.open).not.toBeCalled();
 
     triggerUpdateAvailable();
 
-    tick();
+    jest.advanceTimersToNextTimer();
 
     /* Check prompt is called. */
     expect(mockDialog.open).toBeCalledTimes(1);
@@ -48,55 +50,43 @@ describe('UpdateEffects', () => {
       backdropClass: 'mc-overlay-backdrop',
     });
     expect(mockSwUpdate.activateUpdate).not.toBeCalled();
+  });
 
-    unsubscribe();
-  }));
-
-  it('should reprompt user after 30s', fakeAsync(() => {
-    const { closeDialog, mockDialog, triggerUpdateAvailable, unsubscribe } =
-      setUpUpdate();
+  it('should reprompt user after 30s', () => {
+    const { closeDialog, mockDialog, triggerUpdateAvailable } = setUpUpdate();
 
     triggerUpdateAvailable();
 
-    tick(29999);
+    jest.advanceTimersByTime(29999);
 
     closeDialog();
 
-    tick(30000);
+    jest.advanceTimersByTime(30000);
 
     expect(mockDialog.open).toBeCalledTimes(2);
+  });
 
-    unsubscribe();
-  }));
-
-  it(`shouldn't reprompt user after 30s if dialog is still open`, fakeAsync(() => {
-    const { mockDialog, triggerUpdateAvailable, unsubscribe } = setUpUpdate();
+  it(`shouldn't reprompt user after 30s if dialog is still open`, () => {
+    const { mockDialog, triggerUpdateAvailable } = setUpUpdate();
 
     triggerUpdateAvailable();
 
-    tick(29999);
+    jest.advanceTimersByTime(29999);
 
     expect(mockDialog.open).toBeCalledTimes(1);
 
-    tick(30000);
+    jest.advanceTimersByTime(30000);
 
     expect(mockDialog.open).toBeCalledTimes(1);
-
-    unsubscribe();
-  }));
+  });
 
   /**
    * Use this to test the UpdateEffects.checkForUpdate effect.
    */
   function setUpCheckForUpdate() {
     const utils = setUp();
-    const subscription = utils.updateEffects.checkForUpdate$.subscribe();
-    return {
-      ...utils,
-      unsubscribe() {
-        subscription.unsubscribe();
-      },
-    };
+    observe(utils.updateEffects.checkForUpdate$);
+    return utils;
   }
 
   /**
@@ -104,13 +94,8 @@ describe('UpdateEffects', () => {
    */
   function setUpUpdate() {
     const utils = setUp();
-    const subscription = utils.updateEffects.update$.subscribe();
-    return {
-      ...utils,
-      unsubscribe() {
-        subscription.unsubscribe();
-      },
-    };
+    observe(utils.updateEffects.update$);
+    return utils;
   }
 
   /* Set up effects service. */
