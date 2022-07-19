@@ -49,7 +49,7 @@ jobs:
         if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: >-
           $(npm bin)/percy exec -- $(npm bin)/nx run-many --all --target=e2e
-          --base=deployed/marmicode-next --headless --browser=chrome
+          --base=deployed/marmicode-next --browser=chrome
       - name: Check Percy Review
         if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: yarn percy-review-approved
