@@ -7114,6 +7114,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nrwl/nx-cloud@npm:latest":
+  version: 14.2.0
+  resolution: "@nrwl/nx-cloud@npm:14.2.0"
+  dependencies:
+    axios: ^0.21.1
+    chalk: 4.1.0
+    node-machine-id: ^1.1.12
+    strip-json-comments: ^3.1.1
+    tar: 6.1.11
+  bin:
+    nx-cloud: bin/nx-cloud.js
+  checksum: 124803ff2dc2c78073b2a2d77e918bbf5018acba8211f490a4dee0d0dcd16fb30b09a65372c47f3ce8b41ce0e343c55a47c7ef84400fc141f76c1bea7c0681e8
+  languageName: node
+  linkType: hard
+
 "@nrwl/storybook@npm:14.4.3":
   version: 14.4.3
   resolution: "@nrwl/storybook@npm:14.4.3"
@@ -11666,6 +11681,15 @@ __metadata:
   dependencies:
     follow-redirects: ^1.10.0
   checksum: aee664d2811822ff64edc94fae328a15d82f0a8a8ca02a17931cb3348b03cd1574314aaf8f895d9949f045238df40491c7315de893649e06abc213a71b3963fa
+  languageName: node
+  linkType: hard
+
+"axios@npm:^0.21.1":
+  version: 0.21.4
+  resolution: "axios@npm:0.21.4"
+  dependencies:
+    follow-redirects: ^1.14.0
+  checksum: 44245f24ac971e7458f3120c92f9d66d1fc695e8b97019139de5b0cc65d9b8104647db01e5f46917728edfc0cfd88eb30fc4c55e6053eef4ace76768ce95ff3c
   languageName: node
   linkType: hard
 
@@ -18194,6 +18218,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"follow-redirects@npm:^1.14.0":
+  version: 1.15.1
+  resolution: "follow-redirects@npm:1.15.1"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: 6aa4e3e3cdfa3b9314801a1cd192ba756a53479d9d8cca65bf4db3a3e8834e62139245cd2f9566147c8dfe2efff1700d3e6aefd103de4004a7b99985e71dd533
+  languageName: node
+  linkType: hard
+
 "fontkit@npm:^1.8.0":
   version: 1.8.1
   resolution: "fontkit@npm:1.8.1"
@@ -24306,6 +24340,7 @@ __metadata:
     "@nrwl/eslint-plugin-nx": 14.4.3
     "@nrwl/jest": 14.4.3
     "@nrwl/node": 14.4.3
+    "@nrwl/nx-cloud": latest
     "@nrwl/storybook": 14.4.3
     "@nrwl/workspace": 14.4.3
     "@percy/cypress": ^2.3.2
@@ -25491,6 +25526,13 @@ __metadata:
   version: 0.4.0
   resolution: "node-int64@npm:0.4.0"
   checksum: d0b30b1ee6d961851c60d5eaa745d30b5c95d94bc0e74b81e5292f7c42a49e3af87f1eb9e89f59456f80645d679202537de751b7d72e9e40ceea40c5e449057e
+  languageName: node
+  linkType: hard
+
+"node-machine-id@npm:^1.1.12":
+  version: 1.1.12
+  resolution: "node-machine-id@npm:1.1.12"
+  checksum: e23088a0fb4a77a1d6484b7f09a22992fd3e0054d4f2e427692b4c7081e6cf30118ba07b6113b6c89f1ce46fd26ec5ab1d76dcaf6c10317717889124511283a5
   languageName: node
   linkType: hard
 
@@ -32765,6 +32807,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tar@npm:6.1.11, tar@npm:^6.1.11, tar@npm:^6.1.2":
+  version: 6.1.11
+  resolution: "tar@npm:6.1.11"
+  dependencies:
+    chownr: ^2.0.0
+    fs-minipass: ^2.0.0
+    minipass: ^3.0.0
+    minizlib: ^2.1.1
+    mkdirp: ^1.0.3
+    yallist: ^4.0.0
+  checksum: a04c07bb9e2d8f46776517d4618f2406fb977a74d914ad98b264fc3db0fe8224da5bec11e5f8902c5b9bcb8ace22d95fbe3c7b36b8593b7dfc8391a25898f32f
+  languageName: node
+  linkType: hard
+
 "tar@npm:^4.3.0, tar@npm:^4.4.8":
   version: 4.4.13
   resolution: "tar@npm:4.4.13"
@@ -32791,20 +32847,6 @@ __metadata:
     mkdirp: ^1.0.3
     yallist: ^4.0.0
   checksum: f98df3f87d537dd2a9734c01095ce763d873c1946dcdef181b0383a17449ff402ff3baa9e7d8860bc87359e4cbfa4ae2945da27520d01f58244aaf1bf49f9070
-  languageName: node
-  linkType: hard
-
-"tar@npm:^6.1.11, tar@npm:^6.1.2":
-  version: 6.1.11
-  resolution: "tar@npm:6.1.11"
-  dependencies:
-    chownr: ^2.0.0
-    fs-minipass: ^2.0.0
-    minipass: ^3.0.0
-    minizlib: ^2.1.1
-    mkdirp: ^1.0.3
-    yallist: ^4.0.0
-  checksum: a04c07bb9e2d8f46776517d4618f2406fb977a74d914ad98b264fc3db0fe8224da5bec11e5f8902c5b9bcb8ace22d95fbe3c7b36b8593b7dfc8391a25898f32f
   languageName: node
   linkType: hard
 
