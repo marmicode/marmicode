@@ -1,5 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { LetModule } from '@rx-angular/template';
 import { NEVER, of, throwError } from 'rxjs';
 import { SuspenseComponent } from './suspense.component';
@@ -52,20 +53,18 @@ describe('SuspenseComponent', () => {
 
     const fixture = await render(TestedComponent);
 
-    expect(
-      fixture.debugElement.nativeElement.querySelector('mc-loading')
-    ).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('mc-loading'))).toBeTruthy();
   });
 
   it('should show error template', async () => {
     @Component({
       template: ` <mc-suspense [data$]="data$">
         <ng-template #data let-value>{{ value }}</ng-template>
-        <ng-template #error let-err>{{ err }}</ng-template>
+        <ng-template #error let-err>{{ err.message }}</ng-template>
       </mc-suspense>`,
     })
     class TestedComponent {
-      data$ = throwError('💥');
+      data$ = throwError(() => new Error('💥'));
     }
 
     const fixture = await render(TestedComponent);
@@ -80,14 +79,13 @@ describe('SuspenseComponent', () => {
       </mc-suspense>`,
     })
     class TestedComponent {
-      data$ = throwError('💥');
+      data$ = throwError(() => new Error('💥'));
     }
 
     const fixture = await render(TestedComponent);
 
-    const errorEl = fixture.debugElement.nativeElement.querySelector(
-      'mc-error'
-    );
+    const errorEl =
+      fixture.debugElement.nativeElement.querySelector('mc-error');
     expect(errorEl).toBeTruthy();
     expect(errorEl.textContent).toBe('Oups! Something went wrong.');
   });
@@ -99,7 +97,13 @@ async function render(componentType: Type<unknown>) {
     imports: [LetModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
   }).compileComponents();
+
   const fixture = TestBed.createComponent(componentType);
+
   fixture.detectChanges();
+
+  /* Wait for request animation frame. */
+  await new Promise(requestAnimationFrame);
+
   return fixture;
 }

@@ -20,24 +20,29 @@ import { Observable } from 'rxjs';
       *rxLet="
         data$;
         let data;
-        rxError: errorWrapperTemplate;
+        let error = $error;
+        let suspense = $suspense;
         rxSuspense: suspenseTemplate || defaultSuspenseTemplate
       "
     >
-      <ng-container
-        *ngTemplateOutlet="dataTemplate; context: { $implicit: data }"
-      ></ng-container>
-    </ng-container>
+      <ng-container *ngIf="error === false && suspense === false">
+        <ng-container
+          *ngTemplateOutlet="dataTemplate; context: { $implicit: data }"
+        >
+        </ng-container>
+      </ng-container>
 
-    <!-- Error wrapper. -->
-    <ng-template #errorWrapperTemplate let-error="$rxError">
-      <ng-container
-        *ngTemplateOutlet="
-          errorTemplate || defaultErrorTemplate;
-          context: { $implicit: error }
-        "
-      ></ng-container>
-    </ng-template>
+      <!-- Error. -->
+      <ng-container *ngIf="error">
+        <ng-container
+          *ngTemplateOutlet="
+            errorTemplate || defaultErrorTemplate;
+            context: { $implicit: error }
+          "
+        >
+        </ng-container>
+      </ng-container>
+    </ng-container>
 
     <!-- Default error template. -->
     <ng-template #defaultErrorTemplate>
