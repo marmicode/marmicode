@@ -27,7 +27,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: .yarn-cache
-          key: yarn-cache-${{ hashFiles('yarn.lock') }}
+          key: yarn-cache
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Increase file watchers to avoid storybook warnings
@@ -75,7 +75,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: .yarn-cache
-          key: yarn-cache-${{ hashFiles('yarn.lock') }}
+          key: yarn-cache
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Lint
@@ -98,7 +98,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: .yarn-cache
-          key: yarn-cache-${{ hashFiles('yarn.lock') }}
+          key: yarn-cache
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Test
@@ -130,7 +130,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: .yarn-cache
-          key: yarn-cache-${{ hashFiles('yarn.lock') }}
+          key: yarn-cache
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Deploy
@@ -179,7 +179,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: .yarn-cache
-          key: yarn-cache-${{ hashFiles('yarn.lock') }}
+          key: yarn-cache
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Deploy
