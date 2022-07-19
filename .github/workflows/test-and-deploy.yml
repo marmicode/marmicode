@@ -6,7 +6,9 @@ name: Test & Deploy
     types:
       - contentful-publish
   pull_request: {}
-  push: {}
+  push:
+    branches:
+      - main
   workflow_dispatch: {}
 env:
   CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
@@ -48,11 +50,13 @@ jobs:
       - name: E2E
         if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: >-
-          $(npm bin)/percy exec -- $(npm bin)/nx run-many --all --target=e2e
+          npx @percy/cli exec -- $(npm bin)/nx run-many --all --target=e2e
           --base=deployed/marmicode-next --browser=chrome
       - name: Check Percy Review
         if: steps.should-run-e2e.outputs.should-run-e2e != false
-        run: yarn percy-review-approved
+        run: >-
+          PERCY_TOKEN=$PERCY_FULL_TOKEN npx @percy/cli build:wait --project
+          marmicode/marmicode --commit "$(git rev-parse HEAD) --fail-on-changes"
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
