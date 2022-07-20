@@ -263,7 +263,10 @@
     "update-routes": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "ts-node --esm --skipProject apps/marmicode/update-routes.ts -o dist/marmicode-routes.txt"
+        "commands": [
+          "mkdir -p dist",
+          "ts-node --esm --skipProject apps/marmicode/update-routes.ts -o dist/marmicode-routes.txt"
+        ]
       }
     }
   },
