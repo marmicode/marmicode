@@ -64,6 +64,18 @@ env:
   YARN_CACHE_FOLDER: .yarn-cache
 
 jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - *checkout
+      - *setup-node
+      - *cache
+      - *yarn-install
+      - name: Build
+        run: yarn affected:build --configuration production --base=deployed/marmicode-next
+      - *slack-notify-failure
+
   e2e:
     runs-on: ubuntu-latest
     env:
@@ -157,6 +169,7 @@ jobs:
       name: Marmicode
       url: https://marmicode.io
     needs:
+      - build
       - e2e
       - lint
       - test

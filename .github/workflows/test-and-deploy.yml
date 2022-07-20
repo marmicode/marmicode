@@ -14,6 +14,33 @@ env:
   CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
   YARN_CACHE_FOLDER: .yarn-cache
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - uses: actions/cache@v2
+        with:
+          path: |
+            .yarn-cache
+            node_modules
+          key: yarn-cache
+      - name: Install
+        run: yarn install --immutable
+      - name: Build
+        run: >-
+          yarn affected:build --configuration production
+          --base=deployed/marmicode-next
+      - name: Notify on failure
+        uses: pioug/le-slack-message@v1.0.0
+        if: failure()
+        with:
+          JOB: ${{ toJson(job) }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   e2e:
     runs-on: ubuntu-latest
     env:
@@ -181,6 +208,7 @@ jobs:
       name: Marmicode
       url: https://marmicode.io
     needs:
+      - build
       - e2e
       - lint
       - test
