@@ -12,7 +12,6 @@
         "main": "apps/marmicode/src/main.ts",
         "polyfills": "apps/marmicode/src/polyfills.ts",
         "tsConfig": "apps/marmicode/tsconfig.app.json",
-        "aot": true,
         "assets": [
           "apps/marmicode/src/favicon.ico",
           "apps/marmicode/src/assets",
@@ -82,6 +81,14 @@
         ]
       },
       "configurations": {
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        },
         "production": {
           "fileReplacements": [
             {
@@ -141,6 +148,7 @@
           "ngswConfigPath": "apps/marmicode/ngsw-config.json"
         }
       },
+      "defaultConfiguration": "production",
       "outputs": ["{options.outputPath}"]
     },
     "serve": {
@@ -149,10 +157,14 @@
         "browserTarget": "marmicode:build"
       },
       "configurations": {
+        "development": {
+          "browserTarget": "marmicode:build:development"
+        },
         "production": {
           "browserTarget": "marmicode:build:production"
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -185,6 +197,7 @@
         "tsConfig": "apps/marmicode/tsconfig.server.json"
       },
       "configurations": {
+        "development": {},
         "next": {
           "outputHashing": "media",
           "fileReplacements": [
@@ -211,16 +224,18 @@
     },
     "serve-ssr": {
       "executor": "@nguniversal/builders:ssr-dev-server",
-      "options": {
-        "browserTarget": "marmicode:build",
-        "serverTarget": "marmicode:server"
-      },
+      "options": {},
       "configurations": {
+        "development": {
+          "browserTarget": "marmicode:build:development",
+          "serverTarget": "marmicode:server:development"
+        },
         "production": {
           "browserTarget": "marmicode:build:production",
           "serverTarget": "marmicode:server:production"
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "prerender": {
       "executor": "@nguniversal/builders:prerender",
