@@ -1,7 +1,8 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   Directive,
   ElementRef,
+  inject,
   NgModule,
   OnInit,
   Output,
@@ -32,6 +33,7 @@ export class SwipeDirective implements OnInit {
   @Output() swipeRight: Observable<void>;
 
   private _position$: Observable<number>;
+  private _window = inject(DOCUMENT).defaultView;
 
   constructor(private _elementRef: ElementRef, private _renderer: Renderer2) {
     /*
@@ -42,8 +44,8 @@ export class SwipeDirective implements OnInit {
       this._elementRef.nativeElement,
       'touchstart'
     );
-    const touchmove$ = fromEvent<TouchEvent>(window, 'touchmove');
-    const touchend$ = fromEvent<TouchEvent>(window, 'touchend');
+    const touchmove$ = fromEvent<TouchEvent>(this._window, 'touchmove');
+    const touchend$ = fromEvent<TouchEvent>(this._window, 'touchend');
 
     this._position$ = touchstart$.pipe(
       switchMap((touchstart) =>
