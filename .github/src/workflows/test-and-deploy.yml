@@ -3,7 +3,10 @@ name: Test & Deploy
 on:
   repository_dispatch:
     types: [contentful-publish]
-  push: {}
+  pull_request: {}
+  push:
+    branches:
+      - master
   # Allow manual trigger.
   workflow_dispatch: {}
 
@@ -90,7 +93,11 @@ jobs:
         run: npx @percy/cli exec -- $(npm bin)/nx run-many --all --target=e2e --base=deployed/marmicode-next --browser=chrome
       - name: Check Percy Review
         if: steps.should-run-e2e.outputs.should-run-e2e != false
-        run: PERCY_TOKEN=$PERCY_FULL_TOKEN npx @percy/cli build:wait --project marmicode/marmicode --commit "$GITHUB_SHA" --fail-on-changes
+        # @hack on PR events, Percy uses the last commit hash instead of the merge commit hash.
+        # We have to use PR_HEAD_SHA if present then fallback to GITHUB_SHA.
+        run: PERCY_TOKEN=$PERCY_FULL_TOKEN npx @percy/cli build:wait --project marmicode/marmicode --commit "${PR_HEAD_SHA:-$GITHUB_SHA}" --fail-on-changes
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
       - *upload-dist-on-failure
       - *slack-notify-failure
 
