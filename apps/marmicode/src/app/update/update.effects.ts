@@ -25,14 +25,20 @@ import { UpdateDialogComponent } from './update-dialog.component';
 export class UpdateEffects {
   checkForUpdate$ = createEffect(
     () =>
-      this._zone.runOutsideAngular(() =>
-        this._swUpdate.isEnabled
-          ? this._applicationRef.isStable.pipe(
-              first((isStable) => isStable === true),
-              switchMap(() => timer(0, 30000)),
-              switchMap(() => defer(() => this._swUpdate.checkForUpdate()))
-            )
-          : EMPTY
+      /* @hack use `defer()` to create a new observable, otherwise,
+       * `createEffect()` will define the '__@ngrx/effects_create__' property on the EMPTY constant.
+       * This breaks Angular universal prerender with the following error:
+       * "Cannot redefine property: __@ngrx/effects_create__" */
+      defer(() =>
+        this._zone.runOutsideAngular(() =>
+          this._swUpdate.isEnabled
+            ? this._applicationRef.isStable.pipe(
+                first((isStable) => isStable === true),
+                switchMap(() => timer(0, 30000)),
+                switchMap(() => defer(() => this._swUpdate.checkForUpdate()))
+              )
+            : EMPTY
+        )
       ),
     {
       dispatch: false,

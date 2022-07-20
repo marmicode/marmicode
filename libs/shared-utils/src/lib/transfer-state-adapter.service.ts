@@ -1,33 +1,30 @@
 import { Injectable } from '@angular/core';
-import { isScullyRunning, TransferStateService } from '@scullyio/ng-lib';
-import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { makeStateKey, TransferState } from '@angular/platform-browser';
+import { Observable, of } from 'rxjs';
+import { Platform } from './platform.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TransferStateAdapter {
-  constructor(private _transferStateService: TransferStateService) {}
+  constructor(
+    private _platform: Platform,
+    private _transferState: TransferState
+  ) {}
 
   get<T>(key: string): Observable<T> {
-    return (
-      this._transferStateService
-        .getState<T>(key)
-        /* TransferStateService should not emit multiple values
-         * but Scully doesn't seem to respect this rule. */
-        .pipe(take(1))
-    );
+    return of(this._transferState.get<T>(makeStateKey(key), null));
   }
 
-  hasKey(key: string) {
-    return this._transferStateService.stateHasKey(key);
+  hasKey<T>(key: string) {
+    return this._transferState.hasKey<T>(makeStateKey<T>(key));
   }
 
   set<T>(key: string, value: T) {
-    this._transferStateService.setState(key, value);
+    this._transferState.set(makeStateKey<T>(key), value);
   }
 
   isPrerendering() {
-    return isScullyRunning();
+    return this._platform.isServer();
   }
 }
