@@ -1,12 +1,14 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
   AfterViewChecked,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostListener,
+  inject,
   Input,
   NgModule,
+  PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -17,7 +19,12 @@ import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
-import { animationFrameScheduler, Observable, Subject } from 'rxjs';
+import {
+  animationFrameScheduler,
+  Observable,
+  Subject,
+  asyncScheduler,
+} from 'rxjs';
 import { first, map, observeOn, switchMap, tap } from 'rxjs/operators';
 import { HighlightZone } from '../highlight/highlight-zone';
 
@@ -100,6 +107,7 @@ export class CodeBlockComponent implements AfterViewChecked {
   readonly verticalPadding = 10;
 
   private _block$ = this._state.select('block');
+  private _platformId = inject(PLATFORM_ID);
   private _viewChecked$ = new Subject<void>();
 
   constructor(
@@ -133,7 +141,11 @@ export class CodeBlockComponent implements AfterViewChecked {
         /* @hack schedule state change for next cycle otherwise
          * change detection will miss it...
          * except if we use @rx-angular/template's push. */
-        observeOn(animationFrameScheduler),
+        observeOn(
+          isPlatformBrowser(this._platformId)
+            ? animationFrameScheduler
+            : asyncScheduler
+        ),
         map((lineHeight) => ({ lineHeight }))
       )
     );
