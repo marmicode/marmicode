@@ -28,13 +28,14 @@ export type Size = 'normal' | 'small';
   selector: 'mc-share-buttons',
   styleUrls: ['./share-buttons.component.scss'],
   template: `
-    <share-button
+    <share-buttons
       [autoSetMeta]="true"
       [description]="twitterTitle$ | async"
       [size]="buttonSize$ | async"
       [theme]="theme"
-      button="twitter"
-    ></share-button>
+      [include]="['twitter']"
+      [style.display]="'inline-block'"
+    ></share-buttons>
     <share-buttons
       [autoSetMeta]="true"
       [description]="defaultTitle$ | async"
@@ -42,7 +43,7 @@ export type Size = 'normal' | 'small';
       [include]="buttons"
       [size]="buttonSize$ | async"
       [theme]="theme"
-      style="display: inline-block;"
+      [style.display]="'inline-block'"
     ></share-buttons>
   `,
   providers: [RxState],
