@@ -6,13 +6,15 @@ import {
   AngularFireAnalyticsModule,
   ScreenTrackingService,
 } from '@angular/fire/analytics';
-import { BrowserModule } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  BrowserTransferStateModule,
+} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
-import { ScullyLibModule } from '@scullyio/ng-lib';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -32,7 +34,6 @@ import { UpdateEffects } from './update/update.effects';
     HttpClientModule,
     LayoutModule,
     NavModule,
-    ScullyLibModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
@@ -48,6 +49,7 @@ import { UpdateEffects } from './update/update.effects';
       }
     ),
     StoreRouterConnectingModule.forRoot(),
+    BrowserTransferStateModule,
   ],
   providers: [ScreenTrackingService],
   bootstrap: [AppComponent],

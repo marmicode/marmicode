@@ -1,9 +1,15 @@
 import { CommonModule, ViewportScroller } from '@angular/common';
-import { Compiler, Component, HostListener, NgModule } from '@angular/core';
+import { Component, HostListener, NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { animationFrameScheduler, BehaviorSubject, Observable } from 'rxjs';
+import {
+  animationFrameScheduler,
+  asyncScheduler,
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
 import { map, observeOn, pairwise } from 'rxjs/operators';
+import { Platform } from '@marmicode/shared-utils';
 import { appRouterHelper } from './app-router-helper';
 import { NavMenuModule } from './nav-menu.component';
 
@@ -84,12 +90,11 @@ export class NavComponent {
 
   private _scrollPosition$ = new BehaviorSubject(0);
 
-  constructor(
-    private _compiler: Compiler,
-    private _viewportScroller: ViewportScroller
-  ) {
+  constructor(platform: Platform, private _viewportScroller: ViewportScroller) {
     this.isScrollingDown$ = this._scrollPosition$.pipe(
-      observeOn(animationFrameScheduler),
+      observeOn(
+        platform.isBrowser() ? animationFrameScheduler : asyncScheduler
+      ),
       pairwise(),
       map(([previous, current]) => current > 64 && current - previous > 0)
     );

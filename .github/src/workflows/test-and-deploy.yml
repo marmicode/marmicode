@@ -4,16 +4,20 @@ on:
   repository_dispatch:
     types: [contentful-publish]
   pull_request: {}
-  push: {}
+  push:
+    branches:
+      - master
   # Allow manual trigger.
   workflow_dispatch: {}
 
 x-steps:
-  cache-node-modules: &cache-node-modules
+  cache: &cache
     uses: actions/cache@v2
     with:
-      path: node_modules
-      key: node-modules-${{ hashFiles('yarn.lock') }}-4
+      path: |
+        .yarn-cache
+        node_modules
+      key: yarn-cache
 
   checkout: &checkout
     uses: actions/checkout@v2
@@ -33,7 +37,7 @@ x-steps:
   setup-node: &setup-node
     uses: actions/setup-node@v1
     with:
-      node-version: '14.x'
+      node-version: '16.x'
 
   slack-notify-failure: &slack-notify-failure
     name: Notify on failure
@@ -53,12 +57,25 @@ x-steps:
 
   yarn-install: &yarn-install
     name: Install
-    run: yarn install --frozen-lockfile
+    run: yarn install --immutable
 
 env:
   CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
+  YARN_CACHE_FOLDER: .yarn-cache
 
 jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - *checkout
+      - *setup-node
+      - *cache
+      - *yarn-install
+      - name: Build
+        run: yarn affected:build --configuration production --base=deployed/marmicode-next
+      - *slack-notify-failure
+
   e2e:
     runs-on: ubuntu-latest
     env:
@@ -69,7 +86,7 @@ jobs:
     steps:
       - *checkout
       - *setup-node
-      - *cache-node-modules
+      - *cache
       - *yarn-install
       - name: Increase file watchers to avoid storybook warnings
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
@@ -80,15 +97,19 @@ jobs:
         id: should-run-e2e
         run: |
           # `grep -c` fails if list is empty (no e2e tests to run)
-          SHOULD_RUN_E2E=$(yarn --silent nx print-affected --base=deployed/marmicode-next \
+          SHOULD_RUN_E2E=$(yarn nx print-affected --base=deployed/marmicode-next \
             | yarn json projects | grep -c e2e && echo true || echo false)
           echo "::set-output name=should-run-e2e::$SHOULD_RUN_E2E"
       - name: E2E
         if: steps.should-run-e2e.outputs.should-run-e2e != false
-        run: yarn e2e-all --base=deployed/marmicode-next --headless --browser=chrome
+        run: npx @percy/cli exec -- $(npm bin)/nx run-many --all --target=e2e --base=deployed/marmicode-next --browser=chrome
       - name: Check Percy Review
         if: steps.should-run-e2e.outputs.should-run-e2e != false
-        run: yarn percy-review-approved
+        # @hack on PR events, Percy uses the last commit hash instead of the merge commit hash.
+        # We have to use PR_HEAD_SHA if present then fallback to GITHUB_SHA.
+        run: PERCY_TOKEN=$PERCY_FULL_TOKEN npx @percy/cli build:wait --project marmicode/marmicode --commit "${PR_HEAD_SHA:-$GITHUB_SHA}" --fail-on-changes
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
       - *upload-dist-on-failure
       - *slack-notify-failure
 
@@ -97,7 +118,7 @@ jobs:
     steps:
       - *checkout
       - *setup-node
-      - *cache-node-modules
+      - *cache
       - *yarn-install
       - name: Lint
         run: yarn affected:lint --base=deployed/marmicode-next
@@ -108,7 +129,7 @@ jobs:
     steps:
       - *checkout
       - *setup-node
-      - *cache-node-modules
+      - *cache
       - *yarn-install
       - name: Test
         run: yarn affected:test --base=deployed/marmicode-next
@@ -122,13 +143,14 @@ jobs:
       name: Marmicode Next
       url: https://marmicode-next.web.app
     needs:
+      - build
       - e2e
       - lint
       - test
     steps:
       - *checkout
       - *setup-node
-      - *cache-node-modules
+      - *cache
       - *yarn-install
       - name: Deploy
         env:
@@ -148,13 +170,14 @@ jobs:
       name: Marmicode
       url: https://marmicode.io
     needs:
+      - build
       - e2e
       - lint
       - test
     steps:
       - *checkout
       - *setup-node
-      - *cache-node-modules
+      - *cache
       - *yarn-install
       - name: Deploy
         env:

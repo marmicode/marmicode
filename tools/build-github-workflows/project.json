@@ -1,5 +1,4 @@
 {
-  "root": "tools/build-github-workflows",
   "sourceRoot": "tools/build-github-workflows/src",
   "projectType": "library",
   "targets": {
@@ -14,7 +13,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/tools/build-github-workflows"],
       "options": {
-        "jestConfig": "tools/build-github-workflows/jest.config.js",
+        "jestConfig": "tools/build-github-workflows/jest.config.ts",
         "passWithNoTests": true
       }
     }

@@ -5,11 +5,42 @@ name: Test & Deploy
   repository_dispatch:
     types:
       - contentful-publish
-  push: {}
+  pull_request: {}
+  push:
+    branches:
+      - master
   workflow_dispatch: {}
 env:
   CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
+  YARN_CACHE_FOLDER: .yarn-cache
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - uses: actions/cache@v2
+        with:
+          path: |
+            .yarn-cache
+            node_modules
+          key: yarn-cache
+      - name: Install
+        run: yarn install --immutable
+      - name: Build
+        run: >-
+          yarn affected:build --configuration production
+          --base=deployed/marmicode-next
+      - name: Notify on failure
+        uses: pioug/le-slack-message@v1.0.0
+        if: failure()
+        with:
+          JOB: ${{ toJson(job) }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   e2e:
     runs-on: ubuntu-latest
     env:
@@ -21,13 +52,15 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 16.x
       - uses: actions/cache@v2
         with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-4
+          path: |
+            .yarn-cache
+            node_modules
+          key: yarn-cache
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Increase file watchers to avoid storybook warnings
         run: >-
           echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
@@ -37,18 +70,23 @@ jobs:
         run: >
           # `grep -c` fails if list is empty (no e2e tests to run)
 
-          SHOULD_RUN_E2E=$(yarn --silent nx print-affected
-          --base=deployed/marmicode-next \
+          SHOULD_RUN_E2E=$(yarn nx print-affected --base=deployed/marmicode-next
+          \
             | yarn json projects | grep -c e2e && echo true || echo false)
           echo "::set-output name=should-run-e2e::$SHOULD_RUN_E2E"
       - name: E2E
         if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: >-
-          yarn e2e-all --base=deployed/marmicode-next --headless
-          --browser=chrome
+          npx @percy/cli exec -- $(npm bin)/nx run-many --all --target=e2e
+          --base=deployed/marmicode-next --browser=chrome
       - name: Check Percy Review
         if: steps.should-run-e2e.outputs.should-run-e2e != false
-        run: yarn percy-review-approved
+        run: >-
+          PERCY_TOKEN=$PERCY_FULL_TOKEN npx @percy/cli build:wait --project
+          marmicode/marmicode --commit "${PR_HEAD_SHA:-$GITHUB_SHA}"
+          --fail-on-changes
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
@@ -69,13 +107,15 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 16.x
       - uses: actions/cache@v2
         with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-4
+          path: |
+            .yarn-cache
+            node_modules
+          key: yarn-cache
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Lint
         run: yarn affected:lint --base=deployed/marmicode-next
       - name: Notify on failure
@@ -92,13 +132,15 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 16.x
       - uses: actions/cache@v2
         with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-4
+          path: |
+            .yarn-cache
+            node_modules
+          key: yarn-cache
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Test
         run: yarn affected:test --base=deployed/marmicode-next
       - name: Notify on failure
@@ -115,6 +157,7 @@ jobs:
       name: Marmicode Next
       url: https://marmicode-next.web.app
     needs:
+      - build
       - e2e
       - lint
       - test
@@ -124,13 +167,15 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 16.x
       - uses: actions/cache@v2
         with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-4
+          path: |
+            .yarn-cache
+            node_modules
+          key: yarn-cache
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
@@ -164,6 +209,7 @@ jobs:
       name: Marmicode
       url: https://marmicode.io
     needs:
+      - build
       - e2e
       - lint
       - test
@@ -173,13 +219,15 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 16.x
       - uses: actions/cache@v2
         with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}-4
+          path: |
+            .yarn-cache
+            node_modules
+          key: yarn-cache
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

@@ -1,3 +1,4 @@
+import { Skill } from './skill';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -108,7 +109,7 @@ export interface SearchInputOption {
   ],
 })
 export class SearchInputComponent {
-  @Input() set control(control: FormControl) {
+  @Input() set control(control: FormControl<Skill | string>) {
     this._state.set({ control });
   }
   @Input() placeholder: string;
@@ -116,11 +117,11 @@ export class SearchInputComponent {
 
   control$ = this._state.select('control');
   value$: Observable<string | SearchInputOption>;
-  reset$ = new Subject();
+  reset$ = new Subject<void>();
 
   getOptionLabel = (option: SearchInputOption) => option?.label;
 
-  constructor(private _state: RxState<{ control: FormControl }>) {
+  constructor(private _state: RxState<{ control: FormControl<Skill | string> }>) {
     this.value$ = this.control$.pipe(
       switchMap((control) => control.valueChanges),
       /* Filter duplicates. */
@@ -131,6 +132,7 @@ export class SearchInputComponent {
     this._state.hold(
       this.reset$.pipe(
         withLatestFrom(this.control$),
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         tap(([_, control]) => control.reset())
       )
     );

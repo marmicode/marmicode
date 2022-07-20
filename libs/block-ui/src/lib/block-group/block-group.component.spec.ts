@@ -93,5 +93,5 @@ describe('FrameComponent', () => {
 /* Wait for `requestAnimationFrame` to be triggered.
  * This is clearly not the best way but it works. */
 export async function flushRequestAnimationFrame() {
-  await new Promise(setImmediate);
+  await new Promise(requestAnimationFrame);
 }

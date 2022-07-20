@@ -11,13 +11,19 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CodeBlock } from '@marmicode/block-core';
+import { Platform } from '@marmicode/shared-utils';
 import { RxState, select, selectSlice } from '@rx-angular/state';
 import * as Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/plugins/line-numbers/prism-line-numbers';
-import { animationFrameScheduler, Observable, Subject } from 'rxjs';
+import {
+  animationFrameScheduler,
+  asyncScheduler,
+  Observable,
+  Subject,
+} from 'rxjs';
 import { first, map, observeOn, switchMap, tap } from 'rxjs/operators';
 import { HighlightZone } from '../highlight/highlight-zone';
 
@@ -100,7 +106,7 @@ export class CodeBlockComponent implements AfterViewChecked {
   readonly verticalPadding = 10;
 
   private _block$ = this._state.select('block');
-  private _viewChecked$ = new Subject();
+  private _viewChecked$ = new Subject<void>();
 
   constructor(
     private _state: RxState<{
@@ -108,7 +114,8 @@ export class CodeBlockComponent implements AfterViewChecked {
       highlightZone: HighlightZone;
       highlightableZones: HighlightZone[];
       lineHeight: number;
-    }>
+    }>,
+    platform: Platform
   ) {
     this.code$ = this._block$.pipe(select('code'));
     this.languageClass$ = this._block$.pipe(
@@ -127,13 +134,16 @@ export class CodeBlockComponent implements AfterViewChecked {
         tap(() => Prism.highlightElement(this.codeEl.nativeElement)),
         map(
           () =>
+            /* Default to 25 on SSR as we can't query DOM. */
             this.codeEl.nativeElement.querySelector('.line-numbers-rows span')
-              .clientHeight
+              ?.clientHeight ?? 25
         ),
         /* @hack schedule state change for next cycle otherwise
          * change detection will miss it...
          * except if we use @rx-angular/template's push. */
-        observeOn(animationFrameScheduler),
+        observeOn(
+          platform.isBrowser() ? animationFrameScheduler : asyncScheduler
+        ),
         map((lineHeight) => ({ lineHeight }))
       )
     );

@@ -17,8 +17,7 @@ export const Highlight = () =>
     component: CodeBlockComponent,
     props: {
       block: createCodeBlock({
-        code:
-          '# Get a farm.\ncurl http://localhost:8080/farms/P4VU2Xsw\n\n# Create a farm with urlencoded data\ncurl http://localhost:8080/farms -d"name=springfield"\n\n# Create a farm with invalid data.\ncurl http://localhost:8080/farms \\\n  -H "Content-Type: application/json" \\\n  -d \'{"name": 123, "random": "data"}\'',
+        code: `# Get a farm.\ncurl http://localhost:8080/farms/P4VU2Xsw\n\n# Create a farm with urlencoded data\ncurl http://localhost:8080/farms -d"name=springfield"\n\n# Create a farm with invalid data.\ncurl http://localhost:8080/farms \\\n  -H "Content-Type: application/json" \\\n  -d '{"name": 123, "random": "data"}'`,
         language: 'shell',
       }),
       highlightZone: createHighlightZone({

@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/resource-feature-search",
   "sourceRoot": "libs/resource-feature-search/src",
   "prefix": "mc",
   "targets": {
@@ -16,7 +15,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/resource-feature-search/jest.config.js",
+        "jestConfig": "libs/resource-feature-search/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/resource-feature-search"]

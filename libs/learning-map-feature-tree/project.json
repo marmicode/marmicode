@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/learning-map-feature-tree",
   "sourceRoot": "libs/learning-map-feature-tree/src",
   "prefix": "mc",
   "targets": {
@@ -16,7 +15,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/learning-map-feature-tree/jest.config.js",
+        "jestConfig": "libs/learning-map-feature-tree/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/learning-map-feature-tree"]

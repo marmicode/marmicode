@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/blog-post-ui",
   "sourceRoot": "libs/blog-post-ui/src",
   "prefix": "mc",
   "targets": {
@@ -17,18 +16,17 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/blog-post-ui"],
       "options": {
-        "jestConfig": "libs/blog-post-ui/jest.config.js",
+        "jestConfig": "libs/blog-post-ui/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
+      "executor": "@storybook/angular:start-storybook",
       "options": {
-        "uiFramework": "@storybook/angular",
         "port": 4400,
-        "config": {
-          "configFolder": "libs/blog-post-ui/.storybook"
-        }
+        "configDir": "libs/blog-post-ui/.storybook",
+        "browserTarget": "blog-post-ui:build-storybook",
+        "compodoc": false
       },
       "configurations": {
         "ci": {
@@ -37,13 +35,12 @@
       }
     },
     "build-storybook": {
-      "executor": "@nrwl/storybook:build",
+      "executor": "@storybook/angular:build-storybook",
       "options": {
-        "uiFramework": "@storybook/angular",
-        "outputPath": "dist/storybook/blog-post-ui",
-        "config": {
-          "configFolder": "libs/blog-post-ui/.storybook"
-        }
+        "outputDir": "dist/storybook/blog-post-ui",
+        "configDir": "libs/blog-post-ui/.storybook",
+        "browserTarget": "blog-post-ui:build-storybook",
+        "compodoc": false
       },
       "configurations": {
         "ci": {

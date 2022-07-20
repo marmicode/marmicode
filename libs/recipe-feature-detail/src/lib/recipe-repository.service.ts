@@ -129,6 +129,7 @@ export class RecipeRepository {
             id: resource.sys.id,
             slug: resource.slug,
             title: resource.title,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             type: resource.resourceType as any,
             frames: (resource.content as ContentfulRecipe).frameCollection.items.map(
               (frame) =>

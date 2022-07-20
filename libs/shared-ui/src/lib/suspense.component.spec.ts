@@ -1,5 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { LetModule } from '@rx-angular/template';
 import { NEVER, of, throwError } from 'rxjs';
 import { SuspenseComponent } from './suspense.component';
@@ -19,9 +20,9 @@ describe('SuspenseComponent', () => {
       data$ = of(42);
     }
 
-    const fixture = await render(TestedComponent);
+    const { getTextContent } = await render(TestedComponent);
 
-    expect(fixture.debugElement.nativeElement.textContent).toEqual('42');
+    expect(getTextContent()).toEqual('42');
   });
 
   it('should show suspense template', async () => {
@@ -35,9 +36,9 @@ describe('SuspenseComponent', () => {
       data$ = NEVER;
     }
 
-    const fixture = await render(TestedComponent);
+    const { getTextContent } = await render(TestedComponent);
 
-    expect(fixture.debugElement.nativeElement.textContent).toEqual('⏳');
+    expect(getTextContent()).toEqual('⏳');
   });
 
   it('should show default suspense template', async () => {
@@ -50,27 +51,25 @@ describe('SuspenseComponent', () => {
       data$ = NEVER;
     }
 
-    const fixture = await render(TestedComponent);
+    const { hasLoadingSpinner } = await render(TestedComponent);
 
-    expect(
-      fixture.debugElement.nativeElement.querySelector('mc-loading')
-    ).toBeTruthy();
+    expect(hasLoadingSpinner()).toBeTruthy();
   });
 
   it('should show error template', async () => {
     @Component({
       template: ` <mc-suspense [data$]="data$">
         <ng-template #data let-value>{{ value }}</ng-template>
-        <ng-template #error let-err>{{ err }}</ng-template>
+        <ng-template #error let-err>{{ err.message }}</ng-template>
       </mc-suspense>`,
     })
     class TestedComponent {
-      data$ = throwError('💥');
+      data$ = throwError(() => new Error('💥'));
     }
 
-    const fixture = await render(TestedComponent);
+    const { getTextContent } = await render(TestedComponent);
 
-    expect(fixture.debugElement.nativeElement.textContent).toEqual('💥');
+    expect(getTextContent()).toEqual('💥');
   });
 
   it('should show default error template', async () => {
@@ -80,26 +79,39 @@ describe('SuspenseComponent', () => {
       </mc-suspense>`,
     })
     class TestedComponent {
-      data$ = throwError('💥');
+      data$ = throwError(() => new Error('💥'));
     }
 
-    const fixture = await render(TestedComponent);
+    const { getErrorMessage } = await render(TestedComponent);
 
-    const errorEl = fixture.debugElement.nativeElement.querySelector(
-      'mc-error'
-    );
-    expect(errorEl).toBeTruthy();
-    expect(errorEl.textContent).toBe('Oups! Something went wrong.');
+    expect(getErrorMessage()).toBe('Oups! Something went wrong.');
   });
 });
 
 async function render(componentType: Type<unknown>) {
-  await TestBed.configureTestingModule({
+  TestBed.configureTestingModule({
     declarations: [componentType, SuspenseComponent],
     imports: [LetModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  }).compileComponents();
+  });
+
   const fixture = TestBed.createComponent(componentType);
+
   fixture.detectChanges();
-  return fixture;
+
+  /* Wait for request animation frame. */
+  await new Promise(requestAnimationFrame);
+
+  return {
+    getTextContent() {
+      return fixture.debugElement.nativeElement.textContent;
+    },
+    getErrorMessage() {
+      return fixture.debugElement.query(By.css('mc-error'))?.nativeElement
+        .textContent;
+    },
+    hasLoadingSpinner() {
+      return fixture.debugElement.query(By.css('mc-loading')) != null;
+    },
+  };
 }

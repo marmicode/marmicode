@@ -17,6 +17,7 @@ export type MarkdownToken = (
   tokens?: MarkdownToken[];
 };
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace MarkdownTokens {
   export type Blockquote = Tokens.Blockquote;
   export type Code = Tokens.Code;
