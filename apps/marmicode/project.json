@@ -240,6 +240,26 @@
       },
       "dependsOn": ["update-routes"]
     },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "configurations": {
+        "production": {
+          "project": "marmicode"
+        },
+        "next": {
+          "robots": false,
+          "project": "marmicode-next"
+        }
+      },
+      "options": {
+        "robots": true,
+        "commands": [
+          "if [ \"{args.robots}\" == false ]; then cp apps/marmicode/src/robots-next.txt dist/apps/marmicode/browser/robots.txt; fi",
+          "firebase --project {args.project} deploy"
+        ]
+      },
+      "dependsOn": ["prerender"]
+    },
     "update-routes": {
       "executor": "nx:run-commands",
       "options": {
