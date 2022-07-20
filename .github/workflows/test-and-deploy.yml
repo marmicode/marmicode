@@ -157,6 +157,7 @@ jobs:
       name: Marmicode Next
       url: https://marmicode-next.web.app
     needs:
+      - build
       - e2e
       - lint
       - test
