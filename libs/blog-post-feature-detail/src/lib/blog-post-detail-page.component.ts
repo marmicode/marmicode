@@ -4,7 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { BlogPostModule } from '@marmicode/blog-post-ui';
 import { blogPostDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { PageModule, SuspenseModule } from '@marmicode/shared-ui';
-import { shareReplayWithRefCount } from '@marmicode/shared-utils';
+import {
+  shareReplayWithRefCount,
+  TransferStateHelper,
+} from '@marmicode/shared-utils';
 import { map, switchMap } from 'rxjs/operators';
 import { BlogPostRepository } from './blog-post-repository.service';
 import { blogPostToPageInfo } from './blog-post-to-page-info';
@@ -26,7 +29,9 @@ export class BlogPostDetailPageComponent {
       params.get(blogPostDetailRouterHelper.BLOG_POST_SLUG_PARAM)
     ),
     switchMap((blogPostSlug) =>
-      this._blogPostRepository.getBlogPost(blogPostSlug)
+      this._blogPostRepository
+        .getBlogPost(blogPostSlug)
+        .pipe(this._transferStateHelper.transfer(`blog-post-${blogPostSlug}`))
     ),
     shareReplayWithRefCount()
   );
@@ -34,8 +39,9 @@ export class BlogPostDetailPageComponent {
   pageInfo$ = this.blogPost$.pipe(map(blogPostToPageInfo));
 
   constructor(
+    private _blogPostRepository: BlogPostRepository,
     private _route: ActivatedRoute,
-    private _blogPostRepository: BlogPostRepository
+    private _transferStateHelper: TransferStateHelper
   ) {}
 }
 

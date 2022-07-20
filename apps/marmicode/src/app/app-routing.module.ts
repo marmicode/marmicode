@@ -58,7 +58,14 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      /* Wait for lazy loaded chunks of initial page to be loaded,
+       * in order to avoid repaint blink due to
+       * bootstrap => paint blank page => lazy-load => paint flow. */
+      initialNavigation: 'enabledBlocking',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

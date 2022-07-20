@@ -7,36 +7,38 @@ import {
   NgModule,
   TemplateRef,
 } from '@angular/core';
+import { Suspense, suspensify } from '@jscutlery/operators';
+import { PushModule } from '@rx-angular/template';
+import { Observable } from 'rxjs';
 import { ErrorModule } from './error.component';
 import { LoadingModule } from './loading.component';
-import { LetModule } from '@rx-angular/template';
-import { Observable } from 'rxjs';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-suspense',
   template: `
-    <ng-container
-      *rxLet="
-        data$;
-        let data;
-        let error = $error;
-        let suspense = $suspense;
-        rxSuspense: suspenseTemplate || defaultSuspenseTemplate
-      "
-    >
-      <ng-container *ngIf="error === false && suspense === false">
+    <ng-container *ngIf="suspense$ | push as suspense">
+      <!-- Data. -->
+      <ng-container *ngIf="suspense.value as data">
         <ng-container
           *ngTemplateOutlet="dataTemplate; context: { $implicit: data }"
         >
         </ng-container>
       </ng-container>
 
+      <!-- Loading. -->
+      <ng-container *ngIf="suspense.pending">
+        <ng-container
+          *ngTemplateOutlet="suspenseTemplate ?? defaultSuspenseTemplate"
+        >
+        </ng-container>
+      </ng-container>
+
       <!-- Error. -->
-      <ng-container *ngIf="error">
+      <ng-container *ngIf="suspense.error as error">
         <ng-container
           *ngTemplateOutlet="
-            errorTemplate || defaultErrorTemplate;
+            errorTemplate ?? defaultErrorTemplate;
             context: { $implicit: error }
           "
         >
@@ -59,12 +61,17 @@ export class SuspenseComponent<T = unknown> {
   @ContentChild('data') dataTemplate: TemplateRef<{ $implicit: T }>;
   @ContentChild('error') errorTemplate: TemplateRef<{ $implicit: unknown }>;
   @ContentChild('suspense') suspenseTemplate: TemplateRef<undefined>;
-  @Input() data$: Observable<T>;
+
+  @Input() set data$(data$: Observable<T>) {
+    this.suspense$ = data$?.pipe(suspensify());
+  }
+
+  suspense$: Observable<Suspense<T>>;
 }
 
 @NgModule({
   declarations: [SuspenseComponent],
   exports: [SuspenseComponent],
-  imports: [CommonModule, LetModule, LoadingModule, ErrorModule],
+  imports: [CommonModule, LoadingModule, ErrorModule, PushModule],
 })
 export class SuspenseModule {}

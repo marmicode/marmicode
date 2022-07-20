@@ -1,9 +1,10 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { LetModule } from '@rx-angular/template';
 import { NEVER, of, throwError } from 'rxjs';
-import { SuspenseComponent } from './suspense.component';
+import { ErrorModule } from './error.component';
+import { LoadingModule } from './loading.component';
+import { SuspenseModule } from './suspense.component';
 
 describe('SuspenseComponent', () => {
   beforeEach(() => jest.spyOn(console, 'error'));
@@ -90,17 +91,27 @@ describe('SuspenseComponent', () => {
 
 async function render(componentType: Type<unknown>) {
   TestBed.configureTestingModule({
-    declarations: [componentType, SuspenseComponent],
-    imports: [LetModule],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    declarations: [componentType],
+    imports: [SuspenseModule],
+  });
+
+  /* Load `mc-suspense` without `mc-error` & `mc-loading`.
+   * This avoids file-loader issues etc... and makes the test
+   * shallow without having to import implementation details. */
+  TestBed.overrideModule(SuspenseModule, {
+    set: {
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    },
+  });
+  TestBed.overrideModule(SuspenseModule, {
+    remove: {
+      imports: [ErrorModule, LoadingModule],
+    },
   });
 
   const fixture = TestBed.createComponent(componentType);
 
   fixture.detectChanges();
-
-  /* Wait for request animation frame. */
-  await new Promise(requestAnimationFrame);
 
   return {
     getTextContent() {
