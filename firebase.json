@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "marmicode",
-      "public": "dist/apps/marmicode/static",
+      "public": "dist/apps/marmicode/browser",
       "ignore": [
         "firebase.json",
         "**/.*",

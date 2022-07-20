@@ -179,7 +179,7 @@ jobs:
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: tools/deploy.sh marmicode-next
+        run: nx run marmicode:deploy:next
       - name: Tag deployed/marmicode-next
         run: git tag -f deployed/marmicode-next
       - name: Push changes
@@ -231,7 +231,7 @@ jobs:
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: tools/deploy.sh marmicode
+        run: nx run marmicode:deploy:production
       - name: Tag deployed/marmicode
         run: git tag -f deployed/marmicode
       - name: Push changes
