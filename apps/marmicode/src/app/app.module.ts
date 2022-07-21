@@ -1,11 +1,11 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
 import {
-  AngularFireAnalyticsModule,
+  AnalyticsModule,
   ScreenTrackingService,
 } from '@angular/fire/analytics';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import {
   BrowserModule,
   BrowserTransferStateModule,
@@ -25,8 +25,8 @@ import { UpdateEffects } from './update/update.effects';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    AngularFireAnalyticsModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    AnalyticsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'marmicode' }),
