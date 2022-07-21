@@ -78,7 +78,7 @@
     "axios": "^0.19.2",
     "document-register-element": "^1.7.2",
     "express": "^4.15.2",
-    "firebase": "^7.22.1",
+    "firebase": "^9.9.0",
     "graphql-tag": "^2.10.4",
     "marked": "^1.2.7",
     "ngx-sharebuttons": "^8.0.5",
