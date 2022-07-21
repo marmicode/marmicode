@@ -6,7 +6,6 @@ import {
   NgModule,
   OnChanges,
 } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,8 +23,8 @@ import { SkillChipModule } from './skill-chip.component';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-card',
-  template: ` <mat-card class="card" fxLayout="column">
-    <article class="card-article" fxLayout="column">
+  template: ` <mat-card class="card">
+    <article class="card-article">
       <!-- Resource picture. -->
       <img
         *ngIf="resource.pictureUri"
@@ -43,7 +42,7 @@ import { SkillChipModule } from './skill-chip.component';
       <!-- Resource header with author info. -->
       <mc-resource-header [resourceInfo]="resource"></mc-resource-header>
 
-      <mat-card-content fxFlex>
+      <mat-card-content class="card-content">
         <p>
           {{ resource.summary }}
         </p>
@@ -51,7 +50,7 @@ import { SkillChipModule } from './skill-chip.component';
         <!-- Skills. -->
         <section *ngIf="resource.skills?.length > 0" class="list-container">
           <h3 [style.color]="color" class="list-title">You Will Learn</h3>
-          <div fxLayout="row wrap">
+          <div class="skills">
             <mc-skill-chip
               *ngFor="let skill of resource.skills"
               [skill]="skill"
@@ -65,7 +64,7 @@ import { SkillChipModule } from './skill-chip.component';
           class="list-container"
         >
           <h3 [style.color]="color" class="list-title">Required Skills</h3>
-          <div fxLayout="row wrap">
+          <div class="skills">
             <mc-skill-chip
               *ngFor="let skill of resource.requiredSkills"
               [skill]="skill"
@@ -74,7 +73,7 @@ import { SkillChipModule } from './skill-chip.component';
         </section>
       </mat-card-content>
 
-      <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+      <mat-card-actions class="actions-container">
         <mc-resource-card-action
           [resource]="resource"
         ></mc-resource-card-action>
@@ -90,11 +89,19 @@ import { SkillChipModule } from './skill-chip.component';
       }
 
       .card {
+        display: flex;
+        flex-direction: column;
         overflow: hidden;
         flex: 1;
       }
 
+      .card-content {
+        flex: 1;
+      }
+
       .card-article {
+        display: flex;
+        flex-direction: column;
         flex: 1;
       }
 
@@ -112,6 +119,18 @@ import { SkillChipModule } from './skill-chip.component';
 
       .list-container {
         margin-top: 30px;
+      }
+
+      .skills {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .actions-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
       }
     `,
   ],
@@ -132,7 +151,6 @@ export class ResourceCardComponent implements OnChanges {
   exports: [ResourceCardComponent],
   imports: [
     CommonModule,
-    FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
