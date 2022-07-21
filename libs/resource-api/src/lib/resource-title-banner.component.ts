@@ -5,7 +5,6 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { ResourceType } from '@marmicode/resource-core';
 import { ResourceBadgeModule } from '@marmicode/resource-ui';
 
@@ -16,7 +15,7 @@ import { ResourceBadgeModule } from '@marmicode/resource-ui';
     <svg preserveAspectRatio="none" viewBox="0 0 100 100">
       <polygon style="fill: #561f4b" points="0,0 20,0 10,100 0,100" />
     </svg>
-    <div fxLayout="row" fxLayoutAlign="center">
+    <div class="badge-container">
       <mc-resource-badge
         [resourceType]="resourceType"
         class="badge"
@@ -38,6 +37,12 @@ import { ResourceBadgeModule } from '@marmicode/resource-ui';
         display: block;
         position: relative;
         background-color: #86527c;
+      }
+
+      .badge-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
       }
 
       .badge {
@@ -87,6 +92,6 @@ export class ResourceTitleBannerComponent {
 @NgModule({
   declarations: [ResourceTitleBannerComponent],
   exports: [ResourceTitleBannerComponent],
-  imports: [CommonModule, FlexLayoutModule, ResourceBadgeModule],
+  imports: [CommonModule, ResourceBadgeModule],
 })
 export class ResourceTitleBannerModule {}
