@@ -65,7 +65,7 @@ import { ResourceBadgeModule } from './resource-badge.component';
 
       .picture-container {
         display: flex;
-        flex-diretion: row;
+        flex-direction: row;
         justify-content: flex-start;
         align-items: center;
         align-content: center;
