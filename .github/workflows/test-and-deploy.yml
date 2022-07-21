@@ -26,6 +26,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: |
+            .angular/cache
             .yarn-cache
             node_modules
           key: yarn-cache
@@ -56,6 +57,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: |
+            .angular/cache
             .yarn-cache
             node_modules
           key: yarn-cache
@@ -111,6 +113,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: |
+            .angular/cache
             .yarn-cache
             node_modules
           key: yarn-cache
@@ -136,6 +139,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: |
+            .angular/cache
             .yarn-cache
             node_modules
           key: yarn-cache
@@ -171,6 +175,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: |
+            .angular/cache
             .yarn-cache
             node_modules
           key: yarn-cache
@@ -223,6 +228,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: |
+            .angular/cache
             .yarn-cache
             node_modules
           key: yarn-cache

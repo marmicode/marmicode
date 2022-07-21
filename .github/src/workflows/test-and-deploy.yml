@@ -15,6 +15,7 @@ x-steps:
     uses: actions/cache@v2
     with:
       path: |
+        .angular/cache
         .yarn-cache
         node_modules
       key: yarn-cache
