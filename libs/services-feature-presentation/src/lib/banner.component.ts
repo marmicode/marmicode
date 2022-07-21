@@ -70,7 +70,7 @@ export class BannerComponent {
   @HostBinding('style.backgroundImage')
   backgroundImage = `url(${
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    require('!!file-loader!./banner-wide-1024.jpg').default
+    require('!!file-loader!./banner-wide-1024.webp').default
   })`;
 }
 

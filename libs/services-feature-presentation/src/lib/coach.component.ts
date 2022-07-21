@@ -92,7 +92,7 @@ declare let require: any;
 })
 export class CoachComponent {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  coachPictureUri = require('!!file-loader!./coach.jpg').default;
+  coachPictureUri = require('!!file-loader!./coach.webp').default;
   name = 'Younes Jaaidi';
   isDesktop$ = this._breakpointObserver.observe('(min-width: 960px)').pipe(
     map(({ matches }) => matches),
