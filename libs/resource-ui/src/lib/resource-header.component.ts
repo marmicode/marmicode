@@ -7,7 +7,6 @@ import {
   NgModule,
   OnChanges,
 } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout';
 import { getResourceTypeColor, ResourceInfo } from '@marmicode/resource-core';
 import { ResourceBadgeModule } from './resource-badge.component';
 
@@ -15,21 +14,21 @@ import { ResourceBadgeModule } from './resource-badge.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-header',
   template: `
-    <div *ngIf="isLarge" fxLayout="row" fxLayoutAlign="center">
+    <div *ngIf="isLarge" class="badge-container">
       <mc-resource-badge
         [resourceType]="resourceInfo.type"
-        class="resource-badge"
+        class="badge"
       ></mc-resource-badge>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="picture-container">
       <img
         *ngIf="resourceInfo.author"
         [alt]="resourceInfo.author.name"
         [src]="resourceInfo.author.pictureUri"
         class="picture"
       />
-      <div fxFlex>
+      <div class="content">
         <h1 *ngIf="isLarge" class="title">{{ resourceInfo.title }}</h1>
         <h2 *ngIf="!isLarge" class="title">{{ resourceInfo.title }}</h2>
         <div class="subtitle">
@@ -54,8 +53,22 @@ import { ResourceBadgeModule } from './resource-badge.component';
         padding: 10px 0;
       }
 
-      .resource-badge {
+      .badge-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .badge {
         margin-bottom: 10px;
+      }
+
+      .picture-container {
+        display: flex;
+        flex-diretion: row;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
       }
 
       .picture {
@@ -63,6 +76,10 @@ import { ResourceBadgeModule } from './resource-badge.component';
         width: 45px;
         border-radius: 50%;
         margin-right: 10px;
+      }
+
+      .content {
+        flex: 1;
       }
 
       /* Override h2 styling. */
@@ -119,6 +136,6 @@ export class ResourceHeaderComponent implements OnChanges {
 @NgModule({
   declarations: [ResourceHeaderComponent],
   exports: [ResourceHeaderComponent],
-  imports: [CommonModule, FlexModule, ResourceBadgeModule],
+  imports: [CommonModule, ResourceBadgeModule],
 })
 export class ResourceHeaderModule {}

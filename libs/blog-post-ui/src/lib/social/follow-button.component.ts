@@ -5,7 +5,6 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { AuthorSocialInfo } from './author-social-info';
@@ -20,7 +19,7 @@ import { AuthorSocialInfo } from './author-social-info';
       [href]="'https://twitter.com/' + author.twitter"
       target="_blank"
     >
-      <button class="button" fxLayout="row" fxLayoutAlign="center center">
+      <button class="button">
         <fa-icon [icon]="faTwitter" class="icon"></fa-icon>
         <span>Follow @{{ author.twitter }}</span>
       </button>
@@ -33,6 +32,12 @@ import { AuthorSocialInfo } from './author-social-info';
       }
 
       .button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
         cursor: pointer;
         background-color: #fff;
         color: #00acee;
@@ -67,6 +72,6 @@ export class FollowButtonComponent {
 @NgModule({
   declarations: [FollowButtonComponent],
   exports: [FollowButtonComponent],
-  imports: [CommonModule, FlexModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule],
 })
 export class FollowButtonModule {}
