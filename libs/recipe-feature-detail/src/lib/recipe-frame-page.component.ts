@@ -63,7 +63,6 @@ import { SwipeModule } from './swipe.directive';
         [frames]="frames"
         [recipeSlug]="recipeSlug$ | async"
         [nextFrameRoute]="nextFrameRoute$ | async"
-        class="timeline"
       ></mc-recipe-timeline>
     </mc-page>
   `,

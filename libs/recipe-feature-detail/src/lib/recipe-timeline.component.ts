@@ -45,8 +45,8 @@ import { Frame } from './recipe-repository.service';
   styles: [
     `
       :host {
+        display: flex;
         position: relative;
-        display: block;
         height: 44px;
         margin: 0 10px;
       }
