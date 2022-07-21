@@ -6,7 +6,6 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,11 +28,7 @@ export interface SearchInputOption {
   selector: 'mc-search-input',
   providers: [RxState],
   template: `
-    <div
-      class="search-input-container"
-      fxLayout="row"
-      fxLayoutAlign="center center"
-    >
+    <div class="search-input-container">
       <!-- Search icon. -->
       <mat-icon class="search-icon" color="primary">search</mat-icon>
 
@@ -43,7 +38,6 @@ export interface SearchInputOption {
         [placeholder]="placeholder"
         aria-label="Search"
         class="input"
-        fxFlex
         type="text"
       />
 
@@ -67,6 +61,12 @@ export interface SearchInputOption {
   styles: [
     `
       .search-input-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
         position: relative;
         height: 35px;
         border-color: #888;
@@ -83,6 +83,8 @@ export interface SearchInputOption {
       }
 
       .input {
+        flex: 1;
+
         box-sizing: border-box;
         height: 100%;
         width: 100%;
@@ -121,7 +123,9 @@ export class SearchInputComponent {
 
   getOptionLabel = (option: SearchInputOption) => option?.label;
 
-  constructor(private _state: RxState<{ control: FormControl<Skill | string> }>) {
+  constructor(
+    private _state: RxState<{ control: FormControl<Skill | string> }>
+  ) {
     this.value$ = this.control$.pipe(
       switchMap((control) => control.valueChanges),
       /* Filter duplicates. */
@@ -144,7 +148,6 @@ export class SearchInputComponent {
   exports: [SearchInputComponent],
   imports: [
     CommonModule,
-    FlexModule,
     MatButtonModule,
     MatAutocompleteModule,
     MatIconModule,
