@@ -90,6 +90,7 @@ jobs:
       - *yarn-install
       - name: Increase file watchers to avoid storybook warnings
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
         # Check if we should run e2e tests & percy review.
         # If no tests are ran or if we don't take any snapshots,
         # percy will fail.
@@ -100,9 +101,20 @@ jobs:
           SHOULD_RUN_E2E=$(yarn nx print-affected --base=deployed/marmicode-next \
             | yarn json projects | grep -c e2e && echo true || echo false)
           echo "::set-output name=should-run-e2e::$SHOULD_RUN_E2E"
-      - name: E2E
-        if: steps.should-run-e2e.outputs.should-run-e2e != false
+
+      # Run all E2E tests on main branch.
+      - name: All E2E
+        if: github.ref == 'refs/heads/main' && steps.should-run-e2e.outputs.should-run-e2e != false
         run: npx @percy/cli exec -- $(npm bin)/nx run-many --all --target=e2e --base=deployed/marmicode-next --browser=chrome
+
+      # Run affected E2E tests only on other branches.
+      # Cf. https://docs.percy.io/docs/partial-builds
+      - name: Affected E2E
+        if: github.ref != 'refs/heads/main' && steps.should-run-e2e.outputs.should-run-e2e != false
+        run: npx @percy/cli exec -- $(npm bin)/nx affected --target=e2e --base=deployed/marmicode-next --browser=chrome
+        env:
+          PERCY_PARTIAL_BUILD: 1
+
       - name: Check Percy Review
         if: steps.should-run-e2e.outputs.should-run-e2e != false
         # @hack on PR events, Percy uses the last commit hash instead of the merge commit hash.

@@ -76,11 +76,22 @@ jobs:
           \
             | yarn json projects | grep -c e2e && echo true || echo false)
           echo "::set-output name=should-run-e2e::$SHOULD_RUN_E2E"
-      - name: E2E
-        if: steps.should-run-e2e.outputs.should-run-e2e != false
+      - name: All E2E
+        if: >-
+          github.ref == 'refs/heads/main' &&
+          steps.should-run-e2e.outputs.should-run-e2e != false
         run: >-
           npx @percy/cli exec -- $(npm bin)/nx run-many --all --target=e2e
           --base=deployed/marmicode-next --browser=chrome
+      - name: Affected E2E
+        if: >-
+          github.ref != 'refs/heads/main' &&
+          steps.should-run-e2e.outputs.should-run-e2e != false
+        run: >-
+          npx @percy/cli exec -- $(npm bin)/nx affected --target=e2e
+          --base=deployed/marmicode-next --browser=chrome
+        env:
+          PERCY_PARTIAL_BUILD: 1
       - name: Check Percy Review
         if: steps.should-run-e2e.outputs.should-run-e2e != false
         run: >-
