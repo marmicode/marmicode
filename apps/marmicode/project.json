@@ -262,16 +262,17 @@
           "project": "marmicode"
         },
         "next": {
-          "robots": false,
-          "project": "marmicode-next"
+          "project": "marmicode-next",
+          "robots": false
         }
       },
       "options": {
         "robots": true,
         "commands": [
-          "if [ \"{args.robots}\" == false ]; then cp apps/marmicode/src/robots-next.txt dist/apps/marmicode/browser/robots.txt; fi",
+          "test {args.robots} = false && cp apps/marmicode/src/robots-next.txt dist/apps/marmicode/browser/robots.txt",
           "firebase --project {args.project} deploy"
-        ]
+        ],
+        "parallel": false
       },
       "dependsOn": ["prerender"]
     },
