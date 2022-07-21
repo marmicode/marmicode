@@ -115,8 +115,10 @@ jobs:
         env:
           PERCY_PARTIAL_BUILD: 1
 
+      # Check Percy Review on main branch only.
+      # On other branches, we'll let Percy status check do the job.
       - name: Check Percy Review
-        if: steps.should-run-e2e.outputs.should-run-e2e != false
+        if: github.ref == 'refs/heads/main' && steps.should-run-e2e.outputs.should-run-e2e != false
         # @hack on PR events, Percy uses the last commit hash instead of the merge commit hash.
         # We have to use PR_HEAD_SHA if present then fallback to GITHUB_SHA.
         run: PERCY_TOKEN=$PERCY_FULL_TOKEN npx @percy/cli build:wait --project marmicode/marmicode --commit "${PR_HEAD_SHA:-$GITHUB_SHA}" --fail-on-changes

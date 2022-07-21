@@ -93,7 +93,9 @@ jobs:
         env:
           PERCY_PARTIAL_BUILD: 1
       - name: Check Percy Review
-        if: steps.should-run-e2e.outputs.should-run-e2e != false
+        if: >-
+          github.ref == 'refs/heads/main' &&
+          steps.should-run-e2e.outputs.should-run-e2e != false
         run: >-
           PERCY_TOKEN=$PERCY_FULL_TOKEN npx @percy/cli build:wait --project
           marmicode/marmicode --commit "${PR_HEAD_SHA:-$GITHUB_SHA}"
