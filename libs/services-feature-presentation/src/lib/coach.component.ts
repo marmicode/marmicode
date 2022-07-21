@@ -1,7 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout';
 import { shareReplayWithRefCount } from '@marmicode/shared-utils';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -34,12 +33,7 @@ declare let require: any;
     >
       {{ name }}
     </h2>
-    <div
-      class="coach-title"
-      fxLayout="column"
-      fxLayout.gt-sm="row"
-      fxLayoutAlign="space-between"
-    >
+    <div class="coach-title">
       <p>Google Developer Expert<br />for Angular & Web Technologies</p>
       <p>eXtreme Programming Coach</p>
     </div>
@@ -85,7 +79,17 @@ declare let require: any;
       }
 
       .coach-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
         font-size: 1.2em;
+      }
+
+      @media screen and (min-width: 960px) {
+        .coach-title {
+          flex-direction: row;
+        }
       }
     `,
   ],
@@ -119,6 +123,6 @@ export class CoachComponent {
 @NgModule({
   declarations: [CoachComponent],
   exports: [CoachComponent],
-  imports: [CommonModule, DottyLineModule, FlexModule],
+  imports: [CommonModule, DottyLineModule],
 })
 export class CoachModule {}
