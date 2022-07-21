@@ -5,7 +5,6 @@ import {
   HostListener,
   NgModule,
 } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlockGroupModule } from '@marmicode/block-api';
 import { ResourceTitleBannerModule } from '@marmicode/resource-api';
@@ -32,16 +31,13 @@ import { SwipeModule } from './swipe.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-frame-page',
   template: `
-    <mc-page [info]="pageInfo$ | async" class="page" fxLayout="column">
+    <mc-page [info]="pageInfo$ | async" class="page">
       <!-- Swipable content. -->
-      <!-- Making this flex with fxFlex -->
-      <!-- in order to stick the timeline at the bottom. -->
       <div
         [slideIndex]="currentFrameIndex$ | async"
         (swipeLeft)="swipeLeft$.next()"
         (swipeRight)="swipeRight$.next()"
         class="swipable-content"
-        fxLayout="column"
         mcSlideAnimation
         mcSwipe
       >
@@ -74,13 +70,19 @@ import { SwipeModule } from './swipe.directive';
   styles: [
     `
       .page {
+        display: flex;
+        flex-direction: column;
+
         /* Set overflow to hidden to avoid glitches with mcSlideAnimation. */
         overflow: hidden;
       }
 
       .swipable-content {
+        display: flex;
+        flex-direction: column;
+
         /* Forcing flex-basis to auto as fxFlex sets it to 0px
-                 * and doesn't stretch when content is larger than page. */
+         * and doesn't stretch when content is larger than page. */
         flex: 1 1 auto;
       }
     `,
@@ -242,7 +244,6 @@ export class RecipeFramePageComponent {
   exports: [RecipeFramePageComponent],
   imports: [
     CommonModule,
-    FlexModule,
     PageModule,
     BlockGroupModule,
     RecipeTimelineModule,
