@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
 import {
   createBasicPageInfo,
@@ -30,13 +29,13 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
   selector: 'mc-resource-search-page',
   template: `
     <mc-page [info]="pageInfo">
-      <div fxLayout="row" fxLayoutAlign="center">
+      <div class="search-form-container">
         <mc-resource-search-form
           class="resource-search-form"
         ></mc-resource-search-form>
       </div>
 
-      <div fxLayout="row" fxLayoutAlign="center">
+      <div class="spinner-error-container">
         <mc-loading *ngIf="isLoading$ | async"></mc-loading>
         <mc-error *ngIf="resourcesNotFound$ | async">
           Sorry! The resources you are looking for haven't been cooked yet.
@@ -47,8 +46,7 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
       </div>
       <div
         *ngIf="(isLoading$ | async) === false"
-        fxLayout="row wrap"
-        fxLayoutAlign="center"
+        class="resource-card-container"
       >
         <mc-resource-card
           *ngFor="let resource of resources$ | async; trackBy: trackById"
@@ -60,6 +58,20 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
   `,
   styles: [
     `
+      .search-form-container,
+      .spinner-error-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .resource-card-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
       .resource-search-form {
         margin-top: 10px;
         margin-left: 5px;
@@ -90,34 +102,35 @@ export class ResourceSearchPageComponent {
     private _resourceSearchFacade: ResourceSearchFacade,
     private _transferStateHelper: TransferStateHelper
   ) {
-    const resourcesProgress$ = this._resourceSearchFacade.selectedSkillSlug$.pipe(
-      map((skillSlug) => skillSlug ?? resourceSearchRouterHelper.EVERYTHING),
-      switchMap((skillSlug, index) => {
-        let source$ =
-          skillSlug === resourceSearchRouterHelper.EVERYTHING
-            ? this._resourceRepository.getResources()
-            : this._resourceRepository.getResourcesBySkillSlug(skillSlug);
+    const resourcesProgress$ =
+      this._resourceSearchFacade.selectedSkillSlug$.pipe(
+        map((skillSlug) => skillSlug ?? resourceSearchRouterHelper.EVERYTHING),
+        switchMap((skillSlug, index) => {
+          let source$ =
+            skillSlug === resourceSearchRouterHelper.EVERYTHING
+              ? this._resourceRepository.getResources()
+              : this._resourceRepository.getResourcesBySkillSlug(skillSlug);
 
-        /* Transfer state for the first call only.
-         * We run this once to avoid reloading value from state multiple times when slug changes. */
-        if (index === 0) {
-          source$ = source$.pipe(
-            this._transferStateHelper.transfer('resourceSearchResult')
+          /* Transfer state for the first call only.
+           * We run this once to avoid reloading value from state multiple times when slug changes. */
+          if (index === 0) {
+            source$ = source$.pipe(
+              this._transferStateHelper.transfer('resourceSearchResult')
+            );
+          }
+
+          return source$.pipe(
+            catchError((err) => {
+              console.error(err);
+              return throwError(err);
+            }),
+            progressify({
+              ignoreComplete: true,
+            })
           );
-        }
-
-        return source$.pipe(
-          catchError((err) => {
-            console.error(err);
-            return throwError(err);
-          }),
-          progressify({
-            ignoreComplete: true,
-          })
-        );
-      }),
-      shareReplayWithRefCount()
-    );
+        }),
+        shareReplayWithRefCount()
+      );
 
     this.isLoading$ = resourcesProgress$.pipe(
       map((notification) => notification.type === 'started')
@@ -144,7 +157,6 @@ export class ResourceSearchPageComponent {
   imports: [
     CommonModule,
     ErrorModule,
-    FlexLayoutModule,
     LoadingModule,
     PageModule,
     ResourceCardModule,
