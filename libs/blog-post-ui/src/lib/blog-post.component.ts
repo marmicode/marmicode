@@ -5,7 +5,6 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout';
 import { MatDividerModule } from '@angular/material/divider';
 import { BlockGroupModule } from '@marmicode/block-api';
 import {
@@ -31,7 +30,7 @@ import { ShareButtonsModule } from './social/share-buttons.component';
     ></mc-resource-header>
 
     <!-- Top social share buttons. -->
-    <div fxLayout="row" fxLayoutAlign="center">
+    <div class="share-buttons-container">
       <mc-share-buttons
         [author]="author$ | async"
         [title]="title$ | async"
@@ -58,7 +57,7 @@ import { ShareButtonsModule } from './social/share-buttons.component';
 
     <mat-divider></mat-divider>
 
-    <div fxLayout="column" fxLayoutAlign="center center">
+    <div class="footer-buttons">
       <!-- Social share buttons. -->
       <mc-share-buttons
         [author]="author$ | async"
@@ -71,6 +70,12 @@ import { ShareButtonsModule } from './social/share-buttons.component';
   </div>`,
   styles: [
     `
+      .share-buttons-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+
       .content {
         margin: auto;
         max-width: 1000px;
@@ -84,6 +89,14 @@ import { ShareButtonsModule } from './social/share-buttons.component';
 
       .picture {
         max-width: 100%;
+      }
+
+      .footer-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
       }
     `,
   ],
@@ -124,7 +137,6 @@ export class BlogPostComponent {
   imports: [
     BlockGroupModule,
     CommonModule,
-    FlexModule,
     MatDividerModule,
     ResourceHeaderModule,
     ResourceTitleBannerModule,
