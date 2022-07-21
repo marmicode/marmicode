@@ -5,7 +5,6 @@ import {
   Input,
   NgModule,
 } from '@angular/core';
-import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
@@ -18,7 +17,7 @@ import { Frame } from './recipe-repository.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-timeline',
   template: `
-    <div class="line-container" fxFlex>
+    <div class="line-container">
       <hr class="line" />
       <hr [style.width.%]="progress$ | async" class="past-line" />
       <ul class="bullet-list">
@@ -54,6 +53,7 @@ import { Frame } from './recipe-repository.service';
 
       .line-container {
         display: block;
+        flex: 1;
         position: relative;
         margin-top: 20px;
         margin-right: 20px;
@@ -155,12 +155,6 @@ export class RecipeTimelineComponent {
 @NgModule({
   declarations: [RecipeTimelineComponent],
   exports: [RecipeTimelineComponent],
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatButtonModule,
-    MatIconModule,
-    FlexModule,
-  ],
+  imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule],
 })
 export class RecipeTimelineModule {}

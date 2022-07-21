@@ -48,7 +48,6 @@
     "@angular/core": "14.0.1",
     "@angular/elements": "14.0.1",
     "@angular/fire": "^7.4.1",
-    "@angular/flex-layout": "^10.0.0-beta.32",
     "@angular/forms": "14.0.1",
     "@angular/material": "14.0.1",
     "@angular/platform-browser": "14.0.1",
