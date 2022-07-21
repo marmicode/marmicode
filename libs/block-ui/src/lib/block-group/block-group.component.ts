@@ -4,14 +4,13 @@ import {
   Component,
   HostBinding,
   Input,
-  NgModule,
+  NgModule
 } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   BlockGroup,
   BlockType,
   createMarkdownBlock,
-  parseMarkdown,
+  parseMarkdown
 } from '@marmicode/block-core';
 import { RxState, select } from '@rx-angular/state';
 import { PushModule } from '@rx-angular/template';
@@ -19,7 +18,6 @@ import { map } from 'rxjs/operators';
 import { BlockModule } from '../block.component';
 import { extractHighlightableZones } from '../highlight/extract-highlightable-zones';
 import { HighlightZone } from '../highlight/highlight-zone';
-
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-block-group',
@@ -106,6 +104,6 @@ export class BlockGroupComponent {
 @NgModule({
   declarations: [BlockGroupComponent],
   exports: [BlockGroupComponent],
-  imports: [BlockModule, CommonModule, FlexLayoutModule, PushModule],
+  imports: [BlockModule, CommonModule, PushModule],
 })
 export class BlockGroupModule {}
