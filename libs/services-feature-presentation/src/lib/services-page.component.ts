@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { createBasicPageInfo, PageModule } from '@marmicode/shared-ui';
 import { ActionButtonModule } from './action-button.component';
@@ -31,7 +30,7 @@ import { WorkshopsButtonModule } from './workshops-button.component';
             you better understand how things work and choose the
             <strong>best ingredients</strong> for your apps.
           </p>
-          <div fxLayout="row" fxLayoutAlign="center">
+          <div class="workshops-button-container">
             <mc-workshops-button></mc-workshops-button>
           </div>
         </ng-container>
@@ -51,7 +50,7 @@ import { WorkshopsButtonModule } from './workshops-button.component';
             and the most <strong>pragmatic approach</strong> to produce
             <strong>high quality apps without compromising velocity</strong>.
           </p>
-          <div fxLayout="row" fxLayoutAlign="center">
+          <div class="actions-container">
             <mc-action-button
               icon="mail"
               label="GET IN TOUCH"
@@ -75,6 +74,13 @@ import { WorkshopsButtonModule } from './workshops-button.component';
       .services-presentation {
         background-color: white;
       }
+
+      .actions-container,
+      .workshops-button-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
     `,
   ],
 })
@@ -94,7 +100,6 @@ export class ServicesPageComponent {
     SlantModule,
     SectionModule,
     WorkshopsButtonModule,
-    FlexLayoutModule,
     MatButtonModule,
     ActionButtonModule,
     CoachModule,
