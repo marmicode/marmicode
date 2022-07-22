@@ -16,6 +16,7 @@ import { MarkdownStrongComponent } from './markdown-strong.component';
 import { MarkdownTextComponent } from './markdown-text.component';
 import { MarkdownTokenComponent } from './markdown-token.component';
 import { MarkdownTokensComponent } from './markdown-tokens.component';
+import { PushModule } from '@rx-angular/template';
 
 /**
  * Using a module because most of these components are recursive.
@@ -38,6 +39,6 @@ import { MarkdownTokensComponent } from './markdown-tokens.component';
     MarkdownTokensComponent,
   ],
   exports: [MarkdownTokensComponent],
-  imports: [CommonModule, HighlightLinkModule, CodeBlockModule],
+  imports: [CommonModule, HighlightLinkModule, CodeBlockModule, PushModule],
 })
 export class MarkdownModule {}

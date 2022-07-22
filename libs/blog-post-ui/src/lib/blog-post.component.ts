@@ -18,6 +18,7 @@ import { BlogPost } from './blog-post';
 import { FollowButtonModule } from './social/follow-button.component';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
 import { ShareButtonsModule } from './social/share-buttons.component';
+import { PushModule } from '@rx-angular/template';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,15 +26,15 @@ import { ShareButtonsModule } from './social/share-buttons.component';
   template: ` <div class="content">
     <!-- Resource title / badge / author etc... -->
     <mc-resource-header
-      [resourceInfo]="resourceInfo$ | async"
+      [resourceInfo]="resourceInfo$ | push"
       mode="large"
     ></mc-resource-header>
 
     <!-- Top social share buttons. -->
     <div class="share-buttons-container">
       <mc-share-buttons
-        [author]="author$ | async"
-        [title]="title$ | async"
+        [author]="author$ | push"
+        [title]="title$ | push"
         size="small"
       ></mc-share-buttons>
     </div>
@@ -41,8 +42,8 @@ import { ShareButtonsModule } from './social/share-buttons.component';
     <!-- Picture. -->
     <div class="picture-container">
       <img
-        *ngIf="pictureUri$ | async as pictureUri"
-        [alt]="title$ | async"
+        *ngIf="pictureUri$ | push as pictureUri"
+        [alt]="title$ | push"
         [src]="pictureUri"
         class="picture"
       />
@@ -50,7 +51,7 @@ import { ShareButtonsModule } from './social/share-buttons.component';
 
     <!-- Blog content. -->
     <mc-block-group
-      *ngFor="let blockGroup of blockGroups$ | async"
+      *ngFor="let blockGroup of blockGroups$ | push"
       [blockGroup]="blockGroup"
       desktopLayout="column"
     ></mc-block-group>
@@ -60,12 +61,12 @@ import { ShareButtonsModule } from './social/share-buttons.component';
     <div class="footer-buttons">
       <!-- Social share buttons. -->
       <mc-share-buttons
-        [author]="author$ | async"
-        [title]="title$ | async"
+        [author]="author$ | push"
+        [title]="title$ | push"
       ></mc-share-buttons>
 
       <!-- Follow button. -->
-      <mc-follow-button [author]="author$ | async"></mc-follow-button>
+      <mc-follow-button [author]="author$ | push"></mc-follow-button>
     </div>
   </div>`,
   styles: [
@@ -138,6 +139,7 @@ export class BlogPostComponent {
     BlockGroupModule,
     CommonModule,
     MatDividerModule,
+    PushModule,
     ResourceHeaderModule,
     ResourceTitleBannerModule,
     ShareButtonsModule,

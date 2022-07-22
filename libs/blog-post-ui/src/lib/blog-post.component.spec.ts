@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { PushModule } from '@rx-angular/template';
 import { BlogPost, createBlogPost } from './blog-post';
 import { BlogPostComponent } from './blog-post.component';
 
@@ -50,6 +51,7 @@ describe('BlogPostComponent', () => {
   function createComponent() {
     TestBed.configureTestingModule({
       declarations: [BlogPostComponent],
+      imports: [PushModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
     const fixture = TestBed.createComponent(BlogPostComponent);
