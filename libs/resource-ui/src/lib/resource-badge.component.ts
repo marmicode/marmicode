@@ -1,3 +1,4 @@
+import { PushModule } from '@rx-angular/template';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -16,8 +17,8 @@ import { map } from 'rxjs/operators';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-badge',
-  template: ` <span [style.backgroundColor]="badgeColor$ | async" class="badge">
-    {{ badgeText$ | async }}
+  template: ` <span [style.backgroundColor]="badgeColor$ | push" class="badge">
+    {{ badgeText$ | push }}
   </span>`,
   styles: [
     `
@@ -55,6 +56,6 @@ export class ResourceBadgeComponent {
 @NgModule({
   declarations: [ResourceBadgeComponent],
   exports: [ResourceBadgeComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, PushModule],
 })
 export class ResourceBadgeModule {}

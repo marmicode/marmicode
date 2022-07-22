@@ -1,3 +1,4 @@
+import { PushModule } from '@rx-angular/template';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -19,9 +20,9 @@ import { Frame } from './recipe-repository.service';
   template: `
     <div class="line-container">
       <hr class="line" />
-      <hr [style.width.%]="progress$ | async" class="past-line" />
+      <hr [style.width.%]="progress$ | push" class="past-line" />
       <ul class="bullet-list">
-        <li *ngFor="let bullet of bullets$ | async">
+        <li *ngFor="let bullet of bullets$ | push">
           <a
             [style.left.%]="bullet.position"
             [class.previous-bullet]="bullet.isPast"
@@ -155,6 +156,12 @@ export class RecipeTimelineComponent {
 @NgModule({
   declarations: [RecipeTimelineComponent],
   exports: [RecipeTimelineComponent],
-  imports: [CommonModule, RouterModule, MatButtonModule, MatIconModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatButtonModule,
+    MatIconModule,
+    PushModule,
+  ],
 })
 export class RecipeTimelineModule {}

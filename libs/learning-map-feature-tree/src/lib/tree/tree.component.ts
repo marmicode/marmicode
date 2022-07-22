@@ -1,3 +1,4 @@
+import { PushModule } from '@rx-angular/template';
 import { DataItem, ISpriteProperties } from '@amcharts/amcharts4/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -41,8 +42,8 @@ import { TreeConfig } from './tree-config';
   template: ` <div #treeContainer class="tree-container">
     <div
       #tree
-      [style.height.px]="treeHeight$ | async"
-      [style.width.px]="treeWidth$ | async"
+      [style.height.px]="treeHeight$ | push"
+      [style.width.px]="treeWidth$ | push"
       class="tree"
     ></div>
   </div>`,
@@ -222,6 +223,6 @@ export class TreeComponent implements OnInit {
 @NgModule({
   declarations: [TreeComponent],
   exports: [TreeComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, PushModule],
 })
 export class TreeModule {}

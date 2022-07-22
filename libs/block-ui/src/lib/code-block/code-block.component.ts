@@ -13,6 +13,7 @@ import {
 import { CodeBlock } from '@marmicode/block-core';
 import { Platform } from '@marmicode/shared-utils';
 import { RxState, select, selectSlice } from '@rx-angular/state';
+import { PushModule } from '@rx-angular/template';
 import * as Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-typescript';
@@ -34,12 +35,12 @@ import { HighlightZone } from '../highlight/highlight-zone';
   providers: [RxState],
   template: ` <div class="code-container">
     <pre
-      [ngClass]="languageClass$ | async"
+      [ngClass]="languageClass$ | push"
       [style.paddingTop.px]="verticalPadding"
       [style.paddingBottom.px]="verticalPadding"
       class="line-numbers preformatted"
     ><div
-      *ngFor="let style of lineNumberHighlightStyles$ | async"
+      *ngFor="let style of lineNumberHighlightStyles$ | push"
       [style.backgroundColor]="style.color"
       [style.top.px]="style.top"
       [style.height.px]="style.height"
@@ -47,11 +48,11 @@ import { HighlightZone } from '../highlight/highlight-zone';
     ></div><code
       #code
       class="code"
-      data-role="code-block">{{code$ | async}}</code></pre>
+      data-role="code-block">{{code$ | push}}</code></pre>
 
     <!-- Highlights. -->
     <div
-      *ngFor="let style of highlightStyles$ | async"
+      *ngFor="let style of highlightStyles$ | push"
       [style.backgroundColor]="style.color"
       [style.top.px]="style.top"
       [style.height.px]="style.height"
@@ -179,6 +180,6 @@ export class CodeBlockComponent implements AfterViewChecked {
 @NgModule({
   declarations: [CodeBlockComponent],
   exports: [CodeBlockComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, PushModule],
 })
 export class CodeBlockModule {}
