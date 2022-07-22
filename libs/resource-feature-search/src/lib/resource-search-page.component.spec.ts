@@ -1,57 +1,15 @@
-import { PushModule } from '@rx-angular/template';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ResourceSearchPageComponent } from './resource-search-page.component';
-import { EMPTY, Subject } from 'rxjs';
+import { TestBed } from '@angular/core/testing';
 import { TransferStateAdapter } from '@marmicode/shared-utils';
+import { PushModule } from '@rx-angular/template';
+import { EMPTY, Subject } from 'rxjs';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { ResourceRepository } from './resource-repository.service';
+import { ResourceSearchPageComponent } from './resource-search-page.component';
 
 describe('ResourceSearchComponent', () => {
-  let fixture: ComponentFixture<ResourceSearchPageComponent>;
-  let selectedSkillSlug$: Subject<string>;
-
-  beforeEach(async () => {
-    selectedSkillSlug$ = new Subject<string>();
-
-    return await TestBed.configureTestingModule({
-      declarations: [ResourceSearchPageComponent],
-      imports: [PushModule],
-      providers: [
-        {
-          provide: ResourceRepository,
-          useValue: {
-            getResources: jest.fn().mockReturnValue(EMPTY),
-            getResourcesBySkillSlug: jest.fn().mockReturnValue(EMPTY),
-          },
-        },
-        {
-          provide: ResourceSearchFacade,
-          useValue: {
-            selectedSkillSlug$,
-          },
-        },
-        {
-          provide: TransferStateAdapter,
-          useValue: {
-            hasKey: jest.fn().mockReturnValue(false),
-            isPrerendering: jest.fn().mockReturnValue(false),
-          },
-        },
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
-  });
-
-  let resourceRepository: ResourceRepository;
-  beforeEach(() => (resourceRepository = TestBed.inject(ResourceRepository)));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ResourceSearchPageComponent);
-    fixture.detectChanges();
-  });
-
   it('should not trigger any query until skillSlug parameter is available', () => {
+    const { resourceRepository } = createComponent();
     expect(resourceRepository.getResources).toBeCalledTimes(0);
     expect(resourceRepository.getResourcesBySkillSlug).toBeCalledTimes(0);
   });
@@ -61,9 +19,64 @@ describe('ResourceSearchComponent', () => {
    * and ngrx router emits the null value before destroying the component. */
   it('should search for all resources if skillSlug is null', () => {
     /* Suppose the skillSlug param is null. */
-    selectedSkillSlug$.next(null);
+    const { resourceRepository, setSkillSlug } = createComponent();
+    setSkillSlug(null);
 
     expect(resourceRepository.getResources).toBeCalledTimes(1);
     expect(resourceRepository.getResourcesBySkillSlug).toBeCalledTimes(0);
   });
+
+  function createComponent() {
+    const mockRepo: jest.Mocked<
+      Pick<ResourceRepository, 'getResources' | 'getResourcesBySkillSlug'>
+    > = {
+      getResources: jest.fn(),
+      getResourcesBySkillSlug: jest.fn(),
+    };
+    mockRepo.getResources.mockReturnValue(EMPTY);
+    mockRepo.getResourcesBySkillSlug.mockReturnValue(EMPTY);
+
+    const mockTransferStateAdapter: jest.Mocked<
+      Pick<TransferStateAdapter, 'hasKey' | 'isPrerendering'>
+    > = {
+      isPrerendering: jest.fn(),
+      hasKey: jest.fn(),
+    };
+    mockTransferStateAdapter.isPrerendering.mockReturnValue(false);
+    mockTransferStateAdapter.hasKey.mockReturnValue(false);
+
+    const selectedSkillSlug$ = new Subject<string>();
+
+    TestBed.configureTestingModule({
+      declarations: [ResourceSearchPageComponent],
+      imports: [PushModule],
+      providers: [
+        {
+          provide: ResourceRepository,
+          useValue: mockRepo,
+        },
+        {
+          provide: ResourceSearchFacade,
+          useValue: {
+            selectedSkillSlug$,
+          } as Partial<ResourceSearchFacade>,
+        },
+        {
+          provide: TransferStateAdapter,
+          useValue: mockTransferStateAdapter,
+        },
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    });
+
+    const fixture = TestBed.createComponent(ResourceSearchPageComponent);
+    fixture.detectChanges();
+
+    return {
+      resourceRepository: TestBed.inject(ResourceRepository),
+      setSkillSlug(skillSlug: string) {
+        selectedSkillSlug$.next(skillSlug);
+      },
+    };
+  }
 });
