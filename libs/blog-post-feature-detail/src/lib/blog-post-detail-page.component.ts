@@ -8,6 +8,7 @@ import {
   shareReplayWithRefCount,
   TransferStateHelper,
 } from '@marmicode/shared-utils';
+import { PushModule } from '@rx-angular/template';
 import { map, switchMap } from 'rxjs/operators';
 import { BlogPostRepository } from './blog-post-repository.service';
 import { blogPostToPageInfo } from './blog-post-to-page-info';
@@ -15,7 +16,7 @@ import { blogPostToPageInfo } from './blog-post-to-page-info';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-blog-post-detail-page',
-  template: ` <mc-page [info]="pageInfo$ | async">
+  template: ` <mc-page [info]="pageInfo$ | push">
     <mc-suspense [data$]="blogPost$">
       <ng-template #data let-blogPost>
         <mc-blog-post [blogPost]="blogPost"></mc-blog-post>
@@ -48,6 +49,12 @@ export class BlogPostDetailPageComponent {
 @NgModule({
   declarations: [BlogPostDetailPageComponent],
   exports: [BlogPostDetailPageComponent],
-  imports: [CommonModule, PageModule, BlogPostModule, SuspenseModule],
+  imports: [
+    CommonModule,
+    PageModule,
+    BlogPostModule,
+    SuspenseModule,
+    PushModule,
+  ],
 })
 export class BlogPostDetailPageModule {}

@@ -12,6 +12,7 @@ import {
 } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ZonelessFixesEffects } from '@marmicode/shared-utils';
 import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
@@ -29,8 +30,9 @@ import { UpdateEffects } from './update/update.effects';
     AnalyticsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    BrowserTransferStateModule,
     BrowserModule.withServerTransition({ appId: 'marmicode' }),
-    EffectsModule.forRoot([UpdateEffects]),
+    EffectsModule.forRoot([UpdateEffects, ZonelessFixesEffects]),
     HttpClientModule,
     LayoutModule,
     NavModule,
@@ -49,7 +51,6 @@ import { UpdateEffects } from './update/update.effects';
       }
     ),
     StoreRouterConnectingModule.forRoot(),
-    BrowserTransferStateModule,
   ],
   providers: [ScreenTrackingService],
   bootstrap: [AppComponent],

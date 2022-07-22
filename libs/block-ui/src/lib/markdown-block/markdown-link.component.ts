@@ -10,17 +10,17 @@ import { MarkdownBlockStateService } from './markdown-block-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-link',
   template: ` <mc-highlight-link
-      *ngIf="isHighlightLink$ | async"
-      [color]="color$ | async"
-      [href]="href$ | async"
-      ><mc-markdown-tokens [tokens]="tokens$ | async"></mc-markdown-tokens
+      *ngIf="isHighlightLink$ | push"
+      [color]="color$ | push"
+      [href]="href$ | push"
+      ><mc-markdown-tokens [tokens]="tokens$ | push"></mc-markdown-tokens
     ></mc-highlight-link>
     <a
-      *ngIf="(isHighlightLink$ | async) === false"
-      [href]="href$ | async"
+      *ngIf="(isHighlightLink$ | push) === false"
+      [href]="href$ | push"
       target="_blank"
     >
-      <mc-markdown-tokens [tokens]="tokens$ | async"></mc-markdown-tokens>
+      <mc-markdown-tokens [tokens]="tokens$ | push"></mc-markdown-tokens>
     </a>`,
   providers: [RxState],
 })

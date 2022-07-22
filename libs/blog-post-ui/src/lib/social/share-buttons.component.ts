@@ -1,3 +1,4 @@
+import { PushModule } from '@rx-angular/template';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -30,18 +31,18 @@ export type Size = 'normal' | 'small';
   template: `
     <share-buttons
       [autoSetMeta]="true"
-      [description]="twitterTitle$ | async"
-      [size]="buttonSize$ | async"
+      [description]="twitterTitle$ | push"
+      [size]="buttonSize$ | push"
       [theme]="theme"
       [include]="['twitter']"
       [style.display]="'inline-block'"
     ></share-buttons>
     <share-buttons
       [autoSetMeta]="true"
-      [description]="defaultTitle$ | async"
-      [title]="defaultTitle$ | async"
+      [description]="defaultTitle$ | push"
+      [title]="defaultTitle$ | push"
       [include]="buttons"
-      [size]="buttonSize$ | async"
+      [size]="buttonSize$ | push"
       [theme]="theme"
       [style.display]="'inline-block'"
     ></share-buttons>
@@ -133,6 +134,6 @@ export class ShareButtonsComponent {
 @NgModule({
   declarations: [ShareButtonsComponent],
   exports: [ShareButtonsComponent],
-  imports: [CommonModule, NgxShareButtonsModule],
+  imports: [CommonModule, NgxShareButtonsModule, PushModule],
 })
 export class ShareButtonsModule {}

@@ -13,6 +13,7 @@ import {
   shareReplayWithRefCount,
   TransferStateHelper,
 } from '@marmicode/shared-utils';
+import { PushModule } from '@rx-angular/template';
 import { combineLatest, Observable, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
@@ -36,20 +37,18 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
       </div>
 
       <div class="spinner-error-container">
-        <mc-loading *ngIf="isLoading$ | async"></mc-loading>
-        <mc-error *ngIf="resourcesNotFound$ | async">
+        <mc-loading *ngIf="isLoading$ | push"></mc-loading>
+        <mc-error *ngIf="resourcesNotFound$ | push">
           Sorry! The resources you are looking for haven't been cooked yet.
         </mc-error>
-        <mc-error *ngIf="error$ | async">
-          Oups! Something went wrong.
-        </mc-error>
+        <mc-error *ngIf="error$ | push"> Oups! Something went wrong. </mc-error>
       </div>
       <div
-        *ngIf="(isLoading$ | async) === false"
+        *ngIf="(isLoading$ | push) === false"
         class="resource-card-container"
       >
         <mc-resource-card
-          *ngFor="let resource of resources$ | async; trackBy: trackById"
+          *ngFor="let resource of resources$ | push; trackBy: trackById"
           [resource]="resource"
           class="resource-card"
         ></mc-resource-card>
@@ -159,6 +158,7 @@ export class ResourceSearchPageComponent {
     ErrorModule,
     LoadingModule,
     PageModule,
+    PushModule,
     ResourceCardModule,
     ResourceRepositoryModule,
     ResourceSearchFormModule,

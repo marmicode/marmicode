@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { readFirst } from '@nrwl/angular/testing';
+import { PushModule } from '@rx-angular/template';
 import { RecipeTimelineComponent } from './recipe-timeline.component';
 
 describe('RecipeTimelineComponent', () => {
@@ -10,6 +11,7 @@ describe('RecipeTimelineComponent', () => {
   beforeEach(async () => {
     return TestBed.configureTestingModule({
       declarations: [RecipeTimelineComponent],
+      imports: [PushModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });

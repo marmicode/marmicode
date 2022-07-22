@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { PushModule } from '@rx-angular/template';
 import { ShareButtonsComponent } from './share-buttons.component';
 
 describe('ShareButtonsComponent', () => {
@@ -21,6 +22,7 @@ describe('ShareButtonsComponent', () => {
   function createComponent() {
     TestBed.configureTestingModule({
       declarations: [ShareButtonsComponent],
+      imports: [PushModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
 

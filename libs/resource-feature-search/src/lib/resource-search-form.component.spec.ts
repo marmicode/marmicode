@@ -2,6 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Router } from '@angular/router';
+import { PushModule } from '@rx-angular/template';
 import { BehaviorSubject, of } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
@@ -19,7 +20,7 @@ describe('ResourceSearchFormComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ResourceSearchFormComponent],
-      imports: [MatAutocompleteModule],
+      imports: [MatAutocompleteModule, PushModule],
       providers: [
         {
           provide: ResourceSearchFacade,

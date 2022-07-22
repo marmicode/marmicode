@@ -18,6 +18,7 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
+import { PushModule } from '@rx-angular/template';
 
 export interface SearchInputOption {
   label: string;
@@ -33,7 +34,7 @@ export interface SearchInputOption {
       <mat-icon class="search-icon" color="primary">search</mat-icon>
 
       <input
-        [formControl]="control$ | async"
+        [formControl]="control$ | push"
         [matAutocomplete]="auto"
         [placeholder]="placeholder"
         aria-label="Search"
@@ -43,7 +44,7 @@ export interface SearchInputOption {
 
       <!-- Reset button. -->
       <button
-        *ngIf="value$ | async"
+        *ngIf="value$ | push"
         (click)="reset$.next()"
         class="reset-button"
         mat-icon-button
@@ -151,6 +152,7 @@ export class SearchInputComponent {
     MatButtonModule,
     MatAutocompleteModule,
     MatIconModule,
+    PushModule,
     ReactiveFormsModule,
   ],
 })
