@@ -96,9 +96,9 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           npx @percy/cli exec:start &
-          # Taking snapshots of assets just like it is done in Affected E2E and they have to be present in main branch.
-          npx @percy/cli upload apps/marmicode/src/assets
-          yarn nx run-many --all --target=e2e --base=deployed/marmicode-next --browser=chrome
+          # Uploading placeholder snapshot just like it is done in Affected E2E and they have to be present in main branch.
+          yarn ts-node tools/percy-upload-placeholder.ts
+          yarn nx run-many --all --target=e2e --browser=chrome
           npx @percy/cli exec:stop
 
       # Run affected E2E tests only on other branches.
@@ -107,9 +107,10 @@ jobs:
         if: github.ref != 'refs/heads/main'
         run: |
           npx @percy/cli exec:start &
-          # Taking snapshots of assets just in case no project is affected.
+          # Uploading placeholder snashot of assets just in case no project is affected.
           # If nothing is affected, the snapshots will be empty and the Percy status will fail on PR.
-          npx @percy/cli upload apps/marmicode/src/assets
+          # We can't use percy upload as it starts another separate Percy build.
+          yarn ts-node tools/percy-upload-placeholder.ts
           yarn nx affected --target=e2e --base=deployed/marmicode-next --browser=chrome
           npx @percy/cli exec:stop
         env:

@@ -5256,6 +5256,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@percy/sdk-utils@npm:^1.6.3":
+  version: 1.6.3
+  resolution: "@percy/sdk-utils@npm:1.6.3"
+  checksum: 94bfdc81e43d072d9c2ebaefaa16552c105da287e84ead9f5b6ffb897f2adf3594c7fe0872f9c30eedd3f816c5ef0eb138143dbcd2e9f03eb6a7a9a3eacae524
+  languageName: node
+  linkType: hard
+
 "@phenomnomnominal/tsquery@npm:4.1.1":
   version: 4.1.1
   resolution: "@phenomnomnominal/tsquery@npm:4.1.1"
@@ -20471,6 +20478,7 @@ __metadata:
     "@nrwl/storybook": 14.4.3
     "@nrwl/workspace": 14.4.3
     "@percy/cypress": ^3.1.2
+    "@percy/sdk-utils": ^1.6.3
     "@rx-angular/cdk": ^1.0.0-beta.3
     "@rx-angular/state": ^1.6.1
     "@rx-angular/template": ^1.0.0-beta.33

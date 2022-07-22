@@ -72,13 +72,12 @@ jobs:
         run: >
           npx @percy/cli exec:start &
 
-          # Taking snapshots of assets just like it is done in Affected E2E and
-          they have to be present in main branch.
+          # Uploading placeholder snapshot just like it is done in Affected E2E
+          and they have to be present in main branch.
 
-          npx @percy/cli upload apps/marmicode/src/assets
+          yarn ts-node tools/percy-upload-placeholder.ts
 
-          yarn nx run-many --all --target=e2e --base=deployed/marmicode-next
-          --browser=chrome
+          yarn nx run-many --all --target=e2e --browser=chrome
 
           npx @percy/cli exec:stop
       - name: Affected E2E
@@ -86,12 +85,15 @@ jobs:
         run: >
           npx @percy/cli exec:start &
 
-          # Taking snapshots of assets just in case no project is affected.
+          # Uploading placeholder snashot of assets just in case no project is
+          affected.
 
           # If nothing is affected, the snapshots will be empty and the Percy
           status will fail on PR.
 
-          npx @percy/cli upload apps/marmicode/src/assets
+          # We can't use percy upload as it starts another separate Percy build.
+
+          yarn ts-node tools/percy-upload-placeholder.ts
 
           yarn nx affected --target=e2e --base=deployed/marmicode-next
           --browser=chrome
