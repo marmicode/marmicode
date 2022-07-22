@@ -69,9 +69,18 @@ jobs:
           && sudo sysctl -p
       - name: All E2E
         if: github.ref == 'refs/heads/main'
-        run: >-
-          npx @percy/cli exec -- $(npm bin)/nx run-many --all --target=e2e
-          --base=deployed/marmicode-next --browser=chrome
+        run: >
+          npx @percy/cli exec:start &
+
+          # Taking snapshots of assets just like it is done in Affected E2E and
+          they have to be present in main branch.
+
+          npx @percy/cli upload apps/marmicode/src/assets
+
+          yarn nx run-many --all --target=e2e --base=deployed/marmicode-next
+          --browser=chrome
+
+          npx @percy/cli exec:stop
       - name: Affected E2E
         if: github.ref != 'refs/heads/main'
         run: >
