@@ -1,3 +1,4 @@
+import { PushModule } from '@rx-angular/template';
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { Component, HostListener, NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -18,7 +19,7 @@ import { NavMenuModule } from './nav-menu.component';
   template: `
     <!-- Toolbar. -->
     <mat-toolbar
-      [class.toolbar-hidden]="isScrollingDown$ | async"
+      [class.toolbar-hidden]="isScrollingDown$ | push"
       class="toolbar"
       color="primary"
     >
@@ -109,6 +110,12 @@ export class NavComponent {
 @NgModule({
   declarations: [NavComponent],
   exports: [NavComponent],
-  imports: [CommonModule, MatToolbarModule, NavMenuModule, RouterModule],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    NavMenuModule,
+    PushModule,
+    RouterModule,
+  ],
 })
 export class NavModule {}
