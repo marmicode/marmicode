@@ -11,6 +11,7 @@ import { ResourceTitleBannerModule } from '@marmicode/resource-api';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { createBasicPageInfo, PageModule } from '@marmicode/shared-ui';
 import { RxState, select } from '@rx-angular/state';
+import { PushModule } from '@rx-angular/template';
 import { combineLatest, merge, Subject } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -31,10 +32,10 @@ import { SwipeModule } from './swipe.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-recipe-frame-page',
   template: `
-    <mc-page [info]="pageInfo$ | async" class="page">
+    <mc-page [info]="pageInfo$ | push" class="page">
       <!-- Swipable content. -->
       <div
-        [slideIndex]="currentFrameIndex$ | async"
+        [slideIndex]="currentFrameIndex$ | push"
         (swipeLeft)="swipeLeft$.next()"
         (swipeRight)="swipeRight$.next()"
         class="swipable-content"
@@ -43,26 +44,26 @@ import { SwipeModule } from './swipe.directive';
       >
         <!-- Recipe's title. -->
         <mc-resource-title-banner
-          *ngIf="title$ | async as title"
-          [resourceType]="type$ | async"
+          *ngIf="title$ | push as title"
+          [resourceType]="type$ | push"
           [title]="title"
-          [subtitle]="currentFrameTitle$ | async"
+          [subtitle]="currentFrameTitle$ | push"
         ></mc-resource-title-banner>
 
         <!-- Frame's blocks with code, text etc... -->
         <mc-block-group
-          *ngIf="currentFrame$ | async as currentFrame"
+          *ngIf="currentFrame$ | push as currentFrame"
           [blockGroup]="currentFrame"
         ></mc-block-group>
       </div>
 
       <!-- THE timeline. -->
       <mc-recipe-timeline
-        *ngIf="frames$ | async as frames"
-        [currentFrameIndex]="currentFrameIndex$ | async"
+        *ngIf="frames$ | push as frames"
+        [currentFrameIndex]="currentFrameIndex$ | push"
         [frames]="frames"
-        [recipeSlug]="recipeSlug$ | async"
-        [nextFrameRoute]="nextFrameRoute$ | async"
+        [recipeSlug]="recipeSlug$ | push"
+        [nextFrameRoute]="nextFrameRoute$ | push"
       ></mc-recipe-timeline>
     </mc-page>
   `,
@@ -245,6 +246,7 @@ export class RecipeFramePageComponent {
     CommonModule,
     PageModule,
     BlockGroupModule,
+    PushModule,
     RecipeTimelineModule,
     ResourceTitleBannerModule,
     SlideAnimationModule,

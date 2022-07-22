@@ -1,3 +1,4 @@
+import { PushModule } from '@rx-angular/template';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
@@ -13,22 +14,22 @@ declare let require: any;
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-coach',
   template: `<section
-    [style.marginTop.px]="pictureRadius$ | async"
-    [style.paddingTop.px]="(isDesktop$ | async) ? 30 : 10"
+    [style.marginTop.px]="pictureRadius$ | push"
+    [style.paddingTop.px]="(isDesktop$ | push) ? 30 : 10"
     class="coach-container"
   >
     <img
       [src]="coachPictureUri"
       [alt]="name"
-      [style.top.px]="-(pictureRadius$ | async)"
-      [style.right]="picturePosition$ | async"
-      [style.height.px]="2 * (pictureRadius$ | async)"
-      [style.width.px]="2 * (pictureRadius$ | async)"
+      [style.top.px]="-(pictureRadius$ | push)"
+      [style.right]="picturePosition$ | push"
+      [style.height.px]="2 * (pictureRadius$ | push)"
+      [style.width.px]="2 * (pictureRadius$ | push)"
       class="coach-picture"
     />
     <h2
-      [style.position]="(isDesktop$ | async) ? 'absolute' : 'relative'"
-      [style.top.px]="(isDesktop$ | async) ? -40 : null"
+      [style.position]="(isDesktop$ | push) ? 'absolute' : 'relative'"
+      [style.top.px]="(isDesktop$ | push) ? -40 : null"
       class="mc-primary-text coach-name"
     >
       {{ name }}
@@ -123,6 +124,6 @@ export class CoachComponent {
 @NgModule({
   declarations: [CoachComponent],
   exports: [CoachComponent],
-  imports: [CommonModule, DottyLineModule],
+  imports: [CommonModule, DottyLineModule, PushModule],
 })
 export class CoachModule {}
