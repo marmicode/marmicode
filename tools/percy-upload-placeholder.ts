@@ -7,6 +7,5 @@ import utils from '@percy/sdk-utils';
  */
 utils.postSnapshot({
   url: 'https://fake-placeholder-url.marmicode.io',
-  domSnapshot:
-    '<h1>👋 Placeholder to make sure there is always a snapshot</h1>',
+  domSnapshot: '<h1>Placeholder to make sure there is always a snapshot</h1>',
 });
