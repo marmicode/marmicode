@@ -1,7 +1,8 @@
+import { PushModule } from '@rx-angular/template';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ResourceSearchPageComponent } from './resource-search-page.component';
-import { Subject } from 'rxjs';
+import { EMPTY, Subject } from 'rxjs';
 import { TransferStateAdapter } from '@marmicode/shared-utils';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { ResourceRepository } from './resource-repository.service';
@@ -15,12 +16,13 @@ describe('ResourceSearchComponent', () => {
 
     return await TestBed.configureTestingModule({
       declarations: [ResourceSearchPageComponent],
+      imports: [PushModule],
       providers: [
         {
           provide: ResourceRepository,
           useValue: {
-            getResources: jest.fn(),
-            getResourcesBySkillSlug: jest.fn(),
+            getResources: jest.fn().mockReturnValue(EMPTY),
+            getResourcesBySkillSlug: jest.fn().mockReturnValue(EMPTY),
           },
         },
         {

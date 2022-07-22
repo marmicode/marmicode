@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { createHighlightZone } from '../highlight/highlight-zone';
 import { CodeBlockComponent } from './code-block.component';
 import * as Prism from 'prismjs';
+import { PushModule } from '@rx-angular/template';
 
 describe('CodeBlockComponent', () => {
   let fixture: ComponentFixture<CodeBlockComponent>;
@@ -13,6 +14,7 @@ describe('CodeBlockComponent', () => {
   beforeEach(async () => {
     return TestBed.configureTestingModule({
       declarations: [CodeBlockComponent],
+      imports: [PushModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
