@@ -37,6 +37,7 @@ import { NavMenuItemModule } from './nav-menu-item.component';
         class="mc-hide-gt-sm"
         aria-label="menu"
         aria-haspopup="true"
+        data-role="menu-button"
         mat-button
       >
         <mat-icon>menu</mat-icon>
