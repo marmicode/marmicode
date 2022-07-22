@@ -1,3 +1,4 @@
+import { PushModule } from '@rx-angular/template';
 import {
   animate,
   state,
@@ -44,7 +45,7 @@ import { NavMenuItemModule } from './nav-menu-item.component';
 
     <!-- Overlay menu. -->
     <div
-      *ngIf="isMenuDisplayed$ | async"
+      *ngIf="isMenuDisplayed$ | push"
       @showHide
       class="vertical-menu mat-elevation-z1 mc-hide-gt-sm"
     >
@@ -106,8 +107,7 @@ export class NavMenuComponent {
     {
       icon: 'email',
       title: 'Newsletter',
-      url:
-        'https://gmail.us3.list-manage.com/subscribe?u=915d6ba70c9c00912ba326214&id=71255f30c7',
+      url: 'https://gmail.us3.list-manage.com/subscribe?u=915d6ba70c9c00912ba326214&id=71255f30c7',
     },
     {
       icon: 'school',
@@ -144,6 +144,7 @@ export class NavMenuComponent {
     MatIconModule,
     MatButtonModule,
     NavMenuItemModule,
+    PushModule,
   ],
 })
 export class NavMenuModule {}

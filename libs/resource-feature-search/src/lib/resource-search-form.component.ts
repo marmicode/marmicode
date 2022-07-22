@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
 import { RxState } from '@rx-angular/state';
+import { PushModule } from '@rx-angular/template';
 import { combineLatest, concat, defer, Observable, of } from 'rxjs';
 import {
   filter,
@@ -28,7 +29,7 @@ import {
   template: `
     <mc-search-input
       [control]="skillControl"
-      [options]="filteredSkills$ | async"
+      [options]="filteredSkills$ | push"
       placeholder="Choose a skill..."
     ></mc-search-input>
   `,
@@ -138,6 +139,7 @@ export class ResourceSearchFormComponent {
   exports: [ResourceSearchFormComponent],
   imports: [
     CommonModule,
+    PushModule,
     ResourceSearchStateModule,
     SkillRepositoryModule,
     SearchInputModule,

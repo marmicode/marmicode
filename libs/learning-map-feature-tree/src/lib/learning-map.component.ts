@@ -1,3 +1,4 @@
+import { PushModule } from '@rx-angular/template';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -27,7 +28,7 @@ import { getTopicsTreeConfig } from './topics-tree-utils';
     <mc-tree
       #tree
       [radius]="radius"
-      [treeConfig]="treeConfig$ | async"
+      [treeConfig]="treeConfig$ | push"
     ></mc-tree>`,
   styles: [
     `
@@ -57,6 +58,12 @@ export class LearningMapComponent {
 @NgModule({
   declarations: [LearningMapComponent],
   exports: [LearningMapComponent],
-  imports: [CommonModule, MatButtonModule, MatIconModule, TreeModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    PushModule,
+    TreeModule,
+  ],
 })
 export class LearningMapModule {}
