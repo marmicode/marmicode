@@ -6870,13 +6870,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/anymatch@npm:*":
-  version: 1.3.1
-  resolution: "@types/anymatch@npm:1.3.1"
-  checksum: 1eeb16286102a98eda415e1ade6fb980ff0a001fc21e777af8932001ebbd324d0d2fbbd5ef51c828346ff71847ba00af3f73d1dfea434efb9b72467b8cf0343a
-  languageName: node
-  linkType: hard
-
 "@types/babel__core@npm:^7.0.0, @types/babel__core@npm:^7.1.14":
   version: 7.1.19
   resolution: "@types/babel__core@npm:7.1.19"
@@ -7476,7 +7469,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/tapable@npm:*, @types/tapable@npm:^1, @types/tapable@npm:^1.0.5":
+"@types/tapable@npm:^1, @types/tapable@npm:^1.0.5":
   version: 1.0.8
   resolution: "@types/tapable@npm:1.0.8"
   checksum: b4b754dd0822c407b8f29ef6b766490721c276880f9e976d92ee2b3ef915f11a05a2442ae36c8978bcd872ad6bc833b0a2c4d267f2d611590668a366bad50652
@@ -7524,21 +7517,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack@npm:4.41.21":
-  version: 4.41.21
-  resolution: "@types/webpack@npm:4.41.21"
-  dependencies:
-    "@types/anymatch": "*"
-    "@types/node": "*"
-    "@types/tapable": "*"
-    "@types/uglify-js": "*"
-    "@types/webpack-sources": "*"
-    source-map: ^0.6.0
-  checksum: 5ff1ce5d5d0e791d127a63f0971e2ccc002e82fb22e424fcdf9c774321b6c6cdadcd1f49a85fd4304352d68fee4c9d5296b6529ded6f7be2ce63d99f7560f567
-  languageName: node
-  linkType: hard
-
-"@types/webpack@npm:^4.41.26, @types/webpack@npm:^4.41.8":
+"@types/webpack@npm:4.41.32, @types/webpack@npm:^4.41.26, @types/webpack@npm:^4.41.8":
   version: 4.41.32
   resolution: "@types/webpack@npm:4.41.32"
   dependencies:
@@ -20494,7 +20473,7 @@ __metadata:
     "@types/marked": ^1.2.1
     "@types/node": 18.0.0
     "@types/prismjs": ^1.16.1
-    "@types/webpack": 4.41.21
+    "@types/webpack": 4.41.32
     "@typescript-eslint/eslint-plugin": 4.31.2
     "@typescript-eslint/parser": 4.31.2
     apollo-angular: ^2.0.3
