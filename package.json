@@ -114,7 +114,7 @@
     "@percy/cypress": "^3.1.2",
     "@percy/sdk-utils": "^1.6.3",
     "@storybook/addon-essentials": "6.5.9",
-    "@storybook/addon-knobs": "~6.3.0",
+    "@storybook/addon-knobs": "~6.4.0",
     "@storybook/angular": "6.5.9",
     "@storybook/builder-webpack5": "6.5.9",
     "@storybook/manager-webpack5": "6.5.9",
