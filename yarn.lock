@@ -7180,9 +7180,9 @@ __metadata:
   linkType: hard
 
 "@types/marked@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@types/marked@npm:1.2.1"
-  checksum: f1be243b4e3f0635553a37a9104056d468ab2f7bb52cb408131965b9f44a3309ec5ea9b9b8270182b87bdf46144638f43765f23d1aaad8dc515ea2e221f010ef
+  version: 1.2.2
+  resolution: "@types/marked@npm:1.2.2"
+  checksum: 0fb37a9e3f41ec1fd3ec91553781fd07c21db4adcdda37d2ac18fa648ed7ae8280bd7f4c3a1f37bf2733d7769e959130330357e3fc8535ef10cf684c9570559a
   languageName: node
   linkType: hard
 
@@ -20390,11 +20390,11 @@ __metadata:
   linkType: hard
 
 "marked@npm:^1.2.7":
-  version: 1.2.7
-  resolution: "marked@npm:1.2.7"
+  version: 1.2.9
+  resolution: "marked@npm:1.2.9"
   bin:
     marked: bin/marked
-  checksum: 2b6ae709bfaadf9b13b2dcbbb3ba8650cc0337df8768d92b0d4e525140edff32020877d6d07dafceb15228b77d425dfba57f97333f5d594aee47040788ed4d72
+  checksum: c5a461b8081ee8f672197bf6503c49eba3906614eefea29f3188f5dac06a7fca45a0c2d97ed5d0910a1c96696c827f062ae5cc0b37c9a0acdaafb2acb1467a2f
   languageName: node
   linkType: hard
 
