@@ -7125,9 +7125,9 @@ __metadata:
   linkType: hard
 
 "@types/js-yaml@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@types/js-yaml@npm:4.0.0"
-  checksum: 09a992ce25da1db0aa321aac5952bebc6909ee350a288e1d9d2e729224c49895ff07044e98f83394264ce1c0f57ebab42f82c3be789a31e4fde6265f6d39eac0
+  version: 4.0.5
+  resolution: "@types/js-yaml@npm:4.0.5"
+  checksum: 7dcac8c50fec31643cc9d6444b5503239a861414cdfaa7ae9a38bc22597c4d850c4b8cec3d82d73b3fbca408348ce223b0408d598b32e094470dfffc6d486b4d
   languageName: node
   linkType: hard
 
