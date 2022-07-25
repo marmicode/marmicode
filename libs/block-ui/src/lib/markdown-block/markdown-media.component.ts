@@ -14,6 +14,7 @@ import { MarkdownTokens } from '@marmicode/block-core';
       *ngIf="!isVideo"
       [alt]="token.text"
       [src]="token.href"
+      loading="lazy"
       class="image"
     />
     <video
