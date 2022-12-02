@@ -1,27 +1,11 @@
-import {
-  ApplicationRef,
-  Compiler,
-  Injectable,
-  Injector,
-  NgZone,
-} from '@angular/core';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
+import { ApplicationRef, importProvidersFrom, Injectable, NgZone } from '@angular/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SwUpdate } from '@angular/service-worker';
 import { createEffect } from '@ngrx/effects';
-import {
-  defer,
-  EMPTY,
-  exhaustMap,
-  filter,
-  first,
-  switchMap,
-  timer,
-} from 'rxjs';
+import { defer, EMPTY, exhaustMap, filter, first, Observable, switchMap, timer } from 'rxjs';
 import { UpdateDialogComponent } from './update-dialog.component';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class UpdateEffects {
   checkForUpdate$ = createEffect(
     () =>
@@ -33,15 +17,18 @@ export class UpdateEffects {
         this._zone.runOutsideAngular(() =>
           this._swUpdate.isEnabled
             ? this._applicationRef.isStable.pipe(
-                first((isStable) => isStable === true),
-                switchMap(() => timer(0, 30000)),
-                switchMap(() => defer(() => this._swUpdate.checkForUpdate()))
-              )
+              first((isStable) => isStable === true),
+              switchMap(() => timer(0, 30000)),
+              switchMap(() => defer(() => this._swUpdate.checkForUpdate()))
+            )
             : EMPTY
         )
-      ),
+        /* @hack override type because createEffect's ConditionallyDisallowActionCreator
+         * type-safety seems to break if we return an empty observable
+         * or something that emits null or undefined. */
+      ) as Observable<unknown>,
     {
-      dispatch: false,
+      dispatch: false
     }
   );
 
@@ -56,30 +43,31 @@ export class UpdateEffects {
         switchMap(() => timer(0, 30000)),
         /* Wait for dialog to be close to avoid opening multiple dialogs. */
         exhaustMap(() =>
-          this._getDialogService()
+          this._matDialog
             .open(UpdateDialogComponent, {
-              backdropClass: 'mc-overlay-backdrop',
+              backdropClass: 'mc-overlay-backdrop'
             })
             .afterClosed()
         )
       ),
     {
-      dispatch: false,
+      dispatch: false
     }
   );
 
   constructor(
     private _applicationRef: ApplicationRef,
-    private _compiler: Compiler,
-    private _injector: Injector,
+    private _matDialog: MatDialog,
     private _swUpdate: SwUpdate,
     private _zone: NgZone
-  ) {}
-
-  private _getDialogService(): MatDialog {
-    const moduleRef = this._compiler
-      .compileModuleSync(MatDialogModule)
-      .create(this._injector);
-    return moduleRef.injector.get(MatDialog);
+  ) {
   }
+
+}
+
+export function provideUpdateEffects() {
+  return [
+    UpdateEffects,
+    importProvidersFrom(MatDialogModule)
+  ];
 }
