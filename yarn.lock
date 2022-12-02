@@ -6019,75 +6019,78 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ngrx/effects@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@ngrx/effects@npm:14.0.2"
+"@ngrx/effects@npm:15.0.0":
+  version: 15.0.0
+  resolution: "@ngrx/effects@npm:15.0.0"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
-    "@angular/core": ^14.0.0
-    "@ngrx/store": 14.0.2
+    "@angular/core": ^15.0.0
+    "@ngrx/store": 15.0.0
     rxjs: ^6.5.3 || ^7.5.0
-  checksum: 3b409b5f7517e6f84125958251372e11f3a4fe4ceb18f5bfe582f93a35fac361304107edf4e8c50b0d35757016061898a01c9012230cb4426a65995e5e31fd3a
+  checksum: a53d47965b8d8fd283cda0637eca34165e34e7e1dc01f56d3328618274420da9ed29891e425ead273ac0a6352f3c97c63e65a4b335fe6d640aae2de9c30e76e5
   languageName: node
   linkType: hard
 
-"@ngrx/entity@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@ngrx/entity@npm:14.0.2"
+"@ngrx/entity@npm:15.0.0":
+  version: 15.0.0
+  resolution: "@ngrx/entity@npm:15.0.0"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
-    "@angular/core": ^14.0.0
-    "@ngrx/store": 14.0.2
+    "@angular/core": ^15.0.0
+    "@ngrx/store": 15.0.0
     rxjs: ^6.5.3 || ^7.5.0
-  checksum: 0f51f938ff00c9c9a37b4ed3778f03e7d891aa66814de304132106926b8c2caa84b5cf332cd6956d9c60b72fab7cdfb4a900141174eadc8fb80b487d7fff3b4f
+  checksum: faa768470498f8ded60d1a258ac470e012853e529480b0adf4414784f440492a5e4c477a7cb2783b1ba1105b855b34db2444432ca3249486cd26bc5bc70c3c1d
   languageName: node
   linkType: hard
 
-"@ngrx/router-store@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@ngrx/router-store@npm:14.0.2"
+"@ngrx/router-store@npm:15.0.0":
+  version: 15.0.0
+  resolution: "@ngrx/router-store@npm:15.0.0"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
-    "@angular/common": ^14.0.0
-    "@angular/core": ^14.0.0
-    "@angular/router": ^14.0.0
-    "@ngrx/store": 14.0.2
+    "@angular/common": ^15.0.0
+    "@angular/core": ^15.0.0
+    "@angular/router": ^15.0.0
+    "@ngrx/store": 15.0.0
     rxjs: ^6.5.3 || ^7.5.0
-  checksum: 102455b4ecf62be0bc82ee3b18385f134a4292999b199c9ea98142629083841c476ad0220c5c5b94ad15718e45cd6ca3362d9ceb6e9ce019c83ccd219c1492ad
+  checksum: 210e31704146e7e3fb3bf181a3890b763eaf7d5ea7c3e3afc7393564a5105b467442c67588ef8a9f5f8b50157bbc42fdb8610c9b77c7147c03e180ba3a5a407d
   languageName: node
   linkType: hard
 
-"@ngrx/schematics@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@ngrx/schematics@npm:14.0.2"
-  checksum: ea712cbf3624f6a075342d1f8a0d879649ba13ad7b9bd33e0a27e26cc913c96d1a0edfdfd9463b69ade081183ae562d7393ef11170e9439b2680ecd6f096f720
+"@ngrx/schematics@npm:15.0.0":
+  version: 15.0.0
+  resolution: "@ngrx/schematics@npm:15.0.0"
+  peerDependencies:
+    "@angular-devkit/core": 15.0.0
+    "@angular-devkit/schematics": 14.2.9
+  checksum: db8513eeedfd234d06b55c9e99068213d9c04ac0498a25e57ab8d278236f8644933dc0697ef67040de4e49f0a1f2a23d7d4dae0078d5f46006919e11d02cf3e6
   languageName: node
   linkType: hard
 
-"@ngrx/store-devtools@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@ngrx/store-devtools@npm:14.0.2"
+"@ngrx/store-devtools@npm:15.0.0":
+  version: 15.0.0
+  resolution: "@ngrx/store-devtools@npm:15.0.0"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
-    "@ngrx/store": 14.0.2
+    "@ngrx/store": 15.0.0
     rxjs: ^6.5.3 || ^7.5.0
-  checksum: 1d33e33e55d17a6b4718c58ee20cd1efc13a9feed182c25e36038694b842527351ffc4dc01d40c67a1b989d6b3d9fadfed4211d12ea8233752f5c18ab25228d4
+  checksum: 5a7a91968646758e56e32f7ef23b01658770c2625559540fbc671f1cb917b038e01180c431d3450295b2c6884cc138cc6a5ae3a334bf6756432dd9b9dcd9d8d5
   languageName: node
   linkType: hard
 
-"@ngrx/store@npm:14.0.2":
-  version: 14.0.2
-  resolution: "@ngrx/store@npm:14.0.2"
+"@ngrx/store@npm:15.0.0":
+  version: 15.0.0
+  resolution: "@ngrx/store@npm:15.0.0"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
-    "@angular/core": ^14.0.0
+    "@angular/core": ^15.0.0
     rxjs: ^6.5.3 || ^7.5.0
-  checksum: 157f11431fa8a2120c97d0a975f508ab2f782b5780d31a5a16bcbf39105815f85c9817b5560c713be8fc4cad2ecba771578eb993a85e0fca3566962f08446600
+  checksum: 64a702b21bd0c9ae85520b408134fd860769d7de07fa047780cd2ecfca314c32c78d627169b0e316bca6a60e53c752fbd816b9e4fe2c3e8f91fe1bbfc9715d16
   languageName: node
   linkType: hard
 
@@ -22191,12 +22194,12 @@ __metadata:
     "@jscutlery/cypress-harness": ^0.3.12
     "@jscutlery/operators": ^0.1.7
     "@ngneat/until-destroy": ^7.3.2
-    "@ngrx/effects": 14.0.2
-    "@ngrx/entity": 14.0.2
-    "@ngrx/router-store": 14.0.2
-    "@ngrx/schematics": 14.0.2
-    "@ngrx/store": 14.0.2
-    "@ngrx/store-devtools": 14.0.2
+    "@ngrx/effects": 15.0.0
+    "@ngrx/entity": 15.0.0
+    "@ngrx/router-store": 15.0.0
+    "@ngrx/schematics": 15.0.0
+    "@ngrx/store": 15.0.0
+    "@ngrx/store-devtools": 15.0.0
     "@nguniversal/builders": 15.0.0
     "@nguniversal/express-engine": 15.0.0
     "@nrwl/angular": 15.2.4
