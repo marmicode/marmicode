@@ -2,13 +2,10 @@ import { PushModule } from '@rx-angular/template';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { shareReplayWithRefCount } from '@marmicode/shared-utils';
+import { getAssetUri, shareReplayWithRefCount } from '@marmicode/shared-utils';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DottyLineModule } from './dotty-line.component';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare let require: any;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -96,8 +93,7 @@ declare let require: any;
   ],
 })
 export class CoachComponent {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  coachPictureUri = require('!!file-loader!./coach.webp').default;
+  coachPictureUri = getAssetUri('coach.webp');
   name = 'Younes Jaaidi';
   isDesktop$ = this._breakpointObserver.observe('(min-width: 960px)').pipe(
     map(({ matches }) => matches),
