@@ -21,6 +21,13 @@ import { RouterModule } from '@angular/router';
     <ng-template #templateRef>
       <ng-content></ng-content>
     </ng-template> `,
+  styles: [
+    `
+        a {
+            text-decoration: none;
+        }
+    `
+  ]
 })
 export class LinkComponent {
   @Input() href: string;
