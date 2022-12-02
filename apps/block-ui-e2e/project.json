@@ -1,5 +1,5 @@
 {
-  "root": "apps/block-ui-e2e",
+  "name": "block-ui-e2e",
   "sourceRoot": "apps/block-ui-e2e/src",
   "projectType": "application",
   "targets": {

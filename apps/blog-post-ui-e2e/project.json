@@ -1,5 +1,5 @@
 {
-  "root": "apps/blog-post-ui-e2e",
+  "name": "blog-post-ui-e2e",
   "sourceRoot": "apps/blog-post-ui-e2e/src",
   "projectType": "application",
   "targets": {

@@ -1,5 +1,5 @@
 {
-  "root": "apps/marmicode-e2e",
+  "name": "marmicode-e2e",
   "sourceRoot": "apps/marmicode-e2e/src",
   "projectType": "application",
   "targets": {

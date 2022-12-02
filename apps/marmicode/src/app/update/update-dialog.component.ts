@@ -6,8 +6,8 @@ import {
   Inject,
   NgModule,
 } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
 import { SwUpdate } from '@angular/service-worker';
 
 @Component({
