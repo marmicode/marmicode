@@ -282,7 +282,8 @@
         "commands": [
           "mkdir -p dist",
           "ts-node --esm --skipProject apps/marmicode/update-routes.ts -o dist/marmicode-routes.txt"
-        ]
+        ],
+        "parallel": false
       }
     }
   },
