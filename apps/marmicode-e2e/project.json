@@ -6,9 +6,10 @@
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/marmicode-e2e/cypress.json",
+        "cypressConfig": "apps/marmicode-e2e/cypress.config.ts",
         "tsConfig": "apps/marmicode-e2e/tsconfig.e2e.json",
-        "devServerTarget": "marmicode:serve"
+        "devServerTarget": "marmicode:serve",
+        "testingType": "e2e"
       },
       "configurations": {
         "production": {

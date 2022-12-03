@@ -6,8 +6,8 @@
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/blog-post-ui-e2e/cypress.json",
-        "testingType": "component",
+        "cypressConfig": "apps/blog-post-ui-e2e/cypress.config.ts",
+        "testingType": "e2e",
         "tsConfig": "apps/blog-post-ui-e2e/tsconfig.e2e.json"
       }
     },
