@@ -96,7 +96,7 @@
     "@graphql-cli/codegen": "^1.17.4",
     "@graphql-codegen/schema-ast": "^1.17.4",
     "@graphql-codegen/typescript": "^1.17.4",
-    "@jscutlery/cypress-harness": "0.4.1",
+    "@jscutlery/cypress-harness": "0.4.2",
     "@ngrx/schematics": "15.0.0",
     "@ngrx/store-devtools": "15.0.0",
     "@nguniversal/builders": "15.0.0",

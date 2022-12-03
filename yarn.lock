@@ -4693,9 +4693,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jscutlery/cypress-harness@npm:0.4.1":
-  version: 0.4.1
-  resolution: "@jscutlery/cypress-harness@npm:0.4.1"
+"@jscutlery/cypress-harness@npm:0.4.2":
+  version: 0.4.2
+  resolution: "@jscutlery/cypress-harness@npm:0.4.2"
   dependencies:
     "@cypress/webpack-batteries-included-preprocessor": ^2.2.4
     "@cypress/webpack-preprocessor": ^5.0.0
@@ -4706,7 +4706,7 @@ __metadata:
     cypress-pipe: "*"
     tslib: 2.4.0
     zone.js: "*"
-  checksum: 044a82af2d62fab93ca3382212875338b059ac0b1d26e9885b9146a03a43a209f6d1b798fd1c7afcb4269659d45cfa213c983444c9ff0e00b27dcaf6e3599daa
+  checksum: 65e44eee197c58c969292572a054982edf313543ecabfd919baa6444348e3340a718d291b714dcf04afe0c10ea57e0603e6be0642957ac36b25a9b4798b2a4f6
   languageName: node
   linkType: hard
 
@@ -22140,7 +22140,7 @@ __metadata:
     "@graphql-cli/codegen": ^1.17.4
     "@graphql-codegen/schema-ast": ^1.17.4
     "@graphql-codegen/typescript": ^1.17.4
-    "@jscutlery/cypress-harness": 0.4.1
+    "@jscutlery/cypress-harness": 0.4.2
     "@jscutlery/operators": 0.2.0
     "@ngneat/until-destroy": ^7.3.2
     "@ngrx/effects": 15.0.0
