@@ -34,7 +34,9 @@ jobs:
       - name: Install
         run: yarn install --immutable
       - name: Build
-        run: yarn affected:prerender --base=deployed/marmicode-next
+        run: >-
+          yarn affected --target prerender --configuration next
+          --base=deployed/marmicode-next
       - name: Notify on failure
         uses: pioug/le-slack-message@v1.0.0
         if: failure()
