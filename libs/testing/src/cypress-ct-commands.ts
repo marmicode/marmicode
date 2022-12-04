@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import '@marmicode/testing/cypress-commands';
+import './cypress-commands';
 
 import { mount } from 'cypress/angular';
 
