@@ -4,7 +4,6 @@
     "block-api": "libs/block-api",
     "block-core": "libs/block-core",
     "block-ui": "libs/block-ui",
-    "block-ui-e2e": "apps/block-ui-e2e",
     "blog-post-feature-detail": "libs/blog-post-feature-detail",
     "blog-post-ui": "libs/blog-post-ui",
     "blog-post-ui-e2e": "apps/blog-post-ui-e2e",
