@@ -15,7 +15,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/blog-post-ui"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/blog-post-ui"
+      ],
       "options": {
         "jestConfig": "libs/blog-post-ui/jest.config.ts",
         "passWithNoTests": true
@@ -48,7 +50,32 @@
           "quiet": true
         }
       }
+    },
+    "component-test-build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "does-not-exist",
+        "index": "does-not-exist",
+        "main": "does-not-exist",
+        "polyfills": "libs/block-ui/src/polyfills.ts",
+        "tsConfig": "libs/block-ui/tsconfig.lib.json",
+        "styles": [
+          "libs/block-ui/cypress/support/styles.scss"
+        ]
+      }
+    },
+    "component-test": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "libs/blog-post-ui/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "blog-post-ui:component-test-build"
+      }
     }
   },
-  "tags": ["scope:blog-post", "type:ui"]
+  "tags": [
+    "scope:blog-post",
+    "type:ui"
+  ]
 }

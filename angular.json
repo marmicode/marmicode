@@ -6,7 +6,6 @@
     "block-ui": "libs/block-ui",
     "blog-post-feature-detail": "libs/blog-post-feature-detail",
     "blog-post-ui": "libs/blog-post-ui",
-    "blog-post-ui-e2e": "apps/blog-post-ui-e2e",
     "contentful-api": "libs/contentful-api",
     "learning-map-feature-tree": "libs/learning-map-feature-tree",
     "marmicode": "apps/marmicode",
