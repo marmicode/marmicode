@@ -277,7 +277,8 @@
           "serverTarget": "marmicode:server:next"
         }
       },
-      "dependsOn": ["update-routes"]
+      "dependsOn": ["update-routes"],
+      "defaultConfiguration": "production"
     },
     "deploy": {
       "executor": "nx:run-commands",

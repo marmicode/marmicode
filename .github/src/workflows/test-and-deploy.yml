@@ -75,7 +75,7 @@ jobs:
       - *cache
       - *yarn-install
       - name: Build
-        run: yarn affected:build --configuration production --base=deployed/marmicode-next
+        run: yarn affected:prerender --configuration production --base=deployed/marmicode-next
       - *slack-notify-failure
 
   e2e:
