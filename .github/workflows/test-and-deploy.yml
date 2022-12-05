@@ -35,8 +35,138 @@ jobs:
         run: yarn install --immutable
       - name: Build
         run: >-
-          yarn affected --target prerender --configuration next
+          yarn affected --target=prerender --configuration next
           --base=deployed/marmicode-next
+      - name: Notify on failure
+        uses: pioug/le-slack-message@v1.0.0
+        if: failure()
+        with:
+          JOB: ${{ toJson(job) }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v2
+        with:
+          path: |
+            .angular
+            libs/*/.angular
+            node_modules/.cache
+          key: cache
+      - uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          node-version: '18'
+      - name: Install
+        run: yarn install --immutable
+      - name: Lint
+        run: yarn affected --target=lint --base=deployed/marmicode-next
+      - name: Notify on failure
+        uses: pioug/le-slack-message@v1.0.0
+        if: failure()
+        with:
+          JOB: ${{ toJson(job) }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          node-version: '18'
+      - uses: actions/cache@v2
+        with:
+          path: |
+            .angular
+            libs/*/.angular
+            node_modules/.cache
+          key: cache
+      - name: Install
+        run: yarn install --immutable
+      - name: Test
+        run: yarn affected --target=test --base=deployed/marmicode-next
+      - name: Notify on failure
+        uses: pioug/le-slack-message@v1.0.0
+        if: failure()
+        with:
+          JOB: ${{ toJson(job) }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  component-test:
+    runs-on: ubuntu-latest
+    env:
+      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v2
+        with:
+          path: |
+            .angular
+            libs/*/.angular
+            node_modules/.cache
+          key: cache
+      - uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          node-version: '18'
+      - name: Install
+        run: yarn install --immutable
+      - name: All Component Tests
+        if: github.ref == 'refs/heads/main'
+        run: >
+          yarn percy exec:start &
+
+          # Uploading placeholder snapshot just like it is done in Affected
+          Component Tests and they have to be present in main branch.
+
+          yarn ts-node tools/percy-upload-placeholder.ts
+
+          yarn nx run-many --target=component-test --browser=chrome
+
+          yarn percy exec:stop
+      - name: Affected Component Tests
+        if: github.ref != 'refs/heads/main'
+        run: >
+          yarn percy exec:start &
+
+          # Uploading placeholder snashot of assets just in case no project is
+          affected.
+
+          # If nothing is affected, the snapshots will be empty and the Percy
+          status will fail on PR.
+
+          # We can't use percy upload as it starts another separate Percy build.
+
+          yarn ts-node tools/percy-upload-placeholder.ts
+
+          yarn nx affected --target=component-test
+          --base=deployed/marmicode-next --browser=chrome
+
+          yarn percy exec:stop
+        env:
+          PERCY_PARTIAL_BUILD: 1
+      - name: Check Percy Review
+        if: github.ref == 'refs/heads/main'
+        run: >-
+          PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project
+          marmicode/marmicode --commit "${PR_HEAD_SHA:-$GITHUB_SHA}"
+          --fail-on-changes
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      - name: Upload dist (Cypress videos / build output etc...) on failure
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: dist
+          path: dist
       - name: Notify on failure
         uses: pioug/le-slack-message@v1.0.0
         if: failure()
@@ -65,14 +195,10 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: Increase file watchers to avoid storybook warnings
-        run: >-
-          echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
-          && sudo sysctl -p
       - name: All E2E
         if: github.ref == 'refs/heads/main'
         run: >
-          npx @percy/cli exec:start &
+          yarn percy exec:start &
 
           # Uploading placeholder snapshot just like it is done in Affected E2E
           and they have to be present in main branch.
@@ -81,11 +207,11 @@ jobs:
 
           yarn nx run-many --all --target=e2e --browser=chrome
 
-          npx @percy/cli exec:stop
+          yarn percy exec:stop
       - name: Affected E2E
         if: github.ref != 'refs/heads/main'
         run: >
-          npx @percy/cli exec:start &
+          yarn percy exec:start &
 
           # Uploading placeholder snashot of assets just in case no project is
           affected.
@@ -100,15 +226,13 @@ jobs:
           yarn nx affected --target=e2e --base=deployed/marmicode-next
           --browser=chrome
 
-          npx @percy/cli exec:stop
+          yarn percy exec:stop
         env:
           PERCY_PARTIAL_BUILD: 1
       - name: Check Percy Review
-        if: >-
-          github.ref == 'refs/heads/main' &&
-          steps.should-run-e2e.outputs.should-run-e2e != false
+        if: github.ref == 'refs/heads/main'
         run: >-
-          PERCY_TOKEN=$PERCY_FULL_TOKEN npx @percy/cli build:wait --project
+          PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project
           marmicode/marmicode --commit "${PR_HEAD_SHA:-$GITHUB_SHA}"
           --fail-on-changes
         env:
@@ -125,72 +249,19 @@ jobs:
         with:
           JOB: ${{ toJson(job) }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/cache@v2
-        with:
-          path: |
-            .angular
-            libs/*/.angular
-            node_modules/.cache
-          key: cache
-      - uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          node-version: '18'
-      - name: Install
-        run: yarn install --immutable
-      - name: Lint
-        run: yarn affected:lint --base=deployed/marmicode-next
-      - name: Notify on failure
-        uses: pioug/le-slack-message@v1.0.0
-        if: failure()
-        with:
-          JOB: ${{ toJson(job) }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          node-version: '18'
-      - uses: actions/cache@v2
-        with:
-          path: |
-            .angular
-            libs/*/.angular
-            node_modules/.cache
-          key: cache
-      - name: Install
-        run: yarn install --immutable
-      - name: Test
-        run: yarn affected:test --base=deployed/marmicode-next
-      - name: Notify on failure
-        uses: pioug/le-slack-message@v1.0.0
-        if: failure()
-        with:
-          JOB: ${{ toJson(job) }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   deploy-marmicode-next:
-    name: 🚀 Marmicode Next
-    runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - lint
+      - test
+      - component-test
+      - e2e
+    name: 🚀 Marmicode Next
     environment:
       name: Marmicode Next
       url: https://marmicode-next.web.app
-    needs:
-      - build
-      - e2e
-      - lint
-      - test
     steps:
       - uses: actions/checkout@v2
         with:
@@ -234,17 +305,18 @@ jobs:
           JOB: ${{ toJson(job) }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   deploy-marmicode:
-    name: 🚀 Marmicode
-    runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - lint
+      - test
+      - component-test
+      - e2e
+    name: 🚀 Marmicode
     environment:
       name: Marmicode
       url: https://marmicode.io
-    needs:
-      - build
-      - e2e
-      - lint
-      - test
     steps:
       - uses: actions/checkout@v2
         with:
