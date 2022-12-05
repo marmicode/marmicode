@@ -175,14 +175,13 @@ jobs:
       - *setup-node
       - *yarn-install
 
-      - name: Add placeholder snapshot
+      - name: Add placeholder snapshot & finalize
         # Uploading placeholder snapshot of assets just in case no project is affected.
         # If nothing is affected, the snapshots will be empty and the Percy status will fail on PR.
         # We can't use percy upload as it starts another separate Percy build.
+        # This will also finalize percy parallel build without having to manually call:
+        # yarn percy build:finalize
         run: yarn percy exec --parallel -- yarn ts-node tools/percy-upload-placeholder.ts
-
-      - name: Finalize Percy parallel build
-        run: yarn percy build:finalize
 
       # Check Percy Review on main branch only.
       # On other branches, we'll let Percy status check do the job.

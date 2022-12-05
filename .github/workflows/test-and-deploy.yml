@@ -211,12 +211,10 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: Add placeholder snapshot
+      - name: Add placeholder snapshot & finalize
         run: >-
           yarn percy exec --parallel -- yarn ts-node
           tools/percy-upload-placeholder.ts
-      - name: Finalize Percy parallel build
-        run: yarn percy build:finalize
       - name: Check Percy Review
         if: github.ref == 'refs/heads/main'
         run: >-
