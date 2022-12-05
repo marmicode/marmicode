@@ -73,9 +73,12 @@
           "core-js/modules/es.symbol.iterator",
           "core-js/modules/web.dom-collections.for-each",
           "core-js/modules/web.dom-collections.iterator",
+          "fast-json-stable-stringify",
           "firebase/app",
           "graphql-tag",
+          "marked",
           "panzoom",
+          "prismjs",
           "raf",
           "xlsx",
           "zen-observable"
