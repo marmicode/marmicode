@@ -40,7 +40,7 @@ export interface NavMenuEntry {
       role="menuitem"
       routerLinkActive="active"
     >
-      <ng-container *ngTemplateOutlet="linkContent"></ng-container>
+        <ng-container *ngTemplateOutlet="linkContent"></ng-container>
     </a>
 
     <ng-template #linkContent>
@@ -50,31 +50,31 @@ export interface NavMenuEntry {
         class="icon"
         >{{ entry.icon }}</mat-icon
       >
-      <span [class.mc-primary-text]="color === 'primary'">{{
+      <span class="content" [class.mc-primary-text]="color === 'primary'">{{
         entry.title
       }}</span>
     </ng-template>
   `,
   styles: [
     `
-      a[mat-list-item] {
-        color: white;
-      }
+        .content {
+            color: white;
+        }
 
-      a.active {
-        color: var(--marmicode-accent-color);
-        cursor: default;
-      }
+        a.active .content {
+            color: var(--marmicode-accent-color);
+            cursor: default;
+        }
 
-      .icon {
-        margin-right: 10px;
-      }
+        .icon {
+            margin-right: 10px;
+        }
     `,
   ],
 })
 export class NavMenuItemComponent {
-  @Input() color: 'primary' | null;
-  @Input() entry: NavMenuEntry;
+  @Input() color?: 'primary';
+  @Input() entry?: NavMenuEntry;
   @Input() showIcon = true;
 }
 

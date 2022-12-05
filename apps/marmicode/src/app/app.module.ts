@@ -1,15 +1,9 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import {
-  AnalyticsModule,
-  ScreenTrackingService,
-} from '@angular/fire/analytics';
+import { AnalyticsModule, ScreenTrackingService } from '@angular/fire/analytics';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import {
-  BrowserModule,
-  BrowserTransferStateModule,
-} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ZonelessFixesEffects } from '@marmicode/shared-utils';
@@ -21,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { NavModule } from './nav.component';
-import { UpdateEffects } from './update/update.effects';
+import { provideUpdateEffects, UpdateEffects } from './update/update.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,29 +24,32 @@ import { UpdateEffects } from './update/update.effects';
     AnalyticsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    BrowserTransferStateModule,
     BrowserModule.withServerTransition({ appId: 'marmicode' }),
     EffectsModule.forRoot([UpdateEffects, ZonelessFixesEffects]),
     HttpClientModule,
     LayoutModule,
     NavModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
+      enabled: environment.production
     }),
     StoreModule.forRoot(
       {
-        router: routerReducer,
+        router: routerReducer
       },
       {
         runtimeChecks: {
           strictActionImmutability: true,
-          strictStateImmutability: true,
-        },
+          strictStateImmutability: true
+        }
       }
     ),
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot()
   ],
-  providers: [ScreenTrackingService],
-  bootstrap: [AppComponent],
+  providers: [
+    ScreenTrackingService,
+    provideUpdateEffects()
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
