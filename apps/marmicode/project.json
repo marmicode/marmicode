@@ -1,4 +1,5 @@
 {
+  "name": "marmicode",
   "projectType": "application",
   "generators": {},
   "sourceRoot": "apps/marmicode/src",
@@ -72,9 +73,12 @@
           "core-js/modules/es.symbol.iterator",
           "core-js/modules/web.dom-collections.for-each",
           "core-js/modules/web.dom-collections.iterator",
+          "fast-json-stable-stringify",
           "firebase/app",
           "graphql-tag",
+          "marked",
           "panzoom",
+          "prismjs",
           "raf",
           "xlsx",
           "zen-observable"
@@ -187,7 +191,7 @@
         "jestConfig": "apps/marmicode/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/apps/marmicode"]
+      "outputs": ["{workspaceRoot}/coverage/apps/marmicode"]
     },
     "server": {
       "executor": "@angular-devkit/build-angular:server",
@@ -220,6 +224,29 @@
           "sourceMap": false,
           "optimization": true
         }
+      },
+      "development": {},
+      "next": {
+        "outputHashing": "media",
+        "fileReplacements": [
+          {
+            "replace": "apps/marmicode/src/environments/environment.ts",
+            "with": "apps/marmicode/src/environments/environment.next.ts"
+          }
+        ],
+        "sourceMap": false,
+        "optimization": true
+      },
+      "production": {
+        "outputHashing": "media",
+        "fileReplacements": [
+          {
+            "replace": "apps/marmicode/src/environments/environment.ts",
+            "with": "apps/marmicode/src/environments/environment.prod.ts"
+          }
+        ],
+        "sourceMap": false,
+        "optimization": true
       }
     },
     "serve-ssr": {
@@ -253,7 +280,8 @@
           "serverTarget": "marmicode:server:next"
         }
       },
-      "dependsOn": ["update-routes"]
+      "dependsOn": ["update-routes"],
+      "defaultConfiguration": "production"
     },
     "deploy": {
       "executor": "nx:run-commands",
