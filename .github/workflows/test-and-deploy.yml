@@ -121,46 +121,15 @@ jobs:
         run: yarn install --immutable
       - name: All Component Tests
         if: github.ref == 'refs/heads/main'
-        run: >
-          yarn percy exec:start &
-
-          # Uploading placeholder snapshot just like it is done in Affected
-          Component Tests and they have to be present in main branch.
-
-          yarn ts-node tools/percy-upload-placeholder.ts
-
-          yarn nx run-many --target=component-test --browser=chrome
-
-          yarn percy exec:stop
+        run: >-
+          yarn percy exec --parallel -- yarn nx run-many --target=component-test
+          --browser=chrome
       - name: Affected Component Tests
         if: github.ref != 'refs/heads/main'
-        run: >
-          yarn percy exec:start &
-
-          # Uploading placeholder snashot of assets just in case no project is
-          affected.
-
-          # If nothing is affected, the snapshots will be empty and the Percy
-          status will fail on PR.
-
-          # We can't use percy upload as it starts another separate Percy build.
-
-          yarn ts-node tools/percy-upload-placeholder.ts
-
-          yarn nx affected --target=component-test
-          --base=deployed/marmicode-next --browser=chrome
-
-          yarn percy exec:stop
-        env:
-          PERCY_PARTIAL_BUILD: 1
-      - name: Check Percy Review
-        if: github.ref == 'refs/heads/main'
         run: >-
-          PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project
-          marmicode/marmicode --commit "${PR_HEAD_SHA:-$GITHUB_SHA}"
-          --fail-on-changes
-        env:
-          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          yarn percy exec --parallel --partial -- yarn nx affected
+          --target=component-test --browser=chrome
+          --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
@@ -197,46 +166,14 @@ jobs:
         run: yarn install --immutable
       - name: All E2E
         if: github.ref == 'refs/heads/main'
-        run: >
-          yarn percy exec:start &
-
-          # Uploading placeholder snapshot just like it is done in Affected E2E
-          and they have to be present in main branch.
-
-          yarn ts-node tools/percy-upload-placeholder.ts
-
-          yarn nx run-many --all --target=e2e --browser=chrome
-
-          yarn percy exec:stop
+        run: >-
+          yarn percy exec --parallel -- yarn nx run-many --target=e2e
+          --browser=chrome
       - name: Affected E2E
         if: github.ref != 'refs/heads/main'
-        run: >
-          yarn percy exec:start &
-
-          # Uploading placeholder snashot of assets just in case no project is
-          affected.
-
-          # If nothing is affected, the snapshots will be empty and the Percy
-          status will fail on PR.
-
-          # We can't use percy upload as it starts another separate Percy build.
-
-          yarn ts-node tools/percy-upload-placeholder.ts
-
-          yarn nx affected --target=e2e --base=deployed/marmicode-next
-          --browser=chrome
-
-          yarn percy exec:stop
-        env:
-          PERCY_PARTIAL_BUILD: 1
-      - name: Check Percy Review
-        if: github.ref == 'refs/heads/main'
         run: >-
-          PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project
-          marmicode/marmicode --commit "${PR_HEAD_SHA:-$GITHUB_SHA}"
-          --fail-on-changes
-        env:
-          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          yarn percy exec --parallel --partial -- yarn nx affected --target=e2e
+          --browser=chrome --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
@@ -249,6 +186,42 @@ jobs:
         with:
           JOB: ${{ toJson(job) }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  percy:
+    runs-on: ubuntu-latest
+    env:
+      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
+    needs:
+      - component-test
+      - e2e
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v2
+        with:
+          path: |
+            .angular
+            libs/*/.angular
+            node_modules/.cache
+          key: cache
+      - uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          node-version: '18'
+      - name: Install
+        run: yarn install --immutable
+      - name: Add placeholder snapshot
+        run: >-
+          yarn percy exec --parallel -- yarn ts-node
+          tools/percy-upload-placeholder.ts
+      - name: Finalize Percy parallel build
+        run: yarn percy build:finalize
+      - name: Check Percy Review
+        if: github.ref == 'refs/heads/main'
+        run: >-
+          PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project
+          marmicode/marmicode --fail-on-changes
   deploy-marmicode-next:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -258,6 +231,7 @@ jobs:
       - test
       - component-test
       - e2e
+      - percy
     name: 🚀 Marmicode Next
     environment:
       name: Marmicode Next
@@ -313,6 +287,7 @@ jobs:
       - test
       - component-test
       - e2e
+      - percy
     name: 🚀 Marmicode
     environment:
       name: Marmicode
