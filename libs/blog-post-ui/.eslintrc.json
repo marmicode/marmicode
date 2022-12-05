@@ -1,9 +1,15 @@
 {
-  "extends": ["../../.eslintrc.json"],
-  "ignorePatterns": ["!**/*"],
+  "extends": [
+    "../../.eslintrc.json"
+  ],
+  "ignorePatterns": [
+    "!**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "extends": [
         "plugin:@nrwl/nx/angular",
         "plugin:@angular-eslint/template/process-inline-templates"
@@ -11,7 +17,8 @@
       "parserOptions": {
         "project": [
           "libs/blog-post-ui/tsconfig.*?.json",
-          "libs/blog-post-ui/.storybook/tsconfig.json"
+          "libs/blog-post-ui/.storybook/tsconfig.json",
+          "libs/blog-post-ui/cypress/tsconfig.cy.json"
         ]
       },
       "rules": {
@@ -34,8 +41,12 @@
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@nrwl/nx/angular-template"],
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@nrwl/nx/angular-template"
+      ],
       "rules": {}
     }
   ]

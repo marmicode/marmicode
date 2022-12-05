@@ -1,15 +1,16 @@
+export { getAssetUri } from './lib/get-asset-uri';
 export { LocalStorage } from './lib/local-storage.service';
 export {
   dematerializeData,
   dematerializeError,
   MaterializedNotification,
-  materializeError,
+  materializeError
 } from './lib/operators/materialize-error';
 export {
   deprogressifyData,
   progressify,
   ProgressifyEvent,
-  ProgressifyEventType,
+  ProgressifyEventType
 } from './lib/operators/progressify';
 export { shareReplayWithRefCount } from './lib/operators/share-replay-with-ref-count';
 export { Platform } from './lib/platform.service';
