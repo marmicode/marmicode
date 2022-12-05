@@ -44,21 +44,32 @@ export interface NavMenuEntry {
     </a>
 
     <ng-template #linkContent>
-      <mat-icon
-        *ngIf="showIcon"
-        [class.mc-primary-text]="color === 'primary'"
-        class="icon"
+      <div class="mc-flex-row">
+        <mat-icon
+          *ngIf="showIcon"
+          [class.primary]="color === 'primary'"
+          class="icon"
         >{{ entry.icon }}</mat-icon
-      >
-      <span class="content" [class.mc-primary-text]="color === 'primary'">{{
-        entry.title
-      }}</span>
+        >
+        <span class="content" [class.primary]="color === 'primary'">{{
+          entry.title
+          }}</span>
+      </div>
     </ng-template>
   `,
   styles: [
     `
+        :host {
+            display: flex;
+            justify-content: center;
+        }
+        
         .content {
             color: white;
+        }
+        
+        .content.primary {
+            color: var(--marmicode-primary-color);
         }
 
         a.active .content {
