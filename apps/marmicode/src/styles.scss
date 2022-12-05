@@ -5,6 +5,7 @@ $marmicode-primary-color: map-get($marmicode-purple, 500);
 $marmicode-accent-color: map-get($marmicode-accent, 500);
 
 body {
+  --marmicode-primary-color: #{$marmicode-primary-color};
   --marmicode-accent-color: #{$marmicode-accent-color};
 }
 
