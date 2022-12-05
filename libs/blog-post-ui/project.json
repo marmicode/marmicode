@@ -57,10 +57,10 @@
         "outputPath": "does-not-exist",
         "index": "does-not-exist",
         "main": "does-not-exist",
-        "polyfills": "libs/block-ui/src/polyfills.ts",
-        "tsConfig": "libs/block-ui/tsconfig.lib.json",
+        "polyfills": "libs/blog-post-ui/src/polyfills.ts",
+        "tsConfig": "libs/blog-post-ui/tsconfig.lib.json",
         "styles": [
-          "libs/block-ui/cypress/support/styles.scss"
+          "libs/blog-post-ui/cypress/support/styles.scss"
         ]
       }
     },
