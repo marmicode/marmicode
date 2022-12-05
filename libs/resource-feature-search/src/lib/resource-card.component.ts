@@ -1,18 +1,9 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  NgModule,
-  OnChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, NgModule, OnChanges } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  getResourceTypeActionText,
-  getResourceTypeColor,
-} from '@marmicode/resource-core';
+import { getResourceTypeActionText, getResourceTypeColor } from '@marmicode/resource-core';
 import { ResourceHeaderModule } from '@marmicode/resource-ui';
 import { TriangleModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
@@ -23,63 +14,64 @@ import { SkillChipModule } from './skill-chip.component';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-card',
-  template: ` <mat-card class="card">
-    <article class="card-article">
-      <!-- Resource picture. -->
-      <img
-        *ngIf="resource.pictureUri"
-        [src]="resource.pictureUri"
-        [alt]="resource.title"
-        class="picture"
-        mat-card-image
-      />
+  template: `
+    <mat-card class="card">
+      <article class="card-article">
+        <!-- Resource picture. -->
+        <img
+          *ngIf="resource.pictureUri"
+          [src]="resource.pictureUri"
+          [alt]="resource.title"
+          class="picture"
+          mat-card-image
+        />
 
-      <!-- Resource triangle. -->
-      <mc-resource-type-triangle
-        [resourceType]="resource.type"
-      ></mc-resource-type-triangle>
+        <!-- Resource triangle. -->
+        <mc-resource-type-triangle
+          [resourceType]="resource.type"
+        ></mc-resource-type-triangle>
 
-      <!-- Resource header with author info. -->
-      <mc-resource-header [resourceInfo]="resource" class="header"></mc-resource-header>
+        <!-- Resource header with author info. -->
+        <mc-resource-header [resourceInfo]="resource" class="header"></mc-resource-header>
 
-      <mat-card-content class="card-content">
-        <p>
-          {{ resource.summary }}
-        </p>
+        <mat-card-content class="card-content">
+          <p>
+            {{ resource.summary }}
+          </p>
 
-        <!-- Skills. -->
-        <section *ngIf="resource.skills?.length > 0" class="list-container">
-          <h3 [style.color]="color" class="list-title">You Will Learn</h3>
-          <div class="skills">
-            <mc-skill-chip
-              *ngFor="let skill of resource.skills"
-              [skill]="skill"
-            ></mc-skill-chip>
-          </div>
-        </section>
+          <!-- Skills. -->
+          <section *ngIf="resource.skills?.length > 0" class="list-container">
+            <h3 [style.color]="color" class="list-title">You Will Learn</h3>
+            <div class="skills">
+              <mc-skill-chip
+                *ngFor="let skill of resource.skills"
+                [skill]="skill"
+              ></mc-skill-chip>
+            </div>
+          </section>
 
-        <!-- Required skills. -->
-        <section
-          *ngIf="resource.requiredSkills?.length > 0"
-          class="list-container"
-        >
-          <h3 [style.color]="color" class="list-title">Required Skills</h3>
-          <div class="skills">
-            <mc-skill-chip
-              *ngFor="let skill of resource.requiredSkills"
-              [skill]="skill"
-            ></mc-skill-chip>
-          </div>
-        </section>
-      </mat-card-content>
+          <!-- Required skills. -->
+          <section
+            *ngIf="resource.requiredSkills?.length > 0"
+            class="list-container"
+          >
+            <h3 [style.color]="color" class="list-title">Required Skills</h3>
+            <div class="skills">
+              <mc-skill-chip
+                *ngFor="let skill of resource.requiredSkills"
+                [skill]="skill"
+              ></mc-skill-chip>
+            </div>
+          </section>
+        </mat-card-content>
 
-      <mat-card-actions class="actions-container">
-        <mc-resource-card-action
-          [resource]="resource"
-        ></mc-resource-card-action>
-      </mat-card-actions>
-    </article>
-  </mat-card>`,
+        <mat-card-actions class="actions-container">
+          <mc-resource-card-action
+            [resource]="resource"
+          ></mc-resource-card-action>
+        </mat-card-actions>
+      </article>
+    </mat-card>`,
   styles: [
     `
         :host {
@@ -107,6 +99,7 @@ import { SkillChipModule } from './skill-chip.component';
 
         .picture {
             height: 200px;
+            width: 100%;
             object-fit: cover;
             /* Cancel useless margin as the resource header has a padding. */
             margin-bottom: 0;
@@ -137,8 +130,8 @@ import { SkillChipModule } from './skill-chip.component';
             justify-content: center;
             margin: 10px 0;
         }
-    `,
-  ],
+    `
+  ]
 })
 export class ResourceCardComponent implements OnChanges {
   @Input() resource: Resource;
@@ -163,7 +156,8 @@ export class ResourceCardComponent implements OnChanges {
     ResourceHeaderModule,
     ResourceTypeTriangleModule,
     SkillChipModule,
-    TriangleModule,
-  ],
+    TriangleModule
+  ]
 })
-export class ResourceCardModule {}
+export class ResourceCardModule {
+}
