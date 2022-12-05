@@ -82,56 +82,57 @@ import { SkillChipModule } from './skill-chip.component';
   </mat-card>`,
   styles: [
     `
-      :host {
-        display: flex;
-        flex-direction: column;
-        width: 550px;
-      }
+        :host {
+            display: flex;
+            flex-direction: column;
+            width: 550px;
+        }
 
-      .card {
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        flex: 1;
-      }
+        .card {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            flex: 1;
+        }
 
-      .card-content {
-        flex: 1;
-      }
+        .card-content {
+            flex: 1;
+        }
 
-      .card-article {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-      }
+        .card-article {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
 
-      .picture {
-        height: 200px;
-        object-fit: cover;
-        /* Cancel useless margin as the resource header has a padding. */
-        margin-bottom: 0;
-      }
+        .picture {
+            height: 200px;
+            object-fit: cover;
+            /* Cancel useless margin as the resource header has a padding. */
+            margin-bottom: 0;
+        }
 
-      .list-title {
-        font-family: Avenir, Roboto, 'Helvetica Neue', sans-serif;
-        text-transform: uppercase;
-      }
+        .list-title {
+            font-family: Avenir, Roboto, 'Helvetica Neue', sans-serif;
+            text-transform: uppercase;
+        }
 
-      .list-container {
-        margin-top: 30px;
-      }
+        .list-container {
+            margin-top: 30px;
+        }
 
-      .skills {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-      }
+        .skills {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
 
-      .actions-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-      }
+        .actions-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin: 10px 0;
+        }
     `,
   ],
 })
