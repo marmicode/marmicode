@@ -280,6 +280,12 @@
           "serverTarget": "marmicode:server:next"
         }
       },
+      "inputs": [
+        "{workspaceRoot}/dist/marmicode-routes.txt"
+      ],
+      "outputs": [
+        "{workspaceRoot}/dist/apps/marmicode"
+      ],
       "dependsOn": ["update-routes"],
       "defaultConfiguration": "production"
     },
