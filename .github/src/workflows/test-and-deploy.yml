@@ -72,8 +72,13 @@ x-deploy-base: &deploy-base
     - test
     - component-test
     - e2e
+    - percy
 
-
+x-percy-env: &percy-env
+  PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+  # The full token is used by `percy-poller`.
+  # You can find it here https://percy.io/api/v1/tokens after signing-in to Percy as an admin.
+  PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
 
 env:
   CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
@@ -114,11 +119,7 @@ jobs:
 
   component-test:
     runs-on: ubuntu-latest
-    env:
-      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-      # The full token is used by `percy-poller`.
-      # You can find it here https://percy.io/api/v1/tokens after signing-in to Percy as an admin.
-      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
+    env: *percy-env
     steps:
       - *checkout
       - *cache
@@ -128,89 +129,66 @@ jobs:
       # Run all Component Tests on main branch.
       - name: All Component Tests
         if: github.ref == 'refs/heads/main'
-        run: |
-          yarn percy exec:start &
-          # Uploading placeholder snapshot just like it is done in Affected Component Tests and they have to be present in main branch.
-          yarn ts-node tools/percy-upload-placeholder.ts
-          yarn nx run-many --target=component-test --browser=chrome
-          yarn percy exec:stop
+        run: yarn percy exec --parallel -- yarn nx run-many --target=component-test --browser=chrome
 
       # Run affected Component Tests only on other branches.
       # Cf. https://docs.percy.io/docs/partial-builds
       - name: Affected Component Tests
         if: github.ref != 'refs/heads/main'
-        run: |
-          yarn percy exec:start &
-          # Uploading placeholder snashot of assets just in case no project is affected.
-          # If nothing is affected, the snapshots will be empty and the Percy status will fail on PR.
-          # We can't use percy upload as it starts another separate Percy build.
-          yarn ts-node tools/percy-upload-placeholder.ts
-          yarn nx affected --target=component-test --base=deployed/marmicode-next --browser=chrome
-          yarn percy exec:stop
-        env:
-          PERCY_PARTIAL_BUILD: 1
+        run: yarn percy exec --parallel --partial -- yarn nx affected --target=component-test --browser=chrome --base=deployed/marmicode-next
 
-      # Check Percy Review on main branch only.
-      # On other branches, we'll let Percy status check do the job.
-      - name: Check Percy Review
-        if: github.ref == 'refs/heads/main'
-        # @hack on PR events, Percy uses the last commit hash instead of the merge commit hash.
-        # We have to use PR_HEAD_SHA if present then fallback to GITHUB_SHA.
-        run: PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project marmicode/marmicode --commit "${PR_HEAD_SHA:-$GITHUB_SHA}" --fail-on-changes
-        env:
-          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
       - *upload-dist-on-failure
       - *slack-notify-failure
 
   e2e:
     runs-on: ubuntu-latest
-    env:
-      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-      # The full token is used by `percy-poller`.
-      # You can find it here https://percy.io/api/v1/tokens after signing-in to Percy as an admin.
-      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
+    env: *percy-env
     steps:
       - *checkout
       - *cache
       - *setup-node
       - *yarn-install
 
-      # Run all E2E tests on main branch.
+      # Run all E2E on main branch.
       - name: All E2E
         if: github.ref == 'refs/heads/main'
-        run: |
-          yarn percy exec:start &
-          # Uploading placeholder snapshot just like it is done in Affected E2E and they have to be present in main branch.
-          yarn ts-node tools/percy-upload-placeholder.ts
-          yarn nx run-many --all --target=e2e --browser=chrome
-          yarn percy exec:stop
+        run: yarn percy exec --parallel -- yarn nx run-many --target=e2e --browser=chrome
 
-      # Run affected E2E tests only on other branches.
+      # Run affected E2E only on other branches.
       # Cf. https://docs.percy.io/docs/partial-builds
       - name: Affected E2E
         if: github.ref != 'refs/heads/main'
-        run: |
-          yarn percy exec:start &
-          # Uploading placeholder snashot of assets just in case no project is affected.
-          # If nothing is affected, the snapshots will be empty and the Percy status will fail on PR.
-          # We can't use percy upload as it starts another separate Percy build.
-          yarn ts-node tools/percy-upload-placeholder.ts
-          yarn nx affected --target=e2e --base=deployed/marmicode-next --browser=chrome
-          yarn percy exec:stop
-        env:
-          PERCY_PARTIAL_BUILD: 1
+        run: yarn percy exec --parallel --partial -- yarn nx affected --target=e2e --browser=chrome --base=deployed/marmicode-next
+
+      - *upload-dist-on-failure
+      - *slack-notify-failure
+
+  percy:
+    runs-on: ubuntu-latest
+    env: *percy-env
+    needs:
+      - component-test
+      - e2e
+    steps:
+      - *checkout
+      - *cache
+      - *setup-node
+      - *yarn-install
+
+      - name: Add placeholder snapshot
+        # Uploading placeholder snapshot of assets just in case no project is affected.
+        # If nothing is affected, the snapshots will be empty and the Percy status will fail on PR.
+        # We can't use percy upload as it starts another separate Percy build.
+        run: yarn percy exec --parallel -- yarn ts-node tools/percy-upload-placeholder.ts
+
+      - name: Finalize Percy parallel build
+        run: yarn percy build:finalize
 
       # Check Percy Review on main branch only.
       # On other branches, we'll let Percy status check do the job.
       - name: Check Percy Review
         if: github.ref == 'refs/heads/main'
-        # @hack on PR events, Percy uses the last commit hash instead of the merge commit hash.
-        # We have to use PR_HEAD_SHA if present then fallback to GITHUB_SHA.
-        run: PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project marmicode/marmicode --commit "${PR_HEAD_SHA:-$GITHUB_SHA}" --fail-on-changes
-        env:
-          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-      - *upload-dist-on-failure
-      - *slack-notify-failure
+        run: PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project marmicode/marmicode --fail-on-changes
 
   deploy-marmicode-next:
     <<: *deploy-base
