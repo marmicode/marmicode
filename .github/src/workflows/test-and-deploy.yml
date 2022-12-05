@@ -17,10 +17,10 @@ x-steps:
     uses: actions/cache@v2
     with:
       path: |
-        .angular/cache
-        .yarn-cache
-        node_modules
-      key: yarn-cache
+        .angular
+        libs/*/.angular
+        node_modules/.cache
+      key: cache
 
   checkout: &checkout
     uses: actions/checkout@v2
@@ -38,9 +38,10 @@ x-steps:
       tags: true
 
   setup-node: &setup-node
-    uses: actions/setup-node@v1
+    uses: actions/setup-node@v3
     with:
-      node-version: '16.x'
+      cache: yarn
+      node-version: '18'
 
   slack-notify-failure: &slack-notify-failure
     name: Notify on failure
@@ -64,15 +65,14 @@ x-steps:
 
 env:
   CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
-  YARN_CACHE_FOLDER: .yarn-cache
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - *checkout
-      - *setup-node
       - *cache
+      - *setup-node
       - *yarn-install
       - name: Build
         run: yarn affected --target prerender --configuration next --base=deployed/marmicode-next
@@ -87,8 +87,8 @@ jobs:
       PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
     steps:
       - *checkout
-      - *setup-node
       - *cache
+      - *setup-node
       - *yarn-install
       - name: Increase file watchers to avoid storybook warnings
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
@@ -134,8 +134,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - *checkout
-      - *setup-node
       - *cache
+      - *setup-node
       - *yarn-install
       - name: Lint
         run: yarn affected:lint --base=deployed/marmicode-next
@@ -166,8 +166,8 @@ jobs:
       - test
     steps:
       - *checkout
-      - *setup-node
       - *cache
+      - *setup-node
       - *yarn-install
       - name: Deploy
         env:
@@ -193,8 +193,8 @@ jobs:
       - test
     steps:
       - *checkout
-      - *setup-node
       - *cache
+      - *setup-node
       - *yarn-install
       - name: Deploy
         env:
