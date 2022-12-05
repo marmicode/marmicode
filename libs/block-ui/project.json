@@ -1,4 +1,5 @@
 {
+  "name": "block-ui",
   "projectType": "library",
   "sourceRoot": "libs/block-ui/src",
   "prefix": "marmicode",
@@ -18,7 +19,9 @@
         "jestConfig": "libs/block-ui/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/block-ui"]
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/block-ui"
+      ]
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
@@ -36,7 +39,9 @@
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputDir": "dist/storybook/recipe-ui",
         "configDir": "libs/block-ui/.storybook",
@@ -48,8 +53,30 @@
           "quiet": true
         }
       }
+    },
+    "component-test-build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "does-not-exist",
+        "index": "does-not-exist",
+        "main": "does-not-exist",
+        "polyfills": "libs/block-ui/src/polyfills.ts",
+        "tsConfig": "libs/block-ui/tsconfig.lib.json"
+      }
+    },
+    "component-test": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "libs/block-ui/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "block-ui:component-test-build"
+      }
     }
   },
   "generators": {},
-  "tags": ["scope:block", "type:ui"]
+  "tags": [
+    "scope:block",
+    "type:ui"
+  ]
 }

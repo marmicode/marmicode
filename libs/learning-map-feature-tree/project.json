@@ -1,4 +1,5 @@
 {
+  "name": "learning-map-feature-tree",
   "projectType": "library",
   "sourceRoot": "libs/learning-map-feature-tree/src",
   "prefix": "mc",
@@ -18,7 +19,7 @@
         "jestConfig": "libs/learning-map-feature-tree/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/learning-map-feature-tree"]
+      "outputs": ["{workspaceRoot}/coverage/libs/learning-map-feature-tree"]
     }
   },
   "generators": {},
