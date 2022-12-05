@@ -85,6 +85,7 @@ env:
 
 jobs:
   build:
+    name: 📦 Build
     runs-on: ubuntu-latest
     steps:
       - *checkout
@@ -96,6 +97,7 @@ jobs:
       - *slack-notify-failure
 
   lint:
+    name: 🧹 Lint
     runs-on: ubuntu-latest
     steps:
       - *checkout
@@ -107,6 +109,7 @@ jobs:
       - *slack-notify-failure
 
   test:
+    name: ✅ Test
     runs-on: ubuntu-latest
     steps:
       - *checkout
@@ -118,6 +121,7 @@ jobs:
       - *slack-notify-failure
 
   component-test:
+    name: ✅ Component Test
     runs-on: ubuntu-latest
     env: *percy-env
     steps:
@@ -141,6 +145,7 @@ jobs:
       - *slack-notify-failure
 
   e2e:
+    name: ✅ End-to-End
     runs-on: ubuntu-latest
     env: *percy-env
     steps:
@@ -164,6 +169,7 @@ jobs:
       - *slack-notify-failure
 
   percy:
+    name: 🖼 Finalize Percy
     runs-on: ubuntu-latest
     env: *percy-env
     needs:
