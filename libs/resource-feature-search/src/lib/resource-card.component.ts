@@ -40,7 +40,7 @@ import { SkillChipModule } from './skill-chip.component';
       ></mc-resource-type-triangle>
 
       <!-- Resource header with author info. -->
-      <mc-resource-header [resourceInfo]="resource"></mc-resource-header>
+      <mc-resource-header [resourceInfo]="resource" class="header"></mc-resource-header>
 
       <mat-card-content class="card-content">
         <p>
@@ -110,6 +110,10 @@ import { SkillChipModule } from './skill-chip.component';
             object-fit: cover;
             /* Cancel useless margin as the resource header has a padding. */
             margin-bottom: 0;
+        }
+
+        .header {
+            padding: 10px 16px;
         }
 
         .list-title {
