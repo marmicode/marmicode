@@ -1,4 +1,5 @@
 {
+  "name": "resource-api",
   "projectType": "library",
   "sourceRoot": "libs/resource-api/src",
   "prefix": "mc",
@@ -18,7 +19,7 @@
         "jestConfig": "libs/resource-api/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/resource-api"]
+      "outputs": ["{workspaceRoot}/coverage/libs/resource-api"]
     }
   },
   "generators": {},

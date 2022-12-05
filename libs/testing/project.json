@@ -1,4 +1,5 @@
 {
+  "name": "testing",
   "sourceRoot": "libs/testing/src",
   "projectType": "library",
   "targets": {
@@ -11,7 +12,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/testing"],
+      "outputs": ["{workspaceRoot}/coverage/libs/testing"],
       "options": {
         "jestConfig": "libs/testing/jest.config.ts",
         "passWithNoTests": true
