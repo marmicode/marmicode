@@ -9,11 +9,12 @@
       "options": {
         "cacheableOperations": [
           "build",
+          "build-storybook",
+          "component-test",
+          "e2e",
           "lint",
           "prerender",
-          "test",
-          "build-storybook",
-          "component-test"
+          "test"
         ],
         "parallel": 1,
         "accessToken": "MzU3NTdhZjQtMWJlZC00ZTgyLWI2MTItYzkyNTgzYzU5MWMxfHJlYWQtd3JpdGU="
