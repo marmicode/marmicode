@@ -9,6 +9,7 @@ on:
   # Allow manual trigger.
   workflow_dispatch: {}
 
+jobs:
   deploy:
     name: 🚀 Marmicode
     runs-on: ubuntu-latest
