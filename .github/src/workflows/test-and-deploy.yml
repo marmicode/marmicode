@@ -41,14 +41,6 @@ x-steps:
       cache: yarn
       node-version: '18'
 
-  slack-notify-failure: &slack-notify-failure
-    name: Notify on failure
-    uses: pioug/le-slack-message@v1.0.0
-    if: failure()
-    with:
-      JOB: ${{ toJson(job) }}
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
   upload-dist-on-failure: &upload-dist-on-failure
     name: Upload dist (Cypress videos / build output etc...) on failure
     uses: actions/upload-artifact@v2
@@ -68,15 +60,14 @@ x-deploy-base: &deploy-base
     - build
     - lint
     - test
-    - component-test
-    - e2e
-    - percy
+    - ct-and-e2e
 
 x-percy-env: &percy-env
   PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
   # The full token is used by `percy-poller`.
   # You can find it here https://percy.io/api/v1/tokens after signing-in to Percy as an admin.
   PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
+  PERCY_PARALLEL_TOTAL: 4
 
 env:
   CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
@@ -92,7 +83,6 @@ jobs:
       - *yarn-install
       - name: Build
         run: yarn affected --target=prerender --configuration next --base=deployed/marmicode-next
-      - *slack-notify-failure
 
   lint:
     name: 🧹 Lint
@@ -104,7 +94,6 @@ jobs:
       - *yarn-install
       - name: Lint
         run: yarn affected --target=lint --base=deployed/marmicode-next
-      - *slack-notify-failure
 
   test:
     name: ✅ Test
@@ -116,83 +105,74 @@ jobs:
       - *yarn-install
       - name: Test
         run: yarn affected --target=test --base=deployed/marmicode-next
-      - *slack-notify-failure
 
-  component-test:
-    name: ✅ Component Test
+  ct-and-e2e:
+    name: ✅ Component Test & End-to-End
     runs-on: ubuntu-latest
-    env: *percy-env
+    env:
+      <<: *percy-env
+      NX_CLOUD_DISTRIBUTED_EXECUTION: true
+
     steps:
       - *checkout
       - *cache
       - *setup-node
       - *yarn-install
 
-      # Run all Component Tests on main branch.
-      - name: All Component Tests
+      - run: yarn nx-cloud start-ci-run
+
+      - name: All Component Tests & E2E
         if: github.ref == 'refs/heads/main'
-        run: yarn percy exec --parallel -- yarn nx run-many --target=component-test --browser=chrome --skip-nx-cache
+        run: |
+          yarn nx run-many --target=component-test --browser=chrome \
+          & yarn nx run-many --target=e2e --browser=chrome
 
-      # Run affected Component Tests only on other branches.
+      # Run affected Component Tests & E2E only on other branches.
       # Cf. https://docs.percy.io/docs/partial-builds
-      - name: Affected Component Tests
+      - name: Affected Component Tests & E2E
         if: github.ref != 'refs/heads/main'
-        run: yarn percy exec --parallel --partial -- yarn nx affected --target=component-test --browser=chrome --base=deployed/marmicode-next
+        run: |
+          yarn nx affected --target=component-test --browser=chrome --base=deployed/marmicode-next \
+          & yarn nx affected --target=e2e --browser=chrome --base=deployed/marmicode-next
 
-      - *upload-dist-on-failure
-      - *slack-notify-failure
+      - run: yarn nx-cloud stop-all-agents
 
-  e2e:
-    name: ✅ End-to-End
-    runs-on: ubuntu-latest
-    env: *percy-env
-    steps:
-      - *checkout
-      - *cache
-      - *setup-node
-      - *yarn-install
-
-      # Run all E2E on main branch.
-      - name: All E2E
-        if: github.ref == 'refs/heads/main'
-        run: yarn percy exec --parallel -- yarn nx run-many --target=e2e --browser=chrome --skip-nx-cache
-
-      # Run affected E2E only on other branches.
-      # Cf. https://docs.percy.io/docs/partial-builds
-      - name: Affected E2E
-        if: github.ref != 'refs/heads/main'
-        run: yarn percy exec --parallel --partial -- yarn nx affected --target=e2e --browser=chrome --base=deployed/marmicode-next
-
-      - *upload-dist-on-failure
-      - *slack-notify-failure
-
-  percy:
-    name: 🖼 Finalize Percy
-    runs-on: ubuntu-latest
-    env: *percy-env
-    needs:
-      - component-test
-      - e2e
-    steps:
-      - *checkout
-      - *cache
-      - *setup-node
-      - *yarn-install
-
+      # Uploading placeholder snapshot of assets just in case no project is affected.
+      # If nothing is affected, the snapshots will be empty and the Percy status will fail on PR.
+      # We can't use percy upload as it starts another separate Percy build.
       - name: Add placeholder snapshot
-        # Uploading placeholder snapshot of assets just in case no project is affected.
-        # If nothing is affected, the snapshots will be empty and the Percy status will fail on PR.
-        # We can't use percy upload as it starts another separate Percy build.
         run: yarn percy exec --parallel -- yarn ts-node tools/percy-upload-placeholder.ts
-
-      - name: Finalize Percy parallel build
-        run: yarn percy build:finalize
 
       # Check Percy Review on main branch only.
       # On other branches, we'll let Percy status check do the job.
       - name: Check Percy Review
         if: github.ref == 'refs/heads/main'
         run: PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project marmicode/marmicode --fail-on-changes
+
+      - *upload-dist-on-failure
+
+  nx-agents:
+    name: 🤖 Nx Agents
+    runs-on: ubuntu-latest
+    env: *percy-env
+    strategy:
+      matrix:
+        # Keep in sync with PERCY_PARALLEL_TOTAL where PERCY_PARALLEL_TOTAL=agents + 1 (extra snapshot placeholder).
+        agent: [1, 2, 3]
+    steps:
+      - *checkout
+      - *cache
+      - *setup-node
+      - *yarn-install
+
+      - if: github.ref == 'refs/heads/main'
+        run: yarn percy exec --parallel -- yarn nx-cloud start-agent
+
+      # Cf. https://docs.percy.io/docs/partial-builds
+      - if: github.ref != 'refs/heads/main'
+        run: yarn percy exec --parallel --partial -- yarn nx-cloud start-agent
+
+      - *upload-dist-on-failure
 
   deploy-marmicode-next:
     <<: *deploy-base
@@ -213,7 +193,6 @@ jobs:
         run: git tag -f deployed/marmicode-next
       - *push
       - *upload-dist-on-failure
-      - *slack-notify-failure
 
   deploy-marmicode:
     <<: *deploy-base
@@ -234,4 +213,3 @@ jobs:
         run: git tag -f deployed/marmicode
       - *push
       - *upload-dist-on-failure
-      - *slack-notify-failure
