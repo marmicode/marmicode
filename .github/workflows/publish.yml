@@ -1,0 +1,36 @@
+# DO NOT EDIT: This file was generated.
+
+name: 🚀 Publish
+concurrency: ci-${{ github.ref }}
+'on':
+  repository_dispatch:
+    types:
+      - contentful-publish
+  workflow_dispatch: {}
+  deploy:
+    name: 🚀 Marmicode
+    runs-on: ubuntu-latest
+    environment:
+      name: Marmicode
+      url: https://marmicode.io
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: deployed/marmicode
+      - uses: actions/cache@v3
+        with:
+          path: |
+            .angular
+            libs/*/.angular
+            node_modules/.cache
+          key: cache
+      - uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          node-version: '18'
+      - name: Install
+        run: yarn install --immutable
+      - name: Deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: yarn nx run marmicode:deploy:production
