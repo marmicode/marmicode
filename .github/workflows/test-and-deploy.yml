@@ -35,12 +35,6 @@ jobs:
         run: >-
           yarn affected --target=prerender --configuration next
           --base=deployed/marmicode-next
-      - name: Notify on failure
-        uses: pioug/le-slack-message@v1.0.0
-        if: failure()
-        with:
-          JOB: ${{ toJson(job) }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   lint:
     name: 🧹 Lint
     runs-on: ubuntu-latest
@@ -63,12 +57,6 @@ jobs:
         run: yarn install --immutable
       - name: Lint
         run: yarn affected --target=lint --base=deployed/marmicode-next
-      - name: Notify on failure
-        uses: pioug/le-slack-message@v1.0.0
-        if: failure()
-        with:
-          JOB: ${{ toJson(job) }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   test:
     name: ✅ Test
     runs-on: ubuntu-latest
@@ -91,18 +79,14 @@ jobs:
         run: yarn install --immutable
       - name: Test
         run: yarn affected --target=test --base=deployed/marmicode-next
-      - name: Notify on failure
-        uses: pioug/le-slack-message@v1.0.0
-        if: failure()
-        with:
-          JOB: ${{ toJson(job) }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  component-test:
-    name: ✅ Component Test
+  ct-and-e2e:
+    name: ✅ Component Test & End-to-End
     runs-on: ubuntu-latest
     env:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
+      PERCY_PARALLEL_TOTAL: 4
+      NX_CLOUD_DISTRIBUTED_EXECUTION: true
     steps:
       - uses: actions/checkout@v3
         with:
@@ -120,111 +104,76 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: All Component Tests
+      - run: yarn nx-cloud start-ci-run
+      - name: All Component Tests & E2E
         if: github.ref == 'refs/heads/main'
-        run: >-
-          yarn percy exec --parallel -- yarn nx run-many --target=component-test
-          --browser=chrome --skip-nx-cache
-      - name: Affected Component Tests
+        run: |
+          yarn nx run-many --target=component-test --browser=chrome \
+          & yarn nx run-many --target=e2e --browser=chrome
+      - name: Affected Component Tests & E2E
         if: github.ref != 'refs/heads/main'
-        run: >-
-          yarn percy exec --parallel --partial -- yarn nx affected
-          --target=component-test --browser=chrome
+        run: >
+          yarn nx affected --target=component-test --browser=chrome
+          --base=deployed/marmicode-next \
+
+          & yarn nx affected --target=e2e --browser=chrome
           --base=deployed/marmicode-next
-      - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: dist
-          path: dist
-      - name: Notify on failure
-        uses: pioug/le-slack-message@v1.0.0
-        if: failure()
-        with:
-          JOB: ${{ toJson(job) }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  e2e:
-    name: ✅ End-to-End
-    runs-on: ubuntu-latest
-    env:
-      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: actions/cache@v3
-        with:
-          path: |
-            .angular
-            libs/*/.angular
-            node_modules/.cache
-          key: cache
-      - uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          node-version: '18'
-      - name: Install
-        run: yarn install --immutable
-      - name: All E2E
-        if: github.ref == 'refs/heads/main'
-        run: >-
-          yarn percy exec --parallel -- yarn nx run-many --target=e2e
-          --browser=chrome --skip-nx-cache
-      - name: Affected E2E
-        if: github.ref != 'refs/heads/main'
-        run: >-
-          yarn percy exec --parallel --partial -- yarn nx affected --target=e2e
-          --browser=chrome --base=deployed/marmicode-next
-      - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: dist
-          path: dist
-      - name: Notify on failure
-        uses: pioug/le-slack-message@v1.0.0
-        if: failure()
-        with:
-          JOB: ${{ toJson(job) }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  percy:
-    name: 🖼 Finalize Percy
-    runs-on: ubuntu-latest
-    env:
-      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
-    needs:
-      - component-test
-      - e2e
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: actions/cache@v3
-        with:
-          path: |
-            .angular
-            libs/*/.angular
-            node_modules/.cache
-          key: cache
-      - uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          node-version: '18'
-      - name: Install
-        run: yarn install --immutable
+      - run: yarn nx-cloud stop-all-agents
       - name: Add placeholder snapshot
         run: >-
           yarn percy exec --parallel -- yarn ts-node
           tools/percy-upload-placeholder.ts
-      - name: Finalize Percy parallel build
-        run: yarn percy build:finalize
       - name: Check Percy Review
         if: github.ref == 'refs/heads/main'
         run: >-
           PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project
           marmicode/marmicode --fail-on-changes
+      - name: Upload dist (Cypress videos / build output etc...) on failure
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: dist
+          path: dist
+  nx-agents:
+    name: 🤖 Nx Agents
+    runs-on: ubuntu-latest
+    env:
+      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
+      PERCY_PARALLEL_TOTAL: 4
+    strategy:
+      matrix:
+        agent:
+          - 1
+          - 2
+          - 3
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v3
+        with:
+          path: |
+            .angular
+            libs/*/.angular
+            node_modules/.cache
+          key: cache
+      - uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          node-version: '18'
+      - name: Install
+        run: yarn install --immutable
+      - if: github.ref == 'refs/heads/main'
+        run: yarn percy exec --parallel -- yarn nx-cloud start-agent
+      - if: github.ref != 'refs/heads/main'
+        run: yarn percy exec --parallel --partial -- yarn nx-cloud start-agent
+      - name: Upload dist (Cypress videos / build output etc...) on failure
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: dist
+          path: dist
   deploy-marmicode-next:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -232,9 +181,7 @@ jobs:
       - build
       - lint
       - test
-      - component-test
-      - e2e
-      - percy
+      - ct-and-e2e
     name: 🚀 Marmicode Next
     environment:
       name: Marmicode Next
@@ -275,12 +222,6 @@ jobs:
         with:
           name: dist
           path: dist
-      - name: Notify on failure
-        uses: pioug/le-slack-message@v1.0.0
-        if: failure()
-        with:
-          JOB: ${{ toJson(job) }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   deploy-marmicode:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -288,9 +229,7 @@ jobs:
       - build
       - lint
       - test
-      - component-test
-      - e2e
-      - percy
+      - ct-and-e2e
     name: 🚀 Marmicode
     environment:
       name: Marmicode
@@ -331,9 +270,3 @@ jobs:
         with:
           name: dist
           path: dist
-      - name: Notify on failure
-        uses: pioug/le-slack-message@v1.0.0
-        if: failure()
-        with:
-          JOB: ${{ toJson(job) }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
