@@ -127,7 +127,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: >-
           yarn percy exec --parallel -- yarn nx run-many --target=component-test
-          --browser=chrome
+          --browser=chrome --skip-nx-cache
       - name: Affected Component Tests
         if: github.ref != 'refs/heads/main'
         run: >-
@@ -173,7 +173,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: >-
           yarn percy exec --parallel -- yarn nx run-many --target=e2e
-          --browser=chrome
+          --browser=chrome --skip-nx-cache
       - name: Affected E2E
         if: github.ref != 'refs/heads/main'
         run: >-
