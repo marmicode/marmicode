@@ -3,8 +3,6 @@ name: Test & Deploy
 concurrency: ci-${{ github.ref }}
 
 on:
-  repository_dispatch:
-    types: [contentful-publish]
   pull_request: {}
   push:
     branches:
@@ -14,7 +12,7 @@ on:
 
 x-steps:
   cache: &cache
-    uses: actions/cache@v2
+    uses: actions/cache@v3
     with:
       path: |
         .angular
@@ -23,7 +21,7 @@ x-steps:
       key: cache
 
   checkout: &checkout
-    uses: actions/checkout@v2
+    uses: actions/checkout@v3
     with:
       # Checkout tags so we can use 'affected:* --base=deployed/marmicode-next'
       fetch-depth: 0
