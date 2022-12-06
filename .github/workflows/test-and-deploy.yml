@@ -3,9 +3,6 @@
 name: Test & Deploy
 concurrency: ci-${{ github.ref }}
 'on':
-  repository_dispatch:
-    types:
-      - contentful-publish
   pull_request: {}
   push:
     branches:
@@ -18,10 +15,10 @@ jobs:
     name: 📦 Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             .angular
@@ -48,10 +45,10 @@ jobs:
     name: 🧹 Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             .angular
@@ -76,14 +73,14 @@ jobs:
     name: ✅ Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
           cache: yarn
           node-version: '18'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             .angular
@@ -107,10 +104,10 @@ jobs:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             .angular
@@ -153,10 +150,10 @@ jobs:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             .angular
@@ -201,10 +198,10 @@ jobs:
       - component-test
       - e2e
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             .angular
@@ -243,10 +240,10 @@ jobs:
       name: Marmicode Next
       url: https://marmicode-next.web.app
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             .angular
@@ -299,10 +296,10 @@ jobs:
       name: Marmicode
       url: https://marmicode.io
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             .angular
