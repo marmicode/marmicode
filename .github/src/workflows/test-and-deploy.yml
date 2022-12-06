@@ -133,7 +133,7 @@ jobs:
       # Run all Component Tests on main branch.
       - name: All Component Tests
         if: github.ref == 'refs/heads/main'
-        run: yarn percy exec --parallel -- yarn nx run-many --target=component-test --browser=chrome
+        run: yarn percy exec --parallel -- yarn nx run-many --target=component-test --browser=chrome --skip-nx-cache
 
       # Run affected Component Tests only on other branches.
       # Cf. https://docs.percy.io/docs/partial-builds
@@ -157,7 +157,7 @@ jobs:
       # Run all E2E on main branch.
       - name: All E2E
         if: github.ref == 'refs/heads/main'
-        run: yarn percy exec --parallel -- yarn nx run-many --target=e2e --browser=chrome
+        run: yarn percy exec --parallel -- yarn nx run-many --target=e2e --browser=chrome --skip-nx-cache
 
       # Run affected E2E only on other branches.
       # Cf. https://docs.percy.io/docs/partial-builds
