@@ -175,7 +175,13 @@ jobs:
           name: dist
           path: dist
   deploy-marmicode-next:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    needs:
+      - build
+      - lint
+      - test
+      - ct-and-e2e
     name: 🚀 Marmicode Next
     environment:
       name: Marmicode Next
@@ -197,34 +203,6 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: Wait for build
-        uses: lewagon/wait-on-check-action@v1.2.0
-        with:
-          ref: ${{ github.ref }}
-          check-name: 📦 Build
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
-      - name: Wait for lint
-        uses: lewagon/wait-on-check-action@v1.2.0
-        with:
-          ref: ${{ github.ref }}
-          check-name: 🧹 Lint
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
-      - name: Wait for test
-        uses: lewagon/wait-on-check-action@v1.2.0
-        with:
-          ref: ${{ github.ref }}
-          check-name: ✅ Test
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
-      - name: Wait for ct-and-e2e
-        uses: lewagon/wait-on-check-action@v1.2.0
-        with:
-          ref: ${{ github.ref }}
-          check-name: ✅ Component Test & End-to-End
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
@@ -245,7 +223,13 @@ jobs:
           name: dist
           path: dist
   deploy-marmicode:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    needs:
+      - build
+      - lint
+      - test
+      - ct-and-e2e
     name: 🚀 Marmicode
     environment:
       name: Marmicode
@@ -267,34 +251,6 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: Wait for build
-        uses: lewagon/wait-on-check-action@v1.2.0
-        with:
-          ref: ${{ github.ref }}
-          check-name: 📦 Build
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
-      - name: Wait for lint
-        uses: lewagon/wait-on-check-action@v1.2.0
-        with:
-          ref: ${{ github.ref }}
-          check-name: 🧹 Lint
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
-      - name: Wait for test
-        uses: lewagon/wait-on-check-action@v1.2.0
-        with:
-          ref: ${{ github.ref }}
-          check-name: ✅ Test
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
-      - name: Wait for ct-and-e2e
-        uses: lewagon/wait-on-check-action@v1.2.0
-        with:
-          ref: ${{ github.ref }}
-          check-name: ✅ Component Test & End-to-End
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
