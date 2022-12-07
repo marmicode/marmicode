@@ -76,6 +76,7 @@
     ],
     "everything": [
       "{workspaceRoot}/**/*",
+      "{workspaceRoot}/.github/**/*",
       "!{workspaceRoot}/.yarn/**/*",
       "!{workspaceRoot}/node_modules/**/*"
     ]
