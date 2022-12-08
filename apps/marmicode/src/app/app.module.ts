@@ -1,12 +1,9 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { getAnalytics, provideAnalytics, ScreenTrackingService } from '@angular/fire/analytics';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import {
-  AngularFireAnalyticsModule,
-  CONFIG as FIREBASE_ANALYTICS_CONFIG,
-  ScreenTrackingService
-} from '@angular/fire/compat/analytics';
+import { CONFIG as FIREBASE_ANALYTICS_CONFIG } from '@angular/fire/compat/analytics';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -25,7 +22,7 @@ import { provideUpdateEffects, UpdateEffects } from './update/update.effects';
   declarations: [AppComponent],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    AngularFireAnalyticsModule,
+    provideAnalytics(() => getAnalytics()),
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'marmicode' }),
