@@ -9952,20 +9952,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"apollo-angular@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "apollo-angular@npm:2.0.3"
+"apollo-angular@npm:4.1.1":
+  version: 4.1.1
+  resolution: "apollo-angular@npm:4.1.1"
   dependencies:
-    extract-files: ^9.0.0
-    semver: ^7.0.0
     tslib: ^2.0.0
   peerDependencies:
-    "@angular/core": ^6.1.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
+    "@angular/core": ^14.0.0
     "@apollo/client": ^3.0.0
-    graphql: ">=0.11.0 <0.14.0 || ^14.0.0 || ^15.0.0"
-    rxjs: ^6.0.0
-    zone.js: ~0.8.20 || ~0.9.0 || ~0.10.0
-  checksum: cdffefddc09df80f80c7b34966fa8c7519b90ee2e5acea3da3e73dfe0ffdf455c540efd3c15fe23d49b9fce3cd0c027f978459f74699aa2b8bd88b26ff072775
+    graphql: ^15.0.0 || ^16.0.0
+    rxjs: ^6.0.0 || ^7.0.0
+  checksum: 6b4c99dfa224e55dc3b83ea741de1a012b967d144b967cb14aa954792b6b2fd6de79bea1e580880bb5fb15ecae52ea2216a2e899beace1b97ca4213f2827e01e
   languageName: node
   linkType: hard
 
@@ -16266,13 +16263,6 @@ __metadata:
     snapdragon: ^0.8.1
     to-regex: ^3.0.1
   checksum: a41531b8934735b684cef5e8c5a01d0f298d7d384500ceca38793a9ce098125aab04ee73e2d75d5b2901bc5dddd2b64e1b5e3bf19139ea48bac52af4a92f1d00
-  languageName: node
-  linkType: hard
-
-"extract-files@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "extract-files@npm:9.0.0"
-  checksum: c31781d090f8d8f62cc541f1023b39ea863f24bd6fb3d4011922d71cbded70cef8191f2b70b43ec6cb5c5907cdad1dc5e9f29f78228936c10adc239091d8ab64
   languageName: node
   linkType: hard
 
@@ -22726,7 +22716,7 @@ __metadata:
     "@types/webpack": 4.41.32
     "@typescript-eslint/eslint-plugin": 4.31.2
     "@typescript-eslint/parser": 4.31.2
-    apollo-angular: ^2.0.3
+    apollo-angular: 4.1.1
     axios: ^0.19.2
     cypress: ^11.0.0
     cypress-pipe: ^2.0.0

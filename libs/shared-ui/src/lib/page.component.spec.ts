@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 
-import { beforeEach, describe, expect, it } from '@jest/globals';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { createArticlePageInfo, PageComponent } from './page.component';
 
 describe('PageComponent', () => {

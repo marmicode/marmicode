@@ -104,7 +104,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/webpack", "npm:4.41.32"],\
             ["@typescript-eslint/eslint-plugin", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:4.31.2"],\
             ["@typescript-eslint/parser", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:4.31.2"],\
-            ["apollo-angular", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:2.0.3"],\
+            ["apollo-angular", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:4.1.1"],\
             ["axios", "npm:0.19.2"],\
             ["cypress", "npm:11.2.0"],\
             ["cypress-pipe", "npm:2.0.0"],\
@@ -18798,30 +18798,26 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["apollo-angular", [\
-        ["npm:2.0.3", {\
-          "packageLocation": "./.yarn/cache/apollo-angular-npm-2.0.3-03a9ed4003-cdffefddc0.zip/node_modules/apollo-angular/",\
+        ["npm:4.1.1", {\
+          "packageLocation": "./.yarn/cache/apollo-angular-npm-4.1.1-77384257df-6b4c99dfa2.zip/node_modules/apollo-angular/",\
           "packageDependencies": [\
-            ["apollo-angular", "npm:2.0.3"]\
+            ["apollo-angular", "npm:4.1.1"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:2.0.3", {\
-          "packageLocation": "./.yarn/__virtual__/apollo-angular-virtual-0a62593392/0/cache/apollo-angular-npm-2.0.3-03a9ed4003-cdffefddc0.zip/node_modules/apollo-angular/",\
+        ["virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:4.1.1", {\
+          "packageLocation": "./.yarn/__virtual__/apollo-angular-virtual-3832ed3601/0/cache/apollo-angular-npm-4.1.1-77384257df-6b4c99dfa2.zip/node_modules/apollo-angular/",\
           "packageDependencies": [\
-            ["apollo-angular", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:2.0.3"],\
+            ["apollo-angular", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:4.1.1"],\
             ["@angular/core", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.0.2"],\
             ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.1.2"],\
             ["@types/angular__core", null],\
             ["@types/apollo__client", null],\
             ["@types/graphql", null],\
             ["@types/rxjs", null],\
-            ["@types/zone.js", null],\
-            ["extract-files", "npm:9.0.0"],\
             ["graphql", "npm:16.6.0"],\
             ["rxjs", "npm:7.5.7"],\
-            ["semver", "npm:7.3.7"],\
-            ["tslib", "npm:2.4.0"],\
-            ["zone.js", "npm:0.11.5"]\
+            ["tslib", "npm:2.4.0"]\
           ],\
           "packagePeers": [\
             "@angular/core",\
@@ -18830,10 +18826,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/apollo__client",\
             "@types/graphql",\
             "@types/rxjs",\
-            "@types/zone.js",\
             "graphql",\
-            "rxjs",\
-            "zone.js"\
+            "rxjs"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -26223,15 +26217,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["regex-not", "npm:1.0.2"],\
             ["snapdragon", "npm:0.8.2"],\
             ["to-regex", "npm:3.0.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["extract-files", [\
-        ["npm:9.0.0", {\
-          "packageLocation": "./.yarn/cache/extract-files-npm-9.0.0-6ee13e6aab-c31781d090.zip/node_modules/extract-files/",\
-          "packageDependencies": [\
-            ["extract-files", "npm:9.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -33732,7 +33717,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/webpack", "npm:4.41.32"],\
             ["@typescript-eslint/eslint-plugin", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:4.31.2"],\
             ["@typescript-eslint/parser", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:4.31.2"],\
-            ["apollo-angular", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:2.0.3"],\
+            ["apollo-angular", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:4.1.1"],\
             ["axios", "npm:0.19.2"],\
             ["cypress", "npm:11.2.0"],\
             ["cypress-pipe", "npm:2.0.0"],\

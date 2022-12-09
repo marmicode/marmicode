@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it, jest } from '@jest/globals';
 import { TransferStateAdapter } from '@marmicode/shared-utils';
 import { PushModule } from '@rx-angular/template';
 import { EMPTY, Subject } from 'rxjs';

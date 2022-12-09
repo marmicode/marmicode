@@ -2,7 +2,14 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { beforeEach, describe, expect, it } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { NEVER, of, throwError } from 'rxjs';
 import { ErrorModule } from './error.component';
 import { LoadingModule } from './loading.component';
