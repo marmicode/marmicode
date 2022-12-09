@@ -4,13 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "nx",
-    "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 main module",
     "nx": "nx",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "nx workspace-lint && ng lint",
-    "e2e": "ng e2e",
+    "start": "nx serve",
+    "build": "nx build",
+    "test": "nx run-many --target=test",
+    "lint": "nx workspace-lint && nx run-many --target=lint",
+    "e2e": "nx run-many --target=e2e",
     "affected": "nx affected",
     "format": "nx format:write",
     "format:write": "nx format:write",
@@ -24,10 +23,10 @@
     "graphql-codegen": "graphql codegen",
     "test:watch": "nx affected:test --watch --all --parallel --maxParallel 100",
     "workspace-generator": "nx workspace-generator",
-    "_dev:ssr": "ng run marmicode:serve-ssr",
+    "_dev:ssr": "nx run marmicode:serve-ssr",
     "_serve:ssr": "node dist/marmicode/server/main.js",
-    "_build:ssr": "ng build --prod && ng run marmicode:server:production",
-    "_prerender": "ng run marmicode:prerender"
+    "_build:ssr": "nx build --prod && nx run marmicode:server:production",
+    "_prerender": "nx run marmicode:prerender"
   },
   "private": true,
   "dependencies": {
@@ -47,10 +46,11 @@
     "@angular/router": "15.0.2",
     "@angular/service-worker": "15.0.2",
     "@apollo/client": "^3.1.2",
-    "@fortawesome/angular-fontawesome": "^0.8.2",
-    "@fortawesome/fontawesome-svg-core": "^1.2.34",
-    "@fortawesome/free-brands-svg-icons": "^5.15.2",
-    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@firebase/app": "0.9.0",
+    "@fortawesome/angular-fontawesome": "0.12.0",
+    "@fortawesome/fontawesome-svg-core": "6.2.1",
+    "@fortawesome/free-brands-svg-icons": "6.2.1",
+    "@fortawesome/free-solid-svg-icons": "6.2.1",
     "@jscutlery/operators": "0.2.0",
     "@ngneat/until-destroy": "^7.3.2",
     "@ngrx/effects": "15.0.0",
@@ -68,9 +68,10 @@
     "document-register-element": "^1.7.2",
     "express": "^4.15.2",
     "firebase": "^9.9.0",
+    "graphql": "16.6.0",
     "graphql-tag": "^2.10.4",
     "marked": "^1.2.7",
-    "ngx-sharebuttons": "^8.0.5",
+    "ngx-sharebuttons": "11.0.0",
     "panzoom": "^9.2.5",
     "prismjs": "^1.20.0",
     "rxjs": "~7.5.0",
@@ -98,6 +99,7 @@
     "@nrwl/cypress": "15.3.0",
     "@nrwl/eslint-plugin-nx": "15.3.0",
     "@nrwl/jest": "15.3.0",
+    "@nrwl/linter": "15.3.0",
     "@nrwl/node": "15.3.0",
     "@nrwl/nx-cloud": "15.0.2",
     "@nrwl/storybook": "15.3.0",
@@ -143,5 +145,10 @@
     "ts-jest": "28.0.8",
     "ts-node": "10.9.1",
     "typescript": "4.8.4"
+  },
+  "dependenciesMeta": {
+    "ngx-sharebuttons@11.0.0": {
+      "unplugged": true
+    }
   }
 }
