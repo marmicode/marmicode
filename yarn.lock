@@ -22767,6 +22767,8 @@ __metadata:
   dependenciesMeta:
     ngx-sharebuttons@11.0.0:
       unplugged: true
+    ts-node@10.9.1:
+      unplugged: true
   languageName: unknown
   linkType: soft
 
