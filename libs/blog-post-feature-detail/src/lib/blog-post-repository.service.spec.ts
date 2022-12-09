@@ -1,4 +1,6 @@
 import { TestBed } from '@angular/core/testing';
+
+import { beforeEach, describe, expect, it } from '@jest/globals';
 import { provideApolloCacheWithResolvers } from '@marmicode/testing';
 import { ApolloTestingModule } from 'apollo-angular/testing';
 import { BlogPostRepository } from './blog-post-repository.service';

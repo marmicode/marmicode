@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import { parseHighlightLink } from './parse-highlight-link';
 
 describe('parseHighlightLink', () => {

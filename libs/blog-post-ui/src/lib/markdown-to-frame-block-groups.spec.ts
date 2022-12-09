@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import { CodeBlock, MarkdownBlock } from '@marmicode/block-api';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
 

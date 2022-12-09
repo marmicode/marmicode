@@ -1,11 +1,13 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { beforeEach, describe, expect, it } from '@jest/globals';
 import { createCodeBlock } from '@marmicode/block-core';
+import { PushModule } from '@rx-angular/template';
+import * as Prism from 'prismjs';
 import { first } from 'rxjs/operators';
 import { createHighlightZone } from '../highlight/highlight-zone';
 import { CodeBlockComponent } from './code-block.component';
-import * as Prism from 'prismjs';
-import { PushModule } from '@rx-angular/template';
 
 describe('CodeBlockComponent', () => {
   let fixture: ComponentFixture<CodeBlockComponent>;

@@ -1,4 +1,6 @@
 import { SimpleChange } from '@angular/core';
+
+import { beforeEach, describe, expect, it } from '@jest/globals';
 import { HighlightLinkComponent } from './highlight-link.component';
 import { HighlightZone } from './highlight-zone';
 

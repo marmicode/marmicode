@@ -1,5 +1,6 @@
 import { animate, keyframes, style } from '@angular/animations';
 import { ElementRef } from '@angular/core';
+import { beforeEach, describe, expect, it } from '@jest/globals';
 import { RxState } from '@rx-angular/state';
 import { SlideAnimationDirective } from './slide-animation.directive';
 

@@ -1,4 +1,5 @@
 import { Observable, PartialObserver, Subscription } from 'rxjs';
+import { beforeEach, afterEach, jest } from '@jest/globals';
 
 export function createObserver() {
   let subscription: Subscription;
@@ -9,9 +10,9 @@ export function createObserver() {
   return {
     observe<T>(observable: Observable<T>) {
       const observer: PartialObserver<T> = {
-        next: jest.fn<void, [T]>(),
-        error: jest.fn<void, [unknown]>(),
-        complete: jest.fn<void, []>(),
+        next: jest.fn<(value: T) => void>(),
+        error: jest.fn<(error: unknown) => void>(),
+        complete: jest.fn<() => void>(),
       };
       subscription.add(observable.subscribe(observer));
       return observer;
