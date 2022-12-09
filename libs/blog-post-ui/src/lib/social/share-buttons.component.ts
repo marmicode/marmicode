@@ -1,4 +1,3 @@
-import { PushModule } from '@rx-angular/template';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -15,6 +14,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { RxState, select, selectSlice } from '@rx-angular/state';
+import { PushModule } from '@rx-angular/template';
 import { ShareButtonsModule as NgxShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { map } from 'rxjs/operators';
 import { AuthorSocialInfo } from './author-social-info';
@@ -32,7 +32,6 @@ export type Size = 'normal' | 'small';
     <share-buttons
       [autoSetMeta]="true"
       [description]="twitterTitle$ | push"
-      [size]="buttonSize$ | push"
       [theme]="theme"
       [include]="['twitter']"
       [style.display]="'inline-block'"
@@ -42,7 +41,6 @@ export type Size = 'normal' | 'small';
       [description]="defaultTitle$ | push"
       [title]="defaultTitle$ | push"
       [include]="buttons"
-      [size]="buttonSize$ | push"
       [theme]="theme"
       [style.display]="'inline-block'"
     ></share-buttons>
@@ -53,21 +51,14 @@ export class ShareButtonsComponent {
   @Input() set author(author: AuthorSocialInfo) {
     this._state.set({ author });
   }
+
   @Input() set title(title: string) {
     this._state.set({ title });
   }
+
   @Input() set size(size: Size) {
     this._state.set({ size });
   }
-
-  buttonSize$ = this._state.select('size').pipe(
-    map((size) => {
-      if (size === 'small') {
-        return -6;
-      }
-      return 0;
-    })
-  );
 
   defaultTitle$ = this._state.select(
     selectSlice(['author', 'title']),
