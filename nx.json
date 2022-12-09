@@ -16,7 +16,7 @@
           "prerender",
           "test"
         ],
-        "parallel": 1,
+        "parallel": 4,
         "accessToken": "MzU3NTdhZjQtMWJlZC00ZTgyLWI2MTItYzkyNTgzYzU5MWMxfHJlYWQtd3JpdGU="
       }
     }
