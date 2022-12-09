@@ -60,7 +60,9 @@ x-deploy-base: &deploy-base
     - build
     - lint
     - test
-    - ct-and-e2e
+    - ct
+    - e2e
+    - finalize-percy
 
 x-percy-env: &percy-env
   PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
@@ -106,36 +108,57 @@ jobs:
       - name: Test
         run: yarn affected --target=test --base=deployed/marmicode-next
 
-  ct-and-e2e:
-    name: ✅ Component Test & End-to-End
+  ct:
+    name: ✅ Component Tests
     runs-on: ubuntu-latest
-    env:
-      <<: *percy-env
-      NX_CLOUD_DISTRIBUTED_EXECUTION: true
+    env: *percy-env
+    steps:
+      - *checkout
+      - *cache
+      - *setup-node
+      - *yarn-install
+      - name: All Component Tests
+        if: github.ref == 'refs/heads/main'
+        run: yarn percy exec --parallel -- yarn nx run-many --target=component-test --browser=chrome
 
+      - name: Affected Component Tests
+        if: github.ref != 'refs/heads/main'
+        run: yarn percy exec --parallel --partial -- yarn nx affected --target=component-test --browser=chrome --base=deployed/marmicode-next
+
+      - *upload-dist-on-failure
+
+  e2e:
+    name: ✅ End to End
+    runs-on: ubuntu-latest
+    env: *percy-env
     steps:
       - *checkout
       - *cache
       - *setup-node
       - *yarn-install
 
-      - run: yarn nx-cloud start-ci-run
-
-      - name: All Component Tests & E2E
+      - name: All E2E
         if: github.ref == 'refs/heads/main'
-        run: |
-          yarn nx run-many --target=component-test --browser=chrome \
-          & yarn nx run-many --target=e2e --browser=chrome
+        run: yarn percy exec --parallel -- yarn nx run-many --target=e2e --browser=chrome
 
-      # Run affected Component Tests & E2E only on other branches.
-      # Cf. https://docs.percy.io/docs/partial-builds
-      - name: Affected Component Tests & E2E
+      - name: Affected E2E
         if: github.ref != 'refs/heads/main'
-        run: |
-          yarn nx affected --target=component-test --browser=chrome --base=deployed/marmicode-next \
-          & yarn nx affected --target=e2e --browser=chrome --base=deployed/marmicode-next
+        run: yarn percy exec --parallel --partial -- yarn nx affected --target=e2e --browser=chrome --base=deployed/marmicode-next
 
-      - run: yarn nx-cloud stop-all-agents
+      - *upload-dist-on-failure
+
+  finalize-percy:
+    name: 📸 Finalize Percy
+    runs-on: ubuntu-latest
+    env: *percy-env
+    needs:
+      - ct
+      - e2e
+    steps:
+      - *checkout
+      - *cache
+      - *setup-node
+      - *yarn-install
 
       # Uploading placeholder snapshot of assets just in case no project is affected.
       # If nothing is affected, the snapshots will be empty and the Percy status will fail on PR.
@@ -148,31 +171,6 @@ jobs:
       - name: Check Percy Review
         if: github.ref == 'refs/heads/main'
         run: PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project marmicode/marmicode --fail-on-changes
-
-      - *upload-dist-on-failure
-
-  nx-agents:
-    name: 🤖 Nx Agents
-    runs-on: ubuntu-latest
-    env: *percy-env
-    strategy:
-      matrix:
-        # Keep in sync with PERCY_PARALLEL_TOTAL where PERCY_PARALLEL_TOTAL=agents + 1 (extra snapshot placeholder).
-        agent: [1, 2, 3]
-    steps:
-      - *checkout
-      - *cache
-      - *setup-node
-      - *yarn-install
-
-      - if: github.ref == 'refs/heads/main'
-        run: yarn percy exec --parallel -- yarn nx-cloud start-agent
-
-      # Cf. https://docs.percy.io/docs/partial-builds
-      - if: github.ref != 'refs/heads/main'
-        run: yarn percy exec --parallel --partial -- yarn nx-cloud start-agent
-
-      - *upload-dist-on-failure
 
   deploy-marmicode-next:
     <<: *deploy-base
