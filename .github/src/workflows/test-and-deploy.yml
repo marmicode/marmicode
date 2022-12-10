@@ -111,39 +111,28 @@ jobs:
   ct:
     name: ✅ Component Tests
     runs-on: ubuntu-latest
-    env: *percy-env
     steps:
       - *checkout
       - *cache
       - *setup-node
       - *yarn-install
-      - name: All Component Tests
-        if: github.ref == 'refs/heads/main'
-        run: yarn percy exec --parallel -- yarn nx run-many --target=component-test --browser=chrome
 
       - name: Affected Component Tests
-        if: github.ref != 'refs/heads/main'
-        run: yarn percy exec --parallel --partial -- yarn nx affected --target=component-test --browser=chrome --base=deployed/marmicode-next
+        run: yarn nx affected --target=component-test --browser=chrome --base=deployed/marmicode-next
 
       - *upload-dist-on-failure
 
   e2e:
     name: ✅ End to End
     runs-on: ubuntu-latest
-    env: *percy-env
     steps:
       - *checkout
       - *cache
       - *setup-node
       - *yarn-install
 
-      - name: All E2E
-        if: github.ref == 'refs/heads/main'
-        run: yarn percy exec --parallel -- yarn nx run-many --target=e2e --browser=chrome
-
       - name: Affected E2E
-        if: github.ref != 'refs/heads/main'
-        run: yarn percy exec --parallel --partial -- yarn nx affected --target=e2e --browser=chrome --base=deployed/marmicode-next
+        run: yarn nx affected --target=e2e --browser=chrome --base=deployed/marmicode-next
 
       - *upload-dist-on-failure
 
