@@ -82,10 +82,6 @@ jobs:
   ct:
     name: ✅ Component Tests
     runs-on: ubuntu-latest
-    env:
-      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
-      PERCY_PARALLEL_TOTAL: 4
     steps:
       - uses: actions/checkout@v3
         with:
@@ -103,16 +99,9 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: All Component Tests
-        if: github.ref == 'refs/heads/main'
-        run: >-
-          yarn percy exec --parallel -- yarn nx run-many --target=component-test
-          --browser=chrome
       - name: Affected Component Tests
-        if: github.ref != 'refs/heads/main'
         run: >-
-          yarn percy exec --parallel --partial -- yarn nx affected
-          --target=component-test --browser=chrome
+          yarn nx affected --target=component-test --browser=chrome
           --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
@@ -123,10 +112,6 @@ jobs:
   e2e:
     name: ✅ End to End
     runs-on: ubuntu-latest
-    env:
-      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
-      PERCY_PARALLEL_TOTAL: 4
     steps:
       - uses: actions/checkout@v3
         with:
@@ -144,16 +129,10 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: All E2E
-        if: github.ref == 'refs/heads/main'
-        run: >-
-          yarn percy exec --parallel -- yarn nx run-many --target=e2e
-          --browser=chrome
       - name: Affected E2E
-        if: github.ref != 'refs/heads/main'
         run: >-
-          yarn percy exec --parallel --partial -- yarn nx affected --target=e2e
-          --browser=chrome --base=deployed/marmicode-next
+          yarn nx affected --target=e2e --browser=chrome
+          --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
