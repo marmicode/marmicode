@@ -118,7 +118,12 @@ jobs:
       - *yarn-install
 
       - name: Affected Component Tests
-        run: yarn nx affected --target=component-test --browser=chrome --base=deployed/marmicode-next
+        if: github.ref != 'refs/heads/main'
+        run: yarn nx affected --target=component-test --base=deployed/marmicode-next
+
+      - name: All Component Tests
+        if: github.ref == 'refs/heads/main'
+        run: yarn nx run-many --target=component-test
 
       - *upload-dist-on-failure
 
@@ -131,8 +136,13 @@ jobs:
       - *setup-node
       - *yarn-install
 
-      - name: Affected E2E
-        run: yarn nx affected --target=e2e --browser=chrome --base=deployed/marmicode-next
+      - name: Affected Component Tests
+        if: github.ref != 'refs/heads/main'
+        run: yarn nx affected --target=e2e --base=deployed/marmicode-next
+
+      - name: All Component Tests
+        if: github.ref == 'refs/heads/main'
+        run: yarn nx run-many --target=e2e
 
       - *upload-dist-on-failure
 

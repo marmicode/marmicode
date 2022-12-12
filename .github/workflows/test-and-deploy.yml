@@ -100,9 +100,13 @@ jobs:
       - name: Install
         run: yarn install --immutable
       - name: Affected Component Tests
+        if: github.ref != 'refs/heads/main'
         run: >-
-          yarn nx affected --target=component-test --browser=chrome
+          yarn nx affected --target=component-test
           --base=deployed/marmicode-next
+      - name: All Component Tests
+        if: github.ref == 'refs/heads/main'
+        run: yarn nx run-many --target=component-test
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
@@ -129,10 +133,12 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: Affected E2E
-        run: >-
-          yarn nx affected --target=e2e --browser=chrome
-          --base=deployed/marmicode-next
+      - name: Affected Component Tests
+        if: github.ref != 'refs/heads/main'
+        run: yarn nx affected --target=e2e --base=deployed/marmicode-next
+      - name: All Component Tests
+        if: github.ref == 'refs/heads/main'
+        run: yarn nx run-many --target=e2e
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
