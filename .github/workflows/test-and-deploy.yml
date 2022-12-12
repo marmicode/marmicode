@@ -208,7 +208,7 @@ jobs:
       - test
       - ct
       - e2e
-      - finalize-percy
+      - upload-percy-snapshots
     name: 🚀 Marmicode Next
     environment:
       name: Marmicode Next
@@ -260,7 +260,7 @@ jobs:
       - test
       - ct
       - e2e
-      - finalize-percy
+      - upload-percy-snapshots
     name: 🚀 Marmicode
     environment:
       name: Marmicode

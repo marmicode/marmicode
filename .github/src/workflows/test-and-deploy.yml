@@ -64,7 +64,7 @@ x-deploy-base: &deploy-base
     - test
     - ct
     - e2e
-    - finalize-percy
+    - upload-percy-snapshots
 
 x-percy-env: &percy-env
   PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
