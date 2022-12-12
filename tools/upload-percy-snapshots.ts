@@ -20,16 +20,12 @@ async function main(projectPath?: string) {
 
   const snapshotInfoList: SnapshotInfo[] = await Promise.all(
     files.map(async (fileName) => {
-      const snapshotInfo = JSON.parse(
+      return JSON.parse(
         await readFile(
           join(projectPath, '__percy_snapshots__', fileName),
           'utf8'
         )
       );
-      return {
-        name: fileName.replace(/\.json$/, ''),
-        ...snapshotInfo,
-      };
     })
   );
 

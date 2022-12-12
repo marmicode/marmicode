@@ -24,7 +24,7 @@ Cypress.Commands.add('getByDataRole', (dataRole) =>
 
 Cypress.Commands.add('snapshot', (name = undefined) => {
   name = name || (cy as any).state('runnable').fullTitle();
-  name = name.replace(/ /g, '-');
+  const fileName = name.replace(/ /g, '-').toLowerCase();
 
   const options = {
     widths: [360, 768, 1280],
@@ -33,9 +33,10 @@ Cypress.Commands.add('snapshot', (name = undefined) => {
   return cy.document({ log: false }).then((dom) => {
     const domSnapshot = serializeDOM({ ...options, dom });
     return cy.writeFile(
-      `./__percy_snapshots__/${name}.json`,
+      `./__percy_snapshots__/${fileName}.json`,
       JSON.stringify({
         domSnapshot,
+        name,
         url: dom.URL,
         ...options,
       })
