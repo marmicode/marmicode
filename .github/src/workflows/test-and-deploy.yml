@@ -53,6 +53,11 @@ x-steps:
     name: Install
     run: yarn install --immutable
 
+  # We need this since we moved to Yarn PnP.
+  cypress-install: &cypress-install
+    name: Install Cypress binary
+    run: yarn cypress install
+
 x-deploy-base: &deploy-base
   if: github.ref == 'refs/heads/main'
   runs-on: ubuntu-latest
@@ -116,6 +121,7 @@ jobs:
       - *cache
       - *setup-node
       - *yarn-install
+      - *cypress-install
 
       - name: Affected Component Tests
         if: github.ref != 'refs/heads/main'
@@ -135,6 +141,7 @@ jobs:
       - *cache
       - *setup-node
       - *yarn-install
+      - *cypress-install
 
       - name: Affected Component Tests
         if: github.ref != 'refs/heads/main'

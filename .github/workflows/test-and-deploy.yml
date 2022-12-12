@@ -99,6 +99,8 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
+      - name: Install Cypress binary
+        run: yarn cypress install
       - name: Affected Component Tests
         if: github.ref != 'refs/heads/main'
         run: >-
@@ -133,6 +135,8 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
+      - name: Install Cypress binary
+        run: yarn cypress install
       - name: Affected Component Tests
         if: github.ref != 'refs/heads/main'
         run: yarn nx affected --target=e2e --base=deployed/marmicode-next
