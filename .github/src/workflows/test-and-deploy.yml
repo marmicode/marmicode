@@ -126,11 +126,11 @@ jobs:
 
       - name: Affected Component Tests
         if: github.ref != 'refs/heads/main'
-        run: yarn nx affected --target=component-test --base=deployed/marmicode-next
+        run: yarn nx affected --target component-test --parallel 1 --base deployed/marmicode-next
 
       - name: All Component Tests
         if: github.ref == 'refs/heads/main'
-        run: yarn nx run-many --target=component-test
+        run: yarn nx run-many --target=component-test --parallel 1
 
       - *upload-dist-on-failure
 
@@ -144,13 +144,13 @@ jobs:
       - *yarn-install
       - *cypress-install
 
-      - name: Affected Component Tests
+      - name: Affected E2E
         if: github.ref != 'refs/heads/main'
-        run: yarn nx affected --target=e2e --base=deployed/marmicode-next
+        run: yarn nx affected --target=e2e --parallel 1 --base=deployed/marmicode-next
 
-      - name: All Component Tests
+      - name: All E2E
         if: github.ref == 'refs/heads/main'
-        run: yarn nx run-many --target=e2e
+        run: yarn nx run-many --target=e2e --parallel 1
 
       - *upload-dist-on-failure
 
