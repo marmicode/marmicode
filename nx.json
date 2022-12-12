@@ -42,17 +42,17 @@
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     },
+    "component-test": {
+      "inputs": ["default", "^production"]
+    },
     "e2e": {
-      "inputs": ["everything"]
+      "inputs": ["default", "^production"]
     },
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     },
     "build-storybook": {
       "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
-    },
-    "component-test": {
-      "inputs": ["everything"]
     }
   },
   "namedInputs": {
@@ -73,12 +73,6 @@
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
-    ],
-    "everything": [
-      "{workspaceRoot}/**/*",
-      "{workspaceRoot}/.github/**/*",
-      "!{workspaceRoot}/.yarn/**/*",
-      "!{workspaceRoot}/node_modules/**/*"
     ]
   }
 }
