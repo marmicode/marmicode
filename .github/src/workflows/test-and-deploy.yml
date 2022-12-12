@@ -71,7 +71,6 @@ x-percy-env: &percy-env
   # The full token is used by `percy-poller`.
   # You can find it here https://percy.io/api/v1/tokens after signing-in to Percy as an admin.
   PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
-  PERCY_PARALLEL_TOTAL: 4
 
 jobs:
   build:

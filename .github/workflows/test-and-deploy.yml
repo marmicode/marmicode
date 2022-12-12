@@ -161,7 +161,6 @@ jobs:
     env:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
-      PERCY_PARALLEL_TOTAL: 4
     needs:
       - ct
       - e2e
