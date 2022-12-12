@@ -23,6 +23,9 @@
       "options": {
         "lintFilePatterns": ["apps/marmicode-e2e/**/*.{js,ts}"]
       }
+    },
+    "upload-percy-snapshots": {
+      "command": "tools/upload-percy-snapshots.sh libs/block-ui"
     }
   },
   "tags": ["scope:e2e"],

@@ -31,7 +31,7 @@ Cypress.Commands.add('snapshot', (name = undefined) => {
     return cy.writeFile(
       `./__percy_snapshots__/${name}.json`,
       JSON.stringify({
-        snapshot: domSnapshot,
+        domSnapshot,
         options,
       })
     );

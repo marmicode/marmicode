@@ -39,26 +39,58 @@
   },
   "targetDefaults": {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
     },
     "component-test": {
-      "inputs": ["default", "^production"],
-      "outputs": ["snapshots"]
+      "inputs": [
+        "default",
+        "^production"
+      ],
+      "outputs": [
+        "snapshots"
+      ]
     },
     "e2e": {
-      "inputs": ["default", "^production"],
-      "outputs": ["snapshots"]
+      "inputs": [
+        "default",
+        "^production"
+      ],
+      "outputs": [
+        "snapshots"
+      ]
     },
     "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/jest.preset.js"
+      ]
     },
     "build-storybook": {
-      "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/.storybook/**/*"
+      ]
+    },
+    "upload-percy-snapshots": {
+      "dependsOn": [
+        "component-test",
+        "e2e"
+      ]
     }
   },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
     "sharedGlobals": [
       "{workspaceRoot}/angular.json",
       "{workspaceRoot}/tslint.json",
