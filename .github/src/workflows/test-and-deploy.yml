@@ -16,6 +16,7 @@ x-steps:
     with:
       path: |
         .angular
+        .yarn/unplugged
         libs/*/.angular
         node_modules/.cache
       key: cache

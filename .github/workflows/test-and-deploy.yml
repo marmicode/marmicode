@@ -22,6 +22,7 @@ jobs:
         with:
           path: |
             .angular
+            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache
@@ -46,6 +47,7 @@ jobs:
         with:
           path: |
             .angular
+            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache
@@ -72,6 +74,7 @@ jobs:
         with:
           path: |
             .angular
+            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache
@@ -90,6 +93,7 @@ jobs:
         with:
           path: |
             .angular
+            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache
@@ -126,6 +130,7 @@ jobs:
         with:
           path: |
             .angular
+            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache
@@ -167,6 +172,7 @@ jobs:
         with:
           path: |
             .angular
+            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache
@@ -207,6 +213,7 @@ jobs:
         with:
           path: |
             .angular
+            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache
@@ -257,6 +264,7 @@ jobs:
         with:
           path: |
             .angular
+            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache
