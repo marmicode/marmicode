@@ -11,4 +11,4 @@ fi
 
 PROJECT_PATH=$1
 
-$COMMAND -- ts-node tools/upload-percy-snapshots.ts $PROJECT_PATH
+$COMMAND -- ts-node -P tools/tsconfig.tools.json tools/upload-percy-snapshots.ts $PROJECT_PATH

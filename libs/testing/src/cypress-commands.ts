@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 /* @hack fix "Could not find a declaration file for module"
  * as `allowJs: true` was not enough. */
-// @eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore-next-line
 import serializeDOM from '@percy/dom';
 
