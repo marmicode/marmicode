@@ -1,7 +1,11 @@
+import { beforeEach, describe, it } from '@jest/globals';
 import { TestScheduler } from 'rxjs/testing';
 import { getTestScheduler } from '../testing/get-test-scheduler';
 import {
-  dematerializeData, dematerializeError, MaterializedNotification, materializeError
+  dematerializeData,
+  dematerializeError,
+  MaterializedNotification,
+  materializeError,
 } from './materialize-error';
 
 describe('materializeError', () => {

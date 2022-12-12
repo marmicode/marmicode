@@ -1,3 +1,4 @@
+import { describe, expect, it, jest } from '@jest/globals';
 import { CodeBlock, MarkdownBlock } from '@marmicode/block-api';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
 
@@ -36,99 +37,91 @@ Chapter C after code.
     expect(frameBlocksList.length).toEqual(4);
 
     /* Intro. */
-    expect(frameBlocksList[0]).toEqual(
-      like({
-        blocks: [
-          like({
-            tokens: [
-              like({
-                type: 'paragraph',
-              }),
-              like({
-                type: 'space',
-              }),
-            ],
-          } as Partial<MarkdownBlock>),
-        ],
-      })
-    );
+    expect(frameBlocksList[0]).toMatchObject({
+      blocks: [
+        like({
+          tokens: [
+            like({
+              type: 'paragraph',
+            }),
+            like({
+              type: 'space',
+            }),
+          ],
+        }),
+      ],
+    });
 
     /* Chapter A. */
-    expect(frameBlocksList[1]).toEqual(
-      like({
-        blocks: [
-          like({
-            tokens: [
-              like({
-                type: 'heading',
-              }),
-              like({
-                type: 'paragraph',
-              }),
-              like({
-                type: 'space',
-              }),
-            ],
-          } as Partial<MarkdownBlock>),
-          like({
-            language: 'javascript',
-            code: 'Code A',
-          } as Partial<CodeBlock>),
-        ],
-      })
-    );
+    expect(frameBlocksList[1]).toMatchObject({
+      blocks: [
+        like({
+          tokens: [
+            like({
+              type: 'heading',
+            }),
+            like({
+              type: 'paragraph',
+            }),
+            like({
+              type: 'space',
+            }),
+          ],
+        }),
+        like({
+          language: 'javascript',
+          code: 'Code A',
+        } as Partial<CodeBlock>),
+      ],
+    });
 
     /* Chapter B. */
-    expect(frameBlocksList[2]).toEqual(
-      like({
-        blocks: [
-          like({
-            tokens: [
-              like({
-                type: 'heading',
-              }),
-              like({
-                type: 'paragraph',
-              }),
-              like({
-                type: 'space',
-              }),
-            ],
-          } as Partial<MarkdownBlock>),
-        ],
-      })
-    );
+    expect(frameBlocksList[2]).toMatchObject({
+      blocks: [
+        like({
+          tokens: [
+            like({
+              type: 'heading',
+            }),
+            like({
+              type: 'paragraph',
+            }),
+            like({
+              type: 'space',
+            }),
+          ],
+        }),
+      ],
+    });
 
     /* Chapter C. */
-    expect(frameBlocksList[3]).toEqual(
-      like({
-        blocks: [
-          like({
-            tokens: [
-              like({
-                type: 'heading',
-              }),
-              like({
-                type: 'paragraph',
-              }),
-              like({
-                type: 'space',
-              }),
-            ],
-          } as Partial<MarkdownBlock>),
-          like({
-            language: 'javascript',
-            code: 'Code C',
-          } as Partial<CodeBlock>),
-          like({
-            tokens: [
-              like({
-                type: 'paragraph',
-              }),
-            ],
-          } as Partial<MarkdownBlock>),
-        ],
-      })
-    );
+    expect(frameBlocksList[3]).toMatchObject({
+      blocks: [
+        like({
+          tokens: [
+            like({
+              type: 'heading',
+            }),
+            like({
+              type: 'paragraph',
+            }),
+            like({
+              type: 'space',
+            }),
+          ],
+        }),
+        like({
+          language: 'javascript',
+          code: 'Code C',
+        } as Partial<CodeBlock>),
+        like({
+          tokens: [
+            like({
+              type: 'paragraph',
+            }),
+          ],
+        }),
+      ],
+    });
   });
 });

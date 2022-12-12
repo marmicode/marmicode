@@ -3,6 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
+
+import { jest, describe, expect, it } from '@jest/globals';
 import { createObserver } from '@marmicode/testing';
 import { of, Subject } from 'rxjs';
 import { UpdateDialogComponent } from './update-dialog.component';
@@ -43,7 +45,7 @@ describe('UpdateEffects', () => {
     /* Check prompt is called. */
     expect(mockDialog.open).toBeCalledTimes(1);
     expect(mockDialog.open).toBeCalledWith(UpdateDialogComponent, {
-      backdropClass: 'mc-overlay-backdrop'
+      backdropClass: 'mc-overlay-backdrop',
     });
     expect(mockSwUpdate.activateUpdate).not.toBeCalled();
   });
@@ -97,12 +99,12 @@ describe('UpdateEffects', () => {
   /* Set up effects service. */
   function setUp() {
     const mockDialog: jest.Mocked<Pick<MatDialog, 'open'>> = {
-      open: jest.fn()
+      open: jest.fn(),
     };
     const mockDialogRef: jest.Mocked<
       Pick<MatDialogRef<unknown>, 'afterClosed'>
     > = {
-      afterClosed: jest.fn()
+      afterClosed: jest.fn(),
     };
 
     const dialogAfterClosed$ = new Subject<void>();
@@ -113,15 +115,13 @@ describe('UpdateEffects', () => {
     const versionUpdates$ = new Subject<VersionEvent>();
 
     const mockSwUpdate: jest.Mocked<
-      Pick<
-        SwUpdate,
-        'activateUpdate' | 'checkForUpdate' | 'isEnabled' | 'versionUpdates'
-      >
-    > = {
+      Pick<SwUpdate, 'activateUpdate' | 'checkForUpdate' | 'isEnabled'>
+    > &
+      Pick<SwUpdate, 'versionUpdates'> = {
       activateUpdate: jest.fn(),
       checkForUpdate: jest.fn(),
       versionUpdates: versionUpdates$,
-      isEnabled: true
+      isEnabled: true,
     };
     mockSwUpdate.checkForUpdate.mockResolvedValue(true);
 
@@ -132,18 +132,18 @@ describe('UpdateEffects', () => {
         {
           provide: ApplicationRef,
           useValue: {
-            isStable: of(true)
-          } as ApplicationRef
+            isStable: of(true),
+          } as ApplicationRef,
         },
         {
           provide: MatDialog,
-          useValue: mockDialog
+          useValue: mockDialog,
         },
         {
           provide: SwUpdate,
-          useValue: mockSwUpdate
-        }
-      ]
+          useValue: mockSwUpdate,
+        },
+      ],
     });
 
     return {
@@ -156,9 +156,9 @@ describe('UpdateEffects', () => {
       },
       triggerUpdateAvailable() {
         versionUpdates$.next({
-          type: 'VERSION_READY'
+          type: 'VERSION_READY',
         } as VersionEvent);
-      }
+      },
     };
   }
 });

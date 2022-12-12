@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { describe, expect, it } from '@jest/globals';
 import { PushModule } from '@rx-angular/template';
 import { ShareButtonsComponent } from './share-buttons.component';
 

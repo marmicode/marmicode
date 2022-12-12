@@ -1,6 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
+import { beforeEach, describe, expect, it } from '@jest/globals';
 import { BlockType, createBlockGroup } from '@marmicode/block-core';
 import { PushModule } from '@rx-angular/template';
 import { first } from 'rxjs/operators';

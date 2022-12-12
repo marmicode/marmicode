@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PushModule } from '@rx-angular/template';
 import { NavMenuComponent } from './nav-menu.component';
+import { describe, expect, it } from '@jest/globals';
 
 describe('NavMenuComponent', () => {
   it('should be closed', async () => {
