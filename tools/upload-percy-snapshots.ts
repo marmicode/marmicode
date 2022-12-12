@@ -48,7 +48,9 @@ async function _uploadSnapshot(
 
   try {
     await utils.postSnapshot(snapshotInfo);
-  } catch {
+  } catch (error) {
+    console.warn(error);
+
     if (remainingAttempts === 0) {
       return;
     }
@@ -67,9 +69,8 @@ interface SnapshotInfo {
   domSnapshot: {
     html: string;
   };
-  options: {
-    widths: number[];
-  };
+  url: string;
+  widths: number[];
 }
 
 main(argv[2]);

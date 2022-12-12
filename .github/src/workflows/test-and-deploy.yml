@@ -159,11 +159,11 @@ jobs:
 
       - name: Upload Percy Snapshots
         if: github.ref != 'refs/heads/main'
-        run: yarn nx affected --target=upload-percy-snapshots --base=deployed/marmicode-next
+        run: yarn nx affected --target=upload-percy-snapshots --parallel=1 --base=deployed/marmicode-next
 
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        run: yarn nx run-many --target=upload-percy-snapshots
+        run: yarn nx run-many --target=upload-percy-snapshots --parallel=1
 
       - name: Finalize Percy
         run: yarn percy build:finalize

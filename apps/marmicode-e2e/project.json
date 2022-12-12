@@ -25,7 +25,7 @@
       }
     },
     "upload-percy-snapshots": {
-      "command": "tools/upload-percy-snapshots.sh libs/block-ui"
+      "command": "tools/upload-percy-snapshots.sh apps/marmicode-e2e"
     }
   },
   "tags": ["scope:e2e"],

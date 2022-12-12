@@ -74,7 +74,7 @@
       }
     },
     "upload-percy-snapshots": {
-      "command": "tools/upload-percy-snapshots.sh libs/block-ui"
+      "command": "tools/upload-percy-snapshots.sh libs/blog-post-ui"
     }
   },
   "tags": [

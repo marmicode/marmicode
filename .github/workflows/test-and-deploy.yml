@@ -105,13 +105,7 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: Affected Component Tests
-        if: github.ref != 'refs/heads/main'
-        run: >-
-          yarn nx affected --target=component-test --parallel 1
-          --base=deployed/marmicode-next
       - name: All Component Tests
-        if: github.ref == 'refs/heads/main'
         run: yarn nx run-many --target=component-test --parallel 1
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
@@ -141,13 +135,7 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: Affected E2E
-        if: github.ref != 'refs/heads/main'
-        run: >-
-          yarn nx affected --target=e2e --parallel 1
-          --base=deployed/marmicode-next
       - name: All E2E
-        if: github.ref == 'refs/heads/main'
         run: yarn nx run-many --target=e2e --parallel 1
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
@@ -183,14 +171,8 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: Upload Percy Snapshots
-        if: github.ref != 'refs/heads/main'
-        run: >-
-          yarn nx affected --target=upload-percy-snapshots
-          --base=deployed/marmicode-next
       - name: Upload All Percy Snapshots
-        if: github.ref == 'refs/heads/main'
-        run: yarn nx run-many --target=upload-percy-snapshots
+        run: yarn nx run-many --target=upload-percy-snapshots --parallel=1
       - name: Finalize Percy
         run: yarn percy build:finalize
       - name: Check Percy Review

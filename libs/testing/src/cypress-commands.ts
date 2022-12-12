@@ -30,13 +30,14 @@ Cypress.Commands.add('snapshot', (name = undefined) => {
     widths: [360, 768, 1280],
   };
 
-  return cy.then(() => {
-    const domSnapshot = serializeDOM(options);
+  return cy.document({ log: false }).then((dom) => {
+    const domSnapshot = serializeDOM({ ...options, dom });
     return cy.writeFile(
       `./__percy_snapshots__/${name}.json`,
       JSON.stringify({
         domSnapshot,
-        options,
+        url: dom.URL,
+        ...options,
       })
     );
   });
