@@ -8,8 +8,6 @@ concurrency: ci-${{ github.ref }}
     branches:
       - main
   workflow_dispatch: {}
-env:
-  CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
 jobs:
   build:
     name: 📦 Build
@@ -21,6 +19,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
+            ~/.cache/Cypress
             .angular
             .yarn/unplugged
             libs/*/.angular
@@ -46,6 +45,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
+            ~/.cache/Cypress
             .angular
             .yarn/unplugged
             libs/*/.angular
@@ -73,6 +73,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
+            ~/.cache/Cypress
             .angular
             .yarn/unplugged
             libs/*/.angular
@@ -92,6 +93,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
+            ~/.cache/Cypress
             .angular
             .yarn/unplugged
             libs/*/.angular
@@ -103,13 +105,11 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: Install Cypress binary
-        run: yarn cypress install
       - name: Affected Component Tests
         if: github.ref != 'refs/heads/main'
         run: >-
-          yarn nx affected --target component-test --parallel 1 --base
-          deployed/marmicode-next
+          yarn nx affected --target=component-test --parallel 1
+          --base=deployed/marmicode-next
       - name: All Component Tests
         if: github.ref == 'refs/heads/main'
         run: yarn nx run-many --target=component-test --parallel 1
@@ -129,6 +129,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
+            ~/.cache/Cypress
             .angular
             .yarn/unplugged
             libs/*/.angular
@@ -140,8 +141,6 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: Install Cypress binary
-        run: yarn cypress install
       - name: Affected E2E
         if: github.ref != 'refs/heads/main'
         run: >-
@@ -173,6 +172,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
+            ~/.cache/Cypress
             .angular
             .yarn/unplugged
             libs/*/.angular
@@ -214,6 +214,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
+            ~/.cache/Cypress
             .angular
             .yarn/unplugged
             libs/*/.angular
@@ -265,6 +266,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
+            ~/.cache/Cypress
             .angular
             .yarn/unplugged
             libs/*/.angular

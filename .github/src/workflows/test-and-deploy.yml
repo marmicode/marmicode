@@ -15,6 +15,7 @@ x-steps:
     uses: actions/cache@v3
     with:
       path: |
+        ~/.cache/Cypress
         .angular
         .yarn/unplugged
         libs/*/.angular
@@ -54,11 +55,6 @@ x-steps:
     name: Install
     run: yarn install --immutable
 
-  # We need this since we moved to Yarn PnP.
-  cypress-install: &cypress-install
-    name: Install Cypress binary
-    run: yarn cypress install
-
 x-deploy-base: &deploy-base
   if: github.ref == 'refs/heads/main'
   runs-on: ubuntu-latest
@@ -76,9 +72,6 @@ x-percy-env: &percy-env
   # You can find it here https://percy.io/api/v1/tokens after signing-in to Percy as an admin.
   PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
   PERCY_PARALLEL_TOTAL: 4
-
-env:
-  CYPRESS_CACHE_FOLDER: node_modules/.cache/cypress
 
 jobs:
   build:
@@ -122,11 +115,10 @@ jobs:
       - *cache
       - *setup-node
       - *yarn-install
-      - *cypress-install
 
       - name: Affected Component Tests
         if: github.ref != 'refs/heads/main'
-        run: yarn nx affected --target component-test --parallel 1 --base deployed/marmicode-next
+        run: yarn nx affected --target=component-test --parallel 1 --base=deployed/marmicode-next
 
       - name: All Component Tests
         if: github.ref == 'refs/heads/main'
@@ -142,7 +134,6 @@ jobs:
       - *cache
       - *setup-node
       - *yarn-install
-      - *cypress-install
 
       - name: Affected E2E
         if: github.ref != 'refs/heads/main'
