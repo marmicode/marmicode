@@ -1,5 +1,6 @@
 import { animate, keyframes, style } from '@angular/animations';
 import { ElementRef } from '@angular/core';
+import { beforeEach, describe, expect, jest, it } from '@jest/globals';
 import { RxState } from '@rx-angular/state';
 import { SlideAnimationDirective } from './slide-animation.directive';
 
@@ -39,7 +40,7 @@ describe('SlideAnimationDirective', () => {
         }),
     };
     directive = new SlideAnimationDirective(
-      animationBuilder,
+      animationBuilder as any,
       {} as ElementRef,
       new RxState<{ slideIndex: number }>()
     );
@@ -53,7 +54,7 @@ describe('SlideAnimationDirective', () => {
       1,
       animate(
         /* We don't care about animation duration. */
-        expect.any(String),
+        expect.any(String) as any,
         keyframes([
           style({
             transform: `translateX(-100%)`,
@@ -67,7 +68,7 @@ describe('SlideAnimationDirective', () => {
       2,
       animate(
         /* We don't care about animation duration. */
-        expect.any(String),
+        expect.any(String) as any,
         keyframes([
           style({
             transform: `translateX(100%)`,
@@ -81,7 +82,7 @@ describe('SlideAnimationDirective', () => {
       3,
       animate(
         /* We don't care about animation duration. */
-        expect.any(String),
+        expect.any(String) as any,
         keyframes([
           style({
             opacity: 0,

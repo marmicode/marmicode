@@ -67,7 +67,7 @@
     "component-test": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "libs/blog-post-ui/cypress.config.ts",
+        "cypressConfig": "libs/blog-post-ui/cypress.config.js",
         "testingType": "component",
         "skipServe": true,
         "devServerTarget": "blog-post-ui:component-test-build"

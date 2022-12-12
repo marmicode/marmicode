@@ -69,22 +69,22 @@ import { SwipeModule } from './swipe.directive';
   `,
   styles: [
     `
-      .page {
-        display: flex;
-        flex-direction: column;
+        .page {
+            display: flex;
+            flex-direction: column;
 
-        /* Set overflow to hidden to avoid glitches with mcSlideAnimation. */
-        overflow: hidden;
-      }
+            /* Set overflow to hidden to avoid glitches with mcSlideAnimation. */
+            overflow: hidden;
+        }
 
-      .swipable-content {
-        display: flex;
-        flex-direction: column;
+        .swipable-content {
+            display: flex;
+            flex-direction: column;
 
-        /* Forcing flex-basis to auto as fxFlex sets it to 0px
-         * and doesn't stretch when content is larger than page. */
-        flex: 1 1 auto;
-      }
+            /* Forcing flex-basis to auto as fxFlex sets it to 0px
+             * and doesn't stretch when content is larger than page. */
+            flex: 1 1 auto;
+        }
     `,
   ],
   providers: [RxState],
@@ -184,11 +184,8 @@ export class RecipeFramePageComponent {
       merge(
         this._key$.pipe(filter((key) => key === 'ArrowRight')),
         this.swipeLeft$
-      ).pipe(
-        withLatestFrom(this.nextFrameRoute$),
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        switchMap(([_, route]) => this._tryNavigateToRelativeRoute(route))
-      )
+      ).pipe(withLatestFrom(this.nextFrameRoute$)),
+      ([_, route]) => this._tryNavigateToRelativeRoute(route)
     );
 
     /**
@@ -198,11 +195,8 @@ export class RecipeFramePageComponent {
       merge(
         this._key$.pipe(filter((key) => key === 'ArrowLeft')),
         this.swipeRight$
-      ).pipe(
-        withLatestFrom(this.previousFrameRoute$),
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        switchMap(([_, route]) => this._tryNavigateToRelativeRoute(route))
-      )
+      ).pipe(withLatestFrom(this.previousFrameRoute$)),
+      ([_, route]) => this._tryNavigateToRelativeRoute(route)
     );
 
     /**
@@ -231,11 +225,14 @@ export class RecipeFramePageComponent {
     return frameSlug ? getRelativeFrameRoute(frameSlug) : null;
   }
 
-  private async _tryNavigateToRelativeRoute(route: string[]) {
+  private _tryNavigateToRelativeRoute(route: string[]) {
     if (route == null) {
-      return false;
+      return;
     }
-    return this._router.navigate(route, { relativeTo: this._route });
+
+    this._router
+      .navigate(route, { relativeTo: this._route })
+      .catch((err) => console.error(err));
   }
 }
 
