@@ -51,3 +51,4 @@ Thumbs.db
 !.yarn/sdks
 !.yarn/versions
 
+__percy_snapshots__

@@ -1,4 +1,6 @@
 import { SimpleChange } from '@angular/core';
+
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { HighlightLinkComponent } from './highlight-link.component';
 import { HighlightZone } from './highlight-zone';
 
@@ -25,28 +27,36 @@ describe('Component', () => {
   it('should trigger highlight on click', () => {
     component.onClick();
     expect(mockNativeElement.dispatchEvent).toBeCalledTimes(1);
-    expect(mockNativeElement.dispatchEvent.mock.calls[0][0].detail).toEqual({
-      color: 'red',
-      sections: [
-        {
-          start: 1,
-          end: 1,
-        },
-        {
-          start: 3,
-          end: 4,
-        },
-      ],
-    } as HighlightZone);
+    expect(mockNativeElement.dispatchEvent).toBeCalledWith(
+      expect.objectContaining({
+        detail: {
+          color: 'red',
+          sections: [
+            {
+              start: 1,
+              end: 1,
+            },
+            {
+              start: 3,
+              end: 4,
+            },
+          ],
+        } as HighlightZone,
+      })
+    );
   });
 
   it('should trigger highlight on mouse enter', () => {
     component.onMouseEnter();
     expect(mockNativeElement.dispatchEvent).toBeCalledTimes(1);
-    expect(mockNativeElement.dispatchEvent.mock.calls[0][0].detail).toEqual({
-      color: expect.any(String),
-      sections: expect.any(Array),
-    });
+    expect(mockNativeElement.dispatchEvent).toBeCalledWith(
+      expect.objectContaining({
+        detail: {
+          color: expect.any(String),
+          sections: expect.any(Array),
+        },
+      })
+    );
   });
 
   it('should cancel highlight on mouse leave', () => {
@@ -54,7 +64,9 @@ describe('Component', () => {
     mockNativeElement.dispatchEvent.mockReset();
     component.onMouseLeave();
     expect(mockNativeElement.dispatchEvent).toBeCalledTimes(1);
-    expect(mockNativeElement.dispatchEvent.mock.calls[0][0].detail).toBe(null);
+    expect(mockNativeElement.dispatchEvent).toBeCalledWith(
+      expect.objectContaining({ detail: null })
+    );
   });
 
   it('should not cancel highlight on mouse leave if clicked', () => {
@@ -74,6 +86,8 @@ describe('Component', () => {
     mockNativeElement.dispatchEvent.mockReset();
     component.onMouseLeave();
     expect(mockNativeElement.dispatchEvent).toBeCalledTimes(1);
-    expect(mockNativeElement.dispatchEvent.mock.calls[0][0].detail).toBe(null);
+    expect(mockNativeElement.dispatchEvent).toBeCalledWith(
+      expect.objectContaining({ detail: null })
+    );
   });
 });
