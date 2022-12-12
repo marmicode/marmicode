@@ -1,4 +1,7 @@
 /// <reference types="cypress" />
+/* @hack fix "Could not find a declaration file for module"
+ * as `allowJs: true` was not enough. */
+// @ts-ignore-next-line
 import serializeDOM from '@percy/dom';
 
 declare global {

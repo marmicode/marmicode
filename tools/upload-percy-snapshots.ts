@@ -1,4 +1,5 @@
-// @ts-ignore
+/* @hack fix "Could not find a declaration file for module"
+ * as `allowJs: true` was not enough. */
 import utils from '@percy/sdk-utils';
 import { readdir, readFile } from 'fs/promises';
 import { join } from 'path';
