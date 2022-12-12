@@ -10,8 +10,6 @@
         "cacheableOperations": [
           "build",
           "build-storybook",
-          "component-test",
-          "e2e",
           "lint",
           "prerender",
           "test"

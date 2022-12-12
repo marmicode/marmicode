@@ -72,9 +72,6 @@
         "skipServe": true,
         "devServerTarget": "block-ui:component-test-build"
       }
-    },
-    "upload-percy-snapshots": {
-      "command": "tools/upload-percy-snapshots.sh libs/block-ui"
     }
   },
   "generators": {},

@@ -1,12 +1,5 @@
 /// <reference types="cypress" />
-/* @hack fix "Could not find a declaration file for module"
- * as `allowJs: true` was not enough. */
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore-next-line
-import serializeDOM from '@percy/dom';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore-next-line
-import utils from '@percy/sdk-utils';
+import '@percy/cypress';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -15,7 +8,6 @@ declare global {
       getByDataRole<E extends HTMLElement>(
         dataRole: string
       ): Chainable<JQuery<E>>;
-
       snapshot(name?: string): void;
     }
   }
@@ -25,44 +17,8 @@ Cypress.Commands.add('getByDataRole', (dataRole) =>
   cy.get(`[data-role="${dataRole}"]`)
 );
 
-/* Cf. https://github.com/percy/percy-cypress/blob/master/index.js */
 Cypress.Commands.add('snapshot', (name = undefined) => {
-  name = name || (cy as any).state('runnable').fullTitle();
-  const fileName = name.replace(/ /g, '-').toLowerCase();
-
-  const options = {
+  cy.percySnapshot(name, {
     widths: [360, 768, 1280],
-  };
-
-  cy.then(async () => {
-    if (!(window as any).PercyDOM) {
-      // eslint-disable-next-line no-eval
-      eval(await utils.fetchPercyDOM());
-    }
-  });
-
-  return cy.document({ log: false }).then((dom) => {
-    const domSnapshot = serializeDOM({ ...options, dom });
-    return cy.writeFile(
-      `./__percy_snapshots__/${fileName}.json`,
-      JSON.stringify({
-        domSnapshot,
-        name,
-        url: dom.URL,
-        ...options,
-      })
-    );
   });
 });
-
-/* Cf. https://github.com/percy/percy-cypress/blob/master/index.js */
-// Use Cypress's http:request backend task
-utils.request.fetch = async function fetch(
-  url: string,
-  options: Record<string, unknown>
-) {
-  options = { url, retryOnNetworkFailure: false, ...options };
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore-next-line
-  return Cypress.backend('http:request', options);
-};
