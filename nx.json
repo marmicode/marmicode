@@ -53,7 +53,7 @@
         "^production"
       ],
       "outputs": [
-        "snapshots"
+        "{projectRoot}/__percy_snapshots__/**/*"
       ]
     },
     "e2e": {
@@ -62,7 +62,7 @@
         "^production"
       ],
       "outputs": [
-        "snapshots"
+        "{projectRoot}/__percy_snapshots__/**/*"
       ]
     },
     "test": {
@@ -107,9 +107,6 @@
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
-    ],
-    "snapshots": [
-      "{projectRoot}/__percy_snapshots__/**/*"
     ]
   }
 }
