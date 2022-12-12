@@ -43,10 +43,12 @@
       "inputs": ["production", "^production"]
     },
     "component-test": {
-      "inputs": ["default", "^production"]
+      "inputs": ["default", "^production"],
+      "outputs": ["snapshots"]
     },
     "e2e": {
-      "inputs": ["default", "^production"]
+      "inputs": ["default", "^production"],
+      "outputs": ["snapshots"]
     },
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
@@ -73,6 +75,9 @@
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
+    ],
+    "snapshots": [
+      "{projectRoot}/__percy_snapshots__/**/*"
     ]
   }
 }

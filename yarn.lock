@@ -22697,6 +22697,7 @@ __metadata:
     "@nrwl/workspace": 15.3.0
     "@percy/cli": 1.16.0
     "@percy/cypress": ^3.1.2
+    "@percy/dom": 1.16.0
     "@percy/sdk-utils": ^1.6.3
     "@rx-angular/cdk": ^1.0.0-rc.3
     "@rx-angular/state": ^1.7.0

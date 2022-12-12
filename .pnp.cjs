@@ -85,6 +85,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nrwl/workspace", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.3.0"],\
             ["@percy/cli", "npm:1.16.0"],\
             ["@percy/cypress", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.1.2"],\
+            ["@percy/dom", "npm:1.16.0"],\
             ["@percy/sdk-utils", "npm:1.6.3"],\
             ["@rx-angular/cdk", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:1.0.0-rc.3"],\
             ["@rx-angular/state", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:1.7.0"],\
@@ -33698,6 +33699,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nrwl/workspace", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.3.0"],\
             ["@percy/cli", "npm:1.16.0"],\
             ["@percy/cypress", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.1.2"],\
+            ["@percy/dom", "npm:1.16.0"],\
             ["@percy/sdk-utils", "npm:1.6.3"],\
             ["@rx-angular/cdk", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:1.0.0-rc.3"],\
             ["@rx-angular/state", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:1.7.0"],\
