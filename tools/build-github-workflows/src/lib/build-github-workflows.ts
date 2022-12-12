@@ -1,4 +1,4 @@
-import { readdir, readFile, writeFile } from 'fs';
+import { readdir, readFile, writeFile } from 'fs/promises';
 import { dump, load } from 'js-yaml';
 import { join } from 'path';
 import { promisify } from 'util';
@@ -9,18 +9,18 @@ export async function buildGithubWorkflows() {
   const workflowsPath = '.github/workflows';
 
   /* Get workflow names. */
-  const fileNames = await promisify(readdir)(workflowsSrcPath);
+  const fileNames = await readdir(workflowsSrcPath);
   const workflowFileNames = fileNames.filter((file) => file.match(/\.ya?ml$/));
 
   /* Parse and convert each workflow. */
   for (const workflowFileName of workflowFileNames) {
     const workflowSrcPath = join(workflowsSrcPath, workflowFileName);
     const workflowPath = join(workflowsPath, workflowFileName);
-    let workflow = load(await promisify(readFile)(workflowSrcPath, encoding));
+    let workflow = load(await readFile(workflowSrcPath, encoding));
 
     workflow = _removeExtraKeys(workflow as { [key: string]: unknown });
 
-    await promisify(writeFile)(
+    await writeFile(
       workflowPath,
       `# DO NOT EDIT: This file was generated.
 

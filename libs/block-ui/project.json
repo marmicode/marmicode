@@ -67,7 +67,7 @@
     "component-test": {
       "executor": "@nrwl/cypress:cypress",
       "options": {
-        "cypressConfig": "libs/block-ui/cypress.config.ts",
+        "cypressConfig": "libs/block-ui/cypress.config.js",
         "testingType": "component",
         "skipServe": true,
         "devServerTarget": "block-ui:component-test-build"

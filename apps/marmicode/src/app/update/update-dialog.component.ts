@@ -44,9 +44,13 @@ export class UpdateDialogComponent {
     @Inject(DOCUMENT) private _document: Document
   ) {}
 
-  async update() {
-    await this._swUpdate.activateUpdate();
-    this._document.location.reload();
+  update() {
+    /* @hack Can't use async/await.
+     * Because we get the following error with Angular build + Yarn PnP:
+     * Module not found: Error: Can't resolve: @angular-devkit/build-angular/node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */
+    this._swUpdate.activateUpdate().then(() => {
+      this._document.location.reload();
+    });
   }
 }
 
