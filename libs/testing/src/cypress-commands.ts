@@ -4,9 +4,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore-next-line
 import serializeDOM from '@percy/dom';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore-next-line
-import utils from '@percy/sdk-utils';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -34,13 +31,6 @@ Cypress.Commands.add('snapshot', (name = undefined) => {
     widths: [360, 768, 1280],
   };
 
-  cy.then(async () => {
-    if (!(window as any).PercyDOM) {
-      // eslint-disable-next-line no-eval
-      eval(await utils.fetchPercyDOM());
-    }
-  });
-
   return cy.document({ log: false }).then((dom) => {
     const domSnapshot = serializeDOM({ ...options, dom });
     return cy.writeFile(
@@ -55,14 +45,3 @@ Cypress.Commands.add('snapshot', (name = undefined) => {
   });
 });
 
-/* Cf. https://github.com/percy/percy-cypress/blob/master/index.js */
-// Use Cypress's http:request backend task
-utils.request.fetch = async function fetch(
-  url: string,
-  options: Record<string, unknown>
-) {
-  options = { url, retryOnNetworkFailure: false, ...options };
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore-next-line
-  return Cypress.backend('http:request', options);
-};
