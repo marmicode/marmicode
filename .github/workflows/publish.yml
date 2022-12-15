@@ -26,7 +26,9 @@ jobs:
             .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
-          key: cache
+          key: cache-${{ github.run_id }}
+          restore-keys: |
+            cache
       - uses: actions/setup-node@v3
         with:
           cache: yarn
