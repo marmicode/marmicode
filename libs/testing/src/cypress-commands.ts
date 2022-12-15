@@ -49,9 +49,9 @@ Cypress.Commands.add('snapshot', (name = undefined) => {
   return cy.document({ log: false }).then(async (document) => {
     /* Inline styles. */
     for (const el of Array.from(
-      document.querySelectorAll('link[rel="stylesheet"]')
+      document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]')
     )) {
-      const url = el.getAttribute('href');
+      const url = el.href;
       if (!isSameOrigin({ url, document })) {
         continue;
       }
@@ -65,8 +65,10 @@ Cypress.Commands.add('snapshot', (name = undefined) => {
     }
 
     /* Inline images. */
-    for (const el of Array.from(document.querySelectorAll('img'))) {
-      const url = el.getAttribute('src');
+    for (const el of Array.from(
+      document.querySelectorAll<HTMLImageElement>('img')
+    )) {
+      const url = el.src;
       if (!isSameOrigin({ url, document })) {
         continue;
       }
