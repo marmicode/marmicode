@@ -20,7 +20,11 @@ x-steps:
         .yarn/unplugged
         libs/*/.angular
         node_modules/.cache
-      key: cache
+      # Always update the cache.
+      # https://github.com/actions/cache/blob/main/tips-and-workarounds.md#update-a-cache
+      key: cache-${{ github.run_id }}
+      restore-keys: |
+        cache
 
   checkout: &checkout
     uses: actions/checkout@v3
@@ -100,8 +104,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - *checkout
-      - *setup-node
       - *cache
+      - *setup-node
       - *yarn-install
       - name: Test
         run: yarn affected --target=test --base=deployed/marmicode-next
