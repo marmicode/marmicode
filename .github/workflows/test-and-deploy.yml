@@ -24,7 +24,9 @@ jobs:
             .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
-          key: cache
+          key: cache-${{ github.run_id }}
+          restore-keys: |
+            cache
       - uses: actions/setup-node@v3
         with:
           cache: yarn
@@ -50,7 +52,9 @@ jobs:
             .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
-          key: cache
+          key: cache-${{ github.run_id }}
+          restore-keys: |
+            cache
       - uses: actions/setup-node@v3
         with:
           cache: yarn
@@ -66,10 +70,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
-        with:
-          cache: yarn
-          node-version: '18'
       - uses: actions/cache@v3
         with:
           path: |
@@ -78,7 +78,13 @@ jobs:
             .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
-          key: cache
+          key: cache-${{ github.run_id }}
+          restore-keys: |
+            cache
+      - uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          node-version: '18'
       - name: Install
         run: yarn install --immutable
       - name: Test
@@ -101,7 +107,9 @@ jobs:
             .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
-          key: cache
+          key: cache-${{ github.run_id }}
+          restore-keys: |
+            cache
       - uses: actions/setup-node@v3
         with:
           cache: yarn
@@ -142,7 +150,9 @@ jobs:
             .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
-          key: cache
+          key: cache-${{ github.run_id }}
+          restore-keys: |
+            cache
       - uses: actions/setup-node@v3
         with:
           cache: yarn
@@ -186,7 +196,9 @@ jobs:
             .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
-          key: cache
+          key: cache-${{ github.run_id }}
+          restore-keys: |
+            cache
       - uses: actions/setup-node@v3
         with:
           cache: yarn
@@ -230,7 +242,9 @@ jobs:
             .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
-          key: cache
+          key: cache-${{ github.run_id }}
+          restore-keys: |
+            cache
       - uses: actions/setup-node@v3
         with:
           cache: yarn
@@ -282,7 +296,9 @@ jobs:
             .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
-          key: cache
+          key: cache-${{ github.run_id }}
+          restore-keys: |
+            cache
       - uses: actions/setup-node@v3
         with:
           cache: yarn
