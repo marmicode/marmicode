@@ -24,7 +24,9 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: |
+            ~/.cache/Cypress
             .angular
+            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache
