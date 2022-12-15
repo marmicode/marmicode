@@ -1,4 +1,4 @@
-name: 🚀 Publish
+iname: 🚀 Publish
 
 # Avoid too many deploy while making multiple changes on Contentful.
 concurrency: ci-${{ github.ref }}
@@ -29,7 +29,11 @@ jobs:
             .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
-          key: cache
+          # Always update the cache.
+          # https://github.com/actions/cache/blob/main/tips-and-workarounds.md#update-a-cache
+          key: cache-${{ github.run_id }}
+          restore-keys: |
+            cache
       - uses: actions/setup-node@v3
         with:
           cache: yarn
