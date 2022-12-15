@@ -1,4 +1,4 @@
-iname: 🚀 Publish
+name: 🚀 Publish
 
 # Avoid too many deploy while making multiple changes on Contentful.
 concurrency: ci-${{ github.ref }}
