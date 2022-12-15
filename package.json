@@ -124,6 +124,7 @@
     "@types/webpack": "4.41.32",
     "@typescript-eslint/eslint-plugin": "4.31.2",
     "@typescript-eslint/parser": "4.31.2",
+    "@yarnpkg/sdks": "3.0.0-rc.33",
     "cypress": "^11.0.0",
     "cypress-pipe": "^2.0.0",
     "dotenv": "10.0.0",
