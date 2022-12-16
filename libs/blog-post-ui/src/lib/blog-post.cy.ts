@@ -49,15 +49,7 @@ That’s when we end up with this common recipe:
 \`\`\`javascript
 keywords$ = this.keywordsControl.valueChanges;
 data$ = keywords$.pipe(
-  /* Wait for the user to stop typing for 100ms and emit last value. */
-  debounceTime(100),
-  /* Ignore identical successive values
-   * (e.g. user pastes the same value in the input). */
-  distinctUntilChanged(), 
-  /* when new keywords are emitted, this unsubscribes from the previous
-   * search result (canceling the underlying http request)
-   * and subscribes to the new one. */
-  switchMap(keywords => this.search(keywords))
+  ...
 )
 \`\`\`
 
@@ -92,10 +84,7 @@ Here’s an example of wrapping \`setInterval\` in an observable:
 \`\`\`javascript
 function interval(period) {
   return new Observable(observer => {
-    let i = 0;
-    const handle = setInterval(() => observer.next(i++), period);
-    /* This is the teardown logic. */
-    return () => clearInterval(handle);
+    ...
   });
 }
 \`\`\`
@@ -151,10 +140,7 @@ By diving a little bit in [Nest’s source code](https://github.com/nestjs/nest/
 
 \`\`\`javascript
 public async transformToResult(resultOrDeferred: any) {
-  if (resultOrDeferred && isFunction(resultOrDeferred.subscribe)) {
-    return resultOrDeferred.toPromise();
-  }
-  return resultOrDeferred;
+  ...
 }
 \`\`\`
 
@@ -176,9 +162,7 @@ and it looks like this:
 \`\`\`javascript
 @Injectable()
 export class NoopInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
-    return next.handle();
-  }
+  ...
 }
 \`\`\`
 
@@ -198,17 +182,7 @@ The final interceptor should look like this:
 \`\`\`javascript
 @Injectable()
 export class UnsubscribeOnCloseInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
-    if (context.getType() !== 'http') {
-      return next.handle();
-    }
-
-    const request = context.switchToHttp().getRequest() as Request;
-
-    const close$ = fromEvent(request, 'close');
-
-    return next.handle().pipe(takeUntil(close$));
-  }
+  ...
 }
 \`\`\`
 
