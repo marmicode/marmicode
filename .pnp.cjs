@@ -27108,6 +27108,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["update-notifier", "npm:2.5.0"],\
             ["uuid", "npm:3.4.0"],\
             ["winston", "npm:3.3.3"],\
+            ["winston-transport", "npm:4.5.0"],\
             ["ws", "virtual:840217d451f3ba24c0af88bc12d5fb24f4e38147dfd306a0ebb0974541be180be44a886a1d925a78e255f20695c3941ebcc6fc6e9ac0d766d96c69b90b830768#npm:7.5.8"]\
           ],\
           "linkType": "HARD"\
@@ -33591,6 +33592,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["fast-safe-stringify", "npm:2.0.7"],\
             ["fecha", "npm:4.2.0"],\
             ["ms", "npm:2.1.3"],\
+            ["triple-beam", "npm:1.3.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:2.4.2", {\
+          "packageLocation": "./.yarn/cache/logform-npm-2.4.2-c83969e14e-3d00f4e1cc.zip/node_modules/logform/",\
+          "packageDependencies": [\
+            ["logform", "npm:2.4.2"],\
+            ["@colors/colors", "npm:1.5.0"],\
+            ["fecha", "npm:4.2.0"],\
+            ["ms", "npm:2.1.3"],\
+            ["safe-stable-stringify", "npm:2.4.1"],\
             ["triple-beam", "npm:1.3.0"]\
           ],\
           "linkType": "HARD"\
@@ -40279,6 +40292,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["safe-stable-stringify", [\
+        ["npm:2.4.1", {\
+          "packageLocation": "./.yarn/cache/safe-stable-stringify-npm-2.4.1-fb69af31fc-d8e505c462.zip/node_modules/safe-stable-stringify/",\
+          "packageDependencies": [\
+            ["safe-stable-stringify", "npm:2.4.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["safer-buffer", [\
         ["npm:2.1.2", {\
           "packageLocation": "./.yarn/cache/safer-buffer-npm-2.1.2-8d5c0b705e-cab8f25ae6.zip/node_modules/safer-buffer/",\
@@ -45562,6 +45584,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["winston-transport", "npm:4.4.0"],\
             ["logform", "npm:2.2.0"],\
             ["readable-stream", "npm:2.3.7"],\
+            ["triple-beam", "npm:1.3.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:4.5.0", {\
+          "packageLocation": "./.yarn/cache/winston-transport-npm-4.5.0-e10bfb2169-a56e5678a8.zip/node_modules/winston-transport/",\
+          "packageDependencies": [\
+            ["winston-transport", "npm:4.5.0"],\
+            ["logform", "npm:2.4.2"],\
+            ["readable-stream", "npm:3.6.0"],\
             ["triple-beam", "npm:1.3.0"]\
           ],\
           "linkType": "HARD"\
