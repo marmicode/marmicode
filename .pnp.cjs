@@ -9832,6 +9832,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@google-cloud/precise-date", "npm:1.0.3"],\
             ["@google-cloud/projectify", "npm:1.0.4"],\
             ["@google-cloud/promisify", "npm:1.0.4"],\
+            ["@grpc/grpc-js", "npm:1.8.0"],\
             ["@types/duplexify", "npm:3.6.0"],\
             ["@types/long", "npm:4.0.1"],\
             ["arrify", "npm:2.0.1"],\
@@ -10789,6 +10790,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
+        ["npm:1.8.0", {\
+          "packageLocation": "./.yarn/cache/@grpc-grpc-js-npm-1.8.0-d7edb41ca8-06afdded77.zip/node_modules/@grpc/grpc-js/",\
+          "packageDependencies": [\
+            ["@grpc/grpc-js", "npm:1.8.0"],\
+            ["@grpc/proto-loader", "npm:0.7.4"],\
+            ["@types/node", "npm:18.0.6"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["virtual:38db81a4752d0203092b88e906ceae0dbc79ab329b78635f6d1e964458de1d771fe7a8d7550d84262a3f38aa6c1d75d351f795b2c90d68dcd33e3268b2404ae1#npm:1.0.5", {\
           "packageLocation": "./.yarn/__virtual__/@grpc-grpc-js-virtual-ea951e3972/0/cache/@grpc-grpc-js-npm-1.0.5-c717397e7e-4be4615234.zip/node_modules/@grpc/grpc-js/",\
           "packageDependencies": [\
@@ -10822,6 +10832,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lodash.camelcase", "npm:4.3.0"],\
             ["long", "npm:4.0.0"],\
             ["protobufjs", "npm:6.11.3"],\
+            ["yargs", "npm:16.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:0.7.4", {\
+          "packageLocation": "./.yarn/cache/@grpc-proto-loader-npm-0.7.4-43d91344a0-7789a95906.zip/node_modules/@grpc/proto-loader/",\
+          "packageDependencies": [\
+            ["@grpc/proto-loader", "npm:0.7.4"],\
+            ["@types/long", "npm:4.0.1"],\
+            ["lodash.camelcase", "npm:4.3.0"],\
+            ["long", "npm:4.0.0"],\
+            ["protobufjs", "npm:7.1.2"],\
             ["yargs", "npm:16.2.0"]\
           ],\
           "linkType": "HARD"\
@@ -33581,6 +33603,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["long", "npm:4.0.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:5.2.1", {\
+          "packageLocation": "./.yarn/cache/long-npm-5.2.1-3a12730171-9264da12d1.zip/node_modules/long/",\
+          "packageDependencies": [\
+            ["long", "npm:5.2.1"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["longest", [\
@@ -38468,6 +38497,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/long", "npm:4.0.1"],\
             ["@types/node", "npm:18.0.6"],\
             ["long", "npm:4.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:7.1.2", {\
+          "packageLocation": "./.yarn/unplugged/protobufjs-npm-7.1.2-2e50888192/node_modules/protobufjs/",\
+          "packageDependencies": [\
+            ["protobufjs", "npm:7.1.2"],\
+            ["@protobufjs/aspromise", "npm:1.1.2"],\
+            ["@protobufjs/base64", "npm:1.1.2"],\
+            ["@protobufjs/codegen", "npm:2.0.4"],\
+            ["@protobufjs/eventemitter", "npm:1.1.0"],\
+            ["@protobufjs/fetch", "npm:1.1.0"],\
+            ["@protobufjs/float", "npm:1.0.2"],\
+            ["@protobufjs/inquire", "npm:1.1.0"],\
+            ["@protobufjs/path", "npm:1.1.2"],\
+            ["@protobufjs/pool", "npm:1.1.0"],\
+            ["@protobufjs/utf8", "npm:1.1.0"],\
+            ["@types/node", "npm:18.0.6"],\
+            ["long", "npm:5.2.1"]\
           ],\
           "linkType": "HARD"\
         }]\
