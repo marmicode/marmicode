@@ -100,18 +100,11 @@ jobs:
 
       - name: Upload Percy Snapshots
         if: github.ref != 'refs/heads/main'
-        run: NX_CLOUD_DISTRIBUTED_EXECUTION=false yarn percy exec -- yarn nx affected --target=upload-percy-snapshots --base=deployed/marmicode-next
-
+        run: NX_CLOUD_DISTRIBUTED_EXECUTION=false yarn percy exec --partial -- yarn nx affected --target=upload-percy-snapshots --base=deployed/marmicode-next
 
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
         run: NX_CLOUD_DISTRIBUTED_EXECUTION=false yarn percy exec -- yarn nx run-many --target=upload-percy-snapshots
-
-      # Check Percy Review on main branch only.
-      # On other branches, we'll let Percy status check do the job.
-      - name: Check Percy Review
-        if: github.ref == 'refs/heads/main'
-        run: PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project marmicode/marmicode --fail-on-changes
 
       - *upload-dist-on-failure
 
@@ -130,6 +123,28 @@ jobs:
 
       - name: Start Nx Agent ${{ matrix.agent }}
         run: yarn nx-cloud start-agent
+
+      - *upload-dist-on-failure
+
+  check-percy-snapshots:
+    name: 📸 Check Percy Snapshots
+    runs-on: ubuntu-latest
+    env: *percy-env
+    needs:
+      - build-test-lint
+
+    # Check Percy Review on main branch only.
+    # On other branches, we'll let Percy status check do the job.
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - *checkout
+      - *cache
+      - *setup-node
+      - *yarn-install
+
+      - name: Check Percy Snapshots
+        run: PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project marmicode/marmicode --fail-on-changes
 
       - *upload-dist-on-failure
 
@@ -162,6 +177,8 @@ jobs:
     environment:
       name: Marmicode
       url: https://marmicode.io
+    needs:
+      - check-percy-snapshots
     steps:
       - *checkout
       - *cache
