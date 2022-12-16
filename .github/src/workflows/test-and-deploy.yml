@@ -142,6 +142,8 @@ jobs:
 
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
+        env:
+          NX_CLOUD_DISTRIBUTED_EXECUTION: false
         run: yarn percy exec -- yarn nx run-many --target=upload-percy-snapshots
 
       - name: Check Percy Snapshots
