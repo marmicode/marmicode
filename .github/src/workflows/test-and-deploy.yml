@@ -77,6 +77,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       <<: *percy-env
+      NX_CLOUD_DISTRIBUTED_EXECUTION: true
+      NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 4
     steps:
       - *checkout
       - *cache
@@ -86,9 +88,6 @@ jobs:
       - run: yarn nx-cloud start-ci-run
 
       - name: Build & Lint & Test
-        env:
-          NX_CLOUD_DISTRIBUTED_EXECUTION: true
-          NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 4
         run: |
           yarn nx affected --target=prerender --configuration next --base=deployed/marmicode-next \
           & yarn nx affected --target=lint --base=deployed/marmicode-next \
@@ -100,11 +99,15 @@ jobs:
 
       - name: Upload Percy Snapshots
         if: github.ref != 'refs/heads/main'
-        run: NX_CLOUD_DISTRIBUTED_EXECUTION=false yarn percy exec --partial -- yarn nx affected --target=upload-percy-snapshots --base=deployed/marmicode-next
+        env:
+          NX_CLOUD_DISTRIBUTED_EXECUTION: false
+        run: yarn percy exec --partial -- yarn nx affected --target=upload-percy-snapshots --base=deployed/marmicode-next
 
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        run: NX_CLOUD_DISTRIBUTED_EXECUTION=false yarn percy exec -- yarn nx run-many --target=upload-percy-snapshots
+        env:
+          NX_CLOUD_DISTRIBUTED_EXECUTION: false
+        run: yarn percy exec -- yarn nx run-many --target=upload-percy-snapshots
 
       - *upload-dist-on-failure
 

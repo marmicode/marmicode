@@ -15,6 +15,8 @@ jobs:
     env:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
+      NX_CLOUD_DISTRIBUTED_EXECUTION: true
+      NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 4
     steps:
       - uses: actions/checkout@v3
         with:
@@ -38,9 +40,6 @@ jobs:
         run: yarn install --immutable
       - run: yarn nx-cloud start-ci-run
       - name: Build & Lint & Test
-        env:
-          NX_CLOUD_DISTRIBUTED_EXECUTION: true
-          NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 4
         run: >
           yarn nx affected --target=prerender --configuration next
           --base=deployed/marmicode-next \
@@ -57,15 +56,16 @@ jobs:
       - run: yarn nx-cloud stop-all-agents
       - name: Upload Percy Snapshots
         if: github.ref != 'refs/heads/main'
+        env:
+          NX_CLOUD_DISTRIBUTED_EXECUTION: false
         run: >-
-          NX_CLOUD_DISTRIBUTED_EXECUTION=false yarn percy exec --partial -- yarn
-          nx affected --target=upload-percy-snapshots
-          --base=deployed/marmicode-next
+          yarn percy exec --partial -- yarn nx affected
+          --target=upload-percy-snapshots --base=deployed/marmicode-next
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        run: >-
-          NX_CLOUD_DISTRIBUTED_EXECUTION=false yarn percy exec -- yarn nx
-          run-many --target=upload-percy-snapshots
+        env:
+          NX_CLOUD_DISTRIBUTED_EXECUTION: false
+        run: yarn percy exec -- yarn nx run-many --target=upload-percy-snapshots
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
