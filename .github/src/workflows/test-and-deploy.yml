@@ -101,7 +101,7 @@ jobs:
         if: github.ref != 'refs/heads/main'
         env:
           NX_CLOUD_DISTRIBUTED_EXECUTION: false
-        run: yarn percy exec --partial -- yarn nx affected --target=upload-percy-snapshots --base=deployed/marmicode-next
+        run: yarn percy exec --partial -- yarn upload-affected-percy-snapshots
 
       - *upload-dist-on-failure
 
@@ -126,7 +126,9 @@ jobs:
   check-percy-snapshots:
     name: 📸 Check Percy Snapshots
     runs-on: ubuntu-latest
-    env: *percy-env
+    env:
+      <<: *percy-env
+      NX_CLOUD_DISTRIBUTED_EXECUTION: false
     needs:
       - build-test-lint
 
@@ -142,8 +144,6 @@ jobs:
 
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        env:
-          NX_CLOUD_DISTRIBUTED_EXECUTION: false
         run: yarn percy exec -- yarn nx run-many --target=upload-percy-snapshots
 
       - name: Check Percy Snapshots
