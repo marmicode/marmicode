@@ -2,20 +2,17 @@ import { createBlogPost } from './blog-post';
 import { BlogPostComponent, BlogPostModule } from './blog-post.component';
 
 describe(BlogPostComponent.name, () => {
-
-
   it('should show blog', () => {
     cy.mount(BlogPostComponent, {
       imports: [BlogPostModule],
       componentProperties: {
-
         blogPost: createBlogPost({
           id: '123',
           author: {
             name: 'Younes Jaaidi',
             pictureUri:
               'https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/b4b75f0113a2b4c0b4029bef4926d88c/younes-marmicode-1024.jpeg',
-            twitter: 'yjaaidi'
+            twitter: 'yjaaidi',
           },
           duration: 6,
           pictureUri:
@@ -252,9 +249,9 @@ We have the services you need:
 # 🔗 Links
 💻 [Source code](https://github.com/yjaaidi/ng-experiments/tree/http-request-cancelation) Nx monorepo with an Angular app, a NestJS API and custom CPU / Memory graphing app using Angular & GraphQL subscriptions.
 🐦 [@yjaaidi](https://twitter.com/intent/follow?screen_name=yjaaidi) Stay tuned for more posts and upcoming workshops.
-        `
-        })
-      }
+        `,
+        }),
+      },
     });
     cy.snapshot();
   });
@@ -269,7 +266,7 @@ We have the services you need:
             name: 'Younes Jaaidi',
             pictureUri:
               'https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/b4b75f0113a2b4c0b4029bef4926d88c/younes-marmicode-1024.jpeg',
-            twitter: 'yjaaidi'
+            twitter: 'yjaaidi',
           },
           duration: 6,
           pictureUri: null,
@@ -279,10 +276,14 @@ We have the services you need:
           text: `
 # This is a video
 ![JSCutlery Cypress Mount](//videos.ctfassets.net/gowvxq3b4aid/3AGudY8hGMwRmFvZ1xzJvi/3ba2ba62c5109c2537246d82787821b2/jscutlery-cypress-mount.mp4)
-    `
-        })
-      }
+    `,
+        }),
+      },
     });
+
+    /* Wait for video tag to appear before taking a snapshot. */
+    cy.get('video').should('be.visible');
+
     cy.snapshot();
   });
 });
