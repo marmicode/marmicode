@@ -10,6 +10,7 @@
     "learning-map-feature-tree": "libs/learning-map-feature-tree",
     "marmicode": "apps/marmicode",
     "marmicode-e2e": "apps/marmicode-e2e",
+    "percy-placeholder": "libs/percy-placeholder",
     "recipe-feature-detail": "libs/recipe-feature-detail",
     "resource-api": "libs/resource-api",
     "resource-core": "libs/resource-core",
