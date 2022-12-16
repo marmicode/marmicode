@@ -92,9 +92,6 @@ jobs:
   ct:
     name: ✅ Component Tests
     runs-on: ubuntu-latest
-    env:
-      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -116,16 +113,8 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: Affected Component Tests
-        if: github.ref != 'refs/heads/main'
-        run: >-
-          yarn percy exec --parallel --partial -- yarn nx affected
-          --target=component-test --parallel 1 --base=deployed/marmicode-next
       - name: All Component Tests
-        if: github.ref == 'refs/heads/main'
-        run: >-
-          yarn percy exec --parallel yarn nx run-many --target=component-test
-          --parallel 1
+        run: yarn nx run-many --target=component-test --parallel 1
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
@@ -135,9 +124,6 @@ jobs:
   e2e:
     name: ✅ End to End
     runs-on: ubuntu-latest
-    env:
-      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -159,24 +145,16 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: Affected E2E
-        if: github.ref != 'refs/heads/main'
-        run: >-
-          yarn percy exec --parallel --partial -- yarn nx affected --target=e2e
-          --parallel 1 --base=deployed/marmicode-next
       - name: All E2E
-        if: github.ref == 'refs/heads/main'
-        run: >-
-          yarn percy exec --parallel -- yarn nx run-many --target=e2e --parallel
-          1
+        run: yarn nx run-many --target=e2e --parallel 1
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: dist
           path: dist
-  finalize-percy:
-    name: 📸 Finalize Percy
+  upload-percy-snapshots:
+    name: 📸 Upload Percy Snapshots
     runs-on: ubuntu-latest
     env:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
@@ -205,10 +183,8 @@ jobs:
           node-version: '18'
       - name: Install
         run: yarn install --immutable
-      - name: Upload Placeholder
-        run: >-
-          yarn percy exec --parallel -- yarn ts-node
-          tools/upload-percy-placeholder.ts
+      - name: Upload All Percy Snapshots
+        run: yarn nx run-many --target=upload-percy-snapshots --parallel=1
       - name: Finalize Percy
         run: yarn percy build:finalize
       - name: Check Percy Review
@@ -225,7 +201,7 @@ jobs:
       - test
       - ct
       - e2e
-      - finalize-percy
+      - upload-percy-snapshots
     name: 🚀 Marmicode Next
     environment:
       name: Marmicode Next
@@ -279,7 +255,7 @@ jobs:
       - test
       - ct
       - e2e
-      - finalize-percy
+      - upload-percy-snapshots
     name: 🚀 Marmicode
     environment:
       name: Marmicode
