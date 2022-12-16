@@ -9,6 +9,9 @@ on:
   # Allow manual trigger.
   workflow_dispatch: {}
 
+env:
+  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
 jobs:
   deploy:
     name: 🚀 Marmicode
