@@ -87,10 +87,12 @@ Cypress.Commands.add('snapshot', (name = undefined) => {
     /* Serialize dom with Percy. */
     const domSnapshot = serializeDOM({ ...options, dom: document });
 
+    const snapshotsPath = './__percy_snapshots__';
+
+    cy.writeFile(`${snapshotsPath}/${fileName}.html`, domSnapshot.html);
     cy.writeFile(
-      `./__percy_snapshots__/${fileName}.json`,
+      `${snapshotsPath}/${fileName}.json`,
       JSON.stringify({
-        domSnapshot,
         name,
         url: document.URL,
         ...options,

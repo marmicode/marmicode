@@ -16,16 +16,24 @@ async function main(projectPath?: string) {
 
   console.info(`Uploading snapshots for ${projectPath}...`);
 
-  const files = await readdir(join(projectPath, '__percy_snapshots__'));
+  const percySnapshotPath = join(projectPath, '__percy_snapshots__');
+  const fileNames = await readdir(percySnapshotPath);
+  const infoFileNames = fileNames.filter((file) => file.endsWith('.json'));
 
   const snapshotInfoList: SnapshotInfo[] = await Promise.all(
-    files.map(async (fileName) => {
-      return JSON.parse(
-        await readFile(
-          join(projectPath, '__percy_snapshots__', fileName),
-          'utf8'
-        )
-      );
+    infoFileNames.map(async (infoFleName) => {
+      /* Merge metainfo from json file + html file. */
+      return {
+        ...JSON.parse(
+          await readFile(join(percySnapshotPath, infoFleName), 'utf8')
+        ),
+        domSnapshot: {
+          html: await readFile(
+            join(percySnapshotPath, infoFleName.replace('.json', '.html')),
+            'utf8'
+          ),
+        },
+      };
     })
   );
 
@@ -45,11 +53,11 @@ async function _uploadSnapshot(
   try {
     await utils.postSnapshot(snapshotInfo);
   } catch (error) {
-    console.warn(error);
-
     if (remainingAttempts === 0) {
-      return;
+      throw error;
     }
+
+    console.warn(error);
 
     setTimeout(
       () => _uploadSnapshot(snapshotInfo, remainingAttempts - 1),
@@ -62,9 +70,6 @@ const ATTEMPTS = 5;
 
 interface SnapshotInfo {
   name: string;
-  domSnapshot: {
-    html: string;
-  };
   url: string;
   widths: number[];
 }
