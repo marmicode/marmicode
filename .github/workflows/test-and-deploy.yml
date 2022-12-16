@@ -58,9 +58,7 @@ jobs:
         if: github.ref != 'refs/heads/main'
         env:
           NX_CLOUD_DISTRIBUTED_EXECUTION: false
-        run: >-
-          yarn percy exec --partial -- yarn nx affected
-          --target=upload-percy-snapshots --base=deployed/marmicode-next
+        run: yarn percy exec --partial -- yarn upload-affected-percy-snapshots
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
@@ -113,6 +111,7 @@ jobs:
     env:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
+      NX_CLOUD_DISTRIBUTED_EXECUTION: false
     needs:
       - build-test-lint
     if: github.ref == 'refs/heads/main'
@@ -139,8 +138,6 @@ jobs:
         run: yarn install --immutable
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        env:
-          NX_CLOUD_DISTRIBUTED_EXECUTION: false
         run: yarn percy exec -- yarn nx run-many --target=upload-percy-snapshots
       - name: Check Percy Snapshots
         run: >-

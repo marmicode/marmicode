@@ -23,6 +23,7 @@
     "deploy:prod": "nx run marmicode:deploy:production",
     "graphql-codegen": "graphql codegen",
     "test:watch": "nx affected:test --watch --all --parallel --maxParallel 100",
+    "upload-affected-percy-snapshots": "yarn nx run percy-placeholder:upload-percy-snapshots && yarn nx affected --target=upload-percy-snapshots --base=deployed/marmicode-next",
     "workspace-generator": "nx workspace-generator",
     "_dev:ssr": "nx run marmicode:serve-ssr",
     "_serve:ssr": "node dist/marmicode/server/main.js",
