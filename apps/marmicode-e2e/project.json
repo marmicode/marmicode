@@ -19,20 +19,15 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/marmicode-e2e/**/*.{js,ts}"
-        ]
+        "lintFilePatterns": ["apps/marmicode-e2e/**/*.{js,ts}"]
       }
+    },
+    "upload-percy-snapshots": {
+      "command": "tools/upload-percy-snapshots.sh apps/marmicode-e2e"
     }
   },
-  "tags": [
-    "scope:e2e"
-  ],
-  "implicitDependencies": [
-    "marmicode"
-  ]
+  "tags": ["scope:e2e"],
+  "implicitDependencies": ["marmicode"]
 }
