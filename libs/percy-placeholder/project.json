@@ -1,0 +1,10 @@
+{
+  "name": "percy-placeholder",
+  "projectType": "library",
+  "sourceRoot": "libs/percy-placeholder",
+  "targets": {
+    "upload-percy-snapshots": {
+      "command": "tools/upload-percy-snapshots.sh libs/block-ui"
+    }
+  }
+}
