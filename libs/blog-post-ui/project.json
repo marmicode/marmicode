@@ -72,6 +72,9 @@
         "skipServe": true,
         "devServerTarget": "blog-post-ui:component-test-build"
       }
+    },
+    "upload-percy-snapshots": {
+      "command": "tools/upload-percy-snapshots.sh libs/blog-post-ui"
     }
   },
   "tags": [

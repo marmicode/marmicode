@@ -68,7 +68,7 @@ x-deploy-base: &deploy-base
     - test
     - ct
     - e2e
-    - finalize-percy
+    - upload-percy-snapshots
 
 x-percy-env: &percy-env
   PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
@@ -113,7 +113,6 @@ jobs:
   ct:
     name: ✅ Component Tests
     runs-on: ubuntu-latest
-    env: *percy-env
     steps:
       - *checkout
       - *cache
@@ -122,18 +121,17 @@ jobs:
 
       - name: Affected Component Tests
         if: github.ref != 'refs/heads/main'
-        run: yarn percy exec --parallel --partial -- yarn nx affected --target=component-test --parallel 1 --base=deployed/marmicode-next
+        run: yarn nx affected --target=component-test --parallel 1 --base=deployed/marmicode-next
 
       - name: All Component Tests
         if: github.ref == 'refs/heads/main'
-        run: yarn percy exec --parallel yarn nx run-many --target=component-test --parallel 1
+        run: yarn nx run-many --target=component-test --parallel 1
 
       - *upload-dist-on-failure
 
   e2e:
     name: ✅ End to End
     runs-on: ubuntu-latest
-    env: *percy-env
     steps:
       - *checkout
       - *cache
@@ -142,16 +140,16 @@ jobs:
 
       - name: Affected E2E
         if: github.ref != 'refs/heads/main'
-        run: yarn percy exec --parallel --partial -- yarn nx affected --target=e2e --parallel 1 --base=deployed/marmicode-next
+        run: yarn nx affected --target=e2e --parallel 1 --base=deployed/marmicode-next
 
       - name: All E2E
         if: github.ref == 'refs/heads/main'
-        run: yarn percy exec --parallel -- yarn nx run-many --target=e2e --parallel 1
+        run: yarn nx run-many --target=e2e --parallel 1
 
       - *upload-dist-on-failure
 
-  finalize-percy:
-    name: 📸 Finalize Percy
+  upload-percy-snapshots:
+    name: 📸 Upload Percy Snapshots
     runs-on: ubuntu-latest
     env: *percy-env
     needs:
@@ -163,8 +161,13 @@ jobs:
       - *setup-node
       - *yarn-install
 
-      - name: Upload Placeholder
-        run: yarn percy exec --parallel -- yarn ts-node tools/upload-percy-placeholder.ts
+      - name: Upload Percy Snapshots
+        if: github.ref != 'refs/heads/main'
+        run: yarn nx affected --target=upload-percy-snapshots --parallel=1 --base=deployed/marmicode-next
+
+      - name: Upload All Percy Snapshots
+        if: github.ref == 'refs/heads/main'
+        run: yarn nx run-many --target=upload-percy-snapshots --parallel=1
 
       - name: Finalize Percy
         run: yarn percy build:finalize

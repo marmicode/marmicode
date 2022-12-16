@@ -84,7 +84,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nrwl/storybook", "npm:15.3.0"],\
             ["@nrwl/workspace", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.3.0"],\
             ["@percy/cli", "npm:1.16.0"],\
-            ["@percy/cypress", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.1.2"],\
             ["@percy/dom", "npm:1.16.0"],\
             ["@percy/sdk-utils", "npm:1.6.3"],\
             ["@rx-angular/cdk", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:1.0.0-rc.3"],\
@@ -13553,29 +13552,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@percy/cypress", [\
-        ["npm:3.1.2", {\
-          "packageLocation": "./.yarn/cache/@percy-cypress-npm-3.1.2-b10a40bb3c-576b14c076.zip/node_modules/@percy/cypress/",\
-          "packageDependencies": [\
-            ["@percy/cypress", "npm:3.1.2"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.1.2", {\
-          "packageLocation": "./.yarn/__virtual__/@percy-cypress-virtual-91064baff6/0/cache/@percy-cypress-npm-3.1.2-b10a40bb3c-576b14c076.zip/node_modules/@percy/cypress/",\
-          "packageDependencies": [\
-            ["@percy/cypress", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.1.2"],\
-            ["@percy/sdk-utils", "npm:1.16.0"],\
-            ["@types/cypress", null],\
-            ["cypress", "npm:11.2.0"]\
-          ],\
-          "packagePeers": [\
-            "@types/cypress",\
-            "cypress"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["@percy/dom", [\
         ["npm:1.16.0", {\
           "packageLocation": "./.yarn/cache/@percy-dom-npm-1.16.0-1bafe1e2d6-433c2823c8.zip/node_modules/@percy/dom/",\
@@ -13604,13 +13580,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@percy/sdk-utils", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-sdk-utils-npm-1.16.0-8156e60681-8213d983f5.zip/node_modules/@percy/sdk-utils/",\
-          "packageDependencies": [\
-            ["@percy/sdk-utils", "npm:1.16.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:1.6.3", {\
           "packageLocation": "./.yarn/cache/@percy-sdk-utils-npm-1.6.3-16774cd388-94bfdc81e4.zip/node_modules/@percy/sdk-utils/",\
           "packageDependencies": [\
@@ -34014,7 +33983,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nrwl/storybook", "npm:15.3.0"],\
             ["@nrwl/workspace", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.3.0"],\
             ["@percy/cli", "npm:1.16.0"],\
-            ["@percy/cypress", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.1.2"],\
             ["@percy/dom", "npm:1.16.0"],\
             ["@percy/sdk-utils", "npm:1.6.3"],\
             ["@rx-angular/cdk", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:1.0.0-rc.3"],\
