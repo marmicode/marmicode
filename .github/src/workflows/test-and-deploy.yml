@@ -102,6 +102,7 @@ jobs:
         if: github.ref != 'refs/heads/main'
         run: NX_CLOUD_DISTRIBUTED_EXECUTION=false yarn percy exec -- yarn nx affected --target=upload-percy-snapshots --base=deployed/marmicode-next
 
+
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
         run: NX_CLOUD_DISTRIBUTED_EXECUTION=false yarn percy exec -- yarn nx run-many --target=upload-percy-snapshots
