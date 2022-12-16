@@ -58,19 +58,14 @@ jobs:
       - name: Upload Percy Snapshots
         if: github.ref != 'refs/heads/main'
         run: >-
-          NX_CLOUD_DISTRIBUTED_EXECUTION=false yarn percy exec -- yarn nx
-          affected --target=upload-percy-snapshots
+          NX_CLOUD_DISTRIBUTED_EXECUTION=false yarn percy exec --partial -- yarn
+          nx affected --target=upload-percy-snapshots
           --base=deployed/marmicode-next
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
         run: >-
           NX_CLOUD_DISTRIBUTED_EXECUTION=false yarn percy exec -- yarn nx
           run-many --target=upload-percy-snapshots
-      - name: Check Percy Review
-        if: github.ref == 'refs/heads/main'
-        run: >-
-          PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project
-          marmicode/marmicode --fail-on-changes
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
@@ -111,6 +106,46 @@ jobs:
         run: yarn install --immutable
       - name: Start Nx Agent ${{ matrix.agent }}
         run: yarn nx-cloud start-agent
+      - name: Upload dist (Cypress videos / build output etc...) on failure
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: dist
+          path: dist
+  check-percy-snapshots:
+    name: 📸 Check Percy Snapshots
+    runs-on: ubuntu-latest
+    env:
+      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
+    needs:
+      - build-test-lint
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/Cypress
+            .angular
+            .yarn/unplugged
+            libs/*/.angular
+            node_modules/.cache
+          key: cache-${{ github.run_id }}
+          restore-keys: |
+            cache
+      - uses: actions/setup-node@v3
+        with:
+          cache: yarn
+          node-version: '18'
+      - name: Install
+        run: yarn install --immutable
+      - name: Check Percy Snapshots
+        run: >-
+          PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project
+          marmicode/marmicode --fail-on-changes
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
@@ -170,7 +205,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs:
-      - build-test-lint
+      - check-percy-snapshots
     name: 🚀 Marmicode
     environment:
       name: Marmicode
