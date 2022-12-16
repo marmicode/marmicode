@@ -166,6 +166,7 @@ jobs:
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          NX_CLOUD_DISTRIBUTED_EXECUTION: false
         run: yarn nx run marmicode:deploy:next
 
       - name: Tag deployed/marmicode-next
@@ -191,6 +192,7 @@ jobs:
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          NX_CLOUD_DISTRIBUTED_EXECUTION: false
         run: yarn nx run marmicode:deploy:production
 
       - name: Tag deployed/marmicode
