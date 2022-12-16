@@ -169,9 +169,6 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: yarn percy exec -- yarn nx run-many --target=upload-percy-snapshots --parallel=1
 
-      - name: Finalize Percy
-        run: yarn percy build:finalize
-
       # Check Percy Review on main branch only.
       # On other branches, we'll let Percy status check do the job.
       - name: Check Percy Review
