@@ -281,7 +281,7 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           NX_CLOUD_DISTRIBUTED_EXECUTION: false
-        run: yarn nx run marmicode:deploy:production --skip-nx-cache
+        run: yarn nx run marmicode:deploy:production
 
       - name: Tag deployed/marmicode
         run: git tag -f deployed/marmicode

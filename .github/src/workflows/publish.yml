@@ -46,4 +46,4 @@ jobs:
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: yarn nx run marmicode:deploy:production
+        run: yarn nx run marmicode:deploy:production --skip-nx-cache
