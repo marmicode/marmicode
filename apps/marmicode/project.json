@@ -268,7 +268,7 @@
       "executor": "@nguniversal/builders:prerender",
       "options": {
         "guessRoutes": false,
-        "routesFile": "dist/marmicode-routes.txt"
+        "routesFile": "apps/marmicode/marmicode-routes.txt"
       },
       "configurations": {
         "production": {
@@ -280,12 +280,8 @@
           "serverTarget": "marmicode:server:next"
         }
       },
-      "inputs": [
-        "{workspaceRoot}/dist/marmicode-routes.txt"
-      ],
-      "outputs": [
-        "{workspaceRoot}/dist/apps/marmicode"
-      ],
+      "inputs": ["{projectRoot}/marmicode-routes.txt"],
+      "outputs": ["{workspaceRoot}/dist/apps/marmicode"],
       "dependsOn": ["update-routes"],
       "defaultConfiguration": "production"
     },
@@ -315,7 +311,7 @@
       "options": {
         "commands": [
           "mkdir -p dist",
-          "ts-node --esm --skipProject apps/marmicode/update-routes.ts -o dist/marmicode-routes.txt"
+          "ts-node --esm --skipProject apps/marmicode/update-routes.ts -o apps/marmicode/marmicode-routes.txt"
         ],
         "parallel": false
       }
