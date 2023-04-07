@@ -52,3 +52,5 @@ Thumbs.db
 !.yarn/versions
 
 __percy_snapshots__
+
+apps/marmicode/marmicode-routes.txt
