@@ -314,7 +314,8 @@
           "ts-node --esm --skipProject apps/marmicode/update-routes.ts -o apps/marmicode/marmicode-routes.txt"
         ],
         "parallel": false
-      }
+      },
+      "outputs": ["{projectRoot}/marmicode-routes.txt"]
     }
   },
   "tags": ["scope:app"]
