@@ -83,8 +83,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nrwl/nx-cloud", "npm:15.0.2"],\
             ["@nrwl/storybook", "npm:15.3.0"],\
             ["@nrwl/workspace", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.3.0"],\
-            ["@percy/cli", "npm:1.16.0"],\
-            ["@percy/dom", "npm:1.16.0"],\
+            ["@percy/cli", "npm:1.22.0"],\
+            ["@percy/dom", "npm:1.22.0"],\
             ["@percy/sdk-utils", "npm:1.6.3"],\
             ["@rx-angular/cdk", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:1.0.0-rc.3"],\
             ["@rx-angular/state", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:1.7.0"],\
@@ -13433,72 +13433,72 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@percy/cli", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-cli-npm-1.16.0-d3891e3d46-fb41316700.zip/node_modules/@percy/cli/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/cache/@percy-cli-npm-1.22.0-8efa5130a9-a876544e3b.zip/node_modules/@percy/cli/",\
           "packageDependencies": [\
-            ["@percy/cli", "npm:1.16.0"],\
-            ["@percy/cli-app", "npm:1.16.0"],\
-            ["@percy/cli-build", "npm:1.16.0"],\
-            ["@percy/cli-command", "npm:1.16.0"],\
-            ["@percy/cli-config", "npm:1.16.0"],\
-            ["@percy/cli-exec", "npm:1.16.0"],\
-            ["@percy/cli-snapshot", "npm:1.16.0"],\
-            ["@percy/cli-upload", "npm:1.16.0"],\
-            ["@percy/client", "npm:1.16.0"],\
-            ["@percy/logger", "npm:1.16.0"]\
+            ["@percy/cli", "npm:1.22.0"],\
+            ["@percy/cli-app", "npm:1.22.0"],\
+            ["@percy/cli-build", "npm:1.22.0"],\
+            ["@percy/cli-command", "npm:1.22.0"],\
+            ["@percy/cli-config", "npm:1.22.0"],\
+            ["@percy/cli-exec", "npm:1.22.0"],\
+            ["@percy/cli-snapshot", "npm:1.22.0"],\
+            ["@percy/cli-upload", "npm:1.22.0"],\
+            ["@percy/client", "npm:1.22.0"],\
+            ["@percy/logger", "npm:1.22.0"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@percy/cli-app", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-cli-app-npm-1.16.0-e5795f50c6-90566bf5ec.zip/node_modules/@percy/cli-app/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/cache/@percy-cli-app-npm-1.22.0-d089addd89-5b37dd4bda.zip/node_modules/@percy/cli-app/",\
           "packageDependencies": [\
-            ["@percy/cli-app", "npm:1.16.0"],\
-            ["@percy/cli-command", "npm:1.16.0"],\
-            ["@percy/cli-exec", "npm:1.16.0"]\
+            ["@percy/cli-app", "npm:1.22.0"],\
+            ["@percy/cli-command", "npm:1.22.0"],\
+            ["@percy/cli-exec", "npm:1.22.0"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@percy/cli-build", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-cli-build-npm-1.16.0-c6dbb86b4e-6ef171552f.zip/node_modules/@percy/cli-build/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/cache/@percy-cli-build-npm-1.22.0-24472fb8bc-45b3323e13.zip/node_modules/@percy/cli-build/",\
           "packageDependencies": [\
-            ["@percy/cli-build", "npm:1.16.0"],\
-            ["@percy/cli-command", "npm:1.16.0"]\
+            ["@percy/cli-build", "npm:1.22.0"],\
+            ["@percy/cli-command", "npm:1.22.0"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@percy/cli-command", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-cli-command-npm-1.16.0-07dedd8902-06833a9b31.zip/node_modules/@percy/cli-command/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/cache/@percy-cli-command-npm-1.22.0-3f5862a333-0f5f03260a.zip/node_modules/@percy/cli-command/",\
           "packageDependencies": [\
-            ["@percy/cli-command", "npm:1.16.0"],\
-            ["@percy/config", "npm:1.16.0"],\
-            ["@percy/core", "npm:1.16.0"],\
-            ["@percy/logger", "npm:1.16.0"]\
+            ["@percy/cli-command", "npm:1.22.0"],\
+            ["@percy/config", "npm:1.22.0"],\
+            ["@percy/core", "npm:1.22.0"],\
+            ["@percy/logger", "npm:1.22.0"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@percy/cli-config", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-cli-config-npm-1.16.0-d7130fa31b-187144b81d.zip/node_modules/@percy/cli-config/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/cache/@percy-cli-config-npm-1.22.0-9de002ef9e-1109b9e015.zip/node_modules/@percy/cli-config/",\
           "packageDependencies": [\
-            ["@percy/cli-config", "npm:1.16.0"],\
-            ["@percy/cli-command", "npm:1.16.0"]\
+            ["@percy/cli-config", "npm:1.22.0"],\
+            ["@percy/cli-command", "npm:1.22.0"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@percy/cli-exec", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-cli-exec-npm-1.16.0-2df6c5f771-78b64f3668.zip/node_modules/@percy/cli-exec/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/cache/@percy-cli-exec-npm-1.22.0-e13523523b-d36895ccf0.zip/node_modules/@percy/cli-exec/",\
           "packageDependencies": [\
-            ["@percy/cli-exec", "npm:1.16.0"],\
-            ["@percy/cli-command", "npm:1.16.0"],\
+            ["@percy/cli-exec", "npm:1.22.0"],\
+            ["@percy/cli-command", "npm:1.22.0"],\
             ["cross-spawn", "npm:7.0.3"],\
             ["which", "npm:2.0.2"]\
           ],\
@@ -13506,22 +13506,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@percy/cli-snapshot", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-cli-snapshot-npm-1.16.0-dac9c529d4-87461a6036.zip/node_modules/@percy/cli-snapshot/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/cache/@percy-cli-snapshot-npm-1.22.0-4593902885-43b9d4d7ce.zip/node_modules/@percy/cli-snapshot/",\
           "packageDependencies": [\
-            ["@percy/cli-snapshot", "npm:1.16.0"],\
-            ["@percy/cli-command", "npm:1.16.0"],\
+            ["@percy/cli-snapshot", "npm:1.22.0"],\
+            ["@percy/cli-command", "npm:1.22.0"],\
             ["yaml", "npm:2.1.3"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@percy/cli-upload", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-cli-upload-npm-1.16.0-91e11c10fe-8bab3fea75.zip/node_modules/@percy/cli-upload/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/cache/@percy-cli-upload-npm-1.22.0-5e5e06c637-0db1d36e1f.zip/node_modules/@percy/cli-upload/",\
           "packageDependencies": [\
-            ["@percy/cli-upload", "npm:1.16.0"],\
-            ["@percy/cli-command", "npm:1.16.0"],\
+            ["@percy/cli-upload", "npm:1.22.0"],\
+            ["@percy/cli-command", "npm:1.22.0"],\
             ["fast-glob", "npm:3.2.12"],\
             ["image-size", "npm:1.0.2"]\
           ],\
@@ -13529,22 +13529,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@percy/client", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-client-npm-1.16.0-0a679d703e-c42ffd61cb.zip/node_modules/@percy/client/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/cache/@percy-client-npm-1.22.0-2ef728773f-8751e48b42.zip/node_modules/@percy/client/",\
           "packageDependencies": [\
-            ["@percy/client", "npm:1.16.0"],\
-            ["@percy/env", "npm:1.16.0"],\
-            ["@percy/logger", "npm:1.16.0"]\
+            ["@percy/client", "npm:1.22.0"],\
+            ["@percy/env", "npm:1.22.0"],\
+            ["@percy/logger", "npm:1.22.0"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@percy/config", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-config-npm-1.16.0-74c6aa1009-652000a556.zip/node_modules/@percy/config/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/cache/@percy-config-npm-1.22.0-8987598735-2a46d3e50b.zip/node_modules/@percy/config/",\
           "packageDependencies": [\
-            ["@percy/config", "npm:1.16.0"],\
-            ["@percy/logger", "npm:1.16.0"],\
+            ["@percy/config", "npm:1.22.0"],\
+            ["@percy/logger", "npm:1.22.0"],\
             ["ajv", "npm:8.11.2"],\
             ["cosmiconfig", "npm:7.0.0"],\
             ["yaml", "npm:2.1.3"]\
@@ -13553,14 +13553,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@percy/core", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/unplugged/@percy-core-npm-1.16.0-5dd5bb953f/node_modules/@percy/core/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/unplugged/@percy-core-npm-1.22.0-f4763108be/node_modules/@percy/core/",\
           "packageDependencies": [\
-            ["@percy/core", "npm:1.16.0"],\
-            ["@percy/client", "npm:1.16.0"],\
-            ["@percy/config", "npm:1.16.0"],\
-            ["@percy/dom", "npm:1.16.0"],\
-            ["@percy/logger", "npm:1.16.0"],\
+            ["@percy/core", "npm:1.22.0"],\
+            ["@percy/client", "npm:1.22.0"],\
+            ["@percy/config", "npm:1.22.0"],\
+            ["@percy/dom", "npm:1.22.0"],\
+            ["@percy/logger", "npm:1.22.0"],\
             ["content-disposition", "npm:0.5.4"],\
             ["cross-spawn", "npm:7.0.3"],\
             ["extract-zip", "npm:2.0.1"],\
@@ -13575,28 +13575,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@percy/dom", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-dom-npm-1.16.0-1bafe1e2d6-433c2823c8.zip/node_modules/@percy/dom/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/cache/@percy-dom-npm-1.22.0-43ab208bad-a9425fb572.zip/node_modules/@percy/dom/",\
           "packageDependencies": [\
-            ["@percy/dom", "npm:1.16.0"]\
+            ["@percy/dom", "npm:1.22.0"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@percy/env", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-env-npm-1.16.0-76e02db9ea-88fba7c4be.zip/node_modules/@percy/env/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/cache/@percy-env-npm-1.22.0-b7f9b38fb2-c215783002.zip/node_modules/@percy/env/",\
           "packageDependencies": [\
-            ["@percy/env", "npm:1.16.0"]\
+            ["@percy/env", "npm:1.22.0"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@percy/logger", [\
-        ["npm:1.16.0", {\
-          "packageLocation": "./.yarn/cache/@percy-logger-npm-1.16.0-0230370f6f-172d2271a6.zip/node_modules/@percy/logger/",\
+        ["npm:1.22.0", {\
+          "packageLocation": "./.yarn/cache/@percy-logger-npm-1.22.0-9c2b7a43e1-5e297c94e5.zip/node_modules/@percy/logger/",\
           "packageDependencies": [\
-            ["@percy/logger", "npm:1.16.0"]\
+            ["@percy/logger", "npm:1.22.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -34024,8 +34024,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nrwl/nx-cloud", "npm:15.0.2"],\
             ["@nrwl/storybook", "npm:15.3.0"],\
             ["@nrwl/workspace", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.3.0"],\
-            ["@percy/cli", "npm:1.16.0"],\
-            ["@percy/dom", "npm:1.16.0"],\
+            ["@percy/cli", "npm:1.22.0"],\
+            ["@percy/dom", "npm:1.22.0"],\
             ["@percy/sdk-utils", "npm:1.6.3"],\
             ["@rx-angular/cdk", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:1.0.0-rc.3"],\
             ["@rx-angular/state", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:1.7.0"],\
