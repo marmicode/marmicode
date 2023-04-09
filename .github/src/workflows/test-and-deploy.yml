@@ -224,7 +224,7 @@ jobs:
       # On other branches, we'll let Percy status check do the job.
       - name: Check Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        run: PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project marmicode/marmicode --fail-on-changes
+        run: PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project d53cdff6/marmicode --fail-on-changes
 
       - *upload-dist-on-failure
 
