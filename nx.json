@@ -59,6 +59,9 @@
     },
     "upload-percy-snapshots": {
       "dependsOn": ["component-test", "e2e"]
+    },
+    "lint": {
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
     }
   },
   "namedInputs": {
