@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "nx": "pnpify nx",
+    "nxcloud": "pnpify nxcloud",
     "start": "nx serve",
     "build": "nx build",
     "component-test": "nx run-many --target=component-test",
