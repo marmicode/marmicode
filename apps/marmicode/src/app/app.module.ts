@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { getAnalytics, provideAnalytics, ScreenTrackingService } from '@angular/fire/analytics';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { CONFIG as FIREBASE_ANALYTICS_CONFIG } from '@angular/fire/compat/analytics';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ZonelessFixesEffects } from '@marmicode/shared-utils';
@@ -48,6 +48,7 @@ import { provideUpdateEffects, UpdateEffects } from './update/update.effects';
   ],
   providers: [
     ScreenTrackingService,
+    provideClientHydration(),
     provideUpdateEffects(),
     {
       provide: FIREBASE_ANALYTICS_CONFIG,
