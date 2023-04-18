@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "nx",
-    "nx": "nx",
+    "nx": "pnpify nx",
     "start": "nx serve",
     "build": "nx build",
     "component-test": "nx run-many --target=component-test",
@@ -127,6 +126,7 @@
     "@types/webpack": "4.41.32",
     "@typescript-eslint/eslint-plugin": "4.31.2",
     "@typescript-eslint/parser": "4.31.2",
+    "@yarnpkg/pnpify": "4.0.0-rc.42",
     "@yarnpkg/sdks": "3.0.0-rc.33",
     "cypress": "^12.2.0",
     "cypress-pipe": "^2.0.0",
