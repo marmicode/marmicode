@@ -12,8 +12,9 @@ import {
 } from '@angular/core';
 import { CodeBlock } from '@marmicode/block-core';
 import { Platform } from '@marmicode/shared-utils';
-import { RxState, select, selectSlice } from '@rx-angular/state';
-import { PushModule } from '@rx-angular/template';
+import { RxState, } from '@rx-angular/state';
+import { select, selectSlice } from '@rx-angular/state/selections';
+import { PushPipe } from '@rx-angular/template/push';
 import * as Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-typescript';
@@ -141,7 +142,7 @@ export class CodeBlockComponent implements AfterViewChecked {
         ),
         /* @hack schedule state change for next cycle otherwise
          * change detection will miss it...
-         * except if we use @rx-angular/template's push. */
+         * except if we use @rx-angular/template/push's push. */
         observeOn(
           platform.isBrowser() ? animationFrameScheduler : asyncScheduler
         ),
@@ -180,6 +181,6 @@ export class CodeBlockComponent implements AfterViewChecked {
 @NgModule({
   declarations: [CodeBlockComponent],
   exports: [CodeBlockComponent],
-  imports: [CommonModule, PushModule],
+  imports: [CommonModule, PushPipe],
 })
 export class CodeBlockModule {}

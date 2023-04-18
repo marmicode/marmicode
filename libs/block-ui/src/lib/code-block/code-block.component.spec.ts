@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { createCodeBlock } from '@marmicode/block-core';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import * as Prism from 'prismjs';
 import { first } from 'rxjs/operators';
 import { createHighlightZone } from '../highlight/highlight-zone';
@@ -16,7 +16,7 @@ describe('CodeBlockComponent', () => {
   beforeEach(async () => {
     return TestBed.configureTestingModule({
       declarations: [CodeBlockComponent],
-      imports: [PushModule],
+      imports: [PushPipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });

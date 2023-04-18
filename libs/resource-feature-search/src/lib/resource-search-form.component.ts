@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
 import { RxState } from '@rx-angular/state';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { combineLatest, concat, defer, Observable, of } from 'rxjs';
 import {
   filter,
@@ -139,7 +139,7 @@ export class ResourceSearchFormComponent {
   exports: [ResourceSearchFormComponent],
   imports: [
     CommonModule,
-    PushModule,
+    PushPipe,
     ResourceSearchStateModule,
     SkillRepositoryModule,
     SearchInputModule,

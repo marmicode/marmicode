@@ -4,16 +4,17 @@ import {
   Component,
   HostBinding,
   Input,
-  NgModule
+  NgModule,
 } from '@angular/core';
 import {
   BlockGroup,
   BlockType,
   createMarkdownBlock,
-  parseMarkdown
+  parseMarkdown,
 } from '@marmicode/block-core';
-import { RxState, select } from '@rx-angular/state';
-import { PushModule } from '@rx-angular/template';
+import { RxState } from '@rx-angular/state';
+import { select } from '@rx-angular/state/selections';
+import { PushPipe } from '@rx-angular/template/push';
 import { map } from 'rxjs/operators';
 import { BlockModule } from '../block.component';
 import { extractHighlightableZones } from '../highlight/extract-highlightable-zones';
@@ -104,6 +105,6 @@ export class BlockGroupComponent {
 @NgModule({
   declarations: [BlockGroupComponent],
   exports: [BlockGroupComponent],
-  imports: [BlockModule, CommonModule, PushModule],
+  imports: [BlockModule, CommonModule, PushPipe],
 })
 export class BlockGroupModule {}

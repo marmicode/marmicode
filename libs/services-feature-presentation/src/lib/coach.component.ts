@@ -1,4 +1,4 @@
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
@@ -120,6 +120,6 @@ export class CoachComponent {
 @NgModule({
   declarations: [CoachComponent],
   exports: [CoachComponent],
-  imports: [CommonModule, DottyLineModule, PushModule],
+  imports: [CommonModule, DottyLineModule, PushPipe],
 })
 export class CoachModule {}

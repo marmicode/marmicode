@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Action, select, Store } from '@ngrx/store';
 import {
   getSelectedSkillSlug,
-  RouterPartialState,
+  RouterPartialState
 } from './resource-search.selectors';
 
 @Injectable()
