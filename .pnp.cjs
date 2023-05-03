@@ -25445,6 +25445,30 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["semver", "npm:7.5.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:4.1.1", {\
+          "packageLocation": "./.yarn/cache/exegesis-npm-4.1.1-808fb32c21-77fb0cec2a.zip/node_modules/exegesis/",\
+          "packageDependencies": [\
+            ["exegesis", "npm:4.1.1"],\
+            ["@apidevtools/json-schema-ref-parser", "npm:9.1.2"],\
+            ["ajv", "npm:8.12.0"],\
+            ["ajv-formats", "virtual:4e27f0defb3cff7db103eca9dc8bcbbbeb7bdcf8869a29af87c6e05b4799bbd59500928e04260ce286a347508a4370555ad9c07601bec3b53b0a92f2de75b251#npm:2.1.1"],\
+            ["body-parser", "npm:1.20.2"],\
+            ["content-type", "npm:1.0.5"],\
+            ["deep-freeze", "npm:0.0.1"],\
+            ["events-listener", "npm:1.1.0"],\
+            ["glob", "npm:7.2.3"],\
+            ["json-ptr", "npm:3.1.1"],\
+            ["json-schema-traverse", "npm:1.0.0"],\
+            ["lodash", "npm:4.17.21"],\
+            ["openapi3-ts", "npm:3.2.0"],\
+            ["promise-breaker", "npm:6.0.0"],\
+            ["pump", "npm:3.0.0"],\
+            ["qs", "npm:6.11.1"],\
+            ["raw-body", "npm:2.5.2"],\
+            ["semver", "npm:7.5.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["exegesis-express", [\
@@ -26199,6 +26223,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cross-spawn", "npm:7.0.3"],\
             ["csv-streamify", "npm:3.0.4"],\
             ["dotenv", "npm:6.2.0"],\
+            ["exegesis", "npm:4.1.1"],\
             ["exegesis-express", "npm:2.0.1"],\
             ["exit-code", "npm:1.0.2"],\
             ["express", "npm:4.18.2"],\
@@ -31697,6 +31722,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["tslib", "npm:2.5.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:3.1.1", {\
+          "packageLocation": "./.yarn/cache/json-ptr-npm-3.1.1-ad9165a70a-58da208d84.zip/node_modules/json-ptr/",\
+          "packageDependencies": [\
+            ["json-ptr", "npm:3.1.1"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["json-schema", [\
@@ -35237,6 +35269,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["yaml", "npm:1.10.2"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:3.2.0", {\
+          "packageLocation": "./.yarn/cache/openapi3-ts-npm-3.2.0-bc7f1aff0a-8796a29a13.zip/node_modules/openapi3-ts/",\
+          "packageDependencies": [\
+            ["openapi3-ts", "npm:3.2.0"],\
+            ["yaml", "npm:2.2.2"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["opener", [\
@@ -37434,6 +37474,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/promise-breaker-npm-5.0.0-a3cb65d720-12943dbb2a.zip/node_modules/promise-breaker/",\
           "packageDependencies": [\
             ["promise-breaker", "npm:5.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:6.0.0", {\
+          "packageLocation": "./.yarn/cache/promise-breaker-npm-6.0.0-7f650c8856-84939eb36b.zip/node_modules/promise-breaker/",\
+          "packageDependencies": [\
+            ["promise-breaker", "npm:6.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
