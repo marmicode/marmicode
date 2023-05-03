@@ -186,7 +186,7 @@ jobs:
   nx-agents:
     name: 🤖 Agents
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     strategy:
       matrix:
         agent:

@@ -70,7 +70,8 @@
         "cypressConfig": "libs/blog-post-ui/cypress.config.js",
         "testingType": "component",
         "skipServe": true,
-        "devServerTarget": "blog-post-ui:component-test-build"
+        "devServerTarget": "blog-post-ui:component-test-build",
+        "browser": "chrome"
       }
     },
     "upload-percy-snapshots": {

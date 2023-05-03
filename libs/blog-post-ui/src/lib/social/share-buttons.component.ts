@@ -13,8 +13,9 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
-import { RxState, select, selectSlice } from '@rx-angular/state';
-import { PushModule } from '@rx-angular/template';
+import { RxState, } from '@rx-angular/state';
+import { select, selectSlice } from '@rx-angular/state/selections';
+import { PushPipe } from '@rx-angular/template/push';
 import { ShareButtonsModule as NgxShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { map } from 'rxjs/operators';
 import { AuthorSocialInfo } from './author-social-info';
@@ -125,6 +126,6 @@ export class ShareButtonsComponent {
 @NgModule({
   declarations: [ShareButtonsComponent],
   exports: [ShareButtonsComponent],
-  imports: [CommonModule, NgxShareButtonsModule, PushModule],
+  imports: [CommonModule, NgxShareButtonsModule, PushPipe],
 })
 export class ShareButtonsModule {}

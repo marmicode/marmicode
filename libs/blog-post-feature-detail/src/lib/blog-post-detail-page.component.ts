@@ -8,7 +8,7 @@ import {
   shareReplayWithRefCount,
   TransferStateHelper,
 } from '@marmicode/shared-utils';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { map, switchMap } from 'rxjs/operators';
 import { BlogPostRepository } from './blog-post-repository.service';
 import { blogPostToPageInfo } from './blog-post-to-page-info';
@@ -54,7 +54,7 @@ export class BlogPostDetailPageComponent {
     PageModule,
     BlogPostModule,
     SuspenseModule,
-    PushModule,
+    PushPipe,
   ],
 })
 export class BlogPostDetailPageModule {}

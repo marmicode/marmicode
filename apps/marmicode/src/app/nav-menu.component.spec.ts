@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { NavMenuComponent } from './nav-menu.component';
 import { describe, expect, it } from '@jest/globals';
 
@@ -41,7 +41,7 @@ describe('NavMenuComponent', () => {
   function createMenu() {
     TestBed.configureTestingModule({
       declarations: [NavMenuComponent],
-      imports: [NoopAnimationsModule, PushModule],
+      imports: [NoopAnimationsModule, PushPipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
 

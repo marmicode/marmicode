@@ -4,7 +4,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Router } from '@angular/router';
 
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { BehaviorSubject, of } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
@@ -22,7 +22,7 @@ describe('ResourceSearchFormComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ResourceSearchFormComponent],
-      imports: [MatAutocompleteModule, PushModule],
+      imports: [MatAutocompleteModule, PushPipe],
       providers: [
         {
           provide: ResourceSearchFacade,

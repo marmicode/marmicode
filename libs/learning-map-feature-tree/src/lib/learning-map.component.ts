@@ -1,4 +1,4 @@
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -58,12 +58,6 @@ export class LearningMapComponent {
 @NgModule({
   declarations: [LearningMapComponent],
   exports: [LearningMapComponent],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    PushModule,
-    TreeModule,
-  ],
+  imports: [CommonModule, MatButtonModule, MatIconModule, PushPipe, TreeModule],
 })
 export class LearningMapModule {}
