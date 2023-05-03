@@ -15,7 +15,7 @@ export const selectRouter = createSelector(
   (router) => router
 );
 
-export const { selectRouteParam } = fromRouter.getSelectors(selectRouter);
+export const { selectRouteParam } = fromRouter.getRouterSelectors(selectRouter);
 
 export const getSelectedSkillSlug = selectRouteParam(
   resourceSearchRouterHelper.SKILL_SLUG_PARAM

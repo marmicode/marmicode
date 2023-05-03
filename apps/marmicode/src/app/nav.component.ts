@@ -1,4 +1,4 @@
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { Component, HostListener, NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -114,7 +114,7 @@ export class NavComponent {
     CommonModule,
     MatToolbarModule,
     NavMenuModule,
-    PushModule,
+    PushPipe,
     RouterModule,
   ],
 })

@@ -12,13 +12,14 @@ import {
   ResourceTitleBannerModule,
   ResourceType,
 } from '@marmicode/resource-api';
-import { RxState, select } from '@rx-angular/state';
+import { RxState } from '@rx-angular/state';
+import { select } from '@rx-angular/state/selections';
 import { map } from 'rxjs/operators';
 import { BlogPost } from './blog-post';
 import { FollowButtonModule } from './social/follow-button.component';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
 import { ShareButtonsModule } from './social/share-buttons.component';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -139,7 +140,7 @@ export class BlogPostComponent {
     BlockGroupModule,
     CommonModule,
     MatDividerModule,
-    PushModule,
+    PushPipe,
     ResourceHeaderModule,
     ResourceTitleBannerModule,
     ShareButtonsModule,

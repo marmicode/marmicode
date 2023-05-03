@@ -8,7 +8,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { Suspense, suspensify } from '@jscutlery/operators';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { Observable } from 'rxjs';
 import { ErrorModule } from './error.component';
 import { LoadingModule } from './loading.component';
@@ -72,6 +72,6 @@ export class SuspenseComponent<T = unknown> {
 @NgModule({
   declarations: [SuspenseComponent],
   exports: [SuspenseComponent],
-  imports: [CommonModule, LoadingModule, ErrorModule, PushModule],
+  imports: [CommonModule, LoadingModule, ErrorModule, PushPipe],
 })
 export class SuspenseModule {}

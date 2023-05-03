@@ -19,9 +19,7 @@
         "jestConfig": "libs/block-ui/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/block-ui"
-      ]
+      "outputs": ["{workspaceRoot}/coverage/libs/block-ui"]
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
@@ -39,9 +37,7 @@
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputDir": "dist/storybook/recipe-ui",
         "configDir": "libs/block-ui/.storybook",
@@ -70,7 +66,8 @@
         "cypressConfig": "libs/block-ui/cypress.config.js",
         "testingType": "component",
         "skipServe": true,
-        "devServerTarget": "block-ui:component-test-build"
+        "devServerTarget": "block-ui:component-test-build",
+        "browser": "chrome"
       }
     },
     "upload-percy-snapshots": {
@@ -78,8 +75,5 @@
     }
   },
   "generators": {},
-  "tags": [
-    "scope:block",
-    "type:ui"
-  ]
+  "tags": ["scope:block", "type:ui"]
 }

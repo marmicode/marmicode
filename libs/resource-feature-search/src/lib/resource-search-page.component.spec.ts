@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { describe, expect, it, jest } from '@jest/globals';
 import { TransferStateAdapter } from '@marmicode/shared-utils';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { EMPTY, Subject } from 'rxjs';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { ResourceRepository } from './resource-repository.service';
@@ -51,7 +51,7 @@ describe('ResourceSearchComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ResourceSearchPageComponent],
-      imports: [PushModule],
+      imports: [PushPipe],
       providers: [
         {
           provide: ResourceRepository,

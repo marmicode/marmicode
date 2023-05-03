@@ -3,15 +3,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostListener,
-  NgModule,
+  NgModule
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlockGroupModule } from '@marmicode/block-api';
 import { ResourceTitleBannerModule } from '@marmicode/resource-api';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import { createBasicPageInfo, PageModule } from '@marmicode/shared-ui';
-import { RxState, select } from '@rx-angular/state';
-import { PushModule } from '@rx-angular/template';
+import { RxState } from '@rx-angular/state';
+import { select } from '@rx-angular/state/selections';
+import { PushPipe } from '@rx-angular/template/push';
 import { combineLatest, merge, Subject } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -20,7 +21,7 @@ import {
   pluck,
   switchMap,
   tap,
-  withLatestFrom,
+  withLatestFrom
 } from 'rxjs/operators';
 import { getRelativeFrameRoute } from './get-relative-frame-route';
 import { Frame, Recipe, RecipeRepository } from './recipe-repository.service';
@@ -69,22 +70,22 @@ import { SwipeModule } from './swipe.directive';
   `,
   styles: [
     `
-        .page {
-            display: flex;
-            flex-direction: column;
+      .page {
+        display: flex;
+        flex-direction: column;
 
-            /* Set overflow to hidden to avoid glitches with mcSlideAnimation. */
-            overflow: hidden;
-        }
+        /* Set overflow to hidden to avoid glitches with mcSlideAnimation. */
+        overflow: hidden;
+      }
 
-        .swipable-content {
-            display: flex;
-            flex-direction: column;
+      .swipable-content {
+        display: flex;
+        flex-direction: column;
 
-            /* Forcing flex-basis to auto as fxFlex sets it to 0px
+        /* Forcing flex-basis to auto as fxFlex sets it to 0px
              * and doesn't stretch when content is larger than page. */
-            flex: 1 1 auto;
-        }
+        flex: 1 1 auto;
+      }
     `,
   ],
   providers: [RxState],
@@ -243,7 +244,7 @@ export class RecipeFramePageComponent {
     CommonModule,
     PageModule,
     BlockGroupModule,
-    PushModule,
+    PushPipe,
     RecipeTimelineModule,
     ResourceTitleBannerModule,
     SlideAnimationModule,

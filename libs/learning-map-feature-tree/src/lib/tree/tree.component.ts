@@ -1,4 +1,4 @@
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { DataItem, ISpriteProperties } from '@amcharts/amcharts4/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -223,6 +223,6 @@ export class TreeComponent implements OnInit {
 @NgModule({
   declarations: [TreeComponent],
   exports: [TreeComponent],
-  imports: [CommonModule, PushModule],
+  imports: [CommonModule, PushPipe],
 })
 export class TreeModule {}

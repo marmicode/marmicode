@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { of } from 'rxjs';
 import { RecipeFramePageComponent } from './recipe-frame-page.component';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
@@ -16,7 +16,7 @@ describe('RecipeFramePageComponent', () => {
   beforeEach(async () => {
     return TestBed.configureTestingModule({
       declarations: [RecipeFramePageComponent],
-      imports: [PushModule],
+      imports: [PushPipe],
       providers: [
         {
           provide: ActivatedRoute,
