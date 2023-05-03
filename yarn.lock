@@ -6220,13 +6220,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nguniversal/builders@npm:15.2.0":
-  version: 15.2.0
-  resolution: "@nguniversal/builders@npm:15.2.0"
+"@nguniversal/builders@npm:15.2.1":
+  version: 15.2.1
+  resolution: "@nguniversal/builders@npm:15.2.1"
   dependencies:
     "@angular-devkit/architect": ~0.1502.0
     "@angular-devkit/core": ~15.2.0
-    "@nguniversal/common": 15.2.0
+    "@nguniversal/common": 15.2.1
     browser-sync: ^2.27.10
     express: ^4.18.2
     guess-parser: ^0.4.22
@@ -6237,7 +6237,7 @@ __metadata:
     tree-kill: ^1.2.2
   peerDependencies:
     "@angular-devkit/build-angular": ^15.0.0
-  checksum: 2c99374eb1f6cc0a28e260162d7a69d3442d120e7223eeec2ec2adf7318d0f56a264cc0b8dc26783b724148af3fc48beb8bec5ad128790cb2c0323318e6612ea
+  checksum: 6b43a9fa010ef263b8793126d28b471bec9605ea5e858464c92bb33667f94eb4e203bcb18729e962014e6ff6fd47ecd9eb308546116199a5c5940037257f2435
   languageName: node
   linkType: hard
 
@@ -6252,6 +6252,20 @@ __metadata:
     "@angular/common": ^15.0.0
     "@angular/core": ^15.0.0
   checksum: f934221753f4495aceb8129df178210ed83c47f73d67bccb527bf8f6fd835d7f35184450687220572f06bc6cb568d80c22fff7871a61bc2a981642108117d1a3
+  languageName: node
+  linkType: hard
+
+"@nguniversal/common@npm:15.2.1":
+  version: 15.2.1
+  resolution: "@nguniversal/common@npm:15.2.1"
+  dependencies:
+    critters: 0.0.16
+    jsdom: 21.1.0
+    tslib: ^2.3.0
+  peerDependencies:
+    "@angular/common": ^15.0.0
+    "@angular/core": ^15.0.0
+  checksum: b97d984e7b5d6c7149eabc9e372fbbb92ec79eb7ef55b035a977abf460ea53150c5f7e7e4fdaa189ce0e9879153701e03756101ce58b02d0951c5ba61171e86a
   languageName: node
   linkType: hard
 
@@ -23051,7 +23065,7 @@ __metadata:
     "@ngrx/schematics": 15.3.0
     "@ngrx/store": 15.3.0
     "@ngrx/store-devtools": 15.3.0
-    "@nguniversal/builders": 15.2.0
+    "@nguniversal/builders": 15.2.1
     "@nguniversal/express-engine": 15.2.0
     "@nrwl/angular": 15.9.2
     "@nrwl/cli": 15.9.2
