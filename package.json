@@ -2,6 +2,7 @@
   "name": "marmicode",
   "version": "0.0.0",
   "license": "MIT",
+  "packageManager": "yarn@3.5.1",
   "scripts": {
     "nx": "pnpify nx",
     "nx-cloud": "pnpify nx-cloud",
@@ -91,7 +92,6 @@
     "@angular/cli": "~15.2.0",
     "@angular/compiler-cli": "15.2.7",
     "@angular/language-service": "15.2.7",
-    "@cypress/webpack-dev-server": "^2.0.0",
     "@graphql-cli/codegen": "^1.17.4",
     "@graphql-codegen/schema-ast": "^1.17.4",
     "@graphql-codegen/typescript": "^1.17.4",
@@ -129,7 +129,7 @@
     "@typescript-eslint/parser": "4.31.2",
     "@yarnpkg/pnpify": "4.0.0-rc.42",
     "@yarnpkg/sdks": "3.0.0-rc.33",
-    "cypress": "^12.2.0",
+    "cypress": "^12.11.0",
     "cypress-pipe": "^2.0.0",
     "dotenv": "10.0.0",
     "eslint": "7.22.0",
@@ -155,11 +155,17 @@
     "typescript": "4.9.5"
   },
   "dependenciesMeta": {
+    "@babel/runtime@7.21.5": {
+      "unplugged": true
+    },
     "ngx-sharebuttons@11.0.0": {
       "unplugged": true
     },
     "ts-node@10.9.1": {
       "unplugged": true
     }
+  },
+  "volta": {
+    "node": "18.16.0"
   }
 }
