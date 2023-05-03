@@ -54,6 +54,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@angular/router", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.2.7"],\
             ["@angular/service-worker", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.2.7"],\
             ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.13"],\
+            ["@babel/runtime", "npm:7.21.5"],\
             ["@firebase/app", "npm:0.9.0"],\
             ["@fortawesome/angular-fontawesome", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.12.0"],\
             ["@fortawesome/fontawesome-svg-core", "npm:6.2.1"],\
@@ -33196,6 +33197,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@angular/router", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.2.7"],\
             ["@angular/service-worker", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.2.7"],\
             ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.13"],\
+            ["@babel/runtime", "npm:7.21.5"],\
             ["@firebase/app", "npm:0.9.0"],\
             ["@fortawesome/angular-fontawesome", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.12.0"],\
             ["@fortawesome/fontawesome-svg-core", "npm:6.2.1"],\

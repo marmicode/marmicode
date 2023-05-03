@@ -4,6 +4,7 @@
   "license": "MIT",
   "packageManager": "yarn@3.5.1",
   "scripts": {
+    "postinstall": "mkdir -p node_modules/@angular-devkit/build-angular/node_modules/@babel/runtime/helpers; ln -sf ../../../../../../../.yarn/unplugged/@babel-runtime-npm-7.21.5-7d058028a3/node_modules/@babel/runtime/helpers/esm/ node_modules/@angular-devkit/build-angular/node_modules/@babel/runtime/helpers",
     "nx": "pnpify nx",
     "nx-cloud": "pnpify nx-cloud",
     "start": "nx serve",
@@ -92,6 +93,7 @@
     "@angular/cli": "~15.2.0",
     "@angular/compiler-cli": "15.2.7",
     "@angular/language-service": "15.2.7",
+    "@babel/runtime": "7.21.5",
     "@graphql-cli/codegen": "^1.17.4",
     "@graphql-codegen/schema-ast": "^1.17.4",
     "@graphql-codegen/typescript": "^1.17.4",
