@@ -131,6 +131,7 @@
     "@typescript-eslint/parser": "4.31.2",
     "@yarnpkg/pnpify": "4.0.0-rc.42",
     "@yarnpkg/sdks": "3.0.0-rc.33",
+    "bluebird": "3.7.2",
     "cypress": "^12.11.0",
     "cypress-pipe": "^2.0.0",
     "dotenv": "10.0.0",

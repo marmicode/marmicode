@@ -11837,7 +11837,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bluebird@npm:^3.5.5, bluebird@npm:^3.7.2":
+"bluebird@npm:3.7.2, bluebird@npm:^3.5.5, bluebird@npm:^3.7.2":
   version: 3.7.2
   resolution: "bluebird@npm:3.7.2"
   checksum: 869417503c722e7dc54ca46715f70e15f4d9c602a423a02c825570862d12935be59ed9c7ba34a9b31f186c017c23cac6b54e35446f8353059c101da73eac22ef
@@ -23057,6 +23057,7 @@ __metadata:
     "@yarnpkg/sdks": 3.0.0-rc.33
     apollo-angular: 4.1.1
     axios: ^0.19.2
+    bluebird: 3.7.2
     cypress: ^12.11.0
     cypress-pipe: ^2.0.0
     document-register-element: ^1.7.2

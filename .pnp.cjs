@@ -111,6 +111,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@yarnpkg/sdks", "npm:3.0.0-rc.33"],\
             ["apollo-angular", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:4.1.1"],\
             ["axios", "npm:0.19.2"],\
+            ["bluebird", "npm:3.7.2"],\
             ["cypress", "npm:12.11.0"],\
             ["cypress-pipe", "npm:2.0.0"],\
             ["document-register-element", "npm:1.14.10"],\
@@ -33254,6 +33255,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@yarnpkg/sdks", "npm:3.0.0-rc.33"],\
             ["apollo-angular", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:4.1.1"],\
             ["axios", "npm:0.19.2"],\
+            ["bluebird", "npm:3.7.2"],\
             ["cypress", "npm:12.11.0"],\
             ["cypress-pipe", "npm:2.0.0"],\
             ["document-register-element", "npm:1.14.10"],\
