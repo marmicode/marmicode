@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 
 import { beforeEach, describe, expect, it } from '@jest/globals';
 import { BlockType, createBlockGroup } from '@marmicode/block-core';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { first } from 'rxjs/operators';
 import { createHighlightZone } from '../highlight/highlight-zone';
 import { BlockGroupComponent } from './block-group.component';
@@ -19,7 +19,7 @@ describe('FrameComponent', () => {
   beforeEach(async () => {
     return TestBed.configureTestingModule({
       declarations: [BlockGroupComponent],
-      imports: [PushModule],
+      imports: [PushPipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });

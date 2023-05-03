@@ -1,4 +1,4 @@
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -56,6 +56,6 @@ export class ResourceBadgeComponent {
 @NgModule({
   declarations: [ResourceBadgeComponent],
   exports: [ResourceBadgeComponent],
-  imports: [CommonModule, PushModule],
+  imports: [CommonModule, PushPipe],
 })
 export class ResourceBadgeModule {}

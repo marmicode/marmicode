@@ -18,7 +18,7 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 
 export interface SearchInputOption {
   label: string;
@@ -152,7 +152,7 @@ export class SearchInputComponent {
     MatButtonModule,
     MatAutocompleteModule,
     MatIconModule,
-    PushModule,
+    PushPipe,
     ReactiveFormsModule,
   ],
 })

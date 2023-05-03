@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { describe, expect, it } from '@jest/globals';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { BlogPost, createBlogPost } from './blog-post';
 import { BlogPostComponent } from './blog-post.component';
 
@@ -53,7 +53,7 @@ describe('BlogPostComponent', () => {
   function createComponent() {
     TestBed.configureTestingModule({
       declarations: [BlogPostComponent],
-      imports: [PushModule],
+      imports: [PushPipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
     const fixture = TestBed.createComponent(BlogPostComponent);

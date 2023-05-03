@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { beforeEach, describe, expect, it } from '@jest/globals';
 import { readFirst } from '@nrwl/angular/testing';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { RecipeTimelineComponent } from './recipe-timeline.component';
 
 describe('RecipeTimelineComponent', () => {
@@ -13,7 +13,7 @@ describe('RecipeTimelineComponent', () => {
   beforeEach(async () => {
     return TestBed.configureTestingModule({
       declarations: [RecipeTimelineComponent],
-      imports: [PushModule],
+      imports: [PushPipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });

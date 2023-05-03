@@ -1,4 +1,4 @@
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import {
   animate,
   state,
@@ -145,7 +145,7 @@ export class NavMenuComponent {
     MatIconModule,
     MatButtonModule,
     NavMenuItemModule,
-    PushModule,
+    PushPipe,
   ],
 })
 export class NavMenuModule {}

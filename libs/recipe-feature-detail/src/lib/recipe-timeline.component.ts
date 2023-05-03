@@ -1,15 +1,16 @@
-import { PushModule } from '@rx-angular/template';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  NgModule,
+  NgModule
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { RxState, select, selectSlice } from '@rx-angular/state';
+import { RxState } from '@rx-angular/state';
+import { select, selectSlice } from '@rx-angular/state/selections';
+import { PushPipe } from '@rx-angular/template/push';
 import { map } from 'rxjs/operators';
 import { getRelativeFrameRoute } from './get-relative-frame-route';
 import { Frame } from './recipe-repository.service';
@@ -161,7 +162,7 @@ export class RecipeTimelineComponent {
     RouterModule,
     MatButtonModule,
     MatIconModule,
-    PushModule,
+    PushPipe,
   ],
 })
 export class RecipeTimelineModule {}

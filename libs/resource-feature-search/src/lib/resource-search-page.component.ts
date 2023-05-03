@@ -13,7 +13,7 @@ import {
   shareReplayWithRefCount,
   TransferStateHelper,
 } from '@marmicode/shared-utils';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { combineLatest, Observable, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
@@ -158,7 +158,7 @@ export class ResourceSearchPageComponent {
     ErrorModule,
     LoadingModule,
     PageModule,
-    PushModule,
+    PushPipe,
     ResourceCardModule,
     ResourceRepositoryModule,
     ResourceSearchFormModule,
