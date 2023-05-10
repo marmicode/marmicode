@@ -1,11 +1,12 @@
 {
   "name": "shared-utils",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared-utils/src",
   "prefix": "mc",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/shared-utils/src/**/*.ts",
@@ -14,7 +15,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/shared-utils/jest.config.ts",
         "passWithNoTests": true

@@ -1,11 +1,12 @@
 {
   "name": "resource-ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/resource-ui/src",
   "prefix": "marmicode",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/resource-ui/src/**/*.ts",
@@ -14,7 +15,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/resource-ui"],
       "options": {
         "jestConfig": "libs/resource-ui/jest.config.ts",

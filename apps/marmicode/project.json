@@ -1,5 +1,6 @@
 {
   "name": "marmicode",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "generators": {},
   "sourceRoot": "apps/marmicode/src",
@@ -177,7 +178,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "apps/marmicode/src/**/*.ts",
@@ -186,7 +187,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "apps/marmicode/jest.config.ts",
         "passWithNoTests": true
@@ -211,7 +212,8 @@
             }
           ],
           "sourceMap": false,
-          "optimization": true
+          "optimization": true,
+          "buildOptimizer": true
         },
         "production": {
           "outputHashing": "media",
@@ -222,7 +224,8 @@
             }
           ],
           "sourceMap": false,
-          "optimization": true
+          "optimization": true,
+          "buildOptimizer": true
         }
       },
       "development": {},
