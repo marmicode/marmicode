@@ -506,6 +506,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/eslint", null],\
             ["@types/typescript", null],\
             ["@typescript-eslint/type-utils", "virtual:30d7234f4741913879d0edd7d7ced1fc590ed43c144b8239b8a52c88f9958aaa5fb5924a81df8fba34eb2774be929eefeebaef317f0a7156791a41f06d1d4075#npm:5.59.2"],\
+            ["@typescript-eslint/types", "npm:5.59.5"],\
             ["@typescript-eslint/utils", "virtual:30d7234f4741913879d0edd7d7ced1fc590ed43c144b8239b8a52c88f9958aaa5fb5924a81df8fba34eb2774be929eefeebaef317f0a7156791a41f06d1d4075#npm:5.59.2"],\
             ["aria-query", "npm:5.1.3"],\
             ["axobject-query", "npm:3.1.1"],\
