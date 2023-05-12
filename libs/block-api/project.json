@@ -1,11 +1,12 @@
 {
   "name": "block-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/block-api/src",
   "prefix": "mc",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/block-api/src/**/*.ts",
@@ -14,7 +15,7 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/block-api"],
       "options": {
         "jestConfig": "libs/block-api/jest.config.ts",
