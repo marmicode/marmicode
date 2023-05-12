@@ -1,6 +1,8 @@
 const { defineConfig } = require('cypress');
-const { nxComponentTestingPreset } = require('@nrwl/angular/plugins/component-testing');
+const {
+  nxComponentTestingPreset,
+} = require('@nx/angular/plugins/component-testing');
 
 module.exports = defineConfig({
-  component: nxComponentTestingPreset(__filename)
+  component: nxComponentTestingPreset(__filename),
 });
