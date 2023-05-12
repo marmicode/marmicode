@@ -3004,19 +3004,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@firebase/app@npm:0.9.0":
-  version: 0.9.0
-  resolution: "@firebase/app@npm:0.9.0"
-  dependencies:
-    "@firebase/component": 0.6.0
-    "@firebase/logger": 0.4.0
-    "@firebase/util": 1.8.0
-    idb: 7.0.1
-    tslib: ^2.1.0
-  checksum: a74861d2a82d38fc9f83bd8f19f571464524e69621d5df60053a85f387b91bc3c5f66ded7451f7d3061993a9d7916737940d5dbe65b7e1347f959a9094d786cf
-  languageName: node
-  linkType: hard
-
 "@firebase/app@npm:0.9.9":
   version: 0.9.9
   resolution: "@firebase/app@npm:0.9.9"
@@ -3075,16 +3062,6 @@ __metadata:
   peerDependencies:
     "@firebase/app": 0.x
   checksum: 758733ca36312efcb8561394755d7225031e6948c9885de0e72ebed5b4b9a29cacd83c8ce1c63cf1afabe80daf67811adb7014f33276571e8e716cbe82026166
-  languageName: node
-  linkType: hard
-
-"@firebase/component@npm:0.6.0":
-  version: 0.6.0
-  resolution: "@firebase/component@npm:0.6.0"
-  dependencies:
-    "@firebase/util": 1.8.0
-    tslib: ^2.1.0
-  checksum: 02ae7110d1e5e01e573c75917fe7d9f690b3cf888491174482a52745a3e88ac4e0772e4be563f5ff355cb6d2a91c52a13f9d1ea3fcc2bdcbedc16dde200e8a2c
   languageName: node
   linkType: hard
 
@@ -3414,15 +3391,6 @@ __metadata:
   peerDependencies:
     "@firebase/app": 0.x
   checksum: 0e54b8f7831f89d7cd4b95fb41c1b1fa4a32917f668c59e2c38fcf41c8d11fcd0c6e4c225aa13d0f0244ea58f5d6b40f976d031f14bb07dd02b36375bc415abb
-  languageName: node
-  linkType: hard
-
-"@firebase/util@npm:1.8.0":
-  version: 1.8.0
-  resolution: "@firebase/util@npm:1.8.0"
-  dependencies:
-    tslib: ^2.1.0
-  checksum: b4ebfa37fd1b2b4d4bf5b0be3aa2fff02582d9a848b1c277a99f8df835bdcde07709fd5848bb057d3438c2b65ded73fdf9ffd53978e630e354b06666b1811f97
   languageName: node
   linkType: hard
 
@@ -21656,7 +21624,7 @@ __metadata:
     "@angular/service-worker": 16.0.1
     "@apollo/client": ^3.1.2
     "@babel/runtime": 7.21.5
-    "@firebase/app": 0.9.0
+    "@firebase/app": 0.9.9
     "@fortawesome/angular-fontawesome": 0.12.0
     "@fortawesome/fontawesome-svg-core": 6.2.1
     "@fortawesome/free-brands-svg-icons": 6.2.1
