@@ -1,11 +1,12 @@
 {
   "name": "blog-post-ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/blog-post-ui/src",
   "prefix": "mc",
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/blog-post-ui/src/**/*.ts",
@@ -14,10 +15,8 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/libs/blog-post-ui"
-      ],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/blog-post-ui"],
       "options": {
         "jestConfig": "libs/blog-post-ui/jest.config.ts",
         "passWithNoTests": true
@@ -59,13 +58,11 @@
         "main": "does-not-exist",
         "polyfills": "libs/blog-post-ui/src/polyfills.ts",
         "tsConfig": "libs/blog-post-ui/tsconfig.lib.json",
-        "styles": [
-          "libs/blog-post-ui/cypress/support/styles.scss"
-        ]
+        "styles": ["libs/blog-post-ui/cypress/support/styles.scss"]
       }
     },
     "component-test": {
-      "executor": "@nrwl/cypress:cypress",
+      "executor": "@nx/cypress:cypress",
       "options": {
         "cypressConfig": "libs/blog-post-ui/cypress.config.js",
         "testingType": "component",
@@ -78,8 +75,5 @@
       "command": "tools/upload-percy-snapshots.sh libs/blog-post-ui"
     }
   },
-  "tags": [
-    "scope:blog-post",
-    "type:ui"
-  ]
+  "tags": ["scope:blog-post", "type:ui"]
 }

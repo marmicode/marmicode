@@ -1,10 +1,11 @@
 {
   "name": "marmicode-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/marmicode-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/cypress:cypress",
+      "executor": "@nx/cypress:cypress",
       "options": {
         "cypressConfig": "apps/marmicode-e2e/cypress.config.js",
         "tsConfig": "apps/marmicode-e2e/tsconfig.e2e.json",
@@ -18,7 +19,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/marmicode-e2e/**/*.{js,ts}"]
