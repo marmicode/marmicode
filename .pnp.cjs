@@ -102,7 +102,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/marked", "npm:1.2.2"],\
             ["@types/node", "npm:18.7.1"],\
             ["@types/prismjs", "npm:1.26.0"],\
-            ["@types/webpack", "npm:4.41.32"],\
+            ["@types/webpack", "npm:4.41.33"],\
             ["@typescript-eslint/eslint-plugin", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:5.59.5"],\
             ["@typescript-eslint/parser", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:5.59.5"],\
             ["@yarnpkg/pnpify", "npm:4.0.0-rc.42"],\
@@ -14908,10 +14908,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/webpack", [\
-        ["npm:4.41.32", {\
-          "packageLocation": "./.yarn/cache/@types-webpack-npm-4.41.32-34a78d0b36-e594a1357c.zip/node_modules/@types/webpack/",\
+        ["npm:4.41.33", {\
+          "packageLocation": "./.yarn/cache/@types-webpack-npm-4.41.33-c3bc165381-5f64818128.zip/node_modules/@types/webpack/",\
           "packageDependencies": [\
-            ["@types/webpack", "npm:4.41.32"],\
+            ["@types/webpack", "npm:4.41.33"],\
             ["@types/node", "npm:18.16.3"],\
             ["@types/tapable", "npm:1.0.8"],\
             ["@types/uglify-js", "npm:3.17.1"],\
@@ -23482,7 +23482,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/file-loader-virtual-c319781b44/0/cache/file-loader-npm-6.2.0-4b02fd87d5-faf43eecf2.zip/node_modules/file-loader/",\
           "packageDependencies": [\
             ["file-loader", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:6.2.0"],\
-            ["@types/webpack", "npm:4.41.32"],\
+            ["@types/webpack", "npm:4.41.33"],\
             ["loader-utils", "npm:2.0.4"],\
             ["schema-utils", "npm:3.1.2"],\
             ["webpack", null]\
@@ -25707,7 +25707,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["html-webpack-plugin", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:5.5.1"],\
             ["@types/html-minifier-terser", "npm:6.1.0"],\
-            ["@types/webpack", "npm:4.41.32"],\
+            ["@types/webpack", "npm:4.41.33"],\
             ["html-minifier-terser", "npm:6.1.0"],\
             ["lodash", "npm:4.17.21"],\
             ["pretty-error", "npm:4.0.0"],\
@@ -30061,7 +30061,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/marked", "npm:1.2.2"],\
             ["@types/node", "npm:18.7.1"],\
             ["@types/prismjs", "npm:1.26.0"],\
-            ["@types/webpack", "npm:4.41.32"],\
+            ["@types/webpack", "npm:4.41.33"],\
             ["@typescript-eslint/eslint-plugin", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:5.59.5"],\
             ["@typescript-eslint/parser", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:5.59.5"],\
             ["@yarnpkg/pnpify", "npm:4.0.0-rc.42"],\
