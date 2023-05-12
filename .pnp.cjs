@@ -53,7 +53,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@angular/platform-server", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:16.0.1"],\
             ["@angular/router", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:16.0.1"],\
             ["@angular/service-worker", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:16.0.1"],\
-            ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.13"],\
+            ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.14"],\
             ["@babel/runtime", "npm:7.21.5"],\
             ["@firebase/app", "npm:0.9.9"],\
             ["@fortawesome/angular-fontawesome", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.12.0"],\
@@ -1177,18 +1177,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@apollo/client", [\
-        ["npm:3.7.13", {\
-          "packageLocation": "./.yarn/cache/@apollo-client-npm-3.7.13-304744af07-9c8adfcb5d.zip/node_modules/@apollo/client/",\
+        ["npm:3.7.14", {\
+          "packageLocation": "./.yarn/cache/@apollo-client-npm-3.7.14-65a270a493-eaa8af7445.zip/node_modules/@apollo/client/",\
           "packageDependencies": [\
-            ["@apollo/client", "npm:3.7.13"]\
+            ["@apollo/client", "npm:3.7.14"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.13", {\
-          "packageLocation": "./.yarn/__virtual__/@apollo-client-virtual-75b3cfae2c/0/cache/@apollo-client-npm-3.7.13-304744af07-9c8adfcb5d.zip/node_modules/@apollo/client/",\
+        ["virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.14", {\
+          "packageLocation": "./.yarn/__virtual__/@apollo-client-virtual-d9911d1089/0/cache/@apollo-client-npm-3.7.14-65a270a493-eaa8af7445.zip/node_modules/@apollo/client/",\
           "packageDependencies": [\
-            ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.13"],\
-            ["@graphql-typed-document-node/core", "virtual:75b3cfae2c70fbc2d8fd7a0d514073e3318a86495932323e937109e06671aa6e25bcbd6b366d724d5501a5bb42e7f9f724b5654135410f7e8f2311f3373b8f3a#npm:3.2.0"],\
+            ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.14"],\
+            ["@graphql-typed-document-node/core", "virtual:d9911d1089f4397dc1d867a9bd0bbf708de821f49b45470a6410afcb56f7aa10e27be687b6a1b8a5930abadcb5668ee4359e5aec44ca0bdbfb509fe75ac45e66#npm:3.2.0"],\
             ["@types/graphql", null],\
             ["@types/graphql-ws", null],\
             ["@types/react", null],\
@@ -8523,7 +8523,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/@graphql-tools-utils-virtual-d27ffbb3ad/0/cache/@graphql-tools-utils-npm-9.2.1-ed63b70392-94ed12df5f.zip/node_modules/@graphql-tools/utils/",\
           "packageDependencies": [\
             ["@graphql-tools/utils", "virtual:fd85fbc791444030e4d884523621f67a2399684209a339d748a52a243b9ed09cdc58a635401dcb28fbc51b0aa05f9a2c5f1711702fba34e372046f11b01b4988#npm:9.2.1"],\
-            ["@graphql-typed-document-node/core", "virtual:75b3cfae2c70fbc2d8fd7a0d514073e3318a86495932323e937109e06671aa6e25bcbd6b366d724d5501a5bb42e7f9f724b5654135410f7e8f2311f3373b8f3a#npm:3.2.0"],\
+            ["@graphql-typed-document-node/core", "virtual:d9911d1089f4397dc1d867a9bd0bbf708de821f49b45470a6410afcb56f7aa10e27be687b6a1b8a5930abadcb5668ee4359e5aec44ca0bdbfb509fe75ac45e66#npm:3.2.0"],\
             ["@types/graphql", null],\
             ["graphql", "npm:16.6.0"],\
             ["tslib", "npm:2.5.0"]\
@@ -8588,10 +8588,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:75b3cfae2c70fbc2d8fd7a0d514073e3318a86495932323e937109e06671aa6e25bcbd6b366d724d5501a5bb42e7f9f724b5654135410f7e8f2311f3373b8f3a#npm:3.2.0", {\
-          "packageLocation": "./.yarn/__virtual__/@graphql-typed-document-node-core-virtual-b878c082a4/0/cache/@graphql-typed-document-node-core-npm-3.2.0-505adb1e90-fa44443acc.zip/node_modules/@graphql-typed-document-node/core/",\
+        ["virtual:d9911d1089f4397dc1d867a9bd0bbf708de821f49b45470a6410afcb56f7aa10e27be687b6a1b8a5930abadcb5668ee4359e5aec44ca0bdbfb509fe75ac45e66#npm:3.2.0", {\
+          "packageLocation": "./.yarn/__virtual__/@graphql-typed-document-node-core-virtual-08944b4000/0/cache/@graphql-typed-document-node-core-npm-3.2.0-505adb1e90-fa44443acc.zip/node_modules/@graphql-typed-document-node/core/",\
           "packageDependencies": [\
-            ["@graphql-typed-document-node/core", "virtual:75b3cfae2c70fbc2d8fd7a0d514073e3318a86495932323e937109e06671aa6e25bcbd6b366d724d5501a5bb42e7f9f724b5654135410f7e8f2311f3373b8f3a#npm:3.2.0"],\
+            ["@graphql-typed-document-node/core", "virtual:d9911d1089f4397dc1d867a9bd0bbf708de821f49b45470a6410afcb56f7aa10e27be687b6a1b8a5930abadcb5668ee4359e5aec44ca0bdbfb509fe75ac45e66#npm:3.2.0"],\
             ["@types/graphql", null],\
             ["graphql", "npm:16.6.0"]\
           ],\
@@ -16597,7 +16597,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["apollo-angular", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:4.1.1"],\
             ["@angular/core", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:16.0.1"],\
-            ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.13"],\
+            ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.14"],\
             ["@types/angular__core", null],\
             ["@types/apollo__client", null],\
             ["@types/graphql", null],\
@@ -30012,7 +30012,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@angular/platform-server", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:16.0.1"],\
             ["@angular/router", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:16.0.1"],\
             ["@angular/service-worker", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:16.0.1"],\
-            ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.13"],\
+            ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.14"],\
             ["@babel/runtime", "npm:7.21.5"],\
             ["@firebase/app", "npm:0.9.9"],\
             ["@fortawesome/angular-fontawesome", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.12.0"],\
