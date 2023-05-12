@@ -55,7 +55,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@angular/service-worker", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:16.0.1"],\
             ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.13"],\
             ["@babel/runtime", "npm:7.21.5"],\
-            ["@firebase/app", "npm:0.9.0"],\
+            ["@firebase/app", "npm:0.9.9"],\
             ["@fortawesome/angular-fontawesome", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.12.0"],\
             ["@fortawesome/fontawesome-svg-core", "npm:6.2.1"],\
             ["@fortawesome/free-brands-svg-icons", "npm:6.2.1"],\
@@ -6152,18 +6152,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@firebase/app", [\
-        ["npm:0.9.0", {\
-          "packageLocation": "./.yarn/cache/@firebase-app-npm-0.9.0-835c0fcd6c-a74861d2a8.zip/node_modules/@firebase/app/",\
-          "packageDependencies": [\
-            ["@firebase/app", "npm:0.9.0"],\
-            ["@firebase/component", "npm:0.6.0"],\
-            ["@firebase/logger", "npm:0.4.0"],\
-            ["@firebase/util", "npm:1.8.0"],\
-            ["idb", "npm:7.0.1"],\
-            ["tslib", "npm:2.5.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:0.9.9", {\
           "packageLocation": "./.yarn/cache/@firebase-app-npm-0.9.9-d1cbc5bede-b56dc04048.zip/node_modules/@firebase/app/",\
           "packageDependencies": [\
@@ -6398,15 +6386,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@firebase/component", [\
-        ["npm:0.6.0", {\
-          "packageLocation": "./.yarn/cache/@firebase-component-npm-0.6.0-082f14f0f5-02ae7110d1.zip/node_modules/@firebase/component/",\
-          "packageDependencies": [\
-            ["@firebase/component", "npm:0.6.0"],\
-            ["@firebase/util", "npm:1.8.0"],\
-            ["tslib", "npm:2.5.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:0.6.4", {\
           "packageLocation": "./.yarn/cache/@firebase-component-npm-0.6.4-3592a60aed-5d7006e4bc.zip/node_modules/@firebase/component/",\
           "packageDependencies": [\
@@ -7092,14 +7071,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@firebase/util", [\
-        ["npm:1.8.0", {\
-          "packageLocation": "./.yarn/cache/@firebase-util-npm-1.8.0-c4926a8de1-b4ebfa37fd.zip/node_modules/@firebase/util/",\
-          "packageDependencies": [\
-            ["@firebase/util", "npm:1.8.0"],\
-            ["tslib", "npm:2.5.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:1.9.3", {\
           "packageLocation": "./.yarn/cache/@firebase-util-npm-1.9.3-f73af1bb9f-b2dbd39229.zip/node_modules/@firebase/util/",\
           "packageDependencies": [\
@@ -30043,7 +30014,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@angular/service-worker", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:16.0.1"],\
             ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.13"],\
             ["@babel/runtime", "npm:7.21.5"],\
-            ["@firebase/app", "npm:0.9.0"],\
+            ["@firebase/app", "npm:0.9.9"],\
             ["@fortawesome/angular-fontawesome", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.12.0"],\
             ["@fortawesome/fontawesome-svg-core", "npm:6.2.1"],\
             ["@fortawesome/free-brands-svg-icons", "npm:6.2.1"],\
