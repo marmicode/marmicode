@@ -4623,12 +4623,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jscutlery/operators@npm:0.2.0":
-  version: 0.2.0
-  resolution: "@jscutlery/operators@npm:0.2.0"
+"@jscutlery/operators@npm:0.2.2":
+  version: 0.2.2
+  resolution: "@jscutlery/operators@npm:0.2.2"
   peerDependencies:
     rxjs: ">=6.0.0"
-  checksum: 954a1058ca859d90bfcac562f94bde593edde1927c920bd89e0a0d3957b134e196e82ae438e2aec8ce6e7afbb511986adae4008f2396616b35a49e669661fd78
+  checksum: ef99d5755638953ab85ee3a91f9016f001d82081ecd6eda7e7a0e81e301eee9260c768c6b593d5e440e81c10f2f2f3340b88ab289ea6ba59367e63262992e77b
   languageName: node
   linkType: hard
 
@@ -21634,7 +21634,7 @@ __metadata:
     "@graphql-codegen/typescript": ^1.17.4
     "@jest/globals": 29.4.3
     "@jscutlery/cypress-harness": 0.4.2
-    "@jscutlery/operators": 0.2.0
+    "@jscutlery/operators": 0.2.2
     "@ngneat/until-destroy": ^7.3.2
     "@ngrx/effects": 15.3.0
     "@ngrx/entity": 15.3.0

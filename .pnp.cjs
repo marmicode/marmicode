@@ -65,7 +65,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:1.23.0"],\
             ["@jest/globals", "npm:29.4.3"],\
             ["@jscutlery/cypress-harness", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.4.2"],\
-            ["@jscutlery/operators", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.2.0"],\
+            ["@jscutlery/operators", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.2.2"],\
             ["@ngneat/until-destroy", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:7.3.2"],\
             ["@ngrx/effects", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.3.0"],\
             ["@ngrx/entity", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.3.0"],\
@@ -9139,17 +9139,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@jscutlery/operators", [\
-        ["npm:0.2.0", {\
-          "packageLocation": "./.yarn/cache/@jscutlery-operators-npm-0.2.0-c79605a49a-954a1058ca.zip/node_modules/@jscutlery/operators/",\
+        ["npm:0.2.2", {\
+          "packageLocation": "./.yarn/cache/@jscutlery-operators-npm-0.2.2-871654d745-ef99d57556.zip/node_modules/@jscutlery/operators/",\
           "packageDependencies": [\
-            ["@jscutlery/operators", "npm:0.2.0"]\
+            ["@jscutlery/operators", "npm:0.2.2"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.2.0", {\
-          "packageLocation": "./.yarn/__virtual__/@jscutlery-operators-virtual-8edc220d2f/0/cache/@jscutlery-operators-npm-0.2.0-c79605a49a-954a1058ca.zip/node_modules/@jscutlery/operators/",\
+        ["virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.2.2", {\
+          "packageLocation": "./.yarn/__virtual__/@jscutlery-operators-virtual-a4659d0a5e/0/cache/@jscutlery-operators-npm-0.2.2-871654d745-ef99d57556.zip/node_modules/@jscutlery/operators/",\
           "packageDependencies": [\
-            ["@jscutlery/operators", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.2.0"],\
+            ["@jscutlery/operators", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.2.2"],\
             ["@types/rxjs", null],\
             ["rxjs", "npm:7.8.0"]\
           ],\
@@ -30024,7 +30024,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:1.23.0"],\
             ["@jest/globals", "npm:29.4.3"],\
             ["@jscutlery/cypress-harness", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.4.2"],\
-            ["@jscutlery/operators", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.2.0"],\
+            ["@jscutlery/operators", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.2.2"],\
             ["@ngneat/until-destroy", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:7.3.2"],\
             ["@ngrx/effects", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.3.0"],\
             ["@ngrx/entity", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:15.3.0"],\
