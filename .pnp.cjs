@@ -55,7 +55,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@angular/service-worker", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:16.0.1"],\
             ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.13"],\
             ["@babel/runtime", "npm:7.21.5"],\
-            ["@firebase/app", "npm:0.9.9"],\
+            ["@firebase/app", "npm:0.9.10"],\
             ["@fortawesome/angular-fontawesome", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.12.0"],\
             ["@fortawesome/fontawesome-svg-core", "npm:6.2.1"],\
             ["@fortawesome/free-brands-svg-icons", "npm:6.2.1"],\
@@ -6152,6 +6152,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@firebase/app", [\
+        ["npm:0.9.10", {\
+          "packageLocation": "./.yarn/cache/@firebase-app-npm-0.9.10-8b7a33bc5c-70f34431c0.zip/node_modules/@firebase/app/",\
+          "packageDependencies": [\
+            ["@firebase/app", "npm:0.9.10"],\
+            ["@firebase/component", "npm:0.6.4"],\
+            ["@firebase/logger", "npm:0.4.0"],\
+            ["@firebase/util", "npm:1.9.3"],\
+            ["idb", "npm:7.1.1"],\
+            ["tslib", "npm:2.5.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:0.9.9", {\
           "packageLocation": "./.yarn/cache/@firebase-app-npm-0.9.9-d1cbc5bede-b56dc04048.zip/node_modules/@firebase/app/",\
           "packageDependencies": [\
@@ -30064,7 +30076,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@angular/service-worker", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:16.0.1"],\
             ["@apollo/client", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:3.7.13"],\
             ["@babel/runtime", "npm:7.21.5"],\
-            ["@firebase/app", "npm:0.9.9"],\
+            ["@firebase/app", "npm:0.9.10"],\
             ["@fortawesome/angular-fontawesome", "virtual:9871d02bbfd42bed926afd20b47150126c70568ed0b79be4004f0e71d99ccd409f3bfc1b946c7c1847892526758fea3adf14f9539d5caa5a77679454ab3d8f7b#npm:0.12.0"],\
             ["@fortawesome/fontawesome-svg-core", "npm:6.2.1"],\
             ["@fortawesome/free-brands-svg-icons", "npm:6.2.1"],\
