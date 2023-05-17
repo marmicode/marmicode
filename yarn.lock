@@ -3004,6 +3004,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@firebase/app@npm:0.9.10":
+  version: 0.9.10
+  resolution: "@firebase/app@npm:0.9.10"
+  dependencies:
+    "@firebase/component": 0.6.4
+    "@firebase/logger": 0.4.0
+    "@firebase/util": 1.9.3
+    idb: 7.1.1
+    tslib: ^2.1.0
+  checksum: 70f34431c035c9d257db5d6095797fd5b5c06ca9071297e9fdce57ca497610429d6b04d2b88bf73340970e24649e01d4da29d1b55c679cd1c795c77b35fbed1f
+  languageName: node
+  linkType: hard
+
 "@firebase/app@npm:0.9.9":
   version: 0.9.9
   resolution: "@firebase/app@npm:0.9.9"
@@ -21674,7 +21687,7 @@ __metadata:
     "@angular/service-worker": 16.0.1
     "@apollo/client": ^3.1.2
     "@babel/runtime": 7.21.5
-    "@firebase/app": 0.9.9
+    "@firebase/app": 0.9.10
     "@fortawesome/angular-fontawesome": 0.12.0
     "@fortawesome/fontawesome-svg-core": 6.2.1
     "@fortawesome/free-brands-svg-icons": 6.2.1
