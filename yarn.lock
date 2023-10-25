@@ -21856,7 +21856,7 @@ __metadata:
     prismjs: ^1.20.0
     react: 18.2.0
     react-dom: 18.2.0
-    rxjs: 7.8.0
+    rxjs: 7.8.1
     storybook: 7.0.10
     ts-jest: 29.1.0
     ts-node: 10.9.1
@@ -26371,15 +26371,6 @@ __metadata:
   dependencies:
     tslib: ^1.9.0
   checksum: bc334edef1bb8bbf56590b0b25734ba0deaf8825b703256a93714308ea36dff8a11d25533671adf8e104e5e8f256aa6fdfe39b2e248cdbd7a5f90c260acbbd1b
-  languageName: node
-  linkType: hard
-
-"rxjs@npm:7.8.0":
-  version: 7.8.0
-  resolution: "rxjs@npm:7.8.0"
-  dependencies:
-    tslib: ^2.1.0
-  checksum: 61b4d4fd323c1043d8d6ceb91f24183b28bcf5def4f01ca111511d5c6b66755bc5578587fe714ef5d67cf4c9f2e26f4490d4e1d8cabf9bd5967687835e9866a2
   languageName: node
   linkType: hard
 
