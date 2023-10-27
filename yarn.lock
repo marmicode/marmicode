@@ -8938,9 +8938,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack@npm:4.41.33":
-  version: 4.41.33
-  resolution: "@types/webpack@npm:4.41.33"
+"@types/webpack@npm:4.41.35":
+  version: 4.41.35
+  resolution: "@types/webpack@npm:4.41.35"
   dependencies:
     "@types/node": "*"
     "@types/tapable": ^1
@@ -8948,7 +8948,7 @@ __metadata:
     "@types/webpack-sources": "*"
     anymatch: ^3.0.0
     source-map: ^0.6.0
-  checksum: 5f64818128c94026be0e43e77d687e2d90f0da526a3a7c308c6a0bb12e93a35c9243be427bbf6865f64fd71dc5b32715af9b9da0cd6ae8335081b6db995bad2b
+  checksum: 44f279aed35a6659859220129ad7e3857aabf3fffa9520bc741108ba93bb5c4baac0ce75031f6debdb3f84e159d062aa1fc1d200cb50ff6f252a90d84d4d5a13
   languageName: node
   linkType: hard
 
@@ -21814,7 +21814,7 @@ __metadata:
     "@types/marked": ^1.2.1
     "@types/node": 18.17.7
     "@types/prismjs": ^1.16.1
-    "@types/webpack": 4.41.33
+    "@types/webpack": 4.41.35
     "@typescript-eslint/eslint-plugin": 5.59.9
     "@typescript-eslint/parser": 5.59.9
     "@yarnpkg/pnpify": 4.0.0-rc.43
