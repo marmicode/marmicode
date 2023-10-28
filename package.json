@@ -136,7 +136,7 @@
     "eslint": "7.22.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.11.2",
-    "eslint-plugin-storybook": "0.6.12",
+    "eslint-plugin-storybook": "0.6.15",
     "file-loader": "^6.2.0",
     "firebase-tools": "^8.5.0",
     "fuzzy": "^0.1.3",
