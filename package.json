@@ -18,7 +18,6 @@
     "update": "nx migrate latest",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "build-github-workflows": "ts-node -P tools/build-github-workflows/tsconfig.lib.json tools/build-github-workflows/src/main.ts",
     "deploy:next": "nx run marmicode:deploy:next",
     "deploy:prod": "nx run marmicode:deploy:production",
     "graphql-codegen": "graphql codegen",

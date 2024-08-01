@@ -24,7 +24,6 @@ jobs:
           path: |
             ~/.cache/Cypress
             .angular
-            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache-${{ github.run_id }}
@@ -37,11 +36,11 @@ jobs:
         with:
           bun-version: latest
       - name: Install
-        run: yarn install --immutable
-      - run: yarn nx-cloud start-ci-run
+        run: bun install
+      - run: bunx nx-cloud start-ci-run
       - name: Build
         run: >-
-          yarn nx affected --target=prerender --configuration next
+          bunx nx affected --target=prerender --configuration next
           --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
@@ -61,7 +60,6 @@ jobs:
           path: |
             ~/.cache/Cypress
             .angular
-            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache-${{ github.run_id }}
@@ -74,10 +72,10 @@ jobs:
         with:
           bun-version: latest
       - name: Install
-        run: yarn install --immutable
-      - run: yarn nx-cloud start-ci-run
+        run: bun install
+      - run: bunx nx-cloud start-ci-run
       - name: Test
-        run: yarn nx affected --target=test --base=deployed/marmicode-next
+        run: bunx nx affected --target=test --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
@@ -96,7 +94,6 @@ jobs:
           path: |
             ~/.cache/Cypress
             .angular
-            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache-${{ github.run_id }}
@@ -109,10 +106,10 @@ jobs:
         with:
           bun-version: latest
       - name: Install
-        run: yarn install --immutable
-      - run: yarn nx-cloud start-ci-run
+        run: bun install
+      - run: bunx nx-cloud start-ci-run
       - name: Lint
-        run: yarn nx affected --target=lint --base=deployed/marmicode-next
+        run: bunx nx affected --target=lint --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
@@ -131,7 +128,6 @@ jobs:
           path: |
             ~/.cache/Cypress
             .angular
-            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache-${{ github.run_id }}
@@ -144,11 +140,11 @@ jobs:
         with:
           bun-version: latest
       - name: Install
-        run: yarn install --immutable
-      - run: yarn nx-cloud start-ci-run
+        run: bun install
+      - run: bunx nx-cloud start-ci-run
       - name: Component Test
         run: >-
-          yarn nx affected --target=component-test --parallel 1
+          bunx nx affected --target=component-test --parallel 1
           --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
@@ -168,7 +164,6 @@ jobs:
           path: |
             ~/.cache/Cypress
             .angular
-            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache-${{ github.run_id }}
@@ -181,12 +176,47 @@ jobs:
         with:
           bun-version: latest
       - name: Install
-        run: yarn install --immutable
-      - run: yarn nx-cloud start-ci-run
+        run: bun install
+      - run: bunx nx-cloud start-ci-run
       - name: E2E
         run: >-
-          yarn nx affected --target=e2e --parallel 1
+          bunx nx affected --target=e2e --parallel 1
           --base=deployed/marmicode-next
+      - name: Upload dist (Cypress videos / build output etc...) on failure
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: dist
+          path: dist
+  check-sync:
+    name: 🔄 Check Sync
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/Cypress
+            .angular
+            libs/*/.angular
+            node_modules/.cache
+          key: cache-${{ github.run_id }}
+          restore-keys: |
+            cache
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Install
+        run: bun install
+      - name: Check Sync No Changes
+        run: >-
+          bunx nx affected --target=sync --base=deployed/marmicode-next && git
+          diff --exit-code
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
@@ -213,7 +243,6 @@ jobs:
           path: |
             ~/.cache/Cypress
             .angular
-            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache-${{ github.run_id }}
@@ -226,9 +255,9 @@ jobs:
         with:
           bun-version: latest
       - name: Install
-        run: yarn install --immutable
+        run: bun install
       - name: Start Nx Agent ${{ matrix.agent }}
-        run: yarn nx-cloud start-agent
+        run: bunx nx-cloud start-agent
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
@@ -253,7 +282,6 @@ jobs:
           path: |
             ~/.cache/Cypress
             .angular
-            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache-${{ github.run_id }}
@@ -266,9 +294,9 @@ jobs:
         with:
           bun-version: latest
       - name: Install
-        run: yarn install --immutable
+        run: bun install
       - name: Stop Nx Agents
-        run: yarn nx-cloud stop-all-agents
+        run: bunx nx-cloud stop-all-agents
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
         if: failure()
@@ -294,7 +322,6 @@ jobs:
           path: |
             ~/.cache/Cypress
             .angular
-            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache-${{ github.run_id }}
@@ -307,7 +334,7 @@ jobs:
         with:
           bun-version: latest
       - name: Install
-        run: yarn install --immutable
+        run: bun install
       - name: Upload Affected Percy Snapshots
         if: github.ref != 'refs/heads/main'
         env:
@@ -315,11 +342,11 @@ jobs:
         run: yarn percy exec --partial -- yarn upload-affected-percy-snapshots
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        run: yarn percy exec -- yarn nx run-many --target=upload-percy-snapshots
+        run: yarn percy exec -- bunx nx run-many --target=upload-percy-snapshots
       - name: Check Percy Snapshots
         if: github.ref == 'refs/heads/main'
         run: >-
-          PERCY_TOKEN=$PERCY_FULL_TOKEN yarn percy build:wait --project
+          PERCY_TOKEN=$PERCY_FULL_TOKEN bunx percy build:wait --project
           d53cdff6/marmicode --fail-on-changes
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v2
@@ -349,7 +376,6 @@ jobs:
           path: |
             ~/.cache/Cypress
             .angular
-            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache-${{ github.run_id }}
@@ -362,12 +388,12 @@ jobs:
         with:
           bun-version: latest
       - name: Install
-        run: yarn install --immutable
+        run: bun install
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           NX_CLOUD_DISTRIBUTED_EXECUTION: false
-        run: yarn nx run marmicode:deploy:next
+        run: bunx nx run marmicode:deploy:next
       - name: Tag deployed/marmicode-next
         run: git tag -f deployed/marmicode-next
       - name: Push changes
@@ -406,7 +432,6 @@ jobs:
           path: |
             ~/.cache/Cypress
             .angular
-            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache-${{ github.run_id }}
@@ -419,12 +444,12 @@ jobs:
         with:
           bun-version: latest
       - name: Install
-        run: yarn install --immutable
+        run: bun install
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           NX_CLOUD_DISTRIBUTED_EXECUTION: false
-        run: yarn nx run marmicode:deploy:production
+        run: bunx nx run marmicode:deploy:production
       - name: Tag deployed/marmicode
         run: git tag -f deployed/marmicode
       - name: Push changes

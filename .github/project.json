@@ -1,0 +1,8 @@
+{
+  "name": "github-config",
+  "targets": {
+    "sync": {
+      "command": "ts-node -P tools/build-github-workflows/tsconfig.lib.json tools/build-github-workflows/src/main.ts"
+    }
+  }
+}

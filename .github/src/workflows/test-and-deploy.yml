@@ -164,6 +164,21 @@ jobs:
 
       - *upload-dist-on-failure
 
+  check-sync:
+    name: 🔄 Check Sync
+    runs-on: ubuntu-latest
+    steps:
+      - *checkout
+      - *cache
+      - *setup-node
+      - *install-bun
+      - *bun-install
+
+      - name: Check Sync No Changes
+        run: bunx nx affected --target=sync --base=deployed/marmicode-next && git diff --exit-code
+
+      - *upload-dist-on-failure
+
   nx-agents:
     name: 🤖 Agents
     runs-on: ubuntu-latest
