@@ -1,30 +1,4 @@
 {
-  "npmScope": "marmicode",
-  "affected": {
-    "defaultBase": "main"
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx-cloud",
-      "options": {
-        "cacheableOperations": [
-          "build",
-          "build-storybook",
-          "component-test",
-          "e2e",
-          "lint",
-          "prerender",
-          "test",
-          "update-routes"
-        ],
-        "parallel": 4,
-        "accessToken": "MzU3NTdhZjQtMWJlZC00ZTgyLWI2MTItYzkyNTgzYzU5MWMxfHJlYWQtd3JpdGU="
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nx/angular"
-  },
   "defaultProject": "marmicode",
   "generators": {
     "@nx/angular:application": {
@@ -41,27 +15,54 @@
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "inputs": ["production", "^production"],
+      "cache": true
     },
     "component-test": {
       "inputs": ["default", "^production"],
-      "outputs": ["{projectRoot}/__percy_snapshots__/**/*"]
+      "outputs": ["{projectRoot}/__percy_snapshots__/**/*"],
+      "cache": true
     },
     "e2e": {
       "inputs": ["default", "^production"],
-      "outputs": ["{projectRoot}/__percy_snapshots__/**/*"]
-    },
-    "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+      "outputs": ["{projectRoot}/__percy_snapshots__/**/*"],
+      "cache": true
     },
     "build-storybook": {
-      "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/.storybook/**/*",
+        "{projectRoot}/.storybook/**/*",
+        "{projectRoot}/tsconfig.storybook.json"
+      ],
+      "cache": true
     },
     "upload-percy-snapshots": {
       "dependsOn": ["component-test", "e2e"]
     },
-    "lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+    "prerender": {
+      "cache": true
+    },
+    "update-routes": {
+      "cache": true
+    },
+    "@nx/jest:jest": {
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "cache": true,
+      "options": {
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "@nx/eslint:lint": {
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
+      "cache": true
     }
   },
   "namedInputs": {
@@ -81,7 +82,13 @@
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/.storybook/**/*",
-      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+      "!{projectRoot}/tsconfig.storybook.json",
+      "!{projectRoot}/src/test-setup.[jt]s"
     ]
-  }
+  },
+  "nxCloudAccessToken": "MzU3NTdhZjQtMWJlZC00ZTgyLWI2MTItYzkyNTgzYzU5MWMxfHJlYWQtd3JpdGU=",
+  "parallel": 4,
+  "useInferencePlugins": false,
+  "defaultBase": "main"
 }

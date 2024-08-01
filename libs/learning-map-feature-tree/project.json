@@ -4,25 +4,18 @@
   "projectType": "library",
   "sourceRoot": "libs/learning-map-feature-tree/src",
   "prefix": "mc",
+  "tags": ["scope:learning-map", "type:feature"],
+  "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/learning-map-feature-tree/src/**/*.ts",
-          "libs/learning-map-feature-tree/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/learning-map-feature-tree/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/learning-map-feature-tree/jest.config.ts"
       },
       "outputs": ["{workspaceRoot}/coverage/libs/learning-map-feature-tree"]
     }
-  },
-  "generators": {},
-  "tags": ["scope:learning-map", "type:feature"]
+  }
 }

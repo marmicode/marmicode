@@ -2,9 +2,10 @@
   "name": "marmicode",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "generators": {},
   "sourceRoot": "apps/marmicode/src",
   "prefix": "mc",
+  "tags": ["scope:app"],
+  "generators": {},
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -159,14 +160,14 @@
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "browserTarget": "marmicode:build"
+        "buildTarget": "marmicode:build"
       },
       "configurations": {
         "development": {
-          "browserTarget": "marmicode:build:development"
+          "buildTarget": "marmicode:build:development"
         },
         "production": {
-          "browserTarget": "marmicode:build:production"
+          "buildTarget": "marmicode:build:production"
         }
       },
       "defaultConfiguration": "development"
@@ -174,23 +175,16 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "marmicode:build"
+        "buildTarget": "marmicode:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "apps/marmicode/src/**/*.ts",
-          "apps/marmicode/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "apps/marmicode/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/marmicode/jest.config.ts"
       },
       "outputs": ["{workspaceRoot}/coverage/apps/marmicode"]
     },
@@ -253,7 +247,7 @@
       }
     },
     "serve-ssr": {
-      "executor": "@nguniversal/builders:ssr-dev-server",
+      "executor": "@angular-devkit/build-angular:ssr-dev-server",
       "options": {},
       "configurations": {
         "development": {
@@ -268,10 +262,10 @@
       "defaultConfiguration": "development"
     },
     "prerender": {
-      "executor": "@nguniversal/builders:prerender",
+      "executor": "@angular-devkit/build-angular:prerender",
       "options": {
-        "guessRoutes": false,
-        "routesFile": "apps/marmicode/marmicode-routes.txt"
+        "routesFile": "apps/marmicode/marmicode-routes.txt",
+        "discoverRoutes": false
       },
       "configurations": {
         "production": {
@@ -320,6 +314,5 @@
       },
       "outputs": ["{projectRoot}/marmicode-routes.txt"]
     }
-  },
-  "tags": ["scope:app"]
+  }
 }

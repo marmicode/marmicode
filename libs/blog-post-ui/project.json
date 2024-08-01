@@ -4,22 +4,16 @@
   "projectType": "library",
   "sourceRoot": "libs/blog-post-ui/src",
   "prefix": "mc",
+  "tags": ["scope:blog-post", "type:ui"],
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/blog-post-ui/src/**/*.ts",
-          "libs/blog-post-ui/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/blog-post-ui"],
       "options": {
-        "jestConfig": "libs/blog-post-ui/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blog-post-ui/jest.config.ts"
       }
     },
     "storybook": {
@@ -74,6 +68,5 @@
     "upload-percy-snapshots": {
       "command": "tools/upload-percy-snapshots.sh libs/blog-post-ui"
     }
-  },
-  "tags": ["scope:blog-post", "type:ui"]
+  }
 }

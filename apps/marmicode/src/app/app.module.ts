@@ -1,5 +1,5 @@
 import { LayoutModule } from '@angular/cdk/layout';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { getAnalytics, provideAnalytics, ScreenTrackingService } from '@angular/fire/analytics';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -18,47 +18,38 @@ import { AppComponent } from './app.component';
 import { NavModule } from './nav.component';
 import { provideUpdateEffects, UpdateEffects } from './update/update.effects';
 
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAnalytics(() => getAnalytics()),
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    BrowserModule.withServerTransition({ appId: 'marmicode' }),
-    EffectsModule.forRoot([UpdateEffects, ZonelessFixesEffects]),
-    HttpClientModule,
-    LayoutModule,
-    NavModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production
-    }),
-    StoreModule.forRoot(
-      {
-        router: routerReducer
-      },
-      {
-        runtimeChecks: {
-          strictActionImmutability: true,
-          strictStateImmutability: true
-        }
-      }
-    ),
-    StoreRouterConnectingModule.forRoot()
-  ],
-  providers: [
-    ScreenTrackingService,
-    provideUpdateEffects(),
-    {
-      provide: FIREBASE_ANALYTICS_CONFIG,
-      useValue: {
-        allow_ad_personalization_signals: false,
-        allow_google_signals: false,
-        anonymize_ip: true
-      }
-    }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAnalytics(() => getAnalytics()),
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        BrowserModule.withServerTransition({ appId: 'marmicode' }),
+        EffectsModule.forRoot([UpdateEffects, ZonelessFixesEffects]),
+        LayoutModule,
+        NavModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production
+        }),
+        StoreModule.forRoot({
+            router: routerReducer
+        }, {
+            runtimeChecks: {
+                strictActionImmutability: true,
+                strictStateImmutability: true
+            }
+        }),
+        StoreRouterConnectingModule.forRoot()], providers: [
+        ScreenTrackingService,
+        provideUpdateEffects(),
+        {
+            provide: FIREBASE_ANALYTICS_CONFIG,
+            useValue: {
+                allow_ad_personalization_signals: false,
+                allow_google_signals: false,
+                anonymize_ip: true
+            }
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {
 }

@@ -1,5 +1,6 @@
 {
   "name": "percy-placeholder",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/percy-placeholder",
   "targets": {

@@ -3,12 +3,13 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/marmicode-e2e/src",
   "projectType": "application",
+  "tags": ["scope:e2e"],
+  "implicitDependencies": ["marmicode"],
   "targets": {
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {
         "cypressConfig": "apps/marmicode-e2e/cypress.config.js",
-        "tsConfig": "apps/marmicode-e2e/tsconfig.e2e.json",
         "devServerTarget": "marmicode:serve",
         "testingType": "e2e"
       },
@@ -19,16 +20,10 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/marmicode-e2e/**/*.{js,ts}"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "upload-percy-snapshots": {
       "command": "tools/upload-percy-snapshots.sh apps/marmicode-e2e"
     }
-  },
-  "tags": ["scope:e2e"],
-  "implicitDependencies": ["marmicode"]
+  }
 }
