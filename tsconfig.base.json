@@ -78,7 +78,7 @@
         "libs/shared-utils/src/index.ts"
       ],
       "@marmicode/shared-utils/test-setup": [
-        "libs/shared-test-setup/src/test-setup.ts"
+        "libs/shared-utils/src/test-setup.ts"
       ],
       "@marmicode/testing": [
         "libs/testing/src/index.ts"
