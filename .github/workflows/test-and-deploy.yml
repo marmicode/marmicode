@@ -32,8 +32,10 @@ jobs:
             cache
       - uses: actions/setup-node@v3
         with:
-          cache: yarn
           node-version: '18'
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Install
         run: yarn install --immutable
       - run: yarn nx-cloud start-ci-run
@@ -67,8 +69,10 @@ jobs:
             cache
       - uses: actions/setup-node@v3
         with:
-          cache: yarn
           node-version: '18'
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Install
         run: yarn install --immutable
       - run: yarn nx-cloud start-ci-run
@@ -100,8 +104,10 @@ jobs:
             cache
       - uses: actions/setup-node@v3
         with:
-          cache: yarn
           node-version: '18'
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Install
         run: yarn install --immutable
       - run: yarn nx-cloud start-ci-run
@@ -133,8 +139,10 @@ jobs:
             cache
       - uses: actions/setup-node@v3
         with:
-          cache: yarn
           node-version: '18'
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Install
         run: yarn install --immutable
       - run: yarn nx-cloud start-ci-run
@@ -168,8 +176,10 @@ jobs:
             cache
       - uses: actions/setup-node@v3
         with:
-          cache: yarn
           node-version: '18'
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Install
         run: yarn install --immutable
       - run: yarn nx-cloud start-ci-run
@@ -211,8 +221,10 @@ jobs:
             cache
       - uses: actions/setup-node@v3
         with:
-          cache: yarn
           node-version: '18'
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Install
         run: yarn install --immutable
       - name: Start Nx Agent ${{ matrix.agent }}
@@ -249,8 +261,10 @@ jobs:
             cache
       - uses: actions/setup-node@v3
         with:
-          cache: yarn
           node-version: '18'
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Install
         run: yarn install --immutable
       - name: Stop Nx Agents
@@ -288,8 +302,10 @@ jobs:
             cache
       - uses: actions/setup-node@v3
         with:
-          cache: yarn
           node-version: '18'
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Install
         run: yarn install --immutable
       - name: Upload Affected Percy Snapshots
@@ -341,8 +357,10 @@ jobs:
             cache
       - uses: actions/setup-node@v3
         with:
-          cache: yarn
           node-version: '18'
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Install
         run: yarn install --immutable
       - name: Deploy
@@ -396,8 +414,10 @@ jobs:
             cache
       - uses: actions/setup-node@v3
         with:
-          cache: yarn
           node-version: '18'
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Install
         run: yarn install --immutable
       - name: Deploy
