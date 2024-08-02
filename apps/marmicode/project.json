@@ -308,7 +308,7 @@
       "options": {
         "commands": [
           "mkdir -p dist",
-          "ts-node --esm --skipProject apps/marmicode/update-routes.ts -o apps/marmicode/marmicode-routes.txt"
+          "ts-node --skipProject apps/marmicode/update-routes.ts -o apps/marmicode/marmicode-routes.txt"
         ],
         "parallel": false
       },
