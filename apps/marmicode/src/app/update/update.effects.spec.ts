@@ -98,12 +98,12 @@ describe('UpdateEffects', () => {
   /* Set up effects service. */
   function setUp() {
     const mockDialog: jest.Mocked<Pick<MatDialog, 'open'>> = {
-      open: jest.fn<unknown>(),
+      open: jest.fn(),
     };
     const mockDialogRef: jest.Mocked<
       Pick<MatDialogRef<unknown>, 'afterClosed'>
     > = {
-      afterClosed: jest.fn<unknown>(),
+      afterClosed: jest.fn(),
     };
 
     const dialogAfterClosed$ = new Subject<void>();
@@ -117,8 +117,8 @@ describe('UpdateEffects', () => {
       Pick<SwUpdate, 'activateUpdate' | 'checkForUpdate' | 'isEnabled'>
     > &
       Pick<SwUpdate, 'versionUpdates'> = {
-      activateUpdate: jest.fn<unknown>(),
-      checkForUpdate: jest.fn<unknown>(),
+      activateUpdate: jest.fn(),
+      checkForUpdate: jest.fn(),
       versionUpdates: versionUpdates$,
       isEnabled: true,
     };
