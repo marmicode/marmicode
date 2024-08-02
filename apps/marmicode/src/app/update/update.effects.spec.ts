@@ -1,12 +1,11 @@
-import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 
-import { jest, describe, expect, it } from '@jest/globals';
+import { describe, expect, it, jest } from '@jest/globals';
 import { createObserver } from '@marmicode/testing';
-import { of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { UpdateDialogComponent } from './update-dialog.component';
 import { provideUpdateEffects, UpdateEffects } from './update.effects';
 
@@ -99,12 +98,12 @@ describe('UpdateEffects', () => {
   /* Set up effects service. */
   function setUp() {
     const mockDialog: jest.Mocked<Pick<MatDialog, 'open'>> = {
-      open: jest.fn(),
+      open: jest.fn<unknown>(),
     };
     const mockDialogRef: jest.Mocked<
       Pick<MatDialogRef<unknown>, 'afterClosed'>
     > = {
-      afterClosed: jest.fn(),
+      afterClosed: jest.fn<unknown>(),
     };
 
     const dialogAfterClosed$ = new Subject<void>();
@@ -118,8 +117,8 @@ describe('UpdateEffects', () => {
       Pick<SwUpdate, 'activateUpdate' | 'checkForUpdate' | 'isEnabled'>
     > &
       Pick<SwUpdate, 'versionUpdates'> = {
-      activateUpdate: jest.fn(),
-      checkForUpdate: jest.fn(),
+      activateUpdate: jest.fn<unknown>(),
+      checkForUpdate: jest.fn<unknown>(),
       versionUpdates: versionUpdates$,
       isEnabled: true,
     };
@@ -129,12 +128,6 @@ describe('UpdateEffects', () => {
       imports: [NoopAnimationsModule],
       providers: [
         provideUpdateEffects(),
-        {
-          provide: ApplicationRef,
-          useValue: {
-            isStable: of(true),
-          } as ApplicationRef,
-        },
         {
           provide: MatDialog,
           useValue: mockDialog,
