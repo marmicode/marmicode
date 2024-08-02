@@ -240,11 +240,11 @@ jobs:
         if: github.ref != 'refs/heads/main'
         env:
           NX_CLOUD_DISTRIBUTED_EXECUTION: false
-        run: yarn percy exec --partial -- yarn upload-affected-percy-snapshots
+        run: bunx percy exec --partial -- bunx upload-affected-percy-snapshots
 
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        run: yarn percy exec -- bunx nx run-many --target=upload-percy-snapshots
+        run: bunx percy exec -- bunx nx run-many --target=upload-percy-snapshots
 
       # Check Percy Review on main branch only.
       # On other branches, we'll let Percy status check do the job.
