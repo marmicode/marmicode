@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { NavModule } from './nav.component';
 
 @Component({
+  standalone: true,
   selector: 'mc-root',
+  imports: [NavModule, RouterModule],
   template: `
     <mc-nav>
       <router-outlet></router-outlet>

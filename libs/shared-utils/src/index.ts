@@ -19,4 +19,3 @@ export { TransferStateAdapter } from './lib/transfer-state-adapter.service';
 export { TransferStateHelper } from './lib/transfer-state-helper.service';
 export { WipModule } from './lib/wip.directive';
 export { WipService } from './lib/wip.service';
-export { ZonelessFixesEffects } from './lib/zoneless-fixes.effects';
