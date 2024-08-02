@@ -21,7 +21,7 @@ import { AuthorSocialInfo } from './author-social-info';
     >
       <button class="button">
         <fa-icon [icon]="faTwitter" class="icon"></fa-icon>
-        <span>Follow @{{ author.twitter }}</span>
+        <span>Follow &#64;{{ author.twitter }}</span>
       </button>
     </a>
   `,
