@@ -1,25 +1,16 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  NgModule,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, NgModule } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { BlockGroupModule } from '@marmicode/block-api';
-import {
-  ResourceHeaderModule,
-  ResourceTitleBannerModule,
-  ResourceType,
-} from '@marmicode/resource-api';
+import { ResourceHeaderModule, ResourceTitleBannerModule, ResourceType } from '@marmicode/resource-api';
 import { RxState } from '@rx-angular/state';
 import { select } from '@rx-angular/state/selections';
+import { PushPipe } from '@rx-angular/template/push';
 import { map } from 'rxjs/operators';
 import { BlogPost } from './blog-post';
-import { FollowButtonModule } from './social/follow-button.component';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
+import { FollowButtonModule } from './social/follow-button.component';
 import { ShareButtonsModule } from './social/share-buttons.component';
-import { PushPipe } from '@rx-angular/template/push';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

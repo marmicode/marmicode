@@ -4,25 +4,18 @@
   "projectType": "library",
   "sourceRoot": "libs/shared-router-helpers/src",
   "prefix": "mc",
+  "tags": ["scope:shared", "type:utils"],
+  "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/shared-router-helpers/src/**/*.ts",
-          "libs/shared-router-helpers/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/shared-router-helpers/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/shared-router-helpers/jest.config.ts"
       },
       "outputs": ["{workspaceRoot}/coverage/libs/shared-router-helpers"]
     }
-  },
-  "generators": {},
-  "tags": ["scope:shared", "type:utils"]
+  }
 }

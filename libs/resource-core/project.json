@@ -4,25 +4,18 @@
   "projectType": "library",
   "sourceRoot": "libs/resource-core/src",
   "prefix": "mc",
+  "tags": ["scope:resource", "type:core"],
+  "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/resource-core/src/**/*.ts",
-          "libs/resource-core/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/resource-core/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/resource-core/jest.config.ts"
       },
       "outputs": ["{workspaceRoot}/coverage/libs/resource-core"]
     }
-  },
-  "generators": {},
-  "tags": ["scope:resource", "type:core"]
+  }
 }

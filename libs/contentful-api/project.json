@@ -4,25 +4,18 @@
   "projectType": "library",
   "sourceRoot": "libs/contentful-api/src",
   "prefix": "mc",
+  "tags": ["scope:contentful", "type:api", "name:contentful-api"],
+  "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/contentful-api/src/**/*.ts",
-          "libs/contentful-api/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/contentful-api/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/contentful-api/jest.config.ts"
       },
       "outputs": ["{workspaceRoot}/coverage/libs/contentful-api"]
     }
-  },
-  "generators": {},
-  "tags": ["scope:contentful", "type:api", "name:contentful-api"]
+  }
 }

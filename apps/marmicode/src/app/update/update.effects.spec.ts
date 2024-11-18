@@ -1,12 +1,11 @@
-import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 
-import { jest, describe, expect, it } from '@jest/globals';
+import { describe, expect, it, jest } from '@jest/globals';
 import { createObserver } from '@marmicode/testing';
-import { of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { UpdateDialogComponent } from './update-dialog.component';
 import { provideUpdateEffects, UpdateEffects } from './update.effects';
 
@@ -129,12 +128,6 @@ describe('UpdateEffects', () => {
       imports: [NoopAnimationsModule],
       providers: [
         provideUpdateEffects(),
-        {
-          provide: ApplicationRef,
-          useValue: {
-            isStable: of(true),
-          } as ApplicationRef,
-        },
         {
           provide: MatDialog,
           useValue: mockDialog,

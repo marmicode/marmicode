@@ -4,24 +4,17 @@
   "projectType": "library",
   "sourceRoot": "libs/block-api/src",
   "prefix": "mc",
+  "tags": ["scope:block", "name:block-api", "type:api"],
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/block-api/src/**/*.ts",
-          "libs/block-api/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/block-api"],
       "options": {
-        "jestConfig": "libs/block-api/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/block-api/jest.config.ts"
       }
     }
-  },
-  "tags": ["scope:block", "name:block-api", "type:api"]
+  }
 }
