@@ -51,7 +51,7 @@ x-steps:
 
   upload-dist-on-failure: &upload-dist-on-failure
     name: Upload dist (Cypress videos / build output etc...) on failure
-    uses: actions/upload-artifact@v2
+    uses: actions/upload-artifact@v3
     if: failure()
     with:
       name: dist
