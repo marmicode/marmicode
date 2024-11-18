@@ -7,6 +7,7 @@
     "nx-cloud": "nx-cloud",
     "start": "nx serve",
     "build": "nx build",
+    "build-github-workflows": "ts-node -P tools/build-github-workflows/tsconfig.lib.json tools/build-github-workflows/src/main.ts",
     "component-test": "nx run-many --target=component-test",
     "test": "nx run-many --target=test",
     "lint": "nx workspace-lint && nx run-many --target=lint",
