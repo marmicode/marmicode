@@ -21,12 +21,14 @@
     "component-test": {
       "inputs": ["default", "^production"],
       "outputs": ["{projectRoot}/__percy_snapshots__/**/*"],
-      "cache": true
+      "cache": true,
+      "parallelism": false
     },
     "e2e": {
       "inputs": ["default", "^production"],
       "outputs": ["{projectRoot}/__percy_snapshots__/**/*"],
-      "cache": true
+      "cache": true,
+      "parallelism": false
     },
     "build-storybook": {
       "inputs": [
