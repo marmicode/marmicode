@@ -43,7 +43,7 @@ jobs:
           bunx nx affected --target=prerender --configuration next
           --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: dist
@@ -77,7 +77,7 @@ jobs:
       - name: Test
         run: bunx nx affected --target=test --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: dist
@@ -111,7 +111,7 @@ jobs:
       - name: Lint
         run: bunx nx affected --target=lint --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: dist
@@ -147,7 +147,7 @@ jobs:
           bunx nx affected --target=component-test --parallel 1
           --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: dist
@@ -183,7 +183,7 @@ jobs:
           bunx nx affected --target=e2e --parallel 1
           --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: dist
@@ -218,7 +218,7 @@ jobs:
           bunx nx affected --target=sync --base=deployed/marmicode-next && git
           diff --exit-code
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: dist
@@ -259,7 +259,7 @@ jobs:
       - name: Start Nx Agent ${{ matrix.agent }}
         run: bunx nx-cloud start-agent
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: dist
@@ -298,7 +298,7 @@ jobs:
       - name: Stop Nx Agents
         run: bunx nx-cloud stop-all-agents
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: dist
@@ -349,7 +349,7 @@ jobs:
           PERCY_TOKEN=$PERCY_FULL_TOKEN bunx percy build:wait --project
           d53cdff6/marmicode --fail-on-changes
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: dist
@@ -404,7 +404,7 @@ jobs:
           force: true
           tags: true
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: dist
@@ -460,7 +460,7 @@ jobs:
           force: true
           tags: true
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: dist

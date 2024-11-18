@@ -1,6 +1,7 @@
-import { readdir, readFile, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { readdir, readFile, writeFile } from 'fs/promises';
 import { dump, load } from 'js-yaml';
+import { join } from 'path';
+import { promisify } from 'util';
 
 export async function buildGithubWorkflows() {
   const encoding = 'utf-8';
