@@ -339,10 +339,10 @@ jobs:
         if: github.ref != 'refs/heads/main'
         env:
           NX_CLOUD_DISTRIBUTED_EXECUTION: false
-        run: bunx percy exec --partial -- bunx upload-affected-percy-snapshots
+        run: bunx percy exec --partial -- bun upload-affected-percy-snapshots
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        run: bunx percy exec -- bunx nx run-many --target=upload-percy-snapshots
+        run: bunx percy exec -- bun nx run-many --target=upload-percy-snapshots
       - name: Check Percy Snapshots
         if: github.ref == 'refs/heads/main'
         run: >-
