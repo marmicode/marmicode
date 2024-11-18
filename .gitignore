@@ -46,3 +46,4 @@ apps/marmicode/marmicode-routes.txt
 
 .nx
 nx-cloud.env
+.yarn
