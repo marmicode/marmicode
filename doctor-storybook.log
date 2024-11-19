@@ -1,0 +1,24 @@
+🩺 The doctor is checking the health of your Storybook..
+╭ Incompatible packages found ──────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                           │
+│   The following packages are incompatible with Storybook 8.4.4 as they depend on different major versions of Storybook    │
+│   packages:                                                                                                               │
+│   - @storybook/addon-knobs@7.0.2                                                                                          │
+│   - @storybook/builder-webpack5@7.0.10 (8.4.4 available!)                                                                 │
+│   Repo: https://github.com/storybookjs/storybook/tree/next/code/lib/builder-webpack5                                      │
+│   - @storybook/manager-webpack5@6.5.16                                                                                    │
+│   Repo: https://github.com/storybookjs/storybook/tree/main/lib/core                                                       │
+│                                                                                                                           │
+│                                                                                                                           │
+│   Please consider updating your packages or contacting the maintainers for compatibility details.                         │
+│   For more on Storybook 8 compatibility, see the linked GitHub issue:                                                     │
+│   https://github.com/storybookjs/storybook/issues/26031                                                                   │
+│                                                                                                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+WARN An issue occurred while trying to find dependencies metadata using npm.
+
+You can always recheck the health of your project by running:
+npx storybook doctor
+
+Full logs are available in /Users/y/dev/marmicode/marmicode/doctor-storybook.log
+
