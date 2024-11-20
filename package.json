@@ -67,7 +67,7 @@
     "@rx-angular/template": "^15.1.0",
     "@storybook/core-server": "^8.4.4",
     "apollo-angular": "4.1.1",
-    "axios": "1.7.3",
+    "axios": "1.7.7",
     "document-register-element": "^1.7.2",
     "express": "^4.15.2",
     "firebase": "^9.9.0",
