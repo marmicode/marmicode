@@ -155,7 +155,7 @@
     "react-dom": "18.2.0",
     "storybook": "^8.4.4",
     "ts-jest": "29.1.1",
-    "ts-node": "10.9.1",
+    "ts-node": "10.9.2",
     "typescript": "5.5.4"
   },
   "dependenciesMeta": {
@@ -165,7 +165,7 @@
     "ngx-sharebuttons@11.0.0": {
       "unplugged": true
     },
-    "ts-node@10.9.1": {
+    "ts-node@10.9.2": {
       "unplugged": true
     }
   },
