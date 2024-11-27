@@ -156,7 +156,7 @@
     "storybook": "^8.4.4",
     "ts-jest": "29.2.5",
     "ts-node": "10.9.2",
-    "typescript": "5.5.4"
+    "typescript": "5.7.2"
   },
   "dependenciesMeta": {
     "@babel/runtime@7.26.0": {
