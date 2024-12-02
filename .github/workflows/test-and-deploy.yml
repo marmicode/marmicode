@@ -16,7 +16,7 @@ jobs:
     name: 📦 Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/cache@v3
@@ -52,7 +52,7 @@ jobs:
     name: ✅ Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/cache@v3
@@ -86,7 +86,7 @@ jobs:
     name: 🚨 Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/cache@v3
@@ -120,7 +120,7 @@ jobs:
     name: ✅ Component Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/cache@v3
@@ -156,7 +156,7 @@ jobs:
     name: ✅ E2E
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/cache@v3
@@ -192,7 +192,7 @@ jobs:
     name: 🔄 Check Sync
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/cache@v3
@@ -235,7 +235,7 @@ jobs:
           - 3
           - 4
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/cache@v3
@@ -274,7 +274,7 @@ jobs:
       - component-test
       - e2e
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/cache@v3
@@ -314,7 +314,7 @@ jobs:
       - component-test
       - e2e
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/cache@v3
@@ -368,7 +368,7 @@ jobs:
       name: Marmicode Next
       url: https://marmicode-next.web.app
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/cache@v3
@@ -424,7 +424,7 @@ jobs:
       name: Marmicode
       url: https://marmicode.io
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/cache@v3
