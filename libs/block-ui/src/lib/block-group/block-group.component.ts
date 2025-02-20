@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,13 +16,13 @@ import { RxState } from '@rx-angular/state';
 import { select } from '@rx-angular/state/selections';
 import { PushPipe } from '@rx-angular/template/push';
 import { map } from 'rxjs/operators';
-import { BlockModule } from '../block.component';
+import { BlockModule, BlockComponent } from '../block.component';
 import { extractHighlightableZones } from '../highlight/extract-highlightable-zones';
 import { HighlightZone } from '../highlight/highlight-zone';
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-block-group',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-block-group',
+    template: `
     <mc-block
       *ngFor="let block of blocks$ | push"
       [block]="block"
@@ -33,8 +33,8 @@ import { HighlightZone } from '../highlight/highlight-zone';
       class="block"
     ></mc-block>
   `,
-  styles: [
-    `
+    styles: [
+        `
       /* Make sure blocks respect the flex allowed space.
        * Cf. block-ui-e2e > frame.spec.ts > should apply horizontal scroll if code overflows
        * We shouldn't apply it on column display otherwise the height would be 0. */
@@ -49,8 +49,14 @@ import { HighlightZone } from '../highlight/highlight-zone';
         flex: 1 1 0;
       }
     `,
-  ],
-  providers: [RxState],
+    ],
+    providers: [RxState],
+    standalone: true,
+    imports: [
+        NgFor,
+        BlockComponent,
+        PushPipe,
+    ],
 })
 export class BlockGroupComponent {
   @Input() set blockGroup(blockGroup: BlockGroup) {
@@ -103,8 +109,7 @@ export class BlockGroupComponent {
 }
 
 @NgModule({
-  declarations: [BlockGroupComponent],
-  exports: [BlockGroupComponent],
-  imports: [BlockModule, CommonModule, PushPipe],
+    exports: [BlockGroupComponent],
+    imports: [BlockModule, CommonModule, PushPipe, BlockGroupComponent],
 })
 export class BlockGroupModule {}

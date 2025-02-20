@@ -3,9 +3,9 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { getAssetUri } from '@marmicode/shared-utils';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-error',
-  template: `<img
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-error',
+    template: `<img
     [src]="pictureUri"
     alt="Sad Marmicode"
     class="error-animation mc-primary-text"
@@ -13,8 +13,8 @@ import { getAssetUri } from '@marmicode/shared-utils';
   <div class="error-message">
     <ng-content></ng-content>
   </div> `,
-  styles: [
-    `
+    styles: [
+        `
         :host {
             display: flex;
             max-width: 100%;
@@ -36,16 +36,16 @@ import { getAssetUri } from '@marmicode/shared-utils';
             text-align: center;
         }
     `
-  ]
+    ],
+    standalone: true
 })
 export class ErrorComponent {
   pictureUri = getAssetUri('error.gif');
 }
 
 @NgModule({
-  declarations: [ErrorComponent],
-  exports: [ErrorComponent],
-  imports: [CommonModule]
+    exports: [ErrorComponent],
+    imports: [CommonModule, ErrorComponent]
 })
 export class ErrorModule {
 }

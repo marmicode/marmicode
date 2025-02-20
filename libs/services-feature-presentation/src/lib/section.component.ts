@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { DottyLineModule } from './dotty-line.component';
+import { DottyLineModule, DottyLineComponent } from './dotty-line.component';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-section',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-section',
+    template: `
     <section class="section">
       <mc-dotty-line></mc-dotty-line>
 
@@ -20,8 +20,8 @@ import { DottyLineModule } from './dotty-line.component';
       </div>
     </section>
   `,
-  styles: [
-    `
+    styles: [
+        `
       :host {
         display: block;
         min-height: 300px;
@@ -47,13 +47,14 @@ import { DottyLineModule } from './dotty-line.component';
         margin: 10px;
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [DottyLineComponent],
 })
 export class SectionComponent {}
 
 @NgModule({
-  declarations: [SectionComponent],
-  exports: [SectionComponent],
-  imports: [CommonModule, DottyLineModule],
+    exports: [SectionComponent],
+    imports: [CommonModule, DottyLineModule, SectionComponent],
 })
 export class SectionModule {}

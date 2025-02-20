@@ -3,15 +3,15 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { getAssetUri } from '@marmicode/shared-utils';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-loading',
-  template: `<img
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-loading',
+    template: `<img
     [src]="loadingGifUri"
     class="loading-animation"
     alt="Loading"
   />`,
-  styles: [
-    `
+    styles: [
+        `
         :host {
             max-width: 100%;
 
@@ -20,16 +20,16 @@ import { getAssetUri } from '@marmicode/shared-utils';
             justify-content: center;
         }
     `
-  ]
+    ],
+    standalone: true
 })
 export class LoadingComponent {
   loadingGifUri = getAssetUri('loading.gif');
 }
 
 @NgModule({
-  declarations: [LoadingComponent],
-  exports: [LoadingComponent],
-  imports: [CommonModule]
+    exports: [LoadingComponent],
+    imports: [CommonModule, LoadingComponent]
 })
 export class LoadingModule {
 }

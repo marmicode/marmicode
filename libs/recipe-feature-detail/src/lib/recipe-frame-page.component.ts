@@ -1,4 +1,4 @@
-import { CommonModule, ViewportScroller } from '@angular/common';
+import { CommonModule, ViewportScroller, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -25,14 +25,17 @@ import {
 } from 'rxjs/operators';
 import { getRelativeFrameRoute } from './get-relative-frame-route';
 import { Frame, Recipe, RecipeRepository } from './recipe-repository.service';
-import { RecipeTimelineModule } from './recipe-timeline.component';
-import { SlideAnimationModule } from './slide-animation.directive';
-import { SwipeModule } from './swipe.directive';
+import { RecipeTimelineModule, RecipeTimelineComponent } from './recipe-timeline.component';
+import { SlideAnimationModule, SlideAnimationDirective } from './slide-animation.directive';
+import { SwipeModule, SwipeDirective } from './swipe.directive';
+import { PageComponent } from '../../../shared-ui/src/lib/page.component';
+import { ResourceTitleBannerComponent } from '../../../resource-api/src/lib/resource-title-banner.component';
+import { BlockGroupComponent } from '../../../block-ui/src/lib/block-group/block-group.component';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-recipe-frame-page',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-recipe-frame-page',
+    template: `
     <mc-page [info]="pageInfo$ | push" class="page">
       <!-- Swipable content. -->
       <div
@@ -68,8 +71,8 @@ import { SwipeModule } from './swipe.directive';
       ></mc-recipe-timeline>
     </mc-page>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .page {
         display: flex;
         flex-direction: column;
@@ -87,8 +90,19 @@ import { SwipeModule } from './swipe.directive';
         flex: 1 1 auto;
       }
     `,
-  ],
-  providers: [RxState],
+    ],
+    providers: [RxState],
+    standalone: true,
+    imports: [
+        PageComponent,
+        SlideAnimationDirective,
+        SwipeDirective,
+        NgIf,
+        ResourceTitleBannerComponent,
+        BlockGroupComponent,
+        RecipeTimelineComponent,
+        PushPipe,
+    ],
 })
 export class RecipeFramePageComponent {
   recipe$ = this._state.select('recipe');
@@ -238,17 +252,17 @@ export class RecipeFramePageComponent {
 }
 
 @NgModule({
-  declarations: [RecipeFramePageComponent],
-  exports: [RecipeFramePageComponent],
-  imports: [
-    CommonModule,
-    PageModule,
-    BlockGroupModule,
-    PushPipe,
-    RecipeTimelineModule,
-    ResourceTitleBannerModule,
-    SlideAnimationModule,
-    SwipeModule,
-  ],
+    exports: [RecipeFramePageComponent],
+    imports: [
+        CommonModule,
+        PageModule,
+        BlockGroupModule,
+        PushPipe,
+        RecipeTimelineModule,
+        ResourceTitleBannerModule,
+        SlideAnimationModule,
+        SwipeModule,
+        RecipeFramePageComponent,
+    ],
 })
 export class RecipeFramePageModule {}

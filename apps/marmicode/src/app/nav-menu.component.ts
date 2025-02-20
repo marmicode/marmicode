@@ -6,22 +6,22 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+import { MatButtonModule, MatButton } from '@angular/material/button';
+import { MatIconModule, MatIcon } from '@angular/material/icon';
+import { MatListModule, MatNavList } from '@angular/material/list';
 import {
   resourceSearchRouterHelper,
   servicesRouterHelper,
 } from '@marmicode/shared-router-helpers';
 import { BehaviorSubject } from 'rxjs';
-import { NavMenuItemModule } from './nav-menu-item.component';
+import { NavMenuItemModule, NavMenuItemComponent } from './nav-menu-item.component';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-nav-menu',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-nav-menu',
+    template: `
     <!-- Toolbar links. -->
     <div class="mc-flex-row">
       <mat-nav-list class="mc-flex-row mc-hide mc-show-gt-sm" role="menu">
@@ -64,8 +64,8 @@ import { NavMenuItemModule } from './nav-menu-item.component';
       </mat-nav-list>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .vertical-menu {
         display: flex;
         flex-direction: column;
@@ -83,18 +83,25 @@ import { NavMenuItemModule } from './nav-menu-item.component';
         margin: auto;
       }
     `,
-  ],
-  animations: [
-    trigger('showHide', [
-      state(
-        'void',
-        style({
-          height: 0,
-        })
-      ),
-      transition('void <=> *', animate('.1s')),
-    ]),
-  ],
+    ],
+    animations: [
+        trigger('showHide', [
+            state('void', style({
+                height: 0,
+            })),
+            transition('void <=> *', animate('.1s')),
+        ]),
+    ],
+    standalone: true,
+    imports: [
+        MatNavList,
+        NgFor,
+        NavMenuItemComponent,
+        MatButton,
+        MatIcon,
+        NgIf,
+        PushPipe,
+    ],
 })
 export class NavMenuComponent {
   isMenuDisplayed$ = new BehaviorSubject<boolean>(false);
@@ -137,15 +144,15 @@ export class NavMenuComponent {
 }
 
 @NgModule({
-  declarations: [NavMenuComponent],
-  exports: [NavMenuComponent],
-  imports: [
-    CommonModule,
-    MatListModule,
-    MatIconModule,
-    MatButtonModule,
-    NavMenuItemModule,
-    PushPipe,
-  ],
+    exports: [NavMenuComponent],
+    imports: [
+        CommonModule,
+        MatListModule,
+        MatIconModule,
+        MatButtonModule,
+        NavMenuItemModule,
+        PushPipe,
+        NavMenuComponent,
+    ],
 })
 export class NavMenuModule {}

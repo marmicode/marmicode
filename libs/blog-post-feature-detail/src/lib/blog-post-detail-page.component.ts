@@ -12,17 +12,27 @@ import { PushPipe } from '@rx-angular/template/push';
 import { map, switchMap } from 'rxjs/operators';
 import { BlogPostRepository } from './blog-post-repository.service';
 import { blogPostToPageInfo } from './blog-post-to-page-info';
+import { PageComponent } from '../../../shared-ui/src/lib/page.component';
+import { SuspenseComponent } from '../../../shared-ui/src/lib/suspense.component';
+import { BlogPostComponent } from '../../../blog-post-ui/src/lib/blog-post.component';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-blog-post-detail-page',
-  template: ` <mc-page [info]="pageInfo$ | push">
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-blog-post-detail-page',
+    template: ` <mc-page [info]="pageInfo$ | push">
     <mc-suspense [data$]="blogPost$">
       <ng-template #data let-blogPost>
         <mc-blog-post [blogPost]="blogPost"></mc-blog-post>
       </ng-template>
     </mc-suspense>
   </mc-page>`,
+    standalone: true,
+    imports: [
+        PageComponent,
+        SuspenseComponent,
+        BlogPostComponent,
+        PushPipe,
+    ],
 })
 export class BlogPostDetailPageComponent {
   blogPost$ = this._route.paramMap.pipe(
@@ -47,14 +57,14 @@ export class BlogPostDetailPageComponent {
 }
 
 @NgModule({
-  declarations: [BlogPostDetailPageComponent],
-  exports: [BlogPostDetailPageComponent],
-  imports: [
-    CommonModule,
-    PageModule,
-    BlogPostModule,
-    SuspenseModule,
-    PushPipe,
-  ],
+    exports: [BlogPostDetailPageComponent],
+    imports: [
+        CommonModule,
+        PageModule,
+        BlogPostModule,
+        SuspenseModule,
+        PushPipe,
+        BlogPostDetailPageComponent,
+    ],
 })
 export class BlogPostDetailPageModule {}

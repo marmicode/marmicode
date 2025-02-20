@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,13 +10,13 @@ import {
 import { Suspense, suspensify } from '@jscutlery/operators';
 import { PushPipe } from '@rx-angular/template/push';
 import { Observable } from 'rxjs';
-import { ErrorModule } from './error.component';
-import { LoadingModule } from './loading.component';
+import { ErrorModule, ErrorComponent } from './error.component';
+import { LoadingModule, LoadingComponent } from './loading.component';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-suspense',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-suspense',
+    template: `
     <ng-container *ngIf="suspense$ | push as suspense">
       <!-- Data. -->
       <ng-container *ngIf="suspense.value as data">
@@ -56,6 +56,14 @@ import { LoadingModule } from './loading.component';
       <mc-loading></mc-loading>
     </ng-template>
   `,
+    standalone: true,
+    imports: [
+        NgIf,
+        NgTemplateOutlet,
+        ErrorComponent,
+        LoadingComponent,
+        PushPipe,
+    ],
 })
 export class SuspenseComponent<T = unknown> {
   @ContentChild('data') dataTemplate: TemplateRef<{ $implicit: T }>;
@@ -70,8 +78,7 @@ export class SuspenseComponent<T = unknown> {
 }
 
 @NgModule({
-  declarations: [SuspenseComponent],
-  exports: [SuspenseComponent],
-  imports: [CommonModule, LoadingModule, ErrorModule, PushPipe],
+    exports: [SuspenseComponent],
+    imports: [CommonModule, LoadingModule, ErrorModule, PushPipe, SuspenseComponent],
 })
 export class SuspenseModule {}

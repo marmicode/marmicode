@@ -10,11 +10,24 @@ import {
   MarkdownToken,
   MarkdownTokenType,
 } from '@marmicode/block-core';
+import { NgSwitch, NgSwitchCase } from '@angular/common';
+import { MarkdownBlockquoteComponent } from './markdown-blockquote.component';
+import { MarkdownCodeComponent } from './markdown-code.component';
+import { MarkdownCodespanComponent } from './markdown-codespan.component';
+import { MarkdownEmphasisComponent } from './markdown-emphasis.component';
+import { MarkdownHeadingComponent } from './markdown-heading.component';
+import { MarkdownLinkComponent } from './markdown-link.component';
+import { MarkdownListComponent } from './markdown-list.component';
+import { MarkdownListItemComponent } from './markdown-list-item.component';
+import { MarkdownMediaComponent } from './markdown-media.component';
+import { MarkdownParagraphComponent } from './markdown-paragraph.component';
+import { MarkdownStrongComponent } from './markdown-strong.component';
+import { MarkdownTextComponent } from './markdown-text.component';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-markdown-token',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-markdown-token',
+    template: `
     <ng-container [ngSwitch]="type">
       <!-- Code. -->
       <mc-markdown-blockquote
@@ -91,6 +104,23 @@ import {
       ></mc-markdown-text>
     </ng-container>
   `,
+    standalone: true,
+    imports: [
+        NgSwitch,
+        NgSwitchCase,
+        MarkdownBlockquoteComponent,
+        MarkdownCodeComponent,
+        MarkdownCodespanComponent,
+        MarkdownEmphasisComponent,
+        MarkdownHeadingComponent,
+        MarkdownLinkComponent,
+        MarkdownListComponent,
+        MarkdownListItemComponent,
+        MarkdownMediaComponent,
+        MarkdownParagraphComponent,
+        MarkdownStrongComponent,
+        MarkdownTextComponent,
+    ],
 })
 export class MarkdownTokenComponent implements OnChanges {
   @Input() token: MarkdownToken;

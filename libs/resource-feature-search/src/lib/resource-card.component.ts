@@ -1,20 +1,21 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, NgModule, OnChanges } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import { MatCardModule, MatCard, MatCardImage, MatCardContent, MatCardActions } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { getResourceTypeActionText, getResourceTypeColor } from '@marmicode/resource-core';
 import { ResourceHeaderModule } from '@marmicode/resource-ui';
 import { TriangleModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
-import { ResourceCardActionModule } from './resource-card-action.component';
-import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
-import { SkillChipModule } from './skill-chip.component';
+import { ResourceCardActionModule, ResourceCardActionComponent } from './resource-card-action.component';
+import { ResourceTypeTriangleModule, ResourceTypeTriangleComponent } from './resource-type-triangle.component';
+import { SkillChipModule, SkillChipComponent } from './skill-chip.component';
+import { ResourceHeaderComponent } from '../../../resource-ui/src/lib/resource-header.component';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-resource-card',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-resource-card',
+    template: `
     <mat-card class="card">
       <article class="card-article">
         <!-- Resource picture. -->
@@ -72,8 +73,8 @@ import { SkillChipModule } from './skill-chip.component';
         </mat-card-actions>
       </article>
     </mat-card>`,
-  styles: [
-    `
+    styles: [
+        `
         :host {
             display: flex;
             flex-direction: column;
@@ -131,7 +132,9 @@ import { SkillChipModule } from './skill-chip.component';
             margin: 10px 0;
         }
     `
-  ]
+    ],
+    standalone: true,
+    imports: [MatCard, NgIf, MatCardImage, ResourceTypeTriangleComponent, ResourceHeaderComponent, MatCardContent, NgFor, SkillChipComponent, MatCardActions, ResourceCardActionComponent]
 })
 export class ResourceCardComponent implements OnChanges {
   @Input() resource: Resource;
@@ -145,19 +148,19 @@ export class ResourceCardComponent implements OnChanges {
 }
 
 @NgModule({
-  declarations: [ResourceCardComponent],
-  exports: [ResourceCardComponent],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    ResourceCardActionModule,
-    ResourceHeaderModule,
-    ResourceTypeTriangleModule,
-    SkillChipModule,
-    TriangleModule
-  ]
+    exports: [ResourceCardComponent],
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        ResourceCardActionModule,
+        ResourceHeaderModule,
+        ResourceTypeTriangleModule,
+        SkillChipModule,
+        TriangleModule,
+        ResourceCardComponent
+    ]
 })
 export class ResourceCardModule {
 }
