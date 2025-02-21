@@ -1,4 +1,4 @@
-import { CommonModule, NgFor } from '@angular/common';
+import { AsyncPipe, CommonModule, JsonPipe, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,22 +19,23 @@ import { map } from 'rxjs/operators';
 import { BlockModule, BlockComponent } from '../block.component';
 import { extractHighlightableZones } from '../highlight/extract-highlightable-zones';
 import { HighlightZone } from '../highlight/highlight-zone';
+
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-block-group',
-    template: `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-block-group',
+  template: `
     <mc-block
-      *ngFor="let block of blocks$ | push"
+      *ngFor="let block of blocks$ | async"
       [block]="block"
-      [highlightableZones]="highlightableZones$ | push"
-      [highlightZone]="highlightZone$ | push"
+      [highlightableZones]="highlightableZones$ | async"
+      [highlightZone]="highlightZone$ | async"
       (highlightZoneChange)="onHighlightZone($event)"
       [class.is-row]="desktopLayout === 'row'"
       class="block"
     ></mc-block>
   `,
-    styles: [
-        `
+  styles: [
+    `
       /* Make sure blocks respect the flex allowed space.
        * Cf. block-ui-e2e > frame.spec.ts > should apply horizontal scroll if code overflows
        * We shouldn't apply it on column display otherwise the height would be 0. */
@@ -49,14 +50,10 @@ import { HighlightZone } from '../highlight/highlight-zone';
         flex: 1 1 0;
       }
     `,
-    ],
-    providers: [RxState],
-    standalone: true,
-    imports: [
-        NgFor,
-        BlockComponent,
-        PushPipe,
-    ],
+  ],
+  providers: [RxState],
+  standalone: true,
+  imports: [NgFor, BlockComponent, AsyncPipe],
 })
 export class BlockGroupComponent {
   @Input() set blockGroup(blockGroup: BlockGroup) {
@@ -81,25 +78,25 @@ export class BlockGroupComponent {
             ? createMarkdownBlock({
                 tokens: parseMarkdown(block.text),
               })
-            : block
-        )
-      )
-    )
+            : block,
+        ),
+      ),
+    ),
   );
   highlightZone$ = this._state.select('highlightZone');
   highlightableZones$ = this.blocks$.pipe(
-    select(map((blocks) => extractHighlightableZones(blocks)))
+    select(map((blocks) => extractHighlightableZones(blocks))),
   );
 
   constructor(
     private _state: RxState<{
       blockGroup: BlockGroup;
       highlightZone: HighlightZone;
-    }>
+    }>,
   ) {
     /* Reset highlight zone when blocks change. */
     this._state.connect(
-      this.blocks$.pipe(map(() => ({ highlightZone: null })))
+      this.blocks$.pipe(map(() => ({ highlightZone: null }))),
     );
   }
 
@@ -107,9 +104,3 @@ export class BlockGroupComponent {
     this._state.set({ highlightZone });
   }
 }
-
-@NgModule({
-    exports: [BlockGroupComponent],
-    imports: [BlockModule, CommonModule, PushPipe, BlockGroupComponent],
-})
-export class BlockGroupModule {}
