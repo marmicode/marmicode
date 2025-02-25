@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -9,20 +10,53 @@ import {
 } from '@marmicode/block-core';
 import { firstValueFrom } from 'rxjs';
 import {
+  createHighlightSection,
   createHighlightZone,
   HighlightZone,
 } from '../highlight/highlight-zone';
 import { BlockGroupComponent } from './block-group.component';
 
 describe('FrameComponent', () => {
+  it(`should set '<mc-block>' highlightZone`, async () => {
+    const { triggerHighlightZoneChange, getFirstBlock } =
+      await renderComponentWithTextBlock();
+
+    await triggerHighlightZoneChange(
+      createHighlightZone({
+        color: 'red',
+        sections: [
+          createHighlightSection({
+            start: 1,
+            end: 2,
+          }),
+        ],
+      }),
+    );
+
+    expect(getFirstBlock().properties.highlightZone).toEqual({
+      color: 'red',
+      sections: [
+        createHighlightSection({
+          start: 1,
+          end: 2,
+        }),
+      ],
+    });
+  });
+
   it('should not reset highlight zone if same block group reference is set', async () => {
     const { component, triggerHighlightZoneChange } =
       await renderComponentWithTextBlock();
 
-    triggerHighlightZoneChange(
+    await triggerHighlightZoneChange(
       createHighlightZone({
         color: 'red',
-        sections: [],
+        sections: [
+          createHighlightSection({
+            start: 1,
+            end: 2,
+          }),
+        ],
       }),
     );
 
@@ -33,10 +67,15 @@ describe('FrameComponent', () => {
     const { component, setBlockGroup, triggerHighlightZoneChange } =
       await renderComponentWithTextBlock();
 
-    triggerHighlightZoneChange(
+    await triggerHighlightZoneChange(
       createHighlightZone({
         color: 'red',
-        sections: [],
+        sections: [
+          createHighlightSection({
+            start: 1,
+            end: 2,
+          }),
+        ],
       }),
     );
 
@@ -45,32 +84,6 @@ describe('FrameComponent', () => {
     );
 
     expect(await firstValueFrom(component.highlightZone$)).toBe(null);
-  });
-
-  it.skip(`should set '<mc-block>' highlightZone without ZoneJS`, async () => {
-    const { triggerHighlightZoneChange, getFirstBlock } =
-      await renderComponentWithTextBlock();
-
-    await flushRequestAnimationFrame();
-
-    triggerHighlightZoneChange(
-      createHighlightZone({
-        color: 'red',
-        sections: [],
-      }),
-    );
-
-    await flushRequestAnimationFrame();
-
-    /* Check that the highlight zone is passed to the child component
-     * without having to manually trigger the change detection.
-     * We have to make sure of this because this is a custom event
-     * and it runs outside of zones (and we are preparing our way out
-     * of zones so we don't want to run it in zones). */
-    expect(getFirstBlock().properties.highlightZone).toEqual({
-      color: 'red',
-      sections: [],
-    });
   });
 });
 
@@ -94,6 +107,13 @@ async function renderComponent() {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     },
   });
+
+  TestBed.overrideComponent(BlockGroupComponent, {
+    set: {
+      imports: [AsyncPipe],
+    },
+  });
+
   const fixture = TestBed.createComponent(BlockGroupComponent);
   await fixture.whenStable();
 
@@ -107,15 +127,10 @@ async function renderComponent() {
       fixture.componentRef.setInput('blockGroup', blockGroup);
       await fixture.whenStable();
     },
-    triggerHighlightZoneChange(highlightZone: HighlightZone) {
+    async triggerHighlightZoneChange(highlightZone: HighlightZone) {
       getFirstBlock().triggerEventHandler('highlightZoneChange', highlightZone);
+      await fixture.whenStable();
     },
     getFirstBlock,
   };
-}
-
-/* Wait for `requestAnimationFrame` to be triggered.
- * This is clearly not the best way but it works. */
-export async function flushRequestAnimationFrame() {
-  await new Promise(requestAnimationFrame);
 }

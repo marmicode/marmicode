@@ -1,10 +1,9 @@
-import { AsyncPipe, CommonModule, JsonPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   HostBinding,
   Input,
-  NgModule,
 } from '@angular/core';
 import {
   BlockGroup,
@@ -14,9 +13,8 @@ import {
 } from '@marmicode/block-core';
 import { RxState } from '@rx-angular/state';
 import { select } from '@rx-angular/state/selections';
-import { PushPipe } from '@rx-angular/template/push';
 import { map } from 'rxjs/operators';
-import { BlockModule, BlockComponent } from '../block.component';
+import { BlockComponent } from '../block.component';
 import { extractHighlightableZones } from '../highlight/extract-highlightable-zones';
 import { HighlightZone } from '../highlight/highlight-zone';
 
@@ -24,15 +22,16 @@ import { HighlightZone } from '../highlight/highlight-zone';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-block-group',
   template: `
-    <mc-block
-      *ngFor="let block of blocks$ | async"
-      [block]="block"
-      [highlightableZones]="highlightableZones$ | async"
-      [highlightZone]="highlightZone$ | async"
-      (highlightZoneChange)="onHighlightZone($event)"
-      [class.is-row]="desktopLayout === 'row'"
-      class="block"
-    ></mc-block>
+    @for (block of blocks$ | async; track block.id) {
+      <mc-block
+        [block]="block"
+        [highlightableZones]="highlightableZones$ | async"
+        [highlightZone]="highlightZone$ | async"
+        (highlightZoneChange)="onHighlightZone($event)"
+        [class.is-row]="desktopLayout === 'row'"
+        class="block"
+      ></mc-block>
+    }
   `,
   styles: [
     `
@@ -53,7 +52,7 @@ import { HighlightZone } from '../highlight/highlight-zone';
   ],
   providers: [RxState],
   standalone: true,
-  imports: [NgFor, BlockComponent, AsyncPipe],
+  imports: [BlockComponent, AsyncPipe],
 })
 export class BlockGroupComponent {
   @Input() set blockGroup(blockGroup: BlockGroup) {
