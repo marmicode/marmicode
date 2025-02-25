@@ -1,20 +1,25 @@
+import { NgComponentOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { rxComputed } from '@jscutlery/rx-computed';
 import { MarkdownToken, MarkdownTokens } from '@marmicode/block-core';
-import { NgFor } from '@angular/common';
-import { MarkdownTokenComponent } from './markdown-token.component';
+import { markdownTokensLoader } from './markdown-tokens-loader';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-markdown-list-item',
-    template: `<li>
-    <mc-markdown-token
-      *ngFor="let item of token.tokens"
-      [token]="item"
-    ></mc-markdown-token>
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-markdown-list-item',
+  template: `<li>
+    <ng-container
+      *ngComponentOutlet="
+        MarkdownTokensComponent();
+        inputs: { tokens: token.tokens }
+      "
+    ></ng-container>
   </li>`,
-    standalone: true,
-    imports: [NgFor, MarkdownTokenComponent],
+  standalone: true,
+  imports: [NgComponentOutlet],
 })
 export class MarkdownListItemComponent {
   @Input() token: MarkdownTokens.ListItem & { tokens?: MarkdownToken[] };
+
+  MarkdownTokensComponent = rxComputed(markdownTokensLoader);
 }

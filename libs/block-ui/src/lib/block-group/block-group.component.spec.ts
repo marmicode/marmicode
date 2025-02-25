@@ -2,7 +2,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { describe, expect, it } from '@jest/globals';
-import { screen } from '@testing-library/angular';
 import {
   BlockGroup,
   createBlockGroup,

@@ -1,16 +1,25 @@
+import { NgComponentOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { rxComputed } from '@jscutlery/rx-computed';
 import { MarkdownToken, MarkdownTokens } from '@marmicode/block-core';
-import { MarkdownTokensComponent } from './markdown-tokens.component';
+import { markdownTokensLoader } from './markdown-tokens-loader';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-markdown-emphasis',
-    template: `<em>
-    <mc-markdown-tokens [tokens]="token.tokens"></mc-markdown-tokens>
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-markdown-emphasis',
+  template: `<em>
+    <ng-container
+      *ngComponentOutlet="
+        MarkdownTokensComponent();
+        inputs: { tokens: token.tokens }
+      "
+    />
   </em>`,
-    standalone: true,
-    imports: [MarkdownTokensComponent],
+  standalone: true,
+  imports: [NgComponentOutlet],
 })
 export class MarkdownEmphasisComponent {
   @Input() token: MarkdownTokens.Em & { tokens?: MarkdownToken[] };
+
+  MarkdownTokensComponent = rxComputed(markdownTokensLoader);
 }

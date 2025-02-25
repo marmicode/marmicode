@@ -25,9 +25,9 @@ import { MarkdownStrongComponent } from './markdown-strong.component';
 import { MarkdownTextComponent } from './markdown-text.component';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-markdown-token',
-    template: `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-markdown-token',
+  template: `
     <ng-container [ngSwitch]="type">
       <!-- Code. -->
       <mc-markdown-blockquote
@@ -104,23 +104,23 @@ import { MarkdownTextComponent } from './markdown-text.component';
       ></mc-markdown-text>
     </ng-container>
   `,
-    standalone: true,
-    imports: [
-        NgSwitch,
-        NgSwitchCase,
-        MarkdownBlockquoteComponent,
-        MarkdownCodeComponent,
-        MarkdownCodespanComponent,
-        MarkdownEmphasisComponent,
-        MarkdownHeadingComponent,
-        MarkdownLinkComponent,
-        MarkdownListComponent,
-        MarkdownListItemComponent,
-        MarkdownMediaComponent,
-        MarkdownParagraphComponent,
-        MarkdownStrongComponent,
-        MarkdownTextComponent,
-    ],
+  standalone: true,
+  imports: [
+    NgSwitch,
+    NgSwitchCase,
+    MarkdownBlockquoteComponent,
+    MarkdownCodeComponent,
+    MarkdownCodespanComponent,
+    MarkdownEmphasisComponent,
+    MarkdownHeadingComponent,
+    MarkdownLinkComponent,
+    MarkdownListComponent,
+    MarkdownListItemComponent,
+    MarkdownMediaComponent,
+    MarkdownParagraphComponent,
+    MarkdownStrongComponent,
+    MarkdownTextComponent,
+  ],
 })
 export class MarkdownTokenComponent implements OnChanges {
   @Input() token: MarkdownToken;

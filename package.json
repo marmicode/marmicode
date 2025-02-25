@@ -55,6 +55,7 @@
     "@fortawesome/free-brands-svg-icons": "6.2.1",
     "@fortawesome/free-solid-svg-icons": "6.2.1",
     "@jscutlery/operators": "0.2.2",
+    "@jscutlery/rx-computed": "0.6.7",
     "@ngneat/until-destroy": "^7.3.2",
     "@ngrx/effects": "18.1.1",
     "@ngrx/entity": "18.1.1",
