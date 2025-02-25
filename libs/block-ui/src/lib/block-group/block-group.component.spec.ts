@@ -29,8 +29,8 @@ describe('FrameComponent', () => {
     expect(await firstValueFrom(component.highlightZone$)).not.toBe(null);
   });
 
-  it.skip('should reset highlight zone on block group change', async () => {
-    const { component, triggerHighlightZoneChange } =
+  it('should reset highlight zone on block group change', async () => {
+    const { component, setBlockGroup, triggerHighlightZoneChange } =
       await renderComponentWithTextBlock();
 
     triggerHighlightZoneChange(
@@ -38,6 +38,10 @@ describe('FrameComponent', () => {
         color: 'red',
         sections: [],
       }),
+    );
+
+    await setBlockGroup(
+      createBlockGroup({ blocks: [createTextBlock({ text: 'Bye' })] }),
     );
 
     expect(await firstValueFrom(component.highlightZone$)).toBe(null);
@@ -77,7 +81,7 @@ async function renderComponentWithTextBlock() {
     createBlockGroup({ blocks: [createTextBlock({ text: 'Hello' })] }),
   );
 
-  return utils;
+  return { setBlockGroup, ...utils };
 }
 
 async function renderComponent() {
