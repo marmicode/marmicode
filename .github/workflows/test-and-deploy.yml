@@ -16,10 +16,10 @@ jobs:
     name: 📦 Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/Cypress
@@ -29,7 +29,7 @@ jobs:
           key: cache-${{ github.run_id }}
           restore-keys: |
             cache
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
       - uses: oven-sh/setup-bun@v1
@@ -43,7 +43,7 @@ jobs:
           bunx nx affected --target=prerender --configuration next
           --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: dist
@@ -52,10 +52,10 @@ jobs:
     name: ✅ Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/Cypress
@@ -65,7 +65,7 @@ jobs:
           key: cache-${{ github.run_id }}
           restore-keys: |
             cache
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
       - uses: oven-sh/setup-bun@v1
@@ -77,7 +77,7 @@ jobs:
       - name: Test
         run: bunx nx affected --target=test --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: dist
@@ -86,10 +86,10 @@ jobs:
     name: 🚨 Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/Cypress
@@ -99,7 +99,7 @@ jobs:
           key: cache-${{ github.run_id }}
           restore-keys: |
             cache
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
       - uses: oven-sh/setup-bun@v1
@@ -111,7 +111,7 @@ jobs:
       - name: Lint
         run: bunx nx affected --target=lint --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: dist
@@ -120,10 +120,10 @@ jobs:
     name: ✅ Component Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/Cypress
@@ -133,7 +133,7 @@ jobs:
           key: cache-${{ github.run_id }}
           restore-keys: |
             cache
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
       - uses: oven-sh/setup-bun@v1
@@ -147,7 +147,7 @@ jobs:
           bunx nx affected --target=component-test --parallel 1
           --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: dist
@@ -156,10 +156,10 @@ jobs:
     name: ✅ E2E
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/Cypress
@@ -169,7 +169,7 @@ jobs:
           key: cache-${{ github.run_id }}
           restore-keys: |
             cache
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
       - uses: oven-sh/setup-bun@v1
@@ -183,7 +183,7 @@ jobs:
           bunx nx affected --target=e2e --parallel 1
           --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: dist
@@ -192,10 +192,10 @@ jobs:
     name: 🔄 Check Sync
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/Cypress
@@ -205,7 +205,7 @@ jobs:
           key: cache-${{ github.run_id }}
           restore-keys: |
             cache
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
       - uses: oven-sh/setup-bun@v1
@@ -218,7 +218,7 @@ jobs:
           bunx nx affected --target=sync --base=deployed/marmicode-next && git
           diff --exit-code
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: dist
@@ -235,10 +235,10 @@ jobs:
           - 3
           - 4
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/Cypress
@@ -248,7 +248,7 @@ jobs:
           key: cache-${{ github.run_id }}
           restore-keys: |
             cache
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
       - uses: oven-sh/setup-bun@v1
@@ -259,7 +259,7 @@ jobs:
       - name: Start Nx Agent ${{ matrix.agent }}
         run: bunx nx-cloud start-agent
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: dist
@@ -275,10 +275,10 @@ jobs:
       - component-test
       - e2e
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/Cypress
@@ -288,7 +288,7 @@ jobs:
           key: cache-${{ github.run_id }}
           restore-keys: |
             cache
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
       - uses: oven-sh/setup-bun@v1
@@ -310,7 +310,7 @@ jobs:
           PERCY_TOKEN=$PERCY_FULL_TOKEN bunx percy build:wait --project
           d53cdff6/marmicode --fail-on-changes
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: dist
@@ -329,10 +329,10 @@ jobs:
       name: Marmicode Next
       url: https://marmicode-next.web.app
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/Cypress
@@ -342,7 +342,7 @@ jobs:
           key: cache-${{ github.run_id }}
           restore-keys: |
             cache
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
       - uses: oven-sh/setup-bun@v1
@@ -365,7 +365,7 @@ jobs:
           force: true
           tags: true
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: dist
@@ -385,10 +385,10 @@ jobs:
       name: Marmicode
       url: https://marmicode.io
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/Cypress
@@ -398,7 +398,7 @@ jobs:
           key: cache-${{ github.run_id }}
           restore-keys: |
             cache
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
       - uses: oven-sh/setup-bun@v1
@@ -421,7 +421,7 @@ jobs:
           force: true
           tags: true
       - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: dist
