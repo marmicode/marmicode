@@ -29,7 +29,7 @@ import { MarkdownTextComponent } from './markdown-text.component';
   selector: 'mc-markdown-token',
   template: `
     <ng-container [ngSwitch]="type">
-      <!-- Code. -->
+      <!-- Blockquote. -->
       <mc-markdown-blockquote
         *ngSwitchCase="TokenType.Blockquote"
         [token]="tokenAsAny"
