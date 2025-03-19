@@ -1,3 +1,4 @@
+import { NgFor, NgIf } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -28,7 +29,7 @@ describe('BlogPostComponent', () => {
         summary: 'Life is too short...',
         title: 'Title',
         text: 'content',
-      })
+      }),
     );
 
     expect(getTwitterShareButtonsProperties()).toEqual(
@@ -37,7 +38,7 @@ describe('BlogPostComponent', () => {
           twitter: 'yjaaidi',
         }),
         title: 'Title',
-      })
+      }),
     );
 
     expect(getOtherShareButtonsProperties()).toEqual(
@@ -46,16 +47,18 @@ describe('BlogPostComponent', () => {
           twitter: 'yjaaidi',
         }),
         title: 'Title',
-      })
+      }),
     );
   });
 
   function createComponent() {
-    TestBed.configureTestingModule({
-      declarations: [BlogPostComponent],
-      imports: [PushPipe],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    TestBed.overrideComponent(BlogPostComponent, {
+      set: {
+        imports: [PushPipe, NgIf, NgFor],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      },
     });
+
     const fixture = TestBed.createComponent(BlogPostComponent);
 
     return {

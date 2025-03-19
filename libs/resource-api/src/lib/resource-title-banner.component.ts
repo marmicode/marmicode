@@ -6,13 +6,12 @@ import {
   NgModule,
 } from '@angular/core';
 import { ResourceType } from '@marmicode/resource-core';
-import { ResourceBadgeModule } from '@marmicode/resource-ui';
-import { ResourceBadgeComponent } from '../../../resource-ui/src/lib/resource-badge.component';
+import { ResourceBadgeComponent } from '@marmicode/resource-ui';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-resource-title-banner',
-    template: `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-resource-title-banner',
+  template: `
     <svg preserveAspectRatio="none" viewBox="0 0 100 100">
       <polygon style="fill: #561f4b" points="0,0 20,0 10,100 0,100" />
     </svg>
@@ -32,8 +31,8 @@ import { ResourceBadgeComponent } from '../../../resource-ui/src/lib/resource-ba
       {{ subtitle }}
     </h2>
   `,
-    styles: [
-        `
+  styles: [
+    `
       :host {
         display: block;
         position: relative;
@@ -82,9 +81,9 @@ import { ResourceBadgeComponent } from '../../../resource-ui/src/lib/resource-ba
         width: 100%;
       }
     `,
-    ],
-    standalone: true,
-    imports: [ResourceBadgeComponent, NgIf],
+  ],
+  standalone: true,
+  imports: [ResourceBadgeComponent, NgIf],
 })
 export class ResourceTitleBannerComponent {
   @Input() resourceType: ResourceType;
@@ -93,7 +92,7 @@ export class ResourceTitleBannerComponent {
 }
 
 @NgModule({
-    exports: [ResourceTitleBannerComponent],
-    imports: [CommonModule, ResourceBadgeModule, ResourceTitleBannerComponent],
+  exports: [ResourceTitleBannerComponent],
+  imports: [CommonModule, ResourceBadgeComponent, ResourceTitleBannerComponent],
 })
 export class ResourceTitleBannerModule {}
