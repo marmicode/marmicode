@@ -1,15 +1,19 @@
-import { CommonModule, ViewportScroller, NgIf } from '@angular/common';
+import { CommonModule, NgIf, ViewportScroller } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   HostListener,
-  NgModule
+  NgModule,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BlockGroupModule } from '@marmicode/block-api';
-import { ResourceTitleBannerModule } from '@marmicode/resource-api';
+import { BlockGroupComponent } from '@marmicode/block-ui';
+import { ResourceTitleBannerComponent } from '@marmicode/resource-api';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
-import { createBasicPageInfo, PageModule } from '@marmicode/shared-ui';
+import {
+  createBasicPageInfo,
+  PageComponent,
+  PageModule,
+} from '@marmicode/shared-ui';
 import { RxState } from '@rx-angular/state';
 import { select } from '@rx-angular/state/selections';
 import { PushPipe } from '@rx-angular/template/push';
@@ -21,21 +25,24 @@ import {
   pluck,
   switchMap,
   tap,
-  withLatestFrom
+  withLatestFrom,
 } from 'rxjs/operators';
 import { getRelativeFrameRoute } from './get-relative-frame-route';
 import { Frame, Recipe, RecipeRepository } from './recipe-repository.service';
-import { RecipeTimelineModule, RecipeTimelineComponent } from './recipe-timeline.component';
-import { SlideAnimationModule, SlideAnimationDirective } from './slide-animation.directive';
-import { SwipeModule, SwipeDirective } from './swipe.directive';
-import { PageComponent } from '../../../shared-ui/src/lib/page.component';
-import { ResourceTitleBannerComponent } from '../../../resource-api/src/lib/resource-title-banner.component';
-import { BlockGroupComponent } from '../../../block-ui/src/lib/block-group/block-group.component';
+import {
+  RecipeTimelineComponent,
+  RecipeTimelineModule,
+} from './recipe-timeline.component';
+import {
+  SlideAnimationDirective,
+  SlideAnimationModule,
+} from './slide-animation.directive';
+import { SwipeDirective, SwipeModule } from './swipe.directive';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-recipe-frame-page',
-    template: `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-recipe-frame-page',
+  template: `
     <mc-page [info]="pageInfo$ | push" class="page">
       <!-- Swipable content. -->
       <div
@@ -71,8 +78,8 @@ import { BlockGroupComponent } from '../../../block-ui/src/lib/block-group/block
       ></mc-recipe-timeline>
     </mc-page>
   `,
-    styles: [
-        `
+  styles: [
+    `
       .page {
         display: flex;
         flex-direction: column;
@@ -90,19 +97,19 @@ import { BlockGroupComponent } from '../../../block-ui/src/lib/block-group/block
         flex: 1 1 auto;
       }
     `,
-    ],
-    providers: [RxState],
-    standalone: true,
-    imports: [
-        PageComponent,
-        SlideAnimationDirective,
-        SwipeDirective,
-        NgIf,
-        ResourceTitleBannerComponent,
-        BlockGroupComponent,
-        RecipeTimelineComponent,
-        PushPipe,
-    ],
+  ],
+  providers: [RxState],
+  standalone: true,
+  imports: [
+    PageComponent,
+    SlideAnimationDirective,
+    SwipeDirective,
+    NgIf,
+    ResourceTitleBannerComponent,
+    BlockGroupComponent,
+    RecipeTimelineComponent,
+    PushPipe,
+  ],
 })
 export class RecipeFramePageComponent {
   recipe$ = this._state.select('recipe');
@@ -112,17 +119,17 @@ export class RecipeFramePageComponent {
   currentFrame$ = combineLatest([this.frames$, this.currentFrameSlug$]).pipe(
     map(
       ([frames, currentFrameSlug]) =>
-        frames.find((frame) => frame.slug === currentFrameSlug) ?? frames[0]
-    )
+        frames.find((frame) => frame.slug === currentFrameSlug) ?? frames[0],
+    ),
   );
   currentFrameIndex$ = combineLatest([this.frames$, this.currentFrame$]).pipe(
-    map(([frames, currentFrame]) => frames.indexOf(currentFrame))
+    map(([frames, currentFrame]) => frames.indexOf(currentFrame)),
   );
   currentFrameTitle$ = this.currentFrame$.pipe(
     withLatestFrom(this.currentFrameIndex$),
     select(
-      map(([frame, index]) => (frame ? `${index} - ${frame.title}` : null))
-    )
+      map(([frame, index]) => (frame ? `${index} - ${frame.title}` : null)),
+    ),
   );
   nextFrameRoute$ = combineLatest([this.frames$, this.currentFrameIndex$]).pipe(
     select(
@@ -130,9 +137,9 @@ export class RecipeFramePageComponent {
         this._getFrameRouteByIndex({
           frames,
           index: currentFrameIndex + 1,
-        })
-      )
-    )
+        }),
+      ),
+    ),
   );
   previousFrameRoute$ = combineLatest([
     this.frames$,
@@ -140,9 +147,9 @@ export class RecipeFramePageComponent {
   ]).pipe(
     select(
       map(([frames, currentFrameIndex]) =>
-        this._getFrameRouteByIndex({ frames, index: currentFrameIndex - 1 })
-      )
-    )
+        this._getFrameRouteByIndex({ frames, index: currentFrameIndex - 1 }),
+      ),
+    ),
   );
   type$ = this.recipe$.pipe(select(pluck('type')));
   title$ = this.recipe$.pipe(select(pluck('title')));
@@ -151,8 +158,8 @@ export class RecipeFramePageComponent {
     map(([title, currentFrameTitle]) =>
       createBasicPageInfo({
         title: `${title} > ${currentFrameTitle}`,
-      })
-    )
+      }),
+    ),
   );
 
   swipeLeft$ = new Subject<void>();
@@ -168,7 +175,7 @@ export class RecipeFramePageComponent {
     private _route: ActivatedRoute,
     private _router: Router,
     private _state: RxState<{ recipe: Recipe; currentFrameSlug: string }>,
-    private _viewportScroller: ViewportScroller
+    private _viewportScroller: ViewportScroller,
   ) {
     /**
      * Load recipe.
@@ -178,8 +185,8 @@ export class RecipeFramePageComponent {
       this._route.paramMap.pipe(
         map((params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)),
         distinctUntilChanged(),
-        switchMap((recipeSlug) => this._recipeRepository.getRecipe(recipeSlug))
-      )
+        switchMap((recipeSlug) => this._recipeRepository.getRecipe(recipeSlug)),
+      ),
     );
 
     /**
@@ -188,8 +195,8 @@ export class RecipeFramePageComponent {
     this._state.connect(
       'currentFrameSlug',
       this._route.paramMap.pipe(
-        map((params) => params.get(recipeDetailRouterHelper.FRAME_SLUG_PARAM))
-      )
+        map((params) => params.get(recipeDetailRouterHelper.FRAME_SLUG_PARAM)),
+      ),
     );
 
     /**
@@ -198,9 +205,9 @@ export class RecipeFramePageComponent {
     this._state.hold(
       merge(
         this._key$.pipe(filter((key) => key === 'ArrowRight')),
-        this.swipeLeft$
+        this.swipeLeft$,
       ).pipe(withLatestFrom(this.nextFrameRoute$)),
-      ([_, route]) => this._tryNavigateToRelativeRoute(route)
+      ([_, route]) => this._tryNavigateToRelativeRoute(route),
     );
 
     /**
@@ -209,9 +216,9 @@ export class RecipeFramePageComponent {
     this._state.hold(
       merge(
         this._key$.pipe(filter((key) => key === 'ArrowLeft')),
-        this.swipeRight$
+        this.swipeRight$,
       ).pipe(withLatestFrom(this.previousFrameRoute$)),
-      ([_, route]) => this._tryNavigateToRelativeRoute(route)
+      ([_, route]) => this._tryNavigateToRelativeRoute(route),
     );
 
     /**
@@ -252,17 +259,15 @@ export class RecipeFramePageComponent {
 }
 
 @NgModule({
-    exports: [RecipeFramePageComponent],
-    imports: [
-        CommonModule,
-        PageModule,
-        BlockGroupModule,
-        PushPipe,
-        RecipeTimelineModule,
-        ResourceTitleBannerModule,
-        SlideAnimationModule,
-        SwipeModule,
-        RecipeFramePageComponent,
-    ],
+  exports: [RecipeFramePageComponent],
+  imports: [
+    CommonModule,
+    PageModule,
+    PushPipe,
+    RecipeTimelineModule,
+    SlideAnimationModule,
+    SwipeModule,
+    RecipeFramePageComponent,
+  ],
 })
 export class RecipeFramePageModule {}
