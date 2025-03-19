@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Input, NgModule } from '@angular/co
 import { MatButtonModule, MatButton } from '@angular/material/button';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { LinkModule } from '@marmicode/shared-ui';
-import { LinkComponent } from '../../../shared-ui/src/lib/link.component';
+import { LinkComponent } from '@marmicode/shared-ui';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,

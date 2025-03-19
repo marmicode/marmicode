@@ -12,7 +12,7 @@ import {
   getResourceTypeText,
 } from '@marmicode/resource-core';
 import { TriangleModule } from '@marmicode/shared-ui';
-import { TriangleComponent } from '../../../shared-ui/src/lib/triangle.component';
+import { TriangleComponent } from '@marmicode/shared-ui';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,

@@ -14,7 +14,7 @@ import {
   RecipeRepository,
   RecipeRepositoryModule,
 } from './recipe-repository.service';
-import { PageComponent } from '../../../shared-ui/src/lib/page.component';
+import { PageComponent } from '@marmicode/shared-ui';
 
 @UntilDestroy()
 @Component({

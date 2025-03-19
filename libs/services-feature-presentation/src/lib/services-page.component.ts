@@ -8,7 +8,7 @@ import { CoachModule, CoachComponent } from './coach.component';
 import { SectionModule, SectionComponent } from './section.component';
 import { SlantModule, SlantComponent } from './slant.component';
 import { WorkshopsButtonModule, WorkshopsButtonComponent } from './workshops-button.component';
-import { PageComponent } from '../../../shared-ui/src/lib/page.component';
+import { PageComponent } from '@marmicode/shared-ui';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,

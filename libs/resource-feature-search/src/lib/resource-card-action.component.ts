@@ -18,7 +18,7 @@ import {
 } from '@marmicode/shared-router-helpers';
 import { LinkModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
-import { LinkComponent } from '../../../shared-ui/src/lib/link.component';
+import { LinkComponent } from '@marmicode/shared-ui';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,

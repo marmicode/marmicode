@@ -24,9 +24,9 @@ import {
   ResourceRepositoryModule,
 } from './resource-repository.service';
 import { ResourceSearchFormModule, ResourceSearchFormComponent } from './resource-search-form.component';
-import { PageComponent } from '../../../shared-ui/src/lib/page.component';
-import { LoadingComponent } from '../../../shared-ui/src/lib/loading.component';
-import { ErrorComponent } from '../../../shared-ui/src/lib/error.component';
+import { PageComponent } from '@marmicode/shared-ui';
+import { LoadingComponent } from '@marmicode/shared-ui';
+import { ErrorComponent } from '@marmicode/shared-ui';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
