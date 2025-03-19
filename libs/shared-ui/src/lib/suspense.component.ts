@@ -14,12 +14,12 @@ import { ErrorModule, ErrorComponent } from './error.component';
 import { LoadingModule, LoadingComponent } from './loading.component';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-suspense',
-    template: `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-suspense',
+  template: `
     <ng-container *ngIf="suspense$ | push as suspense">
       <!-- Data. -->
-      <ng-container *ngIf="suspense.value as data">
+      <ng-container *ngIf="suspense.hasValue && suspense.value as data">
         <ng-container
           *ngTemplateOutlet="dataTemplate; context: { $implicit: data }"
         >
@@ -35,7 +35,7 @@ import { LoadingModule, LoadingComponent } from './loading.component';
       </ng-container>
 
       <!-- Error. -->
-      <ng-container *ngIf="suspense.error as error">
+      <ng-container *ngIf="suspense.hasError && suspense.error as error">
         <ng-container
           *ngTemplateOutlet="
             errorTemplate ?? defaultErrorTemplate;
@@ -56,14 +56,8 @@ import { LoadingModule, LoadingComponent } from './loading.component';
       <mc-loading></mc-loading>
     </ng-template>
   `,
-    standalone: true,
-    imports: [
-        NgIf,
-        NgTemplateOutlet,
-        ErrorComponent,
-        LoadingComponent,
-        PushPipe,
-    ],
+  standalone: true,
+  imports: [NgIf, NgTemplateOutlet, ErrorComponent, LoadingComponent, PushPipe],
 })
 export class SuspenseComponent<T = unknown> {
   @ContentChild('data') dataTemplate: TemplateRef<{ $implicit: T }>;
@@ -78,7 +72,13 @@ export class SuspenseComponent<T = unknown> {
 }
 
 @NgModule({
-    exports: [SuspenseComponent],
-    imports: [CommonModule, LoadingModule, ErrorModule, PushPipe, SuspenseComponent],
+  exports: [SuspenseComponent],
+  imports: [
+    CommonModule,
+    LoadingModule,
+    ErrorModule,
+    PushPipe,
+    SuspenseComponent,
+  ],
 })
 export class SuspenseModule {}

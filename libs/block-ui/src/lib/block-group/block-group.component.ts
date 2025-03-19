@@ -22,7 +22,7 @@ import { HighlightZone } from '../highlight/highlight-zone';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-block-group',
   template: `
-    @for (block of blocks$ | async; track block.id) {
+    @for (block of blocks$ | async; track block) {
       <mc-block
         [block]="block"
         [highlightableZones]="highlightableZones$ | async"
