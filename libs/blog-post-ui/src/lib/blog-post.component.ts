@@ -8,7 +8,7 @@ import {
 import { MatDivider, MatDividerModule } from '@angular/material/divider';
 import { BlockGroupComponent } from '@marmicode/block-api';
 import {
-  ResourceTitleBannerModule,
+  ResourceTitleBannerComponent,
   ResourceType,
 } from '@marmicode/resource-api';
 import { ResourceHeaderComponent } from '@marmicode/resource-ui';
@@ -158,7 +158,7 @@ export class BlogPostComponent {
     MatDividerModule,
     PushPipe,
     ResourceHeaderComponent,
-    ResourceTitleBannerModule,
+    ResourceTitleBannerComponent,
     ShareButtonsModule,
     FollowButtonModule,
     BlogPostComponent,
