@@ -198,27 +198,6 @@ jobs:
 
       - *upload-dist-on-failure
 
-  nx-agents-stop:
-    name: 🤖 Agents Stop
-    runs-on: ubuntu-latest
-    needs:
-      - build
-      - lint
-      - test
-      - component-test
-      - e2e
-    steps:
-      - *checkout
-      - *cache
-      - *setup-node
-      - *install-bun
-      - *bun-install
-
-      - name: Stop Nx Agents
-        run: bunx nx-cloud stop-all-agents
-
-      - *upload-dist-on-failure
-
   check-snapshots:
     name: 📸 Check Snapshots
     runs-on: ubuntu-latest
