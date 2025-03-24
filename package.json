@@ -121,7 +121,7 @@
     "@types/express": "^5.0.0",
     "@types/jest": "29.5.14",
     "@types/js-yaml": "^4.0.0",
-    "@types/marked": "^1.2.1",
+    "@types/marked": "^6.0.0",
     "@types/node": "22.10.2",
     "@types/prismjs": "^1.16.1",
     "@types/webpack": "5.28.5",
