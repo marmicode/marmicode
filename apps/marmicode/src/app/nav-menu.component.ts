@@ -16,12 +16,15 @@ import {
   servicesRouterHelper,
 } from '@marmicode/shared-router-helpers';
 import { BehaviorSubject } from 'rxjs';
-import { NavMenuItemModule, NavMenuItemComponent } from './nav-menu-item.component';
+import {
+  NavMenuItemModule,
+  NavMenuItemComponent,
+} from './nav-menu-item.component';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-nav-menu',
-    template: `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-nav-menu',
+  template: `
     <!-- Toolbar links. -->
     <div class="mc-flex-row">
       <mat-nav-list class="mc-flex-row mc-hide mc-show-gt-sm" role="menu">
@@ -64,8 +67,8 @@ import { NavMenuItemModule, NavMenuItemComponent } from './nav-menu-item.compone
       </mat-nav-list>
     </div>
   `,
-    styles: [
-        `
+  styles: [
+    `
       .vertical-menu {
         display: flex;
         flex-direction: column;
@@ -83,25 +86,28 @@ import { NavMenuItemModule, NavMenuItemComponent } from './nav-menu-item.compone
         margin: auto;
       }
     `,
-    ],
-    animations: [
-        trigger('showHide', [
-            state('void', style({
-                height: 0,
-            })),
-            transition('void <=> *', animate('.1s')),
-        ]),
-    ],
-    standalone: true,
-    imports: [
-        MatNavList,
-        NgFor,
-        NavMenuItemComponent,
-        MatButton,
-        MatIcon,
-        NgIf,
-        PushPipe,
-    ],
+  ],
+  animations: [
+    trigger('showHide', [
+      state(
+        'void',
+        style({
+          height: 0,
+        }),
+      ),
+      transition('void <=> *', animate('.1s')),
+    ]),
+  ],
+  standalone: true,
+  imports: [
+    MatNavList,
+    NgFor,
+    NavMenuItemComponent,
+    MatButton,
+    MatIcon,
+    NgIf,
+    PushPipe,
+  ],
 })
 export class NavMenuComponent {
   isMenuDisplayed$ = new BehaviorSubject<boolean>(false);
@@ -113,14 +119,24 @@ export class NavMenuComponent {
       route: resourceSearchRouterHelper.learnEverything(),
     },
     {
-      icon: 'email',
-      title: 'Newsletter',
-      url: 'https://gmail.us3.list-manage.com/subscribe?u=915d6ba70c9c00912ba326214&id=71255f30c7',
+      icon: 'live_tv',
+      title: 'Course',
+      url: 'https://courses.marmicode.io/courses/pragmatic-angular-testing',
     },
     {
       icon: 'school',
       title: 'Workshops',
       url: 'https://marmicode.eventbrite.com',
+    },
+    {
+      icon: 'books',
+      title: 'Cookbook',
+      url: 'https://cookbook.marmicode.io',
+    },
+    {
+      icon: 'email',
+      title: 'Newsletter',
+      url: 'https://gmail.us3.list-manage.com/subscribe?u=915d6ba70c9c00912ba326214&id=71255f30c7',
     },
     {
       icon: 'ev_station',
@@ -144,15 +160,15 @@ export class NavMenuComponent {
 }
 
 @NgModule({
-    exports: [NavMenuComponent],
-    imports: [
-        CommonModule,
-        MatListModule,
-        MatIconModule,
-        MatButtonModule,
-        NavMenuItemModule,
-        PushPipe,
-        NavMenuComponent,
-    ],
+  exports: [NavMenuComponent],
+  imports: [
+    CommonModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
+    NavMenuItemModule,
+    PushPipe,
+    NavMenuComponent,
+  ],
 })
 export class NavMenuModule {}
