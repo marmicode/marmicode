@@ -15,13 +15,13 @@ import { RxState } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-resource-badge',
-  template: ` <span [style.backgroundColor]="badgeColor$ | push" class="badge">
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-resource-badge',
+    template: ` <span [style.backgroundColor]="badgeColor$ | push" class="badge">
     {{ badgeText$ | push }}
   </span>`,
-  styles: [
-    `
+    styles: [
+        `
       .badge {
         display: inline-block;
         position: relative;
@@ -34,8 +34,10 @@ import { map } from 'rxjs/operators';
         text-transform: uppercase;
       }
     `,
-  ],
-  providers: [RxState],
+    ],
+    providers: [RxState],
+    standalone: true,
+    imports: [PushPipe],
 })
 export class ResourceBadgeComponent {
   @Input() set resourceType(resourceType: ResourceType) {
@@ -54,8 +56,7 @@ export class ResourceBadgeComponent {
 }
 
 @NgModule({
-  declarations: [ResourceBadgeComponent],
-  exports: [ResourceBadgeComponent],
-  imports: [CommonModule, PushPipe],
+    exports: [ResourceBadgeComponent],
+    imports: [CommonModule, PushPipe, ResourceBadgeComponent],
 })
 export class ResourceBadgeModule {}

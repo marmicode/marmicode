@@ -16,7 +16,7 @@ import {
 } from 'rxjs/operators';
 import { ResourceSearchStateModule } from './+state/resource-search-state.module';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
-import { SearchInputModule } from './search-input.component';
+import { SearchInputModule, SearchInputComponent } from './search-input.component';
 import { Skill } from './skill';
 import {
   SkillRepository,
@@ -24,24 +24,26 @@ import {
 } from './skill-repository.service';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-resource-search-form',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-resource-search-form',
+    template: `
     <mc-search-input
       [control]="skillControl"
       [options]="filteredSkills$ | push"
       placeholder="Choose a skill..."
     ></mc-search-input>
   `,
-  styles: [
-    `
+    styles: [
+        `
       :host {
         flex: 1;
         max-width: 400px;
       }
     `,
-  ],
-  providers: [RxState],
+    ],
+    providers: [RxState],
+    standalone: true,
+    imports: [SearchInputComponent, PushPipe],
 })
 export class ResourceSearchFormComponent {
   skillControl = new FormControl<Skill | string>(null);
@@ -135,14 +137,14 @@ export class ResourceSearchFormComponent {
 }
 
 @NgModule({
-  declarations: [ResourceSearchFormComponent],
-  exports: [ResourceSearchFormComponent],
-  imports: [
-    CommonModule,
-    PushPipe,
-    ResourceSearchStateModule,
-    SkillRepositoryModule,
-    SearchInputModule,
-  ],
+    exports: [ResourceSearchFormComponent],
+    imports: [
+        CommonModule,
+        PushPipe,
+        ResourceSearchStateModule,
+        SkillRepositoryModule,
+        SearchInputModule,
+        ResourceSearchFormComponent,
+    ],
 })
 export class ResourceSearchFormModule {}

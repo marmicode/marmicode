@@ -4,21 +4,16 @@
   "projectType": "library",
   "sourceRoot": "libs/block-ui/src",
   "prefix": "marmicode",
+  "tags": ["scope:block", "type:ui"],
+  "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/block-ui/src/**/*.ts",
-          "libs/block-ui/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/block-ui/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/block-ui/jest.config.ts"
       },
       "outputs": ["{workspaceRoot}/coverage/libs/block-ui"]
     },
@@ -74,7 +69,5 @@
     "upload-percy-snapshots": {
       "command": "tools/upload-percy-snapshots.sh libs/block-ui"
     }
-  },
-  "generators": {},
-  "tags": ["scope:block", "type:ui"]
+  }
 }

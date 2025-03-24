@@ -1,10 +1,9 @@
 import { BlockType, createBlockGroup } from '@marmicode/block-core';
-import { BlockGroupComponent, BlockGroupModule } from './block-group.component';
+import { BlockGroupComponent } from './block-group.component';
 
 describe(BlockGroupComponent.name, () => {
   it('should apply horizontal scroll if code overflows', () => {
     cy.mount(BlockGroupComponent, {
-      imports: [BlockGroupModule],
       componentProperties: {
         blockGroup: createBlockGroup({
           blocks: [
@@ -58,7 +57,6 @@ blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla
 
   function mountWithHighlightLinks() {
     cy.mount(BlockGroupComponent, {
-      imports: [BlockGroupModule],
       componentProperties: {
         blockGroup: createBlockGroup({
           blocks: [

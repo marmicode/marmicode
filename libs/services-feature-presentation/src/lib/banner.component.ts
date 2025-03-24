@@ -8,20 +8,20 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { getAssetUri } from '@marmicode/shared-utils';
-import { WorkshopsButtonModule } from './workshops-button.component';
+import { WorkshopsButtonModule, WorkshopsButtonComponent } from './workshops-button.component';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-banner',
-  template: ` <header class="banner-header">
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-banner',
+    template: ` <header class="banner-header">
     <h1 class="title">
       We Help You <span class="underline">Cook&nbsp;Better&nbsp;Apps</span>
     </h1>
     <p>with delicious ingredients</p>
     <mc-workshops-button></mc-workshops-button>
   </header>`,
-  styles: [
-    `
+    styles: [
+        `
       :host {
         display: block;
         height: 600px;
@@ -62,7 +62,9 @@ import { WorkshopsButtonModule } from './workshops-button.component';
         text-decoration-color: #5db3ad;
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [WorkshopsButtonComponent],
 })
 export class BannerComponent {
   @HostBinding('style.backgroundImage')
@@ -70,13 +72,13 @@ export class BannerComponent {
 }
 
 @NgModule({
-  declarations: [BannerComponent],
-  exports: [BannerComponent],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    WorkshopsButtonModule,
-  ],
+    exports: [BannerComponent],
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        WorkshopsButtonModule,
+        BannerComponent,
+    ],
 })
 export class BannerModule {}

@@ -31,7 +31,6 @@
 /coverage
 /libpeerconnection.log
 npm-debug.log
-yarn-error.log
 testem.log
 /typings
 
@@ -40,17 +39,10 @@ testem.log
 Thumbs.db
 
 /.firebase
-/scully.log
-
-/.yarn-cache
-
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
 
 __percy_snapshots__
 
 apps/marmicode/marmicode-routes.txt
+
+.nx
+nx-cloud.env

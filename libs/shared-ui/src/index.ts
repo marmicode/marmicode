@@ -9,5 +9,5 @@ export {
   PageComponent,
   PageModule,
 } from './lib/page.component';
-export { SuspenseModule } from './lib/suspense.component';
+export { SuspenseComponent, SuspenseModule } from './lib/suspense.component';
 export { TriangleComponent, TriangleModule } from './lib/triangle.component';

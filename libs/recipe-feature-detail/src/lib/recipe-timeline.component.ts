@@ -1,13 +1,13 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   NgModule
 } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule, MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { RouterModule, RouterLink } from '@angular/router';
 import { RxState } from '@rx-angular/state';
 import { select, selectSlice } from '@rx-angular/state/selections';
 import { PushPipe } from '@rx-angular/template/push';
@@ -16,9 +16,9 @@ import { getRelativeFrameRoute } from './get-relative-frame-route';
 import { Frame } from './recipe-repository.service';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-recipe-timeline',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-recipe-timeline',
+    template: `
     <div class="line-container">
       <hr class="line" />
       <hr [style.width.%]="progress$ | push" class="past-line" />
@@ -44,8 +44,8 @@ import { Frame } from './recipe-repository.service';
       </button>
     </a>
   `,
-  styles: [
-    `
+    styles: [
+        `
       :host {
         display: flex;
         position: relative;
@@ -88,11 +88,18 @@ import { Frame } from './recipe-repository.service';
         color: var(--marmicode-accent-color);
       }
     `,
-  ],
-  /* I hate scss but we are using it here for computing bullet dimensions
-   * and positioning. */
-  styleUrls: ['./recipe-timeline.component.scss'],
-  providers: [RxState],
+    ],
+    /* I hate scss but we are using it here for computing bullet dimensions
+     * and positioning. */
+    styleUrls: ['./recipe-timeline.component.scss'],
+    providers: [RxState],
+    standalone: true,
+    imports: [
+        NgFor,
+        RouterLink,
+        MatButton,
+        PushPipe,
+    ],
 })
 export class RecipeTimelineComponent {
   @Input() set frames(frames: Frame[]) {
@@ -155,14 +162,14 @@ export class RecipeTimelineComponent {
 }
 
 @NgModule({
-  declarations: [RecipeTimelineComponent],
-  exports: [RecipeTimelineComponent],
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatButtonModule,
-    MatIconModule,
-    PushPipe,
-  ],
+    exports: [RecipeTimelineComponent],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatButtonModule,
+        MatIconModule,
+        PushPipe,
+        RecipeTimelineComponent,
+    ],
 })
 export class RecipeTimelineModule {}

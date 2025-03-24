@@ -23,13 +23,13 @@ import { AuthorSocialInfo } from './author-social-info';
 export type Size = 'normal' | 'small';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  /* @hack we would like to apply the theme locally using ShadowDOM but
-   * fontawesome adds some global CSS dynamically so we can't use ShadowDOM.*/
-  encapsulation: ViewEncapsulation.None,
-  selector: 'mc-share-buttons',
-  styleUrls: ['./share-buttons.component.scss'],
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    /* @hack we would like to apply the theme locally using ShadowDOM but
+     * fontawesome adds some global CSS dynamically so we can't use ShadowDOM.*/
+    encapsulation: ViewEncapsulation.None,
+    selector: 'mc-share-buttons',
+    styleUrls: ['./share-buttons.component.scss'],
+    template: `
     <share-buttons
       [autoSetMeta]="true"
       [description]="twitterTitle$ | push"
@@ -46,7 +46,9 @@ export type Size = 'normal' | 'small';
       [style.display]="'inline-block'"
     ></share-buttons>
   `,
-  providers: [RxState],
+    providers: [RxState],
+    standalone: true,
+    imports: [NgxShareButtonsModule, PushPipe],
 })
 export class ShareButtonsComponent {
   @Input() set author(author: AuthorSocialInfo) {
@@ -124,8 +126,7 @@ export class ShareButtonsComponent {
 }
 
 @NgModule({
-  declarations: [ShareButtonsComponent],
-  exports: [ShareButtonsComponent],
-  imports: [CommonModule, NgxShareButtonsModule, PushPipe],
+    exports: [ShareButtonsComponent],
+    imports: [CommonModule, NgxShareButtonsModule, PushPipe, ShareButtonsComponent],
 })
 export class ShareButtonsModule {}

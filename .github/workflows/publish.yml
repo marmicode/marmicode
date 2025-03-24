@@ -25,7 +25,6 @@ jobs:
           path: |
             ~/.cache/Cypress
             .angular
-            .yarn/unplugged
             libs/*/.angular
             node_modules/.cache
           key: cache-${{ github.run_id }}
@@ -33,10 +32,12 @@ jobs:
             cache
       - uses: actions/setup-node@v3
         with:
-          cache: yarn
           node-version: '18'
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Install
-        run: yarn install --immutable
+        run: bun install
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

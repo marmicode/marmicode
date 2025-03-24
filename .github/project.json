@@ -1,0 +1,11 @@
+{
+  "name": "github-config",
+  "targets": {
+    "sync": {
+      "cache": true,
+      "command": "ts-node -P tools/build-github-workflows/tsconfig.lib.json tools/build-github-workflows/src/main.ts",
+      "inputs": ["{projectRoot}/src/**/*", "{workspaceRoot}/tools/build-github-workflows/**/*"],
+      "outputs": ["{projectRoot}/workflows/**/*"]
+    }
+  }
+}

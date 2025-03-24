@@ -9,22 +9,23 @@ describe('ShareButtonsComponent', () => {
   it('should construct title', () => {
     const { getOtherShareButtonsDescription } = createComponent();
     expect(getOtherShareButtonsDescription()).toEqual(
-      'Component Testing by Younes Jaaidi on @Marmicode'
+      'Component Testing by Younes Jaaidi on @Marmicode',
     );
   });
 
   it('should construct twitter title', () => {
     const { getTwitterShareButtonsDescription } = createComponent();
     expect(getTwitterShareButtonsDescription()).toEqual(
-      'Component Testing by @yjaaidi on @Marmicode'
+      'Component Testing by @yjaaidi on @Marmicode',
     );
   });
 
   function createComponent() {
-    TestBed.configureTestingModule({
-      declarations: [ShareButtonsComponent],
-      imports: [PushPipe],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    TestBed.overrideComponent(ShareButtonsComponent, {
+      set: {
+        imports: [PushPipe],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      },
     });
 
     const fixture = TestBed.createComponent(ShareButtonsComponent);

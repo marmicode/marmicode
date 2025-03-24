@@ -5,12 +5,12 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { getAssetUri, shareReplayWithRefCount } from '@marmicode/shared-utils';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DottyLineModule } from './dotty-line.component';
+import { DottyLineModule, DottyLineComponent } from './dotty-line.component';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-coach',
-  template: `<section
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-coach',
+    template: `<section
     [style.marginTop.px]="pictureRadius$ | push"
     [style.paddingTop.px]="(isDesktop$ | push) ? 30 : 10"
     class="coach-container"
@@ -51,8 +51,8 @@ import { DottyLineModule } from './dotty-line.component';
     </p>
     <p>His favorite trick? Adding features by removing code.</p>
   </section>`,
-  styles: [
-    `
+    styles: [
+        `
       .coach-container {
         padding-left: 20px;
         padding-right: 20px;
@@ -90,7 +90,9 @@ import { DottyLineModule } from './dotty-line.component';
         }
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [DottyLineComponent, PushPipe],
 })
 export class CoachComponent {
   coachPictureUri = getAssetUri('coach.webp');
@@ -118,8 +120,7 @@ export class CoachComponent {
 }
 
 @NgModule({
-  declarations: [CoachComponent],
-  exports: [CoachComponent],
-  imports: [CommonModule, DottyLineModule, PushPipe],
+    exports: [CoachComponent],
+    imports: [CommonModule, DottyLineModule, PushPipe, CoachComponent],
 })
 export class CoachModule {}

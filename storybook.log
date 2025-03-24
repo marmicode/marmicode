@@ -1,0 +1,28 @@
+npm error code ERESOLVE
+npm error ERESOLVE could not resolve
+npm error
+npm error While resolving: @angular/fire@18.0.1
+npm error Found: firebase-tools@8.20.0
+npm error node_modules/firebase-tools
+npm error   dev firebase-tools@"^8.5.0" from the root project
+npm error
+npm error Could not resolve dependency:
+npm error peerOptional firebase-tools@"^13.0.0" from @angular/fire@18.0.1
+npm error node_modules/@angular/fire
+npm error   @angular/fire@"18.0.1" from the root project
+npm error
+npm error Conflicting peer dependency: firebase-tools@13.25.0
+npm error node_modules/firebase-tools
+npm error   peerOptional firebase-tools@"^13.0.0" from @angular/fire@18.0.1
+npm error   node_modules/@angular/fire
+npm error     @angular/fire@"18.0.1" from the root project
+npm error
+npm error Fix the upstream dependency conflict, or retry
+npm error this command with --force or --legacy-peer-deps
+npm error to accept an incorrect (and potentially broken) dependency resolution.
+npm error
+npm error
+npm error For a full report see:
+npm error /Users/y/.npm/_logs/2024-11-19T20_32_58_434Z-eresolve-report.txt
+
+npm error A complete log of this run can be found in: /Users/y/.npm/_logs/2024-11-19T20_32_58_434Z-debug-0.log
