@@ -1,8 +1,11 @@
 {
+  "name": "marmicode",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "generators": {},
   "sourceRoot": "apps/marmicode/src",
   "prefix": "mc",
+  "tags": ["scope:app"],
+  "generators": {},
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -72,9 +75,12 @@
           "core-js/modules/es.symbol.iterator",
           "core-js/modules/web.dom-collections.for-each",
           "core-js/modules/web.dom-collections.iterator",
+          "fast-json-stable-stringify",
           "firebase/app",
           "graphql-tag",
+          "marked",
           "panzoom",
+          "prismjs",
           "raf",
           "xlsx",
           "zen-observable"
@@ -154,14 +160,14 @@
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "browserTarget": "marmicode:build"
+        "buildTarget": "marmicode:build"
       },
       "configurations": {
         "development": {
-          "browserTarget": "marmicode:build:development"
+          "buildTarget": "marmicode:build:development"
         },
         "production": {
-          "browserTarget": "marmicode:build:production"
+          "buildTarget": "marmicode:build:production"
         }
       },
       "defaultConfiguration": "development"
@@ -169,25 +175,18 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "marmicode:build"
+        "buildTarget": "marmicode:build"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "apps/marmicode/src/**/*.ts",
-          "apps/marmicode/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "apps/marmicode/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/marmicode/jest.config.ts"
       },
-      "outputs": ["coverage/apps/marmicode"]
+      "outputs": ["{workspaceRoot}/coverage/apps/marmicode"]
     },
     "server": {
       "executor": "@angular-devkit/build-angular:server",
@@ -207,7 +206,8 @@
             }
           ],
           "sourceMap": false,
-          "optimization": true
+          "optimization": true,
+          "buildOptimizer": true
         },
         "production": {
           "outputHashing": "media",
@@ -218,12 +218,36 @@
             }
           ],
           "sourceMap": false,
-          "optimization": true
+          "optimization": true,
+          "buildOptimizer": true
         }
+      },
+      "development": {},
+      "next": {
+        "outputHashing": "media",
+        "fileReplacements": [
+          {
+            "replace": "apps/marmicode/src/environments/environment.ts",
+            "with": "apps/marmicode/src/environments/environment.next.ts"
+          }
+        ],
+        "sourceMap": false,
+        "optimization": true
+      },
+      "production": {
+        "outputHashing": "media",
+        "fileReplacements": [
+          {
+            "replace": "apps/marmicode/src/environments/environment.ts",
+            "with": "apps/marmicode/src/environments/environment.prod.ts"
+          }
+        ],
+        "sourceMap": false,
+        "optimization": true
       }
     },
     "serve-ssr": {
-      "executor": "@nguniversal/builders:ssr-dev-server",
+      "executor": "@angular-devkit/build-angular:ssr-dev-server",
       "options": {},
       "configurations": {
         "development": {
@@ -238,10 +262,10 @@
       "defaultConfiguration": "development"
     },
     "prerender": {
-      "executor": "@nguniversal/builders:prerender",
+      "executor": "@angular-devkit/build-angular:prerender",
       "options": {
-        "guessRoutes": false,
-        "routesFile": "dist/marmicode-routes.txt"
+        "routesFile": "apps/marmicode/marmicode-routes.txt",
+        "discoverRoutes": false
       },
       "configurations": {
         "production": {
@@ -253,7 +277,10 @@
           "serverTarget": "marmicode:server:next"
         }
       },
-      "dependsOn": ["update-routes"]
+      "inputs": ["{projectRoot}/marmicode-routes.txt"],
+      "outputs": ["{workspaceRoot}/dist/apps/marmicode"],
+      "dependsOn": ["update-routes"],
+      "defaultConfiguration": "production"
     },
     "deploy": {
       "executor": "nx:run-commands",
@@ -281,10 +308,11 @@
       "options": {
         "commands": [
           "mkdir -p dist",
-          "ts-node --esm --skipProject apps/marmicode/update-routes.ts -o dist/marmicode-routes.txt"
-        ]
-      }
+          "ts-node --skipProject apps/marmicode/update-routes.ts -o apps/marmicode/marmicode-routes.txt"
+        ],
+        "parallel": false
+      },
+      "outputs": ["{projectRoot}/marmicode-routes.txt"]
     }
-  },
-  "tags": ["scope:app"]
+  }
 }

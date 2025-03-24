@@ -1,26 +1,21 @@
 {
+  "name": "resource-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/resource-api/src",
   "prefix": "mc",
+  "tags": ["scope:resource", "type:api", "name:resource-api"],
+  "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/resource-api/src/**/*.ts",
-          "libs/resource-api/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/resource-api/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/resource-api/jest.config.ts"
       },
-      "outputs": ["coverage/libs/resource-api"]
+      "outputs": ["{workspaceRoot}/coverage/libs/resource-api"]
     }
-  },
-  "generators": {},
-  "tags": ["scope:resource", "type:api", "name:resource-api"]
+  }
 }

@@ -1,5 +1,5 @@
 import { Skill } from './skill';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,9 +7,9 @@ import {
   NgModule,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule, MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatButtonModule, MatIconButton } from '@angular/material/button';
+import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { RxState } from '@rx-angular/state';
 import { Observable, Subject } from 'rxjs';
 import {
@@ -18,17 +18,18 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
+import { MatOption } from '@angular/material/core';
 
 export interface SearchInputOption {
   label: string;
 }
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-search-input',
-  providers: [RxState],
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-search-input',
+    providers: [RxState],
+    template: `
     <div class="search-input-container">
       <!-- Search icon. -->
       <mat-icon class="search-icon" color="primary">search</mat-icon>
@@ -59,8 +60,8 @@ export interface SearchInputOption {
       </mat-option>
     </mat-autocomplete>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .search-input-container {
         display: flex;
         flex-direction: row;
@@ -109,7 +110,19 @@ export interface SearchInputOption {
         right: 0;
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [
+        MatIcon,
+        ReactiveFormsModule,
+        MatAutocompleteTrigger,
+        NgIf,
+        MatIconButton,
+        MatAutocomplete,
+        NgFor,
+        MatOption,
+        PushPipe,
+    ],
 })
 export class SearchInputComponent {
   @Input() set control(control: FormControl<Skill | string>) {
@@ -145,15 +158,15 @@ export class SearchInputComponent {
 }
 
 @NgModule({
-  declarations: [SearchInputComponent],
-  exports: [SearchInputComponent],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatAutocompleteModule,
-    MatIconModule,
-    PushModule,
-    ReactiveFormsModule,
-  ],
+    exports: [SearchInputComponent],
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatAutocompleteModule,
+        MatIconModule,
+        PushPipe,
+        ReactiveFormsModule,
+        SearchInputComponent,
+    ],
 })
 export class SearchInputModule {}

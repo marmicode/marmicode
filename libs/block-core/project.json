@@ -1,26 +1,21 @@
 {
+  "name": "block-core",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/block-core/src",
   "prefix": "marmicode",
+  "tags": ["scope:block", "type:core"],
+  "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/block-core/src/**/*.ts",
-          "libs/block-core/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/block-core/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/block-core/jest.config.ts"
       },
-      "outputs": ["coverage/libs/block-core"]
+      "outputs": ["{workspaceRoot}/coverage/libs/block-core"]
     }
-  },
-  "generators": {},
-  "tags": ["scope:block", "type:core"]
+  }
 }

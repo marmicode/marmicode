@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { makeStateKey, TransferState } from '@angular/platform-browser';
+import { makeStateKey, TransferState } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Platform } from './platform.service';
 

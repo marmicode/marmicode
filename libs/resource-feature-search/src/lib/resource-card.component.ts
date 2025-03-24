@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,18 +7,30 @@ import {
   OnChanges,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardImage,
+  MatCardModule,
+} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import {
   getResourceTypeActionText,
   getResourceTypeColor,
 } from '@marmicode/resource-core';
-import { ResourceHeaderModule } from '@marmicode/resource-ui';
+import { ResourceHeaderComponent } from '@marmicode/resource-ui';
 import { TriangleModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
-import { ResourceCardActionModule } from './resource-card-action.component';
-import { ResourceTypeTriangleModule } from './resource-type-triangle.component';
-import { SkillChipModule } from './skill-chip.component';
+import {
+  ResourceCardActionComponent,
+  ResourceCardActionModule,
+} from './resource-card-action.component';
+import {
+  ResourceTypeTriangleComponent,
+  ResourceTypeTriangleModule,
+} from './resource-type-triangle.component';
+import { SkillChipComponent, SkillChipModule } from './skill-chip.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,7 +53,10 @@ import { SkillChipModule } from './skill-chip.component';
       ></mc-resource-type-triangle>
 
       <!-- Resource header with author info. -->
-      <mc-resource-header [resourceInfo]="resource"></mc-resource-header>
+      <mc-resource-header
+        [resourceInfo]="resource"
+        class="header"
+      ></mc-resource-header>
 
       <mat-card-content class="card-content">
         <p>
@@ -108,9 +123,14 @@ import { SkillChipModule } from './skill-chip.component';
 
       .picture {
         height: 200px;
+        width: 100%;
         object-fit: cover;
         /* Cancel useless margin as the resource header has a padding. */
         margin-bottom: 0;
+      }
+
+      .header {
+        padding: 10px 16px;
       }
 
       .list-title {
@@ -132,8 +152,22 @@ import { SkillChipModule } from './skill-chip.component';
         display: flex;
         flex-direction: row;
         justify-content: center;
+        margin: 10px 0;
       }
     `,
+  ],
+  standalone: true,
+  imports: [
+    MatCard,
+    NgIf,
+    MatCardImage,
+    ResourceTypeTriangleComponent,
+    ResourceHeaderComponent,
+    MatCardContent,
+    NgFor,
+    SkillChipComponent,
+    MatCardActions,
+    ResourceCardActionComponent,
   ],
 })
 export class ResourceCardComponent implements OnChanges {
@@ -148,7 +182,6 @@ export class ResourceCardComponent implements OnChanges {
 }
 
 @NgModule({
-  declarations: [ResourceCardComponent],
   exports: [ResourceCardComponent],
   imports: [
     CommonModule,
@@ -156,10 +189,10 @@ export class ResourceCardComponent implements OnChanges {
     MatCardModule,
     MatIconModule,
     ResourceCardActionModule,
-    ResourceHeaderModule,
     ResourceTypeTriangleModule,
     SkillChipModule,
     TriangleModule,
+    ResourceCardComponent,
   ],
 })
 export class ResourceCardModule {}

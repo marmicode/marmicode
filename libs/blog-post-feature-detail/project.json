@@ -1,25 +1,20 @@
 {
+  "name": "blog-post-feature-detail",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/blog-post-feature-detail/src",
   "prefix": "mc",
+  "tags": ["scope:blog-post", "type:feature"],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/blog-post-feature-detail/src/**/*.ts",
-          "libs/blog-post-feature-detail/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/blog-post-feature-detail"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/blog-post-feature-detail"],
       "options": {
-        "jestConfig": "libs/blog-post-feature-detail/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blog-post-feature-detail/jest.config.ts"
       }
     }
-  },
-  "tags": ["scope:blog-post", "type:feature"]
+  }
 }

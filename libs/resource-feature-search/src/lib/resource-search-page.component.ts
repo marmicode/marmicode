@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
 import {
@@ -13,22 +13,25 @@ import {
   shareReplayWithRefCount,
   TransferStateHelper,
 } from '@marmicode/shared-utils';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { combineLatest, Observable, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { Resource } from './resource';
-import { ResourceCardModule } from './resource-card.component';
+import { ResourceCardModule, ResourceCardComponent } from './resource-card.component';
 import {
   ResourceRepository,
   ResourceRepositoryModule,
 } from './resource-repository.service';
-import { ResourceSearchFormModule } from './resource-search-form.component';
+import { ResourceSearchFormModule, ResourceSearchFormComponent } from './resource-search-form.component';
+import { PageComponent } from '@marmicode/shared-ui';
+import { LoadingComponent } from '@marmicode/shared-ui';
+import { ErrorComponent } from '@marmicode/shared-ui';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-resource-search-page',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-resource-search-page',
+    template: `
     <mc-page [info]="pageInfo">
       <div class="search-form-container">
         <mc-resource-search-form
@@ -55,8 +58,8 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
       </div>
     </mc-page>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .search-form-container,
       .spinner-error-container {
         display: flex;
@@ -81,7 +84,18 @@ import { ResourceSearchFormModule } from './resource-search-form.component';
         margin: 20px 5px;
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [
+        PageComponent,
+        ResourceSearchFormComponent,
+        NgIf,
+        LoadingComponent,
+        ErrorComponent,
+        NgFor,
+        ResourceCardComponent,
+        PushPipe,
+    ],
 })
 export class ResourceSearchPageComponent {
   pageInfo = createBasicPageInfo({
@@ -151,17 +165,17 @@ export class ResourceSearchPageComponent {
 }
 
 @NgModule({
-  declarations: [ResourceSearchPageComponent],
-  exports: [ResourceSearchPageComponent],
-  imports: [
-    CommonModule,
-    ErrorModule,
-    LoadingModule,
-    PageModule,
-    PushModule,
-    ResourceCardModule,
-    ResourceRepositoryModule,
-    ResourceSearchFormModule,
-  ],
+    exports: [ResourceSearchPageComponent],
+    imports: [
+        CommonModule,
+        ErrorModule,
+        LoadingModule,
+        PageModule,
+        PushPipe,
+        ResourceCardModule,
+        ResourceRepositoryModule,
+        ResourceSearchFormModule,
+        ResourceSearchPageComponent,
+    ],
 })
 export class ResourceSearchModule {}

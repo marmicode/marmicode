@@ -1,0 +1,50 @@
+name: 🚀 Publish
+
+# Avoid too many deploy while making multiple changes on Contentful.
+concurrency: ci-${{ github.ref }}
+
+on:
+  repository_dispatch:
+    types: [contentful-publish]
+  # Allow manual trigger.
+  workflow_dispatch: {}
+
+env:
+  NX_CLOUD_DISTRIBUTED_EXECUTION: false
+
+jobs:
+  deploy:
+    name: 🚀 Marmicode
+    runs-on: ubuntu-latest
+    environment:
+      name: Marmicode
+      url: https://marmicode.io
+    steps:
+      # Redeploy last successfully deployed version.
+      - uses: actions/checkout@v3
+        with:
+          ref: deployed/marmicode
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/Cypress
+            .angular
+            libs/*/.angular
+            node_modules/.cache
+          # Always update the cache.
+          # https://github.com/actions/cache/blob/main/tips-and-workarounds.md#update-a-cache
+          key: cache-${{ github.run_id }}
+          restore-keys: |
+            cache
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Install
+        run: bun install
+      - name: Deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: yarn nx run marmicode:deploy:production --skip-nx-cache

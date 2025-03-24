@@ -1,13 +1,13 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "types": ["cypress", "node"]
+    "sourceMap": false,
+    "types": ["cypress", "node"],
+    "outDir": "../../dist/out-tsc",
+    "allowJs": true
   },
-  "include": [],
+  "include": ["src/**/*.ts", "src/**/*.js", "cypress.config.js"],
   "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.e2e.json"
-    }
-  ]
+  "references": [],
+  "exclude": []
 }

@@ -1,7 +1,10 @@
+import { NgIf } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+
+import { describe, expect, it, jest } from '@jest/globals';
 import { TransferStateAdapter } from '@marmicode/shared-utils';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { EMPTY, Subject } from 'rxjs';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { ResourceRepository } from './resource-repository.service';
@@ -48,8 +51,6 @@ describe('ResourceSearchComponent', () => {
     const selectedSkillSlug$ = new Subject<string>();
 
     TestBed.configureTestingModule({
-      declarations: [ResourceSearchPageComponent],
-      imports: [PushModule],
       providers: [
         {
           provide: ResourceRepository,
@@ -66,7 +67,13 @@ describe('ResourceSearchComponent', () => {
           useValue: mockTransferStateAdapter,
         },
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    });
+
+    TestBed.overrideComponent(ResourceSearchPageComponent, {
+      set: {
+        imports: [NgIf, PushPipe],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      },
     });
 
     const fixture = TestBed.createComponent(ResourceSearchPageComponent);

@@ -1,26 +1,21 @@
 {
+  "name": "resource-feature-search",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/resource-feature-search/src",
   "prefix": "mc",
+  "tags": ["scope:resource", "type:feature"],
+  "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/resource-feature-search/src/**/*.ts",
-          "libs/resource-feature-search/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/resource-feature-search/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/resource-feature-search/jest.config.ts"
       },
-      "outputs": ["coverage/libs/resource-feature-search"]
+      "outputs": ["{workspaceRoot}/coverage/libs/resource-feature-search"]
     }
-  },
-  "generators": {},
-  "tags": ["scope:resource", "type:feature"]
+  }
 }

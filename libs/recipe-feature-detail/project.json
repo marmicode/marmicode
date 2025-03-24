@@ -1,26 +1,21 @@
 {
+  "name": "recipe-feature-detail",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/recipe-feature-detail/src",
   "prefix": "mc",
+  "tags": ["scope:recipe", "type:feature"],
+  "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/recipe-feature-detail/src/**/*.ts",
-          "libs/recipe-feature-detail/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/recipe-feature-detail/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/recipe-feature-detail/jest.config.ts"
       },
-      "outputs": ["coverage/libs/recipe-feature-detail"]
+      "outputs": ["{workspaceRoot}/coverage/libs/recipe-feature-detail"]
     }
-  },
-  "generators": {},
-  "tags": ["scope:recipe", "type:feature"]
+  }
 }

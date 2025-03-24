@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,9 +10,9 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { AuthorSocialInfo } from './author-social-info';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-follow-button',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-follow-button',
+    template: `
     <!-- Twitter follow button. -->
     <a
       *ngIf="author?.twitter"
@@ -21,12 +21,12 @@ import { AuthorSocialInfo } from './author-social-info';
     >
       <button class="button">
         <fa-icon [icon]="faTwitter" class="icon"></fa-icon>
-        <span>Follow @{{ author.twitter }}</span>
+        <span>Follow &#64;{{ author.twitter }}</span>
       </button>
     </a>
   `,
-  styles: [
-    `
+    styles: [
+        `
       a {
         text-decoration: none;
       }
@@ -61,7 +61,9 @@ import { AuthorSocialInfo } from './author-social-info';
         margin-right: 5px;
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [NgIf, FontAwesomeModule],
 })
 export class FollowButtonComponent {
   @Input() author: AuthorSocialInfo;
@@ -70,8 +72,7 @@ export class FollowButtonComponent {
 }
 
 @NgModule({
-  declarations: [FollowButtonComponent],
-  exports: [FollowButtonComponent],
-  imports: [CommonModule, FontAwesomeModule],
+    exports: [FollowButtonComponent],
+    imports: [CommonModule, FontAwesomeModule, FollowButtonComponent],
 })
 export class FollowButtonModule {}

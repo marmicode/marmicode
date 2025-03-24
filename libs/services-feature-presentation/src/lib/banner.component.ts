@@ -7,23 +7,21 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { WorkshopsButtonModule } from './workshops-button.component';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare let require: any;
+import { getAssetUri } from '@marmicode/shared-utils';
+import { WorkshopsButtonModule, WorkshopsButtonComponent } from './workshops-button.component';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-banner',
-  template: ` <header class="banner-header">
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-banner',
+    template: ` <header class="banner-header">
     <h1 class="title">
       We Help You <span class="underline">Cook&nbsp;Better&nbsp;Apps</span>
     </h1>
     <p>with delicious ingredients</p>
     <mc-workshops-button></mc-workshops-button>
   </header>`,
-  styles: [
-    `
+    styles: [
+        `
       :host {
         display: block;
         height: 600px;
@@ -64,24 +62,23 @@ declare let require: any;
         text-decoration-color: #5db3ad;
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [WorkshopsButtonComponent],
 })
 export class BannerComponent {
   @HostBinding('style.backgroundImage')
-  backgroundImage = `url(${
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    require('!!file-loader!./banner-wide-1024.webp').default
-  })`;
+  backgroundImage = `url(${getAssetUri('banner-wide-1024.webp')})`;
 }
 
 @NgModule({
-  declarations: [BannerComponent],
-  exports: [BannerComponent],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    WorkshopsButtonModule,
-  ],
+    exports: [BannerComponent],
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        WorkshopsButtonModule,
+        BannerComponent,
+    ],
 })
 export class BannerModule {}

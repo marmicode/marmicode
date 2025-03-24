@@ -1,22 +1,19 @@
 {
+  "name": "tools-build-github-workflows",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "tools/build-github-workflows/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": ["tools/build-github-workflows/**/*.ts"]
-      },
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/tools/build-github-workflows"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/tools/build-github-workflows"],
       "options": {
-        "jestConfig": "tools/build-github-workflows/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "tools/build-github-workflows/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

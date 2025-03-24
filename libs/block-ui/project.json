@@ -1,24 +1,21 @@
 {
+  "name": "block-ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/block-ui/src",
   "prefix": "marmicode",
+  "tags": ["scope:block", "type:ui"],
+  "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/block-ui/src/**/*.ts",
-          "libs/block-ui/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/block-ui/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/block-ui/jest.config.ts"
       },
-      "outputs": ["coverage/libs/block-ui"]
+      "outputs": ["{workspaceRoot}/coverage/libs/block-ui"]
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
@@ -48,8 +45,29 @@
           "quiet": true
         }
       }
+    },
+    "component-test-build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "does-not-exist",
+        "index": "does-not-exist",
+        "main": "does-not-exist",
+        "polyfills": "libs/block-ui/src/polyfills.ts",
+        "tsConfig": "libs/block-ui/tsconfig.lib.json"
+      }
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "libs/block-ui/cypress.config.js",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "block-ui:component-test-build",
+        "browser": "chrome"
+      }
+    },
+    "upload-percy-snapshots": {
+      "command": "tools/upload-percy-snapshots.sh libs/block-ui"
     }
-  },
-  "generators": {},
-  "tags": ["scope:block", "type:ui"]
+  }
 }

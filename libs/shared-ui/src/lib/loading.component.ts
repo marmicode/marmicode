@@ -1,34 +1,35 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { getAssetUri } from '@marmicode/shared-utils';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-loading',
-  template: `<img
-    [src]="loadingGifUrl"
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-loading',
+    template: `<img
+    [src]="loadingGifUri"
     class="loading-animation"
     alt="Loading"
   />`,
-  styles: [
-    `
-      :host {
-        max-width: 100%;
+    styles: [
+        `
+        :host {
+            max-width: 100%;
 
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-      }
-    `,
-  ],
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+    `
+    ],
+    standalone: true
 })
 export class LoadingComponent {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  loadingGifUrl = require('!!file-loader!./loading.gif').default;
+  loadingGifUri = getAssetUri('loading.gif');
 }
 
 @NgModule({
-  declarations: [LoadingComponent],
-  exports: [LoadingComponent],
-  imports: [CommonModule],
+    exports: [LoadingComponent],
+    imports: [CommonModule, LoadingComponent]
 })
-export class LoadingModule {}
+export class LoadingModule {
+}

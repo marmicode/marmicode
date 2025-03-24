@@ -5,11 +5,15 @@
     {
       "files": ["*.ts"],
       "extends": [
-        "plugin:@nrwl/nx/angular",
+        "plugin:@nx/angular",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "parserOptions": {
-        "project": ["libs/block-ui/tsconfig.*?.json", "libs/block-ui/.storybook/tsconfig.json"]
+        "project": [
+          "libs/block-ui/tsconfig.*?.json",
+          "libs/block-ui/.storybook/tsconfig.json",
+          "libs/block-ui/cypress/tsconfig.cy.json"
+        ]
       },
       "rules": {
         "@angular-eslint/directive-selector": [
@@ -32,7 +36,7 @@
     },
     {
       "files": ["*.html"],
-      "extends": ["plugin:@nrwl/nx/angular-template"],
+      "extends": ["plugin:@nx/angular-template"],
       "rules": {}
     }
   ]

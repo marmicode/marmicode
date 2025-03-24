@@ -8,7 +8,8 @@ import {
 import { WipService } from './wip.service';
 
 @Directive({
-  selector: '[mcWip]',
+    selector: '[mcWip]',
+    standalone: true,
 })
 export class WipDirective implements OnInit {
   constructor(
@@ -25,7 +26,8 @@ export class WipDirective implements OnInit {
 }
 
 @Directive({
-  selector: '[mcNotWip]',
+    selector: '[mcNotWip]',
+    standalone: true,
 })
 export class NotWipDirective implements OnInit {
   constructor(
@@ -42,7 +44,7 @@ export class NotWipDirective implements OnInit {
 }
 
 @NgModule({
-  declarations: [WipDirective, NotWipDirective],
-  exports: [WipDirective, NotWipDirective],
+    imports: [WipDirective, NotWipDirective],
+    exports: [WipDirective, NotWipDirective],
 })
 export class WipModule {}

@@ -1,13 +1,13 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   NgModule,
 } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { RouterModule } from '@angular/router';
+import { MatIconModule, MatIcon } from '@angular/material/icon';
+import { MatListModule, MatListItem } from '@angular/material/list';
+import { RouterModule, RouterLinkActive, RouterLink } from '@angular/router';
 
 export interface NavMenuEntry {
   icon: string;
@@ -17,9 +17,9 @@ export interface NavMenuEntry {
 }
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-nav-menu-item',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-nav-menu-item',
+    template: `
     <!-- Url. -->
     <a
       *ngIf="entry.url"
@@ -40,47 +40,66 @@ export interface NavMenuEntry {
       role="menuitem"
       routerLinkActive="active"
     >
-      <ng-container *ngTemplateOutlet="linkContent"></ng-container>
+        <ng-container *ngTemplateOutlet="linkContent"></ng-container>
     </a>
 
     <ng-template #linkContent>
-      <mat-icon
-        *ngIf="showIcon"
-        [class.mc-primary-text]="color === 'primary'"
-        class="icon"
+      <div class="mc-flex-row">
+        <mat-icon
+          *ngIf="showIcon"
+          [class.primary]="color === 'primary'"
+          class="icon"
         >{{ entry.icon }}</mat-icon
-      >
-      <span [class.mc-primary-text]="color === 'primary'">{{
-        entry.title
-      }}</span>
+        >
+        <span class="content" [class.primary]="color === 'primary'">{{
+          entry.title
+          }}</span>
+      </div>
     </ng-template>
   `,
-  styles: [
-    `
-      a[mat-list-item] {
-        color: white;
-      }
+    styles: [
+        `
+        :host {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .content {
+            color: white;
+        }
+        
+        .content.primary {
+            color: var(--marmicode-primary-color);
+        }
 
-      a.active {
-        color: var(--marmicode-accent-color);
-        cursor: default;
-      }
+        a.active .content {
+            color: var(--marmicode-accent-color);
+            cursor: default;
+        }
 
-      .icon {
-        margin-right: 10px;
-      }
+        .icon {
+            margin-right: 10px;
+        }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [
+        NgIf,
+        MatListItem,
+        NgTemplateOutlet,
+        RouterLinkActive,
+        RouterLink,
+        MatIcon,
+    ],
 })
 export class NavMenuItemComponent {
-  @Input() color: 'primary' | null;
-  @Input() entry: NavMenuEntry;
+  @Input() color?: 'primary';
+  @Input() entry?: NavMenuEntry;
   @Input() showIcon = true;
 }
 
 @NgModule({
-  declarations: [NavMenuItemComponent],
-  exports: [NavMenuItemComponent],
-  imports: [CommonModule, MatListModule, MatIconModule, RouterModule],
+    exports: [NavMenuItemComponent],
+    imports: [CommonModule, MatListModule, MatIconModule, RouterModule, NavMenuItemComponent],
 })
 export class NavMenuItemModule {}

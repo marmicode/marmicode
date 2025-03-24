@@ -1,19 +1,16 @@
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { shareReplayWithRefCount } from '@marmicode/shared-utils';
+import { getAssetUri, shareReplayWithRefCount } from '@marmicode/shared-utils';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DottyLineModule } from './dotty-line.component';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare let require: any;
+import { DottyLineModule, DottyLineComponent } from './dotty-line.component';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-coach',
-  template: `<section
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-coach',
+    template: `<section
     [style.marginTop.px]="pictureRadius$ | push"
     [style.paddingTop.px]="(isDesktop$ | push) ? 30 : 10"
     class="coach-container"
@@ -54,8 +51,8 @@ declare let require: any;
     </p>
     <p>His favorite trick? Adding features by removing code.</p>
   </section>`,
-  styles: [
-    `
+    styles: [
+        `
       .coach-container {
         padding-left: 20px;
         padding-right: 20px;
@@ -93,11 +90,12 @@ declare let require: any;
         }
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [DottyLineComponent, PushPipe],
 })
 export class CoachComponent {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  coachPictureUri = require('!!file-loader!./coach.webp').default;
+  coachPictureUri = getAssetUri('coach.webp');
   name = 'Younes Jaaidi';
   isDesktop$ = this._breakpointObserver.observe('(min-width: 960px)').pipe(
     map(({ matches }) => matches),
@@ -122,8 +120,7 @@ export class CoachComponent {
 }
 
 @NgModule({
-  declarations: [CoachComponent],
-  exports: [CoachComponent],
-  imports: [CommonModule, DottyLineModule, PushModule],
+    exports: [CoachComponent],
+    imports: [CommonModule, DottyLineModule, PushPipe, CoachComponent],
 })
 export class CoachModule {}

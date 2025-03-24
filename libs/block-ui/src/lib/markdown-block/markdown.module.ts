@@ -16,29 +16,26 @@ import { MarkdownStrongComponent } from './markdown-strong.component';
 import { MarkdownTextComponent } from './markdown-text.component';
 import { MarkdownTokenComponent } from './markdown-token.component';
 import { MarkdownTokensComponent } from './markdown-tokens.component';
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 
 /**
  * Using a module because most of these components are recursive.
  */
 @NgModule({
-  declarations: [
-    MarkdownTokenComponent,
-    MarkdownBlockquoteComponent,
-    MarkdownCodeComponent,
-    MarkdownCodespanComponent,
-    MarkdownEmphasisComponent,
-    MarkdownHeadingComponent,
-    MarkdownMediaComponent,
-    MarkdownLinkComponent,
-    MarkdownListComponent,
-    MarkdownListItemComponent,
-    MarkdownParagraphComponent,
-    MarkdownStrongComponent,
-    MarkdownTextComponent,
-    MarkdownTokensComponent,
-  ],
-  exports: [MarkdownTokensComponent],
-  imports: [CommonModule, HighlightLinkModule, CodeBlockModule, PushModule],
+    exports: [MarkdownTokensComponent],
+    imports: [CommonModule, HighlightLinkModule, CodeBlockModule, PushPipe, MarkdownTokenComponent,
+        MarkdownBlockquoteComponent,
+        MarkdownCodeComponent,
+        MarkdownCodespanComponent,
+        MarkdownEmphasisComponent,
+        MarkdownHeadingComponent,
+        MarkdownMediaComponent,
+        MarkdownLinkComponent,
+        MarkdownListComponent,
+        MarkdownListItemComponent,
+        MarkdownParagraphComponent,
+        MarkdownStrongComponent,
+        MarkdownTextComponent,
+        MarkdownTokensComponent],
 })
 export class MarkdownModule {}

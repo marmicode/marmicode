@@ -1,26 +1,21 @@
 {
+  "name": "services-feature-presentation",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/services-feature-presentation/src",
   "prefix": "mc",
+  "tags": ["scope:services", "type:feature"],
+  "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/services-feature-presentation/src/**/*.ts",
-          "libs/services-feature-presentation/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/services-feature-presentation/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/services-feature-presentation/jest.config.ts"
       },
-      "outputs": ["coverage/libs/services-feature-presentation"]
+      "outputs": ["{workspaceRoot}/coverage/libs/services-feature-presentation"]
     }
-  },
-  "generators": {},
-  "tags": ["scope:services", "type:feature"]
+  }
 }

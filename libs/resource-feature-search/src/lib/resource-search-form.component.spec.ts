@@ -2,7 +2,9 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Router } from '@angular/router';
-import { PushModule } from '@rx-angular/template';
+
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { PushPipe } from '@rx-angular/template/push';
 import { BehaviorSubject, of } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
@@ -18,9 +20,7 @@ describe('ResourceSearchFormComponent', () => {
   beforeEach(async () => {
     selectedSkillSlug$ = new BehaviorSubject<string>(undefined);
 
-    await TestBed.configureTestingModule({
-      declarations: [ResourceSearchFormComponent],
-      imports: [MatAutocompleteModule, PushModule],
+    TestBed.configureTestingModule({
       providers: [
         {
           provide: ResourceSearchFacade,
@@ -60,13 +60,19 @@ describe('ResourceSearchFormComponent', () => {
                   label: 'React Testing',
                   slug: 'react-testing',
                 }),
-              ])
+              ]),
             ),
           },
         },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    });
+
+    await TestBed.overrideComponent(ResourceSearchFormComponent, {
+      set: {
+        imports: [MatAutocompleteModule, PushPipe],
+        schemas: [NO_ERRORS_SCHEMA],
+      },
+    });
   });
 
   let router: Router;
@@ -79,7 +85,7 @@ describe('ResourceSearchFormComponent', () => {
 
   it('should show all options', async () => {
     expect(
-      await component.filteredSkills$.pipe(take(1)).toPromise()
+      await component.filteredSkills$.pipe(take(1)).toPromise(),
     ).toHaveLength(4);
   });
 
@@ -105,10 +111,10 @@ describe('ResourceSearchFormComponent', () => {
         id: 'xxx',
         label: 'Angular Testing',
         slug: 'angular-testing',
-      })
+      }),
     );
     expect(await component.filteredSkills$.pipe(take(1)).toPromise()).toEqual(
-      []
+      [],
     );
   });
 

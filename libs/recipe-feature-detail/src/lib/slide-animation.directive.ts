@@ -20,7 +20,8 @@ export enum Direction {
  * Animate depending on index change.
  */
 @Directive({
-  selector: '[mcSlideAnimation]',
+    selector: '[mcSlideAnimation]',
+    standalone: true,
 })
 export class SlideAnimationDirective implements OnInit {
   @Input() set slideIndex(slideIndex: number) {
@@ -109,8 +110,7 @@ export class SlideAnimationDirective implements OnInit {
 }
 
 @NgModule({
-  declarations: [SlideAnimationDirective],
-  exports: [SlideAnimationDirective],
-  imports: [CommonModule],
+    exports: [SlideAnimationDirective],
+    imports: [CommonModule, SlideAnimationDirective],
 })
 export class SlideAnimationModule {}

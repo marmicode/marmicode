@@ -1,24 +1,31 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   NgModule,
 } from '@angular/core';
-import { MatDividerModule } from '@angular/material/divider';
-import { BlockGroupModule } from '@marmicode/block-api';
+import { MatDivider, MatDividerModule } from '@angular/material/divider';
+import { BlockGroupComponent } from '@marmicode/block-api';
 import {
-  ResourceHeaderModule,
-  ResourceTitleBannerModule,
+  ResourceTitleBannerComponent,
   ResourceType,
 } from '@marmicode/resource-api';
-import { RxState, select } from '@rx-angular/state';
+import { ResourceHeaderComponent } from '@marmicode/resource-ui';
+import { RxState } from '@rx-angular/state';
+import { select } from '@rx-angular/state/selections';
+import { PushPipe } from '@rx-angular/template/push';
 import { map } from 'rxjs/operators';
 import { BlogPost } from './blog-post';
-import { FollowButtonModule } from './social/follow-button.component';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
-import { ShareButtonsModule } from './social/share-buttons.component';
-import { PushModule } from '@rx-angular/template';
+import {
+  FollowButtonComponent,
+  FollowButtonModule,
+} from './social/follow-button.component';
+import {
+  ShareButtonsComponent,
+  ShareButtonsModule,
+} from './social/share-buttons.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -102,6 +109,17 @@ import { PushModule } from '@rx-angular/template';
     `,
   ],
   providers: [RxState],
+  standalone: true,
+  imports: [
+    ResourceHeaderComponent,
+    ShareButtonsComponent,
+    NgIf,
+    NgFor,
+    BlockGroupComponent,
+    MatDivider,
+    FollowButtonComponent,
+    PushPipe,
+  ],
 })
 export class BlogPostComponent {
   @Input() set blogPost(blogPost: BlogPost) {
@@ -121,8 +139,8 @@ export class BlogPostComponent {
       map((blogPost) => ({
         type: ResourceType.BlogPost,
         ...blogPost,
-      }))
-    )
+      })),
+    ),
   );
 
   resourceType = ResourceType.BlogPost;
@@ -133,17 +151,17 @@ export class BlogPostComponent {
 }
 
 @NgModule({
-  declarations: [BlogPostComponent],
   exports: [BlogPostComponent],
   imports: [
-    BlockGroupModule,
+    BlogPostComponent,
     CommonModule,
     MatDividerModule,
-    PushModule,
-    ResourceHeaderModule,
-    ResourceTitleBannerModule,
+    PushPipe,
+    ResourceHeaderComponent,
+    ResourceTitleBannerComponent,
     ShareButtonsModule,
     FollowButtonModule,
+    BlogPostComponent,
   ],
 })
 export class BlogPostModule {}

@@ -1,26 +1,21 @@
 {
+  "name": "shared-router-helpers",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/shared-router-helpers/src",
   "prefix": "mc",
+  "tags": ["scope:shared", "type:utils"],
+  "generators": {},
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/shared-router-helpers/src/**/*.ts",
-          "libs/shared-router-helpers/src/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/shared-router-helpers/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/shared-router-helpers/jest.config.ts"
       },
-      "outputs": ["coverage/libs/shared-router-helpers"]
+      "outputs": ["{workspaceRoot}/coverage/libs/shared-router-helpers"]
     }
-  },
-  "generators": {},
-  "tags": ["scope:shared", "type:utils"]
+  }
 }

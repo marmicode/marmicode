@@ -1,7 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { readFirst } from '@nrwl/angular/testing';
-import { PushModule } from '@rx-angular/template';
+
+import { beforeEach, describe, expect, it } from '@jest/globals';
+import { readFirst } from '@nx/angular/testing';
+import { PushPipe } from '@rx-angular/template/push';
 import { RecipeTimelineComponent } from './recipe-timeline.component';
 
 describe('RecipeTimelineComponent', () => {
@@ -9,11 +11,12 @@ describe('RecipeTimelineComponent', () => {
   let fixture: ComponentFixture<RecipeTimelineComponent>;
 
   beforeEach(async () => {
-    return TestBed.configureTestingModule({
-      declarations: [RecipeTimelineComponent],
-      imports: [PushModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+    return TestBed.overrideComponent(RecipeTimelineComponent, {
+      set: {
+        imports: [PushPipe],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      },
+    });
   });
 
   beforeEach(() => {

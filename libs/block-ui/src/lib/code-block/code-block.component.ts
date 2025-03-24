@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass, NgFor } from '@angular/common';
 import {
   AfterViewChecked,
   ChangeDetectionStrategy,
@@ -12,8 +12,9 @@ import {
 } from '@angular/core';
 import { CodeBlock } from '@marmicode/block-core';
 import { Platform } from '@marmicode/shared-utils';
-import { RxState, select, selectSlice } from '@rx-angular/state';
-import { PushModule } from '@rx-angular/template';
+import { RxState, } from '@rx-angular/state';
+import { select, selectSlice } from '@rx-angular/state/selections';
+import { PushPipe } from '@rx-angular/template/push';
 import * as Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-typescript';
@@ -29,11 +30,11 @@ import { first, map, observeOn, switchMap, tap } from 'rxjs/operators';
 import { HighlightZone } from '../highlight/highlight-zone';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  selector: 'mc-code-block',
-  providers: [RxState],
-  template: ` <div class="code-container">
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    selector: 'mc-code-block',
+    providers: [RxState],
+    template: ` <div class="code-container">
     <pre
       [ngClass]="languageClass$ | push"
       [style.paddingTop.px]="verticalPadding"
@@ -60,7 +61,13 @@ import { HighlightZone } from '../highlight/highlight-zone';
       data-role="code-highlight"
     ></div>
   </div>`,
-  styleUrls: ['./code-block.component.scss'],
+    styleUrls: ['./code-block.component.scss'],
+    standalone: true,
+    imports: [
+        NgClass,
+        NgFor,
+        PushPipe,
+    ],
 })
 export class CodeBlockComponent implements AfterViewChecked {
   @Input() set block(block: CodeBlock) {
@@ -141,7 +148,7 @@ export class CodeBlockComponent implements AfterViewChecked {
         ),
         /* @hack schedule state change for next cycle otherwise
          * change detection will miss it...
-         * except if we use @rx-angular/template's push. */
+         * except if we use @rx-angular/template/push's push. */
         observeOn(
           platform.isBrowser() ? animationFrameScheduler : asyncScheduler
         ),
@@ -178,8 +185,7 @@ export class CodeBlockComponent implements AfterViewChecked {
 }
 
 @NgModule({
-  declarations: [CodeBlockComponent],
-  exports: [CodeBlockComponent],
-  imports: [CommonModule, PushModule],
+    exports: [CodeBlockComponent],
+    imports: [CommonModule, PushPipe, CodeBlockComponent],
 })
 export class CodeBlockModule {}

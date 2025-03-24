@@ -1,0 +1,1163 @@
+🔎 checking possible migrations..
+
+⚠️  failed to check fix missingStorybookDependencies
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix addons-api
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix new-frameworks
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix cra5
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix webpack5
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix vue3
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix addon-postcss
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix viteConfigFile
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix eslintPlugin
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix builder-vite
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix storybook-binary
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix sb-scripts
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix remove-jest-testing-library
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix remove-argtypes-regex
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix removedglobalclientapis
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix github-flavored-markdown-mdx
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix mdx-to-csf
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix autodocsTrue
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix angular-builders-multiproject
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix angular-builders
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix wrap-require
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix react-docgen
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix storyshots
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix remove-react-dependency
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix remove-legacy-mdx1
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix webpack5-compiler-setup
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix mdx1to3
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix visual-tests-addon
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix autodocs-tags
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+
+⚠️  failed to check fix initial-globals
+
+Error: Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.
+
+Original error:
+TypeError: rootMain.stories is not iterable
+    at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)
+    at Module._compile (node:internal/modules/cjs/loader:1434:14)
+    at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)
+    at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)
+    at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)
+    at Module.load (node:internal/modules/cjs/loader:1249:32)
+    at Module._load (node:internal/modules/cjs/loader:1065:12)
+    at Module.require (node:internal/modules/cjs/loader:1271:19)
+    at require (node:internal/modules/helpers:123:16)
+    at getStorybookData (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:72:2624)
+    at async runFixes (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:2659)
+    at async automigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:1625)
+    at async doAutomigrate (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:531:636)
+    at async Command.<anonymous> (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/@storybook/cli/dist/bin/index.cjs:601:2888)
+WARN An issue occurred while trying to find dependencies metadata using npm.
+
+╭ Migration check ran with failures ─────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                            │
+│   Failed migrations:                                                                                                       │
+│                                                                                                                            │
+│   missingStorybookDependencies:                                                                                            │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   addons-api:                                                                                                              │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   new-frameworks:                                                                                                          │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   cra5:                                                                                                                    │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   webpack5:                                                                                                                │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   vue3:                                                                                                                    │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   addon-postcss:                                                                                                           │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   viteConfigFile:                                                                                                          │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   eslintPlugin:                                                                                                            │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   builder-vite:                                                                                                            │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   storybook-binary:                                                                                                        │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   sb-scripts:                                                                                                              │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   remove-jest-testing-library:                                                                                             │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   remove-argtypes-regex:                                                                                                   │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   removedglobalclientapis:                                                                                                 │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   github-flavored-markdown-mdx:                                                                                            │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   mdx-to-csf:                                                                                                              │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   autodocsTrue:                                                                                                            │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   angular-builders-multiproject:                                                                                           │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   angular-builders:                                                                                                        │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   wrap-require:                                                                                                            │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   react-docgen:                                                                                                            │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   storyshots:                                                                                                              │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   remove-react-dependency:                                                                                                 │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   remove-legacy-mdx1:                                                                                                      │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   webpack5-compiler-setup:                                                                                                 │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   mdx1to3:                                                                                                                 │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   visual-tests-addon:                                                                                                      │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   autodocs-tags:                                                                                                           │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│   initial-globals:                                                                                                         │
+│   Unable to find or evaluate libs/blog-post-ui/.storybook/main.js: SB_CORE-SERVER_0007 (MainFileEvaluationError):          │
+│   Storybook couldn't evaluate your libs/blog-post-ui/.storybook/main.js file.                                              │
+│                                                                                                                            │
+│   Original error:                                                                                                          │
+│   TypeError: rootMain.stories is not iterable                                                                              │
+│   at Object.<anonymous> (/libs/blog-post-ui/.storybook/main.js:9:17)                                                       │
+│   at Module._compile (node:internal/modules/cjs/loader:1434:14)                                                            │
+│   at Module._compile (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2258:26)              │
+│   at Module._extensions..js (node:internal/modules/cjs/loader:1518:10)                                                     │
+│   at Object.newLoader (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:2262:9)              │
+│   at extensions..js (/Users/y/.npm/_npx/2fa0b170d67da41f/node_modules/esbuild-register/dist/node.js:4833:24)               │
+│   at Module.load (node:internal/modules/cjs/loader:1249:32)                                                                │
+│   at Module._load (node:internal/modules/cjs/loader:1065:12)                                                               │
+│   at Module.require (node:internal/modules/cjs/loader:1271:19)                                                             │
+│   at require (node:internal/modules/helpers:123:16)                                                                        │
+│                                                                                                                            │
+│   You can find the full logs in /Users/y/dev/marmicode/marmicode/migration-storybook.log                                   │
+│                                                                                                                            │
+│   ─────────────────────────────────────────────────                                                                        │
+│                                                                                                                            │
+│   If you'd like to run the migrations again, you can do so by running 'npx storybook automigrate'                          │
+│                                                                                                                            │
+│   The automigrations try to migrate common patterns in your project, but might not contain everything needed to migrate    │
+│   to the latest version of Storybook.                                                                                      │
+│                                                                                                                            │
+│   Please check the changelog and migration guide for manual migrations and more information:                               │
+│   https://storybook.js.org/docs/migration-guide                                                                            │
+│   And reach out on Discord if you need help: https://discord.gg/storybook                                                  │
+│                                                                                                                            │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+

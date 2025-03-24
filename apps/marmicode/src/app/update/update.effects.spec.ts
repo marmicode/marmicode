@@ -1,16 +1,13 @@
-import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import {
-  MatDialog,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
+
+import { describe, expect, it, jest } from '@jest/globals';
 import { createObserver } from '@marmicode/testing';
-import { of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { UpdateDialogComponent } from './update-dialog.component';
-import { UpdateEffects } from './update.effects';
+import { provideUpdateEffects, UpdateEffects } from './update.effects';
 
 jest.mock('@angular/material/dialog');
 
@@ -117,11 +114,9 @@ describe('UpdateEffects', () => {
     const versionUpdates$ = new Subject<VersionEvent>();
 
     const mockSwUpdate: jest.Mocked<
-      Pick<
-        SwUpdate,
-        'activateUpdate' | 'checkForUpdate' | 'isEnabled' | 'versionUpdates'
-      >
-    > = {
+      Pick<SwUpdate, 'activateUpdate' | 'checkForUpdate' | 'isEnabled'>
+    > &
+      Pick<SwUpdate, 'versionUpdates'> = {
       activateUpdate: jest.fn(),
       checkForUpdate: jest.fn(),
       versionUpdates: versionUpdates$,
@@ -130,14 +125,9 @@ describe('UpdateEffects', () => {
     mockSwUpdate.checkForUpdate.mockResolvedValue(true);
 
     TestBed.configureTestingModule({
-      imports: [MatDialogModule, NoopAnimationsModule],
+      imports: [NoopAnimationsModule],
       providers: [
-        {
-          provide: ApplicationRef,
-          useValue: {
-            isStable: of(true),
-          } as ApplicationRef,
-        },
+        provideUpdateEffects(),
         {
           provide: MatDialog,
           useValue: mockDialog,

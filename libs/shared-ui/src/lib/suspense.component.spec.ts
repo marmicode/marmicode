@@ -1,6 +1,15 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { NEVER, of, throwError } from 'rxjs';
 import { ErrorModule } from './error.component';
 import { LoadingModule } from './loading.component';
@@ -13,9 +22,10 @@ describe('SuspenseComponent', () => {
 
   it('should subscribe and forward data to projected content', async () => {
     @Component({
-      template: ` <mc-suspense [data$]="data$">
-        <ng-template #data let-data>{{ data }}</ng-template>
-      </mc-suspense>`,
+      template: `
+        <mc-suspense [data$]="data$">
+          <ng-template #data let-data>{{ data }}</ng-template>
+        </mc-suspense>`,
     })
     class TestedComponent {
       data$ = of(42);
@@ -28,10 +38,11 @@ describe('SuspenseComponent', () => {
 
   it('should show suspense template', async () => {
     @Component({
-      template: ` <mc-suspense [data$]="data$">
-        <ng-template #data let-value>{{ value }}</ng-template>
-        <ng-template #suspense>⏳</ng-template>
-      </mc-suspense>`,
+      template: `
+        <mc-suspense [data$]="data$">
+          <ng-template #data let-value>{{ value }}</ng-template>
+          <ng-template #suspense>⏳</ng-template>
+        </mc-suspense>`,
     })
     class TestedComponent {
       data$ = NEVER;
@@ -44,9 +55,10 @@ describe('SuspenseComponent', () => {
 
   it('should show default suspense template', async () => {
     @Component({
-      template: ` <mc-suspense [data$]="data$">
-        <ng-template #data let-value>{{ value }}</ng-template>
-      </mc-suspense>`,
+      template: `
+        <mc-suspense [data$]="data$">
+          <ng-template #data let-value>{{ value }}</ng-template>
+        </mc-suspense>`,
     })
     class TestedComponent {
       data$ = NEVER;
@@ -59,10 +71,11 @@ describe('SuspenseComponent', () => {
 
   it('should show error template', async () => {
     @Component({
-      template: ` <mc-suspense [data$]="data$">
-        <ng-template #data let-value>{{ value }}</ng-template>
-        <ng-template #error let-err>{{ err.message }}</ng-template>
-      </mc-suspense>`,
+      template: `
+        <mc-suspense [data$]="data$">
+          <ng-template #data let-value>{{ value }}</ng-template>
+          <ng-template #error let-err>{{ err.message }}</ng-template>
+        </mc-suspense>`,
     })
     class TestedComponent {
       data$ = throwError(() => new Error('💥'));
@@ -75,9 +88,10 @@ describe('SuspenseComponent', () => {
 
   it('should show default error template', async () => {
     @Component({
-      template: ` <mc-suspense [data$]="data$">
-        <ng-template #data let-value>{{ value }}</ng-template>
-      </mc-suspense>`,
+      template: `
+        <mc-suspense [data$]="data$">
+          <ng-template #data let-value>{{ value }}</ng-template>
+        </mc-suspense>`,
     })
     class TestedComponent {
       data$ = throwError(() => new Error('💥'));

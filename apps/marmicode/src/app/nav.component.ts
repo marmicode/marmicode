@@ -1,8 +1,8 @@
-import { PushModule } from '@rx-angular/template';
+import { PushPipe } from '@rx-angular/template/push';
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { Component, HostListener, NgModule } from '@angular/core';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule } from '@angular/router';
+import { MatToolbarModule, MatToolbar } from '@angular/material/toolbar';
+import { RouterModule, RouterLink } from '@angular/router';
 import {
   animationFrameScheduler,
   asyncScheduler,
@@ -12,11 +12,11 @@ import {
 import { map, observeOn, pairwise } from 'rxjs/operators';
 import { Platform } from '@marmicode/shared-utils';
 import { appRouterHelper } from './app-router-helper';
-import { NavMenuModule } from './nav-menu.component';
+import { NavMenuModule, NavMenuComponent } from './nav-menu.component';
 
 @Component({
-  selector: 'mc-nav',
-  template: `
+    selector: 'mc-nav',
+    template: `
     <!-- Toolbar. -->
     <mat-toolbar
       [class.toolbar-hidden]="isScrollingDown$ | push"
@@ -41,8 +41,8 @@ import { NavMenuModule } from './nav-menu.component';
       <ng-content></ng-content>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       :host {
         display: block;
         height: 100%;
@@ -83,7 +83,14 @@ import { NavMenuModule } from './nav-menu.component';
         height: calc(100% - 64px);
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [
+        MatToolbar,
+        RouterLink,
+        NavMenuComponent,
+        PushPipe,
+    ],
 })
 export class NavComponent {
   appRouterHelper = appRouterHelper;
@@ -108,14 +115,14 @@ export class NavComponent {
 }
 
 @NgModule({
-  declarations: [NavComponent],
-  exports: [NavComponent],
-  imports: [
-    CommonModule,
-    MatToolbarModule,
-    NavMenuModule,
-    PushModule,
-    RouterModule,
-  ],
+    exports: [NavComponent],
+    imports: [
+        CommonModule,
+        MatToolbarModule,
+        NavMenuModule,
+        PushPipe,
+        RouterModule,
+        NavComponent,
+    ],
 })
 export class NavModule {}

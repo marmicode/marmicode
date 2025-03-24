@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf, DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,12 +8,12 @@ import {
   OnChanges,
 } from '@angular/core';
 import { getResourceTypeColor, ResourceInfo } from '@marmicode/resource-core';
-import { ResourceBadgeModule } from './resource-badge.component';
+import { ResourceBadgeModule, ResourceBadgeComponent } from './resource-badge.component';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-resource-header',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-resource-header',
+    template: `
     <div *ngIf="isLarge" class="badge-container">
       <mc-resource-badge
         [resourceType]="resourceInfo.type"
@@ -46,8 +46,8 @@ import { ResourceBadgeModule } from './resource-badge.component';
       </div>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       :host {
         display: block;
         padding: 10px 0;
@@ -118,7 +118,13 @@ import { ResourceBadgeModule } from './resource-badge.component';
         }
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [
+        NgIf,
+        ResourceBadgeComponent,
+        DatePipe,
+    ],
 })
 export class ResourceHeaderComponent implements OnChanges {
   @Input() resourceInfo: ResourceInfo;
@@ -134,8 +140,7 @@ export class ResourceHeaderComponent implements OnChanges {
 }
 
 @NgModule({
-  declarations: [ResourceHeaderComponent],
-  exports: [ResourceHeaderComponent],
-  imports: [CommonModule, ResourceBadgeModule],
+    exports: [ResourceHeaderComponent],
+    imports: [CommonModule, ResourceBadgeModule, ResourceHeaderComponent],
 })
 export class ResourceHeaderModule {}

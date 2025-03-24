@@ -3,7 +3,9 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PushModule } from '@rx-angular/template';
+
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { PushPipe } from '@rx-angular/template/push';
 import { of } from 'rxjs';
 import { RecipeFramePageComponent } from './recipe-frame-page.component';
 import { Recipe, RecipeRepository } from './recipe-repository.service';
@@ -12,9 +14,7 @@ describe('RecipeFramePageComponent', () => {
   let fixture: ComponentFixture<RecipeFramePageComponent>;
 
   beforeEach(async () => {
-    return TestBed.configureTestingModule({
-      declarations: [RecipeFramePageComponent],
-      imports: [PushModule],
+    TestBed.configureTestingModule({
       providers: [
         {
           provide: ActivatedRoute,
@@ -34,7 +34,7 @@ describe('RecipeFramePageComponent', () => {
                     slug: 'install-express-gateway',
                   },
                 ],
-              } as Recipe)
+              } as Recipe),
             ),
           },
         },
@@ -49,8 +49,14 @@ describe('RecipeFramePageComponent', () => {
           },
         },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    });
+
+    TestBed.overrideComponent(RecipeFramePageComponent, {
+      set: {
+        imports: [PushPipe],
+        schemas: [NO_ERRORS_SCHEMA],
+      },
+    });
   });
 
   beforeEach(() => {
@@ -62,7 +68,7 @@ describe('RecipeFramePageComponent', () => {
     const title = fixture.debugElement.query(By.css('mc-page')).properties.info
       .title;
     expect(title).toEqual(
-      'Setup Express Gateway > 0 - Install Express Gateway'
+      'Setup Express Gateway > 0 - Install Express Gateway',
     );
   });
 });

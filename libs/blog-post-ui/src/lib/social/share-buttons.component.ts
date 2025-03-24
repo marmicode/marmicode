@@ -1,4 +1,3 @@
-import { PushModule } from '@rx-angular/template';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -14,7 +13,9 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
-import { RxState, select, selectSlice } from '@rx-angular/state';
+import { RxState, } from '@rx-angular/state';
+import { select, selectSlice } from '@rx-angular/state/selections';
+import { PushPipe } from '@rx-angular/template/push';
 import { ShareButtonsModule as NgxShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { map } from 'rxjs/operators';
 import { AuthorSocialInfo } from './author-social-info';
@@ -22,17 +23,16 @@ import { AuthorSocialInfo } from './author-social-info';
 export type Size = 'normal' | 'small';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  /* @hack we would like to apply the theme locally using ShadowDOM but
-   * fontawesome adds some global CSS dynamically so we can't use ShadowDOM.*/
-  encapsulation: ViewEncapsulation.None,
-  selector: 'mc-share-buttons',
-  styleUrls: ['./share-buttons.component.scss'],
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    /* @hack we would like to apply the theme locally using ShadowDOM but
+     * fontawesome adds some global CSS dynamically so we can't use ShadowDOM.*/
+    encapsulation: ViewEncapsulation.None,
+    selector: 'mc-share-buttons',
+    styleUrls: ['./share-buttons.component.scss'],
+    template: `
     <share-buttons
       [autoSetMeta]="true"
       [description]="twitterTitle$ | push"
-      [size]="buttonSize$ | push"
       [theme]="theme"
       [include]="['twitter']"
       [style.display]="'inline-block'"
@@ -42,32 +42,26 @@ export type Size = 'normal' | 'small';
       [description]="defaultTitle$ | push"
       [title]="defaultTitle$ | push"
       [include]="buttons"
-      [size]="buttonSize$ | push"
       [theme]="theme"
       [style.display]="'inline-block'"
     ></share-buttons>
   `,
-  providers: [RxState],
+    providers: [RxState],
+    standalone: true,
+    imports: [NgxShareButtonsModule, PushPipe],
 })
 export class ShareButtonsComponent {
   @Input() set author(author: AuthorSocialInfo) {
     this._state.set({ author });
   }
+
   @Input() set title(title: string) {
     this._state.set({ title });
   }
+
   @Input() set size(size: Size) {
     this._state.set({ size });
   }
-
-  buttonSize$ = this._state.select('size').pipe(
-    map((size) => {
-      if (size === 'small') {
-        return -6;
-      }
-      return 0;
-    })
-  );
 
   defaultTitle$ = this._state.select(
     selectSlice(['author', 'title']),
@@ -132,8 +126,7 @@ export class ShareButtonsComponent {
 }
 
 @NgModule({
-  declarations: [ShareButtonsComponent],
-  exports: [ShareButtonsComponent],
-  imports: [CommonModule, NgxShareButtonsModule, PushModule],
+    exports: [ShareButtonsComponent],
+    imports: [CommonModule, NgxShareButtonsModule, PushPipe, ShareButtonsComponent],
 })
 export class ShareButtonsModule {}
