@@ -10,18 +10,21 @@ import {
   createCodeBlock,
   MarkdownTokens,
 } from '@marmicode/block-core';
+import { CodeBlockComponent } from '../code-block/code-block.component';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-markdown-code',
-  styles: [
-    `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-markdown-code',
+    styles: [
+        `
       :host {
         font-size: 0.7em;
       }
     `,
-  ],
-  template: ` <mc-code-block [block]="codeBlock"></mc-code-block>`,
+    ],
+    template: ` <mc-code-block [block]="codeBlock"></mc-code-block>`,
+    standalone: true,
+    imports: [CodeBlockComponent],
 })
 export class MarkdownCodeComponent implements OnChanges {
   @Input() token: MarkdownTokens.Code;

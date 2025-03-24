@@ -15,4 +15,4 @@ export {
   isTextBlock,
   parseMarkdown,
 } from '@marmicode/block-core';
-export { BlockGroupModule } from '@marmicode/block-ui';
+export { BlockGroupComponent } from '@marmicode/block-ui';

@@ -1,99 +1,136 @@
+import { AsyncPipe } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
-import { beforeEach, describe, expect, it } from '@jest/globals';
-import { BlockType, createBlockGroup } from '@marmicode/block-core';
-import { PushPipe } from '@rx-angular/template/push';
-import { first } from 'rxjs/operators';
-import { createHighlightZone } from '../highlight/highlight-zone';
+import { describe, expect, it } from '@jest/globals';
+import {
+  BlockGroup,
+  createBlockGroup,
+  createTextBlock,
+} from '@marmicode/block-core';
+import { firstValueFrom } from 'rxjs';
+import {
+  createHighlightSection,
+  createHighlightZone,
+  HighlightZone,
+} from '../highlight/highlight-zone';
 import { BlockGroupComponent } from './block-group.component';
 
 describe('FrameComponent', () => {
-  let component: BlockGroupComponent;
-  let fixture: ComponentFixture<BlockGroupComponent>;
-  const blockGroup = createBlockGroup({
-    blocks: [],
-  });
+  it(`should set '<mc-block>' highlightZone`, async () => {
+    const { triggerHighlightZoneChange, getFirstBlock } =
+      await renderComponentWithTextBlock();
 
-  beforeEach(async () => {
-    return TestBed.configureTestingModule({
-      declarations: [BlockGroupComponent],
-      imports: [PushPipe],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
-  });
+    await triggerHighlightZoneChange(
+      createHighlightZone({
+        color: 'red',
+        sections: [
+          createHighlightSection({
+            start: 1,
+            end: 2,
+          }),
+        ],
+      }),
+    );
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BlockGroupComponent);
-    component = fixture.componentInstance;
-    component.blockGroup = blockGroup;
-    fixture.detectChanges();
+    expect(getFirstBlock().properties.highlightZone).toEqual({
+      color: 'red',
+      sections: [
+        createHighlightSection({
+          start: 1,
+          end: 2,
+        }),
+      ],
+    });
   });
 
   it('should not reset highlight zone if same block group reference is set', async () => {
-    component.onHighlightZone(
+    const { component, triggerHighlightZoneChange } =
+      await renderComponentWithTextBlock();
+
+    await triggerHighlightZoneChange(
       createHighlightZone({
         color: 'red',
-        sections: [],
-      })
+        sections: [
+          createHighlightSection({
+            start: 1,
+            end: 2,
+          }),
+        ],
+      }),
     );
-    component.blockGroup = blockGroup;
-    expect(await component.highlightZone$.pipe(first()).toPromise()).not.toBe(
-      null
-    );
+
+    expect(await firstValueFrom(component.highlightZone$)).not.toBe(null);
   });
 
   it('should reset highlight zone on block group change', async () => {
-    component.onHighlightZone(
+    const { component, setBlockGroup, triggerHighlightZoneChange } =
+      await renderComponentWithTextBlock();
+
+    await triggerHighlightZoneChange(
       createHighlightZone({
         color: 'red',
-        sections: [],
-      })
-    );
-    component.blockGroup = createBlockGroup({
-      blocks: [],
-    });
-    expect(await component.highlightZone$.pipe(first()).toPromise()).toBe(null);
-  });
-
-  it(`should set '<mc-block>' highlightZone without ZoneJS`, async () => {
-    component.blockGroup = createBlockGroup({
-      blocks: [
-        {
-          type: BlockType.Code,
-          code: `const younes = '👨🏻‍🍳';`,
-          language: 'javascript',
-        },
-      ],
-    });
-
-    await flushRequestAnimationFrame();
-
-    component.onHighlightZone(
-      createHighlightZone({
-        color: 'red',
-        sections: [],
-      })
+        sections: [
+          createHighlightSection({
+            start: 1,
+            end: 2,
+          }),
+        ],
+      }),
     );
 
-    await flushRequestAnimationFrame();
+    await setBlockGroup(
+      createBlockGroup({ blocks: [createTextBlock({ text: 'Bye' })] }),
+    );
 
-    /* Check that the highlight zone is passed to the child component
-     * without having to manually trigger the change detection.
-     * We have to make sure of this because this is a custom event
-     * and it runs outside of zones (and we are preparing our way out
-     * of zones so we don't want to run it in zones). */
-    const blockEl = fixture.debugElement.query(By.css('mc-block'));
-    expect(blockEl.properties.highlightZone).toEqual({
-      color: 'red',
-      sections: [],
-    });
+    expect(await firstValueFrom(component.highlightZone$)).toBe(null);
   });
 });
 
-/* Wait for `requestAnimationFrame` to be triggered.
- * This is clearly not the best way but it works. */
-export async function flushRequestAnimationFrame() {
-  await new Promise(requestAnimationFrame);
+async function renderComponentWithTextBlock() {
+  const { setBlockGroup, ...utils } = await renderComponent();
+
+  await setBlockGroup(
+    createBlockGroup({ blocks: [createTextBlock({ text: 'Hello' })] }),
+  );
+
+  return { setBlockGroup, ...utils };
+}
+
+async function renderComponent() {
+  TestBed.configureTestingModule({
+    providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
+  });
+
+  TestBed.overrideComponent(BlockGroupComponent, {
+    add: {
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    },
+  });
+
+  TestBed.overrideComponent(BlockGroupComponent, {
+    set: {
+      imports: [AsyncPipe],
+    },
+  });
+
+  const fixture = TestBed.createComponent(BlockGroupComponent);
+  await fixture.whenStable();
+
+  function getFirstBlock() {
+    return fixture.debugElement.query(By.css('mc-block'));
+  }
+
+  return {
+    component: fixture.componentInstance,
+    async setBlockGroup(blockGroup: BlockGroup) {
+      fixture.componentRef.setInput('blockGroup', blockGroup);
+      await fixture.whenStable();
+    },
+    async triggerHighlightZoneChange(highlightZone: HighlightZone) {
+      getFirstBlock().triggerEventHandler('highlightZoneChange', highlightZone);
+      await fixture.whenStable();
+    },
+    getFirstBlock,
+  };
 }

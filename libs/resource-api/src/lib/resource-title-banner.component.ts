@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,7 +6,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { ResourceType } from '@marmicode/resource-core';
-import { ResourceBadgeModule } from '@marmicode/resource-ui';
+import { ResourceBadgeComponent } from '@marmicode/resource-ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -82,6 +82,8 @@ import { ResourceBadgeModule } from '@marmicode/resource-ui';
       }
     `,
   ],
+  standalone: true,
+  imports: [ResourceBadgeComponent, NgIf],
 })
 export class ResourceTitleBannerComponent {
   @Input() resourceType: ResourceType;
@@ -90,8 +92,7 @@ export class ResourceTitleBannerComponent {
 }
 
 @NgModule({
-  declarations: [ResourceTitleBannerComponent],
   exports: [ResourceTitleBannerComponent],
-  imports: [CommonModule, ResourceBadgeModule],
+  imports: [CommonModule, ResourceBadgeComponent, ResourceTitleBannerComponent],
 })
 export class ResourceTitleBannerModule {}

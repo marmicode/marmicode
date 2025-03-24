@@ -32,7 +32,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
       - name: Install
@@ -68,7 +68,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
       - name: Install
@@ -102,7 +102,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
       - name: Install
@@ -136,7 +136,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
       - name: Install
@@ -172,7 +172,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
       - name: Install
@@ -208,7 +208,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
       - name: Install
@@ -251,52 +251,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
       - name: Install
         run: bun install
       - name: Start Nx Agent ${{ matrix.agent }}
         run: bunx nx-cloud start-agent
-      - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: dist
-          path: dist
-  nx-agents-stop:
-    name: 🤖 Agents Stop
-    runs-on: ubuntu-latest
-    needs:
-      - build
-      - lint
-      - test
-      - component-test
-      - e2e
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/Cypress
-            .angular
-            libs/*/.angular
-            node_modules/.cache
-          key: cache-${{ github.run_id }}
-          restore-keys: |
-            cache
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-      - name: Install
-        run: bun install
-      - name: Stop Nx Agents
-        run: bunx nx-cloud stop-all-agents
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4
         if: failure()
@@ -330,7 +291,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
       - name: Install
@@ -384,7 +345,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
       - name: Install
@@ -440,7 +401,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
       - name: Install

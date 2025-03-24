@@ -26,7 +26,8 @@ import {
  */
 @UntilDestroy()
 @Directive({
-  selector: '[mcSwipe]',
+    selector: '[mcSwipe]',
+    standalone: true,
 })
 export class SwipeDirective implements OnInit {
   @Output() swipeLeft: Observable<void>;
@@ -133,8 +134,7 @@ export class SwipeDirective implements OnInit {
 }
 
 @NgModule({
-  declarations: [SwipeDirective],
-  exports: [SwipeDirective],
-  imports: [CommonModule],
+    exports: [SwipeDirective],
+    imports: [CommonModule, SwipeDirective],
 })
 export class SwipeModule {}

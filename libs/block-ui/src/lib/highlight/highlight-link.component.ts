@@ -14,17 +14,18 @@ import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-highlight-link',
-  template: ` <ng-content></ng-content>`,
-  styles: [
-    `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-highlight-link',
+    template: ` <ng-content></ng-content>`,
+    styles: [
+        `
       :host {
         cursor: pointer;
         border-bottom: 1px dashed currentColor;
       }
     `,
-  ],
+    ],
+    standalone: true,
 })
 export class HighlightLinkComponent implements OnChanges {
   @Input() color: string;
@@ -112,8 +113,7 @@ export class HighlightLinkComponent implements OnChanges {
 }
 
 @NgModule({
-  declarations: [HighlightLinkComponent],
-  exports: [HighlightLinkComponent],
-  imports: [CommonModule],
+    exports: [HighlightLinkComponent],
+    imports: [CommonModule, HighlightLinkComponent],
 })
 export class HighlightLinkModule {}

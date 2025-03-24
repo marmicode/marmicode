@@ -3,7 +3,11 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlogPostModule } from '@marmicode/blog-post-ui';
 import { blogPostDetailRouterHelper } from '@marmicode/shared-router-helpers';
-import { PageModule, SuspenseModule } from '@marmicode/shared-ui';
+import {
+  PageModule,
+  SuspenseComponent,
+  SuspenseModule,
+} from '@marmicode/shared-ui';
 import {
   shareReplayWithRefCount,
   TransferStateHelper,
@@ -12,6 +16,8 @@ import { PushPipe } from '@rx-angular/template/push';
 import { map, switchMap } from 'rxjs/operators';
 import { BlogPostRepository } from './blog-post-repository.service';
 import { blogPostToPageInfo } from './blog-post-to-page-info';
+import { PageComponent } from '@marmicode/shared-ui';
+import { BlogPostComponent } from '@marmicode/blog-post-ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,18 +29,20 @@ import { blogPostToPageInfo } from './blog-post-to-page-info';
       </ng-template>
     </mc-suspense>
   </mc-page>`,
+  standalone: true,
+  imports: [PageComponent, SuspenseComponent, BlogPostComponent, PushPipe],
 })
 export class BlogPostDetailPageComponent {
   blogPost$ = this._route.paramMap.pipe(
     map((params) =>
-      params.get(blogPostDetailRouterHelper.BLOG_POST_SLUG_PARAM)
+      params.get(blogPostDetailRouterHelper.BLOG_POST_SLUG_PARAM),
     ),
     switchMap((blogPostSlug) =>
       this._blogPostRepository
         .getBlogPost(blogPostSlug)
-        .pipe(this._transferStateHelper.transfer(`blog-post-${blogPostSlug}`))
+        .pipe(this._transferStateHelper.transfer(`blog-post-${blogPostSlug}`)),
     ),
-    shareReplayWithRefCount()
+    shareReplayWithRefCount(),
   );
 
   pageInfo$ = this.blogPost$.pipe(map(blogPostToPageInfo));
@@ -42,12 +50,11 @@ export class BlogPostDetailPageComponent {
   constructor(
     private _blogPostRepository: BlogPostRepository,
     private _route: ActivatedRoute,
-    private _transferStateHelper: TransferStateHelper
+    private _transferStateHelper: TransferStateHelper,
   ) {}
 }
 
 @NgModule({
-  declarations: [BlogPostDetailPageComponent],
   exports: [BlogPostDetailPageComponent],
   imports: [
     CommonModule,
@@ -55,6 +62,7 @@ export class BlogPostDetailPageComponent {
     BlogPostModule,
     SuspenseModule,
     PushPipe,
+    BlogPostDetailPageComponent,
   ],
 })
 export class BlogPostDetailPageModule {}

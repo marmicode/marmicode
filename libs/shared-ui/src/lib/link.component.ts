@@ -1,16 +1,16 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   NgModule,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, RouterLink } from '@angular/router';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-link',
-  template: `<a *ngIf="href" [href]="href" rel="noopener" target="_blank">
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-link',
+    template: `<a *ngIf="href" [href]="href" rel="noopener" target="_blank">
       <ng-container *ngTemplateOutlet="templateRef"></ng-container>
     </a>
 
@@ -21,13 +21,15 @@ import { RouterModule } from '@angular/router';
     <ng-template #templateRef>
       <ng-content></ng-content>
     </ng-template> `,
-  styles: [
-    `
+    styles: [
+        `
         a {
             text-decoration: none;
         }
     `
-  ]
+    ],
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet, RouterLink]
 })
 export class LinkComponent {
   @Input() href: string;
@@ -35,8 +37,7 @@ export class LinkComponent {
 }
 
 @NgModule({
-  declarations: [LinkComponent],
-  exports: [LinkComponent],
-  imports: [CommonModule, RouterModule],
+    exports: [LinkComponent],
+    imports: [CommonModule, RouterModule, LinkComponent],
 })
 export class LinkModule {}

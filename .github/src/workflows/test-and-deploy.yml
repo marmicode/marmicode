@@ -16,7 +16,7 @@ env:
 
 x-steps:
   cache: &cache
-    uses: actions/cache@v3
+    uses: actions/cache@v4
     with:
       path: |
         ~/.cache/Cypress
@@ -30,7 +30,7 @@ x-steps:
         cache
 
   checkout: &checkout
-    uses: actions/checkout@v3
+    uses: actions/checkout@v4
     with:
       # Checkout tags so we can use 'affected:* --base=deployed/marmicode-next'
       fetch-depth: 0
@@ -45,13 +45,13 @@ x-steps:
       tags: true
 
   setup-node: &setup-node
-    uses: actions/setup-node@v3
+    uses: actions/setup-node@v4
     with:
       node-version: '18'
 
   upload-dist-on-failure: &upload-dist-on-failure
     name: Upload dist (Cypress videos / build output etc...) on failure
-    uses: actions/upload-artifact@v3
+    uses: actions/upload-artifact@v4
     if: failure()
     with:
       name: dist
@@ -195,27 +195,6 @@ jobs:
 
       - name: Start Nx Agent ${{ matrix.agent }}
         run: bunx nx-cloud start-agent
-
-      - *upload-dist-on-failure
-
-  nx-agents-stop:
-    name: 🤖 Agents Stop
-    runs-on: ubuntu-latest
-    needs:
-      - build
-      - lint
-      - test
-      - component-test
-      - e2e
-    steps:
-      - *checkout
-      - *cache
-      - *setup-node
-      - *install-bun
-      - *bun-install
-
-      - name: Stop Nx Agents
-        run: bunx nx-cloud stop-all-agents
 
       - *upload-dist-on-failure
 
