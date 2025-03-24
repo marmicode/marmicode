@@ -1,4 +1,4 @@
-import { A11yModule } from '@angular/cdk/a11y';
+import { A11yModule, CdkTrapFocus } from '@angular/cdk/a11y';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -6,14 +6,15 @@ import {
   Inject,
   NgModule,
 } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule, MatButton } from '@angular/material/button';
+import { MatDialogModule, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import { SwUpdate } from '@angular/service-worker';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-update-dialog',
-  template: `<h1 mat-dialog-title>New version available</h1>
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-update-dialog',
+    template: `<h1 mat-dialog-title>New version available</h1>
     <div mat-dialog-content>
       <p>Marmicode has been updated, are you ready to reload?</p>
     </div>
@@ -28,15 +29,25 @@ import { SwUpdate } from '@angular/service-worker';
         RELOAD
       </button>
     </div>`,
-  styles: [
-    `
+    styles: [
+        `
       .actions {
         display: flex;
         flex-direction: row;
         justify-content: center;
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [
+        MatDialogTitle,
+        CdkScrollable,
+        MatDialogContent,
+        MatDialogActions,
+        CdkTrapFocus,
+        MatButton,
+        MatDialogClose,
+    ],
 })
 export class UpdateDialogComponent {
   constructor(
@@ -55,8 +66,7 @@ export class UpdateDialogComponent {
 }
 
 @NgModule({
-  declarations: [UpdateDialogComponent],
-  exports: [UpdateDialogComponent],
-  imports: [A11yModule, CommonModule, MatButtonModule, MatDialogModule],
+    exports: [UpdateDialogComponent],
+    imports: [A11yModule, CommonModule, MatButtonModule, MatDialogModule, UpdateDialogComponent],
 })
 export class UpdateDialogModule {}

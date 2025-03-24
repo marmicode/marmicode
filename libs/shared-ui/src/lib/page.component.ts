@@ -40,19 +40,20 @@ export function createArticlePageInfo(
 export type PageInfo = BasicPageInfo | ArticlePageInfo;
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-page',
-  template: ` <ng-content></ng-content>`,
-  styles: [
-    `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-page',
+    template: ` <ng-content></ng-content>`,
+    styles: [
+        `
       :host {
         display: block;
         background-color: white;
         min-height: 100%;
       }
     `,
-  ],
-  providers: [RxState],
+    ],
+    providers: [RxState],
+    standalone: true,
 })
 export class PageComponent implements OnDestroy {
   @Input() set info(info: PageInfo) {
@@ -153,8 +154,7 @@ export class PageComponent implements OnDestroy {
 }
 
 @NgModule({
-  declarations: [PageComponent],
-  exports: [PageComponent],
-  imports: [CommonModule],
+    exports: [PageComponent],
+    imports: [CommonModule, PageComponent],
 })
 export class PageModule {}

@@ -20,9 +20,7 @@ describe('ResourceSearchFormComponent', () => {
   beforeEach(async () => {
     selectedSkillSlug$ = new BehaviorSubject<string>(undefined);
 
-    await TestBed.configureTestingModule({
-      declarations: [ResourceSearchFormComponent],
-      imports: [MatAutocompleteModule, PushPipe],
+    TestBed.configureTestingModule({
       providers: [
         {
           provide: ResourceSearchFacade,
@@ -62,13 +60,19 @@ describe('ResourceSearchFormComponent', () => {
                   label: 'React Testing',
                   slug: 'react-testing',
                 }),
-              ])
+              ]),
             ),
           },
         },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    });
+
+    await TestBed.overrideComponent(ResourceSearchFormComponent, {
+      set: {
+        imports: [MatAutocompleteModule, PushPipe],
+        schemas: [NO_ERRORS_SCHEMA],
+      },
+    });
   });
 
   let router: Router;
@@ -81,7 +85,7 @@ describe('ResourceSearchFormComponent', () => {
 
   it('should show all options', async () => {
     expect(
-      await component.filteredSkills$.pipe(take(1)).toPromise()
+      await component.filteredSkills$.pipe(take(1)).toPromise(),
     ).toHaveLength(4);
   });
 
@@ -107,10 +111,10 @@ describe('ResourceSearchFormComponent', () => {
         id: 'xxx',
         label: 'Angular Testing',
         slug: 'angular-testing',
-      })
+      }),
     );
     expect(await component.filteredSkills$.pipe(take(1)).toPromise()).toEqual(
-      []
+      [],
     );
   });
 

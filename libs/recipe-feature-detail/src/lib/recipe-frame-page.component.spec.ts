@@ -14,9 +14,7 @@ describe('RecipeFramePageComponent', () => {
   let fixture: ComponentFixture<RecipeFramePageComponent>;
 
   beforeEach(async () => {
-    return TestBed.configureTestingModule({
-      declarations: [RecipeFramePageComponent],
-      imports: [PushPipe],
+    TestBed.configureTestingModule({
       providers: [
         {
           provide: ActivatedRoute,
@@ -36,7 +34,7 @@ describe('RecipeFramePageComponent', () => {
                     slug: 'install-express-gateway',
                   },
                 ],
-              } as Recipe)
+              } as Recipe),
             ),
           },
         },
@@ -51,8 +49,14 @@ describe('RecipeFramePageComponent', () => {
           },
         },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    });
+
+    TestBed.overrideComponent(RecipeFramePageComponent, {
+      set: {
+        imports: [PushPipe],
+        schemas: [NO_ERRORS_SCHEMA],
+      },
+    });
   });
 
   beforeEach(() => {
@@ -64,7 +68,7 @@ describe('RecipeFramePageComponent', () => {
     const title = fixture.debugElement.query(By.css('mc-page')).properties.info
       .title;
     expect(title).toEqual(
-      'Setup Express Gateway > 0 - Install Express Gateway'
+      'Setup Express Gateway > 0 - Install Express Gateway',
     );
   });
 });

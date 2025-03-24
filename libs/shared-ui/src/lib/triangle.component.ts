@@ -8,13 +8,13 @@ import {
 } from '@angular/core';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-triangle',
-  template: `<span class="mc-triangle-text">
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-triangle',
+    template: `<span class="mc-triangle-text">
     <ng-content></ng-content>
   </span>`,
-  styles: [
-    `
+    styles: [
+        `
       :host {
         display: inline-block;
         color: white;
@@ -38,7 +38,8 @@ import {
         left: 0;
       }
     `,
-  ],
+    ],
+    standalone: true,
 })
 export class TriangleComponent {
   @HostBinding('style.background')
@@ -47,8 +48,7 @@ export class TriangleComponent {
 }
 
 @NgModule({
-  declarations: [TriangleComponent],
-  exports: [TriangleComponent],
-  imports: [CommonModule],
+    exports: [TriangleComponent],
+    imports: [CommonModule, TriangleComponent],
 })
 export class TriangleModule {}

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass, NgFor } from '@angular/common';
 import {
   AfterViewChecked,
   ChangeDetectionStrategy,
@@ -30,11 +30,11 @@ import { first, map, observeOn, switchMap, tap } from 'rxjs/operators';
 import { HighlightZone } from '../highlight/highlight-zone';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  selector: 'mc-code-block',
-  providers: [RxState],
-  template: ` <div class="code-container">
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    selector: 'mc-code-block',
+    providers: [RxState],
+    template: ` <div class="code-container">
     <pre
       [ngClass]="languageClass$ | push"
       [style.paddingTop.px]="verticalPadding"
@@ -61,7 +61,13 @@ import { HighlightZone } from '../highlight/highlight-zone';
       data-role="code-highlight"
     ></div>
   </div>`,
-  styleUrls: ['./code-block.component.scss'],
+    styleUrls: ['./code-block.component.scss'],
+    standalone: true,
+    imports: [
+        NgClass,
+        NgFor,
+        PushPipe,
+    ],
 })
 export class CodeBlockComponent implements AfterViewChecked {
   @Input() set block(block: CodeBlock) {
@@ -179,8 +185,7 @@ export class CodeBlockComponent implements AfterViewChecked {
 }
 
 @NgModule({
-  declarations: [CodeBlockComponent],
-  exports: [CodeBlockComponent],
-  imports: [CommonModule, PushPipe],
+    exports: [CodeBlockComponent],
+    imports: [CommonModule, PushPipe, CodeBlockComponent],
 })
 export class CodeBlockModule {}

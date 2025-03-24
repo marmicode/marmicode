@@ -1,1 +1,1 @@
-export { BlockGroupModule } from './lib/block-group/block-group.component';
+export { BlockGroupComponent } from './lib/block-group/block-group.component';

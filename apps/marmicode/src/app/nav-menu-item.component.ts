@@ -1,13 +1,13 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Input,
   NgModule,
 } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { RouterModule } from '@angular/router';
+import { MatIconModule, MatIcon } from '@angular/material/icon';
+import { MatListModule, MatListItem } from '@angular/material/list';
+import { RouterModule, RouterLinkActive, RouterLink } from '@angular/router';
 
 export interface NavMenuEntry {
   icon: string;
@@ -17,9 +17,9 @@ export interface NavMenuEntry {
 }
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-nav-menu-item',
-  template: `
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-nav-menu-item',
+    template: `
     <!-- Url. -->
     <a
       *ngIf="entry.url"
@@ -57,8 +57,8 @@ export interface NavMenuEntry {
       </div>
     </ng-template>
   `,
-  styles: [
-    `
+    styles: [
+        `
         :host {
             display: flex;
             justify-content: center;
@@ -81,7 +81,16 @@ export interface NavMenuEntry {
             margin-right: 10px;
         }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [
+        NgIf,
+        MatListItem,
+        NgTemplateOutlet,
+        RouterLinkActive,
+        RouterLink,
+        MatIcon,
+    ],
 })
 export class NavMenuItemComponent {
   @Input() color?: 'primary';
@@ -90,8 +99,7 @@ export class NavMenuItemComponent {
 }
 
 @NgModule({
-  declarations: [NavMenuItemComponent],
-  exports: [NavMenuItemComponent],
-  imports: [CommonModule, MatListModule, MatIconModule, RouterModule],
+    exports: [NavMenuItemComponent],
+    imports: [CommonModule, MatListModule, MatIconModule, RouterModule, NavMenuItemComponent],
 })
 export class NavMenuItemModule {}

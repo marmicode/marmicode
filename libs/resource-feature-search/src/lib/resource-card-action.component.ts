@@ -6,7 +6,7 @@ import {
   NgModule,
   OnChanges,
 } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule, MatButton } from '@angular/material/button';
 import {
   getResourceTypeActionText,
   getResourceTypeColor,
@@ -18,11 +18,12 @@ import {
 } from '@marmicode/shared-router-helpers';
 import { LinkModule } from '@marmicode/shared-ui';
 import { Resource } from './resource';
+import { LinkComponent } from '@marmicode/shared-ui';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-resource-card-action',
-  template: ` <mc-link [href]="resource.url" [route]="route">
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-resource-card-action',
+    template: ` <mc-link [href]="resource.url" [route]="route">
     <button
       [style.backgroundColor]="color"
       class="action-button"
@@ -32,15 +33,17 @@ import { Resource } from './resource';
       {{ actionText }}
     </button>
   </mc-link>`,
-  styles: [
-    `
+    styles: [
+        `
       .action-button {
         font-size: 1.1em;
         min-width: 130px;
         text-transform: uppercase;
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [LinkComponent, MatButton],
 })
 export class ResourceCardActionComponent implements OnChanges {
   private static _routeFactoryMap = new Map<
@@ -79,8 +82,7 @@ export class ResourceCardActionComponent implements OnChanges {
 }
 
 @NgModule({
-  declarations: [ResourceCardActionComponent],
-  exports: [ResourceCardActionComponent],
-  imports: [CommonModule, MatButtonModule, LinkModule],
+    exports: [ResourceCardActionComponent],
+    imports: [CommonModule, MatButtonModule, LinkModule, ResourceCardActionComponent],
 })
 export class ResourceCardActionModule {}

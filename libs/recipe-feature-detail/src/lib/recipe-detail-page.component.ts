@@ -14,12 +14,15 @@ import {
   RecipeRepository,
   RecipeRepositoryModule,
 } from './recipe-repository.service';
+import { PageComponent } from '@marmicode/shared-ui';
 
 @UntilDestroy()
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-recipe-detail-page',
-  template: `<mc-page></mc-page>`,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'mc-recipe-detail-page',
+    template: `<mc-page></mc-page>`,
+    standalone: true,
+    imports: [PageComponent],
 })
 export class RecipeDetailPageComponent implements OnInit {
   constructor(
@@ -50,8 +53,7 @@ export class RecipeDetailPageComponent implements OnInit {
 }
 
 @NgModule({
-  declarations: [RecipeDetailPageComponent],
-  exports: [RecipeDetailPageComponent],
-  imports: [CommonModule, PageModule, RecipeRepositoryModule],
+    exports: [RecipeDetailPageComponent],
+    imports: [CommonModule, PageModule, RecipeRepositoryModule, RecipeDetailPageComponent],
 })
 export class RecipeDetailModule {}

@@ -11,11 +11,12 @@ describe('RecipeTimelineComponent', () => {
   let fixture: ComponentFixture<RecipeTimelineComponent>;
 
   beforeEach(async () => {
-    return TestBed.configureTestingModule({
-      declarations: [RecipeTimelineComponent],
-      imports: [PushPipe],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+    return TestBed.overrideComponent(RecipeTimelineComponent, {
+      set: {
+        imports: [PushPipe],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      },
+    });
   });
 
   beforeEach(() => {

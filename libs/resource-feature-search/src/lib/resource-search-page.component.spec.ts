@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
@@ -50,8 +51,6 @@ describe('ResourceSearchComponent', () => {
     const selectedSkillSlug$ = new Subject<string>();
 
     TestBed.configureTestingModule({
-      declarations: [ResourceSearchPageComponent],
-      imports: [PushPipe],
       providers: [
         {
           provide: ResourceRepository,
@@ -68,7 +67,13 @@ describe('ResourceSearchComponent', () => {
           useValue: mockTransferStateAdapter,
         },
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    });
+
+    TestBed.overrideComponent(ResourceSearchPageComponent, {
+      set: {
+        imports: [NgIf, PushPipe],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      },
     });
 
     const fixture = TestBed.createComponent(ResourceSearchPageComponent);
