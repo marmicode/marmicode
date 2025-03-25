@@ -63,7 +63,8 @@
       ],
       "@marmicode/tools/build-github-workflows": [
         "tools/build-github-workflows/src/index.ts"
-      ]
+      ],
+      "shared-infra": ["libs/shared-infra/src/index.ts"]
     },
     "strict": true,
     "strictNullChecks": false,
