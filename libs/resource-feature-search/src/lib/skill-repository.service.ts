@@ -1,9 +1,12 @@
-import { Injectable, NgModule } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+import { inject, Injectable, NgModule } from '@angular/core';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ContentfulModule, Query } from '@marmicode/contentful-api';
+import {
+  ContentfulClient,
+  Query,
+  provideContentfulClient,
+} from '@marmicode/contentful-infra';
 import { skillFragment, skillFragmentToSkill } from './skill-fragment';
 import { Skill } from './skill';
 
@@ -20,21 +23,20 @@ const allSkills = gql`
 
 @Injectable()
 export class SkillRepository {
-  constructor(private _apollo: Apollo) {}
+  private _contentfulClient = inject(ContentfulClient);
 
   getSkills(): Observable<Skill[]> {
-    return this._apollo
+    return this._contentfulClient
       .query<Query>({
         query: allSkills,
       })
       .pipe(
-        map(({ data }) => data.skillCollection.items.map(skillFragmentToSkill))
+        map(({ data }) => data.skillCollection.items.map(skillFragmentToSkill)),
       );
   }
 }
 
 @NgModule({
-  imports: [ContentfulModule],
-  providers: [SkillRepository],
+  providers: [SkillRepository, provideContentfulClient()],
 })
 export class SkillRepositoryModule {}

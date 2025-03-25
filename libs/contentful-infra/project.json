@@ -1,10 +1,10 @@
 {
-  "name": "contentful-api",
+  "name": "contentful-infra",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/contentful-api/src",
   "prefix": "mc",
-  "tags": ["scope:contentful", "type:api", "name:contentful-api"],
+  "tags": ["scope:contentful", "type:infra", "name:contentful-infra"],
   "generators": {},
   "targets": {
     "lint": {
@@ -13,7 +13,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/contentful-api/jest.config.ts"
+        "jestConfig": "{projectRoot}/jest.config.ts"
       },
       "outputs": ["{workspaceRoot}/coverage/libs/contentful-api"]
     }
