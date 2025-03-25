@@ -24,9 +24,14 @@ import { provideStore } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { provideUpdateEffects, UpdateEffects } from './update/update.effects';
+import {
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideClientHydration(withEventReplay()),
     ScreenTrackingService,
     importProvidersFrom(AppRoutingModule),
     importProvidersFrom(BrowserAnimationsModule),
