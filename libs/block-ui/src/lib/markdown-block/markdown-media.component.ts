@@ -9,9 +9,9 @@ import { MarkdownTokens } from '@marmicode/block-core';
 import { NgIf } from '@angular/common';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-markdown-media',
-    template: `<img
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-markdown-media',
+  template: `<img
       *ngIf="!isVideo"
       [alt]="token.text"
       [src]="token.href"
@@ -25,8 +25,8 @@ import { NgIf } from '@angular/common';
       class="video"
       controls
     ></video> `,
-    styles: [
-        `
+  styles: [
+    `
       :host {
         display: block;
         text-align: center;
@@ -41,9 +41,8 @@ import { NgIf } from '@angular/common';
         outline: none;
       }
     `,
-    ],
-    standalone: true,
-    imports: [NgIf],
+  ],
+  imports: [NgIf],
 })
 export class MarkdownMediaComponent implements OnChanges {
   @Input() token: MarkdownTokens.Media;

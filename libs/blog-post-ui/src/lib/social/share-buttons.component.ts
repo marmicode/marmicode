@@ -13,7 +13,7 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
-import { RxState, } from '@rx-angular/state';
+import { RxState } from '@rx-angular/state';
 import { select, selectSlice } from '@rx-angular/state/selections';
 import { PushPipe } from '@rx-angular/template/push';
 import { ShareButtonsModule as NgxShareButtonsModule } from 'ngx-sharebuttons/buttons';
@@ -23,13 +23,13 @@ import { AuthorSocialInfo } from './author-social-info';
 export type Size = 'normal' | 'small';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    /* @hack we would like to apply the theme locally using ShadowDOM but
-     * fontawesome adds some global CSS dynamically so we can't use ShadowDOM.*/
-    encapsulation: ViewEncapsulation.None,
-    selector: 'mc-share-buttons',
-    styleUrls: ['./share-buttons.component.scss'],
-    template: `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  /* @hack we would like to apply the theme locally using ShadowDOM but
+   * fontawesome adds some global CSS dynamically so we can't use ShadowDOM.*/
+  encapsulation: ViewEncapsulation.None,
+  selector: 'mc-share-buttons',
+  styleUrls: ['./share-buttons.component.scss'],
+  template: `
     <share-buttons
       [autoSetMeta]="true"
       [description]="twitterTitle$ | push"
@@ -46,9 +46,8 @@ export type Size = 'normal' | 'small';
       [style.display]="'inline-block'"
     ></share-buttons>
   `,
-    providers: [RxState],
-    standalone: true,
-    imports: [NgxShareButtonsModule, PushPipe],
+  providers: [RxState],
+  imports: [NgxShareButtonsModule, PushPipe],
 })
 export class ShareButtonsComponent {
   @Input() set author(author: AuthorSocialInfo) {
@@ -76,8 +75,8 @@ export class ShareButtonsComponent {
         return (
           title + (authorName ? ` by ${authorName}` : '') + this._titleSuffix
         );
-      })
-    )
+      }),
+    ),
   );
   twitterTitle$ = this._state.select(
     selectSlice(['author', 'title']),
@@ -96,8 +95,8 @@ export class ShareButtonsComponent {
         return (
           title + (authorName ? ` by ${authorName}` : '') + this._titleSuffix
         );
-      })
-    )
+      }),
+    ),
   );
 
   buttons = ['linkedin', 'facebook', 'copy'];
@@ -111,7 +110,7 @@ export class ShareButtonsComponent {
       title: string;
       author: AuthorSocialInfo;
       size: Size;
-    }>
+    }>,
   ) {
     /* @hack add icons dynamically because `ShareIconsModule` needs
      * to be added to `AppModule` as it's not lazy loading friendly.*/
@@ -126,7 +125,12 @@ export class ShareButtonsComponent {
 }
 
 @NgModule({
-    exports: [ShareButtonsComponent],
-    imports: [CommonModule, NgxShareButtonsModule, PushPipe, ShareButtonsComponent],
+  exports: [ShareButtonsComponent],
+  imports: [
+    CommonModule,
+    NgxShareButtonsModule,
+    PushPipe,
+    ShareButtonsComponent,
+  ],
 })
 export class ShareButtonsModule {}

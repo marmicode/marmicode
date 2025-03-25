@@ -99,7 +99,6 @@ import { SwipeDirective, SwipeModule } from './swipe.directive';
     `,
   ],
   providers: [RxState],
-  standalone: true,
   imports: [
     PageComponent,
     SlideAnimationDirective,

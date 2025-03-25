@@ -14,14 +14,14 @@ import { MarkdownModule } from './markdown.module';
 import { MarkdownTokensComponent } from './markdown-tokens.component';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-markdown-block',
-    template: `<mc-markdown-tokens
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-markdown-block',
+  template: `<mc-markdown-tokens
     [tokens]="block.tokens"
     (highlightZoneChange)="onHighlightZoneChange($event)"
   ></mc-markdown-tokens>`,
-    styles: [
-        `
+  styles: [
+    `
       :host {
         display: block;
         margin: 10px;
@@ -44,10 +44,9 @@ import { MarkdownTokensComponent } from './markdown-tokens.component';
         }
       }
     `,
-    ],
-    providers: [MarkdownBlockStateService],
-    standalone: true,
-    imports: [MarkdownTokensComponent],
+  ],
+  providers: [MarkdownBlockStateService],
+  imports: [MarkdownTokensComponent],
 })
 export class MarkdownBlockComponent {
   @Input() block: MarkdownBlock;
@@ -74,7 +73,7 @@ export class MarkdownBlockComponent {
 }
 
 @NgModule({
-    exports: [MarkdownBlockComponent],
-    imports: [CommonModule, MarkdownModule, MarkdownBlockComponent],
+  exports: [MarkdownBlockComponent],
+  imports: [CommonModule, MarkdownModule, MarkdownBlockComponent],
 })
 export class MarkdownBlockModule {}

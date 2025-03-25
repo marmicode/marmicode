@@ -8,9 +8,9 @@ import { map } from 'rxjs/operators';
 import { DottyLineModule, DottyLineComponent } from './dotty-line.component';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-coach',
-    template: `<section
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-coach',
+  template: `<section
     [style.marginTop.px]="pictureRadius$ | push"
     [style.paddingTop.px]="(isDesktop$ | push) ? 30 : 10"
     class="coach-container"
@@ -51,8 +51,8 @@ import { DottyLineModule, DottyLineComponent } from './dotty-line.component';
     </p>
     <p>His favorite trick? Adding features by removing code.</p>
   </section>`,
-    styles: [
-        `
+  styles: [
+    `
       .coach-container {
         padding-left: 20px;
         padding-right: 20px;
@@ -90,16 +90,15 @@ import { DottyLineModule, DottyLineComponent } from './dotty-line.component';
         }
       }
     `,
-    ],
-    standalone: true,
-    imports: [DottyLineComponent, PushPipe],
+  ],
+  imports: [DottyLineComponent, PushPipe],
 })
 export class CoachComponent {
   coachPictureUri = getAssetUri('coach.webp');
   name = 'Younes Jaaidi';
   isDesktop$ = this._breakpointObserver.observe('(min-width: 960px)').pipe(
     map(({ matches }) => matches),
-    shareReplayWithRefCount()
+    shareReplayWithRefCount(),
   );
   picturePosition$: Observable<string>;
   pictureRadius$: Observable<number>;
@@ -108,19 +107,19 @@ export class CoachComponent {
     const desktopPictureWidth = 100;
     this.pictureRadius$ = this.isDesktop$.pipe(
       map((isDesktop) => (isDesktop ? desktopPictureWidth : 80)),
-      shareReplayWithRefCount()
+      shareReplayWithRefCount(),
     );
     this.picturePosition$ = this.isDesktop$.pipe(
       map((isDesktop) =>
-        isDesktop ? `calc(50% - ${desktopPictureWidth + 3}px)` : '-3px'
+        isDesktop ? `calc(50% - ${desktopPictureWidth + 3}px)` : '-3px',
       ),
-      shareReplayWithRefCount()
+      shareReplayWithRefCount(),
     );
   }
 }
 
 @NgModule({
-    exports: [CoachComponent],
-    imports: [CommonModule, DottyLineModule, PushPipe, CoachComponent],
+  exports: [CoachComponent],
+  imports: [CommonModule, DottyLineModule, PushPipe, CoachComponent],
 })
 export class CoachModule {}

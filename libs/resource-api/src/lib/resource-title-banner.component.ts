@@ -82,7 +82,6 @@ import { ResourceBadgeComponent } from '@marmicode/resource-ui';
       }
     `,
   ],
-  standalone: true,
   imports: [ResourceBadgeComponent, NgIf],
 })
 export class ResourceTitleBannerComponent {

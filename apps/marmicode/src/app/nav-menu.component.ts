@@ -98,7 +98,6 @@ import {
       transition('void <=> *', animate('.1s')),
     ]),
   ],
-  standalone: true,
   imports: [
     MatNavList,
     NgFor,

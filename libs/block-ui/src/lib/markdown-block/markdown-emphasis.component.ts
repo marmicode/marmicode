@@ -15,7 +15,6 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
       "
     />
   </em>`,
-  standalone: true,
   imports: [NgComponentOutlet],
 })
 export class MarkdownEmphasisComponent {

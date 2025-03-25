@@ -51,7 +51,6 @@ import { HighlightZone } from '../highlight/highlight-zone';
     `,
   ],
   providers: [RxState],
-  standalone: true,
   imports: [BlockComponent, AsyncPipe],
 })
 export class BlockGroupComponent {
@@ -90,12 +89,14 @@ export class BlockGroupComponent {
   constructor(
     private _state: RxState<{
       blockGroup: BlockGroup;
-      highlightZone: HighlightZone;
+      highlightZone: HighlightZone | null;
     }>,
   ) {
     /* Reset highlight zone when blocks change. */
     this._state.connect(
-      this.blocks$.pipe(map(() => ({ highlightZone: null }))),
+      this.blocks$.pipe(
+        map(() => ({ highlightZone: null as HighlightZone | null })),
+      ),
     );
   }
 

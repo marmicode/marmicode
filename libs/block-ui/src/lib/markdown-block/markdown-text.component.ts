@@ -16,7 +16,6 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
       ></ng-container>
     </ng-container>
     <span *ngIf="!token.tokens">{{ token.raw }}</span> `,
-  standalone: true,
   imports: [NgIf, NgComponentOutlet],
 })
 export class MarkdownTextComponent {

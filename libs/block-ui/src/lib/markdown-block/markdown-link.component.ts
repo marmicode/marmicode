@@ -37,7 +37,6 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
       ></ng-container>
     </a>`,
   providers: [RxState],
-  standalone: true,
   imports: [NgComponentOutlet, NgIf, HighlightLinkComponent, PushPipe],
 })
 export class MarkdownLinkComponent {

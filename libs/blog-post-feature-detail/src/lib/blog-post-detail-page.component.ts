@@ -29,7 +29,6 @@ import { BlogPostComponent } from '@marmicode/blog-post-ui';
       </ng-template>
     </mc-suspense>
   </mc-page>`,
-  standalone: true,
   imports: [PageComponent, SuspenseComponent, BlogPostComponent, PushPipe],
 })
 export class BlogPostDetailPageComponent {

@@ -7,14 +7,20 @@ import {
   NgModule,
 } from '@angular/core';
 import { MatButtonModule, MatButton } from '@angular/material/button';
-import { MatDialogModule, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose,
+} from '@angular/material/dialog';
 import { SwUpdate } from '@angular/service-worker';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-update-dialog',
-    template: `<h1 mat-dialog-title>New version available</h1>
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-update-dialog',
+  template: `<h1 mat-dialog-title>New version available</h1>
     <div mat-dialog-content>
       <p>Marmicode has been updated, are you ready to reload?</p>
     </div>
@@ -29,30 +35,29 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
         RELOAD
       </button>
     </div>`,
-    styles: [
-        `
+  styles: [
+    `
       .actions {
         display: flex;
         flex-direction: row;
         justify-content: center;
       }
     `,
-    ],
-    standalone: true,
-    imports: [
-        MatDialogTitle,
-        CdkScrollable,
-        MatDialogContent,
-        MatDialogActions,
-        CdkTrapFocus,
-        MatButton,
-        MatDialogClose,
-    ],
+  ],
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    MatDialogActions,
+    CdkTrapFocus,
+    MatButton,
+    MatDialogClose,
+  ],
 })
 export class UpdateDialogComponent {
   constructor(
     private _swUpdate: SwUpdate,
-    @Inject(DOCUMENT) private _document: Document
+    @Inject(DOCUMENT) private _document: Document,
   ) {}
 
   update() {
@@ -66,7 +71,13 @@ export class UpdateDialogComponent {
 }
 
 @NgModule({
-    exports: [UpdateDialogComponent],
-    imports: [A11yModule, CommonModule, MatButtonModule, MatDialogModule, UpdateDialogComponent],
+  exports: [UpdateDialogComponent],
+  imports: [
+    A11yModule,
+    CommonModule,
+    MatButtonModule,
+    MatDialogModule,
+    UpdateDialogComponent,
+  ],
 })
 export class UpdateDialogModule {}

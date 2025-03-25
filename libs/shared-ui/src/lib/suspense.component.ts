@@ -56,7 +56,6 @@ import { LoadingModule, LoadingComponent } from './loading.component';
       <mc-loading></mc-loading>
     </ng-template>
   `,
-  standalone: true,
   imports: [NgIf, NgTemplateOutlet, ErrorComponent, LoadingComponent, PushPipe],
 })
 export class SuspenseComponent<T = unknown> {

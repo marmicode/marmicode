@@ -47,7 +47,7 @@ x-steps:
   setup-node: &setup-node
     uses: actions/setup-node@v4
     with:
-      node-version: '18'
+      node-version: '22'
 
   upload-dist-on-failure: &upload-dist-on-failure
     name: Upload dist (Cypress videos / build output etc...) on failure
