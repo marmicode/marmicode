@@ -11,9 +11,9 @@ import { Skill } from './skill';
 import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-skill-chip',
-    template: `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-skill-chip',
+  template: `
     <a
       [routerLink]="resourceSearchRouterHelper.learn(skill.slug)"
       class="chip"
@@ -23,8 +23,8 @@ import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
       {{ skill.label }}
     </a>
   `,
-    styles: [
-        `
+  styles: [
+    `
       .chip {
         background-color: #f0f0f0;
         border-radius: 16px;
@@ -45,13 +45,8 @@ import { resourceSearchRouterHelper } from '@marmicode/shared-router-helpers';
         cursor: inherit;
       }
     `,
-    ],
-    standalone: true,
-    imports: [
-        MatRipple,
-        RouterLinkActive,
-        RouterLink,
-    ],
+  ],
+  imports: [MatRipple, RouterLinkActive, RouterLink],
 })
 export class SkillChipComponent {
   @Input() skill: Skill;
@@ -60,7 +55,7 @@ export class SkillChipComponent {
 }
 
 @NgModule({
-    exports: [SkillChipComponent],
-    imports: [CommonModule, RouterModule, MatRippleModule, SkillChipComponent],
+  exports: [SkillChipComponent],
+  imports: [CommonModule, RouterModule, MatRippleModule, SkillChipComponent],
 })
 export class SkillChipModule {}

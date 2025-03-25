@@ -15,11 +15,10 @@ import { TriangleModule } from '@marmicode/shared-ui';
 import { TriangleComponent } from '@marmicode/shared-ui';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-resource-type-triangle',
-    template: `<mc-triangle [color]="color">{{ text }}</mc-triangle>`,
-    standalone: true,
-    imports: [TriangleComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-resource-type-triangle',
+  template: `<mc-triangle [color]="color">{{ text }}</mc-triangle>`,
+  imports: [TriangleComponent],
 })
 export class ResourceTypeTriangleComponent implements OnChanges {
   @Input() resourceType: ResourceType;
@@ -33,7 +32,7 @@ export class ResourceTypeTriangleComponent implements OnChanges {
 }
 
 @NgModule({
-    exports: [ResourceTypeTriangleComponent],
-    imports: [CommonModule, TriangleModule, ResourceTypeTriangleComponent],
+  exports: [ResourceTypeTriangleComponent],
+  imports: [CommonModule, TriangleModule, ResourceTypeTriangleComponent],
 })
 export class ResourceTypeTriangleModule {}

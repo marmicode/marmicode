@@ -15,7 +15,6 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
       "
     ></ng-container>
   </ul>`,
-  standalone: true,
   imports: [NgComponentOutlet],
 })
 export class MarkdownListComponent {

@@ -41,7 +41,6 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
       }
     `,
   ],
-  standalone: true,
   imports: [NgIf, NgComponentOutlet, NgTemplateOutlet],
 })
 export class MarkdownHeadingComponent {

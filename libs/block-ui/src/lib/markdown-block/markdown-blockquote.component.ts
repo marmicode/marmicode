@@ -25,7 +25,6 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
       }
     `,
   ],
-  standalone: true,
   imports: [NgComponentOutlet],
 })
 export class MarkdownBlockquoteComponent {

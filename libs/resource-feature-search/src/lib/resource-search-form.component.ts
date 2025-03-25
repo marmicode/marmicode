@@ -16,7 +16,10 @@ import {
 } from 'rxjs/operators';
 import { ResourceSearchStateModule } from './+state/resource-search-state.module';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
-import { SearchInputModule, SearchInputComponent } from './search-input.component';
+import {
+  SearchInputModule,
+  SearchInputComponent,
+} from './search-input.component';
 import { Skill } from './skill';
 import {
   SkillRepository,
@@ -24,26 +27,25 @@ import {
 } from './skill-repository.service';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-resource-search-form',
-    template: `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-resource-search-form',
+  template: `
     <mc-search-input
       [control]="skillControl"
       [options]="filteredSkills$ | push"
       placeholder="Choose a skill..."
     ></mc-search-input>
   `,
-    styles: [
-        `
+  styles: [
+    `
       :host {
         flex: 1;
         max-width: 400px;
       }
     `,
-    ],
-    providers: [RxState],
-    standalone: true,
-    imports: [SearchInputComponent, PushPipe],
+  ],
+  providers: [RxState],
+  imports: [SearchInputComponent, PushPipe],
 })
 export class ResourceSearchFormComponent {
   skillControl = new FormControl<Skill | string>(null);
@@ -57,13 +59,13 @@ export class ResourceSearchFormComponent {
     private _router: Router,
     private _skillRepository: SkillRepository,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    private _state: RxState<any>
+    private _state: RxState<any>,
   ) {
     this.filteredSkills$ = combineLatest([
       this.allSkills$,
       concat(
         defer(() => of(this.skillControl.value)),
-        this.skillControl.valueChanges
+        this.skillControl.valueChanges,
       ),
     ]).pipe(
       map(([skills, keywords]) => {
@@ -85,15 +87,15 @@ export class ResourceSearchFormComponent {
 
           /* Check if all keywords match the label. */
           return keywordsTokenList.every((keywordsToken) =>
-            labelTokenList.find((token) => token.startsWith(keywordsToken))
+            labelTokenList.find((token) => token.startsWith(keywordsToken)),
           );
         });
-      })
+      }),
     );
 
     /* @hack forcing type because `filter` doesn't infer type properly. */
     const skillChanges$ = this.skillControl.valueChanges.pipe(
-      filter((value) => typeof value !== 'string')
+      filter((value) => typeof value !== 'string'),
     ) as Observable<Skill>;
 
     const navigateToSkill$ = skillChanges$.pipe(
@@ -110,11 +112,11 @@ export class ResourceSearchFormComponent {
         defer(() =>
           this._router.navigate(
             resourceSearchRouterHelper.learn(
-              skill?.slug ?? resourceSearchRouterHelper.EVERYTHING
-            )
-          )
-        )
-      )
+              skill?.slug ?? resourceSearchRouterHelper.EVERYTHING,
+            ),
+          ),
+        ),
+      ),
     );
 
     const updateForm$ = combineLatest([
@@ -122,9 +124,9 @@ export class ResourceSearchFormComponent {
       this.allSkills$,
     ]).pipe(
       map(([skillSlug, skills]) =>
-        skills.find((skill) => skill.slug === skillSlug)
+        skills.find((skill) => skill.slug === skillSlug),
       ),
-      tap((skill) => this.skillControl.reset(skill))
+      tap((skill) => this.skillControl.reset(skill)),
     );
 
     this._state.hold(navigateToSkill$);
@@ -137,14 +139,14 @@ export class ResourceSearchFormComponent {
 }
 
 @NgModule({
-    exports: [ResourceSearchFormComponent],
-    imports: [
-        CommonModule,
-        PushPipe,
-        ResourceSearchStateModule,
-        SkillRepositoryModule,
-        SearchInputModule,
-        ResourceSearchFormComponent,
-    ],
+  exports: [ResourceSearchFormComponent],
+  imports: [
+    CommonModule,
+    PushPipe,
+    ResourceSearchStateModule,
+    SkillRepositoryModule,
+    SearchInputModule,
+    ResourceSearchFormComponent,
+  ],
 })
 export class ResourceSearchFormModule {}

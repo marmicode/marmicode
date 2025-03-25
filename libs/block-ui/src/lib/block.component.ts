@@ -13,14 +13,20 @@ import {
   CodeBlock,
   MarkdownBlock,
 } from '@marmicode/block-core';
-import { CodeBlockModule, CodeBlockComponent } from './code-block/code-block.component';
+import {
+  CodeBlockModule,
+  CodeBlockComponent,
+} from './code-block/code-block.component';
 import { HighlightZone } from './highlight/highlight-zone';
-import { MarkdownBlockModule, MarkdownBlockComponent } from './markdown-block/markdown-block.component';
+import {
+  MarkdownBlockModule,
+  MarkdownBlockComponent,
+} from './markdown-block/markdown-block.component';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-block',
-    template: ` <ng-container [ngSwitch]="block.type">
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-block',
+  template: ` <ng-container [ngSwitch]="block.type">
     <!-- Code. -->
     <mc-code-block
       *ngSwitchCase="BlockType.Code"
@@ -37,13 +43,7 @@ import { MarkdownBlockModule, MarkdownBlockComponent } from './markdown-block/ma
       (highlightZoneChange)="highlightZoneChange.emit($event)"
     ></mc-markdown-block>
   </ng-container>`,
-    standalone: true,
-    imports: [
-        NgSwitch,
-        NgSwitchCase,
-        CodeBlockComponent,
-        MarkdownBlockComponent,
-    ],
+  imports: [NgSwitch, NgSwitchCase, CodeBlockComponent, MarkdownBlockComponent],
 })
 export class BlockComponent {
   @Input() block: Block;
@@ -63,7 +63,7 @@ export class BlockComponent {
 }
 
 @NgModule({
-    exports: [BlockComponent],
-    imports: [CommonModule, CodeBlockModule, MarkdownBlockModule, BlockComponent],
+  exports: [BlockComponent],
+  imports: [CommonModule, CodeBlockModule, MarkdownBlockModule, BlockComponent],
 })
 export class BlockModule {}

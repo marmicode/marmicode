@@ -18,20 +18,26 @@ import { combineLatest, Observable, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { ResourceSearchFacade } from './+state/resource-search.facade';
 import { Resource } from './resource';
-import { ResourceCardModule, ResourceCardComponent } from './resource-card.component';
+import {
+  ResourceCardModule,
+  ResourceCardComponent,
+} from './resource-card.component';
 import {
   ResourceRepository,
   ResourceRepositoryModule,
 } from './resource-repository.service';
-import { ResourceSearchFormModule, ResourceSearchFormComponent } from './resource-search-form.component';
+import {
+  ResourceSearchFormModule,
+  ResourceSearchFormComponent,
+} from './resource-search-form.component';
 import { PageComponent } from '@marmicode/shared-ui';
 import { LoadingComponent } from '@marmicode/shared-ui';
 import { ErrorComponent } from '@marmicode/shared-ui';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-resource-search-page',
-    template: `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-resource-search-page',
+  template: `
     <mc-page [info]="pageInfo">
       <div class="search-form-container">
         <mc-resource-search-form
@@ -58,8 +64,8 @@ import { ErrorComponent } from '@marmicode/shared-ui';
       </div>
     </mc-page>
   `,
-    styles: [
-        `
+  styles: [
+    `
       .search-form-container,
       .spinner-error-container {
         display: flex;
@@ -84,18 +90,17 @@ import { ErrorComponent } from '@marmicode/shared-ui';
         margin: 20px 5px;
       }
     `,
-    ],
-    standalone: true,
-    imports: [
-        PageComponent,
-        ResourceSearchFormComponent,
-        NgIf,
-        LoadingComponent,
-        ErrorComponent,
-        NgFor,
-        ResourceCardComponent,
-        PushPipe,
-    ],
+  ],
+  imports: [
+    PageComponent,
+    ResourceSearchFormComponent,
+    NgIf,
+    LoadingComponent,
+    ErrorComponent,
+    NgFor,
+    ResourceCardComponent,
+    PushPipe,
+  ],
 })
 export class ResourceSearchPageComponent {
   pageInfo = createBasicPageInfo({
@@ -113,7 +118,7 @@ export class ResourceSearchPageComponent {
   constructor(
     private _resourceRepository: ResourceRepository,
     private _resourceSearchFacade: ResourceSearchFacade,
-    private _transferStateHelper: TransferStateHelper
+    private _transferStateHelper: TransferStateHelper,
   ) {
     const resourcesProgress$ =
       this._resourceSearchFacade.selectedSkillSlug$.pipe(
@@ -128,7 +133,7 @@ export class ResourceSearchPageComponent {
            * We run this once to avoid reloading value from state multiple times when slug changes. */
           if (index === 0) {
             source$ = source$.pipe(
-              this._transferStateHelper.transfer('resourceSearchResult')
+              this._transferStateHelper.transfer('resourceSearchResult'),
             );
           }
 
@@ -139,14 +144,14 @@ export class ResourceSearchPageComponent {
             }),
             progressify({
               ignoreComplete: true,
-            })
+            }),
           );
         }),
-        shareReplayWithRefCount()
+        shareReplayWithRefCount(),
       );
 
     this.isLoading$ = resourcesProgress$.pipe(
-      map((notification) => notification.type === 'started')
+      map((notification) => notification.type === 'started'),
     );
 
     this.resources$ = resourcesProgress$.pipe(deprogressifyData());
@@ -159,23 +164,23 @@ export class ResourceSearchPageComponent {
     ]).pipe(
       map(([isLoading, resources]) => {
         return !isLoading && resources?.length === 0;
-      })
+      }),
     );
   }
 }
 
 @NgModule({
-    exports: [ResourceSearchPageComponent],
-    imports: [
-        CommonModule,
-        ErrorModule,
-        LoadingModule,
-        PageModule,
-        PushPipe,
-        ResourceCardModule,
-        ResourceRepositoryModule,
-        ResourceSearchFormModule,
-        ResourceSearchPageComponent,
-    ],
+  exports: [ResourceSearchPageComponent],
+  imports: [
+    CommonModule,
+    ErrorModule,
+    LoadingModule,
+    PageModule,
+    PushPipe,
+    ResourceCardModule,
+    ResourceRepositoryModule,
+    ResourceSearchFormModule,
+    ResourceSearchPageComponent,
+  ],
 })
 export class ResourceSearchModule {}

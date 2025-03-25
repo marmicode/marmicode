@@ -51,7 +51,6 @@ import { HighlightZone } from '../highlight/highlight-zone';
     `,
   ],
   providers: [RxState],
-  standalone: true,
   imports: [BlockComponent, AsyncPipe],
 })
 export class BlockGroupComponent {

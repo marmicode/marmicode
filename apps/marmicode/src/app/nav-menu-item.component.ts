@@ -17,9 +17,9 @@ export interface NavMenuEntry {
 }
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-nav-menu-item',
-    template: `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-nav-menu-item',
+  template: `
     <!-- Url. -->
     <a
       *ngIf="entry.url"
@@ -40,7 +40,7 @@ export interface NavMenuEntry {
       role="menuitem"
       routerLinkActive="active"
     >
-        <ng-container *ngTemplateOutlet="linkContent"></ng-container>
+      <ng-container *ngTemplateOutlet="linkContent"></ng-container>
     </a>
 
     <ng-template #linkContent>
@@ -49,48 +49,47 @@ export interface NavMenuEntry {
           *ngIf="showIcon"
           [class.primary]="color === 'primary'"
           class="icon"
-        >{{ entry.icon }}</mat-icon
+          >{{ entry.icon }}</mat-icon
         >
         <span class="content" [class.primary]="color === 'primary'">{{
           entry.title
-          }}</span>
+        }}</span>
       </div>
     </ng-template>
   `,
-    styles: [
-        `
-        :host {
-            display: flex;
-            justify-content: center;
-        }
-        
-        .content {
-            color: white;
-        }
-        
-        .content.primary {
-            color: var(--marmicode-primary-color);
-        }
+  styles: [
+    `
+      :host {
+        display: flex;
+        justify-content: center;
+      }
 
-        a.active .content {
-            color: var(--marmicode-accent-color);
-            cursor: default;
-        }
+      .content {
+        color: white;
+      }
 
-        .icon {
-            margin-right: 10px;
-        }
+      .content.primary {
+        color: var(--marmicode-primary-color);
+      }
+
+      a.active .content {
+        color: var(--marmicode-accent-color);
+        cursor: default;
+      }
+
+      .icon {
+        margin-right: 10px;
+      }
     `,
-    ],
-    standalone: true,
-    imports: [
-        NgIf,
-        MatListItem,
-        NgTemplateOutlet,
-        RouterLinkActive,
-        RouterLink,
-        MatIcon,
-    ],
+  ],
+  imports: [
+    NgIf,
+    MatListItem,
+    NgTemplateOutlet,
+    RouterLinkActive,
+    RouterLink,
+    MatIcon,
+  ],
 })
 export class NavMenuItemComponent {
   @Input() color?: 'primary';
@@ -99,7 +98,13 @@ export class NavMenuItemComponent {
 }
 
 @NgModule({
-    exports: [NavMenuItemComponent],
-    imports: [CommonModule, MatListModule, MatIconModule, RouterModule, NavMenuItemComponent],
+  exports: [NavMenuItemComponent],
+  imports: [
+    CommonModule,
+    MatListModule,
+    MatIconModule,
+    RouterModule,
+    NavMenuItemComponent,
+  ],
 })
 export class NavMenuItemModule {}

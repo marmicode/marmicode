@@ -21,9 +21,9 @@ import { Resource } from './resource';
 import { LinkComponent } from '@marmicode/shared-ui';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-resource-card-action',
-    template: ` <mc-link [href]="resource.url" [route]="route">
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-resource-card-action',
+  template: ` <mc-link [href]="resource.url" [route]="route">
     <button
       [style.backgroundColor]="color"
       class="action-button"
@@ -33,17 +33,16 @@ import { LinkComponent } from '@marmicode/shared-ui';
       {{ actionText }}
     </button>
   </mc-link>`,
-    styles: [
-        `
+  styles: [
+    `
       .action-button {
         font-size: 1.1em;
         min-width: 130px;
         text-transform: uppercase;
       }
     `,
-    ],
-    standalone: true,
-    imports: [LinkComponent, MatButton],
+  ],
+  imports: [LinkComponent, MatButton],
 })
 export class ResourceCardActionComponent implements OnChanges {
   private static _routeFactoryMap = new Map<
@@ -82,7 +81,12 @@ export class ResourceCardActionComponent implements OnChanges {
 }
 
 @NgModule({
-    exports: [ResourceCardActionComponent],
-    imports: [CommonModule, MatButtonModule, LinkModule, ResourceCardActionComponent],
+  exports: [ResourceCardActionComponent],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    LinkModule,
+    ResourceCardActionComponent,
+  ],
 })
 export class ResourceCardActionModule {}
