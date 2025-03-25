@@ -1,12 +1,15 @@
-import { Injectable, NgModule } from '@angular/core';
-import * as contentful from '@marmicode/contentful-api';
-import { ContentfulModule, Query } from '@marmicode/contentful-api';
+import { inject, Injectable, NgModule } from '@angular/core';
+import * as contentful from '@marmicode/contentful-infra';
+import {
+  ContentfulClient,
+  provideContentfulClient,
+  Query,
+} from '@marmicode/contentful-infra';
+import { createAuthor } from '@marmicode/resource-core';
 import { WipService } from '@marmicode/shared-utils';
-import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { createAuthor } from '@marmicode/resource-core';
 import { createResource, Resource } from './resource';
 import { Skill } from './skill';
 import { skillFragment, skillFragmentToSkill } from './skill-fragment';
@@ -77,10 +80,11 @@ const getResourcesBySkill = gql`
 
 @Injectable()
 export class ResourceRepository {
-  constructor(private _apollo: Apollo, private _wip: WipService) {}
+  private _contentfulClient = inject(ContentfulClient);
+  private _wip = inject(WipService);
 
   getResources(): Observable<Resource[]> {
-    return this._apollo
+    return this._contentfulClient
       .query<Query>({
         query: getAllResources,
         variables: {
@@ -92,7 +96,7 @@ export class ResourceRepository {
   }
 
   getResourcesBySkillSlug(skillSlug: string): Observable<Resource[]> {
-    return this._apollo
+    return this._contentfulClient
       .query<Query>({
         query: getResourcesBySkill,
         variables: {
@@ -102,8 +106,8 @@ export class ResourceRepository {
       .pipe(
         map(({ data }) =>
           this._toResources(
-            data.skillCollection.items[0].linkedFrom.resourceCollection
-          )
+            data.skillCollection.items[0].linkedFrom.resourceCollection,
+          ),
         ),
         /* We have to filter again because the previous query also returns
          * resource that have this skill in the `skills` field.
@@ -114,9 +118,9 @@ export class ResourceRepository {
             (resource) =>
               resource.skills.find((skill) => skill.slug === skillSlug) &&
               /* Hide wip resources except if we are in wip mode. */
-              (this._wip.isWip() || resource.isWip !== true)
-          )
-        )
+              (this._wip.isWip() || resource.isWip !== true),
+          ),
+        ),
       );
   }
 
@@ -144,7 +148,7 @@ export class ResourceRepository {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         type: item.resourceType as any,
         url: item.url,
-      })
+      }),
     );
   }
 
@@ -154,7 +158,6 @@ export class ResourceRepository {
 }
 
 @NgModule({
-  imports: [ContentfulModule],
-  providers: [ResourceRepository],
+  providers: [ResourceRepository, provideContentfulClient()],
 })
 export class ResourceRepositoryModule {}

@@ -27,7 +27,7 @@
         "libs/blog-post-feature-detail/src/index.ts"
       ],
       "@marmicode/blog-post-ui": ["libs/blog-post-ui/src/index.ts"],
-      "@marmicode/contentful-api": ["libs/contentful-api/src/index.ts"],
+      "@marmicode/contentful-infra": ["libs/contentful-infra/src/index.ts"],
       "@marmicode/learning-map-feature-tree": [
         "libs/learning-map-feature-tree/src/index.ts"
       ],

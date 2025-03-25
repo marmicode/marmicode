@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { ContentfulClient } from '@marmicode/contentful-infra';
 import { provideApolloCacheWithResolvers } from '@marmicode/testing';
 import { ApolloTestingModule } from 'apollo-angular/testing';
 import { BlogPostRepository } from './blog-post-repository.service';
@@ -42,6 +43,7 @@ describe('BlogPostRepository', () => {
       imports: [ApolloTestingModule],
       providers: [
         BlogPostRepository,
+        ContentfulClient,
         provideApolloCacheWithResolvers({
           resourceCollection: mockResourceCollectionResolver,
         }),
@@ -71,7 +73,7 @@ describe('BlogPostRepository', () => {
         summary: 'Life is too short...',
         title: 'End-to-End HTTP request cancelation with RxJS & NestJS',
         text: expect.stringMatching(/Life is too short/),
-      })
+      }),
     );
 
     expect(mockResourceCollectionResolver).toBeCalledTimes(1);
@@ -84,7 +86,7 @@ describe('BlogPostRepository', () => {
             slug: 'end-to-end-http-request-cancelation-with-rxjs-and-nestjs',
           },
         },
-      })
+      }),
     );
   });
 

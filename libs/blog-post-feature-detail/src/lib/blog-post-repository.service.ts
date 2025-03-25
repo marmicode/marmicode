@@ -1,11 +1,12 @@
-import { Injectable, NgModule } from '@angular/core';
+import { inject, Injectable, NgModule } from '@angular/core';
 import { BlogPost, createBlogPost } from '@marmicode/blog-post-ui';
 import {
   BlogPost as ContentfulBlogPost,
-  ContentfulModule,
+  ContentfulClient,
+  provideContentfulClient,
   Query,
-} from '@marmicode/contentful-api';
-import { Apollo, gql } from 'apollo-angular';
+} from '@marmicode/contentful-infra';
+import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -42,10 +43,10 @@ export const getBlogPost = gql`
 
 @Injectable()
 export class BlogPostRepository {
-  constructor(private _apollo: Apollo) {}
+  private _contentfulClient = inject(ContentfulClient);
 
   getBlogPost(blogPostSlug: string): Observable<BlogPost> {
-    return this._apollo
+    return this._contentfulClient
       .query<Query>({
         query: getBlogPost,
         variables: {
@@ -70,13 +71,12 @@ export class BlogPostRepository {
             title: resource.title,
             text: (resource.content as ContentfulBlogPost).text,
           });
-        })
+        }),
       );
   }
 }
 
 @NgModule({
-  imports: [ContentfulModule],
-  providers: [BlogPostRepository],
+  providers: [BlogPostRepository, provideContentfulClient()],
 })
 export class BlogPostRepositoryModule {}
