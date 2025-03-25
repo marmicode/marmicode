@@ -43,6 +43,7 @@ import { SkillChipComponent, SkillChipModule } from './skill-chip.component';
         [src]="resource.pictureUri"
         [alt]="resource.title"
         class="picture"
+        loading=lazy
         mat-card-image
       />
 

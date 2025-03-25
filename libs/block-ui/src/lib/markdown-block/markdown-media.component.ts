@@ -15,6 +15,7 @@ import { NgIf } from '@angular/common';
       *ngIf="!isVideo"
       [alt]="token.text"
       [src]="token.href"
+      loading="lazy"
       class="image"
     />
     <video
