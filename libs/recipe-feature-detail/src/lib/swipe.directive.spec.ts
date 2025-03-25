@@ -1,10 +1,16 @@
-import { Component, DebugElement, EventEmitter } from '@angular/core';
+import {
+  Component,
+  DebugElement,
+  EventEmitter,
+  provideExperimentalZonelessChangeDetection,
+} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { beforeEach, describe, expect, jest, it } from '@jest/globals';
-import { SwipeModule } from './swipe.directive';
+import { SwipeDirective, SwipeModule } from './swipe.directive';
 
 @Component({
+  imports: [SwipeDirective],
   template: `
     <div data-role="container">
       <div
@@ -30,16 +36,12 @@ describe('SwipeDirective', () => {
   let contentEl: DebugElement;
 
   beforeEach(async () => {
-    return TestBed.configureTestingModule({
-      declarations: [SwipeTestComponent],
-      imports: [SwipeModule],
-    }).compileComponents();
-  });
-
-  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideExperimentalZonelessChangeDetection()],
+    });
     fixture = TestBed.createComponent(SwipeTestComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    await fixture.whenStable();
     contentEl = fixture.debugElement.query(By.css('[data-role=content]'));
   });
 
@@ -47,11 +49,7 @@ describe('SwipeDirective', () => {
     triggerTouchEvent({ eventName: 'touchstart', clientX: 200 });
     triggerTouchEvent({ eventName: 'touchmove', clientX: 250 });
 
-    expect(contentEl.styles).toEqual(
-      expect.objectContaining({
-        marginLeft: '50px',
-      })
-    );
+    expect(contentEl.styles.marginLeft).toBe('50px');
   });
 
   it('should reset position on touchend', () => {
@@ -66,10 +64,8 @@ describe('SwipeDirective', () => {
     triggerTouchEvent({ eventName: 'touchstart', clientX: 200 });
     triggerTouchEvent({ eventName: 'touchmove', clientX: 250 });
 
-    expect(contentEl.styles).toEqual(
-      expect.objectContaining({
-        filter: expect.stringMatching(/blur\(.*px\) grayscale\(.*%\)/),
-      })
+    expect(contentEl.styles.filter).toEqual(
+      expect.stringMatching(/blur\(.*px\) grayscale\(.*%\)/),
     );
   });
 
@@ -134,13 +130,13 @@ describe('SwipeDirective', () => {
       window.dispatchEvent(
         new TouchEvent(eventName, {
           touches,
-        } as TouchEventInit)
+        } as TouchEventInit),
       );
     } else {
       contentEl.nativeElement.dispatchEvent(
         new TouchEvent(eventName, {
           touches,
-        } as TouchEventInit)
+        } as TouchEventInit),
       );
     }
   }
