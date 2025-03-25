@@ -1,13 +1,16 @@
-import { Injectable, NgModule } from '@angular/core';
+import { inject, Injectable, NgModule } from '@angular/core';
 import {
-  ContentfulModule,
-  Recipe as ContentfulRecipe,
+  BlockGroup,
+  createCodeBlock,
+  createTextBlock,
+} from '@marmicode/block-api';
+import {
+  ContentfulClient,
+  provideContentfulClient,
   Query,
-} from '@marmicode/contentful-api';
-import { createCodeBlock, createTextBlock } from '@marmicode/block-api';
-import { BlockGroup } from '@marmicode/block-api';
+  Recipe as ContentfulRecipe,
+} from '@marmicode/contentful-infra';
 import { ResourceType } from '@marmicode/resource-api';
-import { Apollo } from 'apollo-angular';
 
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
@@ -95,10 +98,10 @@ const getRecipe = gql`
 
 @Injectable()
 export class RecipeRepository {
-  constructor(private _apollo: Apollo) {}
+  private _contentfulClient = inject(ContentfulClient);
 
   getRecipeFirstFrameSlug(recipeSlug: string): Observable<string> {
-    return this._apollo
+    return this._contentfulClient
       .query<Query>({
         query: getRecipeFirstFrameSlug,
         variables: {
@@ -109,13 +112,13 @@ export class RecipeRepository {
         map(
           ({ data }) =>
             (data.resourceCollection.items[0].content as ContentfulRecipe)
-              .frameCollection.items[0].slug
-        )
+              .frameCollection.items[0].slug,
+        ),
       );
   }
 
   getRecipe(recipeSlug: string): Observable<Recipe> {
-    return this._apollo
+    return this._contentfulClient
       .query<Query>({
         query: getRecipe,
         variables: {
@@ -131,37 +134,37 @@ export class RecipeRepository {
             title: resource.title,
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             type: resource.resourceType as any,
-            frames: (resource.content as ContentfulRecipe).frameCollection.items.map(
-              (frame) =>
-                createFrame({
-                  blocks: frame.blockCollection.items.map((block) => {
-                    switch (block.__typename) {
-                      case 'CodeBlock':
-                        return createCodeBlock({
-                          code: block.code,
-                          language: block.language,
-                        });
-                      case 'TextBlock':
-                        return createTextBlock({
-                          text: block.text,
-                        });
-                      default:
-                        return null;
-                    }
-                  }),
-                  duration: frame.duration,
-                  slug: frame.slug,
-                  title: frame.title,
-                })
+            frames: (
+              resource.content as ContentfulRecipe
+            ).frameCollection.items.map((frame) =>
+              createFrame({
+                blocks: frame.blockCollection.items.map((block) => {
+                  switch (block.__typename) {
+                    case 'CodeBlock':
+                      return createCodeBlock({
+                        code: block.code,
+                        language: block.language,
+                      });
+                    case 'TextBlock':
+                      return createTextBlock({
+                        text: block.text,
+                      });
+                    default:
+                      return null;
+                  }
+                }),
+                duration: frame.duration,
+                slug: frame.slug,
+                title: frame.title,
+              }),
             ),
           });
-        })
+        }),
       );
   }
 }
 
 @NgModule({
-  imports: [ContentfulModule],
-  providers: [RecipeRepository],
+  providers: [RecipeRepository, provideContentfulClient()],
 })
 export class RecipeRepositoryModule {}

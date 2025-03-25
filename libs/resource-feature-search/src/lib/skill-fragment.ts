@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import { createSkill } from './skill';
-import * as schema from '@marmicode/contentful-api';
+import * as schema from '@marmicode/contentful-infra';
 
 export const skillFragment = gql`
   fragment SkillFragment on Skill {
