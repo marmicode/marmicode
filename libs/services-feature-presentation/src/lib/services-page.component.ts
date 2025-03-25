@@ -2,18 +2,24 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { createBasicPageInfo, PageModule } from '@marmicode/shared-ui';
-import { ActionButtonModule, ActionButtonComponent } from './action-button.component';
+import {
+  ActionButtonModule,
+  ActionButtonComponent,
+} from './action-button.component';
 import { BannerModule, BannerComponent } from './banner.component';
 import { CoachModule, CoachComponent } from './coach.component';
 import { SectionModule, SectionComponent } from './section.component';
 import { SlantModule, SlantComponent } from './slant.component';
-import { WorkshopsButtonModule, WorkshopsButtonComponent } from './workshops-button.component';
+import {
+  WorkshopsButtonModule,
+  WorkshopsButtonComponent,
+} from './workshops-button.component';
 import { PageComponent } from '@marmicode/shared-ui';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-services-page',
-    template: ` <mc-page [info]="pageInfo">
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-services-page',
+  template: ` <mc-page [info]="pageInfo">
     <mc-banner></mc-banner>
     <mc-slant></mc-slant>
     <div class="services-presentation">
@@ -70,8 +76,8 @@ import { PageComponent } from '@marmicode/shared-ui';
       </mc-section>
     </div>
   </mc-page>`,
-    styles: [
-        `
+  styles: [
+    `
       .services-presentation {
         background-color: white;
       }
@@ -83,17 +89,16 @@ import { PageComponent } from '@marmicode/shared-ui';
         justify-content: center;
       }
     `,
-    ],
-    standalone: true,
-    imports: [
-        PageComponent,
-        BannerComponent,
-        SlantComponent,
-        SectionComponent,
-        WorkshopsButtonComponent,
-        ActionButtonComponent,
-        CoachComponent,
-    ],
+  ],
+  imports: [
+    PageComponent,
+    BannerComponent,
+    SlantComponent,
+    SectionComponent,
+    WorkshopsButtonComponent,
+    ActionButtonComponent,
+    CoachComponent,
+  ],
 })
 export class ServicesPageComponent {
   pageInfo = createBasicPageInfo({
@@ -103,18 +108,18 @@ export class ServicesPageComponent {
 }
 
 @NgModule({
-    exports: [ServicesPageComponent],
-    imports: [
-        CommonModule,
-        BannerModule,
-        SlantModule,
-        SectionModule,
-        WorkshopsButtonModule,
-        MatButtonModule,
-        ActionButtonModule,
-        CoachModule,
-        PageModule,
-        ServicesPageComponent,
-    ],
+  exports: [ServicesPageComponent],
+  imports: [
+    CommonModule,
+    BannerModule,
+    SlantModule,
+    SectionModule,
+    WorkshopsButtonModule,
+    MatButtonModule,
+    ActionButtonModule,
+    CoachModule,
+    PageModule,
+    ServicesPageComponent,
+  ],
 })
 export class ServicesModule {}

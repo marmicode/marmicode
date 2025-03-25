@@ -155,7 +155,6 @@ import { SkillChipComponent, SkillChipModule } from './skill-chip.component';
       }
     `,
   ],
-  standalone: true,
   imports: [
     MatCard,
     NgIf,

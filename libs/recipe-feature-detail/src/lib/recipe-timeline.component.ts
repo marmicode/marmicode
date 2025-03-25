@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  NgModule
+  NgModule,
 } from '@angular/core';
 import { MatButtonModule, MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,9 +16,9 @@ import { getRelativeFrameRoute } from './get-relative-frame-route';
 import { Frame } from './recipe-repository.service';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-recipe-timeline',
-    template: `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-recipe-timeline',
+  template: `
     <div class="line-container">
       <hr class="line" />
       <hr [style.width.%]="progress$ | push" class="past-line" />
@@ -44,8 +44,8 @@ import { Frame } from './recipe-repository.service';
       </button>
     </a>
   `,
-    styles: [
-        `
+  styles: [
+    `
       :host {
         display: flex;
         position: relative;
@@ -88,18 +88,12 @@ import { Frame } from './recipe-repository.service';
         color: var(--marmicode-accent-color);
       }
     `,
-    ],
-    /* I hate scss but we are using it here for computing bullet dimensions
-     * and positioning. */
-    styleUrls: ['./recipe-timeline.component.scss'],
-    providers: [RxState],
-    standalone: true,
-    imports: [
-        NgFor,
-        RouterLink,
-        MatButton,
-        PushPipe,
-    ],
+  ],
+  /* I hate scss but we are using it here for computing bullet dimensions
+   * and positioning. */
+  styleUrls: ['./recipe-timeline.component.scss'],
+  providers: [RxState],
+  imports: [NgFor, RouterLink, MatButton, PushPipe],
 })
 export class RecipeTimelineComponent {
   @Input() set frames(frames: Frame[]) {
@@ -126,9 +120,9 @@ export class RecipeTimelineComponent {
           isCurrent: index === currentFrameIndex,
           position: this._getBulletPosition({ frames, index }),
           route: getRelativeFrameRoute(frame.slug),
-        }))
-      )
-    )
+        })),
+      ),
+    ),
   );
 
   progress$ = this._state
@@ -137,9 +131,9 @@ export class RecipeTimelineComponent {
       selectSlice(['frames', 'currentFrameIndex']),
       select(
         map(({ frames, currentFrameIndex }) =>
-          this._getBulletPosition({ frames, index: currentFrameIndex })
-        )
-      )
+          this._getBulletPosition({ frames, index: currentFrameIndex }),
+        ),
+      ),
     );
 
   constructor(
@@ -147,7 +141,7 @@ export class RecipeTimelineComponent {
       frames: Frame[];
       recipeSlug: string;
       currentFrameIndex: number;
-    }>
+    }>,
   ) {}
 
   private _getBulletPosition({
@@ -162,14 +156,14 @@ export class RecipeTimelineComponent {
 }
 
 @NgModule({
-    exports: [RecipeTimelineComponent],
-    imports: [
-        CommonModule,
-        RouterModule,
-        MatButtonModule,
-        MatIconModule,
-        PushPipe,
-        RecipeTimelineComponent,
-    ],
+  exports: [RecipeTimelineComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatButtonModule,
+    MatIconModule,
+    PushPipe,
+    RecipeTimelineComponent,
+  ],
 })
 export class RecipeTimelineModule {}

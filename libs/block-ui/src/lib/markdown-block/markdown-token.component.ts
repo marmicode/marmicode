@@ -104,7 +104,6 @@ import { MarkdownTextComponent } from './markdown-text.component';
       ></mc-markdown-text>
     </ng-container>
   `,
-  standalone: true,
   imports: [
     NgSwitch,
     NgSwitchCase,

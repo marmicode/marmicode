@@ -7,7 +7,11 @@ import {
   NgModule,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule, MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
+import {
+  MatAutocompleteModule,
+  MatAutocompleteTrigger,
+  MatAutocomplete,
+} from '@angular/material/autocomplete';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
 import { RxState } from '@rx-angular/state';
@@ -26,10 +30,10 @@ export interface SearchInputOption {
 }
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-search-input',
-    providers: [RxState],
-    template: `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-search-input',
+  providers: [RxState],
+  template: `
     <div class="search-input-container">
       <!-- Search icon. -->
       <mat-icon class="search-icon" color="primary">search</mat-icon>
@@ -60,8 +64,8 @@ export interface SearchInputOption {
       </mat-option>
     </mat-autocomplete>
   `,
-    styles: [
-        `
+  styles: [
+    `
       .search-input-container {
         display: flex;
         flex-direction: row;
@@ -110,19 +114,18 @@ export interface SearchInputOption {
         right: 0;
       }
     `,
-    ],
-    standalone: true,
-    imports: [
-        MatIcon,
-        ReactiveFormsModule,
-        MatAutocompleteTrigger,
-        NgIf,
-        MatIconButton,
-        MatAutocomplete,
-        NgFor,
-        MatOption,
-        PushPipe,
-    ],
+  ],
+  imports: [
+    MatIcon,
+    ReactiveFormsModule,
+    MatAutocompleteTrigger,
+    NgIf,
+    MatIconButton,
+    MatAutocomplete,
+    NgFor,
+    MatOption,
+    PushPipe,
+  ],
 })
 export class SearchInputComponent {
   @Input() set control(control: FormControl<Skill | string>) {
@@ -138,12 +141,12 @@ export class SearchInputComponent {
   getOptionLabel = (option: SearchInputOption) => option?.label;
 
   constructor(
-    private _state: RxState<{ control: FormControl<Skill | string> }>
+    private _state: RxState<{ control: FormControl<Skill | string> }>,
   ) {
     this.value$ = this.control$.pipe(
       switchMap((control) => control.valueChanges),
       /* Filter duplicates. */
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
 
     /* Reset. */
@@ -151,22 +154,22 @@ export class SearchInputComponent {
       this.reset$.pipe(
         withLatestFrom(this.control$),
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        tap(([_, control]) => control.reset())
-      )
+        tap(([_, control]) => control.reset()),
+      ),
     );
   }
 }
 
 @NgModule({
-    exports: [SearchInputComponent],
-    imports: [
-        CommonModule,
-        MatButtonModule,
-        MatAutocompleteModule,
-        MatIconModule,
-        PushPipe,
-        ReactiveFormsModule,
-        SearchInputComponent,
-    ],
+  exports: [SearchInputComponent],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatAutocompleteModule,
+    MatIconModule,
+    PushPipe,
+    ReactiveFormsModule,
+    SearchInputComponent,
+  ],
 })
 export class SearchInputModule {}

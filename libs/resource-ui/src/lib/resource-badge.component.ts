@@ -15,13 +15,13 @@ import { RxState } from '@rx-angular/state';
 import { map } from 'rxjs/operators';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-resource-badge',
-    template: ` <span [style.backgroundColor]="badgeColor$ | push" class="badge">
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-resource-badge',
+  template: ` <span [style.backgroundColor]="badgeColor$ | push" class="badge">
     {{ badgeText$ | push }}
   </span>`,
-    styles: [
-        `
+  styles: [
+    `
       .badge {
         display: inline-block;
         position: relative;
@@ -34,10 +34,9 @@ import { map } from 'rxjs/operators';
         text-transform: uppercase;
       }
     `,
-    ],
-    providers: [RxState],
-    standalone: true,
-    imports: [PushPipe],
+  ],
+  providers: [RxState],
+  imports: [PushPipe],
 })
 export class ResourceBadgeComponent {
   @Input() set resourceType(resourceType: ResourceType) {
@@ -45,18 +44,18 @@ export class ResourceBadgeComponent {
   }
 
   badgeColor$ = this._state.select(
-    map(({ resourceType }) => getResourceTypeColor(resourceType))
+    map(({ resourceType }) => getResourceTypeColor(resourceType)),
   );
 
   badgeText$ = this._state.select(
-    map(({ resourceType }) => getResourceTypeText(resourceType))
+    map(({ resourceType }) => getResourceTypeText(resourceType)),
   );
 
   constructor(private _state: RxState<{ resourceType: ResourceType }>) {}
 }
 
 @NgModule({
-    exports: [ResourceBadgeComponent],
-    imports: [CommonModule, PushPipe, ResourceBadgeComponent],
+  exports: [ResourceBadgeComponent],
+  imports: [CommonModule, PushPipe, ResourceBadgeComponent],
 })
 export class ResourceBadgeModule {}

@@ -15,8 +15,8 @@ import { appRouterHelper } from './app-router-helper';
 import { NavMenuModule, NavMenuComponent } from './nav-menu.component';
 
 @Component({
-    selector: 'mc-nav',
-    template: `
+  selector: 'mc-nav',
+  template: `
     <!-- Toolbar. -->
     <mat-toolbar
       [class.toolbar-hidden]="isScrollingDown$ | push"
@@ -41,8 +41,8 @@ import { NavMenuModule, NavMenuComponent } from './nav-menu.component';
       <ng-content></ng-content>
     </div>
   `,
-    styles: [
-        `
+  styles: [
+    `
       :host {
         display: block;
         height: 100%;
@@ -83,14 +83,8 @@ import { NavMenuModule, NavMenuComponent } from './nav-menu.component';
         height: calc(100% - 64px);
       }
     `,
-    ],
-    standalone: true,
-    imports: [
-        MatToolbar,
-        RouterLink,
-        NavMenuComponent,
-        PushPipe,
-    ],
+  ],
+  imports: [MatToolbar, RouterLink, NavMenuComponent, PushPipe],
 })
 export class NavComponent {
   appRouterHelper = appRouterHelper;
@@ -98,13 +92,16 @@ export class NavComponent {
 
   private _scrollPosition$ = new BehaviorSubject(0);
 
-  constructor(platform: Platform, private _viewportScroller: ViewportScroller) {
+  constructor(
+    platform: Platform,
+    private _viewportScroller: ViewportScroller,
+  ) {
     this.isScrollingDown$ = this._scrollPosition$.pipe(
       observeOn(
-        platform.isBrowser() ? animationFrameScheduler : asyncScheduler
+        platform.isBrowser() ? animationFrameScheduler : asyncScheduler,
       ),
       pairwise(),
-      map(([previous, current]) => current > 64 && current - previous > 0)
+      map(([previous, current]) => current > 64 && current - previous > 0),
     );
   }
 
@@ -115,14 +112,14 @@ export class NavComponent {
 }
 
 @NgModule({
-    exports: [NavComponent],
-    imports: [
-        CommonModule,
-        MatToolbarModule,
-        NavMenuModule,
-        PushPipe,
-        RouterModule,
-        NavComponent,
-    ],
+  exports: [NavComponent],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    NavMenuModule,
+    PushPipe,
+    RouterModule,
+    NavComponent,
+  ],
 })
 export class NavModule {}

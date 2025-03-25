@@ -31,7 +31,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
@@ -67,7 +67,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
@@ -101,7 +101,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
@@ -135,7 +135,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
@@ -171,7 +171,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
@@ -207,7 +207,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
@@ -250,7 +250,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
@@ -290,7 +290,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
@@ -344,7 +344,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
@@ -400,7 +400,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest

@@ -109,7 +109,6 @@ import {
     `,
   ],
   providers: [RxState],
-  standalone: true,
   imports: [
     ResourceHeaderComponent,
     ShareButtonsComponent,
