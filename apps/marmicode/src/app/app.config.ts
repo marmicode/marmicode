@@ -16,10 +16,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { provideEffects } from '@ngrx/effects';
-import {
-  provideRouterStore,
-  StoreRouterConnectingModule,
-} from '@ngrx/router-store';
+import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -35,14 +32,15 @@ export const appConfig: ApplicationConfig = {
         enabled: environment.production,
       }),
     ),
-    importProvidersFrom(StoreRouterConnectingModule.forRoot()),
     provideAnalytics(() => getAnalytics()),
     provideEffects(UpdateEffects),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideExperimentalZonelessChangeDetection(),
     provideHttpClient(withInterceptorsFromDi()),
+    provideStore({
+      router: routerReducer,
+    }),
     provideRouterStore(),
-    provideStore(),
     provideUpdateEffects(),
   ],
 };
