@@ -1,117 +1,279 @@
 {
   "data": {
     "skillCollection": {
+      "__typename": "SkillCollection",
       "items": [
         {
-          "sys": { "id": "5QhhgFU5KE0eJRWpJoLU8A", "__typename": "Sys" },
+          "sys": {
+            "id": "3cB5TZlmXGcSe6xLZNe9A4",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
+          "label": "Angular AOT Testing",
+          "slug": "angular-aot-testing"
+        },
+        {
+          "sys": {
+            "id": "5QhhgFU5KE0eJRWpJoLU8A",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "Angular CLI Basics",
-          "slug": "angular-cli-basics",
-          "__typename": "Skill"
+          "slug": "angular-cli-basics"
         },
         {
-          "sys": { "id": "7Ec0XpecHrUiGWdB7eACQo", "__typename": "Sys" },
+          "sys": {
+            "id": "7Ec0XpecHrUiGWdB7eACQo",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "Angular Components",
-          "slug": "angular-components",
-          "__typename": "Skill"
+          "slug": "angular-components"
         },
         {
-          "sys": { "id": "45eKVY9T265aPEfP7jLyrb", "__typename": "Sys" },
+          "sys": {
+            "id": "2KjWZaaVsTVLZIBiDJhA9g",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
+          "label": "Angular Cypress Component Testing",
+          "slug": "angular-cypress-component-testing"
+        },
+        {
+          "sys": {
+            "id": "4eK49g0ZLeZMaxXVhvxnoT",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
+          "label": "Angular Dependency Injection",
+          "slug": "angular-dependency-injection"
+        },
+        {
+          "sys": {
+            "id": "4SCwOvtMz35briuzbki5Qn",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
+          "label": "Angular Injection Functions",
+          "slug": "angular-injection-functions"
+        },
+        {
+          "sys": {
+            "id": "45eKVY9T265aPEfP7jLyrb",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "Angular Lazy Loading",
-          "slug": "angular-lazy-loading",
-          "__typename": "Skill"
+          "slug": "angular-lazy-loading"
         },
         {
-          "sys": { "id": "5wAEdDJEFeFL8C9W0VgPsl", "__typename": "Sys" },
+          "sys": {
+            "id": "5wAEdDJEFeFL8C9W0VgPsl",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "Angular Modules",
-          "slug": "angular-modules",
-          "__typename": "Skill"
+          "slug": "angular-modules"
         },
         {
-          "sys": { "id": "4CJ8EFWXg4I6X6RXZug6dO", "__typename": "Sys" },
+          "sys": {
+            "id": "307AKPIHvEZ0SeMRBYFsfq",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
+          "label": "Angular Private Services",
+          "slug": "angular-private-services"
+        },
+        {
+          "sys": {
+            "id": "3fqKyZs63CDwu86MVhhpYl",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
+          "label": "Angular Signals",
+          "slug": "angular-signals"
+        },
+        {
+          "sys": {
+            "id": "1aAhxaeMmpdaojjLqbO1qg",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
+          "label": "Angular Signals Error Management",
+          "slug": "angular-signals-error-management"
+        },
+        {
+          "sys": {
+            "id": "30bAA5cKxCaIVZJtztPRdk",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
+          "label": "Angular Testing Basics",
+          "slug": "angular-testing-basics"
+        },
+        {
+          "sys": {
+            "id": "3nWUXfA4VV8ocVgu2AYE5Z",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
+          "label": "Custom Render Strategies",
+          "slug": "custom-render-strategies"
+        },
+        {
+          "sys": {
+            "id": "7c0hG64sfu7ERhzOWAi0bk",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
+          "label": "Cypress Basics",
+          "slug": "cypress-basics"
+        },
+        {
+          "sys": {
+            "id": "4CJ8EFWXg4I6X6RXZug6dO",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "Express Gateway Request Validation",
-          "slug": "express-gateway-request-validation",
-          "__typename": "Skill"
+          "slug": "express-gateway-request-validation"
         },
         {
-          "sys": { "id": "QDTym2ntmKSuIdzA5WNdE", "__typename": "Sys" },
+          "sys": {
+            "id": "QDTym2ntmKSuIdzA5WNdE",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "Jasmine",
-          "slug": "jasmine",
-          "__typename": "Skill"
+          "slug": "jasmine"
         },
         {
-          "sys": { "id": "27P7hJElhFqY8iXLLPXhqg", "__typename": "Sys" },
+          "sys": {
+            "id": "27P7hJElhFqY8iXLLPXhqg",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "Jest",
-          "slug": "jest",
-          "__typename": "Skill"
+          "slug": "jest"
         },
         {
-          "sys": { "id": "tp9edT0CX7Eo36tCvBSek", "__typename": "Sys" },
+          "sys": {
+            "id": "tp9edT0CX7Eo36tCvBSek",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "Limbo",
-          "slug": "limbo",
-          "__typename": "Skill"
+          "slug": "limbo"
         },
         {
-          "sys": { "id": "4Y0B2kkToZ6z17r0lYtR2N", "__typename": "Sys" },
+          "sys": {
+            "id": "4Y0B2kkToZ6z17r0lYtR2N",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "Mocking Angular Services",
-          "slug": "mocking-angular-services",
-          "__typename": "Skill"
+          "slug": "mocking-angular-services"
         },
         {
-          "sys": { "id": "58wtD6mbyF8OFGRAWfrDin", "__typename": "Sys" },
+          "sys": {
+            "id": "58wtD6mbyF8OFGRAWfrDin",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "Moduleless Angular",
-          "slug": "moduleless-angular",
-          "__typename": "Skill"
+          "slug": "moduleless-angular"
         },
         {
-          "sys": { "id": "3OdKMyrBo5hxbyDCL2Klzq", "__typename": "Sys" },
+          "sys": {
+            "id": "3OdKMyrBo5hxbyDCL2Klzq",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "OpenAPI Specification Basics",
-          "slug": "openapi-specification-basics",
-          "__typename": "Skill"
+          "slug": "openapi-specification-basics"
         },
         {
-          "sys": { "id": "5hNVJpbqTAQIorIaGPf54l", "__typename": "Sys" },
+          "sys": {
+            "id": "5hNVJpbqTAQIorIaGPf54l",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "Propagating HTTP request cancelation",
-          "slug": "propagating-http-request-cancelation",
-          "__typename": "Skill"
+          "slug": "propagating-http-request-cancelation"
         },
         {
-          "sys": { "id": "31ozuyIOuBP9Q4wENZ9T3d", "__typename": "Sys" },
+          "sys": {
+            "id": "31ozuyIOuBP9Q4wENZ9T3d",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "RxJS Basics",
-          "slug": "rxjs-basics",
-          "__typename": "Skill"
+          "slug": "rxjs-basics"
         },
         {
-          "sys": { "id": "3RPw75Mj487lBFk2DXD9MH", "__typename": "Sys" },
+          "sys": {
+            "id": "2NbwVUdVOR7MZ2OMqajDtm",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
+          "label": "RxJS Teardown Propagation",
+          "slug": "rxjs-teardown-propagation"
+        },
+        {
+          "sys": {
+            "id": "3RPw75Mj487lBFk2DXD9MH",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "SCAM",
-          "slug": "scam",
-          "__typename": "Skill"
+          "slug": "scam"
         },
         {
-          "sys": { "id": "2Y314h47vgRaQzuJBYCVwb", "__typename": "Sys" },
+          "sys": {
+            "id": "2Y314h47vgRaQzuJBYCVwb",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "Setup Express Gateway",
-          "slug": "setup-express-gateway",
-          "__typename": "Skill"
+          "slug": "setup-express-gateway"
         },
         {
-          "sys": { "id": "7UiTMuaQp1HSjYj0BbAWV", "__typename": "Sys" },
+          "sys": {
+            "id": "7UiTMuaQp1HSjYj0BbAWV",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "TCR",
-          "slug": "tcr",
-          "__typename": "Skill"
+          "slug": "tcr"
         },
         {
-          "sys": { "id": "1DBu03vVr53evNRubDJa7a", "__typename": "Sys" },
+          "sys": {
+            "id": "1DBu03vVr53evNRubDJa7a",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "Timeboxed TDD",
-          "slug": "timeboxed-tdd",
-          "__typename": "Skill"
+          "slug": "timeboxed-tdd"
         },
         {
-          "sys": { "id": "7HzsEBMbnVelnuzKdUtsax", "__typename": "Sys" },
+          "sys": {
+            "id": "7HzsEBMbnVelnuzKdUtsax",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
           "label": "TypeScript Basics",
-          "slug": "typescript-basics",
-          "__typename": "Skill"
+          "slug": "typescript-basics"
+        },
+        {
+          "sys": {
+            "id": "624M0Zuk151YiK5RJwbNtW",
+            "__typename": "Sys"
+          },
+          "__typename": "Skill",
+          "label": "Versatile Angular Style",
+          "slug": "versatile-angular"
         }
-      ],
-      "__typename": "SkillCollection"
+      ]
     }
   }
 }

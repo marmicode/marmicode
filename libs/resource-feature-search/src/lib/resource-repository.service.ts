@@ -9,7 +9,7 @@ import { createAuthor } from '@marmicode/resource-core';
 import { WipService } from '@marmicode/shared-utils';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { createResource, Resource } from './resource';
 import { Skill } from './skill';
 import { skillFragment, skillFragmentToSkill } from './skill-fragment';
@@ -96,6 +96,7 @@ export class ResourceRepository {
   }
 
   getResourcesBySkillSlug(skillSlug: string): Observable<Resource[]> {
+    console.log(skillSlug);
     return this._contentfulClient
       .query<Query>({
         query: getResourcesBySkill,
@@ -104,6 +105,7 @@ export class ResourceRepository {
         },
       })
       .pipe(
+        tap(console.log),
         map(({ data }) =>
           this._toResources(
             data.skillCollection.items[0].linkedFrom.resourceCollection,
