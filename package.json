@@ -69,7 +69,7 @@
     "@storybook/addon-interactions": "8.6.12",
     "@storybook/core-server": "8.6.12",
     "apollo-angular": "4.2.1",
-    "axios": "1.7.9",
+    "axios": "1.8.4",
     "document-register-element": "^1.7.2",
     "express": "4.21.2",
     "firebase": "^9.9.0",
