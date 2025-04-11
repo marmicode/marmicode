@@ -56,7 +56,7 @@
     "@fortawesome/free-solid-svg-icons": "6.2.1",
     "@jscutlery/operators": "3.2.1",
     "@jscutlery/rx-computed": "0.7.1",
-    "@ngneat/until-destroy": "^7.3.2",
+    "@ngneat/until-destroy": "^10.0.0",
     "@ngrx/effects": "19.1.0",
     "@ngrx/entity": "19.1.0",
     "@ngrx/operators": "19.1.0",
