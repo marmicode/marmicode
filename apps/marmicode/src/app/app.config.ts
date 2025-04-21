@@ -8,6 +8,7 @@ import {
   provideExperimentalZonelessChangeDetection,
 } from '@angular/core';
 import {
+  AnalyticsModule,
   getAnalytics,
   provideAnalytics,
   ScreenTrackingService,
@@ -25,6 +26,9 @@ import { provideUpdateEffects, UpdateEffects } from './update/update.effects';
 export const appConfig: ApplicationConfig = {
   providers: [
     ScreenTrackingService,
+    /* HACK: This is a workaround to fix tracking.
+     * Cf. https://github.com/angular/angularfire/issues/3633#issuecomment-2817498717 */
+    importProvidersFrom(AnalyticsModule),
     importProvidersFrom(AppRoutingModule),
     importProvidersFrom(BrowserAnimationsModule),
     importProvidersFrom(
