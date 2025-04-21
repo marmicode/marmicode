@@ -1,8 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
-@import './custom-theme.scss';
+@use "sass:map";
+@use './custom-theme.scss' as theme;
 
-$marmicode-primary-color: map-get($marmicode-purple, 500);
-$marmicode-accent-color: map-get($marmicode-accent, 500);
+$marmicode-primary-color: map.get(theme.$marmicode-purple, 500);
+$marmicode-accent-color: map.get(theme.$marmicode-accent, 500);
 
 body {
   --marmicode-primary-color: #{$marmicode-primary-color};
