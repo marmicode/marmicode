@@ -10,7 +10,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import {
   faFacebookF,
   faLinkedinIn,
-  faTwitter,
+  faXTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { RxState } from '@rx-angular/state';
@@ -33,7 +33,7 @@ export type Size = 'normal' | 'small';
     <share-buttons
       [description]="twitterTitle$ | push"
       [theme]="theme"
-      [include]="['twitter']"
+      [include]="['x']"
       [style.display]="'inline-block'"
     ></share-buttons>
     <share-buttons
@@ -112,7 +112,7 @@ export class ShareButtonsComponent {
   ) {
     /* @hack add icons dynamically because `ShareIconsModule` needs
      * to be added to `AppModule` as it's not lazy loading friendly.*/
-    iconLibrary.addIcons(faTwitter);
+    iconLibrary.addIcons(faXTwitter);
     iconLibrary.addIcons(faLink);
     iconLibrary.addIcons(faLinkedinIn);
     iconLibrary.addIcons(faFacebookF);
