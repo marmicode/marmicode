@@ -8,12 +8,13 @@
   "generators": {},
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-devkit/build-angular:application",
       "options": {
-        "outputPath": "dist/apps/marmicode/browser",
+        "outputPath": {
+          "base": "dist/apps/marmicode"
+        },
         "index": "apps/marmicode/src/index.html",
-        "main": "apps/marmicode/src/main.ts",
-        "polyfills": "apps/marmicode/src/polyfills.ts",
+        "polyfills": ["apps/marmicode/src/polyfills.ts"],
         "tsConfig": "apps/marmicode/tsconfig.app.json",
         "assets": [
           "apps/marmicode/src/favicon.ico",
@@ -84,13 +85,19 @@
           "raf",
           "xlsx",
           "zen-observable"
-        ]
+        ],
+        "browser": "apps/marmicode/src/main.ts",
+        "server": "apps/marmicode/src/main.server.ts",
+        "ssr": {
+          "entry": "apps/marmicode/src/server.ts"
+        },
+        "prerender": {
+          "routesFile": "apps/marmicode/marmicode-routes.txt"
+        }
       },
       "configurations": {
         "development": {
-          "buildOptimizer": false,
           "optimization": false,
-          "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true
@@ -107,8 +114,6 @@
           "sourceMap": false,
           "namedChunks": false,
           "extractLicenses": true,
-          "vendorChunk": false,
-          "buildOptimizer": true,
           "budgets": [
             {
               "type": "initial",
@@ -121,8 +126,7 @@
               "maximumError": "4kb"
             }
           ],
-          "serviceWorker": true,
-          "ngswConfigPath": "apps/marmicode/ngsw-config.json"
+          "serviceWorker": "apps/marmicode/ngsw-config.json"
         },
         "next": {
           "fileReplacements": [
@@ -136,8 +140,6 @@
           "sourceMap": false,
           "namedChunks": false,
           "extractLicenses": true,
-          "vendorChunk": false,
-          "buildOptimizer": true,
           "budgets": [
             {
               "type": "initial",
@@ -150,12 +152,11 @@
               "maximumError": "4kb"
             }
           ],
-          "serviceWorker": true,
-          "ngswConfigPath": "apps/marmicode/ngsw-config.json"
+          "serviceWorker": "apps/marmicode/ngsw-config.json"
         }
       },
       "defaultConfiguration": "production",
-      "outputs": ["{options.outputPath}"]
+      "outputs": ["{options.outputPath.base}"]
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
@@ -188,100 +189,6 @@
       },
       "outputs": ["{workspaceRoot}/coverage/apps/marmicode"]
     },
-    "server": {
-      "executor": "@angular-devkit/build-angular:server",
-      "options": {
-        "outputPath": "dist/apps/marmicode/server",
-        "main": "apps/marmicode/server.ts",
-        "tsConfig": "apps/marmicode/tsconfig.server.json"
-      },
-      "configurations": {
-        "development": {},
-        "next": {
-          "outputHashing": "media",
-          "fileReplacements": [
-            {
-              "replace": "apps/marmicode/src/environments/environment.ts",
-              "with": "apps/marmicode/src/environments/environment.next.ts"
-            }
-          ],
-          "sourceMap": false,
-          "optimization": true,
-          "buildOptimizer": true
-        },
-        "production": {
-          "outputHashing": "media",
-          "fileReplacements": [
-            {
-              "replace": "apps/marmicode/src/environments/environment.ts",
-              "with": "apps/marmicode/src/environments/environment.prod.ts"
-            }
-          ],
-          "sourceMap": false,
-          "optimization": true,
-          "buildOptimizer": true
-        }
-      },
-      "development": {},
-      "next": {
-        "outputHashing": "media",
-        "fileReplacements": [
-          {
-            "replace": "apps/marmicode/src/environments/environment.ts",
-            "with": "apps/marmicode/src/environments/environment.next.ts"
-          }
-        ],
-        "sourceMap": false,
-        "optimization": true
-      },
-      "production": {
-        "outputHashing": "media",
-        "fileReplacements": [
-          {
-            "replace": "apps/marmicode/src/environments/environment.ts",
-            "with": "apps/marmicode/src/environments/environment.prod.ts"
-          }
-        ],
-        "sourceMap": false,
-        "optimization": true
-      }
-    },
-    "serve-ssr": {
-      "executor": "@angular-devkit/build-angular:ssr-dev-server",
-      "options": {},
-      "configurations": {
-        "development": {
-          "browserTarget": "marmicode:build:development",
-          "serverTarget": "marmicode:server:development"
-        },
-        "production": {
-          "browserTarget": "marmicode:build:production",
-          "serverTarget": "marmicode:server:production"
-        }
-      },
-      "defaultConfiguration": "development"
-    },
-    "prerender": {
-      "executor": "@angular-devkit/build-angular:prerender",
-      "options": {
-        "routesFile": "apps/marmicode/marmicode-routes.txt",
-        "discoverRoutes": false
-      },
-      "configurations": {
-        "production": {
-          "browserTarget": "marmicode:build:production",
-          "serverTarget": "marmicode:server:production"
-        },
-        "next": {
-          "browserTarget": "marmicode:build:next",
-          "serverTarget": "marmicode:server:next"
-        }
-      },
-      "inputs": ["{projectRoot}/marmicode-routes.txt"],
-      "outputs": ["{workspaceRoot}/dist/apps/marmicode"],
-      "dependsOn": ["update-routes"],
-      "defaultConfiguration": "production"
-    },
     "deploy": {
       "executor": "nx:run-commands",
       "configurations": {
@@ -301,7 +208,7 @@
         ],
         "parallel": false
       },
-      "dependsOn": ["prerender"]
+      "dependsOn": ["build"]
     },
     "update-routes": {
       "executor": "nx:run-commands",
