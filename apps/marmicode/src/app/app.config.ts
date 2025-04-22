@@ -22,9 +22,14 @@ import { provideStore } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { provideUpdateEffects, UpdateEffects } from './update/update.effects';
+import {
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideClientHydration(withEventReplay()),
     ScreenTrackingService,
     /* HACK: This is a workaround to fix tracking.
      * Cf. https://github.com/angular/angularfire/issues/3633#issuecomment-2817498717 */
