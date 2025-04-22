@@ -84,10 +84,10 @@
     "zone.js": "0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "0.1902.7",
-    "@angular-devkit/build-angular": "19.2.7",
-    "@angular-devkit/core": "19.2.7",
-    "@angular-devkit/schematics": "19.2.7",
+    "@angular-devkit/architect": "0.1902.8",
+    "@angular-devkit/build-angular": "19.2.8",
+    "@angular-devkit/core": "19.2.8",
+    "@angular-devkit/schematics": "19.2.8",
     "@angular-eslint/eslint-plugin": "19.3.0",
     "@angular-eslint/eslint-plugin-template": "19.3.0",
     "@angular-eslint/template-parser": "19.3.0",
@@ -113,7 +113,7 @@
     "@percy/cli": "1.30.10",
     "@percy/dom": "1.30.10",
     "@percy/sdk-utils": "1.30.10",
-    "@schematics/angular": "19.2.7",
+    "@schematics/angular": "19.2.8",
     "@storybook/addon-essentials": "8.6.12",
     "@storybook/addon-knobs": "~8.0.0",
     "@storybook/angular": "8.6.12",
