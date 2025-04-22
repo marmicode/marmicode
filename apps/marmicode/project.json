@@ -156,7 +156,8 @@
         }
       },
       "defaultConfiguration": "production",
-      "outputs": ["{options.outputPath.base}"]
+      "outputs": ["{options.outputPath.base}"],
+      "dependsOn": ["update-routes"]
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
