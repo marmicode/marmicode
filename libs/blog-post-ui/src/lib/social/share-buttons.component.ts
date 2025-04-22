@@ -10,13 +10,13 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import {
   faFacebookF,
   faLinkedinIn,
-  faTwitter,
+  faXTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { RxState } from '@rx-angular/state';
 import { select, selectSlice } from '@rx-angular/state/selections';
 import { PushPipe } from '@rx-angular/template/push';
-import { ShareButtonsModule as NgxShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareButtons } from 'ngx-sharebuttons/buttons';
 import { map } from 'rxjs/operators';
 import { AuthorSocialInfo } from './author-social-info';
 
@@ -31,14 +31,12 @@ export type Size = 'normal' | 'small';
   styleUrls: ['./share-buttons.component.scss'],
   template: `
     <share-buttons
-      [autoSetMeta]="true"
       [description]="twitterTitle$ | push"
       [theme]="theme"
-      [include]="['twitter']"
+      [include]="['x']"
       [style.display]="'inline-block'"
     ></share-buttons>
     <share-buttons
-      [autoSetMeta]="true"
       [description]="defaultTitle$ | push"
       [title]="defaultTitle$ | push"
       [include]="buttons"
@@ -47,7 +45,7 @@ export type Size = 'normal' | 'small';
     ></share-buttons>
   `,
   providers: [RxState],
-  imports: [NgxShareButtonsModule, PushPipe],
+  imports: [ShareButtons, PushPipe],
 })
 export class ShareButtonsComponent {
   @Input() set author(author: AuthorSocialInfo) {
@@ -114,7 +112,7 @@ export class ShareButtonsComponent {
   ) {
     /* @hack add icons dynamically because `ShareIconsModule` needs
      * to be added to `AppModule` as it's not lazy loading friendly.*/
-    iconLibrary.addIcons(faTwitter);
+    iconLibrary.addIcons(faXTwitter);
     iconLibrary.addIcons(faLink);
     iconLibrary.addIcons(faLinkedinIn);
     iconLibrary.addIcons(faFacebookF);
@@ -126,11 +124,6 @@ export class ShareButtonsComponent {
 
 @NgModule({
   exports: [ShareButtonsComponent],
-  imports: [
-    CommonModule,
-    NgxShareButtonsModule,
-    PushPipe,
-    ShareButtonsComponent,
-  ],
+  imports: [ShareButtonsComponent],
 })
 export class ShareButtonsModule {}
