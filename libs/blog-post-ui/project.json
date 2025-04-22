@@ -45,15 +45,21 @@
       }
     },
     "component-test-build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-devkit/build-angular:application",
       "options": {
         "outputPath": "does-not-exist",
         "index": "does-not-exist",
-        "main": "does-not-exist",
-        "polyfills": "libs/blog-post-ui/src/polyfills.ts",
+        "polyfills": ["libs/blog-post-ui/src/polyfills.ts"],
         "tsConfig": "libs/blog-post-ui/tsconfig.lib.json",
-        "styles": ["libs/blog-post-ui/cypress/support/styles.scss"]
-      }
+        "styles": ["libs/blog-post-ui/cypress/support/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "node_modules"
+          ]
+        },
+        "browser": "apps/marmicode/src/main.ts"
+      },
+      "outputs": ["{options.outputPath.base}"]
     },
     "component-test": {
       "executor": "@nx/cypress:cypress",
