@@ -6,7 +6,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { AuthorSocialInfo } from './author-social-info';
 
 @Component({
@@ -20,7 +20,7 @@ import { AuthorSocialInfo } from './author-social-info';
       target="_blank"
     >
       <button class="button">
-        <fa-icon [icon]="faTwitter" class="icon"></fa-icon>
+        <fa-icon [icon]="faXTwitter" class="icon"></fa-icon>
         <span>Follow &#64;{{ author.twitter }}</span>
       </button>
     </a>
@@ -40,7 +40,7 @@ import { AuthorSocialInfo } from './author-social-info';
 
         cursor: pointer;
         background-color: #fff;
-        color: #00acee;
+        color: #000;
         border: 2px solid;
         border-radius: 0.2em;
         height: 2.5em;
@@ -53,7 +53,7 @@ import { AuthorSocialInfo } from './author-social-info';
       }
 
       .button:hover {
-        background-color: #00acee;
+        background-color: #000;
         color: #fff;
       }
 
@@ -69,7 +69,7 @@ import { AuthorSocialInfo } from './author-social-info';
 export class FollowButtonComponent {
   @Input() author: AuthorSocialInfo;
 
-  faTwitter = faTwitter;
+  faXTwitter = faXTwitter;
 }
 
 @NgModule({
