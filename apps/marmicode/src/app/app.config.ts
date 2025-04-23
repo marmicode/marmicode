@@ -20,36 +20,36 @@ import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
 import { provideUpdateEffects, UpdateEffects } from './update/update.effects';
 import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideClientHydration(withEventReplay()),
-    ScreenTrackingService,
     /* HACK: This is a workaround to fix tracking.
      * Cf. https://github.com/angular/angularfire/issues/3633#issuecomment-2817498717 */
     importProvidersFrom(AnalyticsModule),
-    importProvidersFrom(AppRoutingModule),
     importProvidersFrom(BrowserAnimationsModule),
     importProvidersFrom(
       ServiceWorkerModule.register('ngsw-worker.js', {
         enabled: environment.production,
       }),
     ),
+
+    ScreenTrackingService,
     provideAnalytics(() => getAnalytics()),
+    provideClientHydration(withEventReplay()),
     provideEffects(UpdateEffects),
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideExperimentalZonelessChangeDetection(),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideHttpClient(withInterceptorsFromDi()),
-    provideStore({
-      router: routerReducer,
-    }),
+    provideRouter(routes),
     provideRouterStore(),
+    provideStore({ router: routerReducer }),
     provideUpdateEffects(),
   ],
 };

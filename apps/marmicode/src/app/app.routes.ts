@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import {
   blogPostDetailRouterHelper,
   recipeDetailRouterHelper,
   resourceSearchRouterHelper,
   servicesRouterHelper,
+  workshopDetailRouterHelper,
 } from '@marmicode/shared-router-helpers';
 import { or } from '@marmicode/shared-utils';
 
@@ -14,7 +14,7 @@ export const routes: Routes = [
     path: blogPostDetailRouterHelper.BLOG_POST_DETAIL_PATH,
     loadChildren: () =>
       import('@marmicode/blog-post-feature-detail').then(
-        (m) => m.BlogPostFeatureDetailRoutingModule
+        (m) => m.BlogPostFeatureDetailRoutingModule,
       ),
   },
 
@@ -26,7 +26,7 @@ export const routes: Routes = [
     ]),
     loadChildren: () =>
       import('@marmicode/recipe-feature-detail').then(
-        (m) => m.RecipeDetailRoutingModule
+        (m) => m.RecipeDetailRoutingModule,
       ),
   },
 
@@ -35,7 +35,7 @@ export const routes: Routes = [
     path: resourceSearchRouterHelper.LEARN_PATH,
     loadChildren: () =>
       import('@marmicode/resource-feature-search').then(
-        (m) => m.ResourceSearchRoutingModule
+        (m) => m.ResourceSearchRoutingModule,
       ),
   },
 
@@ -44,8 +44,14 @@ export const routes: Routes = [
     path: servicesRouterHelper.SERVICES_PATH,
     loadChildren: () =>
       import('@marmicode/services-feature-presentation').then(
-        (m) => m.ServicesRoutingModule
+        (m) => m.ServicesRoutingModule,
       ),
+  },
+
+  /* Workshop detail. */
+  {
+    path: workshopDetailRouterHelper.WORKSHOP_DETAIL_PATH,
+    loadComponent: () => import('@marmicode/workshops-feature-detail'),
   },
 
   /* / redirect. */
@@ -56,16 +62,3 @@ export const routes: Routes = [
     redirectTo: '/learn/everything',
   },
 ];
-
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      /* Wait for lazy loaded chunks of initial page to be loaded,
-       * in order to avoid repaint blink due to
-       * bootstrap => paint blank page => lazy-load => paint flow. */
-      initialNavigation: 'enabledBlocking',
-    }),
-  ],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

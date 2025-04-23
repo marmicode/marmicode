@@ -64,7 +64,7 @@
       "@marmicode/tools/build-github-workflows": [
         "tools/build-github-workflows/src/index.ts"
       ],
-      "workshops-feature-detail": ["libs/workshops-feature-detail/src/index.ts"]
+      "@marmicode/workshops-feature-detail": ["libs/workshops-feature-detail/src/index.ts"]
     },
     "strict": true,
     "strictNullChecks": false,
