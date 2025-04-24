@@ -23,19 +23,21 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
       <h1 class="title">{{ title() }}</h1>
       <p class="subtitle">🫒 Tapas Session</p>
       <p class="description">TODO TODO</p>
-      <div class="email-container">
-        <input
-          type="email"
-          class="email-input"
-          placeholder="Enter your email address"
-        />
-        <div class="button-group">
-          <button class="action-button send">🚀</button>
+      <div class="email-and-spots">
+        <div class="email-container">
+          <input
+            type="email"
+            class="email-input"
+            placeholder="Enter your email address"
+          />
+          <div class="button-group">
+            <button class="action-button send">🚀</button>
+          </div>
         </div>
+        <p class="spots">
+          Limited spots available. Be the first to know when registration opens.
+        </p>
       </div>
-      <p class="spots">
-        Limited spots available. Be the first to know when registration opens.
-      </p>
     </div>
   `,
   styles: `
@@ -93,13 +95,22 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
       line-height: 1.5;
     }
 
+    .email-and-spots {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
     .email-container {
       display: flex;
       gap: 1rem;
       max-width: 600px;
+      width: 100%;
       margin: 0 auto 1rem;
       background: rgba(255, 255, 255, 0.1);
-      padding: 0.5rem;
+      padding: 0.5rem 0;
       border-radius: 8px;
     }
 
@@ -131,8 +142,9 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
     }
 
     .spots {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.8);
       font-size: 1.1rem;
+      font-style: italic;
     }
   `,
 })
