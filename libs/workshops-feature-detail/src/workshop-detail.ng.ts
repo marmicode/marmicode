@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { PageComponent, PageInfo } from '@marmicode/shared-ui';
+import { createBasicPageInfo, PageComponent } from '@marmicode/shared-ui';
 
 // TODO fix this
 // @ts-ignore
@@ -96,6 +96,7 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
       background: rgba(56, 0, 48, 0.6);
       font-size: 1rem;
       font-style: italic;
+      box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
     }
 
     .title {
@@ -132,6 +133,7 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
       margin: 0 auto 1rem;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 8px;
+      box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.2);
     }
 
     .email-container input {
@@ -199,15 +201,22 @@ export class WorkshopBanner {
   template: `
     <mc-page [info]="info()">
       <mc-workshop-banner
-        [pictureUri]="info().pictureUri"
-        [title]="info().title"
+        [pictureUri]="workshop().pictureUri"
+        [title]="workshop().title"
       />
     </mc-page>
   `,
 })
 export class WorkshopDetailPage {
-  info = signal<PageInfo>({
+  workshop = signal({
     title: 'Pragmatic Angular Testing Workshop',
-    pictureUri: pragmaticAngularTestingPictureUri,
+    // TODO fix this
+    pictureUri: pragmaticAngularTestingPictureUri as string,
   });
+  info = computed(() =>
+    createBasicPageInfo({
+      title: this.workshop().title,
+      pictureUri: this.workshop().pictureUri,
+    }),
+  );
 }
