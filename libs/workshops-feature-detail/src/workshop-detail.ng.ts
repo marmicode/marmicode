@@ -5,8 +5,9 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { PageComponent as Page } from '@marmicode/shared-ui';
-import { PageInfo } from 'libs/shared-ui/src/lib/page.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { PageComponent, PageInfo } from '@marmicode/shared-ui';
 
 // TODO fix this
 // @ts-ignore
@@ -16,23 +17,21 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-banner',
+  imports: [MatButtonModule, MatIconModule],
   template: `
     <div class="banner-image" [style.backgroundImage]="backgroundImage()"></div>
     <div class="content">
-      <div class="coming-soon">Coming Soon • Summer 2025</div>
+      <div class="badge">Tickets opening soon • Tuesday July 7th</div>
       <h1 class="title">{{ title() }}</h1>
-      <p class="subtitle">🫒 Tapas Session</p>
-      <p class="description">TODO TODO</p>
+      <p class="badge">🫒 Tapas Session • 1-Day Workshop</p>
+      <p class="description">From messy soup to test-driven cooking</p>
       <div class="email-and-spots">
         <div class="email-container">
-          <input
-            type="email"
-            class="email-input"
-            placeholder="Enter your email address"
-          />
-          <div class="button-group">
-            <button class="action-button send">🚀</button>
-          </div>
+          <input type="email" placeholder="Enter your email address" />
+          <button mat-button color="accent">
+            <mat-icon>notifications</mat-icon>
+            NOTIFY ME
+          </button>
         </div>
         <p class="spots">
           Limited spots available. Be the first to know when registration opens.
@@ -48,6 +47,7 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
     .banner-image {
       position: absolute;
       background-attachment: fixed;
+      background-position: center;
       background-size: cover;
       filter: brightness(0.5);
       inset: 0;
@@ -66,24 +66,20 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
       text-align: center;
     }
 
-    .coming-soon {
+    .badge {
       display: inline-block;
-      background: rgba(255, 255, 255, 0.2);
       padding: 0.5rem 1rem;
       border-radius: 20px;
       margin-bottom: 2rem;
+
+      background: rgba(56, 0, 48, 0.6);
+      font-size: 1rem;
+      font-style: italic;
     }
 
     .title {
       font-size: 3rem;
       line-height: 1;
-      font-weight: bold;
-    }
-
-    .subtitle {
-      margin-top: 2rem;
-      font-size: 2rem;
-      font-style: italic;
       font-weight: bold;
     }
 
@@ -105,16 +101,16 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
 
     .email-container {
       display: flex;
+      align-items: center;
       gap: 1rem;
       max-width: 600px;
       width: 100%;
       margin: 0 auto 1rem;
       background: rgba(255, 255, 255, 0.1);
-      padding: 0.5rem 0;
       border-radius: 8px;
     }
 
-    .email-input {
+    .email-container input {
       flex: 1;
       padding: 1rem;
       border: none;
@@ -123,22 +119,17 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
       font-size: 1.2rem;
     }
 
-    .email-input::placeholder {
-      color: rgba(255, 255, 255, 0.7);
+    .email-container input::placeholder {
+      color: rgba(255, 255, 255, 0.9);
     }
 
-    .button-group {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .action-button {
-      padding: 0.5rem 1rem;
+    .email-container button {
+      margin: 1rem;
+      padding: 0.5rem;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 1.2rem;
-      background: rgba(255, 255, 255, 0.2);
+      font-size: 1rem;
     }
 
     .spots {
@@ -158,7 +149,7 @@ export class WorkshopBanner {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-detail-page',
   standalone: true,
-  imports: [Page, WorkshopBanner],
+  imports: [PageComponent, WorkshopBanner],
   template: `
     <mc-page [info]="info()">
       <mc-workshop-banner
