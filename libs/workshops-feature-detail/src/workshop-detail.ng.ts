@@ -20,10 +20,19 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
   imports: [MatButtonModule, MatIconModule],
   template: `
     <div class="banner-image" [style.backgroundImage]="backgroundImage()"></div>
+    <div class="banner-gradient"></div>
     <div class="content">
       <h1 class="title">{{ title() }}</h1>
       <p class="badge">🫒 Tapas Session • 1-Day Workshop • Tuesday July 7th</p>
-      <p class="description">From messy soup to test-driven cooking</p>
+      <p class="description">
+        <span
+          >Tired of whack-a-mole bugs, boring manual tests, and fragile
+          suites?</span
+        >
+        <span
+          >Let’s cook fast, reliable tests that actually help you ship.</span
+        >
+      </p>
       <div class="email-and-spots">
         <div class="email-container">
           <input type="email" placeholder="Enter your email address" />
@@ -49,7 +58,19 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
       background-attachment: fixed;
       background-position: center;
       background-size: cover;
-      filter: brightness(0.5);
+      inset: 0;
+    }
+
+    .banner-gradient {
+      position: absolute;
+      background-attachment: fixed;
+      background-position: center;
+      background-size: cover;
+      background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0),
+        rgba(10, 10, 10, 0.5)
+      );
       inset: 0;
     }
 
@@ -70,7 +91,7 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
       display: inline-block;
       padding: 0.5rem 1rem;
       border-radius: 20px;
-      margin-bottom: 2rem;
+      margin-bottom: 0.7rem;
 
       background: rgba(56, 0, 48, 0.6);
       font-size: 1rem;
@@ -79,11 +100,14 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
 
     .title {
       font-size: 3rem;
-      line-height: 1;
       font-weight: bold;
+      line-height: 1;
+      text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.7);
     }
 
     .description {
+      display: flex;
+      flex-direction: column;
       margin-top: 2rem;
       margin-bottom: 2rem;
 
