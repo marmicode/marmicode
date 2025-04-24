@@ -93,6 +93,9 @@
         },
         "prerender": {
           "routesFile": "apps/marmicode/marmicode-routes.txt"
+        },
+        "loader": {
+          ".png": "file"
         }
       },
       "configurations": {
