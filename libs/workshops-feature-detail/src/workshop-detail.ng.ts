@@ -21,9 +21,8 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
   template: `
     <div class="banner-image" [style.backgroundImage]="backgroundImage()"></div>
     <div class="content">
-      <div class="badge">Tickets opening soon • Tuesday July 7th</div>
       <h1 class="title">{{ title() }}</h1>
-      <p class="badge">🫒 Tapas Session • 1-Day Workshop</p>
+      <p class="badge">🫒 Tapas Session • 1-Day Workshop • Tuesday July 7th</p>
       <p class="description">From messy soup to test-driven cooking</p>
       <div class="email-and-spots">
         <div class="email-container">
@@ -37,6 +36,7 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
           Limited spots available. Be the first to know when registration opens.
         </p>
       </div>
+      <mat-icon class="down-arrow">keyboard_arrow_down</mat-icon>
     </div>
   `,
   styles: `
@@ -56,11 +56,11 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
     .content {
       display: flex;
       position: relative;
-      min-height: 600px;
+      min-height: calc(100vh - 64px);
 
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: end;
 
       color: white;
       text-align: center;
@@ -136,6 +136,28 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
       color: rgba(255, 255, 255, 0.8);
       font-size: 1.1rem;
       font-style: italic;
+    }
+
+    .down-arrow {
+      animation: bounce 2s infinite;
+      bottom: 1rem;
+      margin: 1rem 0;
+    }
+
+    @keyframes bounce {
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
     }
   `,
 })
