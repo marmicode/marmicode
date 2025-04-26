@@ -139,7 +139,7 @@
     "dotenv": "16.5.0",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.2",
-    "eslint-plugin-cypress": "4.2.1",
+    "eslint-plugin-cypress": "4.3.0",
     "eslint-plugin-storybook": "0.12.0",
     "file-loader": "^6.2.0",
     "firebase-tools": "^14.0.0",
