@@ -64,7 +64,7 @@
     "@ngrx/store": "19.1.0",
     "@nx/angular": "20.6.2",
     "@rx-angular/cdk": "^19.0.0",
-    "@rx-angular/state": "^15.0.0",
+    "@rx-angular/state": "^19.0.0",
     "@rx-angular/template": "^15.1.0",
     "@storybook/addon-interactions": "8.6.12",
     "@storybook/core-server": "8.6.12",
