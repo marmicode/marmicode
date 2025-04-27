@@ -7,6 +7,7 @@ import {
 import { createBasicPageInfo, PageComponent } from '@marmicode/shared-ui';
 import { WorkshopBanner } from './workshop-banner.ng';
 import { WorkshopBenefits } from './workshop-benefits.ng';
+import { WorkshopInstructor } from './workshop-instructor.ng';
 
 // TODO fix this
 // @ts-ignore
@@ -16,7 +17,12 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-detail-page',
   standalone: true,
-  imports: [PageComponent, WorkshopBanner, WorkshopBenefits],
+  imports: [
+    PageComponent,
+    WorkshopBanner,
+    WorkshopBenefits,
+    WorkshopInstructor,
+  ],
   template: `
     <mc-page [info]="info()">
       <mc-workshop-banner
@@ -24,6 +30,7 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
         [title]="workshop().title"
       />
       <mc-workshop-benefits />
+      <mc-workshop-instructor />
     </mc-page>
   `,
 })
