@@ -65,7 +65,7 @@
     "@nx/angular": "20.6.2",
     "@rx-angular/cdk": "^19.0.0",
     "@rx-angular/state": "^15.0.0",
-    "@rx-angular/template": "^15.1.0",
+    "@rx-angular/template": "^19.0.0",
     "@storybook/addon-interactions": "8.6.12",
     "@storybook/core-server": "8.6.12",
     "apollo-angular": "10.0.3",
