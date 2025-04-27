@@ -4,9 +4,9 @@ import {
   computed,
   signal,
 } from '@angular/core';
-import { MatCard } from '@angular/material/card';
 import { createBasicPageInfo, PageComponent } from '@marmicode/shared-ui';
 import { WorkshopBanner } from './workshop-banner.ng';
+import { WorkshopBenefits } from './workshop-benefits.ng';
 
 // TODO fix this
 // @ts-ignore
@@ -16,13 +16,14 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-detail-page',
   standalone: true,
-  imports: [PageComponent, WorkshopBanner, MatCard],
+  imports: [PageComponent, WorkshopBanner, WorkshopBenefits],
   template: `
     <mc-page [info]="info()">
       <mc-workshop-banner
         [pictureUri]="workshop().pictureUri"
         [title]="workshop().title"
       />
+      <mc-workshop-benefits />
     </mc-page>
   `,
 })
