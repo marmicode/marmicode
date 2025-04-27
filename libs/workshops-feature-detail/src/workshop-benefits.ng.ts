@@ -21,6 +21,8 @@ import { WorkshopBenefitsCard } from './workshop-benefits-card.ng';
       justify-content: center;
       gap: 2rem;
       padding: 2rem;
+
+      background-color: rgb(249, 250, 251);
     }
   `,
 })

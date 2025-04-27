@@ -68,6 +68,7 @@ import { MatIconModule } from '@angular/material/icon';
 
     .icon {
       margin: auto;
+      transform: scale(1.2);
     }
   `,
 })
