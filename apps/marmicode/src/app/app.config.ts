@@ -14,38 +14,39 @@ import {
   ScreenTrackingService,
 } from '@angular/fire/analytics';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
+import { routes } from './app.routes';
 import { provideUpdateEffects, UpdateEffects } from './update/update.effects';
-import {
-  provideClientHydration,
-  withEventReplay,
-} from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideClientHydration(withEventReplay()),
-    ScreenTrackingService,
     /* HACK: This is a workaround to fix tracking.
      * Cf. https://github.com/angular/angularfire/issues/3633#issuecomment-2817498717 */
     importProvidersFrom(AnalyticsModule),
-    importProvidersFrom(AppRoutingModule),
-    importProvidersFrom(BrowserAnimationsModule),
     importProvidersFrom(
       ServiceWorkerModule.register('ngsw-worker.js', {
         enabled: environment.production,
       }),
     ),
+    ScreenTrackingService,
+    provideClientHydration(withEventReplay()),
     provideAnalytics(() => getAnalytics()),
+    provideAnimations(),
     provideEffects(UpdateEffects),
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideExperimentalZonelessChangeDetection(),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideHttpClient(withInterceptorsFromDi()),
+    provideRouter(routes),
     provideStore({
       router: routerReducer,
     }),
