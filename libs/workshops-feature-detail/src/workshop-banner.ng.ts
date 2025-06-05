@@ -17,7 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
     <div class="banner-gradient"></div>
     <div class="content">
       <h1 class="title">{{ title() }}</h1>
-      <p class="badge">🫒 Tapas Session • 1-Day Workshop • Tuesday July 7th</p>
+      <h2 class="subtitle">🫒 Tapas Session · 1-Day Workshop</h2>
+      <p class="badge">🗓️ Tuesday July 7th · 🐣 Early-Bird: €240</p>
       <p class="description">
         <span
           >Tired of whack-a-mole bugs, boring manual tests, and fragile
@@ -32,11 +33,11 @@ import { MatIconModule } from '@angular/material/icon';
           <input type="email" placeholder="Enter your email address" />
           <button mat-button color="accent">
             <mat-icon>notifications</mat-icon>
-            NOTIFY ME
+            JOIN THE WAITLIST
           </button>
         </div>
         <p class="spots">
-          Limited spots available. Be the first to know when registration opens.
+          Only 20 spots available. Be the first to know when registration opens.
         </p>
       </div>
       <mat-icon class="down-arrow">keyboard_arrow_down</mat-icon>
@@ -82,22 +83,29 @@ import { MatIconModule } from '@angular/material/icon';
     }
 
     .badge {
-      display: inline-block;
       padding: 0.5rem 1rem;
+      margin: 1.5rem 0;
       border-radius: 20px;
       margin-bottom: 0.7rem;
 
       background: rgba(56, 0, 48, 0.6);
-      font-size: 1rem;
-      font-style: italic;
+      font-size: 1.3rem;
       box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .title,
+    .subtitle {
+      font-weight: bold;
+      line-height: 1;
+      text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
     }
 
     .title {
       font-size: 3rem;
-      font-weight: bold;
-      line-height: 1;
-      text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
     }
 
     .description {

@@ -1,5 +1,6 @@
 import {
   provideHttpClient,
+  withFetch,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import {
@@ -46,7 +47,7 @@ export const appConfig: ApplicationConfig = {
     provideEffects(UpdateEffects),
     provideExperimentalZonelessChangeDetection(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptorsFromDi(), withFetch()),
     provideRouter(routes),
     provideRouterStore(),
     provideStore({ router: routerReducer }),
