@@ -7,6 +7,7 @@ import {
 import { createBasicPageInfo, PageComponent } from '@marmicode/shared-ui';
 import { WorkshopBanner } from './workshop-banner.ng';
 import { WorkshopBenefits } from './workshop-benefits.ng';
+import { WorkshopAgenda } from './workshop-agenda.ng';
 import { WorkshopInstructor } from './workshop-instructor.ng';
 
 // TODO fix this
@@ -21,6 +22,7 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
     PageComponent,
     WorkshopBanner,
     WorkshopBenefits,
+    WorkshopAgenda,
     WorkshopInstructor,
   ],
   template: `
@@ -30,6 +32,7 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
         [title]="workshop().title"
       />
       <mc-workshop-benefits />
+      <mc-workshop-agenda />
       <mc-workshop-instructor />
     </mc-page>
   `,
