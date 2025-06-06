@@ -19,9 +19,19 @@ import { WorkshopSection } from './workshop-section.ng';
   `,
   styles: `
     :host {
+      position: relative;
       display: block;
       background-color: rgb(249, 250, 251);
-      padding: 2rem;
+    }
+
+    :host::before {
+      position: absolute;
+      height: 4rem;
+      clip-path: ellipse(60% 75% at 50% 120%);
+      background-color: rgb(249, 250, 251);
+      top: -4rem;
+      width: 100%;
+      content: '';
     }
 
     .benefits {
