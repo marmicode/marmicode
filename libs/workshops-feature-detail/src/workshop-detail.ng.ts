@@ -7,6 +7,7 @@ import {
 import { createBasicPageInfo, PageComponent } from '@marmicode/shared-ui';
 import { WorkshopBanner } from './workshop-banner.ng';
 import { WorkshopBenefits } from './workshop-benefits.ng';
+import { WorkshopPrerequisites } from './workshop-prerequisites.ng';
 import { WorkshopAgenda } from './workshop-agenda.ng';
 import { WorkshopInstructor } from './workshop-instructor.ng';
 
@@ -22,6 +23,7 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
     PageComponent,
     WorkshopBanner,
     WorkshopBenefits,
+    WorkshopPrerequisites,
     WorkshopAgenda,
     WorkshopInstructor,
   ],
@@ -32,6 +34,7 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
         [title]="workshop().title"
       />
       <mc-workshop-benefits />
+      <mc-workshop-prerequisites />
       <mc-workshop-agenda />
       <mc-workshop-instructor />
     </mc-page>

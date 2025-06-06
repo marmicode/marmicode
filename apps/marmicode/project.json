@@ -86,6 +86,7 @@
           "xlsx",
           "zen-observable"
         ],
+        "inlineStyleLanguage": "scss",
         "browser": "apps/marmicode/src/main.ts",
         "server": "apps/marmicode/src/main.server.ts",
         "ssr": {

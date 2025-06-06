@@ -6,7 +6,7 @@ import { WorkshopSection } from './workshop-section.ng';
   selector: 'mc-workshop-agenda',
   imports: [MatExpansionModule, WorkshopSection],
   template: `
-    <mc-workshop-section title="🗓️ Agenda">
+    <mc-workshop-section title="🗓️ Agenda" color="surface">
       <mat-accordion>
         @for (section of sections(); track $index) {
           <mat-expansion-panel>

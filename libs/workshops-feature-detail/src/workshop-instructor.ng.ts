@@ -8,7 +8,7 @@ import { WorkshopSection } from './workshop-section.ng';
   selector: 'mc-workshop-instructor',
   imports: [MatCardModule, WorkshopSection],
   template: `
-    <mc-workshop-section title="👨‍🏫 Your Instructor" color="surface">
+    <mc-workshop-section title="��‍🏫 Your Instructor">
       <mat-card class="card">
         <img
           mat-card-image
