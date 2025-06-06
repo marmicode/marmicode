@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -10,17 +15,17 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     </section>
   `,
   styles: `
-    :host {
+    section {
       position: relative;
       display: block;
-      background-color: rgb(249, 250, 251);
+      background-color: var(--mc-workshop-section-background-color);
     }
 
-    :host::before {
+    section::before {
       position: absolute;
       height: 3rem;
       clip-path: ellipse(60% 100% at 50% 120%);
-      background-color: rgb(249, 250, 251);
+      background-color: var(--mc-workshop-section-background-color);
       top: -3rem;
       width: 100%;
       content: '';
@@ -35,7 +40,15 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       text-align: center;
     }
   `,
+  host: {
+    '[style.--mc-workshop-section-background-color]': 'realColor()',
+  },
 })
 export class WorkshopSection {
   title = input.required<string>();
+  color = input<'surface' | 'plain'>('surface');
+
+  protected realColor = computed(() => {
+    return this.color() === 'surface' ? 'rgb(249, 250, 251)' : 'white';
+  });
 }

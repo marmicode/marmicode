@@ -7,7 +7,7 @@ import { WorkshopSection } from './workshop-section.ng';
   selector: 'mc-workshop-benefits',
   imports: [WorkshopBenefitsCard, WorkshopSection],
   template: `
-    <mc-workshop-section title="🍱 What you'll learn">
+    <mc-workshop-section title="🍱 What you'll learn" color="surface">
       <div class="benefits">
         <mc-workshop-benefits-card />
         <mc-workshop-benefits-card />
