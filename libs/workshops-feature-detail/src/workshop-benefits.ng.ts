@@ -1,15 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { WorkshopBenefitsCard } from './workshop-benefits-card.ng';
+import { WorkshopSection } from './workshop-section.ng';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   selector: 'mc-workshop-benefits',
-  imports: [WorkshopBenefitsCard],
+  imports: [WorkshopBenefitsCard, WorkshopSection],
   template: `
-    <section>
-      <h2>🍱 What you'll learn</h2>
-
+    <mc-workshop-section title="🍱 What you'll learn">
       <div class="benefits">
         <mc-workshop-benefits-card />
         <mc-workshop-benefits-card />
@@ -17,22 +15,13 @@ import { WorkshopBenefitsCard } from './workshop-benefits-card.ng';
         <mc-workshop-benefits-card />
         <mc-workshop-benefits-card />
       </div>
-    </section>
+    </mc-workshop-section>
   `,
   styles: `
     :host {
       display: block;
       background-color: rgb(249, 250, 251);
       padding: 2rem;
-    }
-
-    h2 {
-      font-size: 1.75rem; /* ~28px */
-      font-weight: 700;
-      font-family: 'Inter', sans-serif; /* or your current font */
-      color: #380030;
-      text-transform: uppercase;
-      text-align: center;
     }
 
     .benefits {
