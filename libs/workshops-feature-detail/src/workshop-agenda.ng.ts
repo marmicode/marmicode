@@ -1,11 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { WorkshopSection } from './workshop-section.ng';
 
 @Component({
   selector: 'mc-workshop-agenda',
-  imports: [MatExpansionModule],
+  imports: [MatExpansionModule, WorkshopSection],
   template: `
-    <section>
+    <mc-workshop-section title="🗓️ Agenda">
       <mat-accordion>
         @for (section of sections(); track $index) {
           <mat-expansion-panel>
@@ -20,10 +21,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
           </mat-expansion-panel>
         }
       </mat-accordion>
-    </section>
+    </mc-workshop-section>
   `,
   styles: `
-    :host {
+    mat-accordion {
       display: block;
       margin: auto;
       max-width: 800px;

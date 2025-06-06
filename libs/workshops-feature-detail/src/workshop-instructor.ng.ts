@@ -1,39 +1,32 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { WorkshopSection } from './workshop-section.ng';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   selector: 'mc-workshop-instructor',
-  imports: [MatCardModule],
+  imports: [MatCardModule, WorkshopSection],
   template: `
-    <mat-card class="card">
-      <img
-        mat-card-image
-        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-        alt="Photo of a Shiba Inu"
-      />
-      <mat-card-content>
-        <h3>Younes Jaaidi</h3>
-        <p>
-          bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
-        </p>
-      </mat-card-content>
-    </mat-card>
+    <mc-workshop-section title="👨‍🏫 Your Instructor" color="surface">
+      <mat-card class="card">
+        <img
+          mat-card-image
+          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+          alt="Photo of a Shiba Inu"
+        />
+        <mat-card-content>
+          <h3>Younes Jaaidi</h3>
+          <p>
+            bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mc-workshop-section>
   `,
   styles: `
-    :host {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      padding: 2rem;
-
-      background-color: white;
-    }
-
     .card {
+      margin: auto;
       width: 400px;
 
       h3 {

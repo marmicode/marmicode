@@ -9,7 +9,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-section',
   template: `
-    <section>
+    <section [class.surface]="color() === 'surface'">
       <h2>{{ title() }}</h2>
       <ng-content />
     </section>
@@ -17,15 +17,25 @@ import {
   styles: `
     section {
       position: relative;
+      padding-bottom: 3rem;
       display: block;
-      background-color: var(--mc-workshop-section-background-color);
+      background: var(--mc-workshop-section-background-color);
+    }
+
+    section.surface {
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 10%,
+        rgba(56, 0, 48, 0.1) 90%,
+        rgba(56, 0, 48, 0.2) 110%
+      );
     }
 
     section::before {
       position: absolute;
       height: 3rem;
       clip-path: ellipse(60% 100% at 50% 120%);
-      background-color: var(--mc-workshop-section-background-color);
+      background: white;
       top: -3rem;
       width: 100%;
       content: '';
@@ -46,9 +56,16 @@ import {
 })
 export class WorkshopSection {
   title = input.required<string>();
-  color = input<'surface' | 'plain'>('surface');
+  color = input<'surface' | 'plain'>('plain');
 
-  protected realColor = computed(() => {
-    return this.color() === 'surface' ? 'rgb(249, 250, 251)' : 'white';
-  });
+  protected realColor = computed(() =>
+    this.color() === 'surface'
+      ? `linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 10%,
+        rgba(56, 0, 48, 0.1) 90%,
+        rgba(56, 0, 48, 0.2) 110%
+      )`
+      : 'white',
+  );
 }
