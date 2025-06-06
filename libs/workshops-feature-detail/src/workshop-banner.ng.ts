@@ -169,7 +169,7 @@ import { MatIconModule } from '@angular/material/icon';
     .down-arrow {
       animation: bounce 2s infinite;
       bottom: 1rem;
-      margin: 0 0 2rem 0;
+      margin: 0 0 3rem 0;
     }
 
     @keyframes bounce {

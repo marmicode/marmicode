@@ -26,10 +26,10 @@ import { WorkshopSection } from './workshop-section.ng';
 
     :host::before {
       position: absolute;
-      height: 4rem;
-      clip-path: ellipse(60% 75% at 50% 120%);
+      height: 3rem;
+      clip-path: ellipse(60% 100% at 50% 120%);
       background-color: rgb(249, 250, 251);
-      top: -4rem;
+      top: -3rem;
       width: 100%;
       content: '';
     }
