@@ -8,12 +8,12 @@ import { WorkshopSection } from './workshop-section.ng';
   selector: 'mc-workshop-instructor',
   imports: [MatCardModule, WorkshopSection],
   template: `
-    <mc-workshop-section title="��‍🏫 Your Instructor">
+    <mc-workshop-section title="👨‍🏫 Your Instructor" color="surface">
       <mat-card class="card">
         <img
           mat-card-image
-          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-          alt="Photo of a Shiba Inu"
+          src="https://cookbook.marmicode.io/img/younes.jpg"
+          alt="Photo of Younes Jaaidi"
         />
         <mat-card-content>
           <h3>Younes Jaaidi</h3>
