@@ -18,22 +18,6 @@ import { WorkshopSection } from './workshop-section.ng';
     </mc-workshop-section>
   `,
   styles: `
-    :host {
-      position: relative;
-      display: block;
-      background-color: rgb(249, 250, 251);
-    }
-
-    :host::before {
-      position: absolute;
-      height: 3rem;
-      clip-path: ellipse(60% 100% at 50% 120%);
-      background-color: rgb(249, 250, 251);
-      top: -3rem;
-      width: 100%;
-      content: '';
-    }
-
     .benefits {
       display: flex;
       flex-direction: row;
