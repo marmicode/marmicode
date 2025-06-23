@@ -11,8 +11,6 @@ import { WorkshopPrerequisites } from './workshop-prerequisites.ng';
 import { WorkshopAgenda } from './workshop-agenda.ng';
 import { WorkshopInstructor } from './workshop-instructor.ng';
 
-// TODO fix this
-// @ts-ignore
 import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-testing.png';
 
 @Component({
