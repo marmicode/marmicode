@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { WorkshopSection } from './workshop-section.ng';
+import { Agenda } from './workshop';
 
 @Component({
   selector: 'mc-workshop-agenda',
@@ -8,10 +9,13 @@ import { WorkshopSection } from './workshop-section.ng';
   template: `
     <mc-workshop-section title="🗓️ Agenda">
       <mat-accordion>
-        @for (section of sections(); track $index) {
-          <mat-expansion-panel>
+        @for (section of agenda().sections; track section) {
+          @let isEmpty = section.items.length === 0;
+          <mat-expansion-panel [hideToggle]="isEmpty" [inert]="isEmpty">
             <mat-expansion-panel-header>
-              <mat-panel-title> {{ section.title }} </mat-panel-title>
+              <mat-panel-title class="title">
+                {{ section.title }}
+              </mat-panel-title>
             </mat-expansion-panel-header>
             <ul>
               @for (item of section.items; track $index) {
@@ -29,23 +33,14 @@ import { WorkshopSection } from './workshop-section.ng';
       margin: auto;
       max-width: 800px;
     }
+
+    .title {
+      font-size: 1.25em;
+    }
   `,
 })
 export class WorkshopAgenda {
-  sections = signal([
-    {
-      title: 'Introduction & Setup',
-      items: ['Welcome', 'Environment Setup', 'Goals'],
-    },
-    {
-      title: 'Testing Fundamentals',
-      items: ['Unit Testing', 'Test Runners', 'Assertions'],
-    },
-    {
-      title: 'Advanced Topics',
-      items: ['Component Testing', 'Integration Strategies'],
-    },
-  ]);
+  agenda = input.required<Agenda>();
 
   openSections = signal([true, false, false]);
 

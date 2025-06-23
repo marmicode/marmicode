@@ -16,7 +16,7 @@ Let's cook fast, reliable tests that actually help you ship.`,
   requiredSkills: [
     `Angular core concepts (e.g. components, inputs/outputs, services)`,
     `TypeScript fundamentals (e.g. types, interfaces, basic generics)`,
-    `Git fundamentals (e.g. cloning, resetting, switching branches)`,
+    `Git fundamentals (e.g. cloning, resetting local changes, switching branches)`,
   ],
   benefits: [
     {
@@ -32,7 +32,7 @@ Let's cook fast, reliable tests that actually help you ship.`,
         'Write tests that validate user behavior, not implementation details.',
     },
     {
-      icon: 'autorenew',
+      icon: 'rocket',
       title: 'Future-Proof Your Tests',
       description:
         'Craft tests that survive migrations and refactorings with minimal changes.',
@@ -44,7 +44,7 @@ Let's cook fast, reliable tests that actually help you ship.`,
         'Discover how to choose the appropriate test size for every situation.',
     },
     {
-      icon: 'science',
+      icon: 'theater_comedy',
       title: 'Mocking Made Easy',
       description:
         'Master Fakes and Object Mothers to simplify "mocking" and avoid common pitfalls.',

@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { Benefit } from './workshop';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  selector: 'mc-workshop-benefits-card',
+  selector: 'mc-workshop-benefit-card',
   imports: [MatCardModule, MatIconModule],
   template: `
     <mat-card class="card">
@@ -14,13 +15,12 @@ import { MatIconModule } from '@angular/material/icon';
           <mat-icon
             class="icon"
             color="primary"
-            fontIcon="check_circle"
+            [fontIcon]="benefit().icon"
           ></mat-icon>
         </div>
-        <h3>Cool stuff</h3>
+        <h3>{{ benefit().title }}</h3>
         <p>
-          You will learn how to test your Angular application using the most
-          effective techniques.
+          {{ benefit().description }}
         </p>
       </mat-card-content>
     </mat-card>
@@ -72,4 +72,6 @@ import { MatIconModule } from '@angular/material/icon';
     }
   `,
 })
-export class WorkshopBenefitsCard {}
+export class WorkshopBenefitCard {
+  benefit = input.required<Benefit>();
+}

@@ -1,19 +1,18 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { WorkshopBenefitsCard } from './workshop-benefits-card.ng';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { WorkshopBenefitCard } from './workshop-benefits-card.ng';
 import { WorkshopSection } from './workshop-section.ng';
+import { Benefit } from './workshop';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-benefits',
-  imports: [WorkshopBenefitsCard, WorkshopSection],
+  imports: [WorkshopBenefitCard, WorkshopSection],
   template: `
     <mc-workshop-section title="🍱 What you'll learn" color="surface">
       <div class="benefits">
-        <mc-workshop-benefits-card />
-        <mc-workshop-benefits-card />
-        <mc-workshop-benefits-card />
-        <mc-workshop-benefits-card />
-        <mc-workshop-benefits-card />
+        @for (benefit of benefits(); track benefit) {
+          <mc-workshop-benefit-card [benefit]="benefit" />
+        }
       </div>
     </mc-workshop-section>
   `,
@@ -28,4 +27,6 @@ import { WorkshopSection } from './workshop-section.ng';
     }
   `,
 })
-export class WorkshopBenefits {}
+export class WorkshopBenefits {
+  benefits = input.required<Benefit[]>();
+}

@@ -1,19 +1,24 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  signal,
+} from '@angular/core';
 import { WorkshopSection } from './workshop-section.ng';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  selector: 'mc-workshop-prerequisites',
+  selector: 'mc-workshop-required-skills',
   imports: [WorkshopSection, MatIconModule],
   template: `
     <mc-workshop-section title="🎓 Required Knowledge">
       <ul>
-        @for (prerequisite of prerequisites(); track prerequisite) {
+        @for (skill of skills(); track skill) {
           <li>
             <mat-icon>check</mat-icon>
-            <span>{{ prerequisite }}</span>
+            <span>{{ skill }}</span>
           </li>
         }
       </ul>
@@ -44,10 +49,6 @@ import { MatIconModule } from '@angular/material/icon';
     }
   `,
 })
-export class WorkshopPrerequisites {
-  protected readonly prerequisites = signal([
-    'Basic Angular concepts (e.g. components, inputs/outputs, services)',
-    'TypeScript fundamentals (e.g. types, interfaces, functions)',
-    'Git basics',
-  ]);
+export class WorkshopRequiredSkills {
+  skills = input.required<string[]>();
 }

@@ -9,7 +9,7 @@ import { WorkshopAgenda } from './workshop-agenda.ng';
 import { WorkshopBanner } from './workshop-banner.ng';
 import { WorkshopBenefits } from './workshop-benefits.ng';
 import { WorkshopInstructor } from './workshop-instructor.ng';
-import { WorkshopPrerequisites } from './workshop-prerequisites.ng';
+import { WorkshopRequiredSkills } from './workshop-prerequisites.ng';
 
 import { pragmaticAngularTesting } from './workshops/pragmatic-angular-testing';
 
@@ -21,7 +21,7 @@ import { pragmaticAngularTesting } from './workshops/pragmatic-angular-testing';
     PageComponent,
     WorkshopBanner,
     WorkshopBenefits,
-    WorkshopPrerequisites,
+    WorkshopRequiredSkills,
     WorkshopAgenda,
     WorkshopInstructor,
   ],
@@ -31,9 +31,9 @@ import { pragmaticAngularTesting } from './workshops/pragmatic-angular-testing';
         [pictureUri]="workshop().pictureUri"
         [title]="workshop().title"
       />
-      <mc-workshop-benefits />
-      <mc-workshop-prerequisites />
-      <mc-workshop-agenda />
+      <mc-workshop-benefits [benefits]="workshop().benefits" />
+      <mc-workshop-required-skills [skills]="workshop().requiredSkills" />
+      <mc-workshop-agenda [agenda]="workshop().agenda" />
       <mc-workshop-instructor />
     </mc-page>
   `,
