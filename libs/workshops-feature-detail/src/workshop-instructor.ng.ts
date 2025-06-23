@@ -8,11 +8,12 @@ import { WorkshopSection } from './workshop-section.ng';
   selector: 'mc-workshop-instructor',
   imports: [MatCardModule, WorkshopSection],
   template: `
-    <mc-workshop-section title="👨‍🏫 Your Instructor" color="surface">
+    <mc-workshop-section title="👨🏻‍🏫 Your Instructor" color="surface">
       <mat-card class="card">
         <img
           mat-card-image
           src="https://cookbook.marmicode.io/img/younes.jpg"
+          height="300"
           alt="Photo of Younes Jaaidi"
         />
         <mat-card-content>
@@ -31,10 +32,6 @@ import { WorkshopSection } from './workshop-section.ng';
             He's also an <b>Angular Google Developer Expert</b>, an
             <b>NX Champion</b>, and a mediocre sailor.
           </p>
-          <p>
-            His favorite spice:
-            <code>sleep 300 && git reset --hard && git clean -df</code>
-          </p>
         </mat-card-content>
       </mat-card>
     </mc-workshop-section>
@@ -42,23 +39,28 @@ import { WorkshopSection } from './workshop-section.ng';
   styles: `
     .card {
       margin: auto;
-      width: 400px;
+      width: min(100%, 600px);
+    }
 
-      h3 {
-        font-weight: 700;
-        font-size: 24px; /* Adjust depending on context */
-        color: #111827; /* near-black */
-        line-height: 1.4;
-        margin-top: 1rem;
-        text-align: center;
-      }
+    img {
+      object-fit: cover;
+      object-position: 0% 20%;
+    }
 
-      p {
-        font-weight: 400;
-        font-size: 16px;
-        color: #6b7280; /* dark gray */
-        line-height: 1.6;
-      }
+    h3 {
+      font-weight: 700;
+      font-size: 24px; /* Adjust depending on context */
+      color: #111827; /* near-black */
+      line-height: 1.4;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 16px;
+      color: #6b7280; /* dark gray */
+      line-height: 1.6;
     }
   `,
 })
