@@ -27,10 +27,7 @@ import { pragmaticAngularTesting } from './workshops/pragmatic-angular-testing';
   ],
   template: `
     <mc-page [info]="info()">
-      <mc-workshop-banner
-        [pictureUri]="workshop().pictureUri"
-        [title]="workshop().title"
-      />
+      <mc-workshop-banner [workshop]="workshop()" />
       <mc-workshop-benefits [benefits]="workshop().benefits" />
       <mc-workshop-required-skills [skills]="workshop().requiredSkills" />
       <mc-workshop-agenda [agenda]="workshop().agenda" />

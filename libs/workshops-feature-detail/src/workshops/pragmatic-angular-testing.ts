@@ -4,7 +4,7 @@ import pictureUri from './pragmatic-angular-testing.png';
 export const pragmaticAngularTesting = createWorkshop({
   title: 'Pragmatic Angular Testing Workshop',
   type: 'tapas',
-  subheading: `Tired of whack-a-mole bugs, boring manual tests, and fragile suites? 
+  subheading: `Tired of whack-a-mole bugs, boring manual tests, and fragile suites?
 Let's cook fast, reliable tests that actually help you ship.`,
   pictureUri,
   duration: 1,

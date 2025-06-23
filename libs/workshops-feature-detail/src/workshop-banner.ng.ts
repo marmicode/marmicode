@@ -6,27 +6,28 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { Workshop } from './workshop';
+import { DatePipe, JsonPipe } from '@angular/common';
 
 @Component({
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-banner',
-  imports: [MatButtonModule, MatIconModule],
+  imports: [MatButtonModule, MatIconModule, DatePipe],
   template: `
     <div class="banner-image" [style.backgroundImage]="backgroundImage()"></div>
     <div class="banner-gradient"></div>
     <div class="content">
-      <h1 class="title">{{ title() }}</h1>
-      <h2 class="subtitle">🫒 Tapas Session · 1-Day Workshop</h2>
-      <p class="badge">🗓️ Tuesday July 7th · 🐣 Early-Bird: €240</p>
-      <p class="description">
-        <span
-          >Tired of whack-a-mole bugs, boring manual tests, and fragile
-          suites?</span
-        >
-        <span
-          >Let’s cook fast, reliable tests that actually help you ship.</span
-        >
+      <h1 class="title">{{ workshop().title }}</h1>
+      <h2 class="subtitle">{{ subtitle() }}</h2>
+      <p class="badge">
+        🗓️ {{ (workshop().nextSessionDate | date: 'longDate') ?? 'TBD' }} ·
+        {{ offerStr() }}
+      </p>
+      <p class="subheading">
+        @for (line of subheadingLines(); track line) {
+          <span>{{ line }}</span>
+        }
       </p>
       <div class="email-and-spots">
         <div class="email-container">
@@ -108,7 +109,7 @@ import { MatIconModule } from '@angular/material/icon';
       font-size: 1.5rem;
     }
 
-    .description {
+    .subheading {
       display: flex;
       flex-direction: column;
       margin-top: 2rem;
@@ -190,7 +191,24 @@ import { MatIconModule } from '@angular/material/icon';
   `,
 })
 export class WorkshopBanner {
-  pictureUri = input.required<string>();
-  title = input.required<string>();
-  protected backgroundImage = computed(() => `url(${this.pictureUri()})`);
+  workshop = input.required<Workshop>();
+  protected backgroundImage = computed(
+    () => `url(${this.workshop().pictureUri})`,
+  );
+  protected subtitle = computed(() => {
+    const duration = this.workshop().duration;
+    const typeStr =
+      this.workshop().type === 'tapas' ? '🫒 Tapas Session' : '🍽️ Full Course';
+    const durationStr = duration === 1 ? '1-Day' : `${duration}-Days`;
+    return `${typeStr} · ${durationStr} Workshop`;
+  });
+  protected offerStr = computed(() => {
+    const offer = this.workshop().offer;
+    const typeStr =
+      offer.type === 'early-bird' ? '🐣 Early-Bird' : '⏰ Last-Minute';
+    return `${typeStr}: €${offer.price}`;
+  });
+  protected subheadingLines = computed(() =>
+    this.workshop().subheading.split('\n'),
+  );
 }
