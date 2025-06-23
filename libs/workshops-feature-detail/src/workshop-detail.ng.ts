@@ -5,13 +5,13 @@ import {
   signal,
 } from '@angular/core';
 import { createBasicPageInfo, PageComponent } from '@marmicode/shared-ui';
+import { WorkshopAgenda } from './workshop-agenda.ng';
 import { WorkshopBanner } from './workshop-banner.ng';
 import { WorkshopBenefits } from './workshop-benefits.ng';
-import { WorkshopPrerequisites } from './workshop-prerequisites.ng';
-import { WorkshopAgenda } from './workshop-agenda.ng';
 import { WorkshopInstructor } from './workshop-instructor.ng';
+import { WorkshopPrerequisites } from './workshop-prerequisites.ng';
 
-import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-testing.png';
+import { pragmaticAngularTesting } from './workshops/pragmatic-angular-testing';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,10 +39,7 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
   `,
 })
 export class WorkshopDetailPage {
-  workshop = signal({
-    title: 'Pragmatic Angular Testing Workshop',
-    pictureUri: pragmaticAngularTestingPictureUri,
-  });
+  workshop = signal(pragmaticAngularTesting);
   info = computed(() =>
     createBasicPageInfo({
       title: this.workshop().title,

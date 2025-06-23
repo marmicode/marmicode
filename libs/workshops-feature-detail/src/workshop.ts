@@ -1,14 +1,26 @@
 export interface Workshop {
   title: string;
   type: 'tapas' | 'full';
-  description: string;
+
+  /**
+   * The subheading is a short description of the workshop.
+   * It is displayed in the workshop banner.
+   *
+   * It supports markdown.
+   */
+  subheading: string;
+
   pictureUri: string;
+
+  /**
+   * Workshop duration in days.
+   */
   duration: number;
   nextSessionDate?: Date;
 
   offer: Offer;
 
-  prerequisites: string[];
+  requiredSkills: string[];
   benefits: Benefit[];
   agenda: Agenda;
 }
