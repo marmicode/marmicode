@@ -18,7 +18,22 @@ import { WorkshopSection } from './workshop-section.ng';
         <mat-card-content>
           <h3>Younes Jaaidi</h3>
           <p>
-            bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+            Younes Jaaidi is a Software Cook who enjoys whipping code until
+            tests pass.
+          </p>
+          <p>
+            <b>Born in the kitchen of eXtreme Programming over 15 years ago</b>,
+            he now teaches and coaches teams — like yours — to cook better
+            software using ingredients such as Test-Driven Development, and
+            Collective Ownership.
+          </p>
+          <p>
+            He's also an <b>Angular Google Developer Expert</b>, an
+            <b>NX Champion</b>, and a mediocre sailor.
+          </p>
+          <p>
+            His favorite spice:
+            <code>sleep 300 && git reset --hard && git clean -df</code>
           </p>
         </mat-card-content>
       </mat-card>
