@@ -41,8 +41,7 @@ import pragmaticAngularTestingPictureUri from './workshops/pragmatic-angular-tes
 export class WorkshopDetailPage {
   workshop = signal({
     title: 'Pragmatic Angular Testing Workshop',
-    // TODO fix this
-    pictureUri: pragmaticAngularTestingPictureUri as string,
+    pictureUri: pragmaticAngularTestingPictureUri,
   });
   info = computed(() =>
     createBasicPageInfo({
