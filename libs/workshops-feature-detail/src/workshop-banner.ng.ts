@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,7 +8,6 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Workshop } from './workshop';
-import { DatePipe, JsonPipe } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -200,7 +200,7 @@ export class WorkshopBanner {
     const typeStr =
       this.workshop().type === 'tapas' ? '🫒 Tapas Session' : '🍽️ Full Course';
     const durationStr = duration === 1 ? '1-Day' : `${duration}-Days`;
-    return `${typeStr} · ${durationStr} Workshop`;
+    return `${typeStr} · ${durationStr} Workshop · ${this.workshop().location}`;
   });
   protected offerStr = computed(() => {
     const offer = this.workshop().offer;

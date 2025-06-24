@@ -8,6 +8,7 @@ export const pragmaticAngularTesting = createWorkshop({
 Let's cook fast, reliable tests that actually help you ship.`,
   pictureUri,
   duration: 1,
+  location: 'Remote',
   offer: {
     type: 'early-bird',
     price: 240,

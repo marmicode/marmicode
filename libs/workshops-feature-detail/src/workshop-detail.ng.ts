@@ -16,7 +16,6 @@ import { pragmaticAngularTesting } from './workshops/pragmatic-angular-testing';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-detail-page',
-  standalone: true,
   imports: [
     PageComponent,
     WorkshopBanner,
