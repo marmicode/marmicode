@@ -2,22 +2,24 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   EventEmitter,
+  input,
   Input,
   NgModule,
   Output,
 } from '@angular/core';
-import { MarkdownBlock } from '@marmicode/block-core';
+import { MarkdownBlock, parseMarkdown } from '@marmicode/block-core';
 import { HighlightZone } from '../highlight/highlight-zone';
 import { MarkdownBlockStateService } from './markdown-block-state.service';
-import { MarkdownModule } from './markdown.module';
 import { MarkdownTokensComponent } from './markdown-tokens.component';
+import { MarkdownModule } from './markdown.module';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-block',
   template: `<mc-markdown-tokens
-    [tokens]="block.tokens"
+    [tokens]="tokens()"
     (highlightZoneChange)="onHighlightZoneChange($event)"
   ></mc-markdown-tokens>`,
   styles: [
@@ -49,7 +51,14 @@ import { MarkdownTokensComponent } from './markdown-tokens.component';
   imports: [MarkdownTokensComponent],
 })
 export class MarkdownBlockComponent {
-  @Input() block: MarkdownBlock;
+  block = input.required<MarkdownBlock | string>();
+  protected tokens = computed(() => {
+    const block = this.block();
+    if (typeof block === 'string') {
+      return parseMarkdown(block);
+    }
+    return block.tokens;
+  });
 
   /**
    * The available zones to highlight.

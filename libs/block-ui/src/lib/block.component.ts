@@ -21,7 +21,7 @@ import { HighlightZone } from './highlight/highlight-zone';
 import {
   MarkdownBlockModule,
   MarkdownBlockComponent,
-} from './markdown-block/markdown-block.component';
+} from './markdown-block/markdown-block.ng';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
