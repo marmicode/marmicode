@@ -8,9 +8,8 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'mc-fixed-background',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-fixed-background',
   template: `
     <div
       [class.bg-fixed]="supportsFixedBackground"
@@ -30,7 +29,7 @@ import {
 
     .banner-image {
       position: absolute;
-      background: var(--marmicode-primary-color);
+      background-color: var(--marmicode-primary-color);
       background-position: center;
       background-size: cover;
       inset: 0;
