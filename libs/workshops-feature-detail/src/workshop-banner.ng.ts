@@ -30,11 +30,17 @@ import { Workshop } from './workshop';
       </p>
       <div class="email-and-spots">
         <div class="email-form">
-          <input type="email" placeholder="Drop your email here" />
-          <button mat-button color="accent">
+          <!-- TODO: Re-enable input when the backend is ready. -->
+          <!-- <input type="email" placeholder="Drop your email here" /> -->
+          <a
+            [href]="waitlistMailtoUrl()"
+            mat-button
+            color="accent"
+            target="_blank"
+          >
             <mat-icon>notifications</mat-icon>
             JOIN THE WAITLIST
-          </button>
+          </a>
         </div>
         <p class="spots">
           Only 20 spots available. Be the first to know when registration opens.
@@ -118,7 +124,7 @@ import { Workshop } from './workshop';
     }
 
     .email-form input {
-      flex: 1;
+      flex: 10 1 auto;
       padding: 1rem;
       border: none;
       background: transparent;
@@ -130,7 +136,8 @@ import { Workshop } from './workshop';
       color: rgba(255, 255, 255, 0.9);
     }
 
-    .email-form button {
+    .email-form a {
+      flex: 1 0 auto;
       margin-right: 1rem;
       padding: 0.5rem;
       border: none;
@@ -200,4 +207,16 @@ export class WorkshopBanner {
   protected subheadingLines = computed(() =>
     this.workshop().subheading.split('\n'),
   );
+  protected waitlistMailtoUrl = computed(() => {
+    const url = new URL('mailto:kitchen@marmicode.io');
+    url.searchParams.set(
+      'subject',
+      `Registration for ${this.workshop().title}`,
+    );
+    url.searchParams.set(
+      'body',
+      `Hi! I'd like to be added to the waitlist for ${this.workshop().title} (${this.workshop().type} Session).`,
+    );
+    return url.toString();
+  });
 }
