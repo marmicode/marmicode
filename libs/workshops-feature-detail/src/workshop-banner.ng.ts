@@ -4,10 +4,12 @@ import {
   Component,
   computed,
   input,
+  inject,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Workshop } from './workshop';
+import { Platform } from '@angular/cdk/platform';
 
 @Component({
   standalone: true,
@@ -15,8 +17,12 @@ import { Workshop } from './workshop';
   selector: 'mc-workshop-banner',
   imports: [MatButtonModule, MatIconModule, DatePipe],
   template: `
-    <div class="banner-image" [style.backgroundImage]="backgroundImage()"></div>
-    <div class="banner-gradient"></div>
+    <div
+      [class.bg-fixed]="!platform.IOS"
+      [style.backgroundImage]="backgroundImage()"
+      class="banner-image"
+    ></div>
+    <div [class.bg-fixed]="!platform.IOS" class="banner-gradient"></div>
     <div class="content">
       <h1 class="title">{{ workshop().title }}</h1>
       <h2 class="subtitle">{{ subtitle() }}</h2>
@@ -51,9 +57,12 @@ import { Workshop } from './workshop';
       background: var(--marmicode-primary-color);
     }
 
+    .bg-fixed {
+      background-attachment: fixed;
+    }
+
     .banner-image {
       position: absolute;
-      background-attachment: fixed;
       background-position: center;
       background-size: cover;
       inset: 0;
@@ -61,7 +70,6 @@ import { Workshop } from './workshop';
 
     .banner-gradient {
       position: absolute;
-      background-attachment: fixed;
       background-position: center;
       background-size: cover;
       background-image: linear-gradient(
@@ -194,6 +202,9 @@ import { Workshop } from './workshop';
 })
 export class WorkshopBanner {
   workshop = input.required<Workshop>();
+
+  protected platform = inject(Platform);
+
   protected backgroundImage = computed(
     () => `url(${this.workshop().pictureUri})`,
   );
