@@ -1,7 +1,7 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { WorkshopSection } from './workshop-section.ng';
 import { Agenda } from './workshop';
+import { WorkshopSection } from './workshop-section.ng';
 
 @Component({
   selector: 'mc-workshop-agenda',
@@ -37,17 +37,22 @@ import { Agenda } from './workshop';
     .title {
       font-size: 1.25em;
     }
+
+    li {
+      color: var(--marmicode-primary-color);
+      font-size: 1.2em;
+      line-height: 2;
+      list-style: none;
+      position: relative;
+    }
+
+    li::before {
+      content: '→';
+      position: absolute;
+      left: -1.5em;
+    }
   `,
 })
 export class WorkshopAgenda {
   agenda = input.required<Agenda>();
-
-  openSections = signal([true, false, false]);
-
-  toggleSection(index: number) {
-    const current = this.openSections();
-    this.openSections.set(
-      current.map((open, i) => (i === index ? !open : open)),
-    );
-  }
 }
