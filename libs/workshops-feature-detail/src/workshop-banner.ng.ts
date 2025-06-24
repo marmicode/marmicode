@@ -29,8 +29,8 @@ import { Workshop } from './workshop';
         }
       </p>
       <div class="email-and-spots">
-        <div class="email-container">
-          <input type="email" placeholder="Enter your email address" />
+        <div class="email-form">
+          <input type="email" placeholder="Drop your email here" />
           <button mat-button color="accent">
             <mat-icon>notifications</mat-icon>
             JOIN THE WAITLIST
@@ -47,6 +47,7 @@ import { Workshop } from './workshop';
     :host {
       display: block;
       position: relative;
+      font-size: 1rem;
     }
 
     .content {
@@ -69,7 +70,7 @@ import { Workshop } from './workshop';
       margin-bottom: 0.7rem;
 
       background: rgba(56, 0, 48, 0.6);
-      font-size: 1.3rem;
+      font-size: 1.3em;
       box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
     }
 
@@ -81,11 +82,11 @@ import { Workshop } from './workshop';
     }
 
     .title {
-      font-size: 3rem;
+      font-size: 3em;
     }
 
     .subtitle {
-      font-size: 1.5rem;
+      font-size: 1.5em;
     }
 
     .subheading {
@@ -94,55 +95,52 @@ import { Workshop } from './workshop';
       margin-top: 2rem;
       margin-bottom: 2rem;
 
-      font-size: 1.5rem;
+      font-size: 1.5em;
       line-height: 1.5;
     }
 
     .email-and-spots {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      align-items: stretch;
       gap: 1rem;
     }
 
-    .email-container {
+    .email-form {
       display: flex;
       align-items: center;
       gap: 1rem;
-      max-width: 600px;
-      width: 100%;
-      margin: 0 auto 1rem;
+      margin: 0 0 1rem 0;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 8px;
       box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.2);
     }
 
-    .email-container input {
+    .email-form input {
       flex: 1;
       padding: 1rem;
       border: none;
       background: transparent;
       color: white;
-      font-size: 1.2rem;
+      font-size: 1.2em;
     }
 
-    .email-container input::placeholder {
+    .email-form input::placeholder {
       color: rgba(255, 255, 255, 0.9);
     }
 
-    .email-container button {
-      margin: 1rem;
+    .email-form button {
+      margin-right: 1rem;
       padding: 0.5rem;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 1em;
     }
 
     .spots {
       color: rgba(255, 255, 255, 0.8);
-      font-size: 1.1rem;
+      font-size: 1.1em;
       font-style: italic;
     }
 
@@ -150,6 +148,19 @@ import { Workshop } from './workshop';
       animation: bounce 2s infinite;
       bottom: 1rem;
       margin: 0 0 3rem 0;
+    }
+
+    @media (max-width: 599.98px) {
+      :host {
+        font-size: 0.75rem;
+      }
+
+      .email-form {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        margin: 0 10px;
+      }
     }
 
     @keyframes bounce {
