@@ -8,9 +8,9 @@ import { createBasicPageInfo, PageComponent } from '@marmicode/shared-ui';
 import { WorkshopAgenda } from './workshop-agenda.ng';
 import { WorkshopBanner } from './workshop-banner.ng';
 import { WorkshopBenefits } from './workshop-benefits.ng';
+import { WorkshopDescription } from './workshop-description.ng';
 import { WorkshopInstructor } from './workshop-instructor.ng';
 import { WorkshopRequiredSkills } from './workshop-prerequisites.ng';
-
 import { pragmaticAngularTesting } from './workshops/pragmatic-angular-testing';
 
 @Component({
@@ -18,15 +18,17 @@ import { pragmaticAngularTesting } from './workshops/pragmatic-angular-testing';
   selector: 'mc-workshop-detail-page',
   imports: [
     PageComponent,
+    WorkshopAgenda,
     WorkshopBanner,
     WorkshopBenefits,
-    WorkshopRequiredSkills,
-    WorkshopAgenda,
+    WorkshopDescription,
     WorkshopInstructor,
+    WorkshopRequiredSkills,
   ],
   template: `
     <mc-page [info]="info()">
       <mc-workshop-banner [workshop]="workshop()" />
+      <mc-workshop-description [description]="workshop().description" />
       <mc-workshop-benefits [benefits]="workshop().benefits" />
       <mc-workshop-required-skills [skills]="workshop().requiredSkills" />
       <mc-workshop-agenda [agenda]="workshop().agenda" />

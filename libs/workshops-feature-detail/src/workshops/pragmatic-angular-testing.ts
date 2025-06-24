@@ -9,6 +9,31 @@ Let's cook fast, reliable tests that actually help you ship.`,
   pictureUri,
   duration: 1,
   location: 'Remote',
+  description: `
+Two ways to keep your app stable:
+**Leave it untouched — or season it with a solid testing strategy.**
+
+How's your testing strategy holding up?
+- Does each refactor send half your tests into meltdown?
+- Maintaining mocks turns into a nightmare?
+- Got 100% coverage but bugs still sneak through the cracks?
+- Thought end-to-end would be the main course — but ended up chewing on flakiness and wait times?
+- As release dates approach, you skip tests and serve it raw, hoping nobody gets food poisoning?
+
+If that sounds familiar, this workshop is your kitchen rescue plan.
+
+We'll shop for the good stuff: **Fakes, Object Mothers, Gloves, Vitest, Testing Library, Playwright Component Testing** — and learn when and why to reach for each.
+
+Once we're back in the kitchen, we'll cook **high-confidence, low-maintenance** tests that:
+
+- Help you develop faster.
+- Catch regressions before your users do.
+- **Survive the heat of refactors** and all sorts of **migrations** — including Observables → Signals, or whatever the future holds.
+- Run fast enough to guide you while you code.
+- Are ready for a **Zoneless future**.
+
+No dogma. No silver bullets. Just pragmatic Angular testing skills to help you **ship with peace of mind**.
+`,
   offer: {
     type: 'early-bird',
     price: 240,

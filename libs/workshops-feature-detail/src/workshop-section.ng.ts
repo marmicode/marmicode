@@ -55,7 +55,7 @@ import {
   },
 })
 export class WorkshopSection {
-  title = input.required<string>();
+  title = input<string>();
   color = input<'surface' | 'plain'>('plain');
 
   protected realColor = computed(() =>

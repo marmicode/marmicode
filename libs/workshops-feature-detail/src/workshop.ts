@@ -2,6 +2,7 @@ export interface Workshop {
   title: string;
   type: 'tapas' | 'full';
   location: string;
+  description: string;
 
   /**
    * The subheading is a short description of the workshop.
