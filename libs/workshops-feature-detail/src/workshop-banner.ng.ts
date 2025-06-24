@@ -46,6 +46,7 @@ import { Workshop } from './workshop';
   `,
   styles: `
     :host {
+      display: block;
       position: relative;
     }
 
