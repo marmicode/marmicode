@@ -47,6 +47,21 @@ export const routes: Routes = [
       ),
   },
 
+<<<<<<< Updated upstream
+=======
+  /* Workshop detail. */
+  {
+    path: workshopDetailRouterHelper.WORKSHOP_DETAIL_PATH,
+    loadComponent: () => import('@marmicode/workshops-feature-detail'),
+  },
+
+  /* Workshop list. */
+  {
+    path: workshopDetailRouterHelper.WORKSHOP_LIST_PATH,
+    loadComponent: () => import('@marmicode/workshops-feature-list'),
+  },
+
+>>>>>>> Stashed changes
   /* / redirect. */
   {
     path: '',
