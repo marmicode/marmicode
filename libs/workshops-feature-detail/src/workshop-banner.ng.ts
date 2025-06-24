@@ -48,6 +48,7 @@ import { Workshop } from './workshop';
     :host {
       display: block;
       position: relative;
+      background: var(--marmicode-primary-color);
     }
 
     .banner-image {
