@@ -54,6 +54,7 @@ import { Workshop } from './workshop';
       display: flex;
       position: relative;
       min-height: calc(100vh - 64px);
+      padding-top: 2rem;
 
       flex-direction: column;
       align-items: center;

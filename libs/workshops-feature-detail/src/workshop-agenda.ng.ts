@@ -2,7 +2,6 @@ import { Component, input } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Agenda } from './workshop';
 import { WorkshopSection } from './workshop-section.ng';
-
 @Component({
   selector: 'mc-workshop-agenda',
   imports: [MatExpansionModule, WorkshopSection],
@@ -28,6 +27,16 @@ import { WorkshopSection } from './workshop-section.ng';
     </mc-workshop-section>
   `,
   styles: `
+    @use '@angular/material' as mat;
+
+    :host {
+      @include mat.expansion-overrides(
+        (
+          header-collapsed-state-height: 3.5rem,
+        )
+      );
+    }
+
     mat-accordion {
       display: block;
       margin: auto;
@@ -36,6 +45,7 @@ import { WorkshopSection } from './workshop-section.ng';
 
     .title {
       font-size: 1.25em;
+      line-height: 1.5;
     }
 
     li {
