@@ -39,7 +39,6 @@ import { WorkshopSection } from './workshop-section.ng';
     }
 
     li {
-      color: var(--marmicode-primary-color);
       font-size: 1.2em;
       line-height: 2;
       list-style: none;
@@ -48,6 +47,7 @@ import { WorkshopSection } from './workshop-section.ng';
 
     li::before {
       content: '→';
+      color: var(--marmicode-accent-color);
       position: absolute;
       left: -1.5em;
     }
