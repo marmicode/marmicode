@@ -18,11 +18,14 @@ import { Platform } from '@angular/cdk/platform';
   imports: [MatButtonModule, MatIconModule, DatePipe],
   template: `
     <div
-      [class.bg-fixed]="!platform.IOS"
+      [class.bg-fixed]="supportsFixedBackground"
       [style.backgroundImage]="backgroundImage()"
       class="banner-image"
     ></div>
-    <div [class.bg-fixed]="!platform.IOS" class="banner-gradient"></div>
+    <div
+      [class.bg-fixed]="supportsFixedBackground"
+      class="banner-gradient"
+    ></div>
     <div class="content">
       <h1 class="title">{{ workshop().title }}</h1>
       <h2 class="subtitle">{{ subtitle() }}</h2>
@@ -203,8 +206,6 @@ import { Platform } from '@angular/cdk/platform';
 export class WorkshopBanner {
   workshop = input.required<Workshop>();
 
-  protected platform = inject(Platform);
-
   protected backgroundImage = computed(
     () => `url(${this.workshop().pictureUri})`,
   );
@@ -224,4 +225,11 @@ export class WorkshopBanner {
   protected subheadingLines = computed(() =>
     this.workshop().subheading.split('\n'),
   );
+  protected supportsFixedBackground: boolean;
+
+  private _platform = inject(Platform);
+
+  constructor() {
+    this.supportsFixedBackground = !this._platform.IOS;
+  }
 }
