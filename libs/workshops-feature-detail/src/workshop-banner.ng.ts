@@ -4,28 +4,18 @@ import {
   Component,
   computed,
   input,
-  inject,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { FixedBackground } from './fixed-background.ng';
 import { Workshop } from './workshop';
-import { Platform } from '@angular/cdk/platform';
 
 @Component({
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-banner',
-  imports: [MatButtonModule, MatIconModule, DatePipe],
+  imports: [MatButtonModule, MatIconModule, DatePipe, FixedBackground],
   template: `
-    <div
-      [class.bg-fixed]="supportsFixedBackground"
-      [style.backgroundImage]="backgroundImage()"
-      class="banner-image"
-    ></div>
-    <div
-      [class.bg-fixed]="supportsFixedBackground"
-      class="banner-gradient"
-    ></div>
+    <mc-fixed-background [pictureUri]="workshop().pictureUri" />
     <div class="content">
       <h1 class="title">{{ workshop().title }}</h1>
       <h2 class="subtitle">{{ subtitle() }}</h2>
@@ -57,30 +47,6 @@ import { Platform } from '@angular/cdk/platform';
     :host {
       display: block;
       position: relative;
-      background: var(--marmicode-primary-color);
-    }
-
-    .bg-fixed {
-      background-attachment: fixed;
-    }
-
-    .banner-image {
-      position: absolute;
-      background-position: center;
-      background-size: cover;
-      inset: 0;
-    }
-
-    .banner-gradient {
-      position: absolute;
-      background-position: center;
-      background-size: cover;
-      background-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0),
-        rgba(10, 10, 10, 0.5)
-      );
-      inset: 0;
     }
 
     .content {
@@ -206,9 +172,6 @@ import { Platform } from '@angular/cdk/platform';
 export class WorkshopBanner {
   workshop = input.required<Workshop>();
 
-  protected backgroundImage = computed(
-    () => `url(${this.workshop().pictureUri})`,
-  );
   protected subtitle = computed(() => {
     const duration = this.workshop().duration;
     const typeStr =
@@ -225,11 +188,4 @@ export class WorkshopBanner {
   protected subheadingLines = computed(() =>
     this.workshop().subheading.split('\n'),
   );
-  protected supportsFixedBackground: boolean;
-
-  private _platform = inject(Platform);
-
-  constructor() {
-    this.supportsFixedBackground = !this._platform.IOS;
-  }
 }
