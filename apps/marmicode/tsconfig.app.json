@@ -10,7 +10,8 @@
     "src/main.ts",
     "src/polyfills.ts",
     "src/main.server.ts",
-    "src/server.ts"
+    "src/server.ts",
+    "src/types.d.ts"
   ],
   "exclude": ["jest.config.ts"]
 }

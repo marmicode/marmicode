@@ -68,6 +68,8 @@ import { Workshop } from './workshop';
 
       color: white;
       text-align: center;
+
+      animation: fadeScaleIn 0.3s ease-out forwards;
     }
 
     .badge {
@@ -168,6 +170,21 @@ import { Workshop } from './workshop';
         align-items: stretch;
         gap: 0;
         margin: 0 10px;
+      }
+    }
+
+    @keyframes fadeScaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0);
+      }
+      50% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
       }
     }
 

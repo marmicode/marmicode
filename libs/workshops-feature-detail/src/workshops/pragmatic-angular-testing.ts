@@ -1,5 +1,5 @@
 import { createWorkshop } from '../workshop';
-import pictureUri from './pragmatic-angular-testing.png';
+import pictureUri from './pragmatic-angular-testing.webp';
 
 export const pragmaticAngularTesting = createWorkshop({
   title: 'Pragmatic Angular Testing Workshop',

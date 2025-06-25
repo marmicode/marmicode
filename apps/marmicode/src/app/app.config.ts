@@ -20,7 +20,10 @@ import {
   withEventReplay,
 } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter } from '@angular/router';
+import {
+  provideRouter,
+  withEnabledBlockingInitialNavigation,
+} from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
@@ -46,7 +49,9 @@ export const appConfig: ApplicationConfig = {
     provideExperimentalZonelessChangeDetection(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideHttpClient(withInterceptorsFromDi(), withFetch()),
-    provideRouter(routes),
+    /* HACK: use withEnabledBlockingInitialNavigation() to avoid flicker.
+     * TODO: remove it after migrating to Angular 20. */
+    provideRouter(routes, withEnabledBlockingInitialNavigation()),
     provideRouterStore(),
     provideStore({ router: routerReducer }),
     provideUpdateEffects(),

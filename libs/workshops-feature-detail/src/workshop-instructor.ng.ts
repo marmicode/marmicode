@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { WorkshopSection } from './workshop-section.ng';
+import instructorPictureUri from './workshop-instructor.webp';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -11,8 +12,8 @@ import { WorkshopSection } from './workshop-section.ng';
     <mc-workshop-section title="👨🏻‍🏫 Your Instructor" color="surface">
       <mat-card class="card">
         <img
+          [src]="instructorPictureUri"
           mat-card-image
-          src="https://cookbook.marmicode.io/img/younes.jpg"
           height="300"
           alt="Photo of Younes Jaaidi"
         />
@@ -39,7 +40,7 @@ import { WorkshopSection } from './workshop-section.ng';
   styles: `
     .card {
       margin: auto;
-      width: min(100%, 600px);
+      width: min(100%, 500px);
     }
 
     img {
@@ -64,4 +65,6 @@ import { WorkshopSection } from './workshop-section.ng';
     }
   `,
 })
-export class WorkshopInstructor {}
+export class WorkshopInstructor {
+  protected instructorPictureUri = instructorPictureUri;
+}

@@ -41,8 +41,8 @@ import {
       background-size: cover;
       background-image: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0),
-        rgba(10, 10, 10, 0.5)
+        rgba(10, 10, 10, 0.2),
+        rgba(10, 10, 10, 0.8)
       );
       inset: 0;
     }
