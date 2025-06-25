@@ -15,6 +15,7 @@ import { WorkshopSection } from './workshop-section.ng';
     .content {
       max-width: 1000px;
       margin: 0 auto;
+      padding: 0 1rem;
     }
   `,
 })
