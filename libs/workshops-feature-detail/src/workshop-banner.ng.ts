@@ -1,4 +1,9 @@
-import { DatePipe } from '@angular/common';
+import {
+  CurrencyPipe,
+  NgPlural,
+  NgPluralCase,
+  TitleCasePipe,
+} from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,15 +18,35 @@ import { Workshop } from './workshop';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-banner',
-  imports: [MatButtonModule, MatIconModule, DatePipe, FixedBackground],
+  imports: [
+    CurrencyPipe,
+    FixedBackground,
+    MatButtonModule,
+    MatIconModule,
+    NgPlural,
+    NgPluralCase,
+    TitleCasePipe,
+  ],
   template: `
     <mc-fixed-background [pictureUri]="workshop().pictureUri" />
     <div class="content">
       <h1 class="title">{{ workshop().title }}</h1>
-      <h2 class="subtitle">{{ subtitle() }}</h2>
+      <h2 class="subtitle">
+        <span>{{ workshopType() }}</span>
+        <span> · </span>
+        <span [ngPlural]="workshop().duration">
+          <ng-template ngPluralCase="=1">1 Day</ng-template>
+          <ng-template ngPluralCase="other"
+            >{{ workshop().duration }} Days</ng-template
+          >
+        </span>
+        <span> Workshop</span>
+        <span> · </span>
+        <span>{{ workshop().location | titlecase }}</span>
+      </h2>
       <p class="badge">
-        🗓️ {{ (workshop().nextSessionDate | date: 'longDate') ?? 'TBD' }} ·
-        {{ offerStr() }}
+        {{ offerType() }} Starts at
+        {{ workshop().offer.price | currency: 'EUR' : true : '1.0-0' }}
       </p>
       <p class="subheading">
         @for (line of subheadingLines(); track line) {
@@ -215,11 +240,14 @@ export class WorkshopBanner {
     const durationStr = duration === 1 ? '1-Day' : `${duration}-Days`;
     return `${typeStr} · ${durationStr} Workshop · ${this.workshop().location}`;
   });
-  protected offerStr = computed(() => {
+  protected workshopType = computed(() => {
+    return this.workshop().type === 'tapas'
+      ? '🫒 Tapas Session'
+      : '🍽️ Full Course';
+  });
+  protected offerType = computed(() => {
     const offer = this.workshop().offer;
-    const typeStr =
-      offer.type === 'early-bird' ? '🐣 Early-Bird' : '⏰ Last-Minute';
-    return `${typeStr}: €${offer.price}`;
+    return offer.type === 'early-bird' ? '🐣 Early Bird' : '⏰ Last Minute';
   });
   protected subheadingLines = computed(() =>
     this.workshop().subheading.split('\n'),

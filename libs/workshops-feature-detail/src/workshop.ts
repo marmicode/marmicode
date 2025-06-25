@@ -1,7 +1,7 @@
 export interface Workshop {
   title: string;
   type: 'tapas' | 'full';
-  location: string;
+  location: 'online';
   description: string;
 
   /**
