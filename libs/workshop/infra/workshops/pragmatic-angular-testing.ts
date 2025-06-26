@@ -1,4 +1,4 @@
-import { createWorkshop } from '../../core/workshop';
+import { createWorkshop } from '@marmicode/workshop/core';
 import pictureUri from './pragmatic-angular-testing.webp';
 
 export const pragmaticAngularTesting = createWorkshop({

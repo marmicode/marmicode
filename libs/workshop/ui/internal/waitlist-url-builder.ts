@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Session, Workshop } from '../core/workshop';
+import { Session, Workshop } from '@marmicode/workshop/core';
 
 @Injectable({ providedIn: 'root' })
 export class WaitlistUrlBuilder {

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MarkdownBlockComponent } from '@marmicode/block-ui';
-import { WorkshopSection } from './workshop-section.ng';
+import { WorkshopSection } from './internal/workshop-section.ng';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

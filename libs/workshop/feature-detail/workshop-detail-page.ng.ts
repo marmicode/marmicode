@@ -10,14 +10,14 @@ import {
   ErrorComponent,
   PageComponent,
 } from '@marmicode/shared-ui';
-import { WorkshopRepository } from './infra/workshop-repository';
-import { WorkshopAgenda } from './ui/workshop-agenda.ng';
-import { WorkshopBanner } from './ui/workshop-banner.ng';
-import { WorkshopBenefits } from './ui/workshop-benefits.ng';
-import { WorkshopDescription } from './ui/workshop-description.ng';
-import { WorkshopInstructor } from './ui/workshop-instructor.ng';
-import { WorkshopRequiredSkills } from './ui/workshop-prerequisites.ng';
-import { WorkshopSessions } from './ui/workshop-sessions.ng';
+import { WorkshopRepository } from '@marmicode/workshop/infra';
+import { WorkshopAgenda } from '@marmicode/workshop/ui';
+import { WorkshopBanner } from '@marmicode/workshop/ui';
+import { WorkshopBenefits } from '@marmicode/workshop/ui';
+import { WorkshopDescription } from '@marmicode/workshop/ui';
+import { WorkshopInstructor } from '@marmicode/workshop/ui';
+import { WorkshopRequiredSkills } from '@marmicode/workshop/ui';
+import { WorkshopSessions } from '@marmicode/workshop/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

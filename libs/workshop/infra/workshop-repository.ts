@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Workshop } from '../core/workshop';
+import { Workshop } from '@marmicode/workshop/core';
 import { pragmaticAngularTesting } from './workshops/pragmatic-angular-testing';
 
 @Injectable({ providedIn: 'root' })

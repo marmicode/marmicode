@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { WorkshopSection } from './workshop-section.ng';
+import { WorkshopSection } from './internal/workshop-section.ng';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

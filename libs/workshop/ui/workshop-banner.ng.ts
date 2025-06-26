@@ -13,9 +13,9 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { FixedBackground } from './fixed-background.ng';
-import { Workshop } from '../core/workshop';
-import { WaitlistUrlBuilder } from './waitlist-url-builder';
+import { FixedBackground } from './internal/fixed-background.ng';
+import { Workshop } from '@marmicode/workshop/core';
+import { WaitlistUrlBuilder } from './internal/waitlist-url-builder';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

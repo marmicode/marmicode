@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { Agenda } from '../core/workshop';
-import { WorkshopSection } from './workshop-section.ng';
+import { Agenda } from '@marmicode/workshop/core';
+import { WorkshopSection } from './internal/workshop-section.ng';
 @Component({
   selector: 'mc-workshop-agenda',
   imports: [MatExpansionModule, WorkshopSection],

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { WorkshopBenefitCard } from './workshop-benefits-card.ng';
-import { WorkshopSection } from './workshop-section.ng';
-import { Benefit } from '../core/workshop';
+import { WorkshopSection } from './internal/workshop-section.ng';
+import { Benefit } from '@marmicode/workshop/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

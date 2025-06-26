@@ -9,10 +9,10 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Workshop } from '../core/workshop';
-import { WaitlistUrlBuilder } from './waitlist-url-builder';
-import { WorkshopCard } from './workshop-card.ng';
-import { WorkshopSection } from './workshop-section.ng';
+import { Workshop } from '@marmicode/workshop/core';
+import { WaitlistUrlBuilder } from './internal/waitlist-url-builder';
+import { WorkshopCard } from './internal/workshop-card.ng';
+import { WorkshopSection } from './internal/workshop-section.ng';
 
 @Component({
   selector: 'mc-workshop-sessions',

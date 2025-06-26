@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { WorkshopSection } from './workshop-section.ng';
+import { WorkshopSection } from './internal/workshop-section.ng';
 import instructorPictureUri from './workshop-instructor.webp';
 
 @Component({
