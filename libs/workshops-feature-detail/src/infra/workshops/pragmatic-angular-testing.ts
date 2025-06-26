@@ -1,7 +1,8 @@
-import { createWorkshop } from '../workshop';
+import { createWorkshop } from '../../core/workshop';
 import pictureUri from './pragmatic-angular-testing.webp';
 
 export const pragmaticAngularTesting = createWorkshop({
+  id: 'pragmatic-angular-testing',
   title: 'Pragmatic Angular Testing Workshop',
   type: 'tapas',
   subheading: `Tired of whack-a-mole bugs, boring manual tests, and fragile suites?

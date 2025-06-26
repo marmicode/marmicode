@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { WorkshopBenefitCard } from './workshop-benefits-card.ng';
 import { WorkshopSection } from './workshop-section.ng';
-import { Benefit } from './workshop';
+import { Benefit } from '../core/workshop';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

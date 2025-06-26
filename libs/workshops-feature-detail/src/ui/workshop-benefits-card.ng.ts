@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Benefit } from './workshop';
+import { Benefit } from '../core/workshop';
 import { WorkshopCard } from './workshop-card.ng';
 
 @Component({

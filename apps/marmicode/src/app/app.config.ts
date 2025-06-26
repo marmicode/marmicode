@@ -22,6 +22,7 @@ import {
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideRouter,
+  withComponentInputBinding,
   withEnabledBlockingInitialNavigation,
 } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -51,7 +52,11 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi(), withFetch()),
     /* HACK: use withEnabledBlockingInitialNavigation() to avoid flicker.
      * TODO: remove it after migrating to Angular 20. */
-    provideRouter(routes, withEnabledBlockingInitialNavigation()),
+    provideRouter(
+      routes,
+      withComponentInputBinding(),
+      withEnabledBlockingInitialNavigation(),
+    ),
     provideRouterStore(),
     provideStore({ router: routerReducer }),
     provideUpdateEffects(),

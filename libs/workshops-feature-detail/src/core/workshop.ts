@@ -1,4 +1,5 @@
 export interface Workshop {
+  id: string;
   title: string;
   type: 'tapas' | 'full';
   location: 'online';

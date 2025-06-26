@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Session } from './workshop';
+import { Session } from '../core/workshop';
 import { WorkshopCard } from './workshop-card.ng';
 import { WorkshopSection } from './workshop-section.ng';
 

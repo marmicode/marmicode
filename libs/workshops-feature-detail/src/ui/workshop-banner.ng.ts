@@ -13,7 +13,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FixedBackground } from './fixed-background.ng';
-import { Workshop } from './workshop';
+import { Workshop } from '../core/workshop';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

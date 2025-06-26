@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { Agenda } from './workshop';
+import { Agenda } from '../core/workshop';
 import { WorkshopSection } from './workshop-section.ng';
 @Component({
   selector: 'mc-workshop-agenda',
