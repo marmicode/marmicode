@@ -81,6 +81,6 @@ async function _queryContentful<T>(params: { [key: string]: string }) {
         Authorization: `Bearer _d7Vb4r2lborp1uLTvsv0ne7fB0OMez2FscTnHQux5A`,
       },
       params,
-    }
+    },
   );
 }
