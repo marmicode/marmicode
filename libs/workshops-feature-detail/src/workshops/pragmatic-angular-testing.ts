@@ -9,6 +9,20 @@ Let's cook fast, reliable tests that actually help you ship.`,
   pictureUri,
   duration: 1,
   location: 'online',
+  sessions: [
+    {
+      date: new Date('2025-09-08'),
+      startTime: '10:00',
+      endTime: '17:00',
+      timezone: 'CET',
+    },
+    {
+      date: new Date('2025-09-09'),
+      startTime: '08:00',
+      endTime: '13:00',
+      timezone: 'PT',
+    },
+  ],
   description: `
 Two ways to keep your app stable:
 **Leave it untouched — or season it with a solid testing strategy.**

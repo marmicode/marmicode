@@ -18,6 +18,7 @@ export interface Workshop {
    * Workshop duration in days.
    */
   duration: number;
+  sessions: Session[];
   nextSessionDate?: Date;
 
   offer: Offer;
@@ -53,6 +54,30 @@ export interface Agenda {
 export interface AgendaSection {
   title: string;
   items: string[];
+}
+
+export interface Session {
+  /**
+   * The date of the session.
+   */
+  date: Date;
+
+  /**
+   * The start time of the session.
+   * e.g. '18:00'
+   */
+  startTime: string;
+
+  /**
+   * The end time of the session.
+   * e.g. '21:00'
+   */
+  endTime: string;
+
+  /**
+   * The timezone of the session.
+   */
+  timezone: 'CET' | 'PT';
 }
 
 export function createWorkshop(workshop: Workshop): Workshop {

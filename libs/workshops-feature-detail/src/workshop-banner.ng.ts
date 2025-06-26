@@ -232,6 +232,7 @@ import { Workshop } from './workshop';
 })
 export class WorkshopBanner {
   workshop = input.required<Workshop>();
+  waitlistMailtoUrl = input.required<string>();
 
   protected subtitle = computed(() => {
     const duration = this.workshop().duration;
@@ -252,16 +253,4 @@ export class WorkshopBanner {
   protected subheadingLines = computed(() =>
     this.workshop().subheading.split('\n'),
   );
-  protected waitlistMailtoUrl = computed(() => {
-    const url = new URL('mailto:kitchen@marmicode.io');
-    url.searchParams.set(
-      'subject',
-      `Registration for ${this.workshop().title}`,
-    );
-    url.searchParams.set(
-      'body',
-      `Hi! I'd like to be added to the waitlist for ${this.workshop().title} (${this.workshop().type} Session).`,
-    );
-    return url.toString();
-  });
 }
