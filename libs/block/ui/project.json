@@ -1,8 +1,8 @@
 {
   "name": "block-ui",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/block-ui/src",
+  "sourceRoot": "libs/block/ui/src",
   "prefix": "marmicode",
   "tags": ["scope:block", "type:ui"],
   "generators": {},
@@ -13,15 +13,15 @@
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "libs/block-ui/jest.config.ts"
+        "jestConfig": "{projectRoot}/jest.config.ts"
       },
-      "outputs": ["{workspaceRoot}/coverage/libs/block-ui"]
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
       "options": {
         "port": 4400,
-        "configDir": "libs/block-ui/.storybook",
+        "configDir": "{projectRoot}/.storybook",
         "browserTarget": "block-ui:build-storybook",
         "compodoc": false
       },
@@ -36,7 +36,7 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputDir": "dist/storybook/recipe-ui",
-        "configDir": "libs/block-ui/.storybook",
+        "configDir": "{projectRoot}/.storybook",
         "browserTarget": "block-ui:build-storybook",
         "compodoc": false
       },
@@ -52,14 +52,14 @@
         "outputPath": "does-not-exist",
         "index": "does-not-exist",
         "main": "does-not-exist",
-        "polyfills": "libs/block-ui/src/polyfills.ts",
-        "tsConfig": "libs/block-ui/tsconfig.lib.json"
+        "polyfills": "{projectRoot}/src/polyfills.ts",
+        "tsConfig": "{projectRoot}/tsconfig.lib.json"
       }
     },
     "component-test": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "libs/block-ui/cypress.config.js",
+        "cypressConfig": "{projectRoot}/cypress.config.js",
         "testingType": "component",
         "skipServe": true,
         "devServerTarget": "block-ui:component-test-build",
@@ -67,7 +67,7 @@
       }
     },
     "upload-percy-snapshots": {
-      "command": "tools/upload-percy-snapshots.sh libs/block-ui"
+      "command": "tools/upload-percy-snapshots.sh {projectRoot}"
     }
   }
 }

@@ -10,9 +10,9 @@
       ],
       "parserOptions": {
         "project": [
-          "libs/block-ui/tsconfig.*?.json",
-          "libs/block-ui/.storybook/tsconfig.json",
-          "libs/block-ui/cypress/tsconfig.cy.json"
+          "libs/block/ui/tsconfig.*?.json",
+          "libs/block/ui/.storybook/tsconfig.json",
+          "libs/block/ui/cypress/tsconfig.cy.json"
         ]
       },
       "rules": {
