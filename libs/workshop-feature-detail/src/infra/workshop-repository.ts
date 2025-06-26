@@ -13,4 +13,8 @@ export class WorkshopRepository {
   findWorkshop(id: string): Workshop | undefined {
     return this._workshopsRecord[id];
   }
+
+  getWorkshops(): Workshop[] {
+    return this._workshops;
+  }
 }
