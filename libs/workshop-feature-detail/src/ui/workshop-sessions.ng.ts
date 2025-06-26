@@ -1,9 +1,16 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Session } from '../core/workshop';
+import { Workshop } from '../core/workshop';
+import { WaitlistUrlBuilder } from './waitlist-url-builder';
 import { WorkshopCard } from './workshop-card.ng';
 import { WorkshopSection } from './workshop-section.ng';
 
@@ -21,7 +28,7 @@ import { WorkshopSection } from './workshop-section.ng';
   template: `
     <mc-workshop-section title="🗓️ Upcoming Sessions">
       <div class="sessions">
-        @for (session of sessions(); track session.date) {
+        @for (session of sessionsWithMailtoUrl(); track session.date) {
           <mc-workshop-card>
             <ng-container slot="title">
               🗓️ {{ session.date | date: 'fullDate' }}
@@ -32,7 +39,7 @@ import { WorkshopSection } from './workshop-section.ng';
                 {{ session.timezone }}
               </p>
               <a
-                [href]="waitlistMailtoUrl()"
+                [href]="session.waitlistMailtoUrl"
                 color="primary"
                 mat-stroked-button
                 target="_blank"
@@ -58,6 +65,15 @@ import { WorkshopSection } from './workshop-section.ng';
   `,
 })
 export class WorkshopSessions {
-  sessions = input.required<Session[]>();
-  waitlistMailtoUrl = input.required<string>();
+  workshop = input.required<Workshop>();
+  private _waitlistUrlBuilder = inject(WaitlistUrlBuilder);
+  sessionsWithMailtoUrl = computed(() =>
+    this.workshop().sessions.map((session) => ({
+      ...session,
+      waitlistMailtoUrl: this._waitlistUrlBuilder.generateWaitlistUrl(
+        this.workshop(),
+        session,
+      ),
+    })),
+  );
 }

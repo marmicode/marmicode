@@ -8,12 +8,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FixedBackground } from './fixed-background.ng';
 import { Workshop } from '../core/workshop';
+import { WaitlistUrlBuilder } from './waitlist-url-builder';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -232,7 +234,7 @@ import { Workshop } from '../core/workshop';
 })
 export class WorkshopBanner {
   workshop = input.required<Workshop>();
-  waitlistMailtoUrl = input.required<string>();
+  private _waitlistUrlBuilder = inject(WaitlistUrlBuilder);
 
   protected subtitle = computed(() => {
     const duration = this.workshop().duration;
@@ -252,5 +254,8 @@ export class WorkshopBanner {
   });
   protected subheadingLines = computed(() =>
     this.workshop().subheading.split('\n'),
+  );
+  waitlistMailtoUrl = computed(() =>
+    this._waitlistUrlBuilder.generateWaitlistUrl(this.workshop()),
   );
 }
