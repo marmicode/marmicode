@@ -1,9 +1,6 @@
-import { workshopDetailRouterHelper } from '@marmicode/shared-router-helpers';
+/* eslint-disable @nx/enforce-module-boundaries */
 import axios from 'axios';
-import { writeFile } from 'fs/promises';
-// TODO: update import after moving repository to workshop-infra lib.
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { WorkshopRepository } from '../../libs/workshop-feature-detail/src/infra/workshop-repository';
+import { writeFile, readdir } from 'fs/promises';
 
 main().catch((error) => {
   console.error(error);
@@ -43,7 +40,7 @@ async function _getRoutes() {
     ...(await _getLearnBySkillRoutes()),
     ...(await _getBlogPostRoutes()),
     ...(await _getRecipeRoutes()),
-    ..._getWorkshopRoutes(),
+    ...(await _getWorkshopRoutes()),
   ];
 }
 
@@ -68,11 +65,16 @@ async function _getRecipeRoutes() {
   return slugs.map((slug) => `/recipe/${slug}`);
 }
 
-function _getWorkshopRoutes() {
-  return new WorkshopRepository()
-    .getWorkshops()
-    .map((workshop) => workshop.id)
-    .map((id) => workshopDetailRouterHelper.detail(id));
+/**
+ * TODO: Use workshop repository + route helper once we migrate to Angular 20.
+ */
+async function _getWorkshopRoutes() {
+  const files = await readdir(
+    'libs/workshop-feature-detail/src/infra/workshops',
+  );
+  return files
+    .filter((file) => file.endsWith('.ts'))
+    .map((workshop) => `/workshop/${workshop.replace('.ts', '')}`);
 }
 
 async function _querySlugs(params: {
