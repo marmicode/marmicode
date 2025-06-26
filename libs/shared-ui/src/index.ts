@@ -6,6 +6,7 @@ export {
   BasicPageInfo,
   createArticlePageInfo,
   createBasicPageInfo,
+  PageInfo,
   PageComponent,
   PageModule,
 } from './lib/page.component';
