@@ -4,7 +4,6 @@ import {
   computed,
   inject,
   input,
-  signal,
 } from '@angular/core';
 import {
   createBasicPageInfo,
@@ -13,7 +12,6 @@ import {
 } from '@marmicode/shared-ui';
 import { Workshop } from './core/workshop';
 import { WorkshopRepository } from './infra/workshop-repository';
-import { pragmaticAngularTesting } from './infra/workshops/pragmatic-angular-testing';
 import { WorkshopAgenda } from './ui/workshop-agenda.ng';
 import { WorkshopBanner } from './ui/workshop-banner.ng';
 import { WorkshopBenefits } from './ui/workshop-benefits.ng';
@@ -71,6 +69,9 @@ import { WorkshopSessions } from './ui/workshop-sessions.ng';
 })
 export class WorkshopDetailPage {
   workshopId = input.required<string>();
+  workshop = computed(() =>
+    this._workshopRepository.findWorkshop(this.workshopId()),
+  );
   workshopAndLinks = computed(() => {
     const workshop = this.workshop();
     if (!workshop) {
@@ -87,10 +88,8 @@ export class WorkshopDetailPage {
       pictureUri: this.workshop()?.pictureUri,
     }),
   );
+
   private _workshopRepository = inject(WorkshopRepository);
-  workshop = computed(() =>
-    this._workshopRepository.findWorkshop(this.workshopId()),
-  );
 
   private _computeWaitlistMailtoUrl(workshop: Workshop) {
     const url = new URL('mailto:kitchen@marmicode.io');
