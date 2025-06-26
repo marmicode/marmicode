@@ -1,4 +1,5 @@
 @use "sass:map";
+@use '@angular/material' as mat;
 @use './custom-theme.scss' as theme;
 
 $marmicode-primary-color: map.get(theme.$marmicode-purple, 500);
@@ -17,6 +18,10 @@ body {
   background-color: $marmicode-primary-color;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+
+  @include mat.card-overrides((
+    elevated-container-shape: 8px,
+  ));
 }
 
 .mc-primary-text {

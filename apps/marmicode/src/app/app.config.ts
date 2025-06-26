@@ -1,5 +1,6 @@
 import {
   provideHttpClient,
+  withFetch,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import {
@@ -19,14 +20,17 @@ import {
   withEventReplay,
 } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter } from '@angular/router';
+import {
+  provideRouter,
+  withComponentInputBinding,
+  withEnabledBlockingInitialNavigation,
+} from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { routes } from './app.routes';
-import { provideUpdateEffects, UpdateEffects } from './update/update.effects';
+import { provideUpdateEffects } from './update/update.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -38,19 +42,23 @@ export const appConfig: ApplicationConfig = {
         enabled: environment.production,
       }),
     ),
+
     ScreenTrackingService,
-    provideClientHydration(withEventReplay()),
     provideAnalytics(() => getAnalytics()),
     provideAnimations(),
-    provideEffects(UpdateEffects),
+    provideClientHydration(withEventReplay()),
     provideExperimentalZonelessChangeDetection(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideHttpClient(withInterceptorsFromDi()),
-    provideRouter(routes),
-    provideStore({
-      router: routerReducer,
-    }),
+    provideHttpClient(withInterceptorsFromDi(), withFetch()),
+    /* HACK: use withEnabledBlockingInitialNavigation() to avoid flicker.
+     * TODO: remove it after migrating to Angular 20. */
+    provideRouter(
+      routes,
+      withComponentInputBinding(),
+      withEnabledBlockingInitialNavigation(),
+    ),
     provideRouterStore(),
+    provideStore({ router: routerReducer }),
     provideUpdateEffects(),
   ],
 };
