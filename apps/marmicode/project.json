@@ -216,14 +216,7 @@
       "dependsOn": ["build"]
     },
     "update-routes": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          "mkdir -p dist",
-          "node --experimental-strip-types apps/marmicode/update-routes.ts -o apps/marmicode/marmicode-routes.txt"
-        ],
-        "parallel": false
-      },
+      "command": "node --experimental-strip-types apps/marmicode/update-routes.ts -o apps/marmicode/marmicode-routes.txt",
       "outputs": ["{projectRoot}/marmicode-routes.txt"]
     }
   }
