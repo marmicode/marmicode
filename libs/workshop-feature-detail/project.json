@@ -1,7 +1,7 @@
 {
   "name": "workshops-feature-detail",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/workshops-feature-detail/src",
+  "sourceRoot": "libs/workshop-feature-detail/src",
   "prefix": "lib",
   "projectType": "library",
   "tags": [],
@@ -10,7 +10,7 @@
       "executor": "@nx/vite:test",
       "outputs": ["{options.reportsDirectory}"],
       "options": {
-        "reportsDirectory": "../../coverage/libs/workshops-feature-detail"
+        "reportsDirectory": "../../coverage/libs/workshop-feature-detail"
       }
     },
     "lint": {
