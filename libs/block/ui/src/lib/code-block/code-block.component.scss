@@ -2,8 +2,8 @@
  * Emulated encapsulation doesn't work either because prismjs html is generated dynamically.
  * Cf. https://github.com/cypress-io/cypress/issues/8843 */
 
- @use './prism-tomorrow' as prism-tomorrow;
- @use './prism-line-numbers' as prism-line-numbers;
+ @use 'prism-tomorrow' as prism-tomorrow;
+ @use 'prism-line-numbers' as prism-line-numbers;
 
 mc-code-block {
   /* @hack using a symbolic link to end with a `.scss` extension instead of `.css`
