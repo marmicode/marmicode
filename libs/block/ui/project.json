@@ -1,0 +1,73 @@
+{
+  "name": "block-ui",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/block/ui/src",
+  "prefix": "marmicode",
+  "tags": ["scope:block", "type:ui"],
+  "generators": {},
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "{projectRoot}/jest.config.ts"
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "{projectRoot}/.storybook",
+        "browserTarget": "block-ui:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputDir": "dist/storybook/recipe-ui",
+        "configDir": "{projectRoot}/.storybook",
+        "browserTarget": "block-ui:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "component-test-build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "does-not-exist",
+        "index": "does-not-exist",
+        "main": "does-not-exist",
+        "polyfills": "{projectRoot}/src/polyfills.ts",
+        "tsConfig": "{projectRoot}/tsconfig.lib.json"
+      }
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "{projectRoot}/cypress.config.js",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "block-ui:component-test-build",
+        "browser": "chrome"
+      }
+    },
+    "upload-percy-snapshots": {
+      "command": "tools/upload-percy-snapshots.sh {projectRoot}"
+    }
+  }
+}
