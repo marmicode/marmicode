@@ -1,0 +1,45 @@
+/* Cypress doesn't take Shadow DOM snapshots, so this is how we hack our way through.
+ * Emulated encapsulation doesn't work either because prismjs html is generated dynamically.
+ * Cf. https://github.com/cypress-io/cypress/issues/8843 */
+
+ @use 'prism-tomorrow' as prism-tomorrow;
+ @use 'prism-line-numbers' as prism-line-numbers;
+
+mc-code-block {
+  /* @hack using a symbolic link to end with a `.scss` extension instead of `.css`
+   * in order to enable nested import.
+   * Cf. https://sass-lang.com/documentation/at-rules/import#plain-css-imports. */
+  @include prism-tomorrow.prism-tomorrow;
+  @include prism-line-numbers.prism-line-numbers;
+
+  display: block;
+
+  .code {
+    z-index: 1;
+  }
+
+  .code-container {
+    position: relative;
+    margin: .5em;
+  }
+
+  .highlight {
+    position: absolute;
+    width: 100%;
+  }
+
+  .line-number-highlight {
+    position: absolute;
+    left: 0;
+    width: 3em;
+    opacity: .5;
+  }
+
+  /* @hack using more specific selector. */
+  pre.preformatted {
+    font-size: 1.2em;
+    height: 100%;
+    border-radius: 10px;
+    margin: 0;
+  }
+}
