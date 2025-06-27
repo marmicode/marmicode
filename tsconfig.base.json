@@ -20,9 +20,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@marmicode/block-api": ["libs/block-api/src/index.ts"],
-      "@marmicode/block-core": ["libs/block-core/src/index.ts"],
-      "@marmicode/block-ui": ["libs/block-ui/src/index.ts"],
+      "@marmicode/block-api": ["libs/block/api/index.ts"],
+      "@marmicode/block-core": ["libs/block/core/index.ts"],
+      "@marmicode/block-ui": ["libs/block/ui/src/index.ts"],
       "@marmicode/blog-post-feature-detail": [
         "libs/blog-post-feature-detail/src/index.ts"
       ],
@@ -64,8 +64,11 @@
       "@marmicode/tools/build-github-workflows": [
         "tools/build-github-workflows/src/index.ts"
       ],
-      "@marmicode/workshops-feature-detail": [
-        "libs/workshop-feature-detail/src/index.ts"
+      "@marmicode/workshop/core": ["libs/workshop/core/index.ts"],
+      "@marmicode/workshop/infra": ["libs/workshop/infra/index.ts"],
+      "@marmicode/workshop/ui": ["libs/workshop/ui/index.ts"],
+      "@marmicode/workshop/feature-detail": [
+        "libs/workshop/feature-detail/index.ts"
       ]
     },
     "strict": true,
