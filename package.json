@@ -126,7 +126,7 @@
     "@swc-node/register": "~1.10.0",
     "@swc/core": "~1.11.0",
     "@swc/helpers": "~0.5.11",
-    "@types/express": "5.0.1",
+    "@types/express": "5.0.3",
     "@types/jest": "29.5.14",
     "@types/js-yaml": "^4.0.0",
     "@types/marked": "^1.2.1",
