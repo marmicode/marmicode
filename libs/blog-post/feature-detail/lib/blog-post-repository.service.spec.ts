@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { ContentfulClient } from '@marmicode/contentful/infra';
-import { provideApolloCacheWithResolvers } from '@marmicode/testing';
+import { provideApolloCacheWithResolvers } from '@marmicode/shared/testing';
 import { ApolloTestingModule } from 'apollo-angular/testing';
 import { BlogPostRepository } from './blog-post-repository.service';
 
