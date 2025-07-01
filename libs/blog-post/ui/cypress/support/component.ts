@@ -1,1 +1,1 @@
-import '@marmicode/shared/testing/cypress-ct-commands';
+import '../../../../shared/testing/cypress-ct-commands';

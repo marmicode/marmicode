@@ -49,12 +49,12 @@
       ],
       "@marmicode/shared/ui": ["libs/shared/ui/index.ts"],
       "@marmicode/shared/utils": ["libs/shared/utils/index.ts"],
-      "@marmicode/shared/testing": ["libs/shared/testing/src/index.ts"],
+      "@marmicode/shared/testing": ["libs/shared/testing/index.ts"],
       "@marmicode/shared/testing/cypress-commands": [
-        "libs/shared/testing/src/cypress-commands.ts"
+        "libs/shared/testing/cypress-commands.ts"
       ],
       "@marmicode/shared/testing/cypress-ct-commands": [
-        "libs/shared/testing/src/cypress-ct-commands.ts"
+        "libs/shared/testing/cypress-ct-commands.ts"
       ],
       "@marmicode/tools/build-github-workflows": [
         "tools/build-github-workflows/src/index.ts"
