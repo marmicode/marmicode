@@ -34,7 +34,7 @@ const TAGS = [
   template: `
     <mc-page [info]="pageInfo">
       <section
-        style="max-width: 700px; margin: auto; padding: 2rem; display: flex; flex-direction: column; gap: 2.5rem; align-items: center;"
+        style="max-width: 1200px; margin: auto; padding: 2rem; display: flex; flex-direction: column; gap: 2.5rem; align-items: center;"
       >
         <mat-chip-listbox>
           @for (tag of tags; track tag.value) {
@@ -46,7 +46,9 @@ const TAGS = [
           }
         </mat-chip-listbox>
 
-        <div>
+        <div
+          style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center;"
+        >
           @for (workshop of workshops; track workshop.id) {
             <mat-card style="width: 100%; max-width: 500px; overflow: hidden;">
               <img
@@ -65,8 +67,10 @@ const TAGS = [
                 >
                   {{ workshop.subheading }}
                 </div>
-                <div style="width: 100%;">
-                  <mat-chip-listbox>
+                <mat-chip-listbox>
+                  <div
+                    style="width: 100%; display: flex; justify-content: center; align-items: center;"
+                  >
                     @for (tag of nonNullTags; track tag.value) {
                       <mat-chip-option
                         [selected]="selectedTag() === tag.value"
@@ -74,14 +78,16 @@ const TAGS = [
                         >{{ tag.label }}</mat-chip-option
                       >
                     }
-                  </mat-chip-listbox>
+                  </div>
+                </mat-chip-listbox>
+                <div style="text-align: center;">
+                  <a
+                    [routerLink]="workshopRouterHelper.detail(workshop.id)"
+                    mat-button
+                    color="primary"
+                    >View Details</a
+                  >
                 </div>
-                <a
-                  [routerLink]="workshopRouterHelper.detail(workshop.id)"
-                  mat-button
-                  color="primary"
-                  >View Details</a
-                >
               </mat-card-content>
             </mat-card>
           }
@@ -103,7 +109,10 @@ export class WorkshopListPage {
   private _repo = inject(WorkshopRepository);
 
   constructor() {
-    this.workshops = this._repo.getWorkshops();
+    this.workshops = [
+      ...this._repo.getWorkshops(),
+      ...this._repo.getWorkshops(),
+    ];
   }
 
   selectTag = (tag: string) => this.selectedTag.set(tag);
