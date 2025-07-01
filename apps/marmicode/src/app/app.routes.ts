@@ -13,7 +13,7 @@ export const routes: Routes = [
   {
     path: blogPostDetailRouterHelper.BLOG_POST_DETAIL_PATH,
     loadChildren: () =>
-      import('@marmicode/blog-post-feature-detail').then(
+      import('@marmicode/blog-post/feature-detail').then(
         (m) => m.BlogPostFeatureDetailRoutingModule,
       ),
   },
