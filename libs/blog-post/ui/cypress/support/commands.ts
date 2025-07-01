@@ -1,1 +1,1 @@
-import 'libs/testing/src/cypress-ct-commands';
+import '@marmicode/testing/cypress-ct-commands';

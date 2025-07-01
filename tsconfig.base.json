@@ -39,7 +39,7 @@
       "@marmicode/resource/feature-search": [
         "libs/resource/feature-search/index.ts"
       ],
-      "@marmicode/resource/testing": ["libs/resource/testing/index.ts"],
+      "@marmicode/resource/feature-search/testing": ["libs/resource/feature-search/testing/index.ts"],
       "@marmicode/resource/ui": ["libs/resource/ui/index.ts"],
       "@marmicode/services/feature-presentation": [
         "libs/services/feature-presentation/index.ts"

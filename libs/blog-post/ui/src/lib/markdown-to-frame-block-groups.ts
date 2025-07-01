@@ -8,7 +8,7 @@ import {
   createMarkdownBlock,
   getMarkdownTokenType,
   parseMarkdown,
-} from 'libs/block/api';
+} from '@marmicode/block/api';
 
 export interface BlockGroup {
   blocks: Block[];
