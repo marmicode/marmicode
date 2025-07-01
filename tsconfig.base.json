@@ -65,11 +65,11 @@
         "tools/build-github-workflows/src/index.ts"
       ],
       "@marmicode/workshop/core": ["libs/workshop/core/index.ts"],
-      "@marmicode/workshop/infra": ["libs/workshop/infra/index.ts"],
-      "@marmicode/workshop/ui": ["libs/workshop/ui/index.ts"],
       "@marmicode/workshop/feature-detail": [
         "libs/workshop/feature-detail/index.ts"
-      ]
+      ],
+      "@marmicode/workshop/infra": ["libs/workshop/infra/index.ts"],
+      "@marmicode/workshop/ui": ["libs/workshop/ui/index.ts"]
     },
     "strict": true,
     "strictNullChecks": false,
