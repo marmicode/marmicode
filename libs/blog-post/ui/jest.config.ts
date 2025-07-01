@@ -1,10 +1,10 @@
 /* eslint-disable */
 export default {
-  displayName: 'blog-post-feature-detail',
-  preset: '../../jest.preset.js',
+  displayName: 'blog-post-ui',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
-  coverageDirectory: '../../coverage/libs/blog-post-feature-detail',
+  coverageDirectory: '../../coverage/libs/blog-post-ui',
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

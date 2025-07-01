@@ -6,12 +6,12 @@ import {
   NgModule,
 } from '@angular/core';
 import { MatDivider, MatDividerModule } from '@angular/material/divider';
-import { BlockGroupComponent } from '@marmicode/block/api';
+import { BlockGroupComponent } from 'libs/block/api';
 import {
   ResourceTitleBannerComponent,
   ResourceType,
-} from '@marmicode/resource-api';
-import { ResourceHeaderComponent } from '@marmicode/resource-ui';
+} from 'libs/resource-api/src';
+import { ResourceHeaderComponent } from 'libs/resource-ui/src';
 import { RxState } from '@rx-angular/state';
 import { select } from '@rx-angular/state/selections';
 import { PushPipe } from '@rx-angular/template/push';
