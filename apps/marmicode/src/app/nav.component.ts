@@ -10,7 +10,7 @@ import {
   Observable,
 } from 'rxjs';
 import { map, observeOn, pairwise } from 'rxjs/operators';
-import { Platform } from '@marmicode/shared-utils';
+import { Platform } from '@marmicode/shared/utils';
 import { appRouterHelper } from './app-router-helper';
 import { NavMenuModule, NavMenuComponent } from './nav-menu.component';
 

@@ -11,7 +11,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CodeBlock } from '@marmicode/block/core';
-import { Platform } from '@marmicode/shared-utils';
+import { Platform } from '@marmicode/shared/utils';
 import { RxState } from '@rx-angular/state';
 import { select, selectSlice } from '@rx-angular/state/selections';
 import { PushPipe } from '@rx-angular/template/push';

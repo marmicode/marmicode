@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { blogPostDetailRouterHelper } from '@marmicode/shared-router-helpers';
+import { blogPostDetailRouterHelper } from '@marmicode/shared/router-helpers';
 import { BlogPostDetailPageComponent } from './blog-post-detail-page.component';
 import { BlogPostRepositoryModule } from './blog-post-repository.service';
 

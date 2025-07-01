@@ -1,5 +1,5 @@
 import { inject, Injectable, NgModule } from '@angular/core';
-import { BlogPost, createBlogPost } from '@marmicode/blog-post-ui';
+import { BlogPost, createBlogPost } from '@marmicode/blog-post/ui';
 import {
   BlogPost as ContentfulBlogPost,
   ContentfulClient,

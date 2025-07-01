@@ -5,8 +5,8 @@ import {
   resourceSearchRouterHelper,
   servicesRouterHelper,
   workshopDetailRouterHelper,
-} from '@marmicode/shared-router-helpers';
-import { or } from '@marmicode/shared-utils';
+} from '@marmicode/shared/router-helpers';
+import { or } from '@marmicode/shared/utils';
 
 export const routes: Routes = [
   /* Blog post detail. */
@@ -25,7 +25,7 @@ export const routes: Routes = [
       recipeDetailRouterHelper.TUTORIAL_DETAIL_PATH,
     ]),
     loadChildren: () =>
-      import('@marmicode/recipe-feature-detail').then(
+      import('@marmicode/recipe/feature-detail').then(
         (m) => m.RecipeDetailRoutingModule,
       ),
   },
@@ -34,7 +34,7 @@ export const routes: Routes = [
   {
     path: resourceSearchRouterHelper.LEARN_PATH,
     loadChildren: () =>
-      import('@marmicode/resource-feature-search').then(
+      import('@marmicode/resource/feature-search').then(
         (m) => m.ResourceSearchRoutingModule,
       ),
   },
@@ -43,7 +43,7 @@ export const routes: Routes = [
   {
     path: servicesRouterHelper.SERVICES_PATH,
     loadChildren: () =>
-      import('@marmicode/services-feature-presentation').then(
+      import('@marmicode/services/feature-presentation').then(
         (m) => m.ServicesRoutingModule,
       ),
   },

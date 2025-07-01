@@ -1,23 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BlogPostModule } from '@marmicode/blog-post-ui';
-import { blogPostDetailRouterHelper } from '@marmicode/shared-router-helpers';
+import { BlogPostModule } from '@marmicode/blog-post/ui';
+import { blogPostDetailRouterHelper } from '@marmicode/shared/router-helpers';
 import {
   PageModule,
   SuspenseComponent,
   SuspenseModule,
-} from '@marmicode/shared-ui';
+} from '@marmicode/shared/ui';
 import {
   shareReplayWithRefCount,
   TransferStateHelper,
-} from '@marmicode/shared-utils';
+} from '@marmicode/shared/utils';
 import { PushPipe } from '@rx-angular/template/push';
 import { map, switchMap } from 'rxjs/operators';
 import { BlogPostRepository } from './blog-post-repository.service';
 import { blogPostToPageInfo } from './blog-post-to-page-info';
-import { PageComponent } from '@marmicode/shared-ui';
-import { BlogPostComponent } from '@marmicode/blog-post-ui';
+import { PageComponent } from '@marmicode/shared/ui';
+import { BlogPostComponent } from '@marmicode/blog-post/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

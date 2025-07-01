@@ -10,8 +10,8 @@ import { BlockGroupComponent } from '@marmicode/block/api';
 import {
   ResourceTitleBannerComponent,
   ResourceType,
-} from 'libs/resource-api/src';
-import { ResourceHeaderComponent } from 'libs/resource-ui/src';
+} from '../../../../resource/api';
+import { ResourceHeaderComponent } from '../../../../resource/ui';
 import { RxState } from '@rx-angular/state';
 import { select } from '@rx-angular/state/selections';
 import { PushPipe } from '@rx-angular/template/push';

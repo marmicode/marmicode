@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals';
-import { createBlogPost } from '@marmicode/blog-post-ui';
+import { createBlogPost } from '@marmicode/blog-post/ui';
 import { blogPostToPageInfo } from './blog-post-to-page-info';
 
 describe('blogPostToMeta', () => {

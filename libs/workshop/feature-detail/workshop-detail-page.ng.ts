@@ -9,7 +9,7 @@ import {
   createBasicPageInfo,
   ErrorComponent,
   PageComponent,
-} from '@marmicode/shared-ui';
+} from '@marmicode/shared/ui';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
 import { WorkshopAgenda } from '@marmicode/workshop/ui';
 import { WorkshopBanner } from '@marmicode/workshop/ui';
