@@ -1,7 +1,7 @@
 import { NgComponentOutlet, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { rxComputed } from '@jscutlery/rx-computed';
-import { MarkdownTokens } from '@marmicode/block-core';
+import { MarkdownTokens } from '@marmicode/block/core';
 import { select } from '@ngrx/store';
 import { RxState } from '@rx-angular/state';
 import { PushPipe } from '@rx-angular/template/push';

@@ -1,4 +1,4 @@
-import { ResourceCardHarness } from '@marmicode/resource-feature-search/testing';
+import { ResourceCardHarness } from '@marmicode/resource/feature-search/testing';
 import { getAllHarnesses } from '@jscutlery/cypress-harness';
 
 describe('resource search', () => {

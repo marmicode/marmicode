@@ -4,7 +4,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 
 import { describe, expect, it, jest } from '@jest/globals';
-import { createObserver } from '@marmicode/testing';
+import { createObserver } from '@marmicode/shared/testing';
 import { Subject } from 'rxjs';
 import { UpdateDialogComponent } from './update-dialog.component';
 import { provideUpdateEffects, UpdateEffects } from './update.effects';

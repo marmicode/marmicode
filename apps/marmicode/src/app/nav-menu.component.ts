@@ -14,7 +14,7 @@ import { MatListModule, MatNavList } from '@angular/material/list';
 import {
   resourceSearchRouterHelper,
   servicesRouterHelper,
-} from '@marmicode/shared-router-helpers';
+} from '@marmicode/shared/router-helpers';
 import { BehaviorSubject } from 'rxjs';
 import {
   NavMenuItemModule,

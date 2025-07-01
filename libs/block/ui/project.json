@@ -35,7 +35,7 @@
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputDir": "dist/storybook/recipe-ui",
+        "outputDir": "dist/storybook/{projectRoot}",
         "configDir": "{projectRoot}/.storybook",
         "browserTarget": "block-ui:build-storybook",
         "compodoc": false

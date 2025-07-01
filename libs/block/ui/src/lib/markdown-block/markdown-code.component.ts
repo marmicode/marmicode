@@ -9,7 +9,7 @@ import {
   CodeBlock,
   createCodeBlock,
   MarkdownTokens,
-} from '@marmicode/block-core';
+} from '@marmicode/block/core';
 import { CodeBlockComponent } from '../code-block/code-block.component';
 
 @Component({
