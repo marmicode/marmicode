@@ -1,4 +1,4 @@
-import { BlockType, createBlockGroup } from '@marmicode/block-core';
+import { BlockType, createBlockGroup } from '@marmicode/block/core';
 import { BlockGroupComponent } from './block-group.component';
 
 describe(BlockGroupComponent.name, () => {

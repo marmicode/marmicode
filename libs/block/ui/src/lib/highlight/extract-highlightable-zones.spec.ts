@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals';
-import { Block, BlockType, parseMarkdown } from '@marmicode/block-core';
+import { Block, BlockType, parseMarkdown } from '@marmicode/block/core';
 import { extractHighlightableZones } from './extract-highlightable-zones';
 
 describe('extractHighlightableZones', () => {
@@ -72,7 +72,7 @@ curl http://localhost:8080/farms
           type: BlockType.Markdown,
           tokens: parseMarkdown('text'),
         },
-      ])
+      ]),
     ).toEqual([]);
   });
 });

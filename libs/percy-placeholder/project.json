@@ -5,7 +5,7 @@
   "sourceRoot": "libs/percy-placeholder",
   "targets": {
     "upload-percy-snapshots": {
-      "command": "tools/upload-percy-snapshots.sh libs/percy-placeholder"
+      "command": "tools/upload-percy-snapshots.sh {projectRoot}"
     }
   }
 }

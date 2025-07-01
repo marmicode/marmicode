@@ -17,7 +17,6 @@ export const createNodesV2: CreateNodesV2 = [
             [projectRoot]: {
               name: projectName,
               sourceRoot: projectRoot,
-              projectType: 'library',
               tags: [`scope:${scope}`, `type:${type}`],
               targets: {
                 lint: {

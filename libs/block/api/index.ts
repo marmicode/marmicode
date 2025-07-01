@@ -14,5 +14,5 @@ export {
   getMarkdownTokenType,
   isTextBlock,
   parseMarkdown,
-} from '@marmicode/block-core';
-export { BlockGroupComponent } from '@marmicode/block-ui';
+} from '@marmicode/block/core';
+export { BlockGroupComponent } from '@marmicode/block/ui';
