@@ -9,7 +9,7 @@ import {
   NgModule,
   Output,
 } from '@angular/core';
-import { MarkdownBlock, parseMarkdown } from '@marmicode/block-core';
+import { MarkdownBlock, parseMarkdown } from '@marmicode/block/core';
 import { HighlightZone } from '../highlight/highlight-zone';
 import { MarkdownBlockStateService } from './markdown-block-state.service';
 import { MarkdownTokensComponent } from './markdown-tokens.component';

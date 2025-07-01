@@ -69,9 +69,7 @@ async function _getRecipeRoutes() {
  * TODO: Use workshop repository + route helper once we migrate to Angular 20.
  */
 async function _getWorkshopRoutes() {
-  const files = await readdir(
-    'libs/workshop-feature-detail/src/infra/workshops',
-  );
+  const files = await readdir('libs/workshop/infra/workshops');
   return files
     .filter((file) => file.endsWith('.ts'))
     .map((workshop) => `/workshop/${workshop.replace('.ts', '')}`);

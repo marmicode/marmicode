@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { MarkdownBlockComponent } from '@marmicode/block-ui';
+import { MarkdownBlockComponent } from '@marmicode/block/ui';
 import { WorkshopSection } from './internal/workshop-section.ng';
 
 @Component({

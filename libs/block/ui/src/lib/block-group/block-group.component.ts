@@ -10,7 +10,7 @@ import {
   BlockType,
   createMarkdownBlock,
   parseMarkdown,
-} from '@marmicode/block-core';
+} from '@marmicode/block/core';
 import { RxState } from '@rx-angular/state';
 import { select } from '@rx-angular/state/selections';
 import { map } from 'rxjs/operators';
