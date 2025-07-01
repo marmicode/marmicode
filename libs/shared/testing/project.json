@@ -1,6 +1,6 @@
 {
   "name": "testing",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/testing/src",
   "projectType": "library",
   "tags": ["scope:shared", "type:utils"],
