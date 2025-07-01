@@ -1,5 +1,5 @@
 import { describe, expect, it, jest } from '@jest/globals';
-import { CodeBlock, MarkdownBlock } from '@marmicode/block-api';
+import { CodeBlock, MarkdownBlock } from '@marmicode/block/api';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
 
 export const like = expect.objectContaining;

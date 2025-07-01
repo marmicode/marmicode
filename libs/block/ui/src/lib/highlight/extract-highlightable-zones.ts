@@ -2,7 +2,7 @@ import {
   Block,
   getMarkdownLinks,
   isMarkdownBlock,
-} from '@marmicode/block-core';
+} from '@marmicode/block/core';
 import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 

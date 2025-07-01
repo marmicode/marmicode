@@ -1,4 +1,4 @@
-import { BlockType, createBlockGroup } from '@marmicode/block-core';
+import { BlockType, createBlockGroup } from '@marmicode/block/core';
 import { Meta } from '@storybook/angular';
 import { BlockGroupComponent, BlockGroupModule } from './block-group.component';
 
@@ -42,7 +42,7 @@ blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla blalabla
         ],
       }),
     },
-  } as Meta);
+  }) as Meta;
 
 export const Highlight = () =>
   ({
@@ -79,4 +79,4 @@ curl http://localhost:8080/farms
         ],
       }),
     },
-  } as Meta);
+  }) as Meta;

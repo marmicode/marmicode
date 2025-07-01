@@ -6,7 +6,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BlockGroupComponent } from '@marmicode/block-ui';
+import { BlockGroupComponent } from '@marmicode/block/ui';
 import { ResourceTitleBannerComponent } from '@marmicode/resource-api';
 import { recipeDetailRouterHelper } from '@marmicode/shared-router-helpers';
 import {

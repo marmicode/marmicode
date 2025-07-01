@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { createCodeBlock } from '@marmicode/block-core';
+import { createCodeBlock } from '@marmicode/block/core';
 import { createHighlightZone } from '../highlight/highlight-zone';
 import { CodeBlockComponent } from './code-block.component';
 

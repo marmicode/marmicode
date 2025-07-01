@@ -8,7 +8,7 @@ import {
   createMarkdownBlock,
   getMarkdownTokenType,
   parseMarkdown,
-} from '@marmicode/block-api';
+} from '@marmicode/block/api';
 
 export interface BlockGroup {
   blocks: Block[];
@@ -19,13 +19,13 @@ export function createBlockGroup(blockGroup: BlockGroup): BlockGroup {
 }
 
 export function isCodeToken(
-  token: MarkdownToken
+  token: MarkdownToken,
 ): token is MarkdownTokens.Code {
   return getMarkdownTokenType(token) === MarkdownTokenType.Code;
 }
 
 export function isHeadingToken(
-  token: MarkdownToken
+  token: MarkdownToken,
 ): token is MarkdownTokens.Heading {
   return getMarkdownTokenType(token) === MarkdownTokenType.Heading;
 }

@@ -3,7 +3,7 @@ import {
   BlockGroup,
   createCodeBlock,
   createTextBlock,
-} from '@marmicode/block-api';
+} from '@marmicode/block/api';
 import {
   ContentfulClient,
   provideContentfulClient,

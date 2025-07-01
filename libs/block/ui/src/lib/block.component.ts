@@ -12,7 +12,7 @@ import {
   BlockType,
   CodeBlock,
   MarkdownBlock,
-} from '@marmicode/block-core';
+} from '@marmicode/block/core';
 import {
   CodeBlockModule,
   CodeBlockComponent,
