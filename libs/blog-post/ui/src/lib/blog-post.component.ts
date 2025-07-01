@@ -6,7 +6,7 @@ import {
   NgModule,
 } from '@angular/core';
 import { MatDivider, MatDividerModule } from '@angular/material/divider';
-import { BlockGroupComponent } from 'libs/block/api';
+import { BlockGroupComponent } from '@marmicode/block/api';
 import {
   ResourceTitleBannerComponent,
   ResourceType,
