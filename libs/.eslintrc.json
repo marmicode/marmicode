@@ -9,7 +9,6 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@angular-eslint/template/eqeqeq": ["error", "allow-null"],
         "@angular-eslint/component-class-suffix": "off",
         "@angular-eslint/directive-selector": [
           "error",
@@ -32,7 +31,14 @@
     {
       "files": ["*.html"],
       "extends": ["plugin:@nx/angular-template"],
-      "rules": {}
+      "rules": {
+        "@angular-eslint/template/eqeqeq": [
+          "warn",
+          {
+            "allowNullOrUndefined": true
+          }
+        ]
+      }
     }
   ]
 }
