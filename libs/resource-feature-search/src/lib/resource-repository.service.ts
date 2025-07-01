@@ -1,10 +1,10 @@
 import { inject, Injectable, NgModule } from '@angular/core';
-import * as contentful from '@marmicode/contentful-infra';
+import * as contentful from '@marmicode/contentful/infra';
 import {
   ContentfulClient,
   provideContentfulClient,
   Query,
-} from '@marmicode/contentful-infra';
+} from '@marmicode/contentful/infra';
 import { createAuthor } from '@marmicode/resource-core';
 import { WipService } from '@marmicode/shared-utils';
 import gql from 'graphql-tag';

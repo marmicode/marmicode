@@ -6,7 +6,7 @@ import {
   ContentfulClient,
   Query,
   provideContentfulClient,
-} from '@marmicode/contentful-infra';
+} from '@marmicode/contentful/infra';
 import { skillFragment, skillFragmentToSkill } from './skill-fragment';
 import { Skill } from './skill';
 

@@ -5,7 +5,7 @@ import {
   ContentfulClient,
   provideContentfulClient,
   Query,
-} from '@marmicode/contentful-infra';
+} from '@marmicode/contentful/infra';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

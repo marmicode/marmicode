@@ -9,7 +9,7 @@ import {
   provideContentfulClient,
   Query,
   Recipe as ContentfulRecipe,
-} from '@marmicode/contentful-infra';
+} from '@marmicode/contentful/infra';
 import { ResourceType } from '@marmicode/resource-api';
 
 import gql from 'graphql-tag';
