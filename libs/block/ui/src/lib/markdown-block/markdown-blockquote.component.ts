@@ -1,7 +1,7 @@
 import { NgComponentOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { rxComputed } from '@jscutlery/rx-computed';
-import { MarkdownToken } from '@marmicode/block-core';
+import { MarkdownToken } from '@marmicode/block/core';
 import { markdownTokensLoader } from './markdown-tokens-loader';
 
 @Component({

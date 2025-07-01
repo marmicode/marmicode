@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MarkdownToken } from '@marmicode/block-core';
+import { MarkdownToken } from '@marmicode/block/core';
 import { NgFor } from '@angular/common';
 import { MarkdownTokenComponent } from './markdown-token.component';
 

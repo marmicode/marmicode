@@ -9,7 +9,7 @@ import {
   getMarkdownTokenType,
   MarkdownToken,
   MarkdownTokenType,
-} from '@marmicode/block-core';
+} from '@marmicode/block/core';
 import { NgSwitch, NgSwitchCase } from '@angular/common';
 import { MarkdownBlockquoteComponent } from './markdown-blockquote.component';
 import { MarkdownCodeComponent } from './markdown-code.component';

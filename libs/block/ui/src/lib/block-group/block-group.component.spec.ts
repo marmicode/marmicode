@@ -7,7 +7,7 @@ import {
   BlockGroup,
   createBlockGroup,
   createTextBlock,
-} from '@marmicode/block-core';
+} from '@marmicode/block/core';
 import { firstValueFrom } from 'rxjs';
 import {
   createHighlightSection,

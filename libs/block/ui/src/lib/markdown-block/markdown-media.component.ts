@@ -5,7 +5,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { MarkdownTokens } from '@marmicode/block-core';
+import { MarkdownTokens } from '@marmicode/block/core';
 import { NgIf } from '@angular/common';
 
 @Component({
