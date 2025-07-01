@@ -54,6 +54,12 @@ export const routes: Routes = [
     loadComponent: () => import('@marmicode/workshop/feature-detail'),
   },
 
+  /* Workshop list. */
+  {
+    path: workshopDetailRouterHelper.WORKSHOP_LIST_PATH,
+    loadComponent: () => import('@marmicode/workshop/feature-list'),
+  },
+
   /* / redirect. */
   {
     path: '',
