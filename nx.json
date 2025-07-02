@@ -95,7 +95,13 @@
     ]
   },
   "plugins": [
-    "./tools/plugins/implicit-libs.ts"
+    "./tools/plugins/implicit-libs.ts",
+    {
+      "plugin": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
+    }
   ],
   "nxCloudAccessToken": "NjZmN2U3NGEtYzQ0ZS00ODRlLWIwNDQtZDE1YjBkYTZhZTEyfHJlYWQ=",
   "parallel": 4,

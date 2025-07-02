@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   inject,
   signal,
 } from '@angular/core';
@@ -9,10 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipListbox, MatChipOption } from '@angular/material/chips';
 import { RouterModule } from '@angular/router';
+import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 import { createBasicPageInfo, PageComponent } from '@marmicode/shared/ui';
 import { Workshop } from '@marmicode/workshop/core';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
-import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 
 const TAGS = [
   { label: 'Angular', value: 'angular' },
@@ -40,7 +39,7 @@ const TAGS = [
           @for (tag of tags; track tag.value) {
             <mat-chip-option
               [selected]="selectedTag() === tag.value"
-              (click)="selectTag(tag.value)"
+              (click)="selectTag(tag.value, $event)"
               >{{ tag.label }}</mat-chip-option
             >
           }
@@ -50,7 +49,12 @@ const TAGS = [
           style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center;"
         >
           @for (workshop of workshops; track workshop.id) {
-            <mat-card style="width: 100%; max-width: 500px; overflow: hidden;">
+            <mat-card
+              [routerLink]="workshopRouterHelper.detail(workshop.id)"
+              class="card"
+              role="article"
+              style="width: 100%; max-width: 500px; overflow: hidden;"
+            >
               <img
                 [src]="workshop.pictureUri"
                 alt="workshop image"
@@ -74,7 +78,7 @@ const TAGS = [
                     @for (tag of nonNullTags; track tag.value) {
                       <mat-chip-option
                         [selected]="selectedTag() === tag.value"
-                        (click)="selectTag(tag.value)"
+                        (click)="selectTag(tag.value, $event)"
                         >{{ tag.label }}</mat-chip-option
                       >
                     }
@@ -95,6 +99,11 @@ const TAGS = [
       </section>
     </mc-page>
   `,
+  styles: `
+    .card {
+      cursor: pointer;
+    }
+  `,
 })
 export class WorkshopListPage {
   pageInfo = createBasicPageInfo({
@@ -112,5 +121,9 @@ export class WorkshopListPage {
     this.workshops = this._repo.getWorkshops();
   }
 
-  selectTag = (tag: string) => this.selectedTag.set(tag);
+  selectTag(tag: string, event: MouseEvent) {
+    event.stopPropagation();
+
+    this.selectedTag.set(tag);
+  }
 }
