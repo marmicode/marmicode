@@ -109,10 +109,7 @@ export class WorkshopListPage {
   private _repo = inject(WorkshopRepository);
 
   constructor() {
-    this.workshops = [
-      ...this._repo.getWorkshops(),
-      ...this._repo.getWorkshops(),
-    ];
+    this.workshops = this._repo.getWorkshops();
   }
 
   selectTag = (tag: string) => this.selectedTag.set(tag);
