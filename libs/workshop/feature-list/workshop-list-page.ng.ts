@@ -27,28 +27,21 @@ const TAGS = [
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-list-page',
-  imports: [
-    MatButtonModule,
-    MatCardModule,
-    RouterModule,
-    PageComponent,
-    MatChipListbox,
-    MatChipOption,
-  ],
+  imports: [MatButtonModule, MatCardModule, RouterModule, PageComponent],
   template: `
     <mc-page [info]="pageInfo">
       <section
         style="max-width: 1200px; margin: auto; padding: 2rem; display: flex; flex-direction: column; gap: 2.5rem; align-items: center;"
       >
         <div
-          style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center;"
+          style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: stretch; justify-content: center;"
         >
           @for (workshop of workshops; track workshop.id) {
             <mat-card
               [routerLink]="workshopRouterHelper.detail(workshop.id)"
               class="card"
               role="article"
-              style="width: 100%; max-width: 500px; overflow: hidden;"
+              style="width: min(500px, 90vw); overflow: hidden;"
             >
               <img
                 [src]="workshop.pictureUri"
@@ -78,6 +71,33 @@ const TAGS = [
             </mat-card>
           }
         </div>
+        <mat-card
+          role="article"
+          style="width: min(500px, 90vw); overflow: hidden; opacity: 0.85; border: 2px dashed #1976d2; background: #f5faff;"
+        >
+          <mat-card-content
+            style="display: flex; flex-direction: column; align-items: center; justify-content: space-around; min-height: 300px;"
+          >
+            <h3
+              style="font-weight: 700; font-size: 24px; color: #1976d2; margin-bottom: 1em; text-align: center;"
+            >
+              More Workshops Coming Soon!
+            </h3>
+            <ul
+              style="padding: 0; margin: 0 0 1em 0; text-align: left; color: #333; font-size: 1.1em;"
+            >
+              <li>AI-Assisted TDD</li>
+              <li>Modern Angular</li>
+              <li>Architecture</li>
+              <li>Nx</li>
+              <li>NestJS</li>
+              <li>...</li>
+            </ul>
+            <div style="color: #666; font-size: 1em; text-align: center;">
+              Stay tuned for updates and new workshop announcements!
+            </div>
+          </mat-card-content>
+        </mat-card>
       </section>
     </mc-page>
   `,
