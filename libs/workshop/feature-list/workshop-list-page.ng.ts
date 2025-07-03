@@ -1,3 +1,4 @@
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,7 +7,7 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatChipListbox, MatChipOption } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 import { createBasicPageInfo, PageComponent } from '@marmicode/shared/ui';
@@ -27,7 +28,15 @@ const TAGS = [
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-list-page',
-  imports: [MatButtonModule, MatCardModule, RouterModule, PageComponent],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    RouterModule,
+    PageComponent,
+    CurrencyPipe,
+  ],
   template: `
     <mc-page [info]="pageInfo">
       <section
@@ -58,6 +67,26 @@ const TAGS = [
                   style="margin-bottom: 0.7em; font-size: 1.1em; color: #444;"
                 >
                   {{ workshop.subheading }}
+                </div>
+                <div
+                  style="display: flex; gap: 2em; justify-content: center; align-items: center; margin-bottom: 0.7em; font-size: 1.1em; color: var(--marmicode-accent-color); font-weight: 500; border-radius: 12px; padding: 0.4em 1em;"
+                >
+                  <span style="display: flex; align-items: center; gap: 0.5em;">
+                    <mat-icon>schedule</mat-icon>
+                    <ng-container [ngPlural]="workshop.duration">
+                      <ng-template ngPluralCase="=1">1 Day</ng-template>
+                      <ng-template ngPluralCase="other">
+                        {{ workshop.duration }} Days
+                      </ng-template>
+                    </ng-container>
+                  </span>
+                  <span style="display: flex; align-items: center; gap: 0.5em;">
+                    From
+                    {{
+                      workshop.offer.price
+                        | currency: 'EUR' : 'symbol' : '1.0-0'
+                    }}
+                  </span>
                 </div>
                 <div style="text-align: center;">
                   <a
