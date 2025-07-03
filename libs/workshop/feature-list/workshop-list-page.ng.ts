@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 import { createBasicPageInfo, PageComponent } from '@marmicode/shared/ui';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
-import { workshopViewTransitionName } from '../ui/workshop-view-transition-name';
+import { workshopViewTransitionName } from '@marmicode/workshop/ui';
 
 const LANGUAGES = [
   { label: '🇬🇧 English', value: 'en' },
