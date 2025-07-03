@@ -13,6 +13,11 @@ import { createBasicPageInfo, PageComponent } from '@marmicode/shared/ui';
 import { Workshop } from '@marmicode/workshop/core';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
 
+const LANGUAGES = [
+  { label: '🇬🇧 English', value: 'en' },
+  { label: '🇫🇷 French', value: 'fr' },
+];
+
 const TAGS = [
   { label: 'Angular', value: 'angular' },
   { label: 'Testing', value: 'testing' },
@@ -35,16 +40,6 @@ const TAGS = [
       <section
         style="max-width: 1200px; margin: auto; padding: 2rem; display: flex; flex-direction: column; gap: 2.5rem; align-items: center;"
       >
-        <mat-chip-listbox>
-          @for (tag of tags; track tag.value) {
-            <mat-chip-option
-              [selected]="selectedTag() === tag.value"
-              (click)="selectTag(tag.value, $event)"
-              >{{ tag.label }}</mat-chip-option
-            >
-          }
-        </mat-chip-listbox>
-
         <div
           style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center;"
         >
@@ -71,25 +66,12 @@ const TAGS = [
                 >
                   {{ workshop.subheading }}
                 </div>
-                <mat-chip-listbox>
-                  <div
-                    style="width: 100%; display: flex; justify-content: center; align-items: center;"
-                  >
-                    @for (tag of nonNullTags; track tag.value) {
-                      <mat-chip-option
-                        [selected]="selectedTag() === tag.value"
-                        (click)="selectTag(tag.value, $event)"
-                        >{{ tag.label }}</mat-chip-option
-                      >
-                    }
-                  </div>
-                </mat-chip-listbox>
                 <div style="text-align: center;">
                   <a
                     [routerLink]="workshopRouterHelper.detail(workshop.id)"
                     mat-button
                     color="primary"
-                    >View Details</a
+                    >VIEW DETAILS</a
                   >
                 </div>
               </mat-card-content>
@@ -110,6 +92,7 @@ export class WorkshopListPage {
     title: 'Workshops',
   });
   tags = TAGS;
+  languages = LANGUAGES;
   nonNullTags = TAGS.filter((tag) => tag.value !== null);
   selectedTag = signal<string | null>(null);
   workshops: Workshop[];
