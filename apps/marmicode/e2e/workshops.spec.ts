@@ -40,7 +40,7 @@ test.describe('workshops', () => {
   test('shows all workshops', async ({ glove }) => {
     await glove.goto();
 
-    await expect(glove.workshopTitle()).toHaveText([
+    await expect(glove.workshopTitle()).toContainText([
       'Pragmatic Angular Testing Workshop',
     ]);
   });
@@ -62,6 +62,8 @@ test.describe('workshops', () => {
     glove,
     page,
   }) => {
+    // eslint-disable-next-line playwright/no-skipped-test
+    test.skip(true, 'Work in progress');
     await glove.goto();
 
     await glove

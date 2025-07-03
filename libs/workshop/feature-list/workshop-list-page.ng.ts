@@ -2,6 +2,7 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
   signal,
 } from '@angular/core';
@@ -11,8 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 import { createBasicPageInfo, PageComponent } from '@marmicode/shared/ui';
-import { Workshop } from '@marmicode/workshop/core';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
+import { workshopViewTransitionName } from '../ui/workshop-view-transition-name';
 
 const LANGUAGES = [
   { label: '🇬🇧 English', value: 'en' },
@@ -45,7 +46,10 @@ const TAGS = [
         <div
           style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: stretch; justify-content: center;"
         >
-          @for (workshop of workshops; track workshop.id) {
+          @for (item of workshops(); track item.workshop.id) {
+            @let workshop = item.workshop;
+            @let transitionName = item.transitionName;
+
             <mat-card
               [routerLink]="workshopRouterHelper.detail(workshop.id)"
               class="card"
@@ -56,6 +60,7 @@ const TAGS = [
                 [src]="workshop.thumbnailUri"
                 alt="workshop image"
                 style="width: 100%; height: 250px; object-fit: cover; margin-bottom: 1rem;"
+                [style.view-transition-name]="transitionName"
               />
               <mat-card-content>
                 <h3
@@ -144,14 +149,15 @@ export class WorkshopListPage {
   languages = LANGUAGES;
   nonNullTags = TAGS.filter((tag) => tag.value !== null);
   selectedTag = signal<string | null>(null);
-  workshops: Workshop[];
+  workshops = computed(() =>
+    this._repo.getWorkshops().map((workshop) => ({
+      workshop,
+      transitionName: workshopViewTransitionName(workshop),
+    })),
+  );
   workshopRouterHelper = workshopRouterHelper;
 
   private _repo = inject(WorkshopRepository);
-
-  constructor() {
-    this.workshops = this._repo.getWorkshops();
-  }
 
   selectTag(tag: string, event: MouseEvent) {
     event.stopPropagation();
