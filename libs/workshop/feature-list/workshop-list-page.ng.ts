@@ -53,9 +53,9 @@ const TAGS = [
               style="width: min(500px, 90vw); overflow: hidden;"
             >
               <img
-                [src]="workshop.pictureUri"
+                [src]="workshop.thumbnailUri"
                 alt="workshop image"
-                style="width: 100%; margin-bottom: 1rem;"
+                style="width: 100%; height: 250px; object-fit: cover; margin-bottom: 1rem;"
               />
               <mat-card-content>
                 <h3

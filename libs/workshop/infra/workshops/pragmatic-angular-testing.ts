@@ -1,5 +1,6 @@
 import { createWorkshop } from '@marmicode/workshop/core';
 import pictureUri from './pragmatic-angular-testing.webp';
+import thumbnailUri from './pragmatic-angular-testing-thumbnail.webp';
 
 export const pragmaticAngularTesting = createWorkshop({
   id: 'pragmatic-angular-testing',
@@ -8,6 +9,7 @@ export const pragmaticAngularTesting = createWorkshop({
   subheading: `Tired of whack-a-mole bugs, boring manual tests, and fragile suites?
 Let's cook fast, reliable tests that actually help you ship.`,
   pictureUri,
+  thumbnailUri,
   duration: 1,
   location: 'online',
   sessions: [
