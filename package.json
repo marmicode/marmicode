@@ -4,7 +4,6 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "postinstall": "playwright install",
     "nx": "nx",
     "nx-cloud": "nx-cloud",
     "build": "nx build",
