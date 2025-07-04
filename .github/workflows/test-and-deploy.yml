@@ -270,6 +270,10 @@ jobs:
   deploy-marmicode-next:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    name: 🚀 Marmicode Next
+    environment:
+      name: Marmicode Next
+      url: https://marmicode-next.web.app
     needs:
       - build
       - lint
@@ -277,10 +281,6 @@ jobs:
       - component-test
       - e2e
       - check-sync
-    name: 🚀 Marmicode Next
-    environment:
-      name: Marmicode Next
-      url: https://marmicode-next.web.app
     steps:
       - uses: actions/checkout@v4
         with:
@@ -325,6 +325,10 @@ jobs:
   deploy-marmicode:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    name: 🚀 Marmicode
+    environment:
+      name: Marmicode
+      url: https://marmicode.io
     needs:
       - build
       - lint
@@ -332,10 +336,7 @@ jobs:
       - component-test
       - e2e
       - check-snapshots
-    name: 🚀 Marmicode
-    environment:
-      name: Marmicode
-      url: https://marmicode.io
+      - check-sync
     steps:
       - uses: actions/checkout@v4
         with:
