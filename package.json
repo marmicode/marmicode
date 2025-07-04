@@ -54,7 +54,7 @@
     "@fortawesome/fontawesome-svg-core": "6.7.2",
     "@fortawesome/free-brands-svg-icons": "6.7.2",
     "@fortawesome/free-solid-svg-icons": "6.7.2",
-    "@jscutlery/operators": "3.2.1",
+    "@jscutlery/operators": "3.2.5",
     "@jscutlery/rx-computed": "0.7.1",
     "@ngneat/until-destroy": "^10.0.0",
     "@ngrx/effects": "19.1.0",
