@@ -127,13 +127,12 @@ jobs:
           path: dist
   deploy-marmicode-next:
     runs-on: ubuntu-latest
-    name: 🚀 Marmicode Next
-    environment:
-      name: Marmicode Next
-      url: https://marmicode-next.web.app
+    name: 📦 Deploy Marmicode Next
     needs:
       - test
       - check-sync
+    outputs:
+      url: ${{ steps.deploy.outputs.url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -155,15 +154,36 @@ jobs:
       - name: Install
         run: pnpm install
       - name: Deploy
+        id: deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: pnpm nx run marmicode:deploy:next --no-agents
+        run: >
+          pnpm nx run marmicode:deploy:next --no-agents | tee /tmp/deploy-output
+
+          hosting_url=$(cat /tmp/deploy-output | grep -o 'Hosting URL.*:
+          https://[^[:space:]]*' | sed 's/.*: //')
+
+          channel_url=$(cat /tmp/deploy-output | grep -o 'Channel URL.*:
+          https://[^[:space:]]*' | sed 's/.*: //')
+
+          echo "url=${channel_url:-$hosting_url}" >> $GITHUB_OUTPUT
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: dist
           path: dist
+  marmicode-next:
+    name: 🚀 Marmicode Next
+    runs-on: ubuntu-latest
+    environment:
+      name: Marmicode Next
+      url: ${{ needs.deploy-marmicode-next.outputs.url }}
+    needs:
+      - deploy-marmicode-next
+    steps:
+      - run: |
+          echo "URL: ${{ needs.deploy-marmicode-next.outputs.url }}"
   deploy-marmicode:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
