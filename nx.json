@@ -28,8 +28,7 @@
     "e2e": {
       "inputs": ["default", "^production"],
       "outputs": ["{projectRoot}/__percy_snapshots__/**/*"],
-      "cache": true,
-      "parallelism": false
+      "cache": true
     },
     "build-storybook": {
       "inputs": [
@@ -104,6 +103,5 @@
     }
   ],
   "nxCloudAccessToken": "NjZmN2U3NGEtYzQ0ZS00ODRlLWIwNDQtZDE1YjBkYTZhZTEyfHJlYWQ=",
-  "parallel": 4,
   "defaultBase": "main"
 }
