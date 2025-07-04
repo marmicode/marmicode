@@ -198,10 +198,10 @@
       "executor": "nx:run-commands",
       "configurations": {
         "production": {
-          "project": "marmicode"
+          "firebaseProject": "marmicode"
         },
         "next": {
-          "project": "marmicode-next",
+          "firebaseProject": "marmicode-next",
           "robots": false
         }
       },
@@ -209,7 +209,7 @@
         "robots": true,
         "commands": [
           "if [ \"{args.robots}\" = false ]; then cp apps/marmicode/src/robots-next.txt dist/apps/marmicode/browser/robots.txt; fi",
-          "firebase --project {args.project} deploy"
+          "tools/firebase-deploy.sh {projectName} {args.firebaseProject}"
         ],
         "parallel": false
       },

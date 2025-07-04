@@ -65,9 +65,7 @@ jobs:
       - name: Install
         run: pnpm install
       - name: Check Sync No Changes
-        run: >-
-          pnpm nx affected --target=sync --base=deployed/marmicode-next && git
-          diff --exit-code
+        run: pnpm nx affected --target=sync && git diff --exit-code
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4
         if: failure()
@@ -124,7 +122,6 @@ jobs:
           name: dist
           path: dist
   deploy-marmicode-next:
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     name: 🚀 Marmicode Next
     environment:
@@ -164,8 +161,8 @@ jobs:
           name: dist
           path: dist
   deploy-marmicode:
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     name: 🚀 Marmicode
     environment:
       name: Marmicode

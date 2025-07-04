@@ -52,7 +52,6 @@ x-steps:
     run: pnpm install
 
 x-deploy-base: &deploy-base
-  if: github.ref == 'refs/heads/main'
   runs-on: ubuntu-latest
 
 x-percy-env: &percy-env
@@ -90,7 +89,7 @@ jobs:
       - *pnpm-install
 
       - name: Check Sync No Changes
-        run: pnpm nx affected --target=sync --base=deployed/marmicode-next && git diff --exit-code
+        run: pnpm nx affected --target=sync && git diff --exit-code
 
       - *upload-dist-on-failure
 
@@ -150,6 +149,7 @@ jobs:
 
   deploy-marmicode:
     <<: *deploy-base
+    if: github.ref == 'refs/heads/main'
     name: 🚀 Marmicode
     environment:
       name: Marmicode
