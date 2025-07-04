@@ -11,13 +11,16 @@ import {
   PageComponent,
 } from '@marmicode/shared/ui';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
-import { WorkshopAgenda } from '@marmicode/workshop/ui';
-import { WorkshopBanner } from '@marmicode/workshop/ui';
-import { WorkshopBenefits } from '@marmicode/workshop/ui';
-import { WorkshopDescription } from '@marmicode/workshop/ui';
-import { WorkshopInstructor } from '@marmicode/workshop/ui';
-import { WorkshopRequiredSkills } from '@marmicode/workshop/ui';
-import { WorkshopSessions } from '@marmicode/workshop/ui';
+import {
+  WorkshopAgenda,
+  WorkshopBanner,
+  WorkshopBenefits,
+  WorkshopDescription,
+  WorkshopInstructor,
+  WorkshopRequiredSkills,
+  WorkshopSessions,
+} from '@marmicode/workshop/ui-detail';
+import { workshopViewTransitionName } from '@marmicode/workshop/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,7 +40,10 @@ import { WorkshopSessions } from '@marmicode/workshop/ui';
     <mc-page [info]="info()">
       @let workshop = this.workshop();
       @if (workshop) {
-        <mc-workshop-banner [workshop]="workshop" />
+        <mc-workshop-banner
+          [workshop]="workshop"
+          [style.view-transition-name]="transitionName()"
+        />
         <mc-workshop-description [description]="workshop.description" />
         <mc-workshop-sessions [workshop]="workshop" />
         <mc-workshop-benefits [benefits]="workshop.benefits" />
@@ -68,6 +74,7 @@ export class WorkshopDetailPage {
       pictureUri: this.workshop()?.pictureUri,
     }),
   );
+  transitionName = computed(() => workshopViewTransitionName(this.workshop()));
 
   private _workshopRepository = inject(WorkshopRepository);
 }

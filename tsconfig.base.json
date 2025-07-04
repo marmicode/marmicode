@@ -65,8 +65,12 @@
       "@marmicode/workshop/feature-detail": [
         "libs/workshop/feature-detail/index.ts"
       ],
+      "@marmicode/workshop/feature-list": [
+        "libs/workshop/feature-list/index.ts"
+      ],
       "@marmicode/workshop/infra": ["libs/workshop/infra/index.ts"],
-      "@marmicode/workshop/ui": ["libs/workshop/ui/index.ts"]
+      "@marmicode/workshop/ui": ["libs/workshop/ui/index.ts"],
+      "@marmicode/workshop/ui-detail": ["libs/workshop/ui-detail/index.ts"]
     },
     "strict": true,
     "strictNullChecks": false,

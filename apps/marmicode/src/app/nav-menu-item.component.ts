@@ -12,7 +12,7 @@ import { RouterModule, RouterLinkActive, RouterLink } from '@angular/router';
 export interface NavMenuEntry {
   icon: string;
   title: string;
-  route?: string[];
+  route?: string | string[];
   url?: string;
 }
 

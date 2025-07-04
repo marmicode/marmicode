@@ -6,6 +6,7 @@
     "angular.ng-template",
     "firsttris.vscode-jest-runner",
     "arcanis.vscode-zipfs",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "ms-playwright.playwright"
   ]
 }
