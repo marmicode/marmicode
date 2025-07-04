@@ -33,12 +33,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '22'
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
+      - uses: pnpm/action-setup@v4
       - name: Install
-        run: bun install
+        run: pnpm install
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: yarn nx run marmicode:deploy:production --skip-nx-cache
+        run: pnpm nx deploy marmicode -c production --skip-nx-cache

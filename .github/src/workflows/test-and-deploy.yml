@@ -44,14 +44,12 @@ x-steps:
       name: dist
       path: dist
 
-  install-bun: &install-bun
-    uses: oven-sh/setup-bun@v1
-    with:
-      bun-version: latest
+  install-pnpm: &install-pnpm
+    uses: pnpm/action-setup@v4
 
-  bun-install: &bun-install
+  pnpm-install: &pnpm-install
     name: Install
-    run: bun install
+    run: pnpm install
 
 x-deploy-base: &deploy-base
   if: github.ref == 'refs/heads/main'
@@ -71,13 +69,13 @@ jobs:
       - *checkout
       - *cache
       - *setup-node
-      - *install-bun
-      - *bun-install
+      - *install-pnpm
+      - *pnpm-install
       - uses: nrwl/nx-set-shas@v4
 
-      - run: bunx nx-cloud start-ci-run --distribute-on="8 linux-medium-js"
+      - run: pnpm nx-cloud start-ci-run --distribute-on="8 linux-large-js"
 
-      - run: bunx nx affected --target=build,test,lint,component-test,e2e
+      - run: pnpm nx affected --target=build,test,lint,component-test,e2e
 
       - *upload-dist-on-failure
 
@@ -88,11 +86,11 @@ jobs:
       - *checkout
       - *cache
       - *setup-node
-      - *install-bun
-      - *bun-install
+      - *install-pnpm
+      - *pnpm-install
 
       - name: Check Sync No Changes
-        run: bunx nx affected --target=sync --base=deployed/marmicode-next && git diff --exit-code
+        run: pnpm nx affected --target=sync --base=deployed/marmicode-next && git diff --exit-code
 
       - *upload-dist-on-failure
 
@@ -108,22 +106,22 @@ jobs:
       - *checkout
       - *cache
       - *setup-node
-      - *install-bun
-      - *bun-install
+      - *install-pnpm
+      - *pnpm-install
 
       - name: Upload Affected Percy Snapshots
         if: github.ref != 'refs/heads/main'
-        run: bunx percy exec --partial -- bun upload-affected-percy-snapshots --no-agents
+        run: pnpm percy exec --partial -- pnpm upload-affected-percy-snapshots --no-agents
 
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        run: bunx percy exec -- bun nx run-many --target=upload-percy-snapshots --no-agents
+        run: pnpm percy exec -- pnpm nx run-many --target=upload-percy-snapshots --no-agents
 
       # Check Percy Review on main branch only.
       # On other branches, we'll let Percy status check do the job.
       - name: Check Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        run: PERCY_TOKEN=$PERCY_FULL_TOKEN bunx percy build:wait --project d53cdff6/marmicode --fail-on-changes
+        run: PERCY_TOKEN=$PERCY_FULL_TOKEN pnpm percy build:wait --project d53cdff6/marmicode --fail-on-changes
 
       - *upload-dist-on-failure
 
@@ -140,13 +138,13 @@ jobs:
       - *checkout
       - *cache
       - *setup-node
-      - *install-bun
-      - *bun-install
+      - *install-pnpm
+      - *pnpm-install
 
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: bunx nx run marmicode:deploy:next --no-agents
+        run: pnpm nx run marmicode:deploy:next --no-agents
 
       - *upload-dist-on-failure
 
@@ -164,12 +162,12 @@ jobs:
       - *checkout
       - *cache
       - *setup-node
-      - *install-bun
-      - *bun-install
+      - *install-pnpm
+      - *pnpm-install
 
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: bunx nx run marmicode:deploy:production --no-agents
+        run: pnpm nx run marmicode:deploy:production --no-agents
 
       - *upload-dist-on-failure

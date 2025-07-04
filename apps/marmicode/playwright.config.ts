@@ -25,7 +25,7 @@ export default defineConfig({
   timeout: 5_000,
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'bunx nx serve marmicode',
+    command: 'pnpm nx serve marmicode',
     url: 'http://localhost:4200',
     reuseExistingServer: !process.env.CI,
     cwd: workspaceRoot,

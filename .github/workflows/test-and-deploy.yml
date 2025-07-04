@@ -29,14 +29,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
+      - uses: pnpm/action-setup@v4
       - name: Install
-        run: bun install
+        run: pnpm install
       - uses: nrwl/nx-set-shas@v4
-      - run: bunx nx-cloud start-ci-run --distribute-on="8 linux-medium-js"
-      - run: bunx nx affected --target=build,test,lint,component-test,e2e
+      - run: pnpm nx-cloud start-ci-run --distribute-on="8 linux-large-js"
+      - run: pnpm nx affected --target=build,test,lint,component-test,e2e
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4
         if: failure()
@@ -63,14 +61,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
+      - uses: pnpm/action-setup@v4
       - name: Install
-        run: bun install
+        run: pnpm install
       - name: Check Sync No Changes
         run: >-
-          bunx nx affected --target=sync --base=deployed/marmicode-next && git
+          pnpm nx affected --target=sync --base=deployed/marmicode-next && git
           diff --exit-code
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4
@@ -103,25 +99,23 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
+      - uses: pnpm/action-setup@v4
       - name: Install
-        run: bun install
+        run: pnpm install
       - name: Upload Affected Percy Snapshots
         if: github.ref != 'refs/heads/main'
         run: >-
-          bunx percy exec --partial -- bun upload-affected-percy-snapshots
+          pnpm percy exec --partial -- pnpm upload-affected-percy-snapshots
           --no-agents
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
         run: >-
-          bunx percy exec -- bun nx run-many --target=upload-percy-snapshots
+          pnpm percy exec -- pnpm nx run-many --target=upload-percy-snapshots
           --no-agents
       - name: Check Percy Snapshots
         if: github.ref == 'refs/heads/main'
         run: >-
-          PERCY_TOKEN=$PERCY_FULL_TOKEN bunx percy build:wait --project
+          PERCY_TOKEN=$PERCY_FULL_TOKEN pnpm percy build:wait --project
           d53cdff6/marmicode --fail-on-changes
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4
@@ -156,15 +150,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
+      - uses: pnpm/action-setup@v4
       - name: Install
-        run: bun install
+        run: pnpm install
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: bunx nx run marmicode:deploy:next --no-agents
+        run: pnpm nx run marmicode:deploy:next --no-agents
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4
         if: failure()
@@ -199,15 +191,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
+      - uses: pnpm/action-setup@v4
       - name: Install
-        run: bun install
+        run: pnpm install
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: bunx nx run marmicode:deploy:production --no-agents
+        run: pnpm nx run marmicode:deploy:production --no-agents
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4
         if: failure()
