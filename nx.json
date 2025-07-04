@@ -41,8 +41,7 @@
     "@nx/cypress:cypress": {
       "inputs": ["default", "^production"],
       "outputs": ["{projectRoot}/__percy_snapshots__/**/*"],
-      "cache": true,
-      "parallel": 1
+      "cache": true
     },
     "@nx/jest:jest": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
