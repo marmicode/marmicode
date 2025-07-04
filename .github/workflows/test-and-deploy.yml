@@ -9,43 +9,8 @@ concurrency: ci-${{ github.ref }}
       - main
   workflow_dispatch: {}
 jobs:
-  build:
-    name: 📦 Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/Cypress
-            .angular
-            libs/*/.angular
-            node_modules/.cache
-          key: cache-${{ github.run_id }}
-          restore-keys: |
-            cache
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - name: Install
-        run: bun install
-      - name: Build
-        run: >-
-          bunx nx affected --target=prerender --configuration next
-          --base=deployed/marmicode-next
-      - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: dist
-          path: dist
   test:
-    name: ✅ Test
+    name: ✅ Build, Test, Lint, Component Test, E2E
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -69,109 +34,9 @@ jobs:
           bun-version: latest
       - name: Install
         run: bun install
-      - name: Test
-        run: bunx nx affected --target=test --base=deployed/marmicode-next
-      - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: dist
-          path: dist
-  lint:
-    name: 🚨 Lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/Cypress
-            .angular
-            libs/*/.angular
-            node_modules/.cache
-          key: cache-${{ github.run_id }}
-          restore-keys: |
-            cache
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - name: Install
-        run: bun install
-      - name: Lint
-        run: bunx nx affected --target=lint --base=deployed/marmicode-next
-      - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: dist
-          path: dist
-  component-test:
-    name: ✅ Component Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/Cypress
-            .angular
-            libs/*/.angular
-            node_modules/.cache
-          key: cache-${{ github.run_id }}
-          restore-keys: |
-            cache
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - name: Install
-        run: bun install
-      - name: Component Test
-        run: >-
-          bunx nx affected --target=component-test --parallel 1
-          --base=deployed/marmicode-next
-      - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: dist
-          path: dist
-  e2e:
-    name: ✅ E2E
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/Cypress
-            .angular
-            libs/*/.angular
-            node_modules/.cache
-          key: cache-${{ github.run_id }}
-          restore-keys: |
-            cache
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - name: Install
-        run: bun install
-      - name: E2E
-        run: bunx nx affected --target=e2e --base=deployed/marmicode-next
+      - uses: nrwl/nx-set-shas@v4
+      - run: bunx nx-cloud start-ci-run --distribute-on="8 linux-medium-js"
+      - run: bunx nx affected --target=build,test,lint,component-test,e2e
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4
         if: failure()
@@ -220,8 +85,7 @@ jobs:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
     needs:
-      - component-test
-      - e2e
+      - test
     steps:
       - uses: actions/checkout@v4
         with:
@@ -273,11 +137,7 @@ jobs:
       name: Marmicode Next
       url: https://marmicode-next.web.app
     needs:
-      - build
-      - lint
       - test
-      - component-test
-      - e2e
       - check-sync
     steps:
       - uses: actions/checkout@v4
@@ -305,15 +165,6 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: bunx nx run marmicode:deploy:next --no-agents
-      - name: Tag deployed/marmicode-next
-        run: git tag -f deployed/marmicode-next
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-          force: true
-          tags: true
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4
         if: failure()
@@ -328,11 +179,7 @@ jobs:
       name: Marmicode
       url: https://marmicode.io
     needs:
-      - build
-      - lint
       - test
-      - component-test
-      - e2e
       - check-snapshots
       - check-sync
     steps:
@@ -361,15 +208,6 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: bunx nx run marmicode:deploy:production --no-agents
-      - name: Tag deployed/marmicode
-        run: git tag -f deployed/marmicode
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-          force: true
-          tags: true
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4
         if: failure()

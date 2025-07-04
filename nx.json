@@ -23,7 +23,7 @@
       "inputs": ["default", "^production"],
       "outputs": ["{projectRoot}/__percy_snapshots__/**/*"],
       "cache": true,
-      "parallelism": false
+      "parallel": 1
     },
     "e2e": {
       "inputs": ["default", "^production"],

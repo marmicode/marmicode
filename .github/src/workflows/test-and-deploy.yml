@@ -31,15 +31,6 @@ x-steps:
       # Checkout tags so we can use 'affected:* --base=deployed/marmicode-next'
       fetch-depth: 0
 
-  push: &push
-    name: Push changes
-    uses: ad-m/github-push-action@master
-    with:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      branch: ${{ github.ref }}
-      force: true
-      tags: true
-
   setup-node: &setup-node
     uses: actions/setup-node@v4
     with:
@@ -73,23 +64,8 @@ x-percy-env: &percy-env
   PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
 
 jobs:
-  build:
-    name: 📦 Build
-    runs-on: ubuntu-latest
-    steps:
-      - *checkout
-      - *cache
-      - *setup-node
-      - *install-bun
-      - *bun-install
-
-      - name: Build
-        run: bunx nx affected --target=prerender --configuration next --base=deployed/marmicode-next
-
-      - *upload-dist-on-failure
-
   test:
-    name: ✅ Test
+    name: ✅ Build, Test, Lint, Component Test, E2E
     runs-on: ubuntu-latest
     steps:
       - *checkout
@@ -97,54 +73,11 @@ jobs:
       - *setup-node
       - *install-bun
       - *bun-install
+      - uses: nrwl/nx-set-shas@v4
 
-      - name: Test
-        run: bunx nx affected --target=test --base=deployed/marmicode-next
+      - run: bunx nx-cloud start-ci-run --distribute-on="8 linux-medium-js"
 
-      - *upload-dist-on-failure
-
-  lint:
-    name: 🚨 Lint
-    runs-on: ubuntu-latest
-    steps:
-      - *checkout
-      - *cache
-      - *setup-node
-      - *install-bun
-      - *bun-install
-
-      - name: Lint
-        run: bunx nx affected --target=lint --base=deployed/marmicode-next
-
-      - *upload-dist-on-failure
-
-  component-test:
-    name: ✅ Component Test
-    runs-on: ubuntu-latest
-    steps:
-      - *checkout
-      - *cache
-      - *setup-node
-      - *install-bun
-      - *bun-install
-
-      - name: Component Test
-        run: bunx nx affected --target=component-test --parallel 1 --base=deployed/marmicode-next
-
-      - *upload-dist-on-failure
-
-  e2e:
-    name: ✅ E2E
-    runs-on: ubuntu-latest
-    steps:
-      - *checkout
-      - *cache
-      - *setup-node
-      - *install-bun
-      - *bun-install
-
-      - name: E2E
-        run: bunx nx affected --target=e2e --base=deployed/marmicode-next
+      - run: bunx nx affected --target=build,test,lint,component-test,e2e
 
       - *upload-dist-on-failure
 
@@ -169,8 +102,7 @@ jobs:
     env:
       <<: *percy-env
     needs:
-      - component-test
-      - e2e
+      - test
 
     steps:
       - *checkout
@@ -202,11 +134,7 @@ jobs:
       name: Marmicode Next
       url: https://marmicode-next.web.app
     needs:
-      - build
-      - lint
       - test
-      - component-test
-      - e2e
       - check-sync
     steps:
       - *checkout
@@ -220,10 +148,6 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: bunx nx run marmicode:deploy:next --no-agents
 
-      - name: Tag deployed/marmicode-next
-        run: git tag -f deployed/marmicode-next
-
-      - *push
       - *upload-dist-on-failure
 
   deploy-marmicode:
@@ -233,11 +157,7 @@ jobs:
       name: Marmicode
       url: https://marmicode.io
     needs:
-      - build
-      - lint
       - test
-      - component-test
-      - e2e
       - check-snapshots
       - check-sync
     steps:
@@ -252,8 +172,4 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: bunx nx run marmicode:deploy:production --no-agents
 
-      - name: Tag deployed/marmicode
-        run: git tag -f deployed/marmicode
-
-      - *push
       - *upload-dist-on-failure
