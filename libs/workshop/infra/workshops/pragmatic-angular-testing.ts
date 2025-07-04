@@ -3,7 +3,7 @@ import pictureUri from './pragmatic-angular-testing.webp';
 import thumbnailUri from './pragmatic-angular-testing-thumbnail.webp';
 
 export const pragmaticAngularTesting = createWorkshop({
-  id: 'pragmatic-angular-testing',
+  id: 'pragmatic-angular-testing-tapas-session',
   title: 'Pragmatic Angular Testing Workshop',
   type: 'tapas',
   subheading: `Tired of whack-a-mole bugs, boring manual tests, and fragile suites?
