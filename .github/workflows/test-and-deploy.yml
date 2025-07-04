@@ -1,7 +1,9 @@
 # DO NOT EDIT: This file was generated.
 
 name: Test & Deploy
-concurrency: ci-${{ github.ref }}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 'on':
   pull_request: {}
   push:
