@@ -161,11 +161,11 @@ jobs:
         run: >
           pnpm nx run marmicode:deploy:next --no-agents | tee /tmp/deploy-output
 
-          hosting_url=$(cat /tmp/deploy-output | grep -o 'Hosting URL.*:
-          https://[^[:space:]]*' | sed 's/.*: //')
+          hosting_url=$(cat /tmp/deploy-output | grep 'Hosting URL' | grep -oE
+          'https?://[^ ]+' || echo "")
 
-          channel_url=$(cat /tmp/deploy-output | grep -o 'Channel URL.*:
-          https://[^[:space:]]*' | sed 's/.*: //')
+          channel_url=$(cat /tmp/deploy-output | grep 'Channel URL' | grep -oE
+          'https?://[^ ]+' || echo "")
 
           echo "url=${channel_url:-$hosting_url}" >> $GITHUB_OUTPUT
       - name: Upload dist (Cypress videos / build output etc...) on failure
