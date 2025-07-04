@@ -144,7 +144,7 @@ jobs:
       - *bun-install
 
       - name: E2E
-        run: bunx nx affected --target=e2e --parallel 1 --base=deployed/marmicode-next
+        run: bunx nx affected --target=e2e --base=deployed/marmicode-next
 
       - *upload-dist-on-failure
 

@@ -171,9 +171,7 @@ jobs:
       - name: Install
         run: bun install
       - name: E2E
-        run: >-
-          bunx nx affected --target=e2e --parallel 1
-          --base=deployed/marmicode-next
+        run: bunx nx affected --target=e2e --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4
         if: failure()
