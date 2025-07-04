@@ -4,7 +4,7 @@ import {
   recipeDetailRouterHelper,
   resourceSearchRouterHelper,
   servicesRouterHelper,
-  workshopDetailRouterHelper,
+  workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
 import { or } from '@marmicode/shared/utils';
 
@@ -50,8 +50,14 @@ export const routes: Routes = [
 
   /* Workshop detail. */
   {
-    path: workshopDetailRouterHelper.WORKSHOP_DETAIL_PATH,
+    path: workshopRouterHelper.WORKSHOP_DETAIL_PATH,
     loadComponent: () => import('@marmicode/workshop/feature-detail'),
+  },
+
+  /* Workshop list. */
+  {
+    path: workshopRouterHelper.WORKSHOP_LIST_PATH,
+    loadComponent: () => import('@marmicode/workshop/feature-list'),
   },
 
   /* / redirect. */
