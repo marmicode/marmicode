@@ -170,8 +170,6 @@ jobs:
           bun-version: latest
       - name: Install
         run: bun install
-      - name: Install Playwright Browsers
-        run: bunx playwright install --with-deps
       - name: E2E
         run: >-
           bunx nx affected --target=e2e --parallel 1
@@ -278,6 +276,7 @@ jobs:
       - test
       - component-test
       - e2e
+      - check-sync
     name: 🚀 Marmicode Next
     environment:
       name: Marmicode Next
