@@ -167,6 +167,10 @@ jobs:
           channel_url=$(cat /tmp/deploy-output | grep -o 'Channel URL.*:
           https://[^[:space:]]*' | sed 's/.*: //')
 
+          echo "hosting_url: $hosting_url"
+
+          echo "channel_url: $channel_url"
+
           echo "url=${channel_url:-$hosting_url}" >> $GITHUB_OUTPUT
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4

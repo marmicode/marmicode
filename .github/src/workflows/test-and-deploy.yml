@@ -155,6 +155,8 @@ jobs:
           pnpm nx run marmicode:deploy:next --no-agents | tee /tmp/deploy-output
           hosting_url=$(cat /tmp/deploy-output | grep -o 'Hosting URL.*: https://[^[:space:]]*' | sed 's/.*: //')
           channel_url=$(cat /tmp/deploy-output | grep -o 'Channel URL.*: https://[^[:space:]]*' | sed 's/.*: //')
+          echo "hosting_url: $hosting_url"
+          echo "channel_url: $channel_url"
           echo "url=${channel_url:-$hosting_url}" >> $GITHUB_OUTPUT
       - *upload-dist-on-failure
 
