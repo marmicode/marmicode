@@ -127,12 +127,13 @@ jobs:
           path: dist
   deploy-marmicode-next:
     runs-on: ubuntu-latest
-    name: 📦 Deploy Marmicode Next
+    name: 🚀 Marmicode Next
+    environment:
+      name: Marmicode Next
+      url: ${{ steps.deploy.outputs.url }}
     needs:
       - test
       - check-sync
-    outputs:
-      url: ${{ steps.deploy.outputs.url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -173,17 +174,6 @@ jobs:
         with:
           name: dist
           path: dist
-  marmicode-next:
-    name: 🚀 Marmicode Next
-    runs-on: ubuntu-latest
-    environment:
-      name: Marmicode Next
-      url: ${{ needs.deploy-marmicode-next.outputs.url }}
-    needs:
-      - deploy-marmicode-next
-    steps:
-      - run: |
-          echo "URL: ${{ needs.deploy-marmicode-next.outputs.url }}"
   deploy-marmicode:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'

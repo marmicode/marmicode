@@ -133,12 +133,13 @@ jobs:
 
   deploy-marmicode-next:
     <<: *deploy-base
-    name: 📦 Deploy Marmicode Next
+    name: 🚀 Marmicode Next
+    environment:
+      name: Marmicode Next
+      url: ${{ steps.deploy.outputs.url }}
     needs:
       - test
       - check-sync
-    outputs:
-      url: ${{ steps.deploy.outputs.url }}
     steps:
       - *checkout
       - *cache
@@ -156,18 +157,6 @@ jobs:
           channel_url=$(cat /tmp/deploy-output | grep -o 'Channel URL.*: https://[^[:space:]]*' | sed 's/.*: //')
           echo "url=${channel_url:-$hosting_url}" >> $GITHUB_OUTPUT
       - *upload-dist-on-failure
-
-  marmicode-next:
-    name: 🚀 Marmicode Next
-    runs-on: ubuntu-latest
-    environment:
-      name: Marmicode Next
-      url: ${{ needs.deploy-marmicode-next.outputs.url }}
-    needs:
-      - deploy-marmicode-next
-    steps:
-      - run: |
-          echo "URL: ${{ needs.deploy-marmicode-next.outputs.url }}"
 
   deploy-marmicode:
     <<: *deploy-base
