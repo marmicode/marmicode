@@ -8,9 +8,6 @@ concurrency: ci-${{ github.ref }}
     branches:
       - main
   workflow_dispatch: {}
-env:
-  NX_CLOUD_DISTRIBUTED_EXECUTION: true
-  NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 4
 jobs:
   build:
     name: 📦 Build
@@ -37,7 +34,6 @@ jobs:
           bun-version: latest
       - name: Install
         run: bun install
-      - run: bunx nx-cloud start-ci-run
       - name: Build
         run: >-
           bunx nx affected --target=prerender --configuration next
@@ -73,7 +69,6 @@ jobs:
           bun-version: latest
       - name: Install
         run: bun install
-      - run: bunx nx-cloud start-ci-run
       - name: Test
         run: bunx nx affected --target=test --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
@@ -107,7 +102,6 @@ jobs:
           bun-version: latest
       - name: Install
         run: bun install
-      - run: bunx nx-cloud start-ci-run
       - name: Lint
         run: bunx nx affected --target=lint --base=deployed/marmicode-next
       - name: Upload dist (Cypress videos / build output etc...) on failure
@@ -141,7 +135,6 @@ jobs:
           bun-version: latest
       - name: Install
         run: bun install
-      - run: bunx nx-cloud start-ci-run
       - name: Component Test
         run: >-
           bunx nx affected --target=component-test --parallel 1
@@ -177,7 +170,6 @@ jobs:
           bun-version: latest
       - name: Install
         run: bun install
-      - run: bunx nx-cloud start-ci-run
       - name: Install Playwright Browsers
         run: bunx playwright install --with-deps
       - name: E2E
@@ -225,54 +217,12 @@ jobs:
         with:
           name: dist
           path: dist
-  nx-agents:
-    name: 🤖 Agents
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    strategy:
-      matrix:
-        agent:
-          - 1
-          - 2
-          - 3
-          - 4
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/Cypress
-            .angular
-            libs/*/.angular
-            node_modules/.cache
-          key: cache-${{ github.run_id }}
-          restore-keys: |
-            cache
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - name: Install
-        run: bun install
-      - name: Start Nx Agent ${{ matrix.agent }}
-        run: bunx nx-cloud start-agent
-      - name: Upload dist (Cypress videos / build output etc...) on failure
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: dist
-          path: dist
   check-snapshots:
     name: 📸 Check Snapshots
     runs-on: ubuntu-latest
     env:
       PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       PERCY_FULL_TOKEN: ${{ secrets.PERCY_FULL_TOKEN }}
-      NX_CLOUD_DISTRIBUTED_EXECUTION: false
     needs:
       - component-test
       - e2e
@@ -300,12 +250,14 @@ jobs:
         run: bun install
       - name: Upload Affected Percy Snapshots
         if: github.ref != 'refs/heads/main'
-        env:
-          NX_CLOUD_DISTRIBUTED_EXECUTION: false
-        run: bunx percy exec --partial -- bun upload-affected-percy-snapshots
+        run: >-
+          bunx percy exec --partial -- bun upload-affected-percy-snapshots
+          --no-agents
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        run: bunx percy exec -- bun nx run-many --target=upload-percy-snapshots
+        run: >-
+          bunx percy exec -- bun nx run-many --target=upload-percy-snapshots
+          --no-agents
       - name: Check Percy Snapshots
         if: github.ref == 'refs/heads/main'
         run: >-
@@ -355,8 +307,7 @@ jobs:
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          NX_CLOUD_DISTRIBUTED_EXECUTION: false
-        run: bunx nx run marmicode:deploy:next
+        run: bunx nx run marmicode:deploy:next --no-agents
       - name: Tag deployed/marmicode-next
         run: git tag -f deployed/marmicode-next
       - name: Push changes
@@ -411,8 +362,7 @@ jobs:
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          NX_CLOUD_DISTRIBUTED_EXECUTION: false
-        run: bunx nx run marmicode:deploy:production
+        run: bunx nx run marmicode:deploy:production --no-agents
       - name: Tag deployed/marmicode
         run: git tag -f deployed/marmicode
       - name: Push changes

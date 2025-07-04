@@ -10,10 +10,6 @@ on:
   # Allow manual trigger.
   workflow_dispatch: {}
 
-env:
-  NX_CLOUD_DISTRIBUTED_EXECUTION: true
-  NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 4
-
 x-steps:
   cache: &cache
     uses: actions/cache@v4
@@ -89,8 +85,6 @@ jobs:
       - *install-bun
       - *bun-install
 
-      - run: bunx nx-cloud start-ci-run
-
       - name: Build
         run: bunx nx affected --target=prerender --configuration next --base=deployed/marmicode-next
 
@@ -105,8 +99,6 @@ jobs:
       - *setup-node
       - *install-bun
       - *bun-install
-
-      - run: bunx nx-cloud start-ci-run
 
       - name: Test
         run: bunx nx affected --target=test --base=deployed/marmicode-next
@@ -123,8 +115,6 @@ jobs:
       - *install-bun
       - *bun-install
 
-      - run: bunx nx-cloud start-ci-run
-
       - name: Lint
         run: bunx nx affected --target=lint --base=deployed/marmicode-next
 
@@ -140,8 +130,6 @@ jobs:
       - *install-bun
       - *bun-install
 
-      - run: bunx nx-cloud start-ci-run
-
       - name: Component Test
         run: bunx nx affected --target=component-test --parallel 1 --base=deployed/marmicode-next
 
@@ -156,8 +144,6 @@ jobs:
       - *setup-node
       - *install-bun
       - *bun-install
-
-      - run: bunx nx-cloud start-ci-run
 
       - name: Install Playwright Browsers
         run: bunx playwright install --with-deps
@@ -182,31 +168,11 @@ jobs:
 
       - *upload-dist-on-failure
 
-  nx-agents:
-    name: 🤖 Agents
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    strategy:
-      matrix:
-        agent: [1, 2, 3, 4]
-    steps:
-      - *checkout
-      - *cache
-      - *setup-node
-      - *install-bun
-      - *bun-install
-
-      - name: Start Nx Agent ${{ matrix.agent }}
-        run: bunx nx-cloud start-agent
-
-      - *upload-dist-on-failure
-
   check-snapshots:
     name: 📸 Check Snapshots
     runs-on: ubuntu-latest
     env:
       <<: *percy-env
-      NX_CLOUD_DISTRIBUTED_EXECUTION: false
     needs:
       - component-test
       - e2e
@@ -220,13 +186,11 @@ jobs:
 
       - name: Upload Affected Percy Snapshots
         if: github.ref != 'refs/heads/main'
-        env:
-          NX_CLOUD_DISTRIBUTED_EXECUTION: false
-        run: bunx percy exec --partial -- bun upload-affected-percy-snapshots
+        run: bunx percy exec --partial -- bun upload-affected-percy-snapshots --no-agents
 
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        run: bunx percy exec -- bun nx run-many --target=upload-percy-snapshots
+        run: bunx percy exec -- bun nx run-many --target=upload-percy-snapshots --no-agents
 
       # Check Percy Review on main branch only.
       # On other branches, we'll let Percy status check do the job.
@@ -258,8 +222,7 @@ jobs:
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          NX_CLOUD_DISTRIBUTED_EXECUTION: false
-        run: bunx nx run marmicode:deploy:next
+        run: bunx nx run marmicode:deploy:next --no-agents
 
       - name: Tag deployed/marmicode-next
         run: git tag -f deployed/marmicode-next
@@ -290,8 +253,7 @@ jobs:
       - name: Deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          NX_CLOUD_DISTRIBUTED_EXECUTION: false
-        run: bunx nx run marmicode:deploy:production
+        run: bunx nx run marmicode:deploy:production --no-agents
 
       - name: Tag deployed/marmicode
         run: git tag -f deployed/marmicode
