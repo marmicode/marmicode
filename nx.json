@@ -22,8 +22,7 @@
     "component-test": {
       "inputs": ["default", "^production"],
       "outputs": ["{projectRoot}/__percy_snapshots__/**/*"],
-      "cache": true,
-      "parallel": 1
+      "cache": true
     },
     "e2e": {
       "inputs": ["default", "^production"],
@@ -48,6 +47,9 @@
     },
     "update-routes": {
       "cache": true
+    },
+    "@nx/cypress:cypress": {
+      "parallel": 1
     },
     "@nx/jest:jest": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
