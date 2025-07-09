@@ -30,7 +30,6 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
       [routerLink]="workshopRouterHelper.detail(workshop().id)"
       class="card"
       role="article"
-      style="width: min(500px, 90vw); overflow: hidden;"
     >
       <img
         [src]="workshop().thumbnailUri"
