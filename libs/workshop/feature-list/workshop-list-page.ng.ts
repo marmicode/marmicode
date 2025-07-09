@@ -1,11 +1,5 @@
-import { CommonModule, CurrencyPipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,18 +7,7 @@ import { RouterModule } from '@angular/router';
 import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 import { createBasicPageInfo, PageComponent } from '@marmicode/shared/ui';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
-import { workshopViewTransitionName } from '@marmicode/workshop/ui';
-
-const LANGUAGES = [
-  { label: '🇬🇧 English', value: 'en' },
-  { label: '🇫🇷 French', value: 'fr' },
-];
-
-const TAGS = [
-  { label: 'Angular', value: 'angular' },
-  { label: 'Testing', value: 'testing' },
-  { label: 'All', value: null },
-];
+import { WorkshopPreview } from '@marmicode/workshop/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,7 +19,7 @@ const TAGS = [
     MatIconModule,
     RouterModule,
     PageComponent,
-    CurrencyPipe,
+    WorkshopPreview,
   ],
   template: `
     <mc-page [info]="pageInfo">
@@ -46,63 +29,8 @@ const TAGS = [
         <div
           style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: stretch; justify-content: center;"
         >
-          @for (item of workshops(); track item.workshop.id) {
-            @let workshop = item.workshop;
-            @let transitionName = item.transitionName;
-
-            <mat-card
-              [routerLink]="workshopRouterHelper.detail(workshop.id)"
-              class="card"
-              role="article"
-              style="width: min(500px, 90vw); overflow: hidden;"
-            >
-              <img
-                [src]="workshop.thumbnailUri"
-                alt="workshop image"
-                style="width: 100%; height: 250px; object-fit: cover; margin-bottom: 1rem;"
-                [style.view-transition-name]="transitionName"
-              />
-              <mat-card-content>
-                <h3
-                  style="font-weight: 700; font-size: 24px; color: #111827; line-height: 1.4; margin-bottom: 0.5em;"
-                >
-                  {{ workshop.title }}
-                </h3>
-                <div
-                  style="margin-bottom: 0.7em; font-size: 1.1em; color: #444;"
-                >
-                  {{ workshop.subheading }}
-                </div>
-                <div
-                  style="display: flex; gap: 2em; justify-content: center; align-items: center; margin-bottom: 0.7em; font-size: 1.1em; color: var(--marmicode-accent-color); font-weight: 500; border-radius: 12px; padding: 0.4em 1em;"
-                >
-                  <span style="display: flex; align-items: center; gap: 0.5em;">
-                    <mat-icon>schedule</mat-icon>
-                    <ng-container [ngPlural]="workshop.duration">
-                      <ng-template ngPluralCase="=1">1 Day</ng-template>
-                      <ng-template ngPluralCase="other">
-                        {{ workshop.duration }} Days
-                      </ng-template>
-                    </ng-container>
-                  </span>
-                  <span style="display: flex; align-items: center; gap: 0.5em;">
-                    From
-                    {{
-                      workshop.offer.price
-                        | currency: 'EUR' : 'symbol' : '1.0-0'
-                    }}
-                  </span>
-                </div>
-                <div style="text-align: center;">
-                  <a
-                    [routerLink]="workshopRouterHelper.detail(workshop.id)"
-                    mat-button
-                    color="primary"
-                    >VIEW DETAILS</a
-                  >
-                </div>
-              </mat-card-content>
-            </mat-card>
+          @for (workshop of workshops; track workshop.id) {
+            <mc-workshop-preview [workshop]="workshop" />
           }
         </div>
         <mat-card
@@ -145,23 +73,6 @@ export class WorkshopListPage {
   pageInfo = createBasicPageInfo({
     title: 'Workshops',
   });
-  tags = TAGS;
-  languages = LANGUAGES;
-  nonNullTags = TAGS.filter((tag) => tag.value !== null);
-  selectedTag = signal<string | null>(null);
-  workshops = computed(() =>
-    this._repo.getWorkshops().map((workshop) => ({
-      workshop,
-      transitionName: workshopViewTransitionName(workshop),
-    })),
-  );
+  workshops = inject(WorkshopRepository).getWorkshops();
   workshopRouterHelper = workshopRouterHelper;
-
-  private _repo = inject(WorkshopRepository);
-
-  selectTag(tag: string, event: MouseEvent) {
-    event.stopPropagation();
-
-    this.selectedTag.set(tag);
-  }
 }
