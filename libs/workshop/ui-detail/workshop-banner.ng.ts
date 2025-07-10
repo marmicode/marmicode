@@ -13,16 +13,16 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { FixedBackground } from './internal/fixed-background.ng';
 import { Workshop } from '@marmicode/workshop/core';
 import { WaitlistUrlBuilder } from './internal/waitlist-url-builder';
+import { Hero } from '@marmicode/shared/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-banner',
   imports: [
     CurrencyPipe,
-    FixedBackground,
+    Hero,
     MatButtonModule,
     MatIconModule,
     NgPlural,
@@ -30,10 +30,8 @@ import { WaitlistUrlBuilder } from './internal/waitlist-url-builder';
     TitleCasePipe,
   ],
   template: `
-    <mc-fixed-background [pictureUri]="workshop().pictureUri" />
-    <div class="content">
-      <h1 class="title">{{ workshop().title }}</h1>
-      <h2 class="subtitle">
+    <mc-hero [pictureUri]="workshop().pictureUri" [title]="workshop().title">
+      <ng-content slot="subtitle">
         <span>{{ workshopType() }}</span>
         <span> · </span>
         <span [ngPlural]="workshop().duration">
@@ -45,58 +43,45 @@ import { WaitlistUrlBuilder } from './internal/waitlist-url-builder';
         <span> Workshop</span>
         <span> · </span>
         <span>{{ workshop().location | titlecase }}</span>
-      </h2>
-      <p class="badge">
-        {{ offerType() }} Starts at
-        {{ workshop().offer.price | currency: 'EUR' : true : '1.0-0' }}
-      </p>
-      <p class="subheading">
-        @for (line of subheadingLines(); track line) {
-          <span>{{ line }}</span>
-        }
-      </p>
-      <div class="email-and-spots">
-        <div class="email-form">
-          <!-- TODO: Re-enable input when the backend is ready. -->
-          <!-- <input type="email" placeholder="Drop your email here" /> -->
-          <a
-            [href]="waitlistMailtoUrl()"
-            mat-button
-            color="accent"
-            target="_blank"
-          >
-            <mat-icon>notifications</mat-icon>
-            JOIN THE WAITLIST
-          </a>
-        </div>
-        <p class="spots">
-          Only 20 spots available. Be the first to know when registration opens.
+      </ng-content>
+
+      <ng-content slot="content">
+        <p class="badge">
+          {{ offerType() }} Starts at
+          {{ workshop().offer.price | currency: 'EUR' : true : '1.0-0' }}
         </p>
-      </div>
-      <mat-icon class="down-arrow">keyboard_arrow_down</mat-icon>
-    </div>
+        <p class="subheading">
+          @for (line of subheadingLines(); track line) {
+            <span>{{ line }}</span>
+          }
+        </p>
+        <div class="email-and-spots">
+          <div class="email-form">
+            <!-- TODO: Re-enable input when the backend is ready. -->
+            <!-- <input type="email" placeholder="Drop your email here" /> -->
+            <a
+              [href]="waitlistMailtoUrl()"
+              mat-button
+              color="accent"
+              target="_blank"
+            >
+              <mat-icon>notifications</mat-icon>
+              JOIN THE WAITLIST
+            </a>
+          </div>
+          <p class="spots">
+            Only 20 spots available. Be the first to know when registration
+            opens.
+          </p>
+        </div>
+      </ng-content>
+    </mc-hero>
   `,
   styles: `
     :host {
       display: block;
       position: relative;
       font-size: 1rem;
-    }
-
-    .content {
-      display: flex;
-      position: relative;
-      min-height: calc(100vh - 64px);
-      padding-top: 2rem;
-
-      flex-direction: column;
-      align-items: center;
-      justify-content: end;
-
-      color: white;
-      text-align: center;
-
-      animation: fadeScaleIn 0.3s ease-out forwards;
     }
 
     .badge {
@@ -108,21 +93,6 @@ import { WaitlistUrlBuilder } from './internal/waitlist-url-builder';
       background: rgba(56, 0, 48, 0.6);
       font-size: 1.3em;
       box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .title,
-    .subtitle {
-      font-weight: bold;
-      line-height: 1;
-      text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .title {
-      font-size: 3em;
-    }
-
-    .subtitle {
-      font-size: 1.5em;
     }
 
     .subheading {
@@ -181,12 +151,6 @@ import { WaitlistUrlBuilder } from './internal/waitlist-url-builder';
       font-style: italic;
     }
 
-    .down-arrow {
-      animation: bounce 2s infinite;
-      bottom: 1rem;
-      margin: 0 0 3rem 0;
-    }
-
     @media (max-width: 599.98px) {
       :host {
         font-size: 0.75rem;
@@ -199,62 +163,30 @@ import { WaitlistUrlBuilder } from './internal/waitlist-url-builder';
         margin: 0 10px;
       }
     }
-
-    @keyframes fadeScaleIn {
-      from {
-        opacity: 0;
-        transform: scale(0);
-      }
-      50% {
-        opacity: 0;
-        transform: scale(0);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes bounce {
-      0%,
-      20%,
-      50%,
-      80%,
-      100% {
-        transform: translateY(0);
-      }
-      40% {
-        transform: translateY(-20px);
-      }
-      60% {
-        transform: translateY(-10px);
-      }
-    }
   `,
 })
 export class WorkshopBanner {
   workshop = input.required<Workshop>();
+
   private _waitlistUrlBuilder = inject(WaitlistUrlBuilder);
 
-  protected subtitle = computed(() => {
+  subtitle = computed(() => {
     const duration = this.workshop().duration;
     const typeStr =
       this.workshop().type === 'tapas' ? '🫒 Tapas Session' : '🍽️ Full Course';
     const durationStr = duration === 1 ? '1-Day' : `${duration}-Days`;
     return `${typeStr} · ${durationStr} Workshop · ${this.workshop().location}`;
   });
-  protected workshopType = computed(() => {
+  workshopType = computed(() => {
     return this.workshop().type === 'tapas'
       ? '🫒 Tapas Session'
       : '🍽️ Full Course';
   });
-  protected offerType = computed(() => {
+  offerType = computed(() => {
     const offer = this.workshop().offer;
     return offer.type === 'early-bird' ? '🐣 Early Bird' : '⏰ Last Minute';
   });
-  protected subheadingLines = computed(() =>
-    this.workshop().subheading.split('\n'),
-  );
+  subheadingLines = computed(() => this.workshop().subheading.split('\n'));
   waitlistMailtoUrl = computed(() =>
     this._waitlistUrlBuilder.generateWaitlistUrl(this.workshop()),
   );
