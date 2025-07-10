@@ -60,6 +60,12 @@ export const routes: Routes = [
     loadComponent: () => import('@marmicode/workshop/feature-list'),
   },
 
+  /* Landing page. */
+  {
+    path: 'landing',
+    loadComponent: () => import('@marmicode/landing/feature-landing'),
+  },
+
   /* / redirect. */
   {
     path: '',
