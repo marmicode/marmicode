@@ -19,7 +19,7 @@ import { Hero } from '@marmicode/shared/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-workshop-banner',
+  selector: 'mc-workshop-hero',
   imports: [
     CurrencyPipe,
     Hero,
@@ -165,7 +165,7 @@ import { Hero } from '@marmicode/shared/ui';
     }
   `,
 })
-export class WorkshopBanner {
+export class WorkshopHero {
   workshop = input.required<Workshop>();
 
   private _waitlistUrlBuilder = inject(WaitlistUrlBuilder);

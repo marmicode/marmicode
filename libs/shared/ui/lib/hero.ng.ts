@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
 import { FixedBackground } from './fixed-background.ng';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -6,20 +11,23 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-hero',
   template: ` <mc-fixed-background [pictureUri]="pictureUri()" />
-    <div class="content">
+    <div class="content" [class.full-height]="isFullHeight()">
       <h1 class="title">{{ title() }}</h1>
       <h2 class="subtitle">
         <ng-content select="[slot='subtitle']" />
       </h2>
       <ng-content select="[slot='content']" />
-      <mat-icon class="down-arrow">keyboard_arrow_down</mat-icon>
+
+      @if (isFullHeight()) {
+        <mat-icon class="down-arrow">keyboard_arrow_down</mat-icon>
+      }
     </div>`,
   imports: [FixedBackground, MatIconModule],
   styles: `
     .content {
       display: flex;
       position: relative;
-      min-height: calc(100vh - 64px);
+      min-height: 50vh;
       padding-top: 2rem;
 
       flex-direction: column;
@@ -30,6 +38,10 @@ import { MatIconModule } from '@angular/material/icon';
       text-align: center;
 
       animation: fadeScaleIn 0.3s ease-out forwards;
+    }
+
+    .content.full-height {
+      min-height: calc(100vh - 64px);
     }
 
     .title,
@@ -87,4 +99,6 @@ import { MatIconModule } from '@angular/material/icon';
 export class Hero {
   pictureUri = input.required<string>();
   title = input.required<string>();
+  size = input<'full-height' | 'half-height'>('full-height');
+  isFullHeight = computed(() => this.size() === 'full-height');
 }
