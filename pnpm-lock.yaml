@@ -78,8 +78,8 @@ importers:
         specifier: 3.2.5
         version: 3.2.5(rxjs@7.8.2)
       '@jscutlery/rx-computed':
-        specifier: 0.7.1
-        version: 0.7.1(@angular/core@19.2.3(rxjs@7.8.2)(zone.js@0.15.1))(@jscutlery/operators@3.2.5(rxjs@7.8.2))
+        specifier: 0.7.5
+        version: 0.7.5(@angular/core@19.2.3(rxjs@7.8.2)(zone.js@0.15.1))(@jscutlery/operators@3.2.5(rxjs@7.8.2))
       '@ngneat/until-destroy':
         specifier: ^10.0.0
         version: 10.0.0(@angular/core@19.2.3(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
@@ -3102,8 +3102,8 @@ packages:
     peerDependencies:
       rxjs: '>=6.0.0'
 
-  '@jscutlery/rx-computed@0.7.1':
-    resolution: {integrity: sha512-wOtZeUOfA3O7ulQqFnAaf668rNDY1HOsccVyGRY9FDHTpP4zOXUQqUyCD66Jfgx3wvzd7EUn8YAO+BP3+kStuQ==}
+  '@jscutlery/rx-computed@0.7.5':
+    resolution: {integrity: sha512-EUbsY0j7l/nBTlbr+C04VrUgOYM3/UgJaVJhnkU8gPqPVqaiodObDcM62dH2aSKzAOFuco0kOUfzzgjNzzXIew==}
     peerDependencies:
       '@angular/core': '>=16.0.0 <20.0.0'
       '@jscutlery/operators': ^2.0.0
@@ -17313,7 +17313,7 @@ snapshots:
       import-from: 3.0.0
       is-glob: 4.0.1
       p-limit: 3.0.2
-      tslib: 2.0.2
+      tslib: 2.0.3
       unixify: 1.0.0
       valid-url: 1.0.9
 
@@ -17326,7 +17326,7 @@ snapshots:
       import-from: 3.0.0
       is-glob: 4.0.1
       p-limit: 3.0.2
-      tslib: 2.0.2
+      tslib: 2.0.3
       unixify: 1.0.0
       valid-url: 1.0.9
 
@@ -18004,7 +18004,7 @@ snapshots:
     dependencies:
       rxjs: 7.8.2
 
-  '@jscutlery/rx-computed@0.7.1(@angular/core@19.2.3(rxjs@7.8.2)(zone.js@0.15.1))(@jscutlery/operators@3.2.5(rxjs@7.8.2))':
+  '@jscutlery/rx-computed@0.7.5(@angular/core@19.2.3(rxjs@7.8.2)(zone.js@0.15.1))(@jscutlery/operators@3.2.5(rxjs@7.8.2))':
     dependencies:
       '@angular/core': 19.2.3(rxjs@7.8.2)(zone.js@0.15.1)
       '@jscutlery/operators': 3.2.5(rxjs@7.8.2)
