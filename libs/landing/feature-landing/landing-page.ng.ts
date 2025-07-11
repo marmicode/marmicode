@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { createBasicPageInfo, PageComponent } from '@marmicode/shared/ui';
+import { createBasicPageInfo, Hero, PageComponent } from '@marmicode/shared/ui';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,29 +7,24 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-landing-page',
-  imports: [PageComponent, MatButtonModule, MatCardModule, MatIconModule],
+  imports: [PageComponent, MatButtonModule, MatCardModule, MatIconModule, Hero],
   template: `
     <mc-page [info]="pageInfo">
-      <!-- Hero Section -->
-      <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-content">
-          <h1 class="hero-title">Turn Code Into Cuisine</h1>
-          <p class="hero-subtitle">
+      <mc-hero
+        [pictureUri]="
+          'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80'
+        "
+        contentPosition="middle"
+        size="half-height"
+        title="Turn Code Into Cuisine"
+      >
+        <ng-content slot="content">
+          <h2>
             Workshops, coaching, and recipes for devs who want to ship with
             confidence — and taste.
-          </p>
-          <button
-            mat-raised-button
-            color="primary"
-            class="hero-cta"
-            (click)="openMenu()"
-          >
-            <mat-icon>restaurant_menu</mat-icon>
-            Explore the Menu
-          </button>
-        </div>
-      </section>
+          </h2>
+        </ng-content>
+      </mc-hero>
 
       <!-- About the Cook Section -->
       <section class="about">

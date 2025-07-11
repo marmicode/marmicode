@@ -11,7 +11,11 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-hero',
   template: ` <mc-fixed-background [pictureUri]="pictureUri()" />
-    <div class="content" [class.full-height]="isFullHeight()">
+    <div
+      class="content"
+      [class.full-height]="isFullHeight()"
+      [class.middle]="isContentMiddle()"
+    >
       <h1 class="title">{{ title() }}</h1>
       <h2 class="subtitle">
         <ng-content select="[slot='subtitle']" />
@@ -24,6 +28,10 @@ import { MatIconModule } from '@angular/material/icon';
     </div>`,
   imports: [FixedBackground, MatIconModule],
   styles: `
+    :host {
+      position: relative;
+    }
+
     .content {
       display: flex;
       position: relative;
@@ -38,6 +46,10 @@ import { MatIconModule } from '@angular/material/icon';
       text-align: center;
 
       animation: fadeScaleIn 0.3s ease-out forwards;
+    }
+
+    .content.middle {
+      justify-content: center;
     }
 
     .content.full-height {
@@ -100,5 +112,8 @@ export class Hero {
   pictureUri = input.required<string>();
   title = input.required<string>();
   size = input<'full-height' | 'half-height'>('full-height');
+  contentPosition = input<'middle' | 'bottom'>('bottom');
+
+  isContentMiddle = computed(() => this.contentPosition() === 'middle');
   isFullHeight = computed(() => this.size() === 'full-height');
 }
