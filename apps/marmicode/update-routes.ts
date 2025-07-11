@@ -72,7 +72,7 @@ async function _getWorkshopRoutes() {
   const files = await readdir('libs/workshop/infra/workshops');
   return files
     .filter((file) => file.endsWith('.ts'))
-    .map((workshop) => `/workshop/${workshop.replace('.ts', '')}`);
+    .map((workshop) => `/workshops/${workshop.replace('.ts', '')}`);
 }
 
 async function _querySlugs(params: {
