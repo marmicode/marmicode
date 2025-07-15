@@ -1,12 +1,12 @@
 import { Component, input } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Agenda } from '@marmicode/workshop/core';
-import { LandingSection } from '@marmicode/shared/ui';
+import { PageSection } from '@marmicode/shared/ui';
 @Component({
   selector: 'mc-workshop-agenda',
-  imports: [MatExpansionModule, LandingSection],
+  imports: [MatExpansionModule, PageSection],
   template: `
-    <mc-landing-section title="🗓️ Agenda">
+    <mc-page-section title="🗓️ Agenda">
       <mat-accordion>
         @for (section of agenda().sections; track section) {
           @let isEmpty = section.items.length === 0;
@@ -24,7 +24,7 @@ import { LandingSection } from '@marmicode/shared/ui';
           </mat-expansion-panel>
         }
       </mat-accordion>
-    </mc-landing-section>
+    </mc-page-section>
   `,
   styles: `
     @use '@angular/material' as mat;

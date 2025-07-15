@@ -34,7 +34,7 @@ import { LandingSection } from '@marmicode/shared/ui';
         </ng-content>
       </mc-hero>
 
-      <mc-landing-section title="About the Cook" color="surface">
+      <mc-page-section title="About the Cook" color="surface">
         <div class="about-content">
           <img
             class="about-img"
@@ -58,10 +58,10 @@ import { LandingSection } from '@marmicode/shared/ui';
             </button>
           </div>
         </div>
-      </mc-landing-section>
+      </mc-page-section>
 
       <!-- The Menu Section -->
-      <mc-landing-section title="THe Menu" color="plain">
+      <mc-page-section title="THe Menu" color="plain">
         <div class="menu-columns">
           <div class="menu-col">
             <mat-icon class="menu-icon">menu_book</mat-icon>
@@ -134,9 +134,9 @@ import { LandingSection } from '@marmicode/shared/ui';
             </button>
           </div>
         </div>
-      </mc-landing-section>
+      </mc-page-section>
 
-      <mc-landing-section color="surface" title="Upcoming Events">
+      <mc-page-section color="surface" title="Upcoming Events">
         <div class="events-cards">
           <mat-card class="event-card">
             <div class="event-header">
@@ -191,7 +191,7 @@ import { LandingSection } from '@marmicode/shared/ui';
             </button>
           </mat-card>
         </div>
-      </mc-landing-section>
+      </mc-page-section>
     </mc-page>
   `,
   styles: [

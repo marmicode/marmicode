@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { LandingSection } from '@marmicode/shared/ui';
+import { PageSection } from '@marmicode/shared/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   selector: 'mc-workshop-required-skills',
-  imports: [LandingSection, MatIconModule],
+  imports: [PageSection, MatIconModule],
   template: `
-    <mc-landing-section title="🎓 Required Knowledge">
+    <mc-page-section title="🎓 Required Knowledge">
       <ul>
         @for (skill of skills(); track skill) {
           <li>
@@ -17,7 +17,7 @@ import { LandingSection } from '@marmicode/shared/ui';
           </li>
         }
       </ul>
-    </mc-landing-section>
+    </mc-page-section>
   `,
   styles: `
     @use '@angular/material' as mat;

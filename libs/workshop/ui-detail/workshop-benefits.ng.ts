@@ -1,20 +1,20 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { WorkshopBenefitCard } from './workshop-benefits-card.ng';
-import { LandingSection } from '@marmicode/shared/ui';
+import { PageSection } from '@marmicode/shared/ui';
 import { Benefit } from '@marmicode/workshop/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-benefits',
-  imports: [WorkshopBenefitCard, LandingSection],
+  imports: [WorkshopBenefitCard, PageSection],
   template: `
-    <mc-landing-section title="🍱 What you'll learn" color="surface">
+    <mc-page-section title="🍱 What you'll learn" color="surface">
       <div class="benefits">
         @for (benefit of benefits(); track benefit) {
           <mc-workshop-benefit-card [benefit]="benefit" />
         }
       </div>
-    </mc-landing-section>
+    </mc-page-section>
   `,
   styles: `
     .benefits {

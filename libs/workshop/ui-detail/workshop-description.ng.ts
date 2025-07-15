@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MarkdownBlockComponent } from '@marmicode/block/ui';
-import { LandingSection } from '@marmicode/shared/ui';
+import { PageSection } from '@marmicode/shared/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-description',
-  imports: [LandingSection, MarkdownBlockComponent],
+  imports: [PageSection, MarkdownBlockComponent],
   template: `
-    <mc-landing-section color="surface">
+    <mc-page-section color="surface">
       <mc-markdown-block [block]="description()" class="content" />
-    </mc-landing-section>
+    </mc-page-section>
   `,
   styles: `
     .content {

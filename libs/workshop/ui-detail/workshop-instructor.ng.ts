@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { LandingSection } from '@marmicode/shared/ui';
+import { PageSection } from '@marmicode/shared/ui';
 import instructorPictureUri from './workshop-instructor.webp';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   selector: 'mc-workshop-instructor',
-  imports: [MatCardModule, LandingSection],
+  imports: [MatCardModule, PageSection],
   template: `
-    <mc-landing-section title="👨🏻‍🏫 Your Instructor" color="surface">
+    <mc-page-section title="👨🏻‍🏫 Your Instructor" color="surface">
       <mat-card class="card">
         <img
           [src]="instructorPictureUri"
@@ -35,7 +35,7 @@ import instructorPictureUri from './workshop-instructor.webp';
           </p>
         </mat-card-content>
       </mat-card>
-    </mc-landing-section>
+    </mc-page-section>
   `,
   styles: `
     .card {
