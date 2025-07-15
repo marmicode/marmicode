@@ -14,3 +14,4 @@ export { SuspenseComponent, SuspenseModule } from './lib/suspense.component';
 export { TriangleComponent, TriangleModule } from './lib/triangle.component';
 export { FixedBackground } from './lib/fixed-background.ng';
 export { Hero } from './lib/hero.ng';
+export { LandingSection } from './lib/landing-section.ng';

@@ -3,11 +3,19 @@ import { createBasicPageInfo, Hero, PageComponent } from '@marmicode/shared/ui';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { LandingSection } from '@marmicode/shared/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-landing-page',
-  imports: [PageComponent, MatButtonModule, MatCardModule, MatIconModule, Hero],
+  imports: [
+    PageComponent,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    Hero,
+    LandingSection,
+  ],
   template: `
     <mc-page [info]="pageInfo">
       <mc-hero
@@ -26,9 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
         </ng-content>
       </mc-hero>
 
-      <!-- About the Cook Section -->
-      <section class="about">
-        <h2 class="section-title">About the Cook</h2>
+      <mc-landing-section title="About the Cook" color="surface">
         <div class="about-content">
           <img
             class="about-img"
@@ -52,11 +58,10 @@ import { MatIconModule } from '@angular/material/icon';
             </button>
           </div>
         </div>
-      </section>
+      </mc-landing-section>
 
       <!-- The Menu Section -->
-      <section class="menu">
-        <h2 class="section-title">The Menu</h2>
+      <mc-landing-section title="THe Menu" color="plain">
         <div class="menu-columns">
           <div class="menu-col">
             <mat-icon class="menu-icon">menu_book</mat-icon>
@@ -129,11 +134,9 @@ import { MatIconModule } from '@angular/material/icon';
             </button>
           </div>
         </div>
-      </section>
+      </mc-landing-section>
 
-      <!-- Upcoming Events Section -->
-      <section class="events">
-        <h2 class="section-title">Upcoming Events</h2>
+      <mc-landing-section color="surface" title="Upcoming Events">
         <div class="events-cards">
           <mat-card class="event-card">
             <div class="event-header">
@@ -188,7 +191,7 @@ import { MatIconModule } from '@angular/material/icon';
             </button>
           </mat-card>
         </div>
-      </section>
+      </mc-landing-section>
     </mc-page>
   `,
   styles: [

@@ -7,7 +7,7 @@ import {
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-workshop-section',
+  selector: 'mc-landing-section',
   template: `
     <section [class.surface]="color() === 'surface'">
       <h2>{{ title() }}</h2>
@@ -55,7 +55,7 @@ import {
     '[style.--mc-workshop-section-background-color]': 'realColor()',
   },
 })
-export class WorkshopSection {
+export class LandingSection {
   title = input<string>();
   color = input<'surface' | 'plain'>('plain');
 

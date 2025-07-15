@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Workshop } from '@marmicode/workshop/core';
 import { WaitlistUrlBuilder } from './internal/waitlist-url-builder';
 import { WorkshopCard } from './internal/workshop-card.ng';
-import { WorkshopSection } from './internal/workshop-section.ng';
+import { LandingSection } from '@marmicode/shared/ui';
 
 @Component({
   selector: 'mc-workshop-sessions',
@@ -23,10 +23,10 @@ import { WorkshopSection } from './internal/workshop-section.ng';
     MatCardModule,
     MatIconModule,
     WorkshopCard,
-    WorkshopSection,
+    LandingSection,
   ],
   template: `
-    <mc-workshop-section title="🗓️ Upcoming Sessions">
+    <mc-landing-section title="🗓️ Upcoming Sessions">
       <div class="sessions">
         @for (session of sessionsWithMailtoUrl(); track session.date) {
           <mc-workshop-card>
@@ -50,7 +50,7 @@ import { WorkshopSection } from './internal/workshop-section.ng';
           </mc-workshop-card>
         }
       </div>
-    </mc-workshop-section>
+    </mc-landing-section>
   `,
   styles: `
     .sessions {
