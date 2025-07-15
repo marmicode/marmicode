@@ -26,7 +26,7 @@ import { PageSection } from '@marmicode/shared/ui';
     PageSection,
   ],
   template: `
-    <mc-page-section title="🗓️ Upcoming Sessions">
+    <mc-page-section pageTitle="🗓️ Upcoming Sessions">
       <div class="sessions">
         @for (session of sessionsWithMailtoUrl(); track session.date) {
           <mc-workshop-card>

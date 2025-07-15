@@ -8,7 +8,7 @@ import { Benefit } from '@marmicode/workshop/core';
   selector: 'mc-workshop-benefits',
   imports: [WorkshopBenefitCard, PageSection],
   template: `
-    <mc-page-section title="🍱 What you'll learn" color="surface">
+    <mc-page-section pageTitle="🍱 What you'll learn" color="surface">
       <div class="benefits">
         @for (benefit of benefits(); track benefit) {
           <mc-workshop-benefit-card [benefit]="benefit" />

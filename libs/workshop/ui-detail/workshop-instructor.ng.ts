@@ -6,7 +6,7 @@ import { CookCard, PageSection } from '@marmicode/shared/ui';
   selector: 'mc-workshop-instructor',
   imports: [PageSection, CookCard],
   template: `
-    <mc-page-section title="👨🏻‍🏫 Your Instructor" color="surface">
+    <mc-page-section pageTitle="👨🏻‍🏫 Your Instructor" color="surface">
       <mc-cook-card />
     </mc-page-section>
   `,

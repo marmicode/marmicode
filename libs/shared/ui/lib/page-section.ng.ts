@@ -10,7 +10,7 @@ import {
   selector: 'mc-page-section',
   template: `
     <section [class.surface]="color() === 'surface'">
-      <h2>{{ title() }}</h2>
+      <h2>{{ pageTitle() }}</h2>
       <ng-content />
     </section>
   `,
@@ -56,7 +56,7 @@ import {
   },
 })
 export class PageSection {
-  title = input<string>();
+  pageTitle = input<string>();
   color = input<'surface' | 'plain'>('plain');
 
   protected realColor = computed(() =>

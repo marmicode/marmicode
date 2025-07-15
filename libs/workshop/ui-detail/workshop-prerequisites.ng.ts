@@ -8,7 +8,7 @@ import { PageSection } from '@marmicode/shared/ui';
   selector: 'mc-workshop-required-skills',
   imports: [PageSection, MatIconModule],
   template: `
-    <mc-page-section title="🎓 Required Knowledge">
+    <mc-page-section pageTitle="🎓 Required Knowledge">
       <ul>
         @for (skill of skills(); track skill) {
           <li>

@@ -6,7 +6,7 @@ import { PageSection } from '@marmicode/shared/ui';
   selector: 'mc-workshop-agenda',
   imports: [MatExpansionModule, PageSection],
   template: `
-    <mc-page-section title="🗓️ Agenda">
+    <mc-page-section pageTitle="🗓️ Agenda">
       <mat-accordion>
         @for (section of agenda().sections; track section) {
           @let isEmpty = section.items.length === 0;
