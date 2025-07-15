@@ -24,7 +24,6 @@ import { Benefit } from '@marmicode/workshop/core';
       align-items: center;
       justify-content: center;
       gap: 2rem;
-      padding: 2rem 0;
     }
   `,
 })

@@ -39,7 +39,8 @@ import {
           </h2>
         </ng-content>
       </mc-hero>
-      <mc-page-section pageTitle="THe Menu" color="plain">
+
+      <mc-page-section pageTitle="The Menu" color="plain">
         <div class="menu-columns">
           <div class="menu-col">
             <mat-icon class="menu-icon">menu_book</mat-icon>
@@ -123,7 +124,7 @@ import {
         </div>
       </mc-page-section>
 
-      <mc-page-section color="surface" pageTitle="Upcoming Events">
+      <mc-page-section pageTitle="Upcoming Events" color="surface">
         <div class="events-cards">
           <mat-card class="event-card">
             <div class="event-header">
