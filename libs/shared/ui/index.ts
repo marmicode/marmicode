@@ -1,3 +1,4 @@
+export { CookCard } from './lib/cook-card.ng';
 export { ErrorComponent, ErrorModule } from './lib/error.component';
 export { LinkComponent, LinkModule } from './lib/link.component';
 export { LoadingComponent, LoadingModule } from './lib/loading.component';
