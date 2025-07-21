@@ -141,7 +141,7 @@
     "@vitest/ui": "^3.0.0",
     "bluebird": "3.7.2",
     "browser-sync": "^3.0.0",
-    "cypress": "14.3.2",
+    "cypress": "14.5.2",
     "cypress-pipe": "^2.0.0",
     "dotenv": "16.5.0",
     "eslint": "8.57.1",
