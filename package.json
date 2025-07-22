@@ -143,7 +143,7 @@
     "browser-sync": "^3.0.0",
     "cypress": "14.5.2",
     "cypress-pipe": "^2.0.0",
-    "dotenv": "16.5.0",
+    "dotenv": "16.6.1",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-cypress": "4.3.0",
