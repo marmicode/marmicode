@@ -28,6 +28,9 @@
       ],
       "@marmicode/blog-post/ui": ["libs/blog-post/ui/src/index.ts"],
       "@marmicode/contentful/infra": ["libs/contentful/infra/index.ts"],
+      "@marmicode/landing/feature-landing": [
+        "libs/landing/feature-landing/index.ts"
+      ],
       "@marmicode/learning-map/feature-tree": [
         "libs/learning-map/feature-tree/index.ts"
       ],
