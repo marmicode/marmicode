@@ -14,6 +14,7 @@ export interface Workshop {
   subheading: string;
 
   pictureUri: string;
+  thumbnailUri: string;
 
   /**
    * Workshop duration in days.

@@ -1,0 +1,14 @@
+onlyBuiltDependencies:
+  - '@firebase/util'
+  - '@parcel/watcher'
+  - '@percy/core'
+  - '@swc/core'
+  - core-js
+  - cypress
+  - esbuild
+  - fsevents
+  - lmdb
+  - msgpackr-extract
+  - nx
+  - protobufjs
+  - re2
