@@ -45,11 +45,11 @@ import { MatIconModule } from '@angular/material/icon';
     }
 
     .icon-container {
-      background-color: rgba(121, 34, 108, 0.3);
-      width: 50px;
-      height: 50px;
+      width: 70px;
+      height: 70px;
       border-radius: 12px;
       margin-bottom: 0.5rem;
+      border: 1px solid #e3cff0;
 
       display: flex;
       align-items: center;
@@ -58,7 +58,7 @@ import { MatIconModule } from '@angular/material/icon';
 
     .icon {
       margin: auto;
-      transform: scale(1.2);
+      transform: scale(2.3);
     }
 
     h3 {
