@@ -43,6 +43,7 @@ import { Card, LinkComponent, PageSection } from '@marmicode/shared/ui';
         display: flex;
         flex-direction: row;
         justify-content: center;
+        flex-wrap: wrap;
         gap: 2.5rem;
       }
 
