@@ -49,7 +49,11 @@ import { MatIconModule } from '@angular/material/icon';
       align-items: center;
       justify-content: center;
 
-      background: linear-gradient(135deg, #6a125dc4 0%, #53e0d9 100%);
+      background: color-mix(
+        in srgb,
+        var(--marmicode-primary-color) 75%,
+        transparent
+      );
 
       padding: 1rem 0;
       margin-bottom: 1rem;
@@ -58,6 +62,8 @@ import { MatIconModule } from '@angular/material/icon';
     .header.has-icon {
       padding: 2rem 0 3rem 0;
       margin-bottom: 45px;
+
+      background: linear-gradient(135deg, #6a125dc4 0%, #53e0d9 100%);
     }
 
     .icon-container {
