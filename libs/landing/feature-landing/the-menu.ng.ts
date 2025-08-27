@@ -10,13 +10,13 @@ import { Card, LinkComponent, PageSection } from '@marmicode/shared/ui';
   template: `
     <mc-page-section pageTitle="🍜 The Menu" color="plain" class="container">
       <div class="container">
-        @for (card of products; track card.title) {
-          <mc-card [icon]="card.icon">
-            <ng-container slot="title">{{ card.title }}</ng-container>
+        @for (product of products; track product.title) {
+          <mc-card [icon]="product.icon">
+            <ng-container slot="title">{{ product.title }}</ng-container>
             <ng-container slot="content">
-              <p>{{ card.description }}</p>
+              <p>{{ product.description }}</p>
               <div class="services">
-                @for (service of card.services; track service) {
+                @for (service of product.services; track service) {
                   <li>
                     <mat-icon>{{ service.icon }}</mat-icon>
                     {{ service.text }}
@@ -26,9 +26,9 @@ import { Card, LinkComponent, PageSection } from '@marmicode/shared/ui';
                   </li>
                 }
               </div>
-              <mc-link [href]="card.href">
+              <mc-link [href]="product.href">
                 <button mat-stroked-button color="primary">
-                  {{ card.buttonText }}
+                  {{ product.buttonText }}
                 </button>
               </mc-link>
             </ng-container>
