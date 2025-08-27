@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'mc-card',
   imports: [MatCardModule, MatIconModule],
   template: ` <mat-card class="card">
-    <div class="title horizontal">
+    <div class="title">
       @if (icon()) {
         <div class="icon-container">
           <mat-icon class="icon" color="primary" [fontIcon]="icon()"></mat-icon>
