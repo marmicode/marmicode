@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'mc-card',
   imports: [MatCardModule, MatIconModule],
   template: ` <mat-card class="card">
-    <mat-card-content class="content">
+    <div class="title horizontal">
       @if (icon()) {
         <div class="icon-container">
           <mat-icon class="icon" color="primary" [fontIcon]="icon()"></mat-icon>
@@ -16,6 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
       <h3>
         <ng-content select="[slot='title']" />
       </h3>
+    </div>
+    <mat-card-content class="content">
       <ng-content select="[slot='content']" />
     </mat-card-content>
   </mat-card>`,
@@ -34,8 +36,15 @@ import { MatIconModule } from '@angular/material/icon';
       }
     }
 
+    .title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
     .icon-container {
-      margin: auto;
       background-color: rgba(121, 34, 108, 0.3);
       width: 50px;
       height: 50px;
@@ -61,6 +70,11 @@ import { MatIconModule } from '@angular/material/icon';
     }
 
     .content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
       font-weight: 400;
       font-size: 1.3em;
       color: #6b7280;
