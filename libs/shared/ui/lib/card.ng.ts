@@ -8,14 +8,15 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [MatCardModule, MatIconModule],
   template: ` <mat-card class="card">
     <div class="title">
+      <div class="box"></div>
+      <h3>
+        <ng-content select="[slot='title']" />
+      </h3>
       @if (icon()) {
         <div class="icon-container">
           <mat-icon class="icon" color="primary" [fontIcon]="icon()"></mat-icon>
         </div>
       }
-      <h3>
-        <ng-content select="[slot='title']" />
-      </h3>
     </div>
     <mat-card-content class="content">
       <ng-content select="[slot='content']" />
@@ -23,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
   </mat-card>`,
   styles: `
     .card {
+      overflow: hidden;
       height: 100%;
       min-height: 150px;
       width: min(500px, 90vw);
@@ -36,6 +38,20 @@ import { MatIconModule } from '@angular/material/icon';
       }
     }
 
+    .box {
+      background: linear-gradient(
+        60deg,
+        #380030,
+        var(--marmicode-accent-color)
+      );
+      opacity: 0.8;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+    }
+
     .title {
       display: flex;
       flex-direction: column;
@@ -47,13 +63,15 @@ import { MatIconModule } from '@angular/material/icon';
     .icon-container {
       width: 70px;
       height: 70px;
-      border-radius: 12px;
+      border-radius: 50%;
       margin-bottom: 0.5rem;
       border: 1px solid #e3cff0;
 
+      background-color: white;
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 1;
     }
 
     .icon {
@@ -64,9 +82,10 @@ import { MatIconModule } from '@angular/material/icon';
     h3 {
       font-weight: 700;
       font-size: 24px;
-      color: #111827;
+      color: white;
       line-height: 1.4;
       margin-bottom: 0.5em;
+      z-index: 1;
     }
 
     .content {
