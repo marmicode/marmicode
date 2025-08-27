@@ -11,8 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Workshop } from '@marmicode/workshop/core';
 import { WaitlistUrlBuilder } from './internal/waitlist-url-builder';
-import { WorkshopCard } from './internal/workshop-card.ng';
-import { PageSection } from '@marmicode/shared/ui';
+import { PageSection, Card } from '@marmicode/shared/ui';
 
 @Component({
   selector: 'mc-workshop-sessions',
@@ -22,14 +21,14 @@ import { PageSection } from '@marmicode/shared/ui';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    WorkshopCard,
+    Card,
     PageSection,
   ],
   template: `
     <mc-page-section pageTitle="🗓️ Upcoming Sessions">
       <div class="sessions">
         @for (session of sessionsWithMailtoUrl(); track session.date) {
-          <mc-workshop-card>
+          <mc-card>
             <ng-container slot="title">
               🗓️ {{ session.date | date: 'fullDate' }}
             </ng-container>
@@ -47,7 +46,7 @@ import { PageSection } from '@marmicode/shared/ui';
                 JOIN THE WAITLIST
               </a>
             </ng-container>
-          </mc-workshop-card>
+          </mc-card>
         }
       </div>
     </mc-page-section>

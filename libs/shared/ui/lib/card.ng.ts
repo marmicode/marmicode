@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-workshop-card',
+  selector: 'mc-card',
   imports: [MatCardModule, MatIconModule],
   template: ` <mat-card class="card">
     <mat-card-content class="content">
@@ -68,6 +68,6 @@ import { MatIconModule } from '@angular/material/icon';
     }
   `,
 })
-export class WorkshopCard {
+export class Card {
   icon = input<string>();
 }
