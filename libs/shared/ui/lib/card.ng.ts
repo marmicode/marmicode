@@ -21,8 +21,9 @@ import { MatIconModule } from '@angular/material/icon';
   </mat-card>`,
   styles: `
     .card {
-      width: min(500px, 90vw);
+      height: 100%;
       min-height: 150px;
+      width: min(500px, 90vw);
       text-align: center;
       transition: box-shadow 0.3s ease-in-out;
 

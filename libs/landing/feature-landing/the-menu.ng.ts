@@ -1,90 +1,102 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { LinkComponent, PageSection } from '@marmicode/shared/ui';
+import { Card, LinkComponent, PageSection } from '@marmicode/shared/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-the-menu',
-  imports: [PageSection, MatButtonModule, MatIconModule, LinkComponent],
+  imports: [PageSection, MatButtonModule, MatIconModule, LinkComponent, Card],
   template: `
     <mc-page-section pageTitle="🍜 The Menu" color="plain">
-      <div class="menu-columns">
-        <div class="menu-col">
-          <mat-icon class="menu-icon">menu_book</mat-icon>
-          <h3>Courses & Cookbooks</h3>
-          <p>Self-paced learning, no fluff, just the sauce.</p>
-          <div class="menu-list">
-            <div class="menu-item">
-              <mat-icon>school</mat-icon>
-              Pragmatic Angular Testing
-              <span class="menu-price">80 €</span>
+      <div class="container">
+        <mc-card icon="menu_book">
+          <ng-container slot="title"> Courses & Cookbooks </ng-container>
+          <ng-container slot="content">
+            <p>Self-paced learning, no fluff, just the sauce.</p>
+            <div class="menu-list">
+              <div class="menu-item">
+                <mat-icon>school</mat-icon>
+                Pragmatic Angular Testing
+                <span class="menu-price">80 €</span>
+              </div>
+              <div class="menu-item">
+                <mat-icon>book</mat-icon>
+                Free Cookbook
+              </div>
             </div>
-            <div class="menu-item">
-              <mat-icon>book</mat-icon>
-              Free Cookbook
+            <mc-link href="https://courses.marmicode.io/">
+              <button mat-button color="primary">
+                View Course
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </mc-link>
+          </ng-container>
+        </mc-card>
+
+        <mc-card icon="event">
+          <ng-container slot="title"> Workshops </ng-container>
+          <ng-container slot="content">
+            <p>Hands on sessions for devs who want level up fast.</p>
+            <div class="menu-list">
+              <div class="menu-item">
+                <mat-icon>school</mat-icon>
+                Angular Testing — Tapas Edition
+              </div>
+              <div class="menu-item">
+                <mat-icon>architecture</mat-icon>
+                Architecture, Typescript, Node.js…
+              </div>
+              <div class="menu-item">
+                <mat-icon>groups</mat-icon>
+                Public & in-house, OPCO-financed
+              </div>
             </div>
-          </div>
-          <mc-link href="https://courses.marmicode.io/">
-            <button mat-button color="primary">
-              View All Courses
-              <mat-icon>arrow_forward</mat-icon>
-            </button>
-          </mc-link>
-        </div>
-        <div class="menu-col">
-          <mat-icon class="menu-icon">event</mat-icon>
-          <h3>Workshops</h3>
-          <p>Hands on sessions for devs who want level up fast.</p>
-          <div class="menu-list">
-            <div class="menu-item">
-              <mat-icon>school</mat-icon>
-              Angular Testing — Tapas Edition
+            <mc-link href="https://marmicode.eventbrite.com">
+              <button mat-button color="primary">
+                See All Workshops
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </mc-link>
+          </ng-container>
+        </mc-card>
+
+        <mc-card icon="support_agent">
+          <ng-container slot="title"> Coaching & Reviews </ng-container>
+          <ng-container slot="content">
+            <p>Get tailored help via code reviews or 1.1 sessions.</p>
+            <div class="menu-list">
+              <div class="menu-item">
+                <mat-icon>autorenew</mat-icon>
+                Monthly Code Reviews
+                <span class="menu-price">From 150 €/month</span>
+              </div>
+              <div class="menu-item">
+                <mat-icon>person</mat-icon>
+                1.1 Coaching
+                <span class="menu-price">From 800 €/month</span>
+              </div>
             </div>
-            <div class="menu-item">
-              <mat-icon>architecture</mat-icon>
-              Architecture, Typescript, Node.js…
-            </div>
-            <div class="menu-item">
-              <mat-icon>groups</mat-icon>
-              Public & in-house, OPCO-financed
-            </div>
-          </div>
-          <mc-link href="https://marmicode.eventbrite.com">
-            <button mat-button color="primary">
-              See All Workshops
-              <mat-icon>arrow_forward</mat-icon>
-            </button>
-          </mc-link>
-        </div>
-        <div class="menu-col">
-          <mat-icon class="menu-icon">support_agent</mat-icon>
-          <h3>Coaching & Reviews</h3>
-          <p>Get tailored help via code reviews or 1.1 sessions.</p>
-          <div class="menu-list">
-            <div class="menu-item">
-              <mat-icon>autorenew</mat-icon>
-              Monthly Code Reviews
-              <span class="menu-price">From 150 €/month</span>
-            </div>
-            <div class="menu-item">
-              <mat-icon>person</mat-icon>
-              1.1 Coaching
-              <span class="menu-price">From 800 €/month</span>
-            </div>
-          </div>
-          <mc-link href="mailto:kitchen@marmicode.io">
-            <button mat-button color="primary">
-              Find Your Flavor
-              <mat-icon>arrow_forward</mat-icon>
-            </button>
-          </mc-link>
-        </div>
+            <mc-link href="mailto:kitchen@marmicode.io">
+              <button mat-button color="primary">
+                Find Your Flavor
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </mc-link>
+          </ng-container>
+        </mc-card>
       </div>
     </mc-page-section>
   `,
   styles: [
     `
+      .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 2.5rem;
+      }
+
       .menu-columns {
         display: flex;
         flex-direction: row;
