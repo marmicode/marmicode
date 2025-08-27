@@ -6,6 +6,7 @@ import {
   CookCard,
   createBasicPageInfo,
   Hero,
+  LinkComponent,
   PageComponent,
   PageSection,
 } from '@marmicode/shared/ui';
@@ -21,6 +22,7 @@ import {
     Hero,
     PageSection,
     CookCard,
+    LinkComponent,
   ],
   template: `
     <mc-page [info]="pageInfo">
@@ -57,15 +59,12 @@ import {
                 Free Cookbook
               </div>
             </div>
-            <button
-              mat-button
-              color="primary"
-              class="menu-link"
-              (click)="openCourses()"
-            >
-              View All Courses
-              <mat-icon>arrow_forward</mat-icon>
-            </button>
+            <mc-link href="https://courses.marmicode.io/">
+              <button mat-button color="primary">
+                View All Courses
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </mc-link>
           </div>
           <div class="menu-col">
             <mat-icon class="menu-icon">event</mat-icon>
@@ -85,15 +84,12 @@ import {
                 Public & in-house, OPCO-financed
               </div>
             </div>
-            <button
-              mat-button
-              color="primary"
-              class="menu-link"
-              (click)="openWorkshops()"
-            >
-              See All Workshops
-              <mat-icon>arrow_forward</mat-icon>
-            </button>
+            <mc-link href="https://marmicode.eventbrite.com">
+              <button mat-button color="primary">
+                See All Workshops
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </mc-link>
           </div>
           <div class="menu-col">
             <mat-icon class="menu-icon">support_agent</mat-icon>
@@ -111,15 +107,12 @@ import {
                 <span class="menu-price">From 800 €/month</span>
               </div>
             </div>
-            <button
-              mat-button
-              color="primary"
-              class="menu-link"
-              (click)="openContact()"
-            >
-              Find Your Flavor
-              <mat-icon>arrow_forward</mat-icon>
-            </button>
+            <mc-link href="mailto:kitchen@marmicode.io">
+              <button mat-button color="primary">
+                Find Your Flavor
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </mc-link>
           </div>
         </div>
       </mc-page-section>
@@ -138,13 +131,9 @@ import {
               Hands-on workshop to master Angular testing, with live coding and
               Q&A. Limited seats!
             </p>
-            <button
-              mat-stroked-button
-              color="primary"
-              (click)="openWorkshops()"
-            >
-              View Details
-            </button>
+            <mc-link href="https://marmicode.eventbrite.com">
+              <button mat-stroked-button color="primary">View Details</button>
+            </mc-link>
           </mat-card>
           <mat-card class="event-card">
             <div class="event-header">
@@ -158,9 +147,9 @@ import {
               Get your code reviewed by an expert. Async, actionable feedback
               for your team or project.
             </p>
-            <button mat-stroked-button color="primary" (click)="openContact()">
-              Book Now
-            </button>
+            <mc-link href="mailto:kitchen@marmicode.io">
+              <button mat-stroked-button color="primary">Book Now</button>
+            </mc-link>
           </mat-card>
           <mat-card class="event-card">
             <div class="event-header">
@@ -174,9 +163,9 @@ import {
               Advanced session on scalable frontend and backend architecture.
               For teams and individuals.
             </p>
-            <button mat-stroked-button color="primary" (click)="openContact()">
-              Join Waitlist
-            </button>
+            <mc-link href="mailto:kitchen@marmicode.io">
+              <button mat-stroked-button color="primary">Join Waitlist</button>
+            </mc-link>
           </mat-card>
         </div>
       </mc-page-section>
@@ -527,24 +516,4 @@ export class LandingPage {
     description:
       'Workshops, courses, and coaching to help you build better Angular apps. Learn from a Google Developer Expert and eXtreme Programming coach.',
   });
-
-  openMenu() {
-    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-  }
-
-  openWhatsCooking() {
-    window.open('https://marmicode.io/blog', '_blank');
-  }
-
-  openCourses() {
-    window.open('https://courses.marmicode.io/', '_blank');
-  }
-
-  openWorkshops() {
-    window.open('https://marmicode.eventbrite.com', '_blank');
-  }
-
-  openContact() {
-    window.open('mailto:kitchen@marmicode.io', '_blank');
-  }
 }
