@@ -66,6 +66,8 @@ import { LinkComponent, PageSection, Card } from '@marmicode/shared/ui';
         justify-content: center;
         flex-wrap: wrap;
         gap: 2.5rem;
+
+        margin: 3rem 0;
       }
 
       .header {
