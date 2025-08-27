@@ -10,81 +10,30 @@ import { Card, LinkComponent, PageSection } from '@marmicode/shared/ui';
   template: `
     <mc-page-section pageTitle="🍜 The Menu" color="plain">
       <div class="container">
-        <mc-card icon="menu_book">
-          <ng-container slot="title"> Courses & Cookbooks </ng-container>
-          <ng-container slot="content">
-            <p>Self-paced learning, no fluff, just the sauce.</p>
-            <div class="menu-list">
-              <div class="menu-item">
-                <mat-icon>school</mat-icon>
-                Pragmatic Angular Testing
-                <span class="menu-price">80 €</span>
+        @for (card of products; track card.title) {
+          <mc-card [icon]="card.icon">
+            <ng-container slot="title">{{ card.title }}</ng-container>
+            <ng-container slot="content">
+              <p>{{ card.description }}</p>
+              <div class="services">
+                @for (service of card.services; track service) {
+                  <li>
+                    <mat-icon>{{ service.icon }}</mat-icon>
+                    {{ service.text }}
+                    @if (service.offer) {
+                      <span class="offer">{{ service.offer }}</span>
+                    }
+                  </li>
+                }
               </div>
-              <div class="menu-item">
-                <mat-icon>book</mat-icon>
-                Free Cookbook
-              </div>
-            </div>
-            <mc-link href="https://courses.marmicode.io/">
-              <button mat-button color="primary">
-                View Course
-                <mat-icon>arrow_forward</mat-icon>
-              </button>
-            </mc-link>
-          </ng-container>
-        </mc-card>
-
-        <mc-card icon="school">
-          <ng-container slot="title"> Workshops </ng-container>
-          <ng-container slot="content">
-            <p>Hands on sessions for devs who want level up fast.</p>
-            <div class="menu-list">
-              <div class="menu-item">
-                <mat-icon>school</mat-icon>
-                Angular Testing — Tapas Edition
-              </div>
-              <div class="menu-item">
-                <mat-icon>architecture</mat-icon>
-                Architecture, Typescript, Node.js…
-              </div>
-              <div class="menu-item">
-                <mat-icon>groups</mat-icon>
-                Public & in-house, OPCO-financed
-              </div>
-            </div>
-            <mc-link href="https://marmicode.eventbrite.com">
-              <button mat-button color="primary">
-                See All Workshops
-                <mat-icon>arrow_forward</mat-icon>
-              </button>
-            </mc-link>
-          </ng-container>
-        </mc-card>
-
-        <mc-card icon="support_agent">
-          <ng-container slot="title"> Coaching & Reviews </ng-container>
-          <ng-container slot="content">
-            <p>Get tailored help via code reviews or 1.1 sessions.</p>
-            <div class="menu-list">
-              <div class="menu-item">
-                <mat-icon>autorenew</mat-icon>
-                Monthly Code Reviews
-                <span class="menu-price">From 150 €/month</span>
-              </div>
-              <div class="menu-item">
-                <mat-icon>person</mat-icon>
-                1.1 Coaching
-                <span class="menu-price">From 800 €/month</span>
-              </div>
-            </div>
-            <mc-link href="mailto:kitchen@marmicode.io">
-              <button mat-button color="primary">
-                Find Your Flavor
-                <mat-icon>arrow_forward</mat-icon>
-              </button>
-            </mc-link>
-          </ng-container>
-        </mc-card>
+              <mc-link [href]="card.href">
+                <button mat-stroked-button color="primary">
+                  {{ card.buttonText }}
+                </button>
+              </mc-link>
+            </ng-container>
+          </mc-card>
+        }
       </div>
     </mc-page-section>
   `,
@@ -97,81 +46,114 @@ import { Card, LinkComponent, PageSection } from '@marmicode/shared/ui';
         gap: 2.5rem;
       }
 
-      .menu-columns {
-        display: flex;
-        flex-direction: row;
-        gap: 2.5rem;
-        justify-content: center;
-        max-width: 1100px;
-        margin: 0 auto;
-      }
-
-      .menu-col {
-        flex: 1 1 0;
-        background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        padding: 2rem 1.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        min-width: 260px;
-        max-width: 340px;
-      }
-
-      .menu-icon {
-        font-size: 2.2rem;
-        color: #561f4b;
-        margin-bottom: 0.7rem;
-      }
-
-      .menu-col h3 {
+      h3 {
         font-size: 1.2rem;
         font-weight: 700;
         margin-bottom: 0.7rem;
         color: #561f4b;
       }
 
-      .menu-col p {
-        font-size: 1rem;
-        margin-bottom: 1.2rem;
-        color: #2d1a13;
-      }
-
-      .menu-list {
+      .services {
         margin-bottom: 1.2rem;
         width: 100%;
       }
 
-      .menu-item {
+      .services li {
         display: flex;
         align-items: center;
         font-size: 1rem;
         margin-bottom: 0.5rem;
-        color: #561f4b;
+        color: var(--marmicode-primary-color);
       }
 
-      .menu-item mat-icon {
+      .services mat-icon {
+        padding-top: 0.2rem;
         font-size: 1.1rem;
         margin-right: 0.5rem;
-        color: #5db3ad;
+        color: var(--marmicode-accent-color);
       }
 
-      .menu-price {
+      .offer {
         margin-left: 0.5rem;
-        color: #5db3ad;
-        font-weight: 600;
+        color: var(--marmicode-accent-color);
         font-size: 0.95em;
-      }
-
-      @media (max-width: 1100px) {
-        .menu-columns {
-          flex-direction: column;
-          gap: 1.5rem;
-          align-items: center;
-        }
+        font-style: italic;
       }
     `,
   ],
 })
-export class TheMenu {}
+export class TheMenu {
+  readonly products: Product[] = [
+    {
+      icon: 'menu_book',
+      title: 'Courses & Cookbooks',
+      description: 'Self-paced learning, no fluff, just the sauce.',
+      href: 'https://courses.marmicode.io/',
+      services: [
+        {
+          icon: 'school',
+          text: 'Pragmatic Angular Testing',
+          offer: 'starts at 80€',
+        },
+        {
+          icon: 'book',
+          text: 'Free Cookbook',
+        },
+      ],
+      buttonText: 'VIEW COURSE',
+    },
+    {
+      icon: 'school',
+      title: 'Workshops',
+      description: 'Hands on sessions for devs who want level up fast.',
+      href: 'https://marmicode.eventbrite.com',
+      services: [
+        {
+          icon: 'school',
+          text: 'Angular Testing — Tapas Edition',
+        },
+        {
+          icon: 'architecture',
+          text: 'Architecture, Typescript, Node.js…',
+        },
+        {
+          icon: 'groups',
+          text: 'Public & in-house, OPCO-financed',
+        },
+      ],
+      buttonText: 'SEE ALL WORKSHOPS',
+    },
+    {
+      icon: 'support_agent',
+      title: 'Coaching & Reviews',
+      description: 'Get tailored help via code reviews or 1.1 sessions.',
+      href: 'mailto:kitchen@marmicode.io',
+      services: [
+        {
+          icon: 'autorenew',
+          text: 'Monthly Code Reviews',
+          offer: 'from 150€ / month',
+        },
+        {
+          icon: 'person',
+          text: '1:1 Coaching',
+          offer: 'from 800€ / month',
+        },
+      ],
+      buttonText: 'FIND YOUR FLAVOR',
+    },
+  ];
+}
+
+interface Product {
+  icon: string;
+  title: string;
+  description: string;
+  services: Array<{
+    icon: string;
+    text: string;
+    offer?: string;
+  }>;
+  buttonText: string;
+  href: string;
+}
