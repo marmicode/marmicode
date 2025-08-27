@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { LinkComponent, PageSection } from '@marmicode/shared/ui';
+import { LinkComponent, PageSection, Card } from '@marmicode/shared/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,70 +13,82 @@ import { LinkComponent, PageSection } from '@marmicode/shared/ui';
     MatCardModule,
     MatIconModule,
     LinkComponent,
+    Card,
   ],
   template: `
     <mc-page-section pageTitle="🗓️ Upcoming Events" color="surface">
-      <div class="events-cards">
-        <mat-card class="event-card">
-          <div class="event-header">
-            <mat-icon class="event-icon" color="primary">event</mat-icon>
+      <div class="container">
+        <mc-card>
+          <div slot="title" class="header">
+            <mat-icon class="icon">event</mat-icon>
             <div>
-              <h3>Angular Testing — Tapas Edition</h3>
-              <div class="event-date">July 15, 2024</div>
+              <h3 class="title">Angular Testing — Tapas Edition</h3>
+              <div class="date">July 15, 2024</div>
             </div>
           </div>
-          <p>
-            Hands-on workshop to master Angular testing, with live coding and
-            Q&A. Limited seats!
-          </p>
-          <mc-link href="https://marmicode.eventbrite.com">
-            <button mat-stroked-button color="primary">View Details</button>
-          </mc-link>
-        </mat-card>
-        <mat-card class="event-card">
-          <div class="event-header">
-            <mat-icon class="event-icon" color="primary">event</mat-icon>
+          <ng-container slot="content">
+            <p>
+              Hands-on workshop to master Angular testing, with live coding and
+              Q&A. Limited seats!
+            </p>
+            <mc-link href="https://marmicode.eventbrite.com">
+              <button mat-stroked-button color="primary">VIEW DETAILS</button>
+            </mc-link>
+          </ng-container>
+        </mc-card>
+
+        <mc-card>
+          <div slot="title" class="header">
+            <mat-icon class="icon">event</mat-icon>
             <div>
-              <h3>Monthly Code Review</h3>
-              <div class="event-date">August 1, 2024</div>
+              <h3 class="title">Angular Testing — Tapas Edition</h3>
+              <div class="date">July 15, 2024</div>
             </div>
           </div>
-          <p>
-            Get your code reviewed by an expert. Async, actionable feedback
-            for your team or project.
-          </p>
-          <mc-link href="mailto:kitchen@marmicode.io">
-            <button mat-stroked-button color="primary">Book Now</button>
-          </mc-link>
-        </mat-card>
-        <mat-card class="event-card">
-          <div class="event-header">
-            <mat-icon class="event-icon" color="primary">event</mat-icon>
-            <div>
-              <h3>Architecture Deep Dive</h3>
-              <div class="event-date">September 10, 2024</div>
-            </div>
-          </div>
-          <p>
-            Advanced session on scalable frontend and backend architecture.
-            For teams and individuals.
-          </p>
-          <mc-link href="mailto:kitchen@marmicode.io">
-            <button mat-stroked-button color="primary">Join Waitlist</button>
-          </mc-link>
-        </mat-card>
+          <ng-container slot="content">
+            <p>
+              Hands-on workshop to master Angular testing, with live coding and
+              Q&A. Limited seats!
+            </p>
+            <mc-link href="https://marmicode.eventbrite.com">
+              <button mat-stroked-button color="primary">JOIN WAITLIST</button>
+            </mc-link>
+          </ng-container>
+        </mc-card>
       </div>
     </mc-page-section>
   `,
   styles: [
     `
-      .events-cards {
+      .container {
         display: flex;
         flex-direction: row;
-        gap: 2.5rem;
         justify-content: center;
-        max-width: 1100px;
-        margin: 0 auto;
+        flex-wrap: wrap;
+        gap: 2.5rem;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .icon {
+        color: white;
+        transform: scale(2);
+      }
+
+      .title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .date {
+        color: #46d9cf;
+        font-size: 1.3rem;
+        font-weight: 400;
       }
 
       .event-card {
@@ -91,46 +103,6 @@ import { LinkComponent, PageSection } from '@marmicode/shared/ui';
         flex-direction: column;
         align-items: flex-start;
         color: #561f4b;
-      }
-
-      .event-header {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 1rem;
-      }
-
-      .event-icon {
-        font-size: 2.2rem;
-        color: #561f4b;
-      }
-
-      .event-date {
-        font-size: 1rem;
-        color: #5db3ad;
-        font-weight: 600;
-        margin-top: 0.2rem;
-      }
-
-      .event-card h3 {
-        color: #561f4b;
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin-bottom: 0.2rem;
-      }
-
-      .event-card p {
-        color: #561f4b;
-        font-size: 1rem;
-        margin-bottom: 1.2rem;
-      }
-
-      @media (max-width: 1100px) {
-        .events-cards {
-          flex-direction: column;
-          gap: 1.5rem;
-          align-items: center;
-        }
       }
     `,
   ],

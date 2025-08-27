@@ -17,7 +17,7 @@ import {
   styles: `
     section {
       position: relative;
-      margin: auto;
+      width: 100%;
       padding-bottom: 5rem;
       display: block;
       background: var(--mc-workshop-section-background-color);
