@@ -34,7 +34,7 @@ import { Card, LinkComponent, PageSection } from '@marmicode/shared/ui';
           </ng-container>
         </mc-card>
 
-        <mc-card icon="event">
+        <mc-card icon="school">
           <ng-container slot="title"> Workshops </ng-container>
           <ng-container slot="content">
             <p>Hands on sessions for devs who want level up fast.</p>
