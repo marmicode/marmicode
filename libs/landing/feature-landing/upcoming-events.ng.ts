@@ -20,7 +20,7 @@ import { LinkComponent, PageSection, Card } from '@marmicode/shared/ui';
       <div class="container">
         <mc-card>
           <div slot="title" class="header">
-            <mat-icon class="icon">event</mat-icon>
+            <mat-icon class="icon mc-hide mc-show-gt-xs">event</mat-icon>
             <div>
               <h3 class="title">Angular Testing — Tapas Edition</h3>
               <div class="date">July 15, 2024</div>
@@ -39,7 +39,7 @@ import { LinkComponent, PageSection, Card } from '@marmicode/shared/ui';
 
         <mc-card>
           <div slot="title" class="header">
-            <mat-icon class="icon">event</mat-icon>
+            <mat-icon class="icon mc-hide mc-show-gt-xs">event</mat-icon>
             <div>
               <h3 class="title">Angular Testing — Tapas Edition</h3>
               <div class="date">July 15, 2024</div>
