@@ -97,6 +97,7 @@ import { WorkshopRepository } from '@marmicode/workshop/infra';
   ],
 })
 export class UpcomingEvents {
+  private _today = new Date();
   events = inject(WorkshopRepository)
     .getWorkshops()
     .map((workshop) =>
@@ -110,5 +111,6 @@ export class UpcomingEvents {
       })),
     )
     .flat()
+    .filter((event) => event.date > this._today)
     .sort((a, b) => a.date.getTime() - b.date.getTime());
 }
