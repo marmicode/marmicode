@@ -1,8 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { LinkComponent, PageSection, Card } from '@marmicode/shared/ui';
+import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
+import { Card, LinkComponent, PageSection } from '@marmicode/shared/ui';
+import { WorkshopRepository } from '@marmicode/workshop/infra';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,47 +17,31 @@ import { LinkComponent, PageSection, Card } from '@marmicode/shared/ui';
     MatIconModule,
     LinkComponent,
     Card,
+    DatePipe,
   ],
   template: `
     <mc-page-section pageTitle="🗓️ Upcoming Events" color="surface">
       <div class="container">
-        <mc-card>
-          <div slot="title" class="header">
-            <mat-icon class="icon mc-hide mc-show-gt-xs">event</mat-icon>
-            <div>
-              <h3 class="title">Angular Testing — Tapas Edition</h3>
-              <div class="date">July 15, 2024</div>
+        @for (event of events; track event) {
+          <mc-card>
+            <div slot="title" class="header">
+              <mat-icon class="icon mc-hide mc-show-gt-xs">event</mat-icon>
+              <div>
+                <h3 class="title">{{ event.title }}</h3>
+                <div class="date">
+                  {{ event.date | date }} · {{ event.startTime }}
+                  {{ event.timezone }}
+                </div>
+              </div>
             </div>
-          </div>
-          <ng-container slot="content">
-            <p>
-              Hands-on workshop to master Angular testing, with live coding and
-              Q&A. Limited seats!
-            </p>
-            <mc-link href="https://marmicode.eventbrite.com">
-              <button mat-stroked-button color="primary">VIEW DETAILS</button>
-            </mc-link>
-          </ng-container>
-        </mc-card>
-
-        <mc-card>
-          <div slot="title" class="header">
-            <mat-icon class="icon mc-hide mc-show-gt-xs">event</mat-icon>
-            <div>
-              <h3 class="title">Angular Testing — Tapas Edition</h3>
-              <div class="date">July 15, 2024</div>
-            </div>
-          </div>
-          <ng-container slot="content">
-            <p>
-              Hands-on workshop to master Angular testing, with live coding and
-              Q&A. Limited seats!
-            </p>
-            <mc-link href="https://marmicode.eventbrite.com">
-              <button mat-stroked-button color="primary">JOIN WAITLIST</button>
-            </mc-link>
-          </ng-container>
-        </mc-card>
+            <ng-container slot="content">
+              <p>{{ event.description }}</p>
+              <mc-link [route]="event.route">
+                <button mat-stroked-button color="primary">SHOW DETAILS</button>
+              </mc-link>
+            </ng-container>
+          </mc-card>
+        }
       </div>
     </mc-page-section>
   `,
@@ -109,4 +96,19 @@ import { LinkComponent, PageSection, Card } from '@marmicode/shared/ui';
     `,
   ],
 })
-export class UpcomingEvents {}
+export class UpcomingEvents {
+  events = inject(WorkshopRepository)
+    .getWorkshops()
+    .map((workshop) =>
+      workshop.sessions.map((session) => ({
+        title: workshop.title,
+        description: workshop.subheading,
+        date: session.date,
+        route: workshopRouterHelper.detail(workshop.id),
+        startTime: session.startTime,
+        timezone: session.timezone,
+      })),
+    )
+    .flat()
+    .sort((a, b) => a.date.getTime() - b.date.getTime());
+}

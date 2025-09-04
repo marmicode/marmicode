@@ -37,7 +37,7 @@ import { MatIconModule } from '@angular/material/icon';
       }
 
       &:hover .zoom-on-card-hover {
-        transform: scale(1.2);
+        transform: scale(1.1);
       }
     }
 
