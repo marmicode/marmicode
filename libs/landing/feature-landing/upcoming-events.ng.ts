@@ -20,30 +20,34 @@ import { WorkshopRepository } from '@marmicode/workshop/infra';
     DatePipe,
   ],
   template: `
-    <mc-page-section pageTitle="🗓️ Upcoming Events" color="surface">
-      <div class="container">
-        @for (event of events; track event) {
-          <mc-card>
-            <div slot="title" class="header">
-              <mat-icon class="icon mc-hide mc-show-gt-xs">event</mat-icon>
-              <div>
-                <h3 class="title">{{ event.title }}</h3>
-                <div class="date">
-                  {{ event.date | date }} · {{ event.startTime }}
-                  {{ event.timezone }}
+    @if (events.length > 0) {
+      <mc-page-section pageTitle="🗓️ Upcoming Events" color="surface">
+        <div class="container">
+          @for (event of events; track event) {
+            <mc-card>
+              <div slot="title" class="header">
+                <mat-icon class="icon mc-hide mc-show-gt-xs">event</mat-icon>
+                <div>
+                  <h3 class="title">{{ event.title }}</h3>
+                  <div class="date">
+                    {{ event.date | date }} · {{ event.startTime }}
+                    {{ event.timezone }}
+                  </div>
                 </div>
               </div>
-            </div>
-            <ng-container slot="content">
-              <p>{{ event.description }}</p>
-              <mc-link [route]="event.route">
-                <button mat-stroked-button color="primary">SHOW DETAILS</button>
-              </mc-link>
-            </ng-container>
-          </mc-card>
-        }
-      </div>
-    </mc-page-section>
+              <ng-container slot="content">
+                <p>{{ event.description }}</p>
+                <mc-link [route]="event.route">
+                  <button mat-stroked-button color="primary">
+                    SHOW DETAILS
+                  </button>
+                </mc-link>
+              </ng-container>
+            </mc-card>
+          }
+        </div>
+      </mc-page-section>
+    }
   `,
   styles: [
     `
