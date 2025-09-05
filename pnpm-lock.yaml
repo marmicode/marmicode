@@ -159,7 +159,7 @@ importers:
         specifier: 0.15.1
         version: 0.15.1
     dependenciesMeta:
-      '@babel/runtime@7.28.2':
+      '@babel/runtime@7.28.3':
         unplugged: true
       ngx-sharebuttons@11.0.0:
         unplugged: true
@@ -203,8 +203,8 @@ importers:
         specifier: 19.2.3
         version: 19.2.3
       '@babel/runtime':
-        specifier: 7.28.2
-        version: 7.28.2
+        specifier: 7.28.3
+        version: 7.28.3
       '@graphql-cli/codegen':
         specifier: ^3.0.0
         version: 3.0.4(@babel/core@7.28.0)(@types/node@22.15.2)(encoding@0.1.13)(enquirer@2.4.1)(graphql-config@3.0.3(@types/node@22.15.2)(encoding@0.1.13)(graphql@16.10.0))(graphql@16.10.0)(yargs@16.0.3)
@@ -1494,8 +1494,8 @@ packages:
     resolution: {integrity: sha512-2WJMeRQPHKSPemqk/awGrAiuFfzBmOIPXKizAsVhWH9YJqLZ0H+HS4c8loHGgW6utJ3E/ejXQUsiGaQy2NZ9Fw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/runtime@7.28.2':
-    resolution: {integrity: sha512-KHp2IflsnGywDjBWDkR9iEqiWSpc8GIi0lgTT3mOElT0PP1tG26P4tmFI2YvAdzgq9RGyoHZQEIEdZy6Ec5xCA==}
+  '@babel/runtime@7.28.3':
+    resolution: {integrity: sha512-9uIQ10o0WGdpP6GDhXcdOJPJuDgFtIDtN/9+ArJQ2NAfAmiuhTQdzkaTGR33v43GYS2UrSA0eX2pPPHoFVvpxA==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.27.2':
@@ -13983,7 +13983,7 @@ snapshots:
 
   '@amcharts/amcharts4@4.10.40':
     dependencies:
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       core-js: 3.43.0
       d3-force: 3.0.0
       d3-geo: 3.1.1
@@ -14503,7 +14503,7 @@ snapshots:
     dependencies:
       '@babel/generator': 7.28.0
       '@babel/parser': 7.28.0
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       chalk: 4.1.2
       fb-watchman: 2.0.2
       graphql: 16.10.0
@@ -15960,7 +15960,7 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
-  '@babel/runtime@7.28.2': {}
+  '@babel/runtime@7.28.3': {}
 
   '@babel/template@7.27.2':
     dependencies:
@@ -16029,7 +16029,7 @@ snapshots:
       '@babel/plugin-transform-runtime': 7.28.0(@babel/core@7.28.0)
       '@babel/preset-env': 7.28.0(@babel/core@7.28.0)
       '@babel/preset-react': 7.27.1(@babel/core@7.28.0)
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       '@cypress/webpack-preprocessor': 5.17.1(@babel/core@7.28.0)(@babel/preset-env@7.28.0(@babel/core@7.28.0))(babel-loader@9.2.1(@babel/core@7.28.0)(webpack@5.99.9(@swc/core@1.13.3(@swc/helpers@0.5.17))(esbuild@0.25.5)))(webpack@5.99.9(@swc/core@1.13.3(@swc/helpers@0.5.17))(esbuild@0.25.5))
       babel-loader: 8.4.1(@babel/core@7.28.0)(webpack@4.47.0)
       babel-plugin-add-module-exports: 1.0.4
@@ -16097,7 +16097,7 @@ snapshots:
   '@emotion/babel-plugin@11.13.5':
     dependencies:
       '@babel/helper-module-imports': 7.27.1
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       '@emotion/hash': 0.9.2
       '@emotion/memoize': 0.9.0
       '@emotion/serialize': 1.3.3
@@ -16124,7 +16124,7 @@ snapshots:
 
   '@emotion/react@11.14.0(@types/react@18.3.23)(react@18.3.1)':
     dependencies:
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       '@emotion/babel-plugin': 11.13.5
       '@emotion/cache': 11.14.0
       '@emotion/serialize': 1.3.3
@@ -19176,7 +19176,7 @@ snapshots:
       '@babel/plugin-transform-runtime': 7.28.0(@babel/core@7.28.0)
       '@babel/preset-env': 7.28.0(@babel/core@7.28.0)
       '@babel/preset-typescript': 7.27.1(@babel/core@7.28.0)
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       '@nx/devkit': 20.6.2(nx@20.6.2(@swc-node/register@1.10.10(@swc/core@1.13.3(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.13.3(@swc/helpers@0.5.17)))
       '@nx/workspace': 20.6.2(@swc-node/register@1.10.10(@swc/core@1.13.3(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.13.3(@swc/helpers@0.5.17))
       '@zkochan/js-yaml': 0.0.7
@@ -19220,7 +19220,7 @@ snapshots:
       '@babel/plugin-transform-runtime': 7.28.0(@babel/core@7.28.0)
       '@babel/preset-env': 7.28.0(@babel/core@7.28.0)
       '@babel/preset-typescript': 7.27.1(@babel/core@7.28.0)
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       '@nx/devkit': 20.6.2(nx@20.6.2(@swc-node/register@1.10.10(@swc/core@1.13.3(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.13.3(@swc/helpers@0.5.17)))
       '@nx/workspace': 20.6.2(@swc-node/register@1.10.10(@swc/core@1.13.3(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.13.3(@swc/helpers@0.5.17))
       '@zkochan/js-yaml': 0.0.7
@@ -20602,7 +20602,7 @@ snapshots:
   '@testing-library/dom@10.4.0':
     dependencies:
       '@babel/code-frame': 7.27.1
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
       chalk: 4.1.2
@@ -21811,7 +21811,7 @@ snapshots:
 
   babel-plugin-macros@3.1.0:
     dependencies:
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       cosmiconfig: 7.1.0
       resolve: 1.22.10
 
@@ -23474,7 +23474,7 @@ snapshots:
 
   dom-helpers@5.2.1:
     dependencies:
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       csstype: 3.1.3
 
   dom-serializer@1.4.1:
@@ -28356,7 +28356,7 @@ snapshots:
 
   polished@4.3.1:
     dependencies:
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
 
   polylabel@1.1.0:
     dependencies:
@@ -28887,7 +28887,7 @@ snapshots:
 
   react-select@5.10.1(@types/react@18.3.23)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       '@emotion/cache': 11.14.0
       '@emotion/react': 11.14.0(@types/react@18.3.23)(react@18.3.1)
       '@floating-ui/dom': 1.7.2
@@ -28904,7 +28904,7 @@ snapshots:
 
   react-transition-group@4.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
@@ -29041,7 +29041,7 @@ snapshots:
 
   relay-runtime@12.0.0(encoding@0.1.13):
     dependencies:
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       fbjs: 3.0.5(encoding@0.1.13)
       invariant: 2.2.4
     transitivePeerDependencies:
