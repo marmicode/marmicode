@@ -30,7 +30,7 @@ import heroPictureUri from './landing-hero.webp';
         title="Let's Cook Better Apps!"
       >
         <ng-content slot="content">
-          <h2>
+          <h2 class="subtitle">
             Workshops, coaching, and recipes for devs who want to ship with
             confidence — and taste.
           </h2>
@@ -45,6 +45,15 @@ import heroPictureUri from './landing-hero.webp';
         <mc-cook-card />
       </mc-page-section>
     </mc-page>
+  `,
+  styles: `
+    :host {
+      font-size: 1rem;
+    }
+    
+    .subtitle {
+      font-size: 1.5em;
+    }
   `,
 })
 export class LandingPage {
