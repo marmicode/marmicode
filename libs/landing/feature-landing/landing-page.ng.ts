@@ -8,6 +8,7 @@ import {
 } from '@marmicode/shared/ui';
 import { TheMenu } from './the-menu.ng';
 import { UpcomingEvents } from './upcoming-events.ng';
+import heroPictureUri from './landing-hero.webp';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,12 +24,10 @@ import { UpcomingEvents } from './upcoming-events.ng';
   template: `
     <mc-page [info]="pageInfo">
       <mc-hero
-        [pictureUri]="
-          'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80'
-        "
+        [pictureUri]="landingBannerUri"
         contentPosition="middle"
         size="half-height"
-        title="Turn Code Into Cuisine"
+        title="Let's Cook Better Apps!"
       >
         <ng-content slot="content">
           <h2>
@@ -49,6 +48,7 @@ import { UpcomingEvents } from './upcoming-events.ng';
   `,
 })
 export class LandingPage {
+  landingBannerUri = heroPictureUri;
   pageInfo = createBasicPageInfo({
     title: 'Cook better apps with Marmicode',
     description:
