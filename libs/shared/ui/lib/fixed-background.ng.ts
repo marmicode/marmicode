@@ -24,8 +24,8 @@ import {
     .banner-gradient {
       background-image: linear-gradient(
         to bottom,
-        rgba(10, 10, 10, 0.2),
-        rgba(10, 10, 10, 0.8)
+        rgba(10, 10, 10, 0.5),
+        rgba(10, 10, 10, 0.9)
       );
     }
 

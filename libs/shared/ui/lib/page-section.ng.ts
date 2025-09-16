@@ -7,18 +7,18 @@ import {
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-workshop-section',
+  selector: 'mc-page-section',
   template: `
     <section [class.surface]="color() === 'surface'">
-      <h2>{{ title() }}</h2>
+      <h2>{{ pageTitle() }}</h2>
       <ng-content />
     </section>
   `,
   styles: `
     section {
       position: relative;
-      margin: auto;
-      padding-bottom: 3rem;
+      width: 100%;
+      padding-bottom: 5rem;
       display: block;
       background: var(--mc-workshop-section-background-color);
     }
@@ -55,8 +55,8 @@ import {
     '[style.--mc-workshop-section-background-color]': 'realColor()',
   },
 })
-export class WorkshopSection {
-  title = input<string>();
+export class PageSection {
+  pageTitle = input<string>();
   color = input<'surface' | 'plain'>('plain');
 
   protected realColor = computed(() =>
