@@ -136,7 +136,7 @@ export class TheMenu {
       icon: 'support_agent',
       title: 'Coaching & Reviews',
       description: 'Get tailored help via code reviews or 1.1 sessions.',
-      href: 'mailto:kitchen@marmicode.io',
+      href: 'https://courses.marmicode.io/bundles/ginger-review',
       services: [
         {
           icon: 'autorenew',
