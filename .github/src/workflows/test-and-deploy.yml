@@ -117,11 +117,11 @@ jobs:
 
       - name: Upload Affected Percy Snapshots
         if: github.ref != 'refs/heads/main'
-        run: pnpm percy exec --partial -- pnpm upload-affected-percy-snapshots --no-agents
+        run: pnpm percy exec --partial -- pnpm upload-affected-percy-snapshots --parallel=1 --no-agents
 
       - name: Upload All Percy Snapshots
         if: github.ref == 'refs/heads/main'
-        run: pnpm percy exec -- pnpm nx run-many --target=upload-percy-snapshots --no-agents
+        run: pnpm percy exec -- pnpm nx run-many --target=upload-percy-snapshots --parallel=1 --no-agents
 
       # Check Percy Review on main branch only.
       # On other branches, we'll let Percy status check do the job.
