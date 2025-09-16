@@ -14,13 +14,13 @@ Let's cook fast, reliable tests that actually help you ship.`,
   location: 'online',
   sessions: [
     {
-      date: new Date('2025-09-03'),
+      date: new Date('2025-10-29'),
       startTime: '10:00',
       endTime: '17:00',
       timezone: 'CET',
     },
     {
-      date: new Date('2025-09-04'),
+      date: new Date('2025-10-30'),
       startTime: '08:00',
       endTime: '13:00',
       timezone: 'PT',
