@@ -1,39 +1,71 @@
-import { CommonModule, NgIf, NgTemplateOutlet } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
+  computed,
+  input,
   NgModule,
 } from '@angular/core';
-import { RouterModule, RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-link',
-  template: `<a *ngIf="href" [href]="href" rel="noopener" target="_blank">
+  imports: [NgTemplateOutlet, RouterLink],
+  template: `
+    @if (computedHref()) {
+      <a
+        [href]="computedHref()"
+        rel="noopener"
+        target="_blank"
+        (click)="stopPropagation($event)"
+      >
+        <ng-container *ngTemplateOutlet="templateRef"></ng-container>
+      </a>
+    } @else if (computedRoute()) {
+      <a [routerLink]="computedRoute()" (click)="stopPropagation($event)">
+        <ng-container *ngTemplateOutlet="templateRef"></ng-container>
+      </a>
+    } @else {
       <ng-container *ngTemplateOutlet="templateRef"></ng-container>
-    </a>
-
-    <a *ngIf="route" [routerLink]="route">
-      <ng-container *ngTemplateOutlet="templateRef"></ng-container>
-    </a>
+    }
 
     <ng-template #templateRef>
       <ng-content></ng-content>
-    </ng-template> `,
-  styles: [
-    `
-      a {
-        text-decoration: none;
-      }
-    `,
-  ],
-  imports: [NgIf, NgTemplateOutlet, RouterLink],
+    </ng-template>
+  `,
+  styles: `
+    a {
+      color: var(--marmicode-accent-color);
+      text-decoration: none;
+    }
+  `,
 })
 export class LinkComponent {
-  @Input() href: string;
-  @Input() route: string[];
+  link = input<Link>();
+  href = input<string>();
+  route = input<string[]>();
+
+  computedHref = computed(() => {
+    const link = this.link();
+    return link && 'href' in link ? link.href : this.href();
+  });
+  computedRoute = computed(() => {
+    const link = this.link();
+    return link && 'route' in link ? link.route : this.route();
+  });
+
+  /**
+   * Stop propagation of the event to avoid double navigation.
+   * There are rare occurrences of links or tags inside cards
+   * where cards are also clickable for convenience.
+   */
+  stopPropagation(event: MouseEvent) {
+    event.stopPropagation();
+  }
 }
+
+export type Link = { href: string } | { route: string[] };
 
 @NgModule({
   exports: [LinkComponent],

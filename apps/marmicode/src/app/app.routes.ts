@@ -60,11 +60,10 @@ export const routes: Routes = [
     loadComponent: () => import('@marmicode/workshop/feature-list'),
   },
 
-  /* / redirect. */
+  /* Landing page. */
   {
     path: '',
     pathMatch: 'full',
-    /* @todo use resourceSearchRouterHelper.learnEverything().join('/'). */
-    redirectTo: '/learn/everything',
+    loadComponent: () => import('@marmicode/landing/feature-landing'),
   },
 ];
