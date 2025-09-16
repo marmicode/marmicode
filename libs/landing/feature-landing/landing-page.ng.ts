@@ -47,7 +47,7 @@ import { UpcomingEvents } from './upcoming-events.ng';
             class="hero-action"
             color="accent"
           >
-          <mat-icon>school</mat-icon>
+            <mat-icon>school</mat-icon>
 
             LEVEL UP WITH A WORKSHOP
           </a>
@@ -68,7 +68,7 @@ import { UpcomingEvents } from './upcoming-events.ng';
       font-size: 1.5em;
       margin-bottom: 1.5rem;
     }
-    
+
     .hero-action {
       font-size: 1.2em;
     }

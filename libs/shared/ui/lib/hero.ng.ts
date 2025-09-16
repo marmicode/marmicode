@@ -29,6 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [FixedBackground, MatIconModule],
   styles: `
     :host {
+      display: block;
       position: relative;
       font-size: 1rem;
     }
