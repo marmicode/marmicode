@@ -55,7 +55,7 @@ import { MatIconModule } from '@angular/material/icon';
     }
 
     .content.full-height {
-      min-height: calc(100vh - 64px);
+      min-height: calc(100vmin - 64px);
     }
 
     .title,
