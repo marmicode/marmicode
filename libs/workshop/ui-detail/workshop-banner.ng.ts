@@ -48,7 +48,7 @@ import { Hero } from '@marmicode/shared/ui';
       <ng-content slot="content">
         <p class="badge">
           {{ offerType() }} Starts at
-          {{ workshop().offer.price | currency: 'EUR' : true : '1.0-0' }}
+          {{ workshop().offer.price | currency: 'EUR' : 'symbol' : '1.0-0' }}
         </p>
         <p class="subheading">
           @for (line of subheadingLines(); track line) {
