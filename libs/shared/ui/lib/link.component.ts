@@ -14,11 +14,16 @@ import { RouterLink, RouterModule } from '@angular/router';
   imports: [NgTemplateOutlet, RouterLink],
   template: `
     @if (computedHref()) {
-      <a [href]="computedHref()" rel="noopener" target="_blank">
+      <a
+        [href]="computedHref()"
+        rel="noopener"
+        target="_blank"
+        (click)="stopPropagation($event)"
+      >
         <ng-container *ngTemplateOutlet="templateRef"></ng-container>
       </a>
     } @else if (computedRoute()) {
-      <a [routerLink]="computedRoute()">
+      <a [routerLink]="computedRoute()" (click)="stopPropagation($event)">
         <ng-container *ngTemplateOutlet="templateRef"></ng-container>
       </a>
     } @else {
@@ -49,6 +54,15 @@ export class LinkComponent {
     const link = this.link();
     return link && 'route' in link ? link.route : this.route();
   });
+
+  /**
+   * Stop propagation of the event to avoid double navigation.
+   * There are rare occurrences of links or tags inside cards
+   * where cards are also clickable for convenience.
+   */
+  stopPropagation(event: MouseEvent) {
+    event.stopPropagation();
+  }
 }
 
 export type Link = { href: string } | { route: string[] };

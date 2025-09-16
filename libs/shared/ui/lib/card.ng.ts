@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   imports: [MatCardModule, MatIconModule],
   template: ` <mat-card
     [class.clickable]="link()"
-    (click)="goToLink()"
+    (click)="goToLink($event)"
     class="card"
   >
     <div class="header" [class.has-icon]="icon() != null">
@@ -136,7 +136,9 @@ export class Card {
   private _router = inject(Router);
   private _window = inject(DOCUMENT).defaultView;
 
-  goToLink() {
+  goToLink(event: MouseEvent) {
+    console.log(event);
+
     const link = this.link();
     if (link == null) {
       return;

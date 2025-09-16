@@ -20,7 +20,11 @@ import { Card, Link, LinkComponent, PageSection } from '@marmicode/shared/ui';
                 @for (service of product.services; track service) {
                   <li>
                     <mat-icon>{{ service.icon }}</mat-icon>
-                    <mc-link [href]="service.href">{{ service.text }}</mc-link>
+                    <mc-link [href]="service.href">
+                      <span [class.clickable]="service.href">{{
+                        service.text
+                      }}</span>
+                    </mc-link>
                     @if (service.offer) {
                       <span class="offer">{{ service.offer }}</span>
                     }
@@ -59,6 +63,11 @@ import { Card, Link, LinkComponent, PageSection } from '@marmicode/shared/ui';
     .services {
       margin-bottom: 1.2rem;
       width: 100%;
+    }
+
+    .services .clickable {
+      text-decoration: underline;
+      text-decoration-style: dashed;
     }
 
     .services li {
