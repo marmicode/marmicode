@@ -1,12 +1,24 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { Link } from './link.component';
+import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-card',
   imports: [MatCardModule, MatIconModule],
-  template: ` <mat-card class="card">
+  template: ` <mat-card
+    [class.clickable]="link()"
+    (click)="goToLink()"
+    class="card"
+  >
     <div class="header" [class.has-icon]="icon() != null">
       <h3 class="title zoom-on-card-hover">
         <ng-content select="[slot='title']" />
@@ -39,6 +51,10 @@ import { MatIconModule } from '@angular/material/icon';
       &:hover .zoom-on-card-hover {
         transform: scale(1.1);
       }
+    }
+
+    .clickable {
+      cursor: pointer;
     }
 
     .header {
@@ -115,4 +131,21 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class Card {
   icon = input<string>();
+  link = input<Link>();
+
+  private _router = inject(Router);
+  private _window = inject(DOCUMENT).defaultView;
+
+  goToLink() {
+    const link = this.link();
+    if (link == null) {
+      return;
+    }
+
+    if ('href' in link) {
+      this._window.open(link.href, '_blank', 'noopener');
+    } else if ('route' in link) {
+      this._router.navigate(link.route);
+    }
+  }
 }
