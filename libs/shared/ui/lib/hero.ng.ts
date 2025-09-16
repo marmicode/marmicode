@@ -30,6 +30,7 @@ import { MatIconModule } from '@angular/material/icon';
   styles: `
     :host {
       position: relative;
+      font-size: 1rem;
     }
 
     .content {

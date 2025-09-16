@@ -81,7 +81,6 @@ import { Hero } from '@marmicode/shared/ui';
     :host {
       display: block;
       position: relative;
-      font-size: 1rem;
     }
 
     .badge {

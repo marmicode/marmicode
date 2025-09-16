@@ -64,10 +64,6 @@ import { UpcomingEvents } from './upcoming-events.ng';
     </mc-page>
   `,
   styles: `
-    :host {
-      font-size: 1rem;
-    }
-    
     .subtitle {
       font-size: 1.5em;
       margin-bottom: 1.5rem;
@@ -76,7 +72,6 @@ import { UpcomingEvents } from './upcoming-events.ng';
     .hero-action {
       font-size: 1.2em;
     }
-    
   `,
 })
 export class LandingPage {
