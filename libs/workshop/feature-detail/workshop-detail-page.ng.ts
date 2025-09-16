@@ -11,16 +11,16 @@ import {
   PageComponent,
 } from '@marmicode/shared/ui';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
+import { workshopViewTransitionName } from '@marmicode/workshop/ui';
 import {
   WorkshopAgenda,
-  WorkshopBanner,
+  WorkshopHero,
   WorkshopBenefits,
   WorkshopDescription,
   WorkshopInstructor,
   WorkshopRequiredSkills,
   WorkshopSessions,
 } from '@marmicode/workshop/ui-detail';
-import { workshopViewTransitionName } from '@marmicode/workshop/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,19 +28,19 @@ import { workshopViewTransitionName } from '@marmicode/workshop/ui';
   imports: [
     PageComponent,
     WorkshopAgenda,
-    WorkshopBanner,
     WorkshopBenefits,
     WorkshopDescription,
     WorkshopInstructor,
     WorkshopRequiredSkills,
     WorkshopSessions,
     ErrorComponent,
+    WorkshopHero,
   ],
   template: `
     <mc-page [info]="info()">
       @let workshop = this.workshop();
       @if (workshop) {
-        <mc-workshop-banner
+        <mc-workshop-hero
           [workshop]="workshop"
           [style.view-transition-name]="transitionName()"
         />
