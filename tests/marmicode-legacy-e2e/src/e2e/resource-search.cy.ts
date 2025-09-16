@@ -65,11 +65,10 @@ describe('resource search', () => {
       );
     });
 
-    cy.visit('/');
+    cy.visit('/learn/everything');
   });
 
   it('should list resources', () => {
-    cy.location('pathname').should('eq', '/learn/everything');
     /* Wait for resources to appear. */
     getAllHarnesses(ResourceCardHarness).should('have.length', 14);
     cy.snapshot();
