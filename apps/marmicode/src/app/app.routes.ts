@@ -62,15 +62,8 @@ export const routes: Routes = [
 
   /* Landing page. */
   {
-    path: 'landing',
-    loadComponent: () => import('@marmicode/landing/feature-landing'),
-  },
-
-  /* / redirect. */
-  {
     path: '',
     pathMatch: 'full',
-    /* @todo use resourceSearchRouterHelper.learnEverything().join('/'). */
-    redirectTo: '/learn/everything',
+    loadComponent: () => import('@marmicode/landing/feature-landing'),
   },
 ];
