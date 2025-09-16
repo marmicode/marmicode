@@ -71,6 +71,7 @@ import { UpcomingEvents } from './upcoming-events.ng';
 
     .hero-action {
       font-size: 1.2em;
+      margin: 2rem 0 6rem 0;
     }
   `,
 })
