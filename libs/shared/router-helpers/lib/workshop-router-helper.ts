@@ -5,6 +5,6 @@ export const workshopRouterHelper = {
     return ['/', this.WORKSHOP_LIST_PATH, encodeURIComponent(workshopId)];
   },
   list() {
-    return '/workshops';
+    return ['/', this.WORKSHOP_LIST_PATH];
   },
 };

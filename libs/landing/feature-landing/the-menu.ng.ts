@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 import { Card, LinkComponent, PageSection } from '@marmicode/shared/ui';
 
 @Component({
@@ -19,25 +20,30 @@ import { Card, LinkComponent, PageSection } from '@marmicode/shared/ui';
                 @for (service of product.services; track service) {
                   <li>
                     <mat-icon>{{ service.icon }}</mat-icon>
-                    {{ service.text }}
+                    @if (service.href) {
+                      <mc-link [href]="service.href">{{ service.text }}</mc-link>
+                    } @else {
+                      {{ service.text }}
+                    }
                     @if (service.offer) {
                       <span class="offer">{{ service.offer }}</span>
                     }
                   </li>
                 }
               </div>
-              <mc-link [href]="product.href">
+              <mc-link [link]="product">
                 <button mat-stroked-button color="primary">
                   {{ product.buttonText }}
                 </button>
               </mc-link>
+
             </ng-container>
           </mc-card>
         }
       </div>
     </mc-page-section>
   `,
-  styles: [
+  styles: 
     `
       .container {
         display: flex;
@@ -83,7 +89,6 @@ import { Card, LinkComponent, PageSection } from '@marmicode/shared/ui';
         font-style: italic;
       }
     `,
-  ],
 })
 export class TheMenu {
   readonly products: Product[] = [
@@ -101,6 +106,7 @@ export class TheMenu {
         {
           icon: 'book',
           text: 'Free Cookbook',
+          href: 'https://cookbook.marmicode.io',
         },
       ],
       buttonText: 'VIEW COURSE',
@@ -109,7 +115,7 @@ export class TheMenu {
       icon: 'school',
       title: 'Workshops',
       description: 'Hands on sessions for devs who want level up fast.',
-      href: 'https://marmicode.eventbrite.com',
+      route: workshopRouterHelper.list(),
       services: [
         {
           icon: 'school',
@@ -148,15 +154,22 @@ export class TheMenu {
   ];
 }
 
-interface Product {
+type Product= {
   icon: string;
   title: string;
   description: string;
   services: Array<{
     icon: string;
     text: string;
+    href?: string;
     offer?: string;
   }>;
   buttonText: string;
-  href: string;
-}
+} & (
+  | {
+      href: string;
+    }
+  | {
+      route: string[];
+    }
+);
