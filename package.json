@@ -131,7 +131,7 @@
     "@types/jest": "29.5.14",
     "@types/js-yaml": "^4.0.0",
     "@types/marked": "^1.2.1",
-    "@types/node": "22.15.2",
+    "@types/node": "22.18.8",
     "@types/prismjs": "^1.16.1",
     "@types/webpack": "5.28.5",
     "@typescript-eslint/eslint-plugin": "7.18.0",
@@ -187,7 +187,7 @@
     }
   },
   "volta": {
-    "node": "22.15.0"
+    "node": "22.20.0"
   },
   "packageManager": "pnpm@10.12.4"
 }
