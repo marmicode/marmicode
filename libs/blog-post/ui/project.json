@@ -49,13 +49,10 @@
       "options": {
         "outputPath": "does-not-exist",
         "index": "does-not-exist",
-        "polyfills": ["{projectRoot}/src/polyfills.ts"],
         "tsConfig": "{projectRoot}/tsconfig.lib.json",
         "styles": ["{projectRoot}/cypress/support/styles.scss"],
         "stylePreprocessorOptions": {
-          "includePaths": [
-            "node_modules"
-          ]
+          "includePaths": ["node_modules"]
         },
         "browser": "apps/marmicode/src/main.ts"
       },
