@@ -1,8 +1,8 @@
 import { createWorkshop } from '@marmicode/workshop/core';
-import pictureUri from './pragmatic-angular-testing.webp';
 import thumbnailUri from './pragmatic-angular-testing-thumbnail.webp';
+import pictureUri from './pragmatic-angular-testing.webp';
 
-export const pragmaticAngularTesting = createWorkshop({
+export const pragmaticAngularTestingTapasSession = createWorkshop({
   id: 'pragmatic-angular-testing-tapas-session',
   title: 'Pragmatic Angular Testing Workshop',
   type: 'tapas',

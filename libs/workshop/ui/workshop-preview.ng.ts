@@ -35,9 +35,12 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
         alt="workshop image"
         [style.view-transition-name]="transitionName()"
       />
-      <mat-card-content>
+      <mat-card-content class="content">
         <h3>{{ workshop().title }}</h3>
         <p class="subheading">{{ workshop().subheading }}</p>
+
+        <div class="mc-flex"></div>
+
         <div class="details">
           <span class="duration">
             <mat-icon>schedule</mat-icon>
@@ -65,9 +68,14 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
       </mat-card-content>
     </mat-card>
   `,
+  host: {
+    '[class.mc-flex-column]': 'true',
+  },
   styles: `
     .card {
       cursor: pointer;
+      overflow: hidden;
+      flex: 1;
     }
 
     img {
@@ -83,6 +91,12 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
       color: #111827;
       line-height: 1.4;
       margin-bottom: 0.5em;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
     .subheading {
