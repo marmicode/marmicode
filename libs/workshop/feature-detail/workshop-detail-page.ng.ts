@@ -55,7 +55,8 @@ import {
           <p>Workshop not found.</p>
           <p>
             Please check the URL or
-            <a href="mailto:kitchen@marmicode.io" target="_blank">contact us</a
+            <a href="https://forms.gle/EAUNbXtXQFCapQCd8" target="_blank"
+              >contact us</a
             >.
           </p>
         </mc-error>

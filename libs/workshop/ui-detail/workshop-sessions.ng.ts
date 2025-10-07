@@ -18,31 +18,38 @@ import { Workshop } from '@marmicode/workshop/core';
     PageSection,
   ],
   template: `
-    <mc-page-section pageTitle="🗓️ Upcoming Sessions">
-      <div class="sessions">
-        @for (session of workshop().sessions; track session.date) {
-          <mc-card>
-            <ng-container slot="title">
-              🗓️ {{ session.date | date: 'fullDate' }}
-            </ng-container>
-            <ng-container slot="content">
-              <p class="content">
-                {{ session.startTime }} — {{ session.endTime }}
-                {{ session.timezone }}
-              </p>
-              <a
-                [href]="session.waitlistUrl"
-                color="primary"
-                mat-stroked-button
-                target="_blank"
-              >
-                JOIN THE WAITLIST
-              </a>
-            </ng-container>
-          </mc-card>
-        }
-      </div>
-    </mc-page-section>
+    @if (workshop().sessions.length > 0) {
+      <mc-page-section pageTitle="🗓️ Upcoming Sessions">
+        <div class="sessions">
+          @for (session of workshop().sessions; track session.startDate) {
+            <mc-card>
+              <ng-container slot="title">
+                @if (session.endDate) {
+                  🗓️ {{ session.startDate | date: 'MMM d' }} to
+                  {{ session.endDate | date: 'mediumDate' }}
+                } @else {
+                  🗓️ {{ session.startDate | date: 'fullDate' }}
+                }
+              </ng-container>
+              <ng-container slot="content">
+                <p class="content">
+                  {{ session.startTime }} — {{ session.endTime }}
+                  {{ session.timezone }}
+                </p>
+                <a
+                  [href]="session.waitlistUrl"
+                  color="primary"
+                  mat-stroked-button
+                  target="_blank"
+                >
+                  JOIN THE WAITLIST
+                </a>
+              </ng-container>
+            </mc-card>
+          }
+        </div>
+      </mc-page-section>
+    }
   `,
   styles: `
     .sessions {

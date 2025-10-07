@@ -137,7 +137,6 @@ export class Card {
   private _window = inject(DOCUMENT).defaultView;
 
   goToLink(event: MouseEvent) {
-
     const link = this.link();
     if (link == null) {
       return;

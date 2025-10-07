@@ -131,7 +131,7 @@ export class NavMenuComponent {
     {
       icon: 'phone',
       title: 'Help',
-      url: 'mailto:kitchen@marmicode.io',
+      url: 'https://forms.gle/EAUNbXtXQFCapQCd8',
     },
   ];
 

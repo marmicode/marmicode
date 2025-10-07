@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 import { Card, LinkComponent, PageSection } from '@marmicode/shared/ui';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
+import { WorkshopTypeLabel } from '@marmicode/workshop/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,6 +19,7 @@ import { WorkshopRepository } from '@marmicode/workshop/infra';
     LinkComponent,
     Card,
     DatePipe,
+    WorkshopTypeLabel,
   ],
   template: `
     @if (events.length > 0) {
@@ -28,16 +30,25 @@ import { WorkshopRepository } from '@marmicode/workshop/infra';
               <div slot="title" class="header">
                 <mat-icon class="icon mc-hide mc-show-gt-xs">event</mat-icon>
                 <div>
-                  <h3 class="title">{{ event.title }}</h3>
-                  <div class="date">
-                    {{ event.date | date }} · {{ event.startTime }}
-                    {{ event.timezone }}
-                  </div>
+                  <h3 class="title">{{ event.workshop.title }}</h3>
+                  <p class="type">
+                    <mc-workshop-type-label [workshop]="event.workshop" />
+                  </p>
+                  <p class="date">
+                    @if (event.session.endDate) {
+                      {{ event.session.startDate | date: 'MMM d' }} to
+                      {{ event.session.endDate | date }}
+                    } @else {
+                      {{ event.session.startDate | date }}
+                    }
+                    · {{ event.session.startTime }}
+                    {{ event.session.timezone }}
+                  </p>
                 </div>
               </div>
               <ng-container slot="content">
-                <p>{{ event.description }}</p>
-                <mc-link [route]="event.route">
+                <p>{{ event.workshop.subheading }}</p>
+                <mc-link [route]="event.workshopRoute">
                   <button mat-stroked-button color="primary">
                     SHOW DETAILS
                   </button>
@@ -78,24 +89,17 @@ import { WorkshopRepository } from '@marmicode/workshop/infra';
         margin: 0;
       }
 
-      .date {
-        color: #46d9cf;
-        font-size: 1.3rem;
-        font-weight: 400;
+      .type {
+        margin: 0 0 0.2rem 0;
+        font-size: 1.1rem;
+        font-style: italic;
+        font-weight: 300;
       }
 
-      .event-card {
-        flex: 1 1 0;
-        min-width: 260px;
-        max-width: 340px;
-        background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        padding: 2rem 1.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        color: #561f4b;
+      .date {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 200;
       }
     `,
   ],
@@ -106,15 +110,14 @@ export class UpcomingEvents {
     .getWorkshops()
     .map((workshop) =>
       workshop.sessions.map((session) => ({
-        title: workshop.title,
-        description: workshop.subheading,
-        date: session.date,
-        route: workshopRouterHelper.detail(workshop.id),
-        startTime: session.startTime,
-        timezone: session.timezone,
+        session,
+        workshop,
+        workshopRoute: workshopRouterHelper.detail(workshop.id),
       })),
     )
     .flat()
-    .filter((event) => event.date > this._today)
-    .sort((a, b) => a.date.getTime() - b.date.getTime());
+    .filter((event) => event.session.startDate > this._today)
+    .sort(
+      (a, b) => a.session.startDate.getTime() - b.session.startDate.getTime(),
+    );
 }

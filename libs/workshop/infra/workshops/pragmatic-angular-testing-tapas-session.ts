@@ -1,8 +1,8 @@
 import { createWorkshop } from '@marmicode/workshop/core';
-import pictureUri from './pragmatic-angular-testing.webp';
 import thumbnailUri from './pragmatic-angular-testing-thumbnail.webp';
+import pictureUri from './pragmatic-angular-testing.webp';
 
-export const pragmaticAngularTesting = createWorkshop({
+export const pragmaticAngularTestingTapasSession = createWorkshop({
   id: 'pragmatic-angular-testing-tapas-session',
   title: 'Pragmatic Angular Testing Workshop',
   type: 'tapas',
@@ -15,7 +15,7 @@ Let's cook fast, reliable tests that actually help you ship.`,
   waitlistUrl: 'https://forms.gle/zFnkWKYXbMxHE6hA6',
   sessions: [
     {
-      date: new Date('2025-11-12'),
+      startDate: new Date('2025-11-12'),
       startTime: '10:00',
       endTime: '17:00',
       timezone: 'CET',
@@ -23,7 +23,7 @@ Let's cook fast, reliable tests that actually help you ship.`,
         'https://docs.google.com/forms/d/e/1FAIpQLSfcc9QZ5Wa98yDNlWEBLygWZAs5vZLSwqkFGFhsb1XkBqlbRw/viewform?usp=pp_url&entry.804908816=Wednesday,+November+12,+2025+%E2%80%94+10AM+to+5PM+CET',
     },
     {
-      date: new Date('2025-11-13'),
+      startDate: new Date('2025-11-13'),
       startTime: '08:00',
       endTime: '13:00',
       timezone: 'PT',
@@ -58,8 +58,8 @@ No dogma. No silver bullets. Just pragmatic Angular testing skills to help you *
 `,
   offer: {
     type: 'early-bird',
-    price: 240,
-    originalPrice: 360,
+    price: 350,
+    originalPrice: 450,
   },
   requiredSkills: [
     `Angular core concepts (e.g. components, inputs/outputs, services)`,
