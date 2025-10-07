@@ -51,6 +51,7 @@ test.describe('workshops', () => {
     await glove
       .workshopTitle()
       .filter({ hasText: 'Pragmatic Angular Testing' })
+      .first()
       .click();
 
     await expect
