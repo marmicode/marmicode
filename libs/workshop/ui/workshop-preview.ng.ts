@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 import { Workshop } from '@marmicode/workshop/core';
+import { WorkshopTypeLabel } from './workshop-type-label.ng';
 import { workshopViewTransitionName } from './workshop-view-transition-name';
 
 @Component({
@@ -23,6 +24,7 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
     MatIconModule,
     RouterModule,
     CurrencyPipe,
+    WorkshopTypeLabel,
   ],
   template: `
     <mat-card
@@ -35,9 +37,16 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
         alt="workshop image"
         [style.view-transition-name]="transitionName()"
       />
-      <mat-card-content>
-        <h3>{{ workshop().title }}</h3>
+      <mat-card-content class="content">
+        <div class="header">
+          <h3 class="title">{{ workshop().title }}</h3>
+          <mc-workshop-type-label [workshop]="workshop()" class="type" />
+        </div>
+
         <p class="subheading">{{ workshop().subheading }}</p>
+
+        <div class="mc-flex"></div>
+
         <div class="details">
           <span class="duration">
             <mat-icon>schedule</mat-icon>
@@ -65,9 +74,14 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
       </mat-card-content>
     </mat-card>
   `,
+  host: {
+    '[class.mc-flex-column]': 'true',
+  },
   styles: `
     .card {
       cursor: pointer;
+      overflow: hidden;
+      flex: 1;
     }
 
     img {
@@ -77,12 +91,30 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
       margin-bottom: 1rem;
     }
 
-    h3 {
+    .header {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .title {
       font-weight: 700;
       font-size: 24px;
       color: #111827;
       line-height: 1.4;
       margin-bottom: 0.5em;
+    }
+
+    .type {
+      font-size: 1.2rem;
+      color: #444;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
     .subheading {
