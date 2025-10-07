@@ -21,10 +21,15 @@ import { Workshop } from '@marmicode/workshop/core';
     @if (workshop().sessions.length > 0) {
       <mc-page-section pageTitle="🗓️ Upcoming Sessions">
         <div class="sessions">
-          @for (session of workshop().sessions; track session.date) {
+          @for (session of workshop().sessions; track session.startDate) {
             <mc-card>
               <ng-container slot="title">
-                🗓️ {{ session.date | date: 'fullDate' }}
+                @if (session.endDate) {
+                  🗓️ {{ session.startDate | date: 'MMM d' }} to
+                  {{ session.endDate | date: 'mediumDate' }}
+                } @else {
+                  🗓️ {{ session.startDate | date: 'fullDate' }}
+                }
               </ng-container>
               <ng-container slot="content">
                 <p class="content">

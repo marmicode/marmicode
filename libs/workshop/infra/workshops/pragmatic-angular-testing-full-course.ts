@@ -13,7 +13,17 @@ Learn pragmatic techniques through practical exercises to build maintainable, pr
   duration: 3,
   location: 'online',
   waitlistUrl: 'https://forms.gle/gNuegturZDUvPukT6',
-  sessions: [],
+  sessions: [
+    {
+      startDate: new Date('2025-12-10'),
+      endDate: new Date('2025-12-12'),
+      startTime: '10:00',
+      endTime: '17:00',
+      timezone: 'CET',
+      waitlistUrl:
+        'https://docs.google.com/forms/d/e/1FAIpQLSceQ2TWdpDjPHD4W0j_EsAvcOi4kr-NRmFebiJLo5zHjX-QOQ/viewform?usp=pp_url&entry.804908816=December+10%E2%80%9312,+2025+(Wed%E2%80%93Fri),+10+AM+%E2%80%93+5+PM+CET',
+    },
+  ],
   description: `
 Testing, more specifically frontend testing, is undeniably in **the top 3 of the most complex topics** associated with Angular development.
 

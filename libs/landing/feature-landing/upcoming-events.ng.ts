@@ -29,10 +29,17 @@ import { WorkshopRepository } from '@marmicode/workshop/infra';
                 <mat-icon class="icon mc-hide mc-show-gt-xs">event</mat-icon>
                 <div>
                   <h3 class="title">{{ event.title }}</h3>
-                  <div class="date">
-                    {{ event.date | date }} · {{ event.startTime }}
+                  <p class="type">{{ event.type }}</p>
+                  <p class="date">
+                    @if (event.endDate) {
+                      {{ event.startDate | date: 'MMM d' }} to
+                      {{ event.endDate | date }}
+                    } @else {
+                      {{ event.startDate | date }}
+                    }
+                    · {{ event.startTime }}
                     {{ event.timezone }}
-                  </div>
+                  </p>
                 </div>
               </div>
               <ng-container slot="content">
@@ -78,24 +85,16 @@ import { WorkshopRepository } from '@marmicode/workshop/infra';
         margin: 0;
       }
 
-      .date {
-        color: #46d9cf;
-        font-size: 1.3rem;
-        font-weight: 400;
+      .type {
+        margin: 0.5rem 0 0 0;
+        font-size: 1.2rem;
+        font-weight: 300;
       }
 
-      .event-card {
-        flex: 1 1 0;
-        min-width: 260px;
-        max-width: 340px;
-        background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        padding: 2rem 1.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        color: #561f4b;
+      .date {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 200;
       }
     `,
   ],
@@ -107,14 +106,16 @@ export class UpcomingEvents {
     .map((workshop) =>
       workshop.sessions.map((session) => ({
         title: workshop.title,
+        type: workshop.type === 'tapas' ? '🫒 Tapas Session' : '🍽️ Full Course',
         description: workshop.subheading,
-        date: session.date,
+        startDate: session.startDate,
+        endDate: session.endDate,
         route: workshopRouterHelper.detail(workshop.id),
         startTime: session.startTime,
         timezone: session.timezone,
       })),
     )
     .flat()
-    .filter((event) => event.date > this._today)
-    .sort((a, b) => a.date.getTime() - b.date.getTime());
+    .filter((event) => event.startDate > this._today)
+    .sort((a, b) => a.startDate.getTime() - b.startDate.getTime());
 }

@@ -67,7 +67,12 @@ export interface Session {
   /**
    * The date of the session.
    */
-  date: Date;
+  startDate: Date;
+
+  /**
+   * The end date of the session if multiple days.
+   */
+  endDate?: Date;
 
   /**
    * The start time of the session.
