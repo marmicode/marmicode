@@ -6,8 +6,8 @@ export const pragmaticAngularTestingFullCourse = createWorkshop({
   id: 'pragmatic-angular-testing-full-course',
   title: 'Pragmatic Angular Testing Workshop',
   type: 'full',
-  subheading: `Testing is undeniably in the top 3 of the most complex topics in Angular development.
-Learn pragmatic techniques through practical exercises to build maintainable, profitable tests.`,
+  subheading: `Three days to turn your testing chaos into a well-seasoned strategy.
+Learn to build tests that survive refactors, migrations, and deadlines.`,
   pictureUri,
   thumbnailUri,
   duration: 3,
@@ -43,8 +43,6 @@ During this intensive workshop, you will learn:
 - How to choose **the right scope** for your tests
 - How to control testing costs and adopt a **pragmatic and profitable testing strategy**
 - Lots of tips & tricks that will help adopting a pragmatic testing strategy
-
-**Duration: 3 days**
 `,
   offer: {
     type: 'early-bird',
@@ -52,41 +50,51 @@ During this intensive workshop, you will learn:
     originalPrice: 1200,
   },
   requiredSkills: [
-    `Curiosity and good Web culture`,
-    `Being familiar with the Angular ecosystem (e.g. know how to create a component, implement and use inputs and outputs)`,
-    `An experience with Angular testing will be beneficial in order to grasp more tips & tricks`,
-    `A computer connected to the Internet 😊`,
+    `Angular core concepts (e.g. components, inputs/outputs, services)`,
+    `TypeScript fundamentals (e.g. types, interfaces, basic generics)`,
+    `Git fundamentals (e.g. cloning, resetting local changes, switching branches)`,
   ],
   benefits: [
     {
       icon: 'psychology',
-      title: 'Test-Driven Development Mastery',
+      title: 'Test-Driven Development',
       description:
         'Learn Progressive TDD and Timeboxed TDD with TCR (Test && Commit || Revert) approaches.',
     },
     {
       icon: 'visibility',
-      title: 'Human-Readable & Maintainable Tests',
+      title: 'Readable & Maintainable Tests',
       description:
-        'Master Object Mothers and testing patterns that make tests easy to read, understand, and maintain.',
+        'Learn how to write tests that are easy to read, understand, and maintain over time.',
+    },
+    {
+      icon: 'psychology',
+      title: 'Behavior-Focused Testing',
+      description:
+        'Write tests that validate user behavior, not implementation details.',
     },
     {
       icon: 'rocket',
-      title: 'Vitest & Modern Testing Tools',
+      title: 'Future-Proof Your Tests',
       description:
-        'Leverage Vitest instead of Karma, Jest or Web Test Runner for better performance and developer experience.',
+        'Craft tests that survive migrations and refactorings with minimal changes.',
+    },
+    {
+      icon: 'timer',
+      title: 'Async Testing',
+      description: 'Learn how to test asynchronous code effectively.',
     },
     {
       icon: 'straighten',
-      title: 'Right-Sized Testing Strategy',
+      title: 'Right-Sized Testing',
       description:
-        'Understand Narrow & Wide vs Unit & Integration testing and choose the appropriate scope for every situation.',
+        'Discover how to choose the appropriate test size for every situation.',
     },
     {
       icon: 'theater_comedy',
-      title: 'Test Doubles Expertise',
+      title: 'Mocking Made Easy',
       description:
-        'Master the difference between dummies, stubs, spies, mocks, and fakes + how and when to use them.',
+        'Master Fakes and Object Mothers to simplify "mocking" and avoid common pitfalls.',
     },
     {
       icon: 'play_circle',
@@ -105,6 +113,12 @@ During this intensive workshop, you will learn:
       title: 'NgRx SignalStore Testing',
       description:
         'Test stores effectively and learn when and how to provide test doubles for state management.',
+    },
+    {
+      icon: 'restaurant',
+      title: 'Pragmatic Testing Buffet',
+      description:
+        'Enjoy a buffet of tips and tricks to help you adopt a Pragmatic Testing Strategy.',
     },
   ],
   agenda: {
