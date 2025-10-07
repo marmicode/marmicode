@@ -1,17 +1,10 @@
 import { DatePipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { Card, PageSection } from '@marmicode/shared/ui';
 import { Workshop } from '@marmicode/workshop/core';
-import { WaitlistUrlBuilder } from './internal/waitlist-url-builder';
-import { PageSection, Card } from '@marmicode/shared/ui';
 
 @Component({
   selector: 'mc-workshop-sessions',
@@ -27,7 +20,7 @@ import { PageSection, Card } from '@marmicode/shared/ui';
   template: `
     <mc-page-section pageTitle="🗓️ Upcoming Sessions">
       <div class="sessions">
-        @for (session of sessionsWithMailtoUrl(); track session.date) {
+        @for (session of workshop().sessions; track session.date) {
           <mc-card>
             <ng-container slot="title">
               🗓️ {{ session.date | date: 'fullDate' }}
@@ -38,7 +31,7 @@ import { PageSection, Card } from '@marmicode/shared/ui';
                 {{ session.timezone }}
               </p>
               <a
-                [href]="session.waitlistMailtoUrl"
+                [href]="session.waitlistUrl"
                 color="primary"
                 mat-stroked-button
                 target="_blank"
@@ -65,14 +58,4 @@ import { PageSection, Card } from '@marmicode/shared/ui';
 })
 export class WorkshopSessions {
   workshop = input.required<Workshop>();
-  private _waitlistUrlBuilder = inject(WaitlistUrlBuilder);
-  sessionsWithMailtoUrl = computed(() =>
-    this.workshop().sessions.map((session) => ({
-      ...session,
-      waitlistMailtoUrl: this._waitlistUrlBuilder.generateWaitlistUrl(
-        this.workshop(),
-        session,
-      ),
-    })),
-  );
 }
