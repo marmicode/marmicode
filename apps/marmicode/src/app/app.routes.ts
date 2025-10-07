@@ -66,4 +66,10 @@ export const routes: Routes = [
     pathMatch: 'full',
     loadComponent: () => import('@marmicode/landing/feature-landing'),
   },
+
+  /* Not found. */
+  {
+    path: '**',
+    loadComponent: () => import('./not-found.ng'),
+  },
 ];
