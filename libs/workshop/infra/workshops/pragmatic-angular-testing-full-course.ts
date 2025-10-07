@@ -48,8 +48,8 @@ During this intensive workshop, you will learn:
 `,
   offer: {
     type: 'early-bird',
-    price: 1200,
-    originalPrice: 1800,
+    price: 970,
+    originalPrice: 1200,
   },
   requiredSkills: [
     `Curiosity and good Web culture`,
