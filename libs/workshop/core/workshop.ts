@@ -20,6 +20,11 @@ export interface Workshop {
    * Workshop duration in days.
    */
   duration: number;
+
+  /**
+   * Google form url for the waitlist.
+   */
+  waitlistUrl: string;
   sessions: Session[];
   nextSessionDate?: Date;
 
@@ -80,6 +85,11 @@ export interface Session {
    * The timezone of the session.
    */
   timezone: 'CET' | 'PT';
+
+  /**
+   * Pre-filled google form url for the waitlist.
+   */
+  waitlistUrl: string;
 }
 
 export function createWorkshop(workshop: Workshop): Workshop {

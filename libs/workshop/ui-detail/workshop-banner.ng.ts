@@ -14,7 +14,6 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Workshop } from '@marmicode/workshop/core';
-import { WaitlistUrlBuilder } from './internal/waitlist-url-builder';
 import { Hero } from '@marmicode/shared/ui';
 
 @Component({
@@ -60,7 +59,7 @@ import { Hero } from '@marmicode/shared/ui';
             <!-- TODO: Re-enable input when the backend is ready. -->
             <!-- <input type="email" placeholder="Drop your email here" /> -->
             <a
-              [href]="waitlistMailtoUrl()"
+              [href]="workshop().waitlistUrl"
               mat-button
               color="accent"
               target="_blank"
@@ -167,8 +166,6 @@ import { Hero } from '@marmicode/shared/ui';
 export class WorkshopHero {
   workshop = input.required<Workshop>();
 
-  private _waitlistUrlBuilder = inject(WaitlistUrlBuilder);
-
   subtitle = computed(() => {
     const duration = this.workshop().duration;
     const typeStr =
@@ -186,7 +183,4 @@ export class WorkshopHero {
     return offer.type === 'early-bird' ? '🐣 Early Bird' : '⏰ Last Minute';
   });
   subheadingLines = computed(() => this.workshop().subheading.split('\n'));
-  waitlistMailtoUrl = computed(() =>
-    this._waitlistUrlBuilder.generateWaitlistUrl(this.workshop()),
-  );
 }

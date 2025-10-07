@@ -12,18 +12,23 @@ Let's cook fast, reliable tests that actually help you ship.`,
   thumbnailUri,
   duration: 1,
   location: 'online',
+  waitlistUrl: 'https://forms.gle/zFnkWKYXbMxHE6hA6',
   sessions: [
     {
-      date: new Date('2025-10-29'),
+      date: new Date('2025-11-12'),
       startTime: '10:00',
       endTime: '17:00',
       timezone: 'CET',
+      waitlistUrl:
+        'https://docs.google.com/forms/d/e/1FAIpQLSfcc9QZ5Wa98yDNlWEBLygWZAs5vZLSwqkFGFhsb1XkBqlbRw/viewform?usp=pp_url&entry.804908816=Wednesday,+November+12,+2025+%E2%80%94+10AM+to+5PM+CET',
     },
     {
-      date: new Date('2025-10-30'),
+      date: new Date('2025-11-13'),
       startTime: '08:00',
       endTime: '13:00',
       timezone: 'PT',
+      waitlistUrl:
+        'https://docs.google.com/forms/d/e/1FAIpQLSfcc9QZ5Wa98yDNlWEBLygWZAs5vZLSwqkFGFhsb1XkBqlbRw/viewform?usp=pp_url&entry.804908816=Thursday,+November+13,+2025+%E2%80%94+8AM+to+1PM+PT',
     },
   ],
   description: `
