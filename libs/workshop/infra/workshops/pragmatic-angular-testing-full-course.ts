@@ -30,19 +30,6 @@ Testing, more specifically frontend testing, is undeniably in **the top 3 of the
 When one is confronted with this complexity, it is tempting to give up, but at what cost? It is totally possible to **develop an application without tests but is it really faster**? What happens to **code maintainability** a few months or sometimes just weeks later? **Can we serenely refactor and deploy our apps regularly** while it is getting older and complex in our hands?
 
 This comprehensive 3-day workshop presents, through practical exercises, pragmatic Angular testing techniques. You will **learn how to implement human-readable, maintainable, and above all profitable tests.**
-
-During this intensive workshop, you will learn:
-- How to implement tests for your Angular application with the **Test-Driven Development** approach
-- How to leverage the best of **Vitest**, and **Playwright Component Testing**
-- How to choose the **type of tests** that fits best **depending on the context**
-- How to **decouple tests from code** to encourage refactoring and tidying up when needed
-- How to implement **maintainable and human-readable** tests
-- How to implement **type-safe** tests
-- The difference between **dummies, stubs, spies, mocks, and fakes** + how and when to use them
-- The difference between **isolated, shallow & integration component testing**
-- How to choose **the right scope** for your tests
-- How to control testing costs and adopt a **pragmatic and profitable testing strategy**
-- Lots of tips & tricks that will help adopting a pragmatic testing strategy
 `,
   offer: {
     type: 'early-bird',
@@ -58,20 +45,18 @@ During this intensive workshop, you will learn:
     {
       icon: 'psychology',
       title: 'Test-Driven Development',
+      description: 'From specs to refactors, learn the TDD mindset.',
+    },
+    {
+      icon: 'build',
+      title: 'Modern Testing Tools',
       description:
-        'Learn Progressive TDD and Timeboxed TDD with TCR (Test && Commit || Revert) approaches.',
+        'Leverage the best of Vitest and Playwright Component Testing.',
     },
     {
       icon: 'visibility',
-      title: 'Readable & Maintainable Tests',
-      description:
-        'Learn how to write tests that are easy to read, understand, and maintain over time.',
-    },
-    {
-      icon: 'psychology',
-      title: 'Behavior-Focused Testing',
-      description:
-        'Write tests that validate user behavior, not implementation details.',
+      title: 'Readable and Maintainable Tests',
+      description: 'Tests that tell stories, not implementation details.',
     },
     {
       icon: 'rocket',
@@ -80,39 +65,10 @@ During this intensive workshop, you will learn:
         'Craft tests that survive migrations and refactorings with minimal changes.',
     },
     {
-      icon: 'timer',
-      title: 'Async Testing',
-      description: 'Learn how to test asynchronous code effectively.',
-    },
-    {
-      icon: 'straighten',
-      title: 'Right-Sized Testing',
-      description:
-        'Discover how to choose the appropriate test size for every situation.',
-    },
-    {
       icon: 'theater_comedy',
       title: 'Mocking Made Easy',
       description:
         'Master Fakes and Object Mothers to simplify "mocking" and avoid common pitfalls.',
-    },
-    {
-      icon: 'play_circle',
-      title: 'Component Testing Mastery',
-      description:
-        'Learn isolated, shallow & integration component testing with TestBed, Testing Library, and Playwright Component Testing.',
-    },
-    {
-      icon: 'auto_awesome',
-      title: 'Visual Regression Testing',
-      description:
-        'Implement visual regression testing strategies that scale with Playwright Component Testing.',
-    },
-    {
-      icon: 'storage',
-      title: 'NgRx SignalStore Testing',
-      description:
-        'Test stores effectively and learn when and how to provide test doubles for state management.',
     },
     {
       icon: 'restaurant',
