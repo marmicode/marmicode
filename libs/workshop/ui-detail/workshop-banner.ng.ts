@@ -68,9 +68,9 @@ import { RouterLink } from '@angular/router';
               BOOK A SESSION
             </a>
             <a
-              class="secondary"
-              href="mailto:kitchen@marmicode.io"
+              [href]="workshop().customSessionRequestUrl"
               mat-button
+              class="secondary"
               color="accent"
               target="_blank"
             >

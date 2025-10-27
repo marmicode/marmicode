@@ -17,15 +17,13 @@ import { LumaEvents } from '@marmicode/workshop/ui';
     LumaEvents,
   ],
   template: `
-    @if (workshop().sessions.length > 0) {
-      <mc-page-section
-        [id]="upcomingSessionsSectionId"
-        pageTitle="🗓️ Upcoming Sessions"
-        color="grey"
-      >
-        <mc-luma-events [tag]="workshop().lumaTag" />
-      </mc-page-section>
-    }
+    <mc-page-section
+      [id]="upcomingSessionsSectionId"
+      pageTitle="🗓️ Upcoming Sessions"
+      color="grey"
+    >
+      <mc-luma-events [tag]="workshop().lumaTag" />
+    </mc-page-section>
   `,
 })
 export class WorkshopSessions {

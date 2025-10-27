@@ -27,11 +27,9 @@ export interface Workshop {
   duration: number;
 
   /**
-   * Google form url for the waitlist.
+   * Google form url for custom session requests.
    */
-  waitlistUrl: string;
-  sessions: Session[];
-  nextSessionDate?: Date;
+  customSessionRequestUrl: string;
 
   offer: Offer;
 
