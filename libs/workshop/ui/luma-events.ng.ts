@@ -31,7 +31,7 @@ export class LumaEvents {
     url.searchParams.set('lt', 'light');
     const tag = this.tag();
     if (tag != null && tag.length > 0) {
-      url.searchParams.set('tag', encodeURIComponent(this.tag()));
+      url.searchParams.set('tag', encodeURIComponent(tag));
     }
     return this._sanitizer.bypassSecurityTrustResourceUrl(url.toString());
   });

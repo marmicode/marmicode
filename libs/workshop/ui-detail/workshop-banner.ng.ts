@@ -92,9 +92,7 @@ import { RouterLink } from '@angular/router';
       position: relative;
 
       @media (max-width: 599.98px) {
-        :host {
-          font-size: 0.75rem;
-        }
+        font-size: 0.75rem;
       }
     }
 
