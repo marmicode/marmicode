@@ -22,13 +22,19 @@ import { DomSanitizer } from '@angular/platform-browser';
   ></iframe>`,
 })
 export class LumaEvents {
-  tag = input.required<string>();
+  tag = input<string>();
 
-  protected iframeUrl = computed(() =>
-    this._sanitizer.bypassSecurityTrustResourceUrl(
-      `https://luma.com/embed/calendar/cal-2eC1KNf0fJvuxXY/events?lt=light&tag=${encodeURIComponent(this.tag())}`,
-    ),
-  );
+  protected iframeUrl = computed(() => {
+    const url = new URL(
+      'https://luma.com/embed/calendar/cal-2eC1KNf0fJvuxXY/events',
+    );
+    url.searchParams.set('lt', 'light');
+    const tag = this.tag();
+    if (tag != null && tag.length > 0) {
+      url.searchParams.set('tag', encodeURIComponent(this.tag()));
+    }
+    return this._sanitizer.bypassSecurityTrustResourceUrl(url.toString());
+  });
 
   private _sanitizer = inject(DomSanitizer);
 }

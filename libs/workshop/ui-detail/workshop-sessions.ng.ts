@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { PageSection } from '@marmicode/shared/ui';
 import { Workshop } from '@marmicode/workshop/core';
-import { LumaEvents } from './luma-events.ng';
+import { LumaEvents } from '@marmicode/workshop/ui';
 
 @Component({
   selector: 'mc-workshop-sessions',
