@@ -18,7 +18,11 @@ import { LumaEvents } from '@marmicode/workshop/ui';
   ],
   template: `
     @if (workshop().sessions.length > 0) {
-      <mc-page-section pageTitle="🗓️ Upcoming Sessions" color="grey">
+      <mc-page-section
+        [id]="upcomingSessionsSectionId"
+        pageTitle="🗓️ Upcoming Sessions"
+        color="grey"
+      >
         <mc-luma-events [tag]="workshop().lumaTag" />
       </mc-page-section>
     }
@@ -26,4 +30,8 @@ import { LumaEvents } from '@marmicode/workshop/ui';
 })
 export class WorkshopSessions {
   workshop = input.required<Workshop>();
+
+  upcomingSessionsSectionId = UPCOMING_SESSIONS_SECTION_ID;
 }
+
+export const UPCOMING_SESSIONS_SECTION_ID = 'upcoming-sessions' as const;
