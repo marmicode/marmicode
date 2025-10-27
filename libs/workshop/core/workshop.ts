@@ -6,6 +6,11 @@ export interface Workshop {
   description: string;
 
   /**
+   * Tag used to show upcoming sessions.
+   */
+  lumaTag: string;
+
+  /**
    * The subheading is a short description of the workshop.
    * It is displayed in the workshop banner.
    *

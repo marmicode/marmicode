@@ -13,6 +13,7 @@ Let's cook fast, reliable tests that actually help you ship.`,
   duration: 1,
   location: 'online',
   waitlistUrl: 'https://forms.gle/zFnkWKYXbMxHE6hA6',
+  lumaTag: 'angular-testing-tapas',
   sessions: [
     {
       startDate: new Date('2025-11-12'),

@@ -13,6 +13,7 @@ Learn to build tests that survive refactors, migrations, and deadlines.`,
   duration: 3,
   location: 'online',
   waitlistUrl: 'https://forms.gle/gNuegturZDUvPukT6',
+  lumaTag: 'angular-testing',
   sessions: [
     {
       startDate: new Date('2025-12-10'),

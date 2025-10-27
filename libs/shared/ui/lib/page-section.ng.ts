@@ -20,7 +20,7 @@ import {
       width: 100%;
       padding-bottom: 5rem;
       display: block;
-      background: var(--mc-workshop-section-background-color);
+      background: var(--mc-section-background-color);
     }
 
     section.surface {
@@ -36,7 +36,7 @@ import {
       position: absolute;
       height: 3rem;
       clip-path: ellipse(60% 100% at 50% 120%);
-      background: white;
+      background: var(--mc-section-ellipse-background-color);
       top: -3rem;
       width: 100%;
       content: '';
@@ -52,21 +52,40 @@ import {
     }
   `,
   host: {
-    '[style.--mc-workshop-section-background-color]': 'realColor()',
+    '[style.--mc-section-background-color]': 'backgroundColors().section',
+    '[style.--mc-section-ellipse-background-color]':
+      'backgroundColors().ellipse',
   },
 })
 export class PageSection {
   pageTitle = input<string>();
-  color = input<'surface' | 'plain'>('plain');
+  /**
+   * The color of the section.
+   * - 'surface' for a gradient background
+   * - 'plain' for a white background
+   * - 'grey' for a grey background (only used to match luma events background)
+   */
+  color = input<'surface' | 'plain' | 'grey'>('plain');
 
-  protected realColor = computed(() =>
-    this.color() === 'surface'
-      ? `linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0) 10%,
-        rgba(56, 0, 48, 0.1) 90%,
-        rgba(56, 0, 48, 0.2) 110%
-      )`
-      : 'white',
-  );
+  protected backgroundColors = computed<{
+    ellipse: string;
+    section: string;
+  }>(() => {
+    switch (this.color()) {
+      case 'surface':
+        return {
+          ellipse: 'white',
+          section: `linear-gradient(
+              180deg,
+              rgba(255, 255, 255, 0) 10%,
+              rgba(56, 0, 48, 0.1) 90%,
+              rgba(56, 0, 48, 0.2) 110%
+            )`,
+        };
+      case 'grey':
+        return { ellipse: '#f7f8f9', section: '#f7f8f9' };
+      default:
+        return { ellipse: 'white', section: 'white' };
+    }
+  });
 }
