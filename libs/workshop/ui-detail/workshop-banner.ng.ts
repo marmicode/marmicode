@@ -56,32 +56,26 @@ import { RouterLink } from '@angular/router';
             <span>{{ line }}</span>
           }
         </p>
-        <div class="actions-and-spots">
-          <div class="actions">
-            <a
-              [routerLink]="[]"
-              [fragment]="upcomingSessionsSectionId"
-              mat-raised-button
-              color="accent"
-            >
-              <mat-icon>calendar_month</mat-icon>
-              BOOK A SESSION
-            </a>
-            <a
-              [href]="workshop().customSessionRequestUrl"
-              mat-button
-              class="secondary"
-              color="accent"
-              target="_blank"
-            >
-              <mat-icon>build</mat-icon>
-              REQUEST A CUSTOM SESSION
-            </a>
-          </div>
-          <p class="spots">
-            Only 20 spots available. Be the first to know when registration
-            opens.
-          </p>
+        <div class="actions">
+          <a
+            [routerLink]="[]"
+            [fragment]="upcomingSessionsSectionId"
+            mat-raised-button
+            color="accent"
+          >
+            <mat-icon>calendar_month</mat-icon>
+            BOOK A SESSION
+          </a>
+          <a
+            [href]="workshop().customSessionRequestUrl"
+            mat-button
+            class="secondary"
+            color="accent"
+            target="_blank"
+          >
+            <mat-icon>build</mat-icon>
+            REQUEST A CUSTOM SESSION
+          </a>
         </div>
       </ng-content>
     </mc-hero>
@@ -117,18 +111,11 @@ import { RouterLink } from '@angular/router';
       line-height: 1.5;
     }
 
-    .actions-and-spots {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 1rem;
-    }
-
     .actions {
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin: 0 0 1rem 0;
+      margin: 0 0 3rem 0;
 
       @media (max-width: 599.98px) {
         flex-direction: column;
@@ -139,7 +126,7 @@ import { RouterLink } from '@angular/router';
 
     .actions a {
       flex: 1 0 auto;
-      padding: 0.5rem;
+      padding: 1.2rem;
       border: none;
       border-radius: 8px;
       cursor: pointer;
@@ -149,12 +136,6 @@ import { RouterLink } from '@angular/router';
         background: rgba(255, 255, 255, 0.1);
         box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.2);
       }
-    }
-
-    .spots {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 1.1em;
-      font-style: italic;
     }
   `,
 })
