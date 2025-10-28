@@ -15,11 +15,36 @@ Learn to build tests that survive refactors, migrations, and deadlines.`,
   customSessionRequestUrl: 'https://forms.gle/TEp9DTM6pHiSFRPY9',
   lumaTag: 'angular-testing',
   description: `
-Testing, more specifically frontend testing, is undeniably in **the top 3 of the most complex topics** associated with Angular development.
+There are two ways to keep a product stable:  
+**never touch it — or cook up a solid testing strategy.**
 
-When one is confronted with this complexity, it is tempting to give up, but at what cost? It is totally possible to **develop an application without tests but is it really faster**? What happens to **code maintainability** a few months or sometimes just weeks later? **Can we serenely refactor and deploy our apps regularly** while it is getting older and complex in our hands?
+So… how’s yours holding up?
 
-This comprehensive 3-day workshop presents, through practical exercises, pragmatic Angular testing techniques. You will **learn how to implement human-readable, maintainable, and above all profitable tests.**
+* Refactor something and watch the tests boil over?  
+* Maintaining mocks feels like duct tape meets rocket science?  
+* Still chasing 100% coverage while bugs keep crawling through?  
+* End-to-end tests looked tasty at first — until flakiness and slowness caused indigestion?  
+* As release day nears, you skip tests and serve it raw — fingers crossed hoping no one gets burned?
+
+If any of that hits close to home, this workshop is your way out of the fire.
+
+We’ll stop by the market for key ingredients such as **Fakes, Object Mothers, Gloves, Vitest, Testing Library, Angular CDK Harness, and Playwright Component Testing with Testronaut**.
+
+Then, back to the kitchen, we’ll prepare a complete, low-maintenance testing menu that matures over three days. You’ll learn how to:
+
+* Write maintainable, human-readable tests that **survive refactors and migrations**.  
+* Prepare your suite for tomorrow’s Angular: **Zoneless-ready** and **Signal-friendly**.  
+* Master all flavors of **TDD** — from Progressive to Timeboxed.  
+* Test **async code** and **effects** with confidence.  
+* Build and use your own **test harnesses** and **Gloves** for resilient UI interaction.  
+* Detect **visual regressions** before your users do.  
+* Design a **pragmatic testing strategy** that scales across teams, and pays off over time — not just write better tests.
+
+Across these three days, you won’t just learn recipes — you’ll refine your testing instincts, challenge habits, and leave with a testing culture you can scale.
+
+Small group, plenty of hands-on work, and direct coaching to help you apply each technique to your own codebase.
+
+**No dogma. No silver bullets.** Just three days of practical, battle-tested techniques to help you cook with confidence — and serve code that stays fresh long after the workshop ends.
 `,
   offer: {
     type: 'early-bird',
