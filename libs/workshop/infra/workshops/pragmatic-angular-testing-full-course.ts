@@ -191,7 +191,10 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       {
         title:
           '💻 Hands-on Exercises: Angular Testing Library vs. Vitest Browser Mode',
-        items: ['Hands-on Angular Testing Library practice.'],
+        items: [
+          'Hands-on Angular Testing Library practice.',
+          'Hands-on Vitest Browser Mode practice.',
+        ],
       },
       {
         title: '👨🏻‍🏫 Gloves & Angular CDK Test Harness',
