@@ -9,7 +9,6 @@ import { PageSection } from '@marmicode/shared/ui';
   template: `
     <mc-page-section color="surface">
       <mc-markdown-block [block]="description()" class="content" />
-      <mc-markdown-block [block]="frenchMention" class="content" />
     </mc-page-section>
   `,
   styles: `
@@ -22,8 +21,4 @@ import { PageSection } from '@marmicode/shared/ui';
 })
 export class WorkshopDescription {
   description = input.required<string>();
-  frenchMention = `
-  ---
-  *🇫🇷 Formation également disponible en Français et éligible au financement OPCO.*
-  `;
 }
