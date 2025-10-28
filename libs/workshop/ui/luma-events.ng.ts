@@ -13,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   template: `<iframe
     [src]="iframeUrl()"
     width="100%"
-    height="450"
+    height="650"
     frameborder="0"
     style="border: 0;"
     allowfullscreen=""
