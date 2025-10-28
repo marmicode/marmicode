@@ -66,7 +66,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       icon: 'build',
       title: 'Modern Testing Tools',
       description:
-        'Leverage the best of Vitest and Playwright Component Testing.',
+        'Leverage the best of Vitest and Playwright Component Testing with Testronaut.',
     },
     {
       icon: 'visibility',
@@ -111,7 +111,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '💻 First Tests',
+        title: '💻 Hands-on Exercises: First Tests',
         items: [
           'Test-Driven Development: origin & benefits.',
           'Progressive TDD.',
@@ -120,7 +120,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '💻 Exercise: Testing an Angular Service',
+        title: '💻 Hands-on Exercises: Testing an Angular Service',
         items: [
           'Testing an Angular service with the Progressive TDD approach.',
           'Debugging with Vitest.',
@@ -145,7 +145,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '💻 Exercise: Async Testing',
+        title: '💻 Hands-on Exercises: Async Testing',
         items: ['Hands-on async testing practice.'],
       },
       {
@@ -157,7 +157,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '💻 Component Testing Exercises',
+        title: '💻 Hands-on Exercises: Component Testing',
         items: [
           'Component isolated testing.',
           'Component shallow testing.',
@@ -165,7 +165,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '👨🏻‍🏫 Test Doubles',
+        title: '👨🏻‍🏫 Test Doubles & "Mocking"',
         items: [
           'Mocks vs Dummies vs Spies vs Stubs vs Fakes.',
           'Fake it till you Mock it!',
@@ -174,22 +174,23 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '💻 Exercise: Test Doubles',
+        title: '💻 Hands-on Exercises: Test Doubles & "Mocking"',
         items: ['Hands-on test doubles practice.'],
       },
       {
-        title: '💻 More Component Testing',
+        title: '💻 Hands-on Exercises: More Component Testing',
         items: [
           'Testing Inputs & Outputs based communication.',
           'Interacting with forms.',
         ],
       },
       {
-        title: '👨🏻‍🏫 Angular Testing Library',
+        title: '👨🏻‍🏫 Angular Testing Library vs. Vitest Browser Mode',
         items: ['Resilient DOM testing.'],
       },
       {
-        title: '💻 Exercise: Angular Testing Library',
+        title:
+          '💻 Hands-on Exercises: Angular Testing Library vs. Vitest Browser Mode',
         items: ['Hands-on Angular Testing Library practice.'],
       },
       {
@@ -201,20 +202,21 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '💻 Test Harness Exercises',
+        title: '💻 Hands-on Exercises: Test Harness',
         items: ['Using a test harness.', 'Implementing a test harness.'],
       },
       {
-        title: '👨🏻‍🏫 UI Testing with Playwright Component Testing',
+        title: '👨🏻‍🏫 Playwright Component Testing with Testronaut',
         items: [
           'Beyond the limits of browserless testing.',
-          'Playwright Component Testing (CT).',
-          'Debugging with Playwright CT.',
+          'Playwright Component Testing with Testronaut.',
+          'Debugging with Playwright and Testronaut.',
         ],
       },
       {
-        title: '💻 Exercise: UI Testing with Playwright CT',
-        items: ['Hands-on UI testing with Playwright CT.'],
+        title:
+          '💻 Hands-on Exercises: Playwright Component Testing with Testronaut',
+        items: ['Hands-on Playwright Component Testing with Testronaut.'],
       },
       {
         title: '👨🏻‍🏫 Visual Regression Testing',
@@ -224,23 +226,8 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '💻 Exercise: Visual Regression Testing',
-        items: ['Detecting visual regressions with Playwright CT.'],
-      },
-      {
-        title: '👨🏻‍🏫 NgRx SignalStore Testing',
-        items: [
-          'Testing a store.',
-          'When and how to provide a test double for a store.',
-        ],
-      },
-      {
-        title: '💻 SignalStore Testing Exercises',
-        items: [
-          'Testing a store.',
-          'Provide a test double for a store.',
-          'Testing a custom store feature.',
-        ],
+        title: '💻 Hands-on Exercises: Visual Regression Testing',
+        items: ['Detecting visual regressions with Playwright and Testronaut.'],
       },
       {
         title: '👨🏻‍🏫 Defining a Pragmatic Testing Strategy',

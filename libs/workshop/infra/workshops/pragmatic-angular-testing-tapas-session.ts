@@ -51,34 +51,22 @@ No dogma. No silver bullets. Just pragmatic Angular testing skills to help you *
   ],
   benefits: [
     {
+      icon: 'build',
+      title: 'Modern Testing Tools',
+      description:
+        'Leverage the best of Vitest and Playwright Component Testing.',
+    },
+    {
       icon: 'visibility',
       title: 'Readable & Maintainable Tests',
       description:
         'Learn how to write tests that are easy to read, understand, and maintain over time.',
     },
     {
-      icon: 'psychology',
-      title: 'Behavior-Focused Testing',
-      description:
-        'Write tests that validate user behavior, not implementation details.',
-    },
-    {
       icon: 'rocket',
       title: 'Future-Proof Your Tests',
       description:
         'Craft tests that survive migrations and refactorings with minimal changes.',
-    },
-    {
-      icon: 'straighten',
-      title: 'Right-Sized Testing',
-      description:
-        'Discover how to choose the appropriate test size for every situation.',
-    },
-    {
-      icon: 'theater_comedy',
-      title: 'Mocking Made Easy',
-      description:
-        'Master Fakes and Object Mothers to simplify "mocking" and avoid common pitfalls.',
     },
     {
       icon: 'restaurant',
@@ -105,11 +93,12 @@ No dogma. No silver bullets. Just pragmatic Angular testing skills to help you *
         ],
       },
       {
-        title: '👨🏻‍🏫 Vitest',
+        title: '👨🏻‍🏫 Vitest & Vitest Browser Mode',
         items: [
           'Why Vitest?',
           'Pros, cons, and the future.',
           'Migration path from Karma or Jest.',
+          'Vitest Browser Mode.',
         ],
       },
       {
