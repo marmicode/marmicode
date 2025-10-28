@@ -123,7 +123,7 @@
     "@storybook/addon-essentials": "8.6.14",
     "@storybook/addon-knobs": "8.0.1",
     "@storybook/angular": "8.6.14",
-    "@swc-node/register": "~1.10.0",
+    "@swc-node/register": "~1.11.0",
     "@swc/core": "~1.13.0",
     "@swc/helpers": "~0.5.11",
     "@types/express": "5.0.3",
