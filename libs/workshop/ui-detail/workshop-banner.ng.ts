@@ -77,6 +77,10 @@ import { RouterLink } from '@angular/router';
             REQUEST A CUSTOM SESSION
           </a>
         </div>
+        <div class="bottom-note">
+          🇫🇷 Formation également disponible en Français et éligible au
+          financement OPCO.
+        </div>
       </ng-content>
     </mc-hero>
   `,
@@ -115,12 +119,11 @@ import { RouterLink } from '@angular/router';
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin: 0 0 3rem 0;
+      margin-bottom: 2rem;
 
       @media (max-width: 599.98px) {
         flex-direction: column;
         align-items: stretch;
-        margin: 0 10px;
       }
     }
 
@@ -136,6 +139,13 @@ import { RouterLink } from '@angular/router';
         background: rgba(255, 255, 255, 0.1);
         box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.2);
       }
+    }
+
+    .bottom-note {
+      color: white;
+      font-style: italic;
+      text-align: center;
+      margin-bottom: 2rem;
     }
   `,
 })
