@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 @use '@angular/material' as mat;
 @use './custom-theme.scss' as theme;
 
@@ -10,18 +10,22 @@ body {
   --marmicode-accent-color: #{$marmicode-accent-color};
 }
 
-html, body {
+html,
+body {
   height: 100%;
+  scroll-behavior: smooth;
 }
 body {
   /* @hack: setting background color to toolbar color to affect ios status bar color. */
   background-color: $marmicode-primary-color;
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 
-  @include mat.card-overrides((
-    elevated-container-shape: 8px,
-  ));
+  @include mat.card-overrides(
+    (
+      elevated-container-shape: 8px,
+    )
+  );
 }
 
 .mc-primary-text {
@@ -29,9 +33,9 @@ body {
 }
 
 .mc-overlay-backdrop {
-  background-color: rgba(0, 0, 0, .23);
+  background-color: rgba(0, 0, 0, 0.23);
   backdrop-filter: blur(5px);
-  transition: all .2s ease-out;
+  transition: all 0.2s ease-out;
 }
 
 .mc-flex {

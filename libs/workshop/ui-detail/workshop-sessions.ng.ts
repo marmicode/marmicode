@@ -1,68 +1,35 @@
-import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Card, PageSection } from '@marmicode/shared/ui';
+import { PageSection } from '@marmicode/shared/ui';
 import { Workshop } from '@marmicode/workshop/core';
+import { LumaEvents } from '@marmicode/workshop/ui';
 
 @Component({
   selector: 'mc-workshop-sessions',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    DatePipe,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    Card,
     PageSection,
+    LumaEvents,
   ],
   template: `
-    @if (workshop().sessions.length > 0) {
-      <mc-page-section pageTitle="🗓️ Upcoming Sessions">
-        <div class="sessions">
-          @for (session of workshop().sessions; track session.startDate) {
-            <mc-card>
-              <ng-container slot="title">
-                @if (session.endDate) {
-                  🗓️ {{ session.startDate | date: 'MMM d' }} to
-                  {{ session.endDate | date: 'mediumDate' }}
-                } @else {
-                  🗓️ {{ session.startDate | date: 'fullDate' }}
-                }
-              </ng-container>
-              <ng-container slot="content">
-                <p class="content">
-                  {{ session.startTime }} — {{ session.endTime }}
-                  {{ session.timezone }}
-                </p>
-                <a
-                  [href]="session.waitlistUrl"
-                  color="primary"
-                  mat-stroked-button
-                  target="_blank"
-                >
-                  JOIN THE WAITLIST
-                </a>
-              </ng-container>
-            </mc-card>
-          }
-        </div>
-      </mc-page-section>
-    }
-  `,
-  styles: `
-    .sessions {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      padding: 3rem 0;
-    }
+    <mc-page-section
+      [id]="upcomingSessionsSectionId"
+      pageTitle="🗓️ Upcoming Sessions"
+      color="grey"
+    >
+      <mc-luma-events [tag]="workshop().lumaTag" />
+    </mc-page-section>
   `,
 })
 export class WorkshopSessions {
   workshop = input.required<Workshop>();
+
+  upcomingSessionsSectionId = UPCOMING_SESSIONS_SECTION_ID;
 }
+
+export const UPCOMING_SESSIONS_SECTION_ID = 'upcoming-sessions' as const;

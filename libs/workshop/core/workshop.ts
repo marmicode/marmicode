@@ -6,6 +6,11 @@ export interface Workshop {
   description: string;
 
   /**
+   * Tag used to show upcoming sessions.
+   */
+  lumaTag: string;
+
+  /**
    * The subheading is a short description of the workshop.
    * It is displayed in the workshop banner.
    *
@@ -22,11 +27,9 @@ export interface Workshop {
   duration: number;
 
   /**
-   * Google form url for the waitlist.
+   * Google form url for custom session requests.
    */
-  waitlistUrl: string;
-  sessions: Session[];
-  nextSessionDate?: Date;
+  customSessionRequestUrl: string;
 
   offer: Offer;
 

@@ -8,13 +8,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  inject,
   input,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Workshop } from '@marmicode/workshop/core';
 import { Hero } from '@marmicode/shared/ui';
+import { Workshop } from '@marmicode/workshop/core';
+import { UPCOMING_SESSIONS_SECTION_ID } from './workshop-sessions.ng';
+import { RouterLink } from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +28,7 @@ import { Hero } from '@marmicode/shared/ui';
     NgPlural,
     NgPluralCase,
     TitleCasePipe,
+    RouterLink,
   ],
   template: `
     <mc-hero [pictureUri]="workshop().pictureUri" [title]="workshop().title">
@@ -54,24 +56,26 @@ import { Hero } from '@marmicode/shared/ui';
             <span>{{ line }}</span>
           }
         </p>
-        <div class="email-and-spots">
-          <div class="email-form">
-            <!-- TODO: Re-enable input when the backend is ready. -->
-            <!-- <input type="email" placeholder="Drop your email here" /> -->
-            <a
-              [href]="workshop().waitlistUrl"
-              mat-button
-              color="accent"
-              target="_blank"
-            >
-              <mat-icon>notifications</mat-icon>
-              JOIN THE WAITLIST
-            </a>
-          </div>
-          <p class="spots">
-            Only 20 spots available. Be the first to know when registration
-            opens.
-          </p>
+        <div class="actions">
+          <a
+            [routerLink]="[]"
+            [fragment]="upcomingSessionsSectionId"
+            mat-raised-button
+            color="accent"
+          >
+            <mat-icon>calendar_month</mat-icon>
+            BOOK A SESSION
+          </a>
+          <a
+            [href]="workshop().customSessionRequestUrl"
+            mat-button
+            class="secondary"
+            color="accent"
+            target="_blank"
+          >
+            <mat-icon>build</mat-icon>
+            REQUEST A CUSTOM SESSION
+          </a>
         </div>
       </ng-content>
     </mc-hero>
@@ -80,6 +84,10 @@ import { Hero } from '@marmicode/shared/ui';
     :host {
       display: block;
       position: relative;
+
+      @media (max-width: 599.98px) {
+        font-size: 0.75rem;
+      }
     }
 
     .badge {
@@ -103,62 +111,30 @@ import { Hero } from '@marmicode/shared/ui';
       line-height: 1.5;
     }
 
-    .email-and-spots {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 1rem;
-    }
-
-    .email-form {
+    .actions {
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin: 0 0 1rem 0;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.2);
+      margin: 0 0 3rem 0;
+
+      @media (max-width: 599.98px) {
+        flex-direction: column;
+        align-items: stretch;
+        margin: 0 10px;
+      }
     }
 
-    .email-form input {
-      flex: 10 1 auto;
-      padding: 1rem;
-      border: none;
-      background: transparent;
-      color: white;
-      font-size: 1.2em;
-    }
-
-    .email-form input::placeholder {
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    .email-form a {
+    .actions a {
       flex: 1 0 auto;
-      margin-right: 1rem;
-      padding: 0.5rem;
+      padding: 1.2rem;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-size: 1em;
-    }
 
-    .spots {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 1.1em;
-      font-style: italic;
-    }
-
-    @media (max-width: 599.98px) {
-      :host {
-        font-size: 0.75rem;
-      }
-
-      .email-form {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        margin: 0 10px;
+      &.secondary {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.2);
       }
     }
   `,
@@ -166,6 +142,7 @@ import { Hero } from '@marmicode/shared/ui';
 export class WorkshopHero {
   workshop = input.required<Workshop>();
 
+  upcomingSessionsSectionId = UPCOMING_SESSIONS_SECTION_ID;
   subtitle = computed(() => {
     const duration = this.workshop().duration;
     const typeStr =
