@@ -1,14 +1,21 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { inject, Injectable } from '@angular/core';
 import { Workshop } from '@marmicode/workshop/core';
-import { pragmaticAngularTestingTapasSession } from './workshops/pragmatic-angular-testing-tapas-session';
 import { pragmaticAngularTestingFullCourse } from './workshops/pragmatic-angular-testing-full-course';
+import { pragmaticAngularTestingTapasSession } from './workshops/pragmatic-angular-testing-tapas-session';
 
 @Injectable({ providedIn: 'root' })
 export class WorkshopRepository {
   private _workshops: Workshop[] = [
     pragmaticAngularTestingFullCourse,
     pragmaticAngularTestingTapasSession,
-  ];
+  ].map((workshop) => ({
+    ...workshop,
+    pictureUri: new URL(
+      workshop.pictureUri,
+      inject(DOCUMENT).location.origin,
+    ).toString(),
+  }));
   private _workshopsRecord = this._workshops.reduce(
     (acc, workshop) => ({ ...acc, [workshop.id]: workshop }),
     {} as Record<string, Workshop>,
