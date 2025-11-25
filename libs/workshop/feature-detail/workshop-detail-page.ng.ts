@@ -14,9 +14,9 @@ import { WorkshopRepository } from '@marmicode/workshop/infra';
 import { workshopViewTransitionName } from '@marmicode/workshop/ui';
 import {
   WorkshopAgenda,
-  WorkshopHero,
   WorkshopBenefits,
   WorkshopDescription,
+  WorkshopHero,
   WorkshopInstructor,
   WorkshopRequiredSkills,
   WorkshopSessions,
@@ -73,6 +73,7 @@ export class WorkshopDetailPage {
     createBasicPageInfo({
       title: this.workshop()?.title,
       pictureUri: this.workshop()?.pictureUri,
+      description: this.workshop()?.description,
     }),
   );
   transitionName = computed(() => workshopViewTransitionName(this.workshop()));
