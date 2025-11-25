@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Workshop } from '@marmicode/workshop/core';
 import { pragmaticAngularTestingFullCourse } from './workshops/pragmatic-angular-testing-full-course';
 import { pragmaticAngularTestingTapasSession } from './workshops/pragmatic-angular-testing-tapas-session';
@@ -11,10 +10,8 @@ export class WorkshopRepository {
     pragmaticAngularTestingTapasSession,
   ].map((workshop) => ({
     ...workshop,
-    pictureUri: new URL(
-      workshop.pictureUri,
-      inject(DOCUMENT).location.origin,
-    ).toString(),
+    pictureUri: this._fixPictureUri(workshop.pictureUri),
+    thumbnailUri: this._fixPictureUri(workshop.thumbnailUri),
   }));
   private _workshopsRecord = this._workshops.reduce(
     (acc, workshop) => ({ ...acc, [workshop.id]: workshop }),
@@ -27,5 +24,9 @@ export class WorkshopRepository {
 
   getWorkshops(): Workshop[] {
     return this._workshops;
+  }
+
+  private _fixPictureUri(pictureUri: string): string {
+    return pictureUri.replace(/^\.\//, '/');
   }
 }
