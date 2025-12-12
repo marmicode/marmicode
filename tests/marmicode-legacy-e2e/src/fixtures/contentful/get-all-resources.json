@@ -1,0 +1,821 @@
+{
+  "data": {
+    "resourceCollection": {
+      "__typename": "ResourceCollection",
+      "items": [
+        {
+          "sys": {
+            "id": "55X1ZV91CTocOtuZEOoMni",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 6,
+          "isWip": false,
+          "releasedAt": "2024-11-18T00:00:00.000+01:00",
+          "resourceType": "blog-post",
+          "slug": "angular-template-code-coverage-and-future-proof-testing",
+          "summary": "This article presents how turning on Ahead-Of-Time (AOT) compilation for your Angular tests enables accurate template code coverage, faster test execution, production-symmetry, and future-proof tests.",
+          "title": "The Missing Ingredient for Angular Template Code Coverage and Future-Proof Testing",
+          "url": null,
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://images.ctfassets.net/gowvxq3b4aid/5q2z4mkPhH7GPJZNnlcJwW/19415e0c7cd62e0bee1ba1ef49ee120e/angular-template-coverage.png"
+          },
+          "requiredSkillCollection": {
+            "__typename": "ResourceRequiredSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "30bAA5cKxCaIVZJtztPRdk",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Testing Basics",
+                "slug": "angular-testing-basics"
+              }
+            ]
+          },
+          "skillCollection": {
+            "__typename": "ResourceSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "3cB5TZlmXGcSe6xLZNe9A4",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular AOT Testing",
+                "slug": "angular-aot-testing"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        },
+        {
+          "sys": {
+            "id": "2MEV5jRTKzHcAlN5bCCKQ6",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 9,
+          "isWip": false,
+          "releasedAt": "2023-04-28T12:00:00.000+02:00",
+          "resourceType": "blog-post",
+          "slug": "managing-rxjs-traffic-with-signals",
+          "summary": "Angular provides useful tools to handle RxJS & Signals interoperability but handling pending status and errors can quickly get tricky. \nLet's see how a simple RxJS operator can simplify things and improve consistency. ",
+          "title": "Managing RxJS Traffic with Signals and Suspensify",
+          "url": null,
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://images.ctfassets.net/gowvxq3b4aid/2dhUEvhzxfVoU81VwZkiSW/87bb6f3d2c38ed344cf7b2cf11231d0f/suspensify.jpg"
+          },
+          "requiredSkillCollection": {
+            "__typename": "ResourceRequiredSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "3fqKyZs63CDwu86MVhhpYl",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Signals",
+                "slug": "angular-signals"
+              }
+            ]
+          },
+          "skillCollection": {
+            "__typename": "ResourceSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "1aAhxaeMmpdaojjLqbO1qg",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Signals Error Management",
+                "slug": "angular-signals-error-management"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        },
+        {
+          "sys": {
+            "id": "3xACS6EGsrFxj0uhGcQp2p",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 8,
+          "isWip": false,
+          "releasedAt": "2023-04-07T09:00:00.000+02:00",
+          "requiredSkillCollection": {
+            "items": [],
+            "__typename": "ResourceRequiredSkillCollection"
+          },
+          "resourceType": "blog-post",
+          "slug": "angular-signals-and-custom-render-strategies",
+          "summary": "While libraries and frameworks are getting better and better at tracking changes in a fine-grained way and propagating them to the DOM, we might notice that sometimes, the performance bottleneck resides in DOM updates.\n\nLet's explore how Angular Signals could allow us to overcome these performance bottlenecks with custom rendering strategies.",
+          "title": "Beyond Angular Signals: Signals & Custom Render Strategies",
+          "url": null,
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://images.ctfassets.net/gowvxq3b4aid/5bhhLdQE6btOk6T2rwn1hO/ff9615bd8deaefd6ba0adab4f0597862/banner-angular-signals-and-custom-render-strategies.jpg"
+          },
+          "skillCollection": {
+            "__typename": "ResourceSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "3fqKyZs63CDwu86MVhhpYl",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Signals",
+                "slug": "angular-signals"
+              },
+              {
+                "sys": {
+                  "id": "3nWUXfA4VV8ocVgu2AYE5Z",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Custom Render Strategies",
+                "slug": "custom-render-strategies"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        },
+        {
+          "sys": {
+            "id": "7KmcpWUZ6dvM0eDIT597iD",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 12,
+          "isWip": false,
+          "releasedAt": "2022-12-07T15:00:00.000+01:00",
+          "requiredSkillCollection": {
+            "items": [],
+            "__typename": "ResourceRequiredSkillCollection"
+          },
+          "resourceType": "blog-post",
+          "slug": "versatile-angular",
+          "summary": "As surprising as this might sound, Angular is one of the easiest frameworks to integrate with modern dev tools out of the box (e.g. Vite, Vitest, SWC, Playwright Component Testing)... but only if you follow the Versatile Angular Style.",
+          "title": "Versatile Angular Style brings Modern Dev Tools to Angular",
+          "url": null,
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://assets.ctfassets.net/gowvxq3b4aid/5oxrsQBGCoZQdlcgCLqHHo/124a3f286d6eb23768a842ead6666606/versatile-angular-octopus.avif"
+          },
+          "skillCollection": {
+            "__typename": "ResourceSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "624M0Zuk151YiK5RJwbNtW",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Versatile Angular Style",
+                "slug": "versatile-angular"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        },
+        {
+          "sys": {
+            "id": "3hCqERTJKu0OAzQ3STIep4",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 40,
+          "isWip": false,
+          "releasedAt": "2022-10-07T12:00:00.000+02:00",
+          "resourceType": "external-video",
+          "slug": "cypress-component-testing-the-disappearance-of-mr-button-ngde",
+          "summary": null,
+          "title": "Cypress Component Testing - The Disappearance of Mr. Button @NgDe2022",
+          "url": "https://youtu.be/4p1LLbmIG_k",
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://images.ctfassets.net/gowvxq3b4aid/44eyzlU08rNazSU8ELYZlg/2fb84403e0840b6fb73f730532b36ca4/cypress-component-testing-the-disappearance-of-mr-button-ngde.jpg"
+          },
+          "requiredSkillCollection": {
+            "__typename": "ResourceRequiredSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "7Ec0XpecHrUiGWdB7eACQo",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Components",
+                "slug": "angular-components"
+              }
+            ]
+          },
+          "skillCollection": {
+            "__typename": "ResourceSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "2KjWZaaVsTVLZIBiDJhA9g",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Cypress Component Testing",
+                "slug": "angular-cypress-component-testing"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        },
+        {
+          "sys": {
+            "id": "3fOXRSmBZjGUZoF5NZFWt2",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 9,
+          "isWip": false,
+          "releasedAt": "2022-06-08T00:00:00.000+02:00",
+          "resourceType": "blog-post",
+          "slug": "angular-private-services",
+          "summary": null,
+          "title": "Your Angular Services Might Need Some Privacy ",
+          "url": null,
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://images.ctfassets.net/gowvxq3b4aid/3raoDxu66hCknUABNAEmUN/15b29a0ecde3672ce9542900d1168529/angular-private-services.webp"
+          },
+          "requiredSkillCollection": {
+            "__typename": "ResourceRequiredSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "4SCwOvtMz35briuzbki5Qn",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Injection Functions",
+                "slug": "angular-injection-functions"
+              }
+            ]
+          },
+          "skillCollection": {
+            "__typename": "ResourceSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "307AKPIHvEZ0SeMRBYFsfq",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Private Services",
+                "slug": "angular-private-services"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        },
+        {
+          "sys": {
+            "id": "7EkR7Br9s6T0dMW0xNN16c",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 12,
+          "isWip": false,
+          "releasedAt": "2022-05-20T20:00:00.000+02:00",
+          "resourceType": "blog-post",
+          "slug": "angular-inject-and-injection-functions",
+          "summary": "Since Angular 14, \"inject\" function can now be used in components, services, directives, pipes constructors.\nThis allows both interesting and frightning injection patterns, let's dive into them. ",
+          "title": "Angular Inject & Injection Functions - Patterns & Anti-Patterns",
+          "url": null,
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://images.ctfassets.net/gowvxq3b4aid/7lHoeDQaFCktr287FZ2Sip/1f6e41db9aa53935502d9fe2a15adc47/angular-inject-and-injection-functions.webp"
+          },
+          "requiredSkillCollection": {
+            "__typename": "ResourceRequiredSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "31ozuyIOuBP9Q4wENZ9T3d",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "RxJS Basics",
+                "slug": "rxjs-basics"
+              },
+              {
+                "sys": {
+                  "id": "4eK49g0ZLeZMaxXVhvxnoT",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Dependency Injection",
+                "slug": "angular-dependency-injection"
+              }
+            ]
+          },
+          "skillCollection": {
+            "__typename": "ResourceSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "4SCwOvtMz35briuzbki5Qn",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Injection Functions",
+                "slug": "angular-injection-functions"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        },
+        {
+          "sys": {
+            "id": "226lMafEftbatyCvill1D5",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 6,
+          "isWip": null,
+          "releasedAt": "2021-02-19T00:00:00.000+01:00",
+          "resourceType": "blog-post",
+          "slug": "testing-angular-components-using-cypress",
+          "summary": "Whatever framework you are using, and even without frameworks, component testing is a challenging topic as there is no one-size-fits-all approach.\n\nJest and Cypress are gaining traction but do you also feel that something is missing in between? What if we could isolate and test our components in Cypress (with or without Storybook)?",
+          "title": "Testing Angular Components Using Cypress",
+          "url": null,
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://images.ctfassets.net/gowvxq3b4aid/3UHutdAnqTil4FEoL9L3tF/9aa8f75e4c5df76c3d7dd63c65ddb5ef/jscutlery-cypress-mount.webp"
+          },
+          "requiredSkillCollection": {
+            "__typename": "ResourceRequiredSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "7Ec0XpecHrUiGWdB7eACQo",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Components",
+                "slug": "angular-components"
+              },
+              {
+                "sys": {
+                  "id": "7c0hG64sfu7ERhzOWAi0bk",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Cypress Basics",
+                "slug": "cypress-basics"
+              }
+            ]
+          },
+          "skillCollection": {
+            "__typename": "ResourceSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "2KjWZaaVsTVLZIBiDJhA9g",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Cypress Component Testing",
+                "slug": "angular-cypress-component-testing"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        },
+        {
+          "sys": {
+            "id": "6Q5Mpz4cpwSub6bJORyB9Y",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 5,
+          "isWip": null,
+          "releasedAt": "2020-11-17T00:00:00.000+01:00",
+          "resourceType": "blog-post",
+          "skillCollection": {
+            "items": [],
+            "__typename": "ResourceSkillCollection"
+          },
+          "slug": "spice-up-your-caching-with-convoyr",
+          "summary": "Most web apps get their value from interacting with HTTP APIs.\nThis is generally done using HTTP clients like the native fetch function, Axios or Angular's HttpClient.\n\nOnce you set up an HTTP client on a web app then sooner or later, you will need to extend its capabilities in order to handle different topics like User Experience (e.g. pending requests indicator), performance (e.g. caching), resilience (e.g. automatic retry), and security (e.g. authentication). Luckily, most HTTP clients can be easily extended using interceptors so you won't have to wrap them or implement your own client.\n\nEven though implementing an interceptor can sound quick and easy, handling edge cases, testing and maintenance can get expensive. Wouldn't it be better if someone else could handle these issues for us?",
+          "title": "Spice Up your Caching with Convoyr",
+          "url": null,
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://images.ctfassets.net/gowvxq3b4aid/4tUI36fo5FVwpK0ZXOmjQO/c0465e4d60cc9dacd0d8afe506744af6/spice-up-your-caching-with-convoyr.webp"
+          },
+          "requiredSkillCollection": {
+            "__typename": "ResourceRequiredSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "31ozuyIOuBP9Q4wENZ9T3d",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "RxJS Basics",
+                "slug": "rxjs-basics"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        },
+        {
+          "sys": {
+            "id": "IWBwv00NwZZivRKeFT75e",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 25,
+          "isWip": false,
+          "releasedAt": "2020-07-07T00:00:00.000+02:00",
+          "resourceType": "external-video",
+          "slug": "what-happens-when-you-cancel-an-http-request",
+          "summary": null,
+          "title": "What happens when you cancel an HTTP Request?",
+          "url": "https://youtu.be/EpOdHEvZQ4w?t=180",
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://images.ctfassets.net/gowvxq3b4aid/4y5SswcVUAVDQI27TwG4Uf/a5b5942184b2bce6dc52a91079f42642/what-happens-when-you-cancel-an-http-request.webp"
+          },
+          "requiredSkillCollection": {
+            "__typename": "ResourceRequiredSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "31ozuyIOuBP9Q4wENZ9T3d",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "RxJS Basics",
+                "slug": "rxjs-basics"
+              }
+            ]
+          },
+          "skillCollection": {
+            "__typename": "ResourceSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "5hNVJpbqTAQIorIaGPf54l",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Propagating HTTP request cancelation",
+                "slug": "propagating-http-request-cancelation"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        },
+        {
+          "sys": {
+            "id": "62vt3ifOPzuBOv31JzHdMd",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 6,
+          "isWip": null,
+          "releasedAt": "2020-02-21T00:00:00.000+01:00",
+          "resourceType": "blog-post",
+          "slug": "end-to-end-http-request-cancelation-with-rxjs-and-nestjs",
+          "summary": "Life is too short. When searching for something, we can’t afford to type a whole word or sentence in a search field, or filling all the fields then hitting our old keyboard’s half-broken enter key to finally be able to see the first results... or nothing at all because our search criteria were too restrictive.\n\nDon’t look at me like that! We can probably agree that most of us, if not all, are used to features like typeahead and live search results. We get frustrated every time we have to submit a search form.",
+          "title": "End-to-End HTTP request cancelation with RxJS & NestJS",
+          "url": null,
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://images.ctfassets.net/gowvxq3b4aid/7IC9BlKufXjqRWb5ISDS9h/1c319ae5cf8f701dbc6f0ada2614a5b1/end-to-end-http-request-cancelation-with-rxjs-and-nestjs.webp"
+          },
+          "requiredSkillCollection": {
+            "__typename": "ResourceRequiredSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "31ozuyIOuBP9Q4wENZ9T3d",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "RxJS Basics",
+                "slug": "rxjs-basics"
+              }
+            ]
+          },
+          "skillCollection": {
+            "__typename": "ResourceSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "2NbwVUdVOR7MZ2OMqajDtm",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "RxJS Teardown Propagation",
+                "slug": "rxjs-teardown-propagation"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        },
+        {
+          "sys": {
+            "id": "5nQ2auFi7jYwv3v0PZWCup",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 33,
+          "isWip": null,
+          "releasedAt": "2019-07-05T00:00:00.000Z",
+          "resourceType": "external-video",
+          "slug": "boost-your-time-to-market-by-dancing-the-limbo",
+          "summary": "Stale or long-lived branches, conflicts & huge code reviews can cause technical and human issues in your team. In this talk, Younes demonstrates some alternative and sometimes extreme approaches promoting single-branch development with techniques like Limbo, Timeboxed TDD and Test && Commit || Revert.",
+          "title": "Boost Your Time to Market by Dancing the Limbo",
+          "url": "https://www.youtube.com/watch?v=izGz7H-8yIk",
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://images.ctfassets.net/gowvxq3b4aid/5ZJKJzWYwS1TR3kXexyfzW/0039634b53e52742c119af9889f2e2b3/boost-your-time-to-market-by-dancing-the-limbo.webp"
+          },
+          "requiredSkillCollection": {
+            "__typename": "ResourceRequiredSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "QDTym2ntmKSuIdzA5WNdE",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Jasmine",
+                "slug": "jasmine"
+              },
+              {
+                "sys": {
+                  "id": "27P7hJElhFqY8iXLLPXhqg",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Jest",
+                "slug": "jest"
+              },
+              {
+                "sys": {
+                  "id": "7HzsEBMbnVelnuzKdUtsax",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "TypeScript Basics",
+                "slug": "typescript-basics"
+              }
+            ]
+          },
+          "skillCollection": {
+            "__typename": "ResourceSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "tp9edT0CX7Eo36tCvBSek",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Limbo",
+                "slug": "limbo"
+              },
+              {
+                "sys": {
+                  "id": "1DBu03vVr53evNRubDJa7a",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Timeboxed TDD",
+                "slug": "timeboxed-tdd"
+              },
+              {
+                "sys": {
+                  "id": "7UiTMuaQp1HSjYj0BbAWV",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "TCR",
+                "slug": "tcr"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        },
+        {
+          "sys": {
+            "id": "5jA1eLIJwrwamEyOQwMx6C",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 4,
+          "isWip": null,
+          "releasedAt": "2019-03-13T00:00:00.000+01:00",
+          "resourceType": "blog-post",
+          "slug": "your-angular-module-is-a-scam",
+          "summary": "Angular modules can bring some complexity to your app.\nChoosing the right modules architecture is tricky... but wait, do we really need modules?",
+          "title": "Your Angular Module is a SCAM!",
+          "url": null,
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://images.ctfassets.net/gowvxq3b4aid/4m6dLwW0lZx1zHpv9U0ezx/3543bb57f98c9e11ea3013cbdc9ba7d8/your-angular-module-is-a-scam.webp"
+          },
+          "requiredSkillCollection": {
+            "__typename": "ResourceRequiredSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "5wAEdDJEFeFL8C9W0VgPsl",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Modules",
+                "slug": "angular-modules"
+              },
+              {
+                "sys": {
+                  "id": "3RPw75Mj487lBFk2DXD9MH",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "SCAM",
+                "slug": "scam"
+              }
+            ]
+          },
+          "skillCollection": {
+            "__typename": "ResourceSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "58wtD6mbyF8OFGRAWfrDin",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Moduleless Angular",
+                "slug": "moduleless-angular"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        },
+        {
+          "sys": {
+            "id": "1jq4G3hXu0CN7PAMHq9yB9",
+            "__typename": "Sys"
+          },
+          "__typename": "Resource",
+          "duration": 4,
+          "isWip": null,
+          "releasedAt": "2019-03-12T00:00:00.000+01:00",
+          "resourceType": "blog-post",
+          "slug": "a-new-syntax-for-angular-templates",
+          "summary": "One of my favorite things about Angular is how the template is just a simple HTML file.\nThis is really great; especially if you care about Collective Ownership. With some basic HTML knowledge, anyone can contribute to the application’s development: other teams, external web designers… or even the Client or Product Owner! Why not!?\nIn other words, using HTML templates reduces the TTFC (Time To First Commit) which is the average time it takes for someone new in your team to make his first change.",
+          "title": "A New Syntax for Angular Templates",
+          "url": null,
+          "picture": {
+            "__typename": "Asset",
+            "url": "https://images.ctfassets.net/gowvxq3b4aid/3AoM54IDYLa3lwo3t4kEBB/b28c90aadf02ad8cf3a76cc722639708/ng-markup.webp"
+          },
+          "requiredSkillCollection": {
+            "__typename": "ResourceRequiredSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "7Ec0XpecHrUiGWdB7eACQo",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Angular Components",
+                "slug": "angular-components"
+              }
+            ]
+          },
+          "skillCollection": {
+            "__typename": "ResourceSkillCollection",
+            "items": [
+              {
+                "sys": {
+                  "id": "58wtD6mbyF8OFGRAWfrDin",
+                  "__typename": "Sys"
+                },
+                "__typename": "Skill",
+                "label": "Moduleless Angular",
+                "slug": "moduleless-angular"
+              }
+            ]
+          },
+          "author": {
+            "__typename": "Author",
+            "name": "Younes Jaaidi",
+            "picture": {
+              "__typename": "Asset",
+              "url": "https://images.ctfassets.net/gowvxq3b4aid/222xakOb6LBZWV0vPP2vjm/3022afc23d544fc7c40132a64d115e9b/younes-marmicode-1024.webp"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

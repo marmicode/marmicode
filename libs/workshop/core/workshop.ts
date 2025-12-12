@@ -6,6 +6,11 @@ export interface Workshop {
   description: string;
 
   /**
+   * Tag used to show upcoming sessions.
+   */
+  lumaTag: string;
+
+  /**
    * The subheading is a short description of the workshop.
    * It is displayed in the workshop banner.
    *
@@ -14,13 +19,17 @@ export interface Workshop {
   subheading: string;
 
   pictureUri: string;
+  thumbnailUri: string;
 
   /**
    * Workshop duration in days.
    */
   duration: number;
-  sessions: Session[];
-  nextSessionDate?: Date;
+
+  /**
+   * Google form url for custom session requests.
+   */
+  customSessionRequestUrl: string;
 
   offer: Offer;
 
@@ -61,7 +70,12 @@ export interface Session {
   /**
    * The date of the session.
    */
-  date: Date;
+  startDate: Date;
+
+  /**
+   * The end date of the session if multiple days.
+   */
+  endDate?: Date;
 
   /**
    * The start time of the session.
@@ -79,6 +93,11 @@ export interface Session {
    * The timezone of the session.
    */
   timezone: 'CET' | 'PT';
+
+  /**
+   * Pre-filled google form url for the waitlist.
+   */
+  waitlistUrl: string;
 }
 
 export function createWorkshop(workshop: Workshop): Workshop {

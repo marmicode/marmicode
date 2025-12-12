@@ -1,0 +1,29 @@
+{
+  "name": "marmicode-legacy-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "tests/marmicode-legacy-e2e/src",
+  "projectType": "application",
+  "tags": ["scope:e2e"],
+  "implicitDependencies": ["marmicode"],
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "{projectRoot}/cypress.config.js",
+        "devServerTarget": "marmicode:serve",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "marmicode:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "upload-percy-snapshots": {
+      "command": "tools/upload-percy-snapshots.sh {projectRoot}"
+    }
+  }
+}

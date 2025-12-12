@@ -6,7 +6,6 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { describe, expect, it } from '@jest/globals';
 import { NavMenuComponent } from './nav-menu.component';
-import { RouterTestingHarness } from '@angular/router/testing';
 
 describe('NavMenuComponent', () => {
   it('should be closed', async () => {

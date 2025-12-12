@@ -1,4 +1,3 @@
-import { PushPipe } from '@rx-angular/template/push';
 import {
   animate,
   state,
@@ -8,17 +7,19 @@ import {
 } from '@angular/animations';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { MatButtonModule, MatButton } from '@angular/material/button';
-import { MatIconModule, MatIcon } from '@angular/material/icon';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatListModule, MatNavList } from '@angular/material/list';
 import {
   resourceSearchRouterHelper,
-  servicesRouterHelper,
-} from '@marmicode/shared-router-helpers';
+  workshopRouterHelper,
+} from '@marmicode/shared/router-helpers';
+import { PushPipe } from '@rx-angular/template/push';
 import { BehaviorSubject } from 'rxjs';
 import {
-  NavMenuItemModule,
+  NavMenuEntry,
   NavMenuItemComponent,
+  NavMenuItemModule,
 } from './nav-menu-item.component';
 
 @Component({
@@ -111,41 +112,26 @@ import {
 export class NavMenuComponent {
   isMenuDisplayed$ = new BehaviorSubject<boolean>(false);
 
-  entries = [
+  entries: NavMenuEntry[] = [
     {
       icon: 'article',
-      title: 'Resources',
+      title: 'Articles',
       route: resourceSearchRouterHelper.learnEverything(),
-    },
-    {
-      icon: 'live_tv',
-      title: 'Course',
-      url: 'https://courses.marmicode.io/courses/pragmatic-angular-testing',
     },
     {
       icon: 'school',
       title: 'Workshops',
-      url: 'https://marmicode.eventbrite.com',
+      route: workshopRouterHelper.list(),
     },
     {
-      icon: 'books',
-      title: 'Cookbook',
-      url: 'https://cookbook.marmicode.io',
-    },
-    {
-      icon: 'email',
-      title: 'Newsletter',
-      url: 'https://gmail.us3.list-manage.com/subscribe?u=915d6ba70c9c00912ba326214&id=71255f30c7',
-    },
-    {
-      icon: 'ev_station',
-      title: 'Services',
-      route: servicesRouterHelper.services(),
+      icon: 'live_tv',
+      title: 'Learn to Test',
+      url: 'https://courses.marmicode.io',
     },
     {
       icon: 'phone',
-      title: 'Contact Us',
-      url: 'mailto:kitchen@marmicode.io',
+      title: 'Help',
+      url: 'https://forms.gle/EAUNbXtXQFCapQCd8',
     },
   ];
 

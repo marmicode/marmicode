@@ -9,15 +9,18 @@ import {
   createBasicPageInfo,
   ErrorComponent,
   PageComponent,
-} from '@marmicode/shared-ui';
+} from '@marmicode/shared/ui';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
-import { WorkshopAgenda } from '@marmicode/workshop/ui';
-import { WorkshopBanner } from '@marmicode/workshop/ui';
-import { WorkshopBenefits } from '@marmicode/workshop/ui';
-import { WorkshopDescription } from '@marmicode/workshop/ui';
-import { WorkshopInstructor } from '@marmicode/workshop/ui';
-import { WorkshopRequiredSkills } from '@marmicode/workshop/ui';
-import { WorkshopSessions } from '@marmicode/workshop/ui';
+import { workshopViewTransitionName } from '@marmicode/workshop/ui';
+import {
+  WorkshopAgenda,
+  WorkshopBenefits,
+  WorkshopDescription,
+  WorkshopHero,
+  WorkshopInstructor,
+  WorkshopRequiredSkills,
+  WorkshopSessions,
+} from '@marmicode/workshop/ui-detail';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,19 +28,22 @@ import { WorkshopSessions } from '@marmicode/workshop/ui';
   imports: [
     PageComponent,
     WorkshopAgenda,
-    WorkshopBanner,
     WorkshopBenefits,
     WorkshopDescription,
     WorkshopInstructor,
     WorkshopRequiredSkills,
     WorkshopSessions,
     ErrorComponent,
+    WorkshopHero,
   ],
   template: `
     <mc-page [info]="info()">
       @let workshop = this.workshop();
       @if (workshop) {
-        <mc-workshop-banner [workshop]="workshop" />
+        <mc-workshop-hero
+          [workshop]="workshop"
+          [style.view-transition-name]="transitionName()"
+        />
         <mc-workshop-description [description]="workshop.description" />
         <mc-workshop-sessions [workshop]="workshop" />
         <mc-workshop-benefits [benefits]="workshop.benefits" />
@@ -49,7 +55,8 @@ import { WorkshopSessions } from '@marmicode/workshop/ui';
           <p>Workshop not found.</p>
           <p>
             Please check the URL or
-            <a href="mailto:kitchen@marmicode.io" target="_blank">contact us</a
+            <a href="https://forms.gle/EAUNbXtXQFCapQCd8" target="_blank"
+              >contact us</a
             >.
           </p>
         </mc-error>
@@ -66,8 +73,10 @@ export class WorkshopDetailPage {
     createBasicPageInfo({
       title: this.workshop()?.title,
       pictureUri: this.workshop()?.pictureUri,
+      description: this.workshop()?.description,
     }),
   );
+  transitionName = computed(() => workshopViewTransitionName(this.workshop()));
 
   private _workshopRepository = inject(WorkshopRepository);
 }

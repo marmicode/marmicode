@@ -24,6 +24,8 @@ import {
   provideRouter,
   withComponentInputBinding,
   withEnabledBlockingInitialNavigation,
+  withInMemoryScrolling,
+  withViewTransitions,
 } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
@@ -56,6 +58,11 @@ export const appConfig: ApplicationConfig = {
       routes,
       withComponentInputBinding(),
       withEnabledBlockingInitialNavigation(),
+      withViewTransitions(),
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'enabled',
+      }),
     ),
     provideRouterStore(),
     provideStore({ router: routerReducer }),

@@ -20,56 +20,60 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@marmicode/block-api": ["libs/block/api/index.ts"],
-      "@marmicode/block-core": ["libs/block/core/index.ts"],
-      "@marmicode/block-ui": ["libs/block/ui/src/index.ts"],
-      "@marmicode/blog-post-feature-detail": [
-        "libs/blog-post-feature-detail/src/index.ts"
+      "@marmicode/block/api": ["libs/block/api/index.ts"],
+      "@marmicode/block/core": ["libs/block/core/index.ts"],
+      "@marmicode/block/ui": ["libs/block/ui/src/index.ts"],
+      "@marmicode/blog-post/feature-detail": [
+        "libs/blog-post/feature-detail/index.ts"
       ],
-      "@marmicode/blog-post-ui": ["libs/blog-post-ui/src/index.ts"],
-      "@marmicode/contentful-infra": ["libs/contentful-infra/src/index.ts"],
-      "@marmicode/learning-map-feature-tree": [
-        "libs/learning-map-feature-tree/src/index.ts"
+      "@marmicode/blog-post/ui": ["libs/blog-post/ui/src/index.ts"],
+      "@marmicode/contentful/infra": ["libs/contentful/infra/index.ts"],
+      "@marmicode/landing/feature-landing": [
+        "libs/landing/feature-landing/index.ts"
       ],
-      "@marmicode/recipe-feature-detail": [
-        "libs/recipe-feature-detail/src/index.ts"
+      "@marmicode/learning-map/feature-tree": [
+        "libs/learning-map/feature-tree/index.ts"
       ],
-      "@marmicode/resource-api": ["libs/resource-api/src/index.ts"],
-      "@marmicode/resource-core": ["libs/resource-core/src/index.ts"],
-      "@marmicode/resource-feature-search": [
-        "libs/resource-feature-search/src/index.ts"
+      "@marmicode/recipe/feature-detail": [
+        "libs/recipe/feature-detail/index.ts"
       ],
-      "@marmicode/resource-feature-search/testing": [
-        "libs/resource-feature-search/src/testing/index.ts"
+      "@marmicode/resource/api": ["libs/resource/api/index.ts"],
+      "@marmicode/resource/core": ["libs/resource/core/index.ts"],
+      "@marmicode/resource/feature-search": [
+        "libs/resource/feature-search/index.ts"
       ],
-      "@marmicode/resource-ui": ["libs/resource-ui/src/index.ts"],
-      "@marmicode/services-feature-presentation": [
-        "libs/services-feature-presentation/src/index.ts"
+      "@marmicode/resource/feature-search/testing": [
+        "libs/resource/feature-search/testing/index.ts"
       ],
-      "@marmicode/shared-router-helpers": [
-        "libs/shared-router-helpers/src/index.ts"
+      "@marmicode/resource/ui": ["libs/resource/ui/index.ts"],
+      "@marmicode/services/feature-presentation": [
+        "libs/services/feature-presentation/index.ts"
       ],
-      "@marmicode/shared-ui": ["libs/shared-ui/src/index.ts"],
-      "@marmicode/shared-utils": ["libs/shared-utils/src/index.ts"],
-      "@marmicode/shared-utils/testing/test-setup": [
-        "libs/shared-utils/testing/test-setup.ts"
+      "@marmicode/shared/router-helpers": [
+        "libs/shared/router-helpers/index.ts"
       ],
-      "@marmicode/testing": ["libs/testing/src/index.ts"],
-      "@marmicode/testing/cypress-commands": [
-        "libs/testing/src/cypress-commands.ts"
+      "@marmicode/shared/testing": ["libs/shared/testing/index.ts"],
+      "@marmicode/shared/testing/cypress-commands": [
+        "libs/shared/testing/cypress-commands.ts"
       ],
-      "@marmicode/testing/cypress-ct-commands": [
-        "libs/testing/src/cypress-ct-commands.ts"
+      "@marmicode/shared/testing/cypress-ct-commands": [
+        "libs/shared/testing/cypress-ct-commands.ts"
       ],
+      "@marmicode/shared/ui": ["libs/shared/ui/index.ts"],
+      "@marmicode/shared/utils": ["libs/shared/utils/index.ts"],
       "@marmicode/tools/build-github-workflows": [
         "tools/build-github-workflows/src/index.ts"
       ],
       "@marmicode/workshop/core": ["libs/workshop/core/index.ts"],
-      "@marmicode/workshop/infra": ["libs/workshop/infra/index.ts"],
-      "@marmicode/workshop/ui": ["libs/workshop/ui/index.ts"],
       "@marmicode/workshop/feature-detail": [
         "libs/workshop/feature-detail/index.ts"
-      ]
+      ],
+      "@marmicode/workshop/feature-list": [
+        "libs/workshop/feature-list/index.ts"
+      ],
+      "@marmicode/workshop/infra": ["libs/workshop/infra/index.ts"],
+      "@marmicode/workshop/ui": ["libs/workshop/ui/index.ts"],
+      "@marmicode/workshop/ui-detail": ["libs/workshop/ui-detail/index.ts"]
     },
     "strict": true,
     "strictNullChecks": false,

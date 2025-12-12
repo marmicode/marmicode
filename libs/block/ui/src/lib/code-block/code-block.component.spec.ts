@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
-import { createCodeBlock } from '@marmicode/block-core';
+import { createCodeBlock } from '@marmicode/block/core';
 import { PushPipe } from '@rx-angular/template/push';
 import * as Prism from 'prismjs';
 import { first } from 'rxjs/operators';

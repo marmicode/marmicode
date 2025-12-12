@@ -1,8 +1,9 @@
-import { PushPipe } from '@rx-angular/template/push';
 import { CommonModule, ViewportScroller } from '@angular/common';
-import { Component, HostListener, NgModule } from '@angular/core';
-import { MatToolbarModule, MatToolbar } from '@angular/material/toolbar';
-import { RouterModule, RouterLink } from '@angular/router';
+import { Component, NgModule } from '@angular/core';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
+import { RouterLink, RouterModule } from '@angular/router';
+import { Platform } from '@marmicode/shared/utils';
+import { PushPipe } from '@rx-angular/template/push';
 import {
   animationFrameScheduler,
   asyncScheduler,
@@ -10,12 +11,15 @@ import {
   Observable,
 } from 'rxjs';
 import { map, observeOn, pairwise } from 'rxjs/operators';
-import { Platform } from '@marmicode/shared-utils';
 import { appRouterHelper } from './app-router-helper';
-import { NavMenuModule, NavMenuComponent } from './nav-menu.component';
+import { NavMenuComponent, NavMenuModule } from './nav-menu.component';
 
 @Component({
   selector: 'mc-nav',
+  imports: [MatToolbar, RouterLink, NavMenuComponent, PushPipe],
+  host: {
+    '(window:scroll)': 'updateScrollPosition()',
+  },
   template: `
     <!-- Toolbar. -->
     <mat-toolbar
@@ -84,7 +88,6 @@ import { NavMenuModule, NavMenuComponent } from './nav-menu.component';
       }
     `,
   ],
-  imports: [MatToolbar, RouterLink, NavMenuComponent, PushPipe],
 })
 export class NavComponent {
   appRouterHelper = appRouterHelper;
@@ -101,12 +104,25 @@ export class NavComponent {
         platform.isBrowser() ? animationFrameScheduler : asyncScheduler,
       ),
       pairwise(),
-      map(([previous, current]) => current > 64 && current - previous > 0),
+      map(([previous, current]) => {
+        /* If we are at the top of the page, ignore scroll down. */
+        if (current <= 64) {
+          return false;
+        }
+
+        /* If at the bottom of the page or beyond, consider it scrolling down.
+         * This avoids the jumpy effect of the navbar reappearing when
+         * reaching the bottom of the page. */
+        if (current + window.innerHeight >= document.body.scrollHeight) {
+          return true;
+        }
+
+        return current - previous > 0;
+      }),
     );
   }
 
-  @HostListener('window:scroll')
-  onScroll() {
+  updateScrollPosition() {
     this._scrollPosition$.next(this._viewportScroller.getScrollPosition()[1]);
   }
 }

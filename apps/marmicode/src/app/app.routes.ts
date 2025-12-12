@@ -4,16 +4,16 @@ import {
   recipeDetailRouterHelper,
   resourceSearchRouterHelper,
   servicesRouterHelper,
-  workshopDetailRouterHelper,
-} from '@marmicode/shared-router-helpers';
-import { or } from '@marmicode/shared-utils';
+  workshopRouterHelper,
+} from '@marmicode/shared/router-helpers';
+import { or } from '@marmicode/shared/utils';
 
 export const routes: Routes = [
   /* Blog post detail. */
   {
     path: blogPostDetailRouterHelper.BLOG_POST_DETAIL_PATH,
     loadChildren: () =>
-      import('@marmicode/blog-post-feature-detail').then(
+      import('@marmicode/blog-post/feature-detail').then(
         (m) => m.BlogPostFeatureDetailRoutingModule,
       ),
   },
@@ -25,7 +25,7 @@ export const routes: Routes = [
       recipeDetailRouterHelper.TUTORIAL_DETAIL_PATH,
     ]),
     loadChildren: () =>
-      import('@marmicode/recipe-feature-detail').then(
+      import('@marmicode/recipe/feature-detail').then(
         (m) => m.RecipeDetailRoutingModule,
       ),
   },
@@ -34,7 +34,7 @@ export const routes: Routes = [
   {
     path: resourceSearchRouterHelper.LEARN_PATH,
     loadChildren: () =>
-      import('@marmicode/resource-feature-search').then(
+      import('@marmicode/resource/feature-search').then(
         (m) => m.ResourceSearchRoutingModule,
       ),
   },
@@ -43,22 +43,33 @@ export const routes: Routes = [
   {
     path: servicesRouterHelper.SERVICES_PATH,
     loadChildren: () =>
-      import('@marmicode/services-feature-presentation').then(
+      import('@marmicode/services/feature-presentation').then(
         (m) => m.ServicesRoutingModule,
       ),
   },
 
   /* Workshop detail. */
   {
-    path: workshopDetailRouterHelper.WORKSHOP_DETAIL_PATH,
+    path: workshopRouterHelper.WORKSHOP_DETAIL_PATH,
     loadComponent: () => import('@marmicode/workshop/feature-detail'),
   },
 
-  /* / redirect. */
+  /* Workshop list. */
+  {
+    path: workshopRouterHelper.WORKSHOP_LIST_PATH,
+    loadComponent: () => import('@marmicode/workshop/feature-list'),
+  },
+
+  /* Landing page. */
   {
     path: '',
     pathMatch: 'full',
-    /* @todo use resourceSearchRouterHelper.learnEverything().join('/'). */
-    redirectTo: '/learn/everything',
+    loadComponent: () => import('@marmicode/landing/feature-landing'),
+  },
+
+  /* Not found. */
+  {
+    path: '**',
+    loadComponent: () => import('./not-found.ng'),
   },
 ];
