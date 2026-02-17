@@ -49,8 +49,8 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
 `,
   offer: {
     type: 'early-bird',
-    price: 780,
-    originalPrice: 970,
+    price: 970,
+    originalPrice: 1270,
   },
   requiredSkills: [
     `Angular core concepts (e.g. components, inputs/outputs, services)`,

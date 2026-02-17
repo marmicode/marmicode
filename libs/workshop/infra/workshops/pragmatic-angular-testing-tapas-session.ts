@@ -41,8 +41,8 @@ No dogma. No silver bullets. Just pragmatic Angular testing skills to help you *
 `,
   offer: {
     type: 'early-bird',
-    price: 270,
-    originalPrice: 350,
+    price: 370,
+    originalPrice: 470,
   },
   requiredSkills: [
     `Angular core concepts (e.g. components, inputs/outputs, services)`,
