@@ -28,7 +28,7 @@ So… how’s yours holding up?
 
 If any of that hits close to home, this workshop is your way out of the fire.
 
-We’ll stop by the market for key ingredients such as **Fakes, Object Mothers, Gloves, Vitest, Testing Library, Angular CDK Harness, and Playwright Component Testing with Testronaut**.
+We’ll stop by the market for key ingredients such as **Fakes, Object Mothers, Gloves, Vitest, Testing Library, Angular CDK Harness, Playwright Component Testing with Testronaut, and Playwright for end-to-end testing**.
 
 Then, back to the kitchen, we’ll prepare a complete, low-maintenance testing menu that matures over three days. You’ll learn how to:
 
@@ -38,6 +38,7 @@ Then, back to the kitchen, we’ll prepare a complete, low-maintenance testing m
 * Test **async code** and **effects** with confidence.  
 * Build and use your own **test harnesses** and **Gloves** for resilient UI interaction.  
 * Detect **visual regressions** before your users do.  
+* Write fast, reliable **end-to-end tests with Playwright** — and know exactly when to reach for e2e vs. component tests.  
 * Design a **pragmatic testing strategy** that scales across teams, and pays off over time — not just write better tests.
 
 Across these three days, you won’t just learn recipes — you’ll refine your testing instincts, challenge habits, and leave with a testing culture you can scale.
@@ -84,6 +85,12 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       title: 'Mocking Made Easy',
       description:
         'Master Fakes and Object Mothers to simplify "mocking" and avoid common pitfalls.',
+    },
+    {
+      icon: 'language',
+      title: 'End-to-End Testing',
+      description:
+        "Write reliable e2e tests with Playwright and know when they're the right tool for the job.",
     },
     {
       icon: 'restaurant',
@@ -207,6 +214,17 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       {
         title: '💻 Hands-on Exercises: Test Harness',
         items: ['Using a test harness.', 'Implementing a test harness.'],
+      },
+      {
+        title: '🍳 End-to-End Testing with Playwright',
+        items: [
+          'When to use e2e tests vs. component tests.',
+          'Writing fast, reliable end-to-end tests with Playwright.',
+        ],
+      },
+      {
+        title: '💻 Hands-on Exercises: End-to-End Testing with Playwright',
+        items: ['Hands-on end-to-end testing with Playwright.'],
       },
       {
         title: '👨🏻‍🏫 Playwright Component Testing with Testronaut',
