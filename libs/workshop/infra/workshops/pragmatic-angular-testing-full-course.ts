@@ -216,7 +216,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         items: ['Using a test harness.', 'Implementing a test harness.'],
       },
       {
-        title: '🍳 End-to-End Testing with Playwright',
+        title: '👨🏻‍🏫 End-to-End Testing with Playwright',
         items: [
           'When to use e2e tests vs. component tests.',
           'Writing fast, reliable end-to-end tests with Playwright.',
