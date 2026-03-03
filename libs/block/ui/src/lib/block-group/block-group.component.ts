@@ -1,10 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  Input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, inject } from '@angular/core';
 import {
   BlockGroup,
   BlockType,
@@ -54,6 +49,11 @@ import { HighlightZone } from '../highlight/highlight-zone';
   imports: [BlockComponent, AsyncPipe],
 })
 export class BlockGroupComponent {
+  private _state = inject<RxState<{
+    blockGroup: BlockGroup;
+    highlightZone: HighlightZone | null;
+}>>(RxState);
+
   @Input() set blockGroup(blockGroup: BlockGroup) {
     this._state.set({ blockGroup });
   }
@@ -86,12 +86,7 @@ export class BlockGroupComponent {
     select(map((blocks) => extractHighlightableZones(blocks))),
   );
 
-  constructor(
-    private _state: RxState<{
-      blockGroup: BlockGroup;
-      highlightZone: HighlightZone | null;
-    }>,
-  ) {
+  constructor() {
     /* Reset highlight zone when blocks change. */
     this._state.connect(
       this.blocks$.pipe(

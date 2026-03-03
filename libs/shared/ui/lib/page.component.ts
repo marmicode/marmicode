@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  NgModule,
-  OnDestroy
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, NgModule, OnDestroy, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RxState } from '@rx-angular/state';
 
@@ -56,17 +50,19 @@ export type PageInfo = BasicPageInfo | ArticlePageInfo;
     standalone: true,
 })
 export class PageComponent implements OnDestroy {
+  private _metaService = inject(Meta);
+  private _state = inject<RxState<{
+    info: PageInfo;
+}>>(RxState);
+  private _titleService = inject(Title);
+
   @Input() set info(info: PageInfo) {
     this._state.set({ info });
   }
 
   private _defaultTitle = 'Marmicode';
 
-  constructor(
-    private _metaService: Meta,
-    private _state: RxState<{ info: PageInfo }>,
-    private _titleService: Title
-  ) {
+  constructor() {
     /* Sync input with page title. */
     this._state.hold(this._state.select('info'), (info) => {
       /* Fixes issue where title was set to default value when component was loaded

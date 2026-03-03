@@ -6,6 +6,7 @@ import {
   Component,
   ElementRef,
   HostListener,
+  inject,
   Input,
   NgModule,
   OnInit,
@@ -98,7 +99,9 @@ export class TreeComponent implements OnInit {
 
   private _treeConfig$ = new ReplaySubject<TreeConfig>(1);
 
-  constructor(private _amcore: Amcore) {
+  private _amcore = inject(Amcore);
+
+  constructor() {
     this.treeHeight$ = this._treeConfig$.pipe(map((config) => config.height));
     this.treeWidth$ = this._treeConfig$.pipe(map((config) => config.width));
   }

@@ -1,10 +1,5 @@
 import { CommonModule, NgIf, ViewportScroller } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostListener,
-  NgModule,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, NgModule, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlockGroupComponent } from '@marmicode/block/ui';
 import { ResourceTitleBannerComponent } from '@marmicode/resource/api';
@@ -113,6 +108,15 @@ import { SwipeDirective, SwipeModule } from './swipe.directive';
 ],
 })
 export class RecipeFramePageComponent {
+  private _recipeRepository = inject(RecipeRepository);
+  private _route = inject(ActivatedRoute);
+  private _router = inject(Router);
+  private _state = inject<RxState<{
+    recipe: Recipe;
+    currentFrameSlug: string;
+}>>(RxState);
+  private _viewportScroller = inject(ViewportScroller);
+
   recipe$ = this._state.select('recipe');
   recipeSlug$ = this.recipe$.pipe(select(map((recipe) => recipe.slug)));
   frames$ = this.recipe$.pipe(select(map((recipe) => recipe.frames)));
@@ -171,13 +175,7 @@ export class RecipeFramePageComponent {
    */
   private _key$ = new Subject<string>();
 
-  constructor(
-    private _recipeRepository: RecipeRepository,
-    private _route: ActivatedRoute,
-    private _router: Router,
-    private _state: RxState<{ recipe: Recipe; currentFrameSlug: string }>,
-    private _viewportScroller: ViewportScroller,
-  ) {
+  constructor() {
     /**
      * Load recipe.
      */

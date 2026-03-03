@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  NgModule,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, NgModule, ViewEncapsulation, inject } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import {
   faFacebookF,
@@ -45,6 +39,12 @@ export type Size = 'normal' | 'small';
   imports: [ShareButtons, PushPipe],
 })
 export class ShareButtonsComponent {
+  private _state = inject<RxState<{
+    title: string;
+    author: AuthorSocialInfo;
+    size: Size;
+}>>(RxState);
+
   @Input()
   set author(author: AuthorSocialInfo) {
     this._state.set({ author });
@@ -92,14 +92,9 @@ export class ShareButtonsComponent {
   buttons = ['linkedin', 'facebook', 'copy'];
   theme = 'outline';
   private _titleSuffix = ' on @Marmicode';
-  constructor(
-    iconLibrary: FaIconLibrary,
-    private _state: RxState<{
-      title: string;
-      author: AuthorSocialInfo;
-      size: Size;
-    }>,
-  ) {
+  constructor() {
+    const iconLibrary = inject(FaIconLibrary);
+
     /* @hack add icons dynamically because `ShareIconsModule` needs
      * to be added to `AppModule` as it's not lazy loading friendly.*/
     iconLibrary.addIcons(faXTwitter);

@@ -1,15 +1,5 @@
 import { CommonModule, NgClass, NgFor } from '@angular/common';
-import {
-  AfterViewChecked,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  HostListener,
-  Input,
-  NgModule,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { AfterViewChecked, ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, NgModule, ViewChild, ViewEncapsulation, inject } from '@angular/core';
 import { CodeBlock } from '@marmicode/block/core';
 import { Platform } from '@marmicode/shared/utils';
 import { RxState } from '@rx-angular/state';
@@ -67,6 +57,13 @@ import { HighlightZone } from '../highlight/highlight-zone';
   imports: [NgClass, PushPipe],
 })
 export class CodeBlockComponent implements AfterViewChecked {
+  private _state = inject<RxState<{
+    block: CodeBlock;
+    highlightZone: HighlightZone;
+    highlightableZones: HighlightZone[];
+    lineHeight: number;
+}>>(RxState);
+
   @Input() set block(block: CodeBlock) {
     this._state.set({ block });
   }
@@ -113,15 +110,9 @@ export class CodeBlockComponent implements AfterViewChecked {
   private _block$ = this._state.select('block');
   private _viewChecked$ = new Subject<void>();
 
-  constructor(
-    private _state: RxState<{
-      block: CodeBlock;
-      highlightZone: HighlightZone;
-      highlightableZones: HighlightZone[];
-      lineHeight: number;
-    }>,
-    platform: Platform,
-  ) {
+  constructor() {
+    const platform = inject(Platform);
+
     this.code$ = this._block$.pipe(select('code'));
     this.languageClass$ = this._block$.pipe(
       select(map((block) => (block ? `language-${block.language}` : null))),

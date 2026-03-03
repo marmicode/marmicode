@@ -1,5 +1,5 @@
 import { CommonModule, NgIf, NgFor } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule, inject } from '@angular/core';
 import { resourceSearchRouterHelper } from '@marmicode/shared/router-helpers';
 import {
   createBasicPageInfo,
@@ -109,6 +109,10 @@ import { ErrorComponent } from '@marmicode/shared/ui';
 ],
 })
 export class ResourceSearchPageComponent {
+  private _resourceRepository = inject(ResourceRepository);
+  private _resourceSearchFacade = inject(ResourceSearchFacade);
+  private _transferStateHelper = inject(TransferStateHelper);
+
   pageInfo = createBasicPageInfo({
     title: 'Resources',
     description: 'JavaScript, Angular & Testing Resources',
@@ -121,11 +125,7 @@ export class ResourceSearchPageComponent {
 
   trackById = (index: number, resource: Resource) => resource.id;
 
-  constructor(
-    private _resourceRepository: ResourceRepository,
-    private _resourceSearchFacade: ResourceSearchFacade,
-    private _transferStateHelper: TransferStateHelper,
-  ) {
+  constructor() {
     const resourcesProgress$ =
       this._resourceSearchFacade.selectedSkillSlug$.pipe(
         map((skillSlug) => skillSlug ?? resourceSearchRouterHelper.EVERYTHING),

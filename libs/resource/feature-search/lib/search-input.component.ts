@@ -1,11 +1,6 @@
 import { Skill } from './skill';
 import { CommonModule, NgIf, NgFor } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  NgModule,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, NgModule, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   MatAutocompleteModule,
@@ -129,6 +124,10 @@ export interface SearchInputOption {
 ],
 })
 export class SearchInputComponent {
+  private _state = inject<RxState<{
+    control: FormControl<Skill | string>;
+}>>(RxState);
+
   @Input() set control(control: FormControl<Skill | string>) {
     this._state.set({ control });
   }
@@ -141,9 +140,7 @@ export class SearchInputComponent {
 
   getOptionLabel = (option: SearchInputOption) => option?.label;
 
-  constructor(
-    private _state: RxState<{ control: FormControl<Skill | string> }>,
-  ) {
+  constructor() {
     this.value$ = this.control$.pipe(
       switchMap((control) => control.valueChanges),
       /* Filter duplicates. */

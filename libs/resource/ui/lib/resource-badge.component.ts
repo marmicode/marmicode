@@ -1,11 +1,6 @@
 import { PushPipe } from '@rx-angular/template/push';
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  NgModule,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, NgModule, inject } from '@angular/core';
 import {
   getResourceTypeColor,
   getResourceTypeText,
@@ -39,6 +34,10 @@ import { map } from 'rxjs/operators';
   imports: [PushPipe],
 })
 export class ResourceBadgeComponent {
+  private _state = inject<RxState<{
+    resourceType: ResourceType;
+}>>(RxState);
+
   @Input() set resourceType(resourceType: ResourceType) {
     this._state.set({ resourceType });
   }
@@ -50,8 +49,6 @@ export class ResourceBadgeComponent {
   badgeText$ = this._state.select(
     map(({ resourceType }) => getResourceTypeText(resourceType)),
   );
-
-  constructor(private _state: RxState<{ resourceType: ResourceType }>) {}
 }
 
 @NgModule({

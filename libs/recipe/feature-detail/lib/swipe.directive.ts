@@ -30,16 +30,16 @@ import {
   standalone: true,
 })
 export class SwipeDirective implements OnInit {
+  private _elementRef = inject(ElementRef);
+  private _renderer = inject(Renderer2);
+
   @Output() swipeLeft: Observable<void>;
   @Output() swipeRight: Observable<void>;
 
   private _position$: Observable<number>;
   private _window = inject(DOCUMENT).defaultView;
 
-  constructor(
-    private _elementRef: ElementRef,
-    private _renderer: Renderer2,
-  ) {
+  constructor() {
     /*
      * Using native events instead of HostListeners in order to avoid
      * triggering change detection for nothing.

@@ -1,5 +1,5 @@
 import { NgComponentOutlet } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { rxComputed } from '@jscutlery/rx-computed';
 import { MarkdownTokens } from '@marmicode/block/core';
 import { select } from '@ngrx/store';
@@ -42,6 +42,11 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   imports: [NgComponentOutlet, HighlightLinkComponent, PushPipe],
 })
 export class MarkdownLinkComponent {
+  private _markdownBlockStateService = inject(MarkdownBlockStateService);
+  private _state = inject<RxState<{
+    token: MarkdownTokens.Link;
+}>>(RxState);
+
   @Input() set token(token: MarkdownTokens.Link) {
     this._state.set({ token });
   }
@@ -65,9 +70,4 @@ export class MarkdownLinkComponent {
   );
 
   MarkdownTokensComponent = rxComputed(markdownTokensLoader);
-
-  constructor(
-    private _markdownBlockStateService: MarkdownBlockStateService,
-    private _state: RxState<{ token: MarkdownTokens.Link }>,
-  ) {}
 }

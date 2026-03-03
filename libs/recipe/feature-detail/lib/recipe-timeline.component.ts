@@ -1,10 +1,5 @@
 import { CommonModule, NgFor } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  NgModule,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, NgModule, inject } from '@angular/core';
 import { MatButtonModule, MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule, RouterLink } from '@angular/router';
@@ -98,6 +93,12 @@ import { Frame } from './recipe-repository.service';
   imports: [RouterLink, MatButton, PushPipe],
 })
 export class RecipeTimelineComponent {
+  private _state = inject<RxState<{
+    frames: Frame[];
+    recipeSlug: string;
+    currentFrameIndex: number;
+}>>(RxState);
+
   @Input() set frames(frames: Frame[]) {
     this._state.set({ frames });
   }
@@ -137,14 +138,6 @@ export class RecipeTimelineComponent {
         ),
       ),
     );
-
-  constructor(
-    private _state: RxState<{
-      frames: Frame[];
-      recipeSlug: string;
-      currentFrameIndex: number;
-    }>,
-  ) {}
 
   private _getBulletPosition({
     frames,

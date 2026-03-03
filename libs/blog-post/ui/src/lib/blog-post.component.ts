@@ -1,10 +1,5 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  NgModule,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, NgModule, inject } from '@angular/core';
 import { MatDivider, MatDividerModule } from '@angular/material/divider';
 import { BlockGroupComponent } from '@marmicode/block/api';
 import {
@@ -120,6 +115,10 @@ import {
 ],
 })
 export class BlogPostComponent {
+  private _state = inject<RxState<{
+    blogPost: BlogPost;
+}>>(RxState);
+
   @Input()
   set blogPost(blogPost: BlogPost) {
     this._state.set({ blogPost });
@@ -139,11 +138,6 @@ export class BlogPostComponent {
   );
   resourceType = ResourceType.BlogPost;
   title$ = this._state.select('blogPost', 'title');
-  constructor(
-    private _state: RxState<{
-      blogPost: BlogPost;
-    }>,
-  ) {}
 }
 @NgModule({
   exports: [BlogPostComponent],
