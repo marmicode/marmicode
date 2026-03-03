@@ -18,7 +18,6 @@ import {
 import {
   provideRouter,
   withComponentInputBinding,
-  withEnabledBlockingInitialNavigation,
   withInMemoryScrolling,
   withViewTransitions,
 } from '@angular/router';
@@ -45,12 +44,9 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideHttpClient(withInterceptorsFromDi(), withFetch()),
-    /* HACK: use withEnabledBlockingInitialNavigation() to avoid flicker.
-     * TODO: remove it after migrating to Angular 20. */
     provideRouter(
       routes,
       withComponentInputBinding(),
-      withEnabledBlockingInitialNavigation(),
       withViewTransitions(),
       withInMemoryScrolling({
         anchorScrolling: 'enabled',

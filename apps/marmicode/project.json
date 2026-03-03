@@ -88,12 +88,7 @@
         "inlineStyleLanguage": "scss",
         "browser": "apps/marmicode/src/main.ts",
         "server": "apps/marmicode/src/main.server.ts",
-        "ssr": {
-          "entry": "apps/marmicode/src/server.ts"
-        },
-        "prerender": {
-          "routesFile": "apps/marmicode/marmicode-routes.txt"
-        },
+        "outputMode": "static",
         "loader": {
           ".webp": "file"
         }
@@ -159,8 +154,7 @@
         }
       },
       "defaultConfiguration": "production",
-      "outputs": ["{options.outputPath.base}"],
-      "dependsOn": ["update-routes"]
+      "outputs": ["{options.outputPath.base}"]
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
@@ -215,10 +209,6 @@
         "parallel": false
       },
       "dependsOn": ["build"]
-    },
-    "update-routes": {
-      "command": "node --experimental-strip-types apps/marmicode/update-routes.ts -o apps/marmicode/marmicode-routes.txt",
-      "outputs": ["{projectRoot}/marmicode-routes.txt"]
     }
   }
 }
