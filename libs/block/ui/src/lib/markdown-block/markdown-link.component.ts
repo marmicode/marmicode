@@ -1,4 +1,4 @@
-import { NgComponentOutlet, NgIf } from '@angular/common';
+import { NgComponentOutlet } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { rxComputed } from '@jscutlery/rx-computed';
 import { MarkdownTokens } from '@marmicode/block/core';
@@ -12,32 +12,34 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
 
 @Component({
   selector: 'mc-markdown-link',
-  template: ` <mc-highlight-link
-      *ngIf="isHighlightLink$ | push"
-      [color]="color$ | push"
-      [href]="href$ | push"
+  template: ` @if (isHighlightLink$ | push) {
+  <mc-highlight-link
+    [color]="color$ | push"
+    [href]="href$ | push"
     >
-      <ng-container
+    <ng-container
         *ngComponentOutlet="
           MarkdownTokensComponent();
           inputs: { tokens: tokens$ | push }
         "
-      ></ng-container>
-    </mc-highlight-link>
-    <a
-      *ngIf="(isHighlightLink$ | push) === false"
-      [href]="href$ | push"
-      target="_blank"
+    ></ng-container>
+  </mc-highlight-link>
+}
+@if ((isHighlightLink$ | push) === false) {
+  <a
+    [href]="href$ | push"
+    target="_blank"
     >
-      <ng-container
+    <ng-container
         *ngComponentOutlet="
           MarkdownTokensComponent();
           inputs: { tokens: tokens$ | push }
         "
-      ></ng-container>
-    </a>`,
+    ></ng-container>
+  </a>
+}`,
   providers: [RxState],
-  imports: [NgComponentOutlet, NgIf, HighlightLinkComponent, PushPipe],
+  imports: [NgComponentOutlet, HighlightLinkComponent, PushPipe],
 })
 export class MarkdownLinkComponent {
   @Input() set token(token: MarkdownTokens.Link) {

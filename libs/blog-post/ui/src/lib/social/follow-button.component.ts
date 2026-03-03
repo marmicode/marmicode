@@ -8,23 +8,23 @@ import {
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { AuthorSocialInfo } from './author-social-info';
-
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-follow-button',
   template: `
     <!-- Twitter follow button. -->
-    <a
-      *ngIf="author?.twitter"
-      [href]="'https://twitter.com/' + author.twitter"
-      target="_blank"
-    >
-      <button class="button">
-        <fa-icon [icon]="faXTwitter" class="icon"></fa-icon>
-        <span>Follow &#64;{{ author.twitter }}</span>
-      </button>
-    </a>
-  `,
+    @if (author?.twitter) {
+      <a
+        [href]="'https://twitter.com/' + author.twitter"
+        target="_blank"
+        >
+        <button class="button">
+          <fa-icon [icon]="faXTwitter" class="icon"></fa-icon>
+          <span>Follow &#64;{{ author.twitter }}</span>
+        </button>
+      </a>
+    }
+    `,
   styles: [
     `
       a {
@@ -64,14 +64,13 @@ import { AuthorSocialInfo } from './author-social-info';
       }
     `,
   ],
-  imports: [NgIf, FontAwesomeModule],
+  imports: [FontAwesomeModule],
 })
 export class FollowButtonComponent {
-  @Input() author: AuthorSocialInfo;
-
+  @Input()
+  author: AuthorSocialInfo;
   faXTwitter = faXTwitter;
 }
-
 @NgModule({
   exports: [FollowButtonComponent],
   imports: [CommonModule, FontAwesomeModule, FollowButtonComponent],

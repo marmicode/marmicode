@@ -18,9 +18,7 @@ import { PushPipe } from '@rx-angular/template/push';
 import { ShareButtons } from 'ngx-sharebuttons/buttons';
 import { map } from 'rxjs/operators';
 import { AuthorSocialInfo } from './author-social-info';
-
 export type Size = 'normal' | 'small';
-
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   /* @hack we would like to apply the theme locally using ShadowDOM but
@@ -47,18 +45,18 @@ export type Size = 'normal' | 'small';
   imports: [ShareButtons, PushPipe],
 })
 export class ShareButtonsComponent {
-  @Input() set author(author: AuthorSocialInfo) {
+  @Input()
+  set author(author: AuthorSocialInfo) {
     this._state.set({ author });
   }
-
-  @Input() set title(title: string) {
+  @Input()
+  set title(title: string) {
     this._state.set({ title });
   }
-
-  @Input() set size(size: Size) {
+  @Input()
+  set size(size: Size) {
     this._state.set({ size });
   }
-
   defaultTitle$ = this._state.select(
     selectSlice(['author', 'title']),
     select(
@@ -66,9 +64,7 @@ export class ShareButtonsComponent {
         if (title == null) {
           return null;
         }
-
         const authorName = author?.name;
-
         return (
           title + (authorName ? ` by ${authorName}` : '') + this._titleSuffix
         );
@@ -82,25 +78,20 @@ export class ShareButtonsComponent {
         if (title == null) {
           return null;
         }
-
         const authorName = author?.twitter
           ? author?.twitter
             ? `@${author?.twitter}`
             : ''
           : author?.name;
-
         return (
           title + (authorName ? ` by ${authorName}` : '') + this._titleSuffix
         );
       }),
     ),
   );
-
   buttons = ['linkedin', 'facebook', 'copy'];
   theme = 'outline';
-
   private _titleSuffix = ' on @Marmicode';
-
   constructor(
     iconLibrary: FaIconLibrary,
     private _state: RxState<{
@@ -115,12 +106,10 @@ export class ShareButtonsComponent {
     iconLibrary.addIcons(faLink);
     iconLibrary.addIcons(faLinkedinIn);
     iconLibrary.addIcons(faFacebookF);
-
     /* Set default size. */
     this._state.set({ size: 'normal' });
   }
 }
-
 @NgModule({
   exports: [ShareButtonsComponent],
   imports: [ShareButtonsComponent],

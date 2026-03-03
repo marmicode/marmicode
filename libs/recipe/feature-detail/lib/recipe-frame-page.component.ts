@@ -52,32 +52,35 @@ import { SwipeDirective, SwipeModule } from './swipe.directive';
         class="swipable-content"
         mcSlideAnimation
         mcSwipe
-      >
+        >
         <!-- Recipe's title. -->
-        <mc-resource-title-banner
-          *ngIf="title$ | push as title"
-          [resourceType]="type$ | push"
-          [title]="title"
-          [subtitle]="currentFrameTitle$ | push"
-        ></mc-resource-title-banner>
-
+        @if (title$ | push; as title) {
+          <mc-resource-title-banner
+            [resourceType]="type$ | push"
+            [title]="title"
+            [subtitle]="currentFrameTitle$ | push"
+          ></mc-resource-title-banner>
+        }
+    
         <!-- Frame's blocks with code, text etc... -->
-        <mc-block-group
-          *ngIf="currentFrame$ | push as currentFrame"
-          [blockGroup]="currentFrame"
-        ></mc-block-group>
+        @if (currentFrame$ | push; as currentFrame) {
+          <mc-block-group
+            [blockGroup]="currentFrame"
+          ></mc-block-group>
+        }
       </div>
-
+    
       <!-- THE timeline. -->
-      <mc-recipe-timeline
-        *ngIf="frames$ | push as frames"
-        [currentFrameIndex]="currentFrameIndex$ | push"
-        [frames]="frames"
-        [recipeSlug]="recipeSlug$ | push"
-        [nextFrameRoute]="nextFrameRoute$ | push"
-      ></mc-recipe-timeline>
+      @if (frames$ | push; as frames) {
+        <mc-recipe-timeline
+          [currentFrameIndex]="currentFrameIndex$ | push"
+          [frames]="frames"
+          [recipeSlug]="recipeSlug$ | push"
+          [nextFrameRoute]="nextFrameRoute$ | push"
+        ></mc-recipe-timeline>
+      }
     </mc-page>
-  `,
+    `,
   styles: [
     `
       .page {
@@ -103,12 +106,11 @@ import { SwipeDirective, SwipeModule } from './swipe.directive';
     PageComponent,
     SlideAnimationDirective,
     SwipeDirective,
-    NgIf,
     ResourceTitleBannerComponent,
     BlockGroupComponent,
     RecipeTimelineComponent,
-    PushPipe,
-  ],
+    PushPipe
+],
 })
 export class RecipeFramePageComponent {
   recipe$ = this._state.select('recipe');

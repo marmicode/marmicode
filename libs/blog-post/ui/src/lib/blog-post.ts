@@ -12,7 +12,6 @@ export interface BlogPost {
   title: string;
   text: string;
 }
-
 export function createBlogPost(blogPost: BlogPost) {
   return { ...blogPost };
 }

@@ -6,24 +6,26 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { MarkdownTokens } from '@marmicode/block/core';
-import { NgIf } from '@angular/common';
+
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-media',
-  template: `<img
-      *ngIf="!isVideo"
-      [alt]="token.text"
-      [src]="token.href"
-      class="image"
+  template: `@if (!isVideo) {
+  <img
+    [alt]="token.text"
+    [src]="token.href"
+    class="image"
     />
-    <video
-      *ngIf="isVideo"
-      [src]="token.href"
-      [title]="token.text"
-      class="video"
-      controls
-    ></video> `,
+}
+@if (isVideo) {
+  <video
+    [src]="token.href"
+    [title]="token.text"
+    class="video"
+    controls
+  ></video>
+}`,
   styles: [
     `
       :host {
@@ -41,7 +43,7 @@ import { NgIf } from '@angular/common';
       }
     `,
   ],
-  imports: [NgIf],
+  imports: [],
 })
 export class MarkdownMediaComponent implements OnChanges {
   @Input() token: MarkdownTokens.Media;

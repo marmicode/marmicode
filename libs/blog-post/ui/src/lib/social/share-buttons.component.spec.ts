@@ -4,7 +4,6 @@ import { By } from '@angular/platform-browser';
 import { describe, expect, it } from '@jest/globals';
 import { PushPipe } from '@rx-angular/template/push';
 import { ShareButtonsComponent } from './share-buttons.component';
-
 describe('ShareButtonsComponent', () => {
   it('should construct title', () => {
     const { getOtherShareButtonsDescription } = createComponent();
@@ -12,14 +11,12 @@ describe('ShareButtonsComponent', () => {
       'Component Testing by Younes Jaaidi on @Marmicode',
     );
   });
-
   it('should construct twitter title', () => {
     const { getTwitterShareButtonsDescription } = createComponent();
     expect(getTwitterShareButtonsDescription()).toEqual(
       'Component Testing by @yjaaidi on @Marmicode',
     );
   });
-
   function createComponent() {
     TestBed.overrideComponent(ShareButtonsComponent, {
       set: {
@@ -27,17 +24,14 @@ describe('ShareButtonsComponent', () => {
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
       },
     });
-
     const fixture = TestBed.createComponent(ShareButtonsComponent);
     const component = fixture.componentInstance;
-
     component.author = {
       name: 'Younes Jaaidi',
       twitter: 'yjaaidi',
     };
     component.title = 'Component Testing';
     fixture.detectChanges();
-
     return {
       getTwitterShareButtonsDescription() {
         return fixture.debugElement.queryAll(By.css('share-buttons'))[0]

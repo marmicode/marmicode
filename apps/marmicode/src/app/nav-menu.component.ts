@@ -29,13 +29,14 @@ import {
     <!-- Toolbar links. -->
     <div class="mc-flex-row">
       <mat-nav-list class="mc-flex-row mc-hide mc-show-gt-sm" role="menu">
-        <mc-nav-menu-item
-          *ngFor="let entry of entries"
-          [entry]="entry"
-          [showIcon]="false"
-        ></mc-nav-menu-item>
+        @for (entry of entries; track entry) {
+          <mc-nav-menu-item
+            [entry]="entry"
+            [showIcon]="false"
+          ></mc-nav-menu-item>
+        }
       </mat-nav-list>
-
+    
       <button
         (click)="toggleMenu()"
         class="mc-hide-gt-sm"
@@ -43,31 +44,33 @@ import {
         aria-haspopup="true"
         data-role="menu-button"
         mat-button
-      >
+        >
         <mat-icon>menu</mat-icon>
       </button>
     </div>
-
+    
     <!-- Overlay menu. -->
-    <div
-      *ngIf="isMenuDisplayed$ | push"
-      @showHide
-      class="vertical-menu mat-elevation-z1 mc-hide-gt-sm"
-    >
-      <mat-nav-list
-        class="vertical-menu-list"
-        data-role="vertical-menu"
-        role="menu"
-      >
-        <mc-nav-menu-item
-          *ngFor="let entry of entries"
-          [entry]="entry"
-          (click)="closeMenu()"
-          color="primary"
-        ></mc-nav-menu-item>
-      </mat-nav-list>
-    </div>
-  `,
+    @if (isMenuDisplayed$ | push) {
+      <div
+        @showHide
+        class="vertical-menu mat-elevation-z1 mc-hide-gt-sm"
+        >
+        <mat-nav-list
+          class="vertical-menu-list"
+          data-role="vertical-menu"
+          role="menu"
+          >
+          @for (entry of entries; track entry) {
+            <mc-nav-menu-item
+              [entry]="entry"
+              (click)="closeMenu()"
+              color="primary"
+            ></mc-nav-menu-item>
+          }
+        </mat-nav-list>
+      </div>
+    }
+    `,
   styles: [
     `
       .vertical-menu {
@@ -101,13 +104,11 @@ import {
   ],
   imports: [
     MatNavList,
-    NgFor,
     NavMenuItemComponent,
     MatButton,
     MatIcon,
-    NgIf,
-    PushPipe,
-  ],
+    PushPipe
+],
 })
 export class NavMenuComponent {
   isMenuDisplayed$ = new BehaviorSubject<boolean>(false);

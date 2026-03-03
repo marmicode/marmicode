@@ -37,7 +37,7 @@ export interface SearchInputOption {
     <div class="search-input-container">
       <!-- Search icon. -->
       <mat-icon class="search-icon" color="primary">search</mat-icon>
-
+    
       <input
         [formControl]="control$ | push"
         [matAutocomplete]="auto"
@@ -45,25 +45,28 @@ export interface SearchInputOption {
         aria-label="Search"
         class="input"
         type="text"
-      />
-
+        />
+    
       <!-- Reset button. -->
-      <button
-        *ngIf="value$ | push"
-        (click)="reset$.next()"
-        class="reset-button"
-        mat-icon-button
-      >
-        <mat-icon color="primary">clear</mat-icon>
-      </button>
+      @if (value$ | push) {
+        <button
+          (click)="reset$.next()"
+          class="reset-button"
+          mat-icon-button
+          >
+          <mat-icon color="primary">clear</mat-icon>
+        </button>
+      }
     </div>
-
+    
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionLabel">
-      <mat-option *ngFor="let option of options" [value]="option">
-        {{ option.label }}
-      </mat-option>
+      @for (option of options; track option) {
+        <mat-option [value]="option">
+          {{ option.label }}
+        </mat-option>
+      }
     </mat-autocomplete>
-  `,
+    `,
   styles: [
     `
       .search-input-container {
@@ -119,13 +122,11 @@ export interface SearchInputOption {
     MatIcon,
     ReactiveFormsModule,
     MatAutocompleteTrigger,
-    NgIf,
     MatIconButton,
     MatAutocomplete,
-    NgFor,
     MatOption,
-    PushPipe,
-  ],
+    PushPipe
+],
 })
 export class SearchInputComponent {
   @Input() set control(control: FormControl<Skill | string>) {

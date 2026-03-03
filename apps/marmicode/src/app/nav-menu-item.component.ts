@@ -21,42 +21,45 @@ export interface NavMenuEntry {
   selector: 'mc-nav-menu-item',
   template: `
     <!-- Url. -->
-    <a
-      *ngIf="entry.url"
-      [href]="entry.url"
-      mat-list-item
-      rel="noopener"
-      role="menuitem"
-      target="_blank"
-    >
-      <ng-container *ngTemplateOutlet="linkContent"></ng-container>
-    </a>
-
+    @if (entry.url) {
+      <a
+        [href]="entry.url"
+        mat-list-item
+        rel="noopener"
+        role="menuitem"
+        target="_blank"
+        >
+        <ng-container *ngTemplateOutlet="linkContent"></ng-container>
+      </a>
+    }
+    
     <!-- Route. -->
-    <a
-      *ngIf="entry.route"
-      [routerLink]="entry.route"
-      mat-list-item
-      role="menuitem"
-      routerLinkActive="active"
-    >
-      <ng-container *ngTemplateOutlet="linkContent"></ng-container>
-    </a>
-
+    @if (entry.route) {
+      <a
+        [routerLink]="entry.route"
+        mat-list-item
+        role="menuitem"
+        routerLinkActive="active"
+        >
+        <ng-container *ngTemplateOutlet="linkContent"></ng-container>
+      </a>
+    }
+    
     <ng-template #linkContent>
       <div class="mc-flex-row">
-        <mat-icon
-          *ngIf="showIcon"
-          [class.primary]="color === 'primary'"
-          class="icon"
-          >{{ entry.icon }}</mat-icon
-        >
-        <span class="content" [class.primary]="color === 'primary'">{{
-          entry.title
-        }}</span>
-      </div>
-    </ng-template>
-  `,
+        @if (showIcon) {
+          <mat-icon
+            [class.primary]="color === 'primary'"
+            class="icon"
+            >{{ entry.icon }}</mat-icon
+            >
+          }
+          <span class="content" [class.primary]="color === 'primary'">{{
+            entry.title
+          }}</span>
+        </div>
+      </ng-template>
+    `,
   styles: [
     `
       :host {
@@ -83,13 +86,12 @@ export interface NavMenuEntry {
     `,
   ],
   imports: [
-    NgIf,
     MatListItem,
     NgTemplateOutlet,
     RouterLinkActive,
     RouterLink,
-    MatIcon,
-  ],
+    MatIcon
+],
 })
 export class NavMenuItemComponent {
   @Input() color?: 'primary';

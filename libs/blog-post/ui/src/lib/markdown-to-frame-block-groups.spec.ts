@@ -1,9 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { CodeBlock } from '@marmicode/block/api';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
-
 export const like = expect.objectContaining;
-
 describe('markdownToFrames', () => {
   it(`should convert blog post's text to blocks`, () => {
     const markdown = `
@@ -31,11 +29,8 @@ Code C
 
 Chapter C after code.
 `;
-
     const frameBlocksList = markdownToFrameBlockGroups(markdown);
-
     expect(frameBlocksList.length).toEqual(4);
-
     /* Intro. */
     expect(frameBlocksList[0]).toMatchObject({
       blocks: [
@@ -51,7 +46,6 @@ Chapter C after code.
         }),
       ],
     });
-
     /* Chapter A. */
     expect(frameBlocksList[1]).toMatchObject({
       blocks: [
@@ -74,7 +68,6 @@ Chapter C after code.
         } as Partial<CodeBlock>),
       ],
     });
-
     /* Chapter B. */
     expect(frameBlocksList[2]).toMatchObject({
       blocks: [
@@ -93,7 +86,6 @@ Chapter C after code.
         }),
       ],
     });
-
     /* Chapter C. */
     expect(frameBlocksList[3]).toMatchObject({
       blocks: [

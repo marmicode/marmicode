@@ -9,27 +9,22 @@ import {
   getMarkdownTokenType,
   parseMarkdown,
 } from '@marmicode/block/api';
-
 export interface BlockGroup {
   blocks: Block[];
 }
-
 export function createBlockGroup(blockGroup: BlockGroup): BlockGroup {
   return { ...blockGroup };
 }
-
 export function isCodeToken(
   token: MarkdownToken,
 ): token is MarkdownTokens.Code {
   return getMarkdownTokenType(token) === MarkdownTokenType.Code;
 }
-
 export function isHeadingToken(
   token: MarkdownToken,
 ): token is MarkdownTokens.Heading {
   return getMarkdownTokenType(token) === MarkdownTokenType.Heading;
 }
-
 /**
  * This function will parse & split a blog post's markdown text into
  * different block groups.
@@ -51,7 +46,6 @@ export function markdownToFrameBlockGroups(text: string): BlockGroup[] {
      */
     function createOrExtendBlockGroup(blockGroup?: BlockGroup) {
       const blocks = blockGroup?.blocks ?? [];
-
       /* Create a new code block. */
       if (isCodeToken(token)) {
         return createBlockGroup({
@@ -64,9 +58,7 @@ export function markdownToFrameBlockGroups(text: string): BlockGroup[] {
           ],
         });
       }
-
       const lastBlock = blocks[blocks.length - 1];
-
       /* Create a markdown block if the last block is not markdown. */
       if (lastBlock?.type !== BlockType.Markdown) {
         return createBlockGroup({
@@ -78,7 +70,6 @@ export function markdownToFrameBlockGroups(text: string): BlockGroup[] {
           ],
         });
       }
-
       /* Extend the last markdown block otherwise. */
       return createBlockGroup({
         blocks: [
@@ -89,17 +80,14 @@ export function markdownToFrameBlockGroups(text: string): BlockGroup[] {
         ],
       });
     }
-
     /* This is a block group breaker, create new block group. */
     if (isHeadingToken(token)) {
       return [...blockGroups, createOrExtendBlockGroup()];
     }
-
     /* Append to last block group.
      * `createOrExtendBlockGroup` will create a new group
      * if `lastBlockGroup` is null. */
     const lastBlockGroup = blockGroups[blockGroups.length - 1];
-
     return [
       ...blockGroups.slice(0, blockGroups.length - 1),
       createOrExtendBlockGroup(lastBlockGroup),

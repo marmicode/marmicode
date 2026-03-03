@@ -35,34 +35,36 @@ import { HighlightZone } from '../highlight/highlight-zone';
   selector: 'mc-code-block',
   providers: [RxState],
   template: ` <div class="code-container">
-    <pre
-      [ngClass]="languageClass$ | push"
-      [style.paddingTop.px]="verticalPadding"
-      [style.paddingBottom.px]="verticalPadding"
-      class="line-numbers preformatted"
-    ><div
-      *ngFor="let style of lineNumberHighlightStyles$ | push"
-      [style.backgroundColor]="style.color"
-      [style.top.px]="style.top"
-      [style.height.px]="style.height"
-      class="line-number-highlight"
-    ></div><code
-      #code
-      class="code"
+      <pre
+        [ngClass]="languageClass$ | push"
+        [style.paddingTop.px]="verticalPadding"
+        [style.paddingBottom.px]="verticalPadding"
+        class="line-numbers preformatted"
+        >@for (style of lineNumberHighlightStyles$ | push; track style) {
+        <div
+          [style.backgroundColor]="style.color"
+          [style.top.px]="style.top"
+          [style.height.px]="style.height"
+          class="line-number-highlight"
+        ></div>
+        }<code
+        #code
+        class="code"
       data-role="code-block">{{code$ | push}}</code></pre>
-
-    <!-- Highlights. -->
-    <div
-      *ngFor="let style of highlightStyles$ | push"
-      [style.backgroundColor]="style.color"
-      [style.top.px]="style.top"
-      [style.height.px]="style.height"
-      class="highlight"
-      data-role="code-highlight"
-    ></div>
-  </div>`,
+    
+      <!-- Highlights. -->
+      @for (style of highlightStyles$ | push; track style) {
+        <div
+          [style.backgroundColor]="style.color"
+          [style.top.px]="style.top"
+          [style.height.px]="style.height"
+          class="highlight"
+          data-role="code-highlight"
+        ></div>
+      }
+    </div>`,
   styleUrls: ['./code-block.component.scss'],
-  imports: [NgClass, NgFor, PushPipe],
+  imports: [NgClass, PushPipe],
 })
 export class CodeBlockComponent implements AfterViewChecked {
   @Input() set block(block: CodeBlock) {

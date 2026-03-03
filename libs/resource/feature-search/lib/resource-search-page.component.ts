@@ -44,26 +44,34 @@ import { ErrorComponent } from '@marmicode/shared/ui';
           class="resource-search-form"
         ></mc-resource-search-form>
       </div>
-
+    
       <div class="spinner-error-container">
-        <mc-loading *ngIf="isLoading$ | push"></mc-loading>
-        <mc-error *ngIf="resourcesNotFound$ | push">
-          Sorry! The resources you are looking for haven't been cooked yet.
-        </mc-error>
-        <mc-error *ngIf="error$ | push"> Oups! Something went wrong. </mc-error>
+        @if (isLoading$ | push) {
+          <mc-loading></mc-loading>
+        }
+        @if (resourcesNotFound$ | push) {
+          <mc-error>
+            Sorry! The resources you are looking for haven't been cooked yet.
+          </mc-error>
+        }
+        @if (error$ | push) {
+          <mc-error> Oups! Something went wrong. </mc-error>
+        }
       </div>
-      <div
-        *ngIf="(isLoading$ | push) === false"
-        class="resource-card-container"
-      >
-        <mc-resource-card
-          *ngFor="let resource of resources$ | push; trackBy: trackById"
-          [resource]="resource"
-          class="resource-card"
-        ></mc-resource-card>
-      </div>
+      @if ((isLoading$ | push) === false) {
+        <div
+          class="resource-card-container"
+          >
+          @for (resource of resources$ | push; track trackById($index, resource)) {
+            <mc-resource-card
+              [resource]="resource"
+              class="resource-card"
+            ></mc-resource-card>
+          }
+        </div>
+      }
     </mc-page>
-  `,
+    `,
   styles: [
     `
       .search-form-container,
@@ -94,13 +102,11 @@ import { ErrorComponent } from '@marmicode/shared/ui';
   imports: [
     PageComponent,
     ResourceSearchFormComponent,
-    NgIf,
     LoadingComponent,
     ErrorComponent,
-    NgFor,
     ResourceCardComponent,
-    PushPipe,
-  ],
+    PushPipe
+],
 })
 export class ResourceSearchPageComponent {
   pageInfo = createBasicPageInfo({

@@ -23,15 +23,17 @@ import { Frame } from './recipe-repository.service';
       <hr class="line" />
       <hr [style.width.%]="progress$ | push" class="past-line" />
       <ul class="bullet-list">
-        <li *ngFor="let bullet of bullets$ | push">
-          <a
-            [style.left.%]="bullet.position"
-            [class.previous-bullet]="bullet.isPast"
-            [class.current-bullet]="bullet.isCurrent"
-            [routerLink]="bullet.route"
-            class="bullet"
-          ></a>
-        </li>
+        @for (bullet of bullets$ | push; track bullet) {
+          <li>
+            <a
+              [style.left.%]="bullet.position"
+              [class.previous-bullet]="bullet.isPast"
+              [class.current-bullet]="bullet.isCurrent"
+              [routerLink]="bullet.route"
+              class="bullet"
+            ></a>
+          </li>
+        }
       </ul>
     </div>
     <a [routerLink]="nextFrameRoute">
@@ -39,11 +41,11 @@ import { Frame } from './recipe-repository.service';
         [disabled]="nextFrameRoute == null"
         class="next-frame-button"
         mat-stroked-button
-      >
+        >
         <span>NEXT</span>
       </button>
     </a>
-  `,
+    `,
   styles: [
     `
       :host {
@@ -93,7 +95,7 @@ import { Frame } from './recipe-repository.service';
    * and positioning. */
   styleUrls: ['./recipe-timeline.component.scss'],
   providers: [RxState],
-  imports: [NgFor, RouterLink, MatButton, PushPipe],
+  imports: [RouterLink, MatButton, PushPipe],
 })
 export class RecipeTimelineComponent {
   @Input() set frames(frames: Frame[]) {

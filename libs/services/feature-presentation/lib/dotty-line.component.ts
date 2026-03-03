@@ -4,12 +4,13 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-dotty-line',
-  template: `<div
-    *ngFor="let line of lines"
+  template: `@for (line of lines; track line) {
+  <div
     [style.borderBottomColor]="line.color"
     [style.width.px]="line.width"
     class="line"
-  ></div>`,
+  ></div>
+}`,
   styles: [
     `
       .line {
@@ -19,7 +20,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
       }
     `,
   ],
-  imports: [NgFor],
+  imports: [],
 })
 export class DottyLineComponent {
   width = 60;

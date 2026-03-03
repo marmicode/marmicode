@@ -175,7 +175,8 @@
           "buildTarget": "marmicode:build:production"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "continuous": true
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -189,7 +190,8 @@
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "apps/marmicode/jest.config.ts"
+        "jestConfig": "apps/marmicode/jest.config.ts",
+        "tsConfig": "apps/marmicode/tsconfig.spec.json"
       },
       "outputs": ["{workspaceRoot}/coverage/apps/marmicode"]
     },

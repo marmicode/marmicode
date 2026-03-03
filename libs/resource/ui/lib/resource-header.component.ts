@@ -17,38 +17,45 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-header',
   template: `
-    <div *ngIf="isLarge" class="badge-container">
-      <mc-resource-badge
-        [resourceType]="resourceInfo.type"
-        class="badge"
-      ></mc-resource-badge>
-    </div>
-
+    @if (isLarge) {
+      <div class="badge-container">
+        <mc-resource-badge
+          [resourceType]="resourceInfo.type"
+          class="badge"
+        ></mc-resource-badge>
+      </div>
+    }
+    
     <div class="picture-container">
-      <img
-        *ngIf="resourceInfo.author"
-        [alt]="resourceInfo.author.name"
-        [src]="resourceInfo.author.pictureUri"
-        class="picture"
-      />
+      @if (resourceInfo.author) {
+        <img
+          [alt]="resourceInfo.author.name"
+          [src]="resourceInfo.author.pictureUri"
+          class="picture"
+          />
+      }
       <div class="content">
-        <h1 *ngIf="isLarge" class="title">{{ resourceInfo.title }}</h1>
-        <h2 *ngIf="!isLarge" class="title">{{ resourceInfo.title }}</h2>
+        @if (isLarge) {
+          <h1 class="title">{{ resourceInfo.title }}</h1>
+        }
+        @if (!isLarge) {
+          <h2 class="title">{{ resourceInfo.title }}</h2>
+        }
         <div class="subtitle">
-          <ng-container *ngIf="resourceInfo.author">
+          @if (resourceInfo.author) {
             <span>by {{ resourceInfo.author.name }}</span>
             <span class="mc-hide mc-show-gt-xs">&nbsp;•&nbsp;</span>
             <br class="mc-hide-gt-xs" />
-          </ng-container>
-          <ng-container *ngIf="resourceInfo.releasedAt">
+          }
+          @if (resourceInfo.releasedAt) {
             <span>{{ resourceInfo.releasedAt | date }}</span>
             <span>&nbsp;•&nbsp;</span>
-          </ng-container>
+          }
           <span [style.color]="color">{{ resourceInfo.duration }} minutes</span>
         </div>
       </div>
     </div>
-  `,
+    `,
   styles: [
     `
       :host {
@@ -122,7 +129,7 @@ import {
       }
     `,
   ],
-  imports: [NgIf, ResourceBadgeComponent, DatePipe],
+  imports: [ResourceBadgeComponent, DatePipe],
 })
 export class ResourceHeaderComponent implements OnChanges {
   @Input() resourceInfo: ResourceInfo;

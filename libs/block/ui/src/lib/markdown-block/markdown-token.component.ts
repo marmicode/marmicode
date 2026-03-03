@@ -10,7 +10,7 @@ import {
   MarkdownToken,
   MarkdownTokenType,
 } from '@marmicode/block/core';
-import { NgSwitch, NgSwitchCase } from '@angular/common';
+
 import { MarkdownBlockquoteComponent } from './markdown-blockquote.component';
 import { MarkdownCodeComponent } from './markdown-code.component';
 import { MarkdownCodespanComponent } from './markdown-codespan.component';
@@ -28,85 +28,86 @@ import { MarkdownTextComponent } from './markdown-text.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-token',
   template: `
-    <ng-container [ngSwitch]="type">
-      <!-- Blockquote. -->
-      <mc-markdown-blockquote
-        *ngSwitchCase="TokenType.Blockquote"
-        [token]="tokenAsAny"
-      ></mc-markdown-blockquote>
-
-      <!-- Code. -->
-      <mc-markdown-code
-        *ngSwitchCase="TokenType.Code"
-        [token]="tokenAsAny"
-      ></mc-markdown-code>
-
-      <!-- Codespan. -->
-      <mc-markdown-codespan
-        *ngSwitchCase="TokenType.Codespan"
-        [token]="tokenAsAny"
-      ></mc-markdown-codespan>
-
-      <!-- Emphasis. -->
-      <mc-markdown-emphasis
-        *ngSwitchCase="TokenType.Emphasis"
-        [token]="tokenAsAny"
-      ></mc-markdown-emphasis>
-
-      <!-- Heading. -->
-      <mc-markdown-heading
-        *ngSwitchCase="TokenType.Heading"
-        [token]="tokenAsAny"
-      ></mc-markdown-heading>
-
-      <!-- Horizontal Rule. -->
-      <hr *ngSwitchCase="TokenType.HorizontalRule" />
-      <!-- Link. -->
-      <mc-markdown-link
-        *ngSwitchCase="TokenType.Link"
-        [token]="tokenAsAny"
-      ></mc-markdown-link>
-
-      <!-- List. -->
-      <mc-markdown-list
-        *ngSwitchCase="TokenType.List"
-        [token]="tokenAsAny"
-      ></mc-markdown-list>
-
-      <!-- List item. -->
-      <mc-markdown-list-item
-        *ngSwitchCase="TokenType.ListItem"
-        [token]="tokenAsAny"
-      ></mc-markdown-list-item>
-
-      <!-- Media: Image or Video. -->
-      <mc-markdown-media
-        *ngSwitchCase="TokenType.Media"
-        [token]="tokenAsAny"
-      ></mc-markdown-media>
-
-      <!-- Paragraph. -->
-      <mc-markdown-paragraph
-        *ngSwitchCase="TokenType.Paragraph"
-        [token]="tokenAsAny"
-      ></mc-markdown-paragraph>
-
-      <!-- Strong. -->
-      <mc-markdown-strong
-        *ngSwitchCase="TokenType.Strong"
-        [token]="tokenAsAny"
-      ></mc-markdown-strong>
-
-      <!-- Text. -->
-      <mc-markdown-text
-        *ngSwitchCase="TokenType.Text"
-        [token]="tokenAsAny"
-      ></mc-markdown-text>
-    </ng-container>
-  `,
+@switch (type) {
+  <!-- Blockquote. -->
+  @case (TokenType.Blockquote) {
+    <mc-markdown-blockquote
+      [token]="tokenAsAny"
+    ></mc-markdown-blockquote>
+  }
+  <!-- Code. -->
+  @case (TokenType.Code) {
+    <mc-markdown-code
+      [token]="tokenAsAny"
+    ></mc-markdown-code>
+  }
+  <!-- Codespan. -->
+  @case (TokenType.Codespan) {
+    <mc-markdown-codespan
+      [token]="tokenAsAny"
+    ></mc-markdown-codespan>
+  }
+  <!-- Emphasis. -->
+  @case (TokenType.Emphasis) {
+    <mc-markdown-emphasis
+      [token]="tokenAsAny"
+    ></mc-markdown-emphasis>
+  }
+  <!-- Heading. -->
+  @case (TokenType.Heading) {
+    <mc-markdown-heading
+      [token]="tokenAsAny"
+    ></mc-markdown-heading>
+  }
+  <!-- Horizontal Rule. -->
+  @case (TokenType.HorizontalRule) {
+    <hr />
+  }
+  <!-- Link. -->
+  @case (TokenType.Link) {
+    <mc-markdown-link
+      [token]="tokenAsAny"
+    ></mc-markdown-link>
+  }
+  <!-- List. -->
+  @case (TokenType.List) {
+    <mc-markdown-list
+      [token]="tokenAsAny"
+    ></mc-markdown-list>
+  }
+  <!-- List item. -->
+  @case (TokenType.ListItem) {
+    <mc-markdown-list-item
+      [token]="tokenAsAny"
+    ></mc-markdown-list-item>
+  }
+  <!-- Media: Image or Video. -->
+  @case (TokenType.Media) {
+    <mc-markdown-media
+      [token]="tokenAsAny"
+    ></mc-markdown-media>
+  }
+  <!-- Paragraph. -->
+  @case (TokenType.Paragraph) {
+    <mc-markdown-paragraph
+      [token]="tokenAsAny"
+    ></mc-markdown-paragraph>
+  }
+  <!-- Strong. -->
+  @case (TokenType.Strong) {
+    <mc-markdown-strong
+      [token]="tokenAsAny"
+    ></mc-markdown-strong>
+  }
+  <!-- Text. -->
+  @case (TokenType.Text) {
+    <mc-markdown-text
+      [token]="tokenAsAny"
+    ></mc-markdown-text>
+  }
+}
+`,
   imports: [
-    NgSwitch,
-    NgSwitchCase,
     MarkdownBlockquoteComponent,
     MarkdownCodeComponent,
     MarkdownCodespanComponent,
@@ -118,8 +119,8 @@ import { MarkdownTextComponent } from './markdown-text.component';
     MarkdownMediaComponent,
     MarkdownParagraphComponent,
     MarkdownStrongComponent,
-    MarkdownTextComponent,
-  ],
+    MarkdownTextComponent
+],
 })
 export class MarkdownTokenComponent implements OnChanges {
   @Input() token: MarkdownToken;
