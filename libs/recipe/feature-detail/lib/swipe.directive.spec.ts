@@ -1,13 +1,8 @@
-import {
-  Component,
-  DebugElement,
-  EventEmitter,
-  provideessChangeDetection,
-} from '@angular/core';
+import { Component, DebugElement, EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { beforeEach, describe, expect, jest, it } from '@jest/globals';
-import { SwipeDirective, SwipeModule } from './swipe.directive';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { SwipeDirective } from './swipe.directive';
 
 @Component({
   imports: [SwipeDirective],
