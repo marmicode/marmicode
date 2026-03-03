@@ -1,10 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import {
-  Component,
-  CUSTOM_ELEMENTS_SCHEMA,
-  provideExperimentalZonelessChangeDetection,
-  Type,
-} from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -114,10 +109,6 @@ describe('SuspenseComponent', () => {
 });
 
 async function render(componentType: Type<unknown>) {
-  TestBed.configureTestingModule({
-    providers: [provideExperimentalZonelessChangeDetection()],
-  });
-
   /* Load `mc-suspense` without `mc-error` & `mc-loading`.
    * This avoids file-loader issues etc... and makes the test
    * shallow without having to import implementation details. */

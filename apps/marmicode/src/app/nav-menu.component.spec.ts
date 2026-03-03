@@ -1,5 +1,4 @@
 import { provideLocationMocks } from '@angular/common/testing';
-import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
@@ -41,12 +40,7 @@ describe('NavMenuComponent', () => {
 
   async function createMenu() {
     TestBed.configureTestingModule({
-      providers: [
-        provideExperimentalZonelessChangeDetection(),
-        provideNoopAnimations(),
-        provideLocationMocks(),
-        provideRouter([]),
-      ],
+      providers: [provideLocationMocks(), provideRouter([])],
     });
 
     const fixture = TestBed.createComponent(NavMenuComponent);

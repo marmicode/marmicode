@@ -26,24 +26,27 @@ import {
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-block',
-  template: ` <ng-container [ngSwitch]="block.type">
-    <!-- Code. -->
+  template: `
+@switch (block.type) {
+  <!-- Code. -->
+  @case (BlockType.Code) {
     <mc-code-block
-      *ngSwitchCase="BlockType.Code"
       [block]="codeBlock"
       [highlightableZones]="highlightableZones"
       [highlightZone]="highlightZone"
     ></mc-code-block>
-
-    <!-- Markdown. -->
+  }
+  <!-- Markdown. -->
+  @case (BlockType.Markdown) {
     <mc-markdown-block
-      *ngSwitchCase="BlockType.Markdown"
       [block]="markdownBlock"
       [highlightableZones]="highlightableZones"
       (highlightZoneChange)="highlightZoneChange.emit($event)"
     ></mc-markdown-block>
-  </ng-container>`,
-  imports: [NgSwitch, NgSwitchCase, CodeBlockComponent, MarkdownBlockComponent],
+  }
+}
+`,
+  imports: [CodeBlockComponent, MarkdownBlockComponent],
 })
 export class BlockComponent {
   @Input() block: Block;

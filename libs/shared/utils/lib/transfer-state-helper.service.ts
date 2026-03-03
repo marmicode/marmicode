@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { concat, MonoTypeOperatorFunction } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { TransferStateAdapter } from './transfer-state-adapter.service';
@@ -7,7 +7,8 @@ import { TransferStateAdapter } from './transfer-state-adapter.service';
   providedIn: 'root',
 })
 export class TransferStateHelper {
-  constructor(private _transferState: TransferStateAdapter) {}
+  private _transferState = inject(TransferStateAdapter);
+
 
   /**
    * Decorates the source in order to preload data from transfer state

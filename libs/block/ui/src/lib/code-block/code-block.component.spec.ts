@@ -76,7 +76,7 @@ describe.skip('CodeBlockComponent', () => {
     });
 
     /* Wait for view check to call highlight. */
-    expect(Prism.highlightElement).toBeCalledTimes(0);
+    expect(Prism.highlightElement).toHaveBeenCalledTimes(0);
 
     /* Trigger view check. */
     fixture.detectChanges();
@@ -84,6 +84,6 @@ describe.skip('CodeBlockComponent', () => {
     /* Double call doesn't trigger highlight twice. */
     fixture.detectChanges();
 
-    expect(Prism.highlightElement).toBeCalledTimes(1);
+    expect(Prism.highlightElement).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,11 +1,6 @@
 import { A11yModule, CdkTrapFocus } from '@angular/cdk/a11y';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Inject,
-  NgModule,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule, inject } from '@angular/core';
 import { MatButtonModule, MatButton } from '@angular/material/button';
 import {
   MatDialogModule,
@@ -55,10 +50,9 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
   ],
 })
 export class UpdateDialogComponent {
-  constructor(
-    private _swUpdate: SwUpdate,
-    @Inject(DOCUMENT) private _document: Document,
-  ) {}
+  private _swUpdate = inject(SwUpdate);
+  private _document = inject<Document>(DOCUMENT);
+
 
   update() {
     /* @hack Can't use async/await.

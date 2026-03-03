@@ -1,10 +1,5 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  NgModule,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, NgModule, inject } from '@angular/core';
 import { MatDivider, MatDividerModule } from '@angular/material/divider';
 import { BlockGroupComponent } from '@marmicode/block/api';
 import {
@@ -26,56 +21,57 @@ import {
   ShareButtonsComponent,
   ShareButtonsModule,
 } from './social/share-buttons.component';
-
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-blog-post',
   template: ` <div class="content">
-    <!-- Resource title / badge / author etc... -->
-    <mc-resource-header
-      [resourceInfo]="resourceInfo$ | push"
-      mode="large"
-    ></mc-resource-header>
-
-    <!-- Top social share buttons. -->
-    <div class="share-buttons-container">
-      <mc-share-buttons
-        [author]="author$ | push"
-        [title]="title$ | push"
-        size="small"
-      ></mc-share-buttons>
-    </div>
-
-    <!-- Picture. -->
-    <div class="picture-container">
-      <img
-        *ngIf="pictureUri$ | push as pictureUri"
-        [alt]="title$ | push"
-        [src]="pictureUri"
-        class="picture"
-      />
-    </div>
-
-    <!-- Blog content. -->
-    <mc-block-group
-      *ngFor="let blockGroup of blockGroups$ | push"
-      [blockGroup]="blockGroup"
-      desktopLayout="column"
-    ></mc-block-group>
-
-    <mat-divider></mat-divider>
-
-    <div class="footer-buttons">
-      <!-- Social share buttons. -->
-      <mc-share-buttons
-        [author]="author$ | push"
-        [title]="title$ | push"
-      ></mc-share-buttons>
-
-      <!-- Follow button. -->
-      <mc-follow-button [author]="author$ | push"></mc-follow-button>
-    </div>
-  </div>`,
+      <!-- Resource title / badge / author etc... -->
+      <mc-resource-header
+        [resourceInfo]="resourceInfo$ | push"
+        mode="large"
+      ></mc-resource-header>
+    
+      <!-- Top social share buttons. -->
+      <div class="share-buttons-container">
+        <mc-share-buttons
+          [author]="author$ | push"
+          [title]="title$ | push"
+          size="small"
+        ></mc-share-buttons>
+      </div>
+    
+      <!-- Picture. -->
+      <div class="picture-container">
+        @if (pictureUri$ | push; as pictureUri) {
+          <img
+            [alt]="title$ | push"
+            [src]="pictureUri"
+            class="picture"
+            />
+        }
+      </div>
+    
+      <!-- Blog content. -->
+      @for (blockGroup of blockGroups$ | push; track blockGroup) {
+        <mc-block-group
+          [blockGroup]="blockGroup"
+          desktopLayout="column"
+        ></mc-block-group>
+      }
+    
+      <mat-divider></mat-divider>
+    
+      <div class="footer-buttons">
+        <!-- Social share buttons. -->
+        <mc-share-buttons
+          [author]="author$ | push"
+          [title]="title$ | push"
+        ></mc-share-buttons>
+    
+        <!-- Follow button. -->
+        <mc-follow-button [author]="author$ | push"></mc-follow-button>
+      </div>
+    </div>`,
   styles: [
     `
       .share-buttons-container {
@@ -112,27 +108,26 @@ import {
   imports: [
     ResourceHeaderComponent,
     ShareButtonsComponent,
-    NgIf,
-    NgFor,
     BlockGroupComponent,
     MatDivider,
     FollowButtonComponent,
-    PushPipe,
-  ],
+    PushPipe
+],
 })
 export class BlogPostComponent {
-  @Input() set blogPost(blogPost: BlogPost) {
+  private _state = inject<RxState<{
+    blogPost: BlogPost;
+}>>(RxState);
+
+  @Input()
+  set blogPost(blogPost: BlogPost) {
     this._state.set({ blogPost });
   }
-
   author$ = this._state.select('blogPost', 'author');
-
   blockGroups$ = this._state
     .select('blogPost')
     .pipe(select(map((blogPost) => markdownToFrameBlockGroups(blogPost.text))));
-
   pictureUri$ = this._state.select('blogPost', 'pictureUri');
-
   resourceInfo$ = this._state.select('blogPost').pipe(
     select(
       map((blogPost) => ({
@@ -141,14 +136,9 @@ export class BlogPostComponent {
       })),
     ),
   );
-
   resourceType = ResourceType.BlogPost;
-
   title$ = this._state.select('blogPost', 'title');
-
-  constructor(private _state: RxState<{ blogPost: BlogPost }>) {}
 }
-
 @NgModule({
   exports: [BlogPostComponent],
   imports: [

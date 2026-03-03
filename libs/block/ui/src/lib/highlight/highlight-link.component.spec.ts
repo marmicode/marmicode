@@ -26,8 +26,8 @@ describe('Component', () => {
 
   it('should trigger highlight on click', () => {
     component.onClick();
-    expect(mockNativeElement.dispatchEvent).toBeCalledTimes(1);
-    expect(mockNativeElement.dispatchEvent).toBeCalledWith(
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledTimes(1);
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledWith(
       expect.objectContaining({
         detail: {
           color: 'red',
@@ -42,20 +42,20 @@ describe('Component', () => {
             },
           ],
         } as HighlightZone,
-      })
+      }),
     );
   });
 
   it('should trigger highlight on mouse enter', () => {
     component.onMouseEnter();
-    expect(mockNativeElement.dispatchEvent).toBeCalledTimes(1);
-    expect(mockNativeElement.dispatchEvent).toBeCalledWith(
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledTimes(1);
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledWith(
       expect.objectContaining({
         detail: {
           color: expect.any(String),
           sections: expect.any(Array),
         },
-      })
+      }),
     );
   });
 
@@ -63,9 +63,9 @@ describe('Component', () => {
     component.onMouseEnter();
     mockNativeElement.dispatchEvent.mockReset();
     component.onMouseLeave();
-    expect(mockNativeElement.dispatchEvent).toBeCalledTimes(1);
-    expect(mockNativeElement.dispatchEvent).toBeCalledWith(
-      expect.objectContaining({ detail: null })
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledTimes(1);
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledWith(
+      expect.objectContaining({ detail: null }),
     );
   });
 
@@ -74,7 +74,7 @@ describe('Component', () => {
     component.onClick();
     mockNativeElement.dispatchEvent.mockReset();
     component.onMouseLeave();
-    expect(mockNativeElement.dispatchEvent).not.toBeCalled();
+    expect(mockNativeElement.dispatchEvent).not.toHaveBeenCalled();
   });
 
   /**
@@ -85,9 +85,9 @@ describe('Component', () => {
     component.onMouseEnter();
     mockNativeElement.dispatchEvent.mockReset();
     component.onMouseLeave();
-    expect(mockNativeElement.dispatchEvent).toBeCalledTimes(1);
-    expect(mockNativeElement.dispatchEvent).toBeCalledWith(
-      expect.objectContaining({ detail: null })
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledTimes(1);
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledWith(
+      expect.objectContaining({ detail: null }),
     );
   });
 });

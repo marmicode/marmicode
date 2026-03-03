@@ -17,46 +17,44 @@ import { LoadingModule, LoadingComponent } from './loading.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-suspense',
   template: `
-    <ng-container *ngIf="suspense$ | push as suspense">
+    @if (suspense$ | push; as suspense) {
       <!-- Data. -->
-      <ng-container *ngIf="suspense.hasValue && suspense.value as data">
+      @if (suspense.hasValue && suspense.value; as data) {
         <ng-container
           *ngTemplateOutlet="dataTemplate; context: { $implicit: data }"
-        >
+          >
         </ng-container>
-      </ng-container>
-
+      }
       <!-- Loading. -->
-      <ng-container *ngIf="suspense.pending">
+      @if (suspense.pending) {
         <ng-container
           *ngTemplateOutlet="suspenseTemplate ?? defaultSuspenseTemplate"
-        >
+          >
         </ng-container>
-      </ng-container>
-
+      }
       <!-- Error. -->
-      <ng-container *ngIf="suspense.hasError && suspense.error as error">
+      @if (suspense.hasError && suspense.error; as error) {
         <ng-container
           *ngTemplateOutlet="
             errorTemplate ?? defaultErrorTemplate;
             context: { $implicit: error }
           "
-        >
+          >
         </ng-container>
-      </ng-container>
-    </ng-container>
-
+      }
+    }
+    
     <!-- Default error template. -->
     <ng-template #defaultErrorTemplate>
       <mc-error>Oups! Something went wrong.</mc-error>
     </ng-template>
-
+    
     <!-- Default suspense template. -->
     <ng-template #defaultSuspenseTemplate>
       <mc-loading></mc-loading>
     </ng-template>
-  `,
-  imports: [NgIf, NgTemplateOutlet, ErrorComponent, LoadingComponent, PushPipe],
+    `,
+  imports: [NgTemplateOutlet, ErrorComponent, LoadingComponent, PushPipe],
 })
 export class SuspenseComponent<T = unknown> {
   @ContentChild('data') dataTemplate: TemplateRef<{ $implicit: T }>;

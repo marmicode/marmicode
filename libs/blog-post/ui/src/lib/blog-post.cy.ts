@@ -1,6 +1,5 @@
 import { createBlogPost } from './blog-post';
 import { BlogPostComponent, BlogPostModule } from './blog-post.component';
-
 describe(BlogPostComponent.name, () => {
   it('should show blog', () => {
     cy.mount(BlogPostComponent, {
@@ -229,7 +228,6 @@ We have the services you need:
     });
     cy.snapshot();
   });
-
   it('should show video', () => {
     cy.mount(BlogPostComponent, {
       imports: [BlogPostModule],
@@ -254,10 +252,8 @@ We have the services you need:
         }),
       },
     });
-
     /* Wait for video tag to appear before taking a snapshot. */
     cy.get('video').should('be.visible');
-
     cy.snapshot();
   });
 });

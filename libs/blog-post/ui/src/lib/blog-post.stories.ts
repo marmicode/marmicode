@@ -1,7 +1,6 @@
 import { Meta, Story, moduleMetadata } from '@storybook/angular';
 import { createBlogPost } from './blog-post';
 import { BlogPostComponent, BlogPostModule } from './blog-post.component';
-
 export default {
   title: 'BlogPost',
   decorators: [
@@ -10,12 +9,10 @@ export default {
     }),
   ],
 } as Meta;
-
 const Template: Story = (args) => ({
   component: BlogPostComponent,
   props: args,
 });
-
 export const Default = Template.bind({});
 Default.args = {
   blogPost: createBlogPost({
@@ -264,7 +261,6 @@ We have the services you need:
         `,
   }),
 };
-
 export const Video = Template.bind({});
 Video.args = {
   blogPost: createBlogPost({

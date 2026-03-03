@@ -2,12 +2,10 @@ import { NgFor, NgIf } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
 import { describe, expect, it } from '@jest/globals';
 import { PushPipe } from '@rx-angular/template/push';
 import { BlogPost, createBlogPost } from './blog-post';
 import { BlogPostComponent } from './blog-post.component';
-
 describe('BlogPostComponent', () => {
   it('should pass the right information to share buttons', () => {
     const {
@@ -31,7 +29,6 @@ describe('BlogPostComponent', () => {
         text: 'content',
       }),
     );
-
     expect(getTwitterShareButtonsProperties()).toEqual(
       expect.objectContaining({
         author: expect.objectContaining({
@@ -40,7 +37,6 @@ describe('BlogPostComponent', () => {
         title: 'Title',
       }),
     );
-
     expect(getOtherShareButtonsProperties()).toEqual(
       expect.objectContaining({
         author: expect.objectContaining({
@@ -50,7 +46,6 @@ describe('BlogPostComponent', () => {
       }),
     );
   });
-
   function createComponent() {
     TestBed.overrideComponent(BlogPostComponent, {
       set: {
@@ -58,9 +53,7 @@ describe('BlogPostComponent', () => {
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
       },
     });
-
     const fixture = TestBed.createComponent(BlogPostComponent);
-
     return {
       setBlogPost(blogPost: BlogPost) {
         fixture.componentInstance.blogPost = blogPost;

@@ -1,15 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  HostBinding,
-  HostListener,
-  Input,
-  NgModule,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListener, Input, NgModule, OnChanges, SimpleChanges, inject } from '@angular/core';
 import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 
@@ -28,6 +18,8 @@ import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
     standalone: true,
 })
 export class HighlightLinkComponent implements OnChanges {
+  private _elementRef = inject(ElementRef);
+
   @Input() color: string;
   @Input() href: string;
 
@@ -55,8 +47,6 @@ export class HighlightLinkComponent implements OnChanges {
     );
     return zone?.color;
   }
-
-  constructor(private _elementRef: ElementRef) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.href) {
