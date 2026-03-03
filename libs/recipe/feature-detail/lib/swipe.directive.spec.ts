@@ -2,7 +2,7 @@ import {
   Component,
   DebugElement,
   EventEmitter,
-  provideExperimentalZonelessChangeDetection,
+  provideessChangeDetection,
 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -36,9 +36,6 @@ describe('SwipeDirective', () => {
   let contentEl: DebugElement;
 
   beforeEach(async () => {
-    TestBed.configureTestingModule({
-      providers: [provideExperimentalZonelessChangeDetection()],
-    });
     fixture = TestBed.createComponent(SwipeTestComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();

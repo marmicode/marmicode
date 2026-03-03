@@ -3,11 +3,7 @@ import {
   withFetch,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import {
-  ApplicationConfig,
-  importProvidersFrom,
-  provideExperimentalZonelessChangeDetection,
-} from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import {
   AnalyticsModule,
   getAnalytics,
@@ -19,7 +15,6 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideRouter,
   withComponentInputBinding,
@@ -47,9 +42,7 @@ export const appConfig: ApplicationConfig = {
 
     ScreenTrackingService,
     provideAnalytics(() => getAnalytics()),
-    provideAnimations(),
     provideClientHydration(withEventReplay()),
-    provideExperimentalZonelessChangeDetection(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideHttpClient(withInterceptorsFromDi(), withFetch()),
     /* HACK: use withEnabledBlockingInitialNavigation() to avoid flicker.
