@@ -185,7 +185,7 @@
       "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "apps/marmicode/jest.config.ts",
-        "tsConfig": "apps/marmicode/tsconfig.spec.json"
+        "tsConfig": "{projectRoot}/tsconfig.spec.json"
       },
       "outputs": ["{workspaceRoot}/coverage/apps/marmicode"]
     },
