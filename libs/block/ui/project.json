@@ -14,7 +14,7 @@
       "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "{projectRoot}/jest.config.ts",
-        "tsConfig": "libs/block/ui/tsconfig.spec.json"
+        "tsConfig": "{projectRoot}/tsconfig.spec.json"
       },
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     },
