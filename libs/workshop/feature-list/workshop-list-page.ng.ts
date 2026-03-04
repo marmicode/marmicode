@@ -5,6 +5,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,6 +21,7 @@ import { ComingSoon } from './coming-soon.ng';
   selector: 'mc-workshop-list-page',
   imports: [
     ComingSoon,
+    FormsModule,
     MatButtonToggleModule,
     MatCardModule,
     MatIconModule,
@@ -31,13 +33,14 @@ import { ComingSoon } from './coming-soon.ng';
     <mc-page [info]="pageInfo">
       <section class="container">
         <mat-button-toggle-group
-          [value]="languageFilter()"
-          (change)="languageFilter.set($event.value)"
+          [(ngModel)]="languageFilter"
           aria-label="Filter by language"
         >
-          <mat-button-toggle [value]="null">All</mat-button-toggle>
-          <mat-button-toggle value="en">🇬🇧 English</mat-button-toggle>
-          <mat-button-toggle value="fr">🇫🇷 French</mat-button-toggle>
+          @for (option of languageOptions; track option) {
+            <mat-button-toggle [value]="option.value">
+              {{ option.label }}
+            </mat-button-toggle>
+          }
         </mat-button-toggle-group>
         <div class="list">
           @for (workshop of filteredWorkshops(); track workshop.id) {
@@ -83,6 +86,11 @@ export class WorkshopListPage {
       : this._workshops;
   });
   languageFilter = signal<WorkshopLanguage | null>(null);
+  languageOptions: Array<{ label: string; value: WorkshopLanguage | null }> = [
+    { label: 'All', value: null },
+    { label: '🇬🇧 English', value: 'en' },
+    { label: '🇫🇷 French', value: 'fr' },
+  ];
 
   private _workshops = inject(WorkshopRepository).getWorkshops();
 }
