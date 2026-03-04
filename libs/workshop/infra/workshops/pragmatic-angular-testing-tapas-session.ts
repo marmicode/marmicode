@@ -5,6 +5,7 @@ import pictureUri from './pragmatic-angular-testing.webp';
 export const pragmaticAngularTestingTapasSession = createWorkshop({
   id: 'pragmatic-angular-testing-tapas-session',
   title: 'Pragmatic Angular Testing Workshop',
+  shortTitle: 'Pragmatic Angular Testing',
   type: 'tapas',
   subheading: `Tired of whack-a-mole bugs, boring manual tests, and fragile suites?
 Let's cook fast, reliable tests that actually help you ship.`,

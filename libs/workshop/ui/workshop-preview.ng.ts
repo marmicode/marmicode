@@ -48,7 +48,7 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
       }
       <mat-card-content class="content">
         <div class="header">
-          <h3 class="title">{{ workshop().title }}</h3>
+          <h3 class="title">{{ workshop().shortTitle }}</h3>
           <mc-workshop-type-label [workshop]="workshop()" class="type" />
         </div>
 

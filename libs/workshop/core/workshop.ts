@@ -1,6 +1,10 @@
 export interface Workshop {
   id: string;
   title: string;
+  /**
+   * The short title is using in the list page.
+   */
+  shortTitle: string;
   type: 'tapas' | 'full';
   location: 'online';
   description: string;

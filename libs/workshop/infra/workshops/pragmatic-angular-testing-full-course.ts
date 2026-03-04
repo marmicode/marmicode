@@ -5,6 +5,7 @@ import thumbnailUri from './pragmatic-angular-testing-thumbnail.webp';
 export const pragmaticAngularTestingFullCourse = createWorkshop({
   id: 'pragmatic-angular-testing-full-course',
   title: 'Pragmatic Angular Testing Workshop',
+  shortTitle: 'Pragmatic Angular Testing',
   type: 'full',
   subheading: `Three days to turn your testing chaos into a well-seasoned strategy.
 Learn to build tests that survive refactors, migrations, and deadlines.`,
@@ -30,7 +31,7 @@ So… how’s yours holding up?
 
 If any of that hits close to home, this workshop is your way out of the fire.
 
-We’ll stop by the market for key ingredients such as **Fakes, Object Mothers, Gloves, Vitest, Testing Library, Angular CDK Harness, Playwright Component Testing with Testronaut, and Playwright for end-to-end testing**.
+We’ll stop by the market for key ingredients such as **Fakes**, **Object Mothers**, **Gloves**, **Vitest**, **Testronaut** for Playwright Component Testing, **Playwright** for end-to-end testing, and **WallabyJS** for TDD.
 
 Then, back to the kitchen, we’ll prepare a complete, low-maintenance testing menu that matures over three days. You’ll learn how to:
 
@@ -45,6 +46,8 @@ Then, back to the kitchen, we’ll prepare a complete, low-maintenance testing m
 
 Across these three days, you won’t just learn recipes — you’ll refine your testing instincts, challenge habits, and leave with a testing culture you can scale.
 
+Whether you or your AI agents write the tests, you'll need the instincts to tell if they're meaningful or just getting in the way — and a clear testing strategy to guide both your team and your tools.
+
 Small group, plenty of hands-on work, and direct coaching to help you apply each technique to your own codebase.
 
 **No dogma. No silver bullets.** Just three days of practical, battle-tested techniques to help you cook with confidence — and serve code that stays fresh long after the workshop ends.
@@ -56,7 +59,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
   },
   language: 'en',
   requiredSkills: [
-    `Angular core concepts (e.g. components, inputs/outputs, services)`,
+    `Angular core concepts (e.g. components, inputs/outputs, services, signals, etc.)`,
     `TypeScript fundamentals (e.g. types, interfaces, basic generics)`,
     `Git fundamentals (e.g. cloning, resetting local changes, switching branches)`,
   ],
