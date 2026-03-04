@@ -34,10 +34,10 @@ import {
 
     section::before {
       position: absolute;
-      height: 3rem;
+      height: 4rem;
       clip-path: ellipse(60% 100% at 50% 120%);
       background: var(--mc-section-ellipse-background-color);
-      top: -3rem;
+      top: -4rem;
       width: 100%;
       content: '';
     }
