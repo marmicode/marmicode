@@ -11,7 +11,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 import { Workshop, WorkshopLanguage } from '@marmicode/workshop/core';
-import { WorkshopTypeLabel } from './workshop-type-label.ng';
 import { workshopViewTransitionName } from './workshop-view-transition-name';
 
 @Component({
@@ -24,7 +23,6 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
     MatIconModule,
     RouterModule,
     CurrencyPipe,
-    WorkshopTypeLabel,
   ],
   template: `
     <mat-card
@@ -49,7 +47,6 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
       <mat-card-content class="content">
         <div class="header">
           <h3 class="title">{{ workshop().shortTitle }}</h3>
-          <mc-workshop-type-label [workshop]="workshop()" class="type" />
         </div>
 
         <p class="subheading">{{ workshop().subheading }}</p>
@@ -126,15 +123,15 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
 
     .header {
       text-align: center;
-      margin-bottom: 1rem;
+      margin: 1rem 0;
     }
 
     .title {
+      color: var(--marmicode-primary-color);
       font-weight: 700;
       font-size: 24px;
-      color: #111827;
       line-height: 1.4;
-      margin-bottom: 0.5em;
+      margin: 0;
     }
 
     .type {
@@ -151,6 +148,7 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
     }
 
     .subheading {
+      margin-top: 0;
       margin-bottom: 0.7em;
       font-size: 1.1em;
       color: #444;
