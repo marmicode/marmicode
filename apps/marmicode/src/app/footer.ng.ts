@@ -215,7 +215,8 @@ import { appRouterHelper } from './app-router-helper';
 
     .legal {
       border-top: 1px solid rgba(255, 255, 255, 0.2);
-      padding-top: 24px;
+      margin-top: 1rem;
+      padding-top: 1rem;
       text-align: center;
       font-size: 0.875rem;
       opacity: 0.8;
