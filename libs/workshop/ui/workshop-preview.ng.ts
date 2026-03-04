@@ -1,9 +1,8 @@
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  inject,
   input,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,6 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 import { Workshop, WorkshopLanguage } from '@marmicode/workshop/core';
+import { formatPrice } from './format-price';
+import { WORKSHOP_PREVIEW_LABELS } from './workshop-preview.i18n';
 import { workshopViewTransitionName } from './workshop-view-transition-name';
 
 @Component({
@@ -63,14 +64,14 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
               </ng-template>
             </ng-container>
           </span>
-          <span class="price"> {{ priceText() }} </span>
+          <span class="price">{{ labels().from }} {{ formattedPrice() }} </span>
         </div>
 
         <div class="actions">
           <a
             [routerLink]="workshopRouterHelper.detail(workshop().id)"
             matButton="outlined"
-            >{{ labels().viewDetails }}</a
+            >{{ labels().viewDetails | uppercase }}</a
           >
         </div>
       </mat-card-content>
@@ -176,27 +177,20 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
       text-align: center;
     }
   `,
-  providers: [CurrencyPipe],
 })
 export class WorkshopPreview {
   workshop = input.required<Workshop>();
 
   transitionName = computed(() => workshopViewTransitionName(this.workshop()));
-  labels = computed(() => this._labels[this.workshop().language]);
+  labels = computed(() => WORKSHOP_PREVIEW_LABELS[this.workshop().language]);
   languageChip = computed(() => this._languageChips[this.workshop().language]);
-  priceText = computed(() => {
-    const workshop = this.workshop();
-    return `${this.labels().from} ${this._currencyPipe.transform(
-      workshop.offer.price,
-      'EUR',
-      'symbol',
-      '1.0-0',
-      workshop.language,
-    )}`;
-  });
+  formattedPrice = computed(() =>
+    formatPrice({
+      price: this.workshop().offer.price,
+      locale: this.workshop().language,
+    }),
+  );
   workshopRouterHelper = workshopRouterHelper;
-
-  private _currencyPipe = inject(CurrencyPipe);
 
   private _languageChips: Record<
     WorkshopLanguage,
@@ -204,28 +198,5 @@ export class WorkshopPreview {
   > = {
     en: { flag: '🇬🇧', code: 'EN' },
     fr: { flag: '🇫🇷', code: 'FR' },
-  };
-
-  private _labels: Record<
-    WorkshopLanguage,
-    {
-      day: string;
-      days: string;
-      from: string;
-      viewDetails: string;
-    }
-  > = {
-    en: {
-      day: 'Day',
-      days: 'Days',
-      from: 'From',
-      viewDetails: 'VIEW DETAILS',
-    },
-    fr: {
-      day: 'Jour',
-      days: 'Jours',
-      from: 'À partir de',
-      viewDetails: "PLUS D'INFOS",
-    },
   };
 }

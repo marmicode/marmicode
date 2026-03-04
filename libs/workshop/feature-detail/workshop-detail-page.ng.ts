@@ -44,12 +44,12 @@ import {
           [workshop]="workshop"
           [style.view-transition-name]="transitionName()"
         />
-        <mc-workshop-description [description]="workshop.description" />
+        <mc-workshop-description [workshop]="workshop" />
         <mc-workshop-sessions [workshop]="workshop" />
-        <mc-workshop-benefits [benefits]="workshop.benefits" />
-        <mc-workshop-required-skills [skills]="workshop.requiredSkills" />
-        <mc-workshop-agenda [agenda]="workshop.agenda" />
-        <mc-workshop-instructor />
+        <mc-workshop-benefits [workshop]="workshop" />
+        <mc-workshop-required-skills [workshop]="workshop" />
+        <mc-workshop-agenda [workshop]="workshop" />
+        <mc-workshop-instructor [workshop]="workshop" />
       } @else {
         <mc-error>
           <p>Workshop not found.</p>

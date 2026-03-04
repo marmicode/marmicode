@@ -3,7 +3,7 @@ import pictureUri from './pragmatic-angular-testing.webp';
 import thumbnailUri from './pragmatic-angular-testing-thumbnail.webp';
 
 export const pragmaticAngularTestingFullCourseFr = createWorkshop({
-  id: 'pragmatic-angular-testing-full-course-fr',
+  id: 'test-angular-pragmatique',
   title: 'Formation Test Angular Pragmatique',
   shortTitle: 'Test Angular Pragmatique',
   type: 'full',

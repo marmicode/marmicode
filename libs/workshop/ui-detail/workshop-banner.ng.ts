@@ -1,8 +1,8 @@
 import {
-  CurrencyPipe,
   NgPlural,
   NgPluralCase,
   TitleCasePipe,
+  UpperCasePipe,
 } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -12,44 +12,43 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 import { Hero } from '@marmicode/shared/ui';
 import { Workshop } from '@marmicode/workshop/core';
+import { formatPrice } from '@marmicode/workshop/ui';
+import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
 import { UPCOMING_SESSIONS_SECTION_ID } from './workshop-sessions.ng';
-import { RouterLink } from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-hero',
   imports: [
-    CurrencyPipe,
     Hero,
     MatButtonModule,
     MatIconModule,
     NgPlural,
     NgPluralCase,
-    TitleCasePipe,
     RouterLink,
+    TitleCasePipe,
+    UpperCasePipe,
   ],
   template: `
     <mc-hero [pictureUri]="workshop().pictureUri" [title]="workshop().title">
       <ng-content slot="subtitle">
-        <span>{{ workshopType() }}</span>
-        <span> · </span>
         <span [ngPlural]="workshop().duration">
-          <ng-template ngPluralCase="=1">1 Day</ng-template>
+          <ng-template ngPluralCase="=1">1 {{ labels().day }}</ng-template>
           <ng-template ngPluralCase="other"
-            >{{ workshop().duration }} Days</ng-template
+            >{{ workshop().duration }} {{ labels().days }}</ng-template
           >
         </span>
-        <span> Workshop</span>
         <span> · </span>
         <span>{{ workshop().location | titlecase }}</span>
       </ng-content>
 
       <ng-content slot="content">
         <p class="badge">
-          {{ offerType() }} Starts at
-          {{ workshop().offer.price | currency: 'EUR' : 'symbol' : '1.0-0' }}
+          {{ offerType() }} {{ labels().priceStartsAt }}
+          {{ formattedPrice() }}
         </p>
         <p class="subheading">
           @for (line of subheadingLines(); track line) {
@@ -63,7 +62,7 @@ import { RouterLink } from '@angular/router';
             matButton="filled"
           >
             <mat-icon>calendar_month</mat-icon>
-            BOOK A SESSION
+            {{ labels().bookASession | uppercase }}
           </a>
           <a
             [href]="workshop().customSessionRequestUrl"
@@ -72,13 +71,14 @@ import { RouterLink } from '@angular/router';
             target="_blank"
           >
             <mat-icon>build</mat-icon>
-            REQUEST A CUSTOM SESSION
+            {{ labels().requestACustomSession | uppercase }}
           </a>
         </div>
-        <div class="bottom-note">
-          🇫🇷 Formation également disponible en Français et éligible au
-          financement OPCO.
-        </div>
+        @if (workshop().language === 'fr') {
+          <div class="bottom-note">
+            🇫🇷 Formation éligible au financement OPCO.
+          </div>
+        }
       </ng-content>
     </mc-hero>
   `,
@@ -151,7 +151,7 @@ import { RouterLink } from '@angular/router';
 
     .bottom-note {
       color: white;
-      font-style: italic;
+      font-size: 1.3rem;
       text-align: center;
       margin-bottom: 2rem;
     }
@@ -159,23 +159,17 @@ import { RouterLink } from '@angular/router';
 })
 export class WorkshopHero {
   workshop = input.required<Workshop>();
-
+  labels = computed(() => WORKSHOP_DETAIL_LABELS[this.workshop().language]);
   upcomingSessionsSectionId = UPCOMING_SESSIONS_SECTION_ID;
-  subtitle = computed(() => {
-    const duration = this.workshop().duration;
-    const typeStr =
-      this.workshop().type === 'tapas' ? '🫒 Tapas Session' : '🍽️ Full Course';
-    const durationStr = duration === 1 ? '1-Day' : `${duration}-Days`;
-    return `${typeStr} · ${durationStr} Workshop · ${this.workshop().location}`;
-  });
-  workshopType = computed(() => {
-    return this.workshop().type === 'tapas'
-      ? '🫒 Tapas Session'
-      : '🍽️ Full Course';
-  });
   offerType = computed(() => {
-    const offer = this.workshop().offer;
+    const { offer } = this.workshop();
     return offer.type === 'early-bird' ? '🐣 Early Bird' : '⏰ Last Minute';
   });
   subheadingLines = computed(() => this.workshop().subheading.split('\n'));
+  formattedPrice = computed(() =>
+    formatPrice({
+      price: this.workshop().offer.price,
+      locale: this.workshop().language,
+    }),
+  );
 }
