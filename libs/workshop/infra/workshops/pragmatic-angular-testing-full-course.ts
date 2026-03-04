@@ -18,8 +18,7 @@ Learn to build tests that survive refactors, migrations, and deadlines.`,
   customSessionRequestUrl: 'https://forms.gle/TEp9DTM6pHiSFRPY9',
   lumaTag: 'angular-testing',
   description: `
-There are two ways to keep a product stable:  
-**never touch it — or cook up a solid testing strategy.**
+There are two ways to keep a product stable: **never touch it — or cook up a solid testing strategy.**
 
 So… how’s yours holding up?
 
