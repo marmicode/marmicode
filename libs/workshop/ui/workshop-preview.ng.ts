@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,7 +23,6 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
     MatCardModule,
     MatIconModule,
     RouterModule,
-    CurrencyPipe,
   ],
   template: `
     <mat-card
@@ -63,13 +63,7 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
               </ng-template>
             </ng-container>
           </span>
-          <span class="price">
-            {{ labels().from }}
-            {{
-              workshop().offer.price
-                | currency: 'EUR' : 'symbol' : '1.0-0' : workshop().language
-            }}
-          </span>
+          <span class="price"> {{ priceText() }} </span>
         </div>
 
         <div class="actions">
@@ -182,6 +176,7 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
       text-align: center;
     }
   `,
+  providers: [CurrencyPipe],
 })
 export class WorkshopPreview {
   workshop = input.required<Workshop>();
@@ -189,7 +184,19 @@ export class WorkshopPreview {
   transitionName = computed(() => workshopViewTransitionName(this.workshop()));
   labels = computed(() => this._labels[this.workshop().language]);
   languageChip = computed(() => this._languageChips[this.workshop().language]);
+  priceText = computed(() => {
+    const workshop = this.workshop();
+    return `${this.labels().from} ${this._currencyPipe.transform(
+      workshop.offer.price,
+      'EUR',
+      'symbol',
+      '1.0-0',
+      workshop.language,
+    )}`;
+  });
   workshopRouterHelper = workshopRouterHelper;
+
+  private _currencyPipe = inject(CurrencyPipe);
 
   private _languageChips: Record<
     WorkshopLanguage,
