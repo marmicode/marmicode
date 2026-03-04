@@ -125,7 +125,7 @@ describe('ResourceSearchFormComponent', () => {
 
     component.skillControl.setValue(null);
 
-    expect(router.navigate).toBeCalledWith(['/', 'learn', 'everything']);
+    expect(router.navigate).toHaveBeenCalledWith(['/', 'learn', 'everything']);
   });
 
   /**
@@ -137,7 +137,7 @@ describe('ResourceSearchFormComponent', () => {
     /* Trigger route change. */
     selectedSkillSlug$.next('angular-testing');
 
-    expect(router.navigate).not.toBeCalled();
+    expect(router.navigate).not.toHaveBeenCalled();
   });
 
   /**
@@ -149,6 +149,6 @@ describe('ResourceSearchFormComponent', () => {
     /* Trigger route change to /learn/everything. */
     selectedSkillSlug$.next('everything');
 
-    expect(router.navigate).not.toBeCalled();
+    expect(router.navigate).not.toHaveBeenCalled();
   });
 });

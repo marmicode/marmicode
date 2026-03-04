@@ -30,14 +30,14 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
       - uses: pnpm/action-setup@v4
       - name: Install
         run: pnpm install
       - uses: nrwl/nx-set-shas@v4
       - run: pnpm nx-cloud start-ci-run --distribute-on="8 linux-large-js"
       - run: >-
-          pnpm nx affected --target=build,test,lint & pnpm nx affected
+          pnpm nx affected --target=build,jest,test,lint & pnpm nx affected
           --target=component-test,e2e --parallel=1
       - name: Upload dist (Cypress videos / build output etc...) on failure
         uses: actions/upload-artifact@v4
@@ -64,7 +64,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
       - uses: pnpm/action-setup@v4
       - name: Install
         run: pnpm install
@@ -101,7 +101,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
       - uses: pnpm/action-setup@v4
       - name: Install
         run: pnpm install
@@ -152,7 +152,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
       - uses: pnpm/action-setup@v4
       - name: Install
         run: pnpm install
@@ -203,7 +203,7 @@ jobs:
             cache
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
       - uses: pnpm/action-setup@v4
       - name: Install
         run: pnpm install

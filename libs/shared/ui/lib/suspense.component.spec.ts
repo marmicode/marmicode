@@ -1,16 +1,14 @@
 import { JsonPipe } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Type } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  provideZonelessChangeDetection,
+  Type,
+} from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  jest,
-} from '@jest/globals';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { NEVER, of, throwError } from 'rxjs';
 import { ErrorComponent } from './error.component';
 import { LoadingComponent } from './loading.component';
@@ -18,11 +16,11 @@ import { SuspenseComponent } from './suspense.component';
 
 describe('SuspenseComponent', () => {
   beforeEach(() => {
-    jest.spyOn(console, 'error');
+    vi.spyOn(console, 'error');
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.restoreAllMocks();
   });
 
   it('should subscribe and forward data to projected content', async () => {
@@ -53,9 +51,11 @@ describe('SuspenseComponent', () => {
       data$ = NEVER;
     }
 
-    const { getTextContent } = await render(TestedComponent);
+    const { getTextContent } = await render(TestedComponent, {
+      waitForStable: false,
+    });
 
-    expect(getTextContent()).toEqual('⏳');
+    await expect.poll(() => getTextContent()).toEqual('⏳');
   });
 
   it('should show default suspense template', async () => {
@@ -69,9 +69,11 @@ describe('SuspenseComponent', () => {
       data$ = NEVER;
     }
 
-    const { hasLoadingSpinner } = await render(TestedComponent);
+    const { hasLoadingSpinner } = await render(TestedComponent, {
+      waitForStable: false,
+    });
 
-    expect(hasLoadingSpinner()).toBeTruthy();
+    await expect.poll(() => hasLoadingSpinner()).toBeTruthy();
   });
 
   it('should show error template', async () => {
@@ -108,7 +110,14 @@ describe('SuspenseComponent', () => {
   });
 });
 
-async function render(componentType: Type<unknown>) {
+async function render(
+  componentType: Type<unknown>,
+  { waitForStable }: { waitForStable: boolean } = { waitForStable: true },
+) {
+  TestBed.configureTestingModule({
+    providers: [provideZonelessChangeDetection()],
+  });
+
   /* Load `mc-suspense` without `mc-error` & `mc-loading`.
    * This avoids file-loader issues etc... and makes the test
    * shallow without having to import implementation details. */
@@ -124,12 +133,13 @@ async function render(componentType: Type<unknown>) {
   });
 
   const fixture = TestBed.createComponent(componentType);
-
-  await fixture.whenStable();
+  if (waitForStable) {
+    await fixture.whenStable();
+  }
 
   return {
     getTextContent() {
-      return fixture.debugElement.nativeElement.textContent;
+      return fixture.nativeElement.textContent;
     },
     getErrorMessage() {
       return fixture.debugElement.query(By.css('mc-error'))?.nativeElement

@@ -1,14 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { ContentfulClient } from '@marmicode/contentful/infra';
 import { provideApolloCacheWithResolvers } from '@marmicode/shared/testing';
 import { ApolloTestingModule } from 'apollo-angular/testing';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { BlogPostRepository } from './blog-post-repository.service';
 
 describe('BlogPostRepository', () => {
   let blogPostRepository: BlogPostRepository;
-  let mockResourceCollectionResolver: jest.Mock;
+  let mockResourceCollectionResolver: Mock;
   const fakeGraphqlResponse = {
     items: [
       {
@@ -38,7 +37,7 @@ describe('BlogPostRepository', () => {
   };
 
   beforeEach(() => {
-    mockResourceCollectionResolver = jest.fn();
+    mockResourceCollectionResolver = vi.fn();
     TestBed.configureTestingModule({
       imports: [ApolloTestingModule],
       providers: [
@@ -76,8 +75,8 @@ describe('BlogPostRepository', () => {
       }),
     );
 
-    expect(mockResourceCollectionResolver).toBeCalledTimes(1);
-    expect(mockResourceCollectionResolver).toBeCalledWith(
+    expect(mockResourceCollectionResolver).toHaveBeenCalledTimes(1);
+    expect(mockResourceCollectionResolver).toHaveBeenCalledWith(
       undefined,
       expect.objectContaining({
         args: {

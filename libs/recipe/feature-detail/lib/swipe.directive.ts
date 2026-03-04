@@ -4,7 +4,6 @@ import {
   ElementRef,
   inject,
   NgModule,
-  OnInit,
   Output,
   Renderer2,
   RendererStyleFlags2,
@@ -29,7 +28,7 @@ import {
   selector: '[mcSwipe]',
   standalone: true,
 })
-export class SwipeDirective implements OnInit {
+export class SwipeDirective {
   private _elementRef = inject(ElementRef);
   private _renderer = inject(Renderer2);
 
@@ -83,9 +82,7 @@ export class SwipeDirective implements OnInit {
       filter((distance) => distance > 0),
       mapTo(undefined),
     );
-  }
 
-  ngOnInit() {
     this._position$.pipe(untilDestroyed(this)).subscribe((position) => {
       const el = this._elementRef.nativeElement;
       if (position !== 0) {

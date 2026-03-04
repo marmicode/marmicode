@@ -41,9 +41,9 @@ describe('transferStateHelper', () => {
 
       source$.pipe(helper.transfer('theAnswer')).subscribe(observer);
 
-      expect(observer).toBeCalledTimes(1);
-      expect(observer).toBeCalledWith(42);
-      expect(adapter.set).toBeCalledWith('theAnswer', 42);
+      expect(observer).toHaveBeenCalledTimes(1);
+      expect(observer).toHaveBeenCalledWith(42);
+      expect(adapter.set).toHaveBeenCalledWith('theAnswer', 42);
     });
   });
 
@@ -59,12 +59,12 @@ describe('transferStateHelper', () => {
 
       source$.pipe(helper.transfer('theAnswer')).subscribe(observer);
 
-      expect(observer).toBeCalledTimes(2);
-      expect(observer).toBeCalledWith(42);
-      expect(observer).toBeCalledWith(4200);
-      expect(adapter.hasKey).toBeCalled();
-      expect(adapter.get).toBeCalledWith('theAnswer');
-      expect(adapter.set).not.toBeCalled();
+      expect(observer).toHaveBeenCalledTimes(2);
+      expect(observer).toHaveBeenCalledWith(42);
+      expect(observer).toHaveBeenCalledWith(4200);
+      expect(adapter.hasKey).toHaveBeenCalled();
+      expect(adapter.get).toHaveBeenCalledWith('theAnswer');
+      expect(adapter.set).not.toHaveBeenCalled();
     });
   });
 });

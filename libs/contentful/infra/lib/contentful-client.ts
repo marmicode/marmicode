@@ -30,7 +30,7 @@ export class ContentfulClient {
   private _apollo = inject(Apollo);
   private _injector = inject(Injector);
 
-  query<QUERY>(options: QueryOptions): Observable<ApolloQueryResult<QUERY>> {
+  query<QUERY>(options: QueryOptions): Observable<Apollo.QueryResult<QUERY>> {
     return this._apollo
       .query<QUERY>(options)
       .pipe(pendingUntilEvent(this._injector));

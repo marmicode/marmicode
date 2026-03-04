@@ -9,14 +9,6 @@
     "lint": {
       "executor": "@nx/eslint:lint"
     },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "{projectRoot}/jest.config.ts",
-        "tsConfig": "libs/blog-post/ui/tsconfig.spec.json"
-      }
-    },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
       "options": {
