@@ -1,13 +1,26 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use './custom-theme.scss' as theme;
+@use './theme-colors.scss' as theme-colors;
 
-$marmicode-primary-color: map.get(theme.$marmicode-purple, 500);
-$marmicode-accent-color: map.get(theme.$marmicode-accent, 500);
+$marmicode-primary-color: map.get(theme-colors.$primary-palette, 10);
+$marmicode-accent-color: map.get(theme-colors.$tertiary-palette, 60);
+$marmicode-accent-bright-color: map.get(theme-colors.$tertiary-palette, 90);
 
+html,
 body {
   --marmicode-primary-color: #{$marmicode-primary-color};
   --marmicode-accent-color: #{$marmicode-accent-color};
+  --marmicode-accent-bright-color: #{$marmicode-accent-bright-color};
+
+  color-scheme: light;
+
+  @include mat.theme(
+    (
+      color: theme-colors.$primary-palette,
+      typography: Roboto,
+      density: 0,
+    )
+  );
 }
 
 html,
@@ -15,15 +28,20 @@ body {
   height: 100%;
   scroll-behavior: smooth;
 }
+
 body {
   /* @hack: setting background color to toolbar color to affect ios status bar color. */
   background-color: $marmicode-primary-color;
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
 
-  @include mat.card-overrides(
+.mc-tertiary {
+  @include mat.theme(
     (
-      elevated-container-shape: 8px,
+      color: theme-colors.$tertiary-palette,
+      typography: Roboto,
+      density: 0,
     )
   );
 }

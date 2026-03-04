@@ -53,6 +53,7 @@ import { NavMenuComponent, NavMenuModule } from './nav-menu.component';
       }
 
       .toolbar {
+        background-color: var(--marmicode-primary-color);
         height: 64px;
         position: fixed;
         top: 0;
