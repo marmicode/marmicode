@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -24,6 +24,7 @@
     <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:site" content="@marmicode" />
+    <meta name="twitter:creator" content="@yjaaidi" />
   </head>
   <body class="mat-typography">
     <mc-root>
@@ -79,7 +80,9 @@
       <script lang="javascript">
         setTimeout(() => {
           const errorEl = document.querySelector('#error-fallback');
-          if (errorEl == null) { return; }
+          if (errorEl == null) {
+            return;
+          }
           errorEl.style.display = 'flex';
         }, 5000);
       </script>

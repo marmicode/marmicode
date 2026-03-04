@@ -2,16 +2,17 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   NgModule,
-  OnDestroy,
+  effect,
   inject,
+  input,
 } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
-import { RxState } from '@rx-angular/state';
+import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 
 export interface BasicPageInfo {
   description?: string;
+  alternates?: Array<{ href: string; language: string }>;
+  language?: string;
   pictureUri?: string;
   title?: string;
 }
@@ -51,107 +52,67 @@ export type PageInfo = BasicPageInfo | ArticlePageInfo;
       min-height: 100%;
     }
   `,
-  providers: [RxState],
 })
-export class PageComponent implements OnDestroy {
+export class PageComponent {
+  info = input<PageInfo>();
+
   private _metaService = inject(Meta);
-  private _state = inject<
-    RxState<{
-      info: PageInfo;
-    }>
-  >(RxState);
   private _titleService = inject(Title);
-
-  @Input() set info(info: PageInfo) {
-    this._state.set({ info });
-  }
-
   private _defaultTitle = 'Marmicode';
 
   constructor() {
     /* Sync input with page title. */
-    this._state.hold(this._state.select('info'), (info) => {
-      /* Fixes issue where title was set to default value when component was loaded
-       * and meanwhile info is set. This affects analytics stats. */
-      if (info == null) {
-        return;
-      }
-
-      const title = this._infoToTitle(info);
-      this._titleService.setTitle(title);
+    effect((onCleanup) => {
+      this._titleService.setTitle(this._infoToTitle(this.info()));
+      onCleanup(() => {
+        this._titleService.setTitle(this._defaultTitle);
+      });
     });
 
     /* Update meta data. */
-    this._state.hold(this._state.select('info'), (info) => {
-      this._resetMeta();
-
-      /* Nothing to do. */
-      if (info == null) {
-        return;
-      }
-
-      /* Basic info. */
-      let tags = [
-        { name: 'description', content: info.description },
-        { property: 'og:description', content: info.description },
-        { property: 'og:image', content: info.pictureUri },
-        { property: 'twitter:card', content: 'summary_large_image' },
-        { property: 'twitter:description', content: info.description },
-        { property: 'twitter:title', content: this._infoToTitle(info) },
-      ];
-
-      /* Article. */
-      if ('type' in info && info.type === 'article') {
-        const twitter = info.author?.twitter;
-        tags = [
-          ...tags,
-
-          { name: 'author', content: info.author?.name },
-          { property: 'og:type', content: info.type },
-          {
-            property: 'article:published_time',
-            content: info.publishedAt?.toISOString(),
-          },
-          {
-            property: 'article:author',
-            content: twitter ? `https://twitter.com/${twitter}` : null,
-          },
-          {
-            property: 'twitter:creator',
-            content: twitter ? `@${twitter}` : null,
-          },
-        ];
-      }
-
-      this._metaService.addTags(
-        tags
-          /* Ignore null values. */
-          .filter((tag) => tag.content != null),
-      );
+    effect((onCleanup) => {
+      const metas = this._infoToMetaTags(this.info());
+      const tagEls = this._metaService.addTags(metas);
+      onCleanup(() => {
+        tagEls.forEach((el) => this._metaService.removeTagElement(el));
+      });
     });
-  }
-
-  ngOnDestroy() {
-    this._resetMeta();
-    this._titleService.setTitle(this._defaultTitle);
   }
 
   private _infoToTitle(info: PageInfo) {
     return info.title ? `${info.title} | Marmicode` : this._defaultTitle;
   }
 
-  private _resetMeta() {
-    this._metaService.removeTag('name="author"');
-    this._metaService.removeTag('name="description"');
-    this._metaService.removeTag('property="og:type"');
-    this._metaService.removeTag('property="og:description"');
-    this._metaService.removeTag('property="og:image"');
-    this._metaService.removeTag('property="article:published_time"');
-    this._metaService.removeTag('property="article:author"');
-    this._metaService.removeTag('property="twitter:card"');
-    this._metaService.removeTag('property="twitter:creator"');
-    this._metaService.removeTag('property="twitter:description"');
-    this._metaService.removeTag('property="twitter:title"');
+  private _infoToMetaTags(info: PageInfo): MetaDefinition[] {
+    let tags = [
+      { name: 'description', content: info.description },
+      { property: 'og:description', content: info.description },
+      { property: 'og:image', content: info.pictureUri },
+      { property: 'twitter:card', content: 'summary_large_image' },
+      { property: 'twitter:description', content: info.description },
+      { property: 'twitter:title', content: this._infoToTitle(info) },
+    ];
+    if ('type' in info && info.type === 'article') {
+      const twitter = info.author?.twitter;
+      tags = [
+        ...tags,
+        { name: 'author', content: info.author?.name },
+        { property: 'og:type', content: info.type },
+        {
+          property: 'article:published_time',
+          content: info.publishedAt?.toISOString(),
+        },
+        {
+          property: 'article:author',
+          content: twitter ? `https://twitter.com/${twitter}` : null,
+        },
+        {
+          property: 'twitter:creator',
+          content: twitter ? `@${twitter}` : null,
+        },
+      ];
+    }
+    return tags.filter((tag) => tag.content != null);
   }
 }
 
