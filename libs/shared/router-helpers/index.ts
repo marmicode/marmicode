@@ -3,3 +3,4 @@ export { recipeDetailRouterHelper } from './lib/recipe-detail-router-helper';
 export { resourceSearchRouterHelper } from './lib/resource-search-router-helper';
 export { servicesRouterHelper } from './lib/services-router-helper';
 export { workshopRouterHelper } from './lib/workshop-router-helper';
+export { externalLinks } from './lib/external-links';
