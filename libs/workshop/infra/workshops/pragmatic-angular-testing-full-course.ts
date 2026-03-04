@@ -105,6 +105,48 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         'Enjoy a buffet of tips and tricks to help you adopt a Pragmatic Testing Strategy.',
     },
   ],
+  faqs: [
+    {
+      question: 'Who is this workshop for?',
+      answer:
+        "Angular developers who write tests — or want to start — and want to improve their testing practices. Whether you're dealing with flaky tests, untestable code, or no testing strategy at all — this workshop is for you.",
+    },
+    {
+      question: "What's the experience level?",
+      answer:
+        'You should be comfortable with Angular fundamentals (components, services, inputs/outputs), TypeScript basics, and Git. No prior testing experience is required — we start from the ground up.',
+    },
+    {
+      question: 'What tools do I need?',
+      answer:
+        'A laptop with Node.js, Git, and your favorite IDE. Detailed setup instructions are sent a few days before the workshop.',
+    },
+    {
+      question: 'Is it hands-on?',
+      answer:
+        "Very. You'll alternate between short theory sessions and practical exercises throughout the three days. Small groups ensure direct coaching and feedback.",
+    },
+    {
+      question: 'What if my company uses Jest or Karma?',
+      answer:
+        "The principles and strategies you'll learn apply regardless of your test runner. That said, we use Vitest in the exercises — and you might not want to go back.",
+    },
+    {
+      question: 'Can my company fund this?',
+      answer: 'Yes. Contact me for a quote and administrative details.',
+    },
+    {
+      question:
+        "What's the difference between booking a session and requesting a custom session?",
+      answer:
+        '"Book a Session" lets you join a scheduled cohort. "Custom Session" is for companies who want a private, in-house workshop — with optional adjustments to content, duration, or focus areas.',
+    },
+    {
+      question: 'Is there a money-back guarantee?',
+      answer:
+        "If the workshop doesn't meet your expectations, reach out within 7 days and we'll work it out.",
+    },
+  ],
   agenda: {
     sections: [
       {

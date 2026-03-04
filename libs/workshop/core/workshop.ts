@@ -47,6 +47,13 @@ export interface Workshop {
   requiredSkills: string[];
   benefits: Benefit[];
   agenda: Agenda;
+
+  faqs: Faq[];
+}
+
+export interface Faq {
+  question: string;
+  answer: string;
 }
 
 export type WorkshopLanguage = 'en' | 'fr';

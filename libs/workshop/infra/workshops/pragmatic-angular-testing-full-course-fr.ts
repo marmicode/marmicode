@@ -105,6 +105,49 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         "Profitez d'un buffet de conseils et de techniques pour adopter une stratégie de test pragmatique.",
     },
   ],
+  faqs: [
+    {
+      question: "À qui s'adresse cette formation ?",
+      answer:
+        "Aux développeurs Angular qui écrivent déjà des tests — ou qui veulent s'y mettre — et qui souhaitent améliorer leurs pratiques de test. Que vous soyez confrontés à des tests instables, du code difficile à tester, ou une absence de stratégie de test — cette formation est faite pour vous.",
+    },
+    {
+      question: 'Quel niveau est requis ?',
+      answer:
+        "Vous devez être à l'aise avec les fondamentaux d'Angular (composants, services, inputs/outputs), les bases de TypeScript, et Git. Aucune expérience préalable en testing n'est nécessaire — on part de zéro.",
+    },
+    {
+      question: 'Quels outils sont nécessaires ?',
+      answer:
+        'Un ordinateur portable avec Node.js, Git, et votre IDE préféré. Les instructions de setup sont envoyées quelques jours avant la formation.',
+    },
+    {
+      question: "C'est vraiment pratique ?",
+      answer:
+        'Très. Vous alternerez entre courtes sessions théoriques et exercices pratiques pendant trois jours. Les petits groupes garantissent un accompagnement direct et personnalisé.',
+    },
+    {
+      question: 'Et si mon équipe utilise Jest ou Karma ?',
+      answer:
+        "Les principes et stratégies enseignés s'appliquent quel que soit votre test runner. Cela dit, on utilise Vitest dans les exercices — et vous risquez de ne plus vouloir revenir en arrière.",
+    },
+    {
+      question: 'Ma société peut-elle financer cette formation ?',
+      answer:
+        'Si vous êtes en France, cette formation est éligible au financement OPCO. Contactez-moi pour un devis et les modalités administratives.',
+    },
+    {
+      question:
+        'Quelle différence entre réserver une place et demander une session sur mesure ?',
+      answer:
+        '"Réserver une Place" vous inscrit à une session planifiée. "Session sur Mesure" s\'adresse aux entreprises qui souhaitent une formation privée — avec la possibilité d\'adapter le contenu, la durée ou les priorités.',
+    },
+    {
+      question: 'Y a-t-il une garantie satisfait ou remboursé ?',
+      answer:
+        'Si la formation ne répond pas à vos attentes, contactez-moi dans les 7 jours et nous trouverons une solution ensemble.',
+    },
+  ],
   agenda: {
     sections: [
       {

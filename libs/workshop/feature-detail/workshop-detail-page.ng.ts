@@ -16,6 +16,7 @@ import {
   WorkshopAgenda,
   WorkshopBenefits,
   WorkshopDescription,
+  WorkshopFaq,
   WorkshopHero,
   WorkshopInstructor,
   WorkshopRequiredSkills,
@@ -35,6 +36,7 @@ import {
     WorkshopSessions,
     ErrorComponent,
     WorkshopHero,
+    WorkshopFaq,
   ],
   template: `
     <mc-page [info]="info()">
@@ -50,6 +52,7 @@ import {
         <mc-workshop-required-skills [workshop]="workshop" />
         <mc-workshop-agenda [workshop]="workshop" />
         <mc-workshop-instructor [workshop]="workshop" />
+        <mc-workshop-faq [workshop]="workshop" />
       } @else {
         <mc-error>
           <p>Workshop not found.</p>
