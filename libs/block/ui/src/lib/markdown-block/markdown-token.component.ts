@@ -28,85 +28,61 @@ import { MarkdownTextComponent } from './markdown-text.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-token',
   template: `
-@switch (type) {
-  <!-- Blockquote. -->
-  @case (TokenType.Blockquote) {
-    <mc-markdown-blockquote
-      [token]="tokenAsAny"
-    ></mc-markdown-blockquote>
-  }
-  <!-- Code. -->
-  @case (TokenType.Code) {
-    <mc-markdown-code
-      [token]="tokenAsAny"
-    ></mc-markdown-code>
-  }
-  <!-- Codespan. -->
-  @case (TokenType.Codespan) {
-    <mc-markdown-codespan
-      [token]="tokenAsAny"
-    ></mc-markdown-codespan>
-  }
-  <!-- Emphasis. -->
-  @case (TokenType.Emphasis) {
-    <mc-markdown-emphasis
-      [token]="tokenAsAny"
-    ></mc-markdown-emphasis>
-  }
-  <!-- Heading. -->
-  @case (TokenType.Heading) {
-    <mc-markdown-heading
-      [token]="tokenAsAny"
-    ></mc-markdown-heading>
-  }
-  <!-- Horizontal Rule. -->
-  @case (TokenType.HorizontalRule) {
-    <hr />
-  }
-  <!-- Link. -->
-  @case (TokenType.Link) {
-    <mc-markdown-link
-      [token]="tokenAsAny"
-    ></mc-markdown-link>
-  }
-  <!-- List. -->
-  @case (TokenType.List) {
-    <mc-markdown-list
-      [token]="tokenAsAny"
-    ></mc-markdown-list>
-  }
-  <!-- List item. -->
-  @case (TokenType.ListItem) {
-    <mc-markdown-list-item
-      [token]="tokenAsAny"
-    ></mc-markdown-list-item>
-  }
-  <!-- Media: Image or Video. -->
-  @case (TokenType.Media) {
-    <mc-markdown-media
-      [token]="tokenAsAny"
-    ></mc-markdown-media>
-  }
-  <!-- Paragraph. -->
-  @case (TokenType.Paragraph) {
-    <mc-markdown-paragraph
-      [token]="tokenAsAny"
-    ></mc-markdown-paragraph>
-  }
-  <!-- Strong. -->
-  @case (TokenType.Strong) {
-    <mc-markdown-strong
-      [token]="tokenAsAny"
-    ></mc-markdown-strong>
-  }
-  <!-- Text. -->
-  @case (TokenType.Text) {
-    <mc-markdown-text
-      [token]="tokenAsAny"
-    ></mc-markdown-text>
-  }
-}
-`,
+    @switch (type) {
+      <!-- Blockquote. -->
+      @case (TokenType.Blockquote) {
+        <mc-markdown-blockquote [token]="tokenAsAny" />
+      }
+      <!-- Code. -->
+      @case (TokenType.Code) {
+        <mc-markdown-code [token]="tokenAsAny" />
+      }
+      <!-- Codespan. -->
+      @case (TokenType.Codespan) {
+        <mc-markdown-codespan [token]="tokenAsAny" />
+      }
+      <!-- Emphasis. -->
+      @case (TokenType.Emphasis) {
+        <mc-markdown-emphasis [token]="tokenAsAny" />
+      }
+      <!-- Heading. -->
+      @case (TokenType.Heading) {
+        <mc-markdown-heading [token]="tokenAsAny" />
+      }
+      <!-- Horizontal Rule. -->
+      @case (TokenType.HorizontalRule) {
+        <hr />
+      }
+      <!-- Link. -->
+      @case (TokenType.Link) {
+        <mc-markdown-link [token]="tokenAsAny" />
+      }
+      <!-- List. -->
+      @case (TokenType.List) {
+        <mc-markdown-list [token]="tokenAsAny" />
+      }
+      <!-- List item. -->
+      @case (TokenType.ListItem) {
+        <mc-markdown-list-item [token]="tokenAsAny" />
+      }
+      <!-- Media: Image or Video. -->
+      @case (TokenType.Media) {
+        <mc-markdown-media [token]="tokenAsAny" />
+      }
+      <!-- Paragraph. -->
+      @case (TokenType.Paragraph) {
+        <mc-markdown-paragraph [token]="tokenAsAny" />
+      }
+      <!-- Strong. -->
+      @case (TokenType.Strong) {
+        <mc-markdown-strong [token]="tokenAsAny" />
+      }
+      <!-- Text. -->
+      @case (TokenType.Text) {
+        <mc-markdown-text [token]="tokenAsAny" />
+      }
+    }
+  `,
   imports: [
     MarkdownBlockquoteComponent,
     MarkdownCodeComponent,
@@ -119,8 +95,8 @@ import { MarkdownTextComponent } from './markdown-text.component';
     MarkdownMediaComponent,
     MarkdownParagraphComponent,
     MarkdownStrongComponent,
-    MarkdownTextComponent
-],
+    MarkdownTextComponent,
+  ],
 })
 export class MarkdownTokenComponent implements OnChanges {
   @Input() token: MarkdownToken;
