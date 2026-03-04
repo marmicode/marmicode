@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, NgModule, OnDestroy, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  NgModule,
+  OnDestroy,
+  inject,
+} from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RxState } from '@rx-angular/state';
 
@@ -23,7 +30,7 @@ export interface ArticlePageInfo extends BasicPageInfo {
 }
 
 export function createArticlePageInfo(
-  meta: Omit<ArticlePageInfo, 'type'>
+  meta: Omit<ArticlePageInfo, 'type'>,
 ): ArticlePageInfo {
   return {
     ...meta,
@@ -34,26 +41,25 @@ export function createArticlePageInfo(
 export type PageInfo = BasicPageInfo | ArticlePageInfo;
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-page',
-    template: ` <ng-content></ng-content>`,
-    styles: [
-        `
-      :host {
-        display: block;
-        background-color: white;
-        min-height: 100%;
-      }
-    `,
-    ],
-    providers: [RxState],
-    standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-page',
+  template: `<ng-content />`,
+  styles: `
+    :host {
+      display: block;
+      background-color: white;
+      min-height: 100%;
+    }
+  `,
+  providers: [RxState],
 })
 export class PageComponent implements OnDestroy {
   private _metaService = inject(Meta);
-  private _state = inject<RxState<{
-    info: PageInfo;
-}>>(RxState);
+  private _state = inject<
+    RxState<{
+      info: PageInfo;
+    }>
+  >(RxState);
   private _titleService = inject(Title);
 
   @Input() set info(info: PageInfo) {
@@ -120,7 +126,7 @@ export class PageComponent implements OnDestroy {
       this._metaService.addTags(
         tags
           /* Ignore null values. */
-          .filter((tag) => tag.content != null)
+          .filter((tag) => tag.content != null),
       );
     });
   }
@@ -150,7 +156,7 @@ export class PageComponent implements OnDestroy {
 }
 
 @NgModule({
-    exports: [PageComponent],
-    imports: [CommonModule, PageComponent],
+  exports: [PageComponent],
+  imports: [CommonModule, PageComponent],
 })
 export class PageModule {}

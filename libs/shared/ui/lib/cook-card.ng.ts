@@ -1,32 +1,40 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import cookPictureUri from './cook.webp';
-
+import gdePictureUri from './gde.webp';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-cook-card',
   imports: [MatCard, MatCardContent],
   template: ` <mat-card class="card">
-    <img
-      [src]="cookPictureUri"
-      mat-card-image
-      height="300"
-      alt="Photo of Younes Jaaidi"
-    />
+    <div class="picture-container">
+      <img
+        [src]="cookPictureUri"
+        class="cook-picture"
+        mat-card-image
+        alt="Younes Jaaidi wearing a red apron and holding wooden cooking spoons, standing in a kitchen-themed setup with jars of fairy lights and programming stickers (JavaScript, TypeScript, Angular, Nx, RxJS) on a shelf behind him."
+        height="400"
+      />
+      <img
+        [src]="gdePictureUri"
+        mat-card-image
+        alt="Google Developer Expert badge"
+        class="gde-picture"
+      />
+    </div>
     <mat-card-content>
       <h3>Younes Jaaidi</h3>
+      <p>I am a Software Cook who enjoys whipping code until tests pass.</p>
       <p>
-        Younes Jaaidi is a Software Cook who enjoys whipping code until tests
-        pass.
+        <b>With nearly 20 years of experience in eXtreme Programming</b>, I've
+        coached dozens of teams and trained thousands of developers to cook
+        robust and maintainable software — using <b>Test-Driven Development</b>,
+        <b>pragmatic testing strategies</b>, and a healthy dose of
+        <b>Collective Ownership</b>.
       </p>
+
       <p>
-        <b>Born in the kitchen of eXtreme Programming over 15 years ago</b>, he
-        now teaches and coaches teams — like yours — to cook better software
-        using ingredients such as Test-Driven Development, and Collective
-        Ownership.
-      </p>
-      <p>
-        He's also an <b>Angular Google Developer Expert</b>, an
+        I'm also an <b>Angular Google Developer Expert</b>, an
         <b>NX Champion</b>, and a mediocre sailor.
       </p>
     </mat-card-content>
@@ -38,9 +46,22 @@ import cookPictureUri from './cook.webp';
       width: min(100%, 500px);
     }
 
-    img {
+    .picture-container {
+      position: relative;
+      height: 400px;
+    }
+
+    .cook-picture {
       object-fit: cover;
       object-position: 0% 20%;
+    }
+
+    .gde-picture {
+      position: absolute;
+      object-fit: cover;
+      width: 100%;
+      bottom: 0;
+      background-color: rgb(32, 52, 75, 0.8);
     }
 
     h3 {
@@ -57,9 +78,11 @@ import cookPictureUri from './cook.webp';
       font-size: 16px;
       color: #6b7280; /* dark gray */
       line-height: 1.6;
+      text-align: justify;
     }
   `,
 })
 export class CookCard {
   cookPictureUri = cookPictureUri;
+  gdePictureUri = gdePictureUri;
 }
