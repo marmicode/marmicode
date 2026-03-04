@@ -1,9 +1,15 @@
+import { registerLocaleData } from '@angular/common';
 import {
   provideHttpClient,
   withFetch,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import localeFr from '@angular/common/locales/fr';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideAppInitializer,
+} from '@angular/core';
 import {
   AnalyticsModule,
   getAnalytics,
@@ -40,6 +46,7 @@ export const appConfig: ApplicationConfig = {
     ),
 
     ScreenTrackingService,
+    provideAppInitializer(() => registerLocaleData(localeFr)),
     provideAnalytics(() => getAnalytics()),
     provideClientHydration(withEventReplay()),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

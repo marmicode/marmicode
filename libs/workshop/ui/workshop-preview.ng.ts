@@ -57,24 +57,26 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
           <span class="duration">
             <mat-icon>schedule</mat-icon>
             <ng-container [ngPlural]="workshop().duration">
-              <ng-template ngPluralCase="=1">1 Day</ng-template>
+              <ng-template ngPluralCase="=1">1 {{ labels().day }}</ng-template>
               <ng-template ngPluralCase="other">
-                {{ workshop().duration }} Days
+                {{ workshop().duration }} {{ labels().days }}
               </ng-template>
             </ng-container>
           </span>
           <span class="price">
-            From
-            {{ workshop().offer.price | currency: 'EUR' : 'symbol' : '1.0-0' }}
+            {{ labels().from }}
+            {{
+              workshop().offer.price
+                | currency: 'EUR' : 'symbol' : '1.0-0' : workshop().language
+            }}
           </span>
         </div>
 
         <div class="actions">
           <a
             [routerLink]="workshopRouterHelper.detail(workshop().id)"
-            mat-button
-            color="primary"
-            >VIEW DETAILS</a
+            matButton="outlined"
+            >{{ labels().viewDetails }}</a
           >
         </div>
       </mat-card-content>
@@ -185,6 +187,7 @@ export class WorkshopPreview {
   workshop = input.required<Workshop>();
 
   transitionName = computed(() => workshopViewTransitionName(this.workshop()));
+  labels = computed(() => this._labels[this.workshop().language]);
   languageChip = computed(() => this._languageChips[this.workshop().language]);
   workshopRouterHelper = workshopRouterHelper;
 
@@ -194,5 +197,28 @@ export class WorkshopPreview {
   > = {
     en: { flag: '🇬🇧', code: 'EN' },
     fr: { flag: '🇫🇷', code: 'FR' },
+  };
+
+  private _labels: Record<
+    WorkshopLanguage,
+    {
+      day: string;
+      days: string;
+      from: string;
+      viewDetails: string;
+    }
+  > = {
+    en: {
+      day: 'Day',
+      days: 'Days',
+      from: 'From',
+      viewDetails: 'VIEW DETAILS',
+    },
+    fr: {
+      day: 'Jour',
+      days: 'Jours',
+      from: 'À partir de',
+      viewDetails: "PLUS D'INFOS",
+    },
   };
 }
