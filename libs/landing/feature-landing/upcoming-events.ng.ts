@@ -16,7 +16,7 @@ import { LumaEvents } from '@marmicode/workshop/ui';
     LumaEvents,
   ],
   template: `
-    <mc-page-section pageTitle="🗓️ Upcoming Events" color="grey">
+    <mc-page-section sectionTitle="🗓️ Upcoming Events" color="grey">
       <mc-luma-events />
     </mc-page-section>
   `,

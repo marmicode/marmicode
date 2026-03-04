@@ -57,7 +57,7 @@ import { UpcomingEvents } from './upcoming-events.ng';
 
       <mc-upcoming-events />
 
-      <mc-page-section pageTitle="👨🏻‍🍳 About the Cook" color="surface">
+      <mc-page-section sectionTitle="👨🏻‍🍳 About the Cook" color="surface">
         <mc-cook-card />
       </mc-page-section>
     </mc-page>

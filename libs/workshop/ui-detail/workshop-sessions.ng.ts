@@ -25,7 +25,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
   template: `
     <mc-page-section
       [id]="upcomingSessionsSectionId"
-      [pageTitle]="pageTitle()"
+      [sectionTitle]="sectionTitle()"
       color="grey"
     >
       <mc-luma-events [tag]="workshop().lumaTag" />
@@ -35,7 +35,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
 export class WorkshopSessions {
   workshop = input.required<Workshop>();
 
-  pageTitle = computed(
+  sectionTitle = computed(
     () =>
       `🗓️ ${WORKSHOP_DETAIL_LABELS[this.workshop().language].upcomingSessions}`,
   );

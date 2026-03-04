@@ -7,7 +7,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
   selector: 'mc-workshop-agenda',
   imports: [MatExpansionModule, PageSection],
   template: `
-    <mc-page-section [pageTitle]="pageTitle()">
+    <mc-page-section [sectionTitle]="sectionTitle()">
       <mat-accordion>
         @for (section of workshop().agenda.sections; track section) {
           @let isEmpty = section.items.length === 0;
@@ -67,7 +67,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
 export class WorkshopAgenda {
   workshop = input.required<Workshop>();
 
-  pageTitle = computed(
+  sectionTitle = computed(
     () => `🗓️ ${WORKSHOP_DETAIL_LABELS[this.workshop().language].program}`,
   );
 }

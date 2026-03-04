@@ -9,7 +9,7 @@ import { Card, Link, LinkComponent, PageSection } from '@marmicode/shared/ui';
   selector: 'mc-the-menu',
   imports: [PageSection, MatButtonModule, MatIconModule, LinkComponent, Card],
   template: `
-    <mc-page-section pageTitle="🍜 The Menu" color="plain">
+    <mc-page-section sectionTitle="🍜 The Menu" color="plain">
       <div class="container">
         @for (product of products; track product.title) {
           <mc-card [icon]="product.icon" [link]="product.link">

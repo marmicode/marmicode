@@ -15,7 +15,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
   selector: 'mc-workshop-required-skills',
   imports: [PageSection, MatIconModule],
   template: `
-    <mc-page-section [pageTitle]="pageTitle()">
+    <mc-page-section [sectionTitle]="sectionTitle()">
       <ul>
         @for (skill of workshop().requiredSkills; track skill) {
           <li>
@@ -53,7 +53,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
 })
 export class WorkshopRequiredSkills {
   workshop = input.required<Workshop>();
-  pageTitle = computed(
+  sectionTitle = computed(
     () =>
       `🎓 ${WORKSHOP_DETAIL_LABELS[this.workshop().language].requiredKnowledge}`,
   );

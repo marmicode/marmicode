@@ -14,7 +14,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
   selector: 'mc-workshop-benefits',
   imports: [WorkshopBenefitCard, PageSection],
   template: `
-    <mc-page-section [pageTitle]="pageTitle()" color="surface">
+    <mc-page-section [sectionTitle]="sectionTitle()" color="surface">
       <div class="benefits">
         @for (benefit of workshop().benefits; track benefit) {
           <mc-workshop-benefit-card [benefit]="benefit" />
@@ -35,7 +35,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
 })
 export class WorkshopBenefits {
   workshop = input.required<Workshop>();
-  pageTitle = computed(
+  sectionTitle = computed(
     () =>
       `🍱 ${WORKSHOP_DETAIL_LABELS[this.workshop().language].whatYouWillLearn}`,
   );

@@ -15,7 +15,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
   imports: [MatExpansionModule, PageSection],
   template: `
     @if (workshop().faqs.length > 0) {
-      <mc-page-section [pageTitle]="pageTitle()">
+      <mc-page-section [sectionTitle]="sectionTitle()">
         <mat-accordion>
           @for (faq of workshop().faqs; track faq.question) {
             <mat-expansion-panel>
@@ -40,7 +40,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
 export class WorkshopFaq {
   workshop = input.required<Workshop>();
 
-  pageTitle = computed(
+  sectionTitle = computed(
     () => `🙋 ${WORKSHOP_DETAIL_LABELS[this.workshop().language].faq}`,
   );
 }

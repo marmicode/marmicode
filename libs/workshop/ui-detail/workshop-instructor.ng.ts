@@ -13,14 +13,14 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
   selector: 'mc-workshop-instructor',
   imports: [PageSection, CookCard],
   template: `
-    <mc-page-section [pageTitle]="pageTitle()" color="surface">
+    <mc-page-section [sectionTitle]="sectionTitle()" color="surface">
       <mc-cook-card />
     </mc-page-section>
   `,
 })
 export class WorkshopInstructor {
   workshop = input.required<Workshop>();
-  pageTitle = computed(
+  sectionTitle = computed(
     () => `👨🏻‍🏫 ${WORKSHOP_DETAIL_LABELS[this.workshop().language].instructor}`,
   );
 }
