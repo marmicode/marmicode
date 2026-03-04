@@ -15,12 +15,9 @@ import gdePictureUri from './gde.webp';
         alt="Younes Jaaidi wearing a red apron and holding wooden cooking spoons, standing in a kitchen-themed setup with jars of fairy lights and programming stickers (JavaScript, TypeScript, Angular, Nx, RxJS) on a shelf behind him."
         height="400"
       />
-      <img
-        [src]="gdePictureUri"
-        mat-card-image
-        alt="Google Developer Expert badge"
-        class="gde-picture"
-      />
+      <div class="badge-container">
+        <img [src]="gdePictureUri" alt="Google Developer Expert badge" />
+      </div>
     </div>
     <mat-card-content>
       <h3>Younes Jaaidi</h3>
@@ -56,12 +53,19 @@ import gdePictureUri from './gde.webp';
       object-position: 0% 20%;
     }
 
-    .gde-picture {
+    .badge-container {
       position: absolute;
-      object-fit: cover;
+      height: 70px;
       width: 100%;
       bottom: 0;
       background-color: rgb(32, 52, 75, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        height: 100%;
+      }
     }
 
     h3 {
