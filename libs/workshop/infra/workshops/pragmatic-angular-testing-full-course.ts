@@ -8,6 +8,8 @@ export const pragmaticAngularTestingFullCourse = createWorkshop({
   type: 'full',
   subheading: `Three days to turn your testing chaos into a well-seasoned strategy.
 Learn to build tests that survive refactors, migrations, and deadlines.`,
+  pictureAltText:
+    'Younes in apron holding a purple cooking pot overflowing with Angular, Vitest, Playwright, and Testronaut logos in a kitchen setting.',
   pictureUri,
   thumbnailUri,
   duration: 3,
@@ -52,6 +54,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
     price: 970,
     originalPrice: 1270,
   },
+  language: 'en',
   requiredSkills: [
     `Angular core concepts (e.g. components, inputs/outputs, services)`,
     `TypeScript fundamentals (e.g. types, interfaces, basic generics)`,

@@ -14,21 +14,10 @@ class WorskhopsGlove {
   }
 
   /**
-   * Selects a tag from the tags at the top of the page.
+   * Selects a language filter button.
    */
-  tag(tag: string) {
-    return this._page.getByRole('option', { name: tag }).first();
-  }
-
-  /**
-   * Selects a tag within a workshop card.
-   */
-  workshopTag({ title, tag }: { title: string; tag: string }) {
-    return this._page
-      .getByRole('article')
-      .filter({ has: this.workshopTitle().filter({ hasText: title }) })
-      .getByRole('listbox')
-      .getByRole('option', { name: tag });
+  languageFilter(name: 'All' | 'English' | 'French') {
+    return this._page.getByRole('button', { name });
   }
 
   workshopTitle() {
@@ -59,28 +48,12 @@ test.describe('workshops', () => {
       .toContain('Pragmatic Angular Testing Workshop');
   });
 
-  test('does not go to workshop when clicking on tag', async ({
-    glove,
-    page,
-  }) => {
-    // eslint-disable-next-line playwright/no-skipped-test
-    test.skip(true, 'Work in progress');
+  test('filters workshops by language', async ({ glove }) => {
     await glove.goto();
 
-    await glove
-      .workshopTag({
-        title: 'Pragmatic Angular Testing Workshop',
-        tag: 'Testing',
-      })
-      .click();
-
-    /* Checking that the tag is clicked sounds like a good idea,
-     * but Playwright is faster than the browser navigation.
-     * So it can see the tag changed before the navigation happens.
-     * This can cause a false negative. */
-    // eslint-disable-next-line playwright/no-networkidle
-    await page.waitForLoadState('networkidle');
-
-    await expect.poll(() => page.title()).toBe('Workshops | Marmicode');
+    await glove.languageFilter('French').click();
+    await expect(glove.workshopTitle()).toHaveText(
+      'Formation Testing Angular Pragmatique',
+    );
   });
 });

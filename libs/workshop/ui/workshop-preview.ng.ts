@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
-import { Workshop } from '@marmicode/workshop/core';
+import { Workshop, WorkshopLanguage } from '@marmicode/workshop/core';
 import { WorkshopTypeLabel } from './workshop-type-label.ng';
 import { workshopViewTransitionName } from './workshop-view-transition-name';
 
@@ -33,10 +33,19 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
       role="article"
     >
       <img
+        [alt]="workshop().pictureAltText"
         [src]="workshop().thumbnailUri"
-        alt="workshop image"
         [style.view-transition-name]="transitionName()"
       />
+      @if (languageChip(); as chip) {
+        <span
+          class="language-chip"
+          [attr.aria-label]="'Language: ' + chip.code"
+        >
+          <span class="chip-flag">{{ chip.flag }}</span>
+          <span class="chip-code">{{ chip.code }}</span>
+        </span>
+      }
       <mat-card-content class="content">
         <div class="header">
           <h3 class="title">{{ workshop().title }}</h3>
@@ -82,6 +91,30 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
       cursor: pointer;
       overflow: hidden;
       flex: 1;
+    }
+
+    .language-chip {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.65rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+      font-size: 1rem;
+    }
+
+    .chip-flag {
+      line-height: 1;
+      font-size: 1.7rem;
+    }
+
+    .chip-code {
+      font-weight: 700;
+      color: var(--marmicode-primary-color);
     }
 
     img {
@@ -154,5 +187,14 @@ export class WorkshopPreview {
   workshop = input.required<Workshop>();
 
   transitionName = computed(() => workshopViewTransitionName(this.workshop()));
+  languageChip = computed(() => this._languageChips[this.workshop().language]);
   workshopRouterHelper = workshopRouterHelper;
+
+  private _languageChips: Record<
+    WorkshopLanguage,
+    { flag: string; code: string }
+  > = {
+    en: { flag: '🇬🇧', code: 'EN' },
+    fr: { flag: '🇫🇷', code: 'FR' },
+  };
 }

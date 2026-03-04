@@ -18,6 +18,7 @@ export interface Workshop {
    */
   subheading: string;
 
+  pictureAltText: string;
   pictureUri: string;
   thumbnailUri: string;
 
@@ -33,10 +34,18 @@ export interface Workshop {
 
   offer: Offer;
 
+  /**
+   * The language of this workshop.
+   * Used for filtering and display of language chip.
+   */
+  language: WorkshopLanguage;
+
   requiredSkills: string[];
   benefits: Benefit[];
   agenda: Agenda;
 }
+
+export type WorkshopLanguage = 'en' | 'fr';
 
 export type Offer = EarlyBirdOffer | LastMinuteOffer;
 

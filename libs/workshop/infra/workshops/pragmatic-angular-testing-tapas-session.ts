@@ -8,6 +8,8 @@ export const pragmaticAngularTestingTapasSession = createWorkshop({
   type: 'tapas',
   subheading: `Tired of whack-a-mole bugs, boring manual tests, and fragile suites?
 Let's cook fast, reliable tests that actually help you ship.`,
+  pictureAltText:
+    'Younes in apron holding a purple cooking pot overflowing with Angular, Vitest, Playwright, and Testronaut logos in a kitchen setting.',
   pictureUri,
   thumbnailUri,
   duration: 1,
@@ -44,6 +46,7 @@ No dogma. No silver bullets. Just pragmatic Angular testing skills to help you *
     price: 370,
     originalPrice: 470,
   },
+  language: 'en',
   requiredSkills: [
     `Angular core concepts (e.g. components, inputs/outputs, services)`,
     `TypeScript fundamentals (e.g. types, interfaces, basic generics)`,
