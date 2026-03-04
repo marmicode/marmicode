@@ -60,17 +60,15 @@ import { RouterLink } from '@angular/router';
           <a
             [routerLink]="[]"
             [fragment]="upcomingSessionsSectionId"
-            mat-raised-button
-            color="accent"
+            matButton="filled"
           >
             <mat-icon>calendar_month</mat-icon>
             BOOK A SESSION
           </a>
           <a
             [href]="workshop().customSessionRequestUrl"
-            mat-button
             class="secondary"
-            color="accent"
+            matButton
             target="_blank"
           >
             <mat-icon>build</mat-icon>
@@ -85,9 +83,19 @@ import { RouterLink } from '@angular/router';
     </mc-hero>
   `,
   styles: `
+    @use '@angular/material' as mat;
+
     :host {
       display: block;
       position: relative;
+
+      @include mat.button-overrides(
+        (
+          filled-container-color: var(--marmicode-accent-bright-color),
+          filled-label-text-color: black,
+          text-label-text-color: var(--marmicode-accent-bright-color),
+        )
+      );
 
       @media (max-width: 599.98px) {
         font-size: 0.75rem;
@@ -136,7 +144,7 @@ import { RouterLink } from '@angular/router';
       font-size: 1em;
 
       &.secondary {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
         box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.2);
       }
     }

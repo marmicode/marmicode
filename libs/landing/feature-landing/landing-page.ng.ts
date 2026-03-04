@@ -43,9 +43,8 @@ import { UpcomingEvents } from './upcoming-events.ng';
           </h2>
           <a
             [routerLink]="workshopRouterHelper.list()"
-            mat-button
+            matButton
             class="hero-action"
-            color="accent"
           >
             <mat-icon>school</mat-icon>
 
@@ -64,6 +63,8 @@ import { UpcomingEvents } from './upcoming-events.ng';
     </mc-page>
   `,
   styles: `
+    @use '@angular/material' as mat;
+
     .subtitle {
       font-size: 1.5em;
       margin-bottom: 1.5rem;
@@ -72,6 +73,15 @@ import { UpcomingEvents } from './upcoming-events.ng';
     .hero-action {
       font-size: 1.2em;
       margin: 2rem 0 6rem 0;
+      background-color: rgba(255, 255, 255, 0.02);
+
+      @include mat.button-overrides(
+        (
+          filled-container-color: var(--marmicode-accent-bright-color),
+          filled-label-text-color: black,
+          text-label-text-color: var(--marmicode-accent-bright-color),
+        )
+      );
     }
   `,
 })

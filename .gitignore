@@ -45,5 +45,6 @@ __percy_snapshots__
 .nx
 nx-cloud.env
 
+.vite
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
