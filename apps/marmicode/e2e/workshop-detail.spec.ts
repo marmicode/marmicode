@@ -1,13 +1,25 @@
 import { test as base, expect, Page } from '@playwright/test';
 
-const test = base.extend<{ glove: WorskhopDetailGlove }>({
-  glove: ({ page }, use) => use(new WorskhopDetailGlove(page)),
+const test = base.extend<{ glove: WorkshopDetailGlove }>({
+  glove: ({ page }, use) => use(new WorkshopDetailGlove(page)),
 });
 
 test.describe('workshop detail', () => {
-  test('shows workshop info', async ({ glove, page }) => {
+  test('shows workshop info', async ({ browserName, glove, page }) => {
+    /* Skip WebKit for now because it's flaky on CI: "Failed to take two consecutive stable screenshots." */
+    // eslint-disable-next-line playwright/no-skipped-test
+    test.skip(process.env.CI && browserName === 'webkit', 'Skip on WebKit');
+
     test.slow();
+
     await glove.goto('pragmatic-angular-testing-full-course');
+
+    /* Wait for luma sessions to be loaded. */
+    await page
+      .frame({ url: (u) => u.origin === 'https://luma.com' })
+      .getByText('Pragmatic Angular Testing')
+      .waitFor();
+
     await expect(page).toHaveScreenshot({ fullPage: true });
   });
 
@@ -61,7 +73,7 @@ test.describe('workshop detail', () => {
   });
 });
 
-class WorskhopDetailGlove {
+class WorkshopDetailGlove {
   constructor(private _page: Page) {}
 
   goto(workshopId: string) {

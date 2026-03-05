@@ -2,9 +2,6 @@ name: 🌅 Update Snapshots
 on:
   - workflow_dispatch
 
-env:
-  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
-
 jobs:
   update-snapshots:
     name: 🌅 Update Snapshots
@@ -16,18 +13,21 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 25
+          node-version: 24
 
       - uses: pnpm/action-setup@v4
 
       - run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Install Cypress
+        run: pnpm exec cypress install
 
       - name: Install Playwright Browsers
         run: pnpm exec playwright install chromium firefox webkit --with-deps
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: pnpm exec nx affected --target e2e --update-snapshots
+      - run: pnpm exec nx affected --target e2e --parallel=1 --update-snapshots
 
       - run: |
           git config --global user.email "bot@marmicode.io"
