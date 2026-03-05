@@ -96,7 +96,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
       icon: 'language',
       title: 'Tests End-to-End',
       description:
-        "Écrivez des tests end-to-end fiables avec Playwright et savoir comment choisir l'outil approprié.",
+        "Écrivez des tests end-to-end fiables avec Playwright et sachez comment choisir l'outil approprié.",
     },
     {
       icon: 'restaurant',
