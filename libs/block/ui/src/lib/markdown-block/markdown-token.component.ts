@@ -104,7 +104,7 @@ export class MarkdownTokenComponent implements OnChanges {
   type: string;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.token) {
+    if ('token' in changes) {
       this.type = getMarkdownTokenType(this.token);
 
       /* Log unsupported types. */

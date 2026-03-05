@@ -1,10 +1,16 @@
 /* eslint-disable */
 export default {
-  displayName: 'blog-post-ui',
-  preset: '../../../jest.preset.js',
-  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  preset: '../jest.preset.js',
+  coverageDirectory: '../../coverage/apps/marmicode',
+
+  setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
   globals: {},
-  coverageDirectory: '../../coverage/libs/blog-post-ui',
+  displayName: 'marmicode',
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|webp|svg|ttf|woff|woff2)$':
+      '<rootDir>/__mocks__/image-stub.js',
+  },
+  testMatch: ['**/*.jest.ts'],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',
@@ -15,7 +21,8 @@ export default {
       'jest-preset-angular',
       {
         stringifyContentPathRegex: '\\.(html|svg)$',
-        tsconfig: '<rootDir>/tsconfig.spec.json',
+
+        tsconfig: '<rootDir>/tsconfig.jest.json',
       },
     ],
   },

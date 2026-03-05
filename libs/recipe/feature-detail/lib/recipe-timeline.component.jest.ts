@@ -2,8 +2,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { beforeEach, describe, expect, it } from '@jest/globals';
-import { readFirst } from '@nx/angular/testing';
 import { PushPipe } from '@rx-angular/template/push';
+import { firstValueFrom } from 'rxjs';
 import { RecipeTimelineComponent } from './recipe-timeline.component';
 
 describe('RecipeTimelineComponent', () => {
@@ -47,7 +47,7 @@ describe('RecipeTimelineComponent', () => {
       },
     ];
 
-    expect(await readFirst(component.bullets$)).toEqual([
+    expect(await firstValueFrom(component.bullets$)).toEqual([
       expect.objectContaining({
         position: 0,
       }),

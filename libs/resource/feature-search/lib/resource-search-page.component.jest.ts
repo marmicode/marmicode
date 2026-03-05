@@ -13,8 +13,8 @@ import { ResourceSearchPageComponent } from './resource-search-page.component';
 describe('ResourceSearchComponent', () => {
   it('should not trigger any query until skillSlug parameter is available', () => {
     const { resourceRepository } = createComponent();
-    expect(resourceRepository.getResources).toBeCalledTimes(0);
-    expect(resourceRepository.getResourcesBySkillSlug).toBeCalledTimes(0);
+    expect(resourceRepository.getResources).toHaveBeenCalledTimes(0);
+    expect(resourceRepository.getResourcesBySkillSlug).toHaveBeenCalledTimes(0);
   });
 
   /* This fixes a bug where `getResourcesBySkillSlug` was called with
@@ -25,8 +25,8 @@ describe('ResourceSearchComponent', () => {
     const { resourceRepository, setSkillSlug } = createComponent();
     setSkillSlug(null);
 
-    expect(resourceRepository.getResources).toBeCalledTimes(1);
-    expect(resourceRepository.getResourcesBySkillSlug).toBeCalledTimes(0);
+    expect(resourceRepository.getResources).toHaveBeenCalledTimes(1);
+    expect(resourceRepository.getResourcesBySkillSlug).toHaveBeenCalledTimes(0);
   });
 
   function createComponent() {

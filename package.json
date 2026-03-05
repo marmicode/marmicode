@@ -48,7 +48,7 @@
     "@angular/router": "21.1.6",
     "@angular/service-worker": "21.1.6",
     "@angular/ssr": "21.1.5",
-    "@apollo/client": "^3.1.2",
+    "@apollo/client": "4.1.6",
     "@firebase/app": "0.11.5",
     "@fortawesome/angular-fontawesome": "1.0.0",
     "@fortawesome/fontawesome-svg-core": "6.7.2",
@@ -67,7 +67,7 @@
     "@rx-angular/state": "^15.0.0",
     "@rx-angular/template": "^15.1.0",
     "@storybook/core-server": "8.6.17",
-    "apollo-angular": "10.0.3",
+    "apollo-angular": "13.0.0",
     "axios": "1.8.4",
     "document-register-element": "^1.7.2",
     "express": "5.2.1",
@@ -137,8 +137,8 @@
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "@typescript-eslint/utils": "^7.16.0",
-    "@vitest/coverage-v8": "4.0.9",
-    "@vitest/ui": "4.0.9",
+    "@vitest/coverage-v8": "4.0.18",
+    "@vitest/ui": "4.0.18",
     "bluebird": "3.7.2",
     "browser-sync": "^3.0.0",
     "cypress": "15.9.0",
@@ -170,11 +170,11 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "storybook": "10.2.14",
-    "ts-jest": "29.4.6",
+    "ts-jest": "29.3.4",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
     "vite": "7.3.1",
-    "vitest": "4.0.9"
+    "vitest": "4.0.18"
   },
   "dependenciesMeta": {
     "@babel/runtime@7.28.6": {
@@ -187,8 +187,11 @@
       "unplugged": true
     }
   },
+  "engines": {
+    "node": "^24.0.0 || ^25.0.0"
+  },
   "volta": {
-    "node": "22.15.0"
+    "node": "24.13.0"
   },
   "packageManager": "pnpm@10.18.2"
 }

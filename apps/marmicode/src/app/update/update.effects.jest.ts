@@ -1,10 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 
 import { describe, expect, it, jest } from '@jest/globals';
-import { createObserver } from '@marmicode/shared/testing';
+import { observe } from '@marmicode/shared/testing';
 import { Subject } from 'rxjs';
 import { UpdateDialogComponent } from './update-dialog.component';
 import { provideUpdateEffects, UpdateEffects } from './update.effects';
@@ -14,43 +13,49 @@ jest.mock('@angular/material/dialog');
 jest.useFakeTimers();
 
 describe('UpdateEffects', () => {
-  const { observe } = createObserver();
+  it('should check for updates every 30s', async () => {
+    const { mockSwUpdate, updateEffects } = setUp();
 
-  it('should check for updates every 30s', () => {
-    const { mockSwUpdate } = setUpCheckForUpdate();
+    using _ = await observe(updateEffects.checkForUpdate$);
 
     jest.advanceTimersToNextTimer();
 
-    expect(mockSwUpdate.checkForUpdate).toBeCalledTimes(1);
+    expect(mockSwUpdate.checkForUpdate).toHaveBeenCalledTimes(1);
 
     jest.advanceTimersByTime(29999);
 
-    expect(mockSwUpdate.checkForUpdate).toBeCalledTimes(1);
+    expect(mockSwUpdate.checkForUpdate).toHaveBeenCalledTimes(1);
 
     jest.advanceTimersByTime(30000);
 
-    expect(mockSwUpdate.checkForUpdate).toBeCalledTimes(2);
+    expect(mockSwUpdate.checkForUpdate).toHaveBeenCalledTimes(2);
   });
 
-  it('should prompt user for reload', () => {
-    const { mockDialog, mockSwUpdate, triggerUpdateAvailable } = setUpUpdate();
+  it('should prompt user for reload', async () => {
+    const { mockDialog, mockSwUpdate, updateEffects, triggerUpdateAvailable } =
+      setUp();
 
-    expect(mockDialog.open).not.toBeCalled();
+    using _ = await observe(updateEffects.update$);
+
+    expect(mockDialog.open).not.toHaveBeenCalled();
 
     triggerUpdateAvailable();
 
     jest.advanceTimersToNextTimer();
 
     /* Check prompt is called. */
-    expect(mockDialog.open).toBeCalledTimes(1);
-    expect(mockDialog.open).toBeCalledWith(UpdateDialogComponent, {
+    expect(mockDialog.open).toHaveBeenCalledTimes(1);
+    expect(mockDialog.open).toHaveBeenCalledWith(UpdateDialogComponent, {
       backdropClass: 'mc-overlay-backdrop',
     });
-    expect(mockSwUpdate.activateUpdate).not.toBeCalled();
+    expect(mockSwUpdate.activateUpdate).not.toHaveBeenCalled();
   });
 
-  it('should reprompt user after 30s', () => {
-    const { closeDialog, mockDialog, triggerUpdateAvailable } = setUpUpdate();
+  it('should reprompt user after 30s', async () => {
+    const { closeDialog, mockDialog, updateEffects, triggerUpdateAvailable } =
+      setUp();
+
+    using _ = await observe(updateEffects.update$);
 
     triggerUpdateAvailable();
 
@@ -60,40 +65,24 @@ describe('UpdateEffects', () => {
 
     jest.advanceTimersByTime(30000);
 
-    expect(mockDialog.open).toBeCalledTimes(2);
+    expect(mockDialog.open).toHaveBeenCalledTimes(2);
   });
 
-  it(`shouldn't reprompt user after 30s if dialog is still open`, () => {
-    const { mockDialog, triggerUpdateAvailable } = setUpUpdate();
+  it(`shouldn't reprompt user after 30s if dialog is still open`, async () => {
+    const { mockDialog, updateEffects, triggerUpdateAvailable } = setUp();
+
+    using _ = await observe(updateEffects.update$);
 
     triggerUpdateAvailable();
 
     jest.advanceTimersByTime(29999);
 
-    expect(mockDialog.open).toBeCalledTimes(1);
+    expect(mockDialog.open).toHaveBeenCalledTimes(1);
 
     jest.advanceTimersByTime(30000);
 
-    expect(mockDialog.open).toBeCalledTimes(1);
+    expect(mockDialog.open).toHaveBeenCalledTimes(1);
   });
-
-  /**
-   * Use this to test the UpdateEffects.checkForUpdate effect.
-   */
-  function setUpCheckForUpdate() {
-    const utils = setUp();
-    observe(utils.updateEffects.checkForUpdate$);
-    return utils;
-  }
-
-  /**
-   * Use this to test the UpdateEffects.update effect.
-   */
-  function setUpUpdate() {
-    const utils = setUp();
-    observe(utils.updateEffects.update$);
-    return utils;
-  }
 
   /* Set up effects service. */
   function setUp() {
@@ -125,7 +114,6 @@ describe('UpdateEffects', () => {
     mockSwUpdate.checkForUpdate.mockResolvedValue(true);
 
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule],
       providers: [
         provideUpdateEffects(),
         {

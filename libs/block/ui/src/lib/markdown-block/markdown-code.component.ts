@@ -30,7 +30,7 @@ export class MarkdownCodeComponent implements OnChanges {
   codeBlock: CodeBlock;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.token) {
+    if ('token' in changes) {
       this.codeBlock = createCodeBlock({
         code: this.token.text,
         language: this.token.lang,

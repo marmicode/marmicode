@@ -181,13 +181,13 @@
     "lint": {
       "executor": "@nx/eslint:lint"
     },
-    "test": {
+    "jest": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "apps/marmicode/jest.config.ts",
+        "jestConfig": "{projectRoot}/jest.config.ts",
         "tsConfig": "{projectRoot}/tsconfig.spec.json"
       },
-      "outputs": ["{workspaceRoot}/coverage/apps/marmicode"]
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     },
     "deploy": {
       "executor": "nx:run-commands",

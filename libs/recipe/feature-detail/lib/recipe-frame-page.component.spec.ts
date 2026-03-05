@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { PushPipe } from '@rx-angular/template/push';
 import { of } from 'rxjs';
 import { RecipeFramePageComponent } from './recipe-frame-page.component';
@@ -25,7 +25,7 @@ describe('RecipeFramePageComponent', () => {
         {
           provide: RecipeRepository,
           useValue: {
-            getRecipe: jest.fn().mockReturnValue(
+            getRecipe: vi.fn().mockReturnValue(
               of({
                 title: 'Setup Express Gateway',
                 frames: [
@@ -45,7 +45,7 @@ describe('RecipeFramePageComponent', () => {
         {
           provide: ViewportScroller,
           useValue: {
-            scrollToPosition: jest.fn(),
+            scrollToPosition: vi.fn(),
           },
         },
       ],
@@ -65,8 +65,9 @@ describe('RecipeFramePageComponent', () => {
 
   it('should combine recipe & frame titles', () => {
     fixture.detectChanges();
-    const title = fixture.debugElement.query(By.css('mc-page')).properties.info
-      .title;
+    const title = fixture.debugElement.query(By.css('mc-page')).properties[
+      'info'
+    ].title;
     expect(title).toEqual(
       'Setup Express Gateway > 0 - Install Express Gateway',
     );

@@ -1,8 +1,14 @@
-import { animate, keyframes, style } from '@angular/animations';
+import {
+  animate,
+  AnimationBuilder,
+  keyframes,
+  style,
+} from '@angular/animations';
 import { ElementRef } from '@angular/core';
 import { beforeEach, describe, expect, jest, it } from '@jest/globals';
 import { RxState } from '@rx-angular/state';
 import { SlideAnimationDirective } from './slide-animation.directive';
+import { TestBed } from '@angular/core/testing';
 
 describe('SlideAnimationDirective', () => {
   let animationBuilder: {
@@ -39,16 +45,20 @@ describe('SlideAnimationDirective', () => {
           }),
         }),
     };
-    directive = new SlideAnimationDirective(
-      animationBuilder as any,
-      {} as ElementRef,
-      new RxState<{ slideIndex: number }>()
-    );
+    TestBed.configureTestingModule({
+      providers: [
+        SlideAnimationDirective,
+        { provide: AnimationBuilder, useValue: animationBuilder },
+        { provide: ElementRef, useValue: {} },
+        { provide: RxState, useValue: new RxState<{ slideIndex: number }>() },
+      ],
+    });
+    directive = TestBed.inject(SlideAnimationDirective);
     directive.ngOnInit();
   });
 
   it('should build animations', () => {
-    expect(animationBuilder.build).toBeCalledTimes(3);
+    expect(animationBuilder.build).toHaveBeenCalledTimes(3);
     /* Left to right animation. */
     expect(animationBuilder.build).toHaveBeenNthCalledWith(
       1,
@@ -60,8 +70,8 @@ describe('SlideAnimationDirective', () => {
             transform: `translateX(-100%)`,
           }),
           style({ transform: 'translateX(0)' }),
-        ])
-      )
+        ]),
+      ),
     );
     /* Right to left animation. */
     expect(animationBuilder.build).toHaveBeenNthCalledWith(
@@ -74,8 +84,8 @@ describe('SlideAnimationDirective', () => {
             transform: `translateX(100%)`,
           }),
           style({ transform: 'translateX(0)' }),
-        ])
-      )
+        ]),
+      ),
     );
     /* Initial animation. */
     expect(animationBuilder.build).toHaveBeenNthCalledWith(
@@ -88,28 +98,28 @@ describe('SlideAnimationDirective', () => {
             opacity: 0,
           }),
           style({ opacity: 1 }),
-        ])
-      )
+        ]),
+      ),
     );
   });
 
   it('should run initial animation when index is initialized', () => {
     directive.slideIndex = 3;
 
-    expect(mockPlayInitialAnimation).toBeCalledTimes(1);
+    expect(mockPlayInitialAnimation).toHaveBeenCalledTimes(1);
   });
 
   it('should slide in right to left when index increases', () => {
     directive.slideIndex = 3;
     directive.slideIndex = 4;
 
-    expect(mockPlayRightToLeft).toBeCalledTimes(1);
+    expect(mockPlayRightToLeft).toHaveBeenCalledTimes(1);
   });
 
   it('should slide in left to right when index decreases', () => {
     directive.slideIndex = 3;
     directive.slideIndex = 2;
 
-    expect(mockPlayLeftToRight).toBeCalledTimes(1);
+    expect(mockPlayLeftToRight).toHaveBeenCalledTimes(1);
   });
 });

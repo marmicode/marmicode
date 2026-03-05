@@ -9,5 +9,5 @@
     "isolatedModules": true
   },
   "files": ["src/test-setup.ts"],
-  "include": ["**/*.spec.ts", "**/*.test.ts", "**/*.d.ts", "jest.config.ts"]
+  "include": ["**/*.jest.ts", "**/*.test.ts", "**/*.d.ts", "jest.config.ts"]
 }
