@@ -183,12 +183,7 @@ describe('PageComponent', () => {
           content: 'https://twitter.com/yjaaidi',
         },
         { name: '', property: 'twitter:creator', content: '@yjaaidi' },
-        {
-          name: '',
-          property: 'article:author',
-          content: 'https://twitter.com/yjaaidi',
-        },
-      ] as MetaDefinition[]);
+      ] satisfies MetaDefinition[]);
   });
 
   it('should reset meta when set to null', async () => {

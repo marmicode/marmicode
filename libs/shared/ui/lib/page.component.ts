@@ -117,14 +117,6 @@ export class PageComponent {
 
       /* Update meta data. */
       const metas = this._infoToMetaTags(info);
-      if ('type' in info && info.type === 'article') {
-        metas.push({
-          property: 'article:author',
-          content: info.author?.twitter
-            ? `https://twitter.com/${info.author.twitter}`
-            : null,
-        });
-      }
       const tagEls = this._metaService.addTags(metas);
       onCleanup(() => {
         tagEls.forEach((el) => this._metaService.removeTagElement(el));
