@@ -1,0 +1,44 @@
+name: 🌅 Update Snapshots
+on:
+  - workflow_dispatch
+
+env:
+  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+
+jobs:
+  update-snapshots:
+    name: 🌅 Update Snapshots
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 25
+
+      - uses: pnpm/action-setup@v4
+
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install chromium firefox webkit --with-deps
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - run: pnpm exec nx affected --target e2e --update-snapshots
+
+      - run: |
+          git config --global user.email "bot@marmicode.io"
+          git config --global user.name "Marmicode Bot"
+          git add apps/*/e2e/**/*.png
+          git diff --cached --quiet || git commit -a -m "test: ✅ update snapshots"
+          git push
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: dist/.playwright/apps/cookbook/playwright-report/
+          retention-days: 30
