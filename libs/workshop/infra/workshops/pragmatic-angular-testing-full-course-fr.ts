@@ -209,7 +209,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         items: [
           'Tester un composant.',
           'Les différents types de tests de composants : isolated vs. shallow vs. integration.',
-          'Intéragir avec le DOM.',
+          'Interagir avec le DOM.',
         ],
       },
       {
@@ -237,7 +237,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         title: '💻 Exercices pratiques : tests de composants (suite)',
         items: [
           'Tester la communication via Inputs et Outputs.',
-          'Intéragir avec les formulaires.',
+          'Interagir avec les formulaires.',
         ],
       },
       {
