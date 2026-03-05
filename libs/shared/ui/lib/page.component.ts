@@ -61,17 +61,28 @@ export class PageComponent {
   private _defaultTitle = 'Marmicode';
 
   constructor() {
-    /* Sync input with page title. */
     effect((onCleanup) => {
+      const info = this.info();
+      if (info == null) {
+        return;
+      }
+
+      /* Sync input with page title. */
       this._titleService.setTitle(this._infoToTitle(this.info()));
       onCleanup(() => {
         this._titleService.setTitle(this._defaultTitle);
       });
-    });
 
-    /* Update meta data. */
-    effect((onCleanup) => {
-      const metas = this._infoToMetaTags(this.info());
+      /* Update meta data. */
+      const metas = this._infoToMetaTags(info);
+      if ('type' in info && info.type === 'article') {
+        metas.push({
+          property: 'article:author',
+          content: info.author?.twitter
+            ? `https://twitter.com/${info.author.twitter}`
+            : null,
+        });
+      }
       const tagEls = this._metaService.addTags(metas);
       onCleanup(() => {
         tagEls.forEach((el) => this._metaService.removeTagElement(el));

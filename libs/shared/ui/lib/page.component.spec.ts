@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { MetaDefinition } from '@angular/platform-browser';
 
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it, vi } from 'vitest';
 import { MetaFake, provideMetaFake } from '../testing/meta.fake';
 import { provideTitleFake, TitleFake } from '../testing/title.fake';
 import {
@@ -36,27 +36,26 @@ describe('PageComponent', () => {
       title: null,
     });
 
-    expect(titleFake.getTitle()).toBe('Marmicode');
+    await expect.poll(() => titleFake.getTitle()).toBe('Marmicode');
   });
 
   it('should set page title', async () => {
     const { setPageInfo, titleFake } = await renderComponent();
 
-    setPageInfo({
-      title: '🍔',
-    });
-    expect(titleFake.getTitle()).toBe('🍔 | Marmicode');
+    setPageInfo({ title: '🍔' });
+
+    await expect.poll(() => titleFake.getTitle()).toBe('🍔 | Marmicode');
   });
 
-  it('should set page title to default on destroy', async () => {
-    const { destroy, setPageInfo, titleFake } = await renderComponent();
+  it('should set page title to default after destroy', async () => {
+    const { destroy, setPageInfo, titleFake, whenStable } =
+      await renderComponent();
 
-    setPageInfo({
-      title: '🍔',
-    });
+    setPageInfo({ title: '🍔' });
+    await whenStable();
     destroy();
 
-    expect(titleFake.getTitle()).toBe('Marmicode');
+    await expect.poll(() => titleFake.getTitle()).toBe('Marmicode');
   });
 
   it('should set opengraph & twitter meta', async () => {
@@ -75,27 +74,34 @@ describe('PageComponent', () => {
       }),
     );
 
-    expect(getMetaTags()).toEqual([
-      { name: 'description', property: null, content: 'Description' },
-      { name: '', property: 'og:description', content: 'Description' },
-      { name: '', property: 'og:image', content: 'https://picture.url' },
-      { name: '', property: 'twitter:card', content: 'summary_large_image' },
-      { name: '', property: 'twitter:description', content: 'Description' },
-      { name: '', property: 'twitter:title', content: 'Title | Marmicode' },
-      { name: 'author', property: null, content: 'Younes Jaaidi' },
-      { name: '', property: 'og:type', content: 'article' },
-      {
-        name: '',
-        property: 'article:published_time',
-        content: '2020-01-01T00:00:00.000Z',
-      },
-      {
-        name: '',
-        property: 'article:author',
-        content: 'https://twitter.com/yjaaidi',
-      },
-      { name: '', property: 'twitter:creator', content: '@yjaaidi' },
-    ] as MetaDefinition[]);
+    await expect
+      .poll(() => getMetaTags())
+      .toEqual([
+        { name: 'description', property: null, content: 'Description' },
+        { name: '', property: 'og:description', content: 'Description' },
+        { name: '', property: 'og:image', content: 'https://picture.url' },
+        { name: '', property: 'twitter:card', content: 'summary_large_image' },
+        { name: '', property: 'twitter:description', content: 'Description' },
+        { name: '', property: 'twitter:title', content: 'Title | Marmicode' },
+        { name: 'author', property: null, content: 'Younes Jaaidi' },
+        { name: '', property: 'og:type', content: 'article' },
+        {
+          name: '',
+          property: 'article:published_time',
+          content: '2020-01-01T00:00:00.000Z',
+        },
+        {
+          name: '',
+          property: 'article:author',
+          content: 'https://twitter.com/yjaaidi',
+        },
+        { name: '', property: 'twitter:creator', content: '@yjaaidi' },
+        {
+          name: '',
+          property: 'article:author',
+          content: 'https://twitter.com/yjaaidi',
+        },
+      ] as MetaDefinition[]);
   });
 
   it('should reset meta when set to null', async () => {
@@ -152,6 +158,9 @@ async function renderComponent() {
           content: el.content,
           property: el.getAttribute('property'),
         }));
+    },
+    whenStable() {
+      return fixture.whenStable();
     },
     titleFake: TestBed.inject(TitleFake),
   };

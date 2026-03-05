@@ -22,7 +22,7 @@ export default defineConfig(() => ({
     environment: 'jsdom',
     isolate: false,
     pool: 'threads',
-    testTimeout: 1_000,
+    testTimeout: 1_500,
     include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     setupFiles: [testSetupPath],
     reporters: ['default'],

@@ -62,8 +62,8 @@ export class MetaFake implements OmitPrivate<Meta> {
     });
   }
 
-  removeTagElement(): void {
-    throw new Error('`MetaFake#removeTagElement` not implemented.');
+  removeTagElement(el: HTMLMetaElement): void {
+    this._metas = this._metas.filter(({ element }) => element !== el);
   }
 
   updateTag(): HTMLMetaElement | null {
