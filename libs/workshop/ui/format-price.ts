@@ -3,7 +3,7 @@ export function formatPrice({
   locale,
 }: {
   price: number;
-  locale: string;
+  locale: Intl.LocalesArgument;
 }): string {
   return price.toLocaleString(locale, {
     style: 'currency',
