@@ -5,6 +5,12 @@ const test = base.extend<{ glove: WorskhopDetailGlove }>({
 });
 
 test.describe('workshop detail', () => {
+  test('shows workshop info', async ({ glove, page }) => {
+    test.slow();
+    await glove.goto('pragmatic-angular-testing-full-course');
+    await expect(page).toHaveScreenshot({ fullPage: true });
+  });
+
   test('sets the page language to the workshop language', async ({
     glove,
     page,
