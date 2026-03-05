@@ -40,5 +40,5 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
-          path: dist/.playwright/apps/cookbook/playwright-report/
+          path: dist/.playwright/apps/marmicode/playwright-report/
           retention-days: 30
