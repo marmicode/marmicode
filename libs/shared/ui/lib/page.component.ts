@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, PlatformLocation } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,7 +12,7 @@ import { HtmlAdapter } from './html-adapter';
 
 export interface BasicPageInfo {
   description?: string;
-  alternates?: Array<{ href: string; language: string }>;
+  alternates?: Array<{ path: string; language: string }>;
   language?: string;
   pictureUri?: string;
   title?: string;
@@ -62,6 +62,7 @@ export class PageComponent {
   private _titleService = inject(Title);
   private _defaultLanguage = 'en';
   private _defaultTitle = 'Marmicode';
+  private _platformLocation = inject(PlatformLocation);
 
   constructor() {
     effect((onCleanup) => {
@@ -72,15 +73,39 @@ export class PageComponent {
 
       /* Sync input with page title. */
       this._titleService.setTitle(this._infoToTitle(this.info()));
-      onCleanup(() => {
-        this._titleService.setTitle(this._defaultTitle);
-      });
+      onCleanup(() => this._titleService.setTitle(this._defaultTitle));
 
       /* Sync html[lang] with page info language. */
       if (info.language) {
         this._htmlAdapter.setHtmlAttribute('lang', info.language);
+        onCleanup(() =>
+          this._htmlAdapter.setHtmlAttribute('lang', this._defaultLanguage),
+        );
+      }
+
+      if (info.alternates) {
+        const tags = info.alternates.map((alternate) =>
+          this._htmlAdapter.addLinkTag({
+            rel: 'alternate',
+            hreflang: alternate.language,
+            href: this._pathToUrl(alternate.path),
+          }),
+        );
+
+        const englishAlternate = info.alternates.find(
+          (alternate) => alternate.language === this._defaultLanguage,
+        );
+        if (englishAlternate) {
+          tags.push(
+            this._htmlAdapter.addLinkTag({
+              rel: 'canonical',
+              href: this._pathToUrl(englishAlternate.path),
+            }),
+          );
+        }
+
         onCleanup(() => {
-          this._htmlAdapter.setHtmlAttribute('lang', this._defaultLanguage);
+          tags.forEach((tag) => tag.remove());
         });
       }
 
@@ -135,6 +160,11 @@ export class PageComponent {
       ];
     }
     return tags.filter((tag) => tag.content != null);
+  }
+
+  private _pathToUrl(path: string) {
+    const { protocol, hostname } = this._platformLocation;
+    return `${protocol}//${hostname}${path}`;
   }
 }
 

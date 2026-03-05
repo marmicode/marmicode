@@ -1,6 +1,9 @@
+import {
+  MOCK_PLATFORM_LOCATION_CONFIG,
+  MockPlatformLocationConfig,
+} from '@angular/common/testing';
 import { TestBed } from '@angular/core/testing';
 import { MetaDefinition } from '@angular/platform-browser';
-
 import { describe, expect, it } from 'vitest';
 import { MetaFake, provideMetaFake } from '../testing/meta.fake';
 import { provideTitleFake, TitleFake } from '../testing/title.fake';
@@ -81,59 +84,68 @@ describe('PageComponent', () => {
       .toBe('en');
   });
 
-  it.todo(
-    'sets canonical and alternate links when `alternates` is provided',
-    async () => {
-      const { setPageInfo } = await renderComponent();
+  it('sets canonical and alternate links when `alternates` is provided', async () => {
+    const { htmlAdapterFake, setPageInfo } = await renderComponent();
 
-      setPageInfo({
-        alternates: [
-          { href: '/workshops/test-angular-pragmatique', language: 'fr' },
-          { href: '/workshops/pragmatic-angular-testing', language: 'en' },
-        ],
-      });
+    setPageInfo({
+      alternates: [
+        { path: '/workshops/test-angular-pragmatique', language: 'fr' },
+        { path: '/workshops/pragmatic-angular-testing', language: 'en' },
+      ],
+    });
 
-      await expect
-        .poll(() => document.head.querySelector('link[rel="canonical"]'))
-        .toBe('https://xyz/workshops/pragmatic-angular-testing');
-      await expect
-        .poll(() =>
-          Array.from(
-            document.head.querySelectorAll('link[rel="alternate"]'),
-          ).map((el) => ({
-            href: el.getAttribute('href'),
-            language: el.getAttribute('hreflang'),
+    await expect
+      .poll(
+        () =>
+          htmlAdapterFake.getLinkTags().find((e) => e.rel === 'canonical').href,
+      )
+      .toBe('https://marmicode.io/workshops/pragmatic-angular-testing');
+    await expect
+      .poll(() =>
+        htmlAdapterFake
+          .getLinkTags()
+          .filter((e) => e.rel === 'alternate')
+          .map((el) => ({
+            href: el.href,
+            language: el.hreflang,
           })),
-        )
-        .toEqual([
-          { href: '/workshops/test-angular-pragmatique', language: 'fr' },
-          { href: '/workshops/pragmatic-angular-testing', language: 'en' },
-        ]);
-    },
-  );
+      )
+      .toEqual([
+        {
+          href: 'https://marmicode.io/workshops/test-angular-pragmatique',
+          language: 'fr',
+        },
+        {
+          href: 'https://marmicode.io/workshops/pragmatic-angular-testing',
+          language: 'en',
+        },
+      ]);
+  });
 
-  it.todo(
-    'removes canonical and alternate links when component is destroyed',
-    async () => {
-      const { destroyOnceStable, setPageInfo } = await renderComponent();
+  it('removes canonical and alternate links when component is destroyed', async () => {
+    const { destroyOnceStable, htmlAdapterFake, setPageInfo } =
+      await renderComponent();
 
-      setPageInfo({
-        alternates: [
-          { href: '/workshops/test-angular-pragmatique', language: 'fr' },
-          { href: '/workshops/pragmatic-angular-testing', language: 'en' },
-        ],
-      });
+    setPageInfo({
+      alternates: [
+        { path: '/workshops/test-angular-pragmatique', language: 'fr' },
+        { path: '/workshops/pragmatic-angular-testing', language: 'en' },
+      ],
+    });
 
-      await destroyOnceStable();
+    await destroyOnceStable();
 
-      await expect
-        .poll(() => document.head.querySelector('link[rel="canonical"]'))
-        .toBeNull();
-      await expect
-        .poll(() => document.head.querySelectorAll('link[rel="alternate"]'))
-        .toHaveLength(0);
-    },
-  );
+    await expect
+      .poll(() =>
+        htmlAdapterFake.getLinkTags().find((e) => e.rel === 'canonical'),
+      )
+      .toBeUndefined();
+    await expect
+      .poll(() =>
+        htmlAdapterFake.getLinkTags().filter((e) => e.rel === 'alternate'),
+      )
+      .toHaveLength(0);
+  });
 
   it('sets opengraph & twitter meta', async () => {
     const { setPageInfo, getMetaTags } = await renderComponent();
@@ -217,6 +229,12 @@ describe('PageComponent', () => {
 async function renderComponent() {
   TestBed.configureTestingModule({
     providers: [
+      {
+        provide: MOCK_PLATFORM_LOCATION_CONFIG,
+        useValue: {
+          startUrl: 'https://marmicode.io',
+        } satisfies MockPlatformLocationConfig,
+      },
       provideMetaFake(),
       provideTitleFake(),
       provideHtmlAdapterFake(),
