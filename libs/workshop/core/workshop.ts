@@ -1,3 +1,5 @@
+import { Optional } from '@marmicode/shared/utils';
+
 export interface Workshop {
   id: string;
   title: string;
@@ -15,6 +17,11 @@ export interface Workshop {
   type: 'tapas' | 'full';
   location: 'online';
   description: string;
+
+  /**
+   * If set, this will show a Join Waitlist button instead of a Book a Seat button.
+   */
+  waitlistUrl?: string;
 
   /**
    * Tag used to show upcoming sessions.

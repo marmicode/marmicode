@@ -56,14 +56,21 @@ import { UPCOMING_SESSIONS_SECTION_ID } from './workshop-sessions.ng';
           }
         </p>
         <div class="actions">
-          <a
-            [routerLink]="[]"
-            [fragment]="upcomingSessionsSectionId"
-            matButton="filled"
-          >
-            <mat-icon>calendar_month</mat-icon>
-            {{ labels().bookASession | uppercase }}
-          </a>
+          @if (workshop().waitlistUrl; as waitlistUrl) {
+            <a [href]="waitlistUrl" matButton="filled" target="_blank">
+              <mat-icon>notifications</mat-icon>
+              {{ labels().joinWaitlist | uppercase }}
+            </a>
+          } @else {
+            <a
+              [routerLink]="[]"
+              [fragment]="upcomingSessionsSectionId"
+              matButton="filled"
+            >
+              <mat-icon>calendar_month</mat-icon>
+              {{ labels().bookASession | uppercase }}
+            </a>
+          }
           <a
             [href]="workshop().customSessionRequestUrl"
             class="secondary"
@@ -76,7 +83,7 @@ import { UPCOMING_SESSIONS_SECTION_ID } from './workshop-sessions.ng';
         </div>
         @if (workshop().language === 'fr') {
           <div class="bottom-note">
-            🇫🇷 Formation éligible au financement OPCO.
+            🇫🇷 Formation finançable jusqu'à 100% via OPCO.
           </div>
         }
       </ng-content>

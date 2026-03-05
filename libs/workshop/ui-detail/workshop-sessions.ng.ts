@@ -23,13 +23,15 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
     LumaEvents,
   ],
   template: `
-    <mc-page-section
-      [id]="upcomingSessionsSectionId"
-      [sectionTitle]="sectionTitle()"
-      color="grey"
-    >
-      <mc-luma-events [tag]="workshop().lumaTag" />
-    </mc-page-section>
+    @if (!workshop().waitlistUrl) {
+      <mc-page-section
+        [id]="upcomingSessionsSectionId"
+        [sectionTitle]="sectionTitle()"
+        color="grey"
+      >
+        <mc-luma-events [tag]="workshop().lumaTag" />
+      </mc-page-section>
+    }
   `,
 })
 export class WorkshopSessions {

@@ -1,5 +1,5 @@
 export * from './workshop-agenda.ng';
-export * from './workshop-banner.ng';
+export * from './workshop-hero.ng';
 export * from './workshop-benefits.ng';
 export * from './workshop-faq.ng';
 export * from './workshop-description.ng';
