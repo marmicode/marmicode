@@ -1,4 +1,5 @@
-import { DOCUMENT, inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class HtmlAdapter {
