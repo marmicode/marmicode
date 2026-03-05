@@ -22,8 +22,8 @@ import { appRouterHelper } from './app-router-helper';
             <li>
               <mc-link
                 color="white"
-                href="https://courses.marmicode.io/courses/pragmatic-angular-testing"
                 size="small"
+                href="https://courses.marmicode.io/courses/pragmatic-angular-testing"
               >
                 ✅ Angular Testing Course
               </mc-link>
@@ -31,8 +31,8 @@ import { appRouterHelper } from './app-router-helper';
             <li>
               <mc-link
                 color="white"
-                [route]="workshopRouterHelper.list()"
                 size="small"
+                [route]="workshopRouterHelper.list()"
               >
                 👨🏻‍🏫 Workshops
               </mc-link>
@@ -40,8 +40,8 @@ import { appRouterHelper } from './app-router-helper';
             <li>
               <mc-link
                 color="white"
-                [route]="resourceSearchRouterHelper.learnEverything()"
                 size="small"
+                [route]="resourceSearchRouterHelper.learnEverything()"
               >
                 📚 Blog
               </mc-link>
@@ -49,8 +49,8 @@ import { appRouterHelper } from './app-router-helper';
             <li>
               <mc-link
                 color="white"
-                href="https://youtube.com/@marmicode"
                 size="small"
+                href="https://youtube.com/@marmicode"
               >
                 📺 Youtube
               </mc-link>
@@ -65,8 +65,8 @@ import { appRouterHelper } from './app-router-helper';
             <li>
               <mc-link
                 color="white"
-                [href]="externalLinks.contactFormUrl"
                 size="small"
+                [href]="externalLinks.contactFormUrl"
               >
                 ✉️ Contact Me
               </mc-link>
@@ -74,22 +74,22 @@ import { appRouterHelper } from './app-router-helper';
             <li>
               <mc-link
                 color="white"
-                href="https://bsky.app/profile/younesjd.dev"
                 size="small"
+                href="https://bsky.app/profile/younesjd.dev"
               >
                 🦋 Bluesky
               </mc-link>
             </li>
             <li>
-              <mc-link color="white" href="https://x.com/yjaaidi" size="small">
+              <mc-link color="white" size="small" href="https://x.com/yjaaidi">
                 X
               </mc-link>
             </li>
             <li>
               <mc-link
                 color="white"
-                href="https://linkedin.com/in/yjaaidi"
                 size="small"
+                href="https://linkedin.com/in/yjaaidi"
               >
                 LinkedIn
               </mc-link>
@@ -101,25 +101,17 @@ import { appRouterHelper } from './app-router-helper';
       <!-- Legal -->
       <div class="legal">
         <span class="legal-links">
-          <mc-link
-            color="white"
-            href="https://courses.marmicode.io/pages/legal"
-            size="small"
-            >Legal</mc-link
+          <mc-link href="https://courses.marmicode.io/pages/legal"
+            ><span>Legal</span></mc-link
           >
           ·
           <mc-link
-            color="white"
             href="https://courses.marmicode.io/pages/terms-and-conditions"
-            size="small"
-            >Terms</mc-link
+            ><span>Terms</span></mc-link
           >
           ·
-          <mc-link
-            color="white"
-            href="https://courses.marmicode.io/pages/privacy-policy"
-            size="small"
-            >Privacy</mc-link
+          <mc-link href="https://courses.marmicode.io/pages/privacy-policy"
+            ><span>Privacy</span></mc-link
           >
         </span>
         <p class="copyright">Copyright © {{ year }} Marmicode.</p>
@@ -146,27 +138,6 @@ import { appRouterHelper } from './app-router-helper';
       flex-wrap: wrap;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: white;
-      text-decoration: none;
-    }
-
-    .brand:hover {
-      opacity: 0.9;
-    }
-
-    .logo {
-      flex-shrink: 0;
-    }
-
-    .brand-name {
-      font-size: 1.25rem;
-      font-weight: 500;
-    }
-
     .section-title {
       font-size: 0.75rem;
       font-weight: 600;
@@ -181,36 +152,12 @@ import { appRouterHelper } from './app-router-helper';
       list-style: none;
       margin: 0;
       padding: 0;
-    }
-
-    .link-list li {
-      margin-bottom: 8px;
-    }
-
-    .link-list a {
-      color: rgba(255, 255, 255, 0.9);
-      text-decoration: none;
-    }
-
-    .link-list a:hover {
-      color: white;
-      text-decoration: underline;
-    }
-
-    .author-name {
-      font-weight: 600;
-      margin: 0 0 4px;
-    }
-
-    .author-bio {
-      margin: 0;
       font-size: 0.9rem;
-      line-height: 1.5;
       opacity: 0.9;
-    }
 
-    .author-bio mc-link ::ng-deep a {
-      color: var(--marmicode-accent-bright-color);
+      li {
+        margin: 0.5rem 0;
+      }
     }
 
     .legal {
@@ -224,16 +171,10 @@ import { appRouterHelper } from './app-router-helper';
 
     .legal-links {
       margin-right: 8px;
-    }
 
-    .legal a {
-      color: rgba(255, 255, 255, 0.9);
-      text-decoration: none;
-    }
-
-    .legal a:hover {
-      color: white;
-      text-decoration: underline;
+      span {
+        color: var(--marmicode-accent-bright-color);
+      }
     }
 
     .copyright {
