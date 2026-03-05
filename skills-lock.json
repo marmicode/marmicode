@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "skills": {
+    "charted-design": {
+      "source": "marmicode/skills",
+      "sourceType": "github",
+      "computedHash": "573920e26c76d6a7229f1159885cddb10250b1ea8b47edf6791de7a5e0b28f22"
+    },
+    "charted-green": {
+      "source": "marmicode/skills",
+      "sourceType": "github",
+      "computedHash": "4f4c975b36d9489e39b6f2905c7053a1fc96e3a74951c6f212bfad7ecdee7974"
+    },
+    "charted-red": {
+      "source": "marmicode/skills",
+      "sourceType": "github",
+      "computedHash": "f5ef2fa86340f34f1d5536c5793bd41de1089d829fa315318efd9d3d9f3a6dc4"
+    },
+    "charted-review": {
+      "source": "marmicode/skills",
+      "sourceType": "github",
+      "computedHash": "90104c82db8e3fbfa955a5213792391ce8792b7c5fafd3d665c6b5adc4d974b4"
+    },
+    "charted-scaffold": {
+      "source": "marmicode/skills",
+      "sourceType": "github",
+      "computedHash": "d4aeebda9b1af84ff10d0fcf9ab308918775ff5b12de1e963081d7c1805a8fb0"
+    }
+  }
+}
