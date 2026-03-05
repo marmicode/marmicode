@@ -1,21 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListener, Input, NgModule, OnChanges, SimpleChanges, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostBinding,
+  HostListener,
+  Input,
+  NgModule,
+  OnChanges,
+  SimpleChanges,
+  inject,
+} from '@angular/core';
 import { createHighlightZone, HighlightZone } from './highlight-zone';
 import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'mc-highlight-link',
-    template: ` <ng-content></ng-content>`,
-    styles: [
-        `
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'mc-highlight-link',
+  template: ` <ng-content></ng-content>`,
+  styles: [
+    `
       :host {
         cursor: pointer;
         border-bottom: 1px dashed currentColor;
       }
     `,
-    ],
-    standalone: true,
+  ],
+  standalone: true,
 })
 export class HighlightLinkComponent implements OnChanges {
   private _elementRef = inject(ElementRef);
@@ -43,13 +54,13 @@ export class HighlightLinkComponent implements OnChanges {
     const highlightSections = parseHighlightLink(href);
     const zone = highlightableZones.find(
       (_zone) =>
-        JSON.stringify(_zone.sections) === JSON.stringify(highlightSections)
+        JSON.stringify(_zone.sections) === JSON.stringify(highlightSections),
     );
     return zone?.color;
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.href) {
+    if ('href' in changes) {
       this._zone = createHighlightZone({
         color: this.color,
         sections: parseHighlightLink(this.href),
@@ -97,13 +108,13 @@ export class HighlightLinkComponent implements OnChanges {
       new CustomEvent('highlightZoneChange', {
         bubbles: true,
         detail: zone,
-      })
+      }),
     );
   }
 }
 
 @NgModule({
-    exports: [HighlightLinkComponent],
-    imports: [CommonModule, HighlightLinkComponent],
+  exports: [HighlightLinkComponent],
+  imports: [CommonModule, HighlightLinkComponent],
 })
 export class HighlightLinkModule {}

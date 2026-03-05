@@ -1,8 +1,9 @@
-import { SimpleChange } from '@angular/core';
+import { ElementRef, SimpleChange } from '@angular/core';
 
 import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { HighlightLinkComponent } from './highlight-link.component';
 import { HighlightZone } from './highlight-zone';
+import { TestBed } from '@angular/core/testing';
 
 describe('Component', () => {
   let component: HighlightLinkComponent;
@@ -14,9 +15,18 @@ describe('Component', () => {
     mockNativeElement = {
       dispatchEvent: jest.fn(),
     };
-    component = new HighlightLinkComponent({
-      nativeElement: mockNativeElement,
+    TestBed.configureTestingModule({
+      providers: [
+        HighlightLinkComponent,
+        {
+          provide: ElementRef,
+          useValue: {
+            nativeElement: mockNativeElement,
+          },
+        },
+      ],
     });
+    component = TestBed.inject(HighlightLinkComponent);
     component.color = 'red';
     component.href = 'highlight://1,3-4';
     component.ngOnChanges({
