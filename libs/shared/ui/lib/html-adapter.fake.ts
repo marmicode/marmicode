@@ -7,7 +7,7 @@ export class HtmlAdapterFake implements Public<HtmlAdapter> {
   private _attributes: Map<string, string> = new Map();
   private _linkTags: LinkTag[] = [];
 
-  addLinkTag(linkTag: LinkTag) {
+  upsertLinkTag(linkTag: LinkTag) {
     this._linkTags = [...this._linkTags, linkTag];
     return {
       remove: () => {

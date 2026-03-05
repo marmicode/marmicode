@@ -85,7 +85,7 @@ export class PageComponent {
 
       if (info.alternates) {
         const tags = info.alternates.map((alternate) =>
-          this._htmlAdapter.addLinkTag({
+          this._htmlAdapter.upsertLinkTag({
             rel: 'alternate',
             hreflang: alternate.language,
             href: this._pathToUrl(alternate.path),
@@ -97,7 +97,7 @@ export class PageComponent {
         );
         if (englishAlternate) {
           tags.push(
-            this._htmlAdapter.addLinkTag({
+            this._htmlAdapter.upsertLinkTag({
               rel: 'canonical',
               href: this._pathToUrl(englishAlternate.path),
             }),

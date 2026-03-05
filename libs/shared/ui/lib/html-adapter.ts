@@ -4,18 +4,32 @@ import { DOCUMENT, inject, Injectable } from '@angular/core';
 export class HtmlAdapter {
   private _document = inject(DOCUMENT);
 
-  addLinkTag(linkTag: LinkTag) {
-    const el = this._document.createElement('link');
-    el.rel = linkTag.rel;
-    el.href = linkTag.href;
+  upsertLinkTag(linkTag: LinkTag) {
+    const allLinks = Array.from(this._document.head.querySelectorAll('link'));
 
-    if (linkTag.rel === 'alternate') {
-      el.hreflang = linkTag.hreflang;
+    /* Find existing link tag to avoid duplicates.
+     * This happens due to SSR. */
+    let el = allLinks.find(
+      (e) =>
+        e.rel === linkTag.rel &&
+        e.href === linkTag.href &&
+        (linkTag.rel === 'alternate' ? e.hreflang === linkTag.hreflang : true),
+    );
+
+    if (!el) {
+      el = this._document.createElement('link');
+      el.rel = linkTag.rel;
+      el.href = linkTag.href;
+
+      if (linkTag.rel === 'alternate') {
+        el.hreflang = linkTag.hreflang;
+      }
+
+      this._document.head.appendChild(el);
     }
 
-    this._document.head.appendChild(el);
     return {
-      remove: () => this._document.head.removeChild(el),
+      remove: () => el.remove(),
     };
   }
 

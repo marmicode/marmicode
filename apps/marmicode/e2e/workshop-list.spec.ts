@@ -1,31 +1,12 @@
 import { test as base, expect, Page } from '@playwright/test';
 
-const test = base.extend<{ glove: WorskhopsGlove }>({
+const test = base.extend<{ glove: WorskhopListGlove }>({
   glove: async ({ page }, use) => {
-    await use(new WorskhopsGlove(page));
+    await use(new WorskhopListGlove(page));
   },
 });
 
-class WorskhopsGlove {
-  constructor(private _page: Page) {}
-
-  goto() {
-    return this._page.goto('/workshops');
-  }
-
-  /**
-   * Selects a language filter button.
-   */
-  languageFilter(name: 'All' | 'English' | 'French') {
-    return this._page.getByRole('radio', { name });
-  }
-
-  workshopTitle() {
-    return this._page.getByRole('heading', { level: 3 });
-  }
-}
-
-test.describe('workshops', () => {
+test.describe('workshop list', () => {
   test('shows all workshops', async ({ glove }) => {
     await glove.goto();
 
@@ -61,3 +42,22 @@ test.describe('workshops', () => {
     ]);
   });
 });
+
+class WorskhopListGlove {
+  constructor(private _page: Page) {}
+
+  goto() {
+    return this._page.goto('/workshops');
+  }
+
+  /**
+   * Selects a language filter button.
+   */
+  languageFilter(name: 'All' | 'English' | 'French') {
+    return this._page.getByRole('radio', { name });
+  }
+
+  workshopTitle() {
+    return this._page.getByRole('heading', { level: 3 });
+  }
+}
