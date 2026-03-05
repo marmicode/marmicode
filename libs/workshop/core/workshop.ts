@@ -2,7 +2,7 @@ export interface Workshop {
   id: string;
   title: string;
   /**
-   * The short title is using in the list page.
+   * The short title is used in the list page.
    */
   shortTitle: string;
   type: 'tapas' | 'full';

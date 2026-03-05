@@ -72,7 +72,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
       icon: 'build',
       title: 'Outils de Test Modernes',
       description:
-        'Maitrîsez des outils modernes comme Vitest et Playwright Component Testing avec Testronaut.',
+        'Maîtrisez des outils modernes comme Vitest et Playwright Component Testing avec Testronaut.',
     },
     {
       icon: 'visibility',
@@ -90,7 +90,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
       icon: 'theater_comedy',
       title: 'Le Mocking en toute Simplicité',
       description:
-        'Maitrîsez les Fakes et les Object Mothers pour simplifier le "mocking" et éviter les pièges habituels.',
+        'Maîtrisez les Fakes et les Object Mothers pour simplifier le "mocking" et éviter les pièges habituels.',
     },
     {
       icon: 'language',
