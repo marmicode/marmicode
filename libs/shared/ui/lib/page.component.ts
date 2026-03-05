@@ -163,8 +163,8 @@ export class PageComponent {
   }
 
   private _pathToUrl(path: string) {
-    const { protocol, hostname } = this._platformLocation;
-    return `${protocol}//${hostname}${path}`;
+    const { protocol, hostname, port } = this._platformLocation;
+    return new URL(path, `${protocol}//${hostname}:${port}`).toString();
   }
 }
 

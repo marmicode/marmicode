@@ -1,6 +1,13 @@
 export interface Workshop {
   id: string;
   title: string;
+
+  /**
+   * The alternate is used to display the workshops in the other languages.
+   * This field is populated by `WorkshopRepository`.
+   */
+  alternates?: Array<{ id: string; language: string }>;
+
   /**
    * The short title is used in the list page.
    */

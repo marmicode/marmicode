@@ -8,6 +8,11 @@ export class HtmlAdapter {
     const el = this._document.createElement('link');
     el.rel = linkTag.rel;
     el.href = linkTag.href;
+
+    if (linkTag.rel === 'alternate') {
+      el.hreflang = linkTag.hreflang;
+    }
+
     this._document.head.appendChild(el);
     return {
       remove: () => this._document.head.removeChild(el),

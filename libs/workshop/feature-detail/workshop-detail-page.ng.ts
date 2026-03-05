@@ -22,7 +22,10 @@ import {
   WorkshopRequiredSkills,
   WorkshopSessions,
 } from '@marmicode/workshop/ui-detail';
-import { externalLinks } from '@marmicode/shared/router-helpers';
+import {
+  externalLinks,
+  workshopRouterHelper,
+} from '@marmicode/shared/router-helpers';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -70,13 +73,23 @@ export class WorkshopDetailPage {
   workshopId = input.required<string>();
 
   contactFormUrl = externalLinks.contactFormUrl;
-  info = computed(() =>
-    createBasicPageInfo({
-      title: this.workshop()?.title,
-      pictureUri: this.workshop()?.pictureUri,
-      description: this.workshop()?.description,
-    }),
-  );
+  info = computed(() => {
+    const w = this.workshop();
+
+    const allAlternates = w?.alternates
+      ? [{ id: w.id, language: w.language }, ...w.alternates]
+      : [];
+
+    return createBasicPageInfo({
+      title: w?.title,
+      pictureUri: w?.pictureUri,
+      alternates: allAlternates?.map((alternate) => ({
+        path: workshopRouterHelper.detailUrl(alternate.id),
+        language: alternate.language,
+      })),
+      description: w?.description,
+    });
+  });
   transitionName = computed(() => workshopViewTransitionName(this.workshop()));
   workshop = computed(() =>
     this._workshopRepository.findWorkshop(this.workshopId()),

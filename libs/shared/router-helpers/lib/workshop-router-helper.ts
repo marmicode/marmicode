@@ -4,6 +4,9 @@ export const workshopRouterHelper = {
   detail(workshopId: string) {
     return ['/', this.WORKSHOP_LIST_PATH, encodeURIComponent(workshopId)];
   },
+  detailUrl(workshopId: string) {
+    return `/${this.detail(workshopId).slice(1).join('/')}`;
+  },
   list() {
     return ['/', this.WORKSHOP_LIST_PATH];
   },
