@@ -17,7 +17,7 @@ test.describe('workshop detail', () => {
         'href',
         'http://localhost:4200/workshops/pragmatic-angular-testing-full-course',
       );
-    await expect.soft(alternateLinks).toHaveCount(2);
+    await expect.soft(alternateLinks).toHaveCount(3);
     await expect.soft(alternateLinks.nth(0)).toHaveAttribute('hreflang', 'fr');
     await expect
       .soft(alternateLinks.nth(0))
@@ -28,6 +28,15 @@ test.describe('workshop detail', () => {
     await expect.soft(alternateLinks.nth(1)).toHaveAttribute('hreflang', 'en');
     await expect
       .soft(alternateLinks.nth(1))
+      .toHaveAttribute(
+        'href',
+        'http://localhost:4200/workshops/pragmatic-angular-testing-full-course',
+      );
+    await expect
+      .soft(alternateLinks.nth(2))
+      .toHaveAttribute('hreflang', 'x-default');
+    await expect
+      .soft(alternateLinks.nth(2))
       .toHaveAttribute(
         'href',
         'http://localhost:4200/workshops/pragmatic-angular-testing-full-course',

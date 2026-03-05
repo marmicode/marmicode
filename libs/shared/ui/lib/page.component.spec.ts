@@ -102,22 +102,20 @@ describe('PageComponent', () => {
       .toBe('https://marmicode.io/workshops/pragmatic-angular-testing');
     await expect
       .poll(() =>
-        htmlAdapterFake
-          .getLinkTags()
-          .filter((e) => e.rel === 'alternate')
-          .map((el) => ({
-            href: el.href,
-            language: el.hreflang,
-          })),
+        htmlAdapterFake.getLinkTags().filter((e) => e.rel === 'alternate'),
       )
-      .toEqual([
+      .toMatchObject([
         {
           href: 'https://marmicode.io/workshops/test-angular-pragmatique',
-          language: 'fr',
+          hreflang: 'fr',
         },
         {
           href: 'https://marmicode.io/workshops/pragmatic-angular-testing',
-          language: 'en',
+          hreflang: 'en',
+        },
+        {
+          href: 'https://marmicode.io/workshops/pragmatic-angular-testing',
+          hreflang: 'x-default',
         },
       ]);
   });

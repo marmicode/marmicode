@@ -96,10 +96,16 @@ export class PageComponent {
           (alternate) => alternate.language === this._defaultLanguage,
         );
         if (englishAlternate) {
+          const href = this._pathToUrl(englishAlternate.path);
           tags.push(
             this._htmlAdapter.upsertLinkTag({
               rel: 'canonical',
-              href: this._pathToUrl(englishAlternate.path),
+              href,
+            }),
+            this._htmlAdapter.upsertLinkTag({
+              rel: 'alternate',
+              href,
+              hreflang: 'x-default',
             }),
           );
         }
