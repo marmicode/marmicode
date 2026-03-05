@@ -72,7 +72,7 @@ export class PageComponent {
       }
 
       /* Sync input with page title. */
-      this._titleService.setTitle(this._infoToTitle(this.info()));
+      this._titleService.setTitle(this._infoToTitle(info));
       onCleanup(() => this._titleService.setTitle(this._defaultTitle));
 
       /* Sync html[lang] with page info language. */

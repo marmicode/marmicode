@@ -1,8 +1,8 @@
 import { test as base, expect, Page } from '@playwright/test';
 
-const test = base.extend<{ glove: WorskhopListGlove }>({
+const test = base.extend<{ glove: WorkshopListGlove }>({
   glove: async ({ page }, use) => {
-    await use(new WorskhopListGlove(page));
+    await use(new WorkshopListGlove(page));
   },
 });
 
@@ -43,7 +43,7 @@ test.describe('workshop list', () => {
   });
 });
 
-class WorskhopListGlove {
+class WorkshopListGlove {
   constructor(private _page: Page) {}
 
   goto() {
