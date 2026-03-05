@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { MetaDefinition } from '@angular/platform-browser';
 
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { MetaFake, provideMetaFake } from '../testing/meta.fake';
 import { provideTitleFake, TitleFake } from '../testing/title.fake';
 import {
@@ -13,7 +13,7 @@ import {
 describe('PageComponent', () => {
   /* Tests issue where page title was set to default title
    * because `info` is null, meanwhile page info is loaded... */
-  it('should not touch page title until page info is given', async () => {
+  it('does not touch page title until page info is given', async () => {
     const { titleFake } = await renderComponent();
 
     expect(titleFake.getTitle()).toBeUndefined();
@@ -21,7 +21,7 @@ describe('PageComponent', () => {
 
   /* Tests issue where page title was set to default title
    * because `info` is null, meanwhile page info is loaded... */
-  it('should not touch page title if info is null', async () => {
+  it('does not touch page title if info is null', async () => {
     const { setPageInfo, titleFake } = await renderComponent();
 
     setPageInfo(null);
@@ -29,7 +29,7 @@ describe('PageComponent', () => {
     expect(titleFake.getTitle()).toBeUndefined();
   });
 
-  it('should set default page title if title is null', async () => {
+  it('sets default page title if title is null', async () => {
     const { setPageInfo, titleFake } = await renderComponent();
 
     setPageInfo({
@@ -39,7 +39,7 @@ describe('PageComponent', () => {
     await expect.poll(() => titleFake.getTitle()).toBe('Marmicode');
   });
 
-  it('should set page title', async () => {
+  it('sets page title', async () => {
     const { setPageInfo, titleFake } = await renderComponent();
 
     setPageInfo({ title: '🍔' });
@@ -47,18 +47,89 @@ describe('PageComponent', () => {
     await expect.poll(() => titleFake.getTitle()).toBe('🍔 | Marmicode');
   });
 
-  it('should set page title to default after destroy', async () => {
-    const { destroy, setPageInfo, titleFake, whenStable } =
+  it('sets page title to default after destroy', async () => {
+    const { destroyOnceStable, setPageInfo, titleFake } =
       await renderComponent();
 
     setPageInfo({ title: '🍔' });
-    await whenStable();
-    destroy();
+    await destroyOnceStable();
 
     await expect.poll(() => titleFake.getTitle()).toBe('Marmicode');
   });
 
-  it('should set opengraph & twitter meta', async () => {
+  it.todo('sets html[lang] attribute to page info language', async () => {
+    const { setPageInfo } = await renderComponent();
+
+    setPageInfo({ language: 'fr' });
+
+    await expect.poll(() => document.documentElement.lang).toBe('fr');
+  });
+
+  it.todo('rolls back html[lang] attribute to default (en)', async () => {
+    const { setPageInfo, destroyOnceStable } = await renderComponent();
+
+    setPageInfo({ language: 'fr' });
+
+    await destroyOnceStable();
+
+    await expect.poll(() => document.documentElement.lang).toBe('en');
+  });
+
+  it.todo(
+    'sets canonical and alternate links when `alternates` is provided',
+    async () => {
+      const { setPageInfo } = await renderComponent();
+
+      setPageInfo({
+        alternates: [
+          { href: '/workshops/test-angular-pragmatique', language: 'fr' },
+          { href: '/workshops/pragmatic-angular-testing', language: 'en' },
+        ],
+      });
+
+      await expect
+        .poll(() => document.head.querySelector('link[rel="canonical"]'))
+        .toBe('https://xyz/workshops/pragmatic-angular-testing');
+      await expect
+        .poll(() =>
+          Array.from(
+            document.head.querySelectorAll('link[rel="alternate"]'),
+          ).map((el) => ({
+            href: el.getAttribute('href'),
+            language: el.getAttribute('hreflang'),
+          })),
+        )
+        .toEqual([
+          { href: '/workshops/test-angular-pragmatique', language: 'fr' },
+          { href: '/workshops/pragmatic-angular-testing', language: 'en' },
+        ]);
+    },
+  );
+
+  it.todo(
+    'removes canonical and alternate links when component is destroyed',
+    async () => {
+      const { destroyOnceStable, setPageInfo } = await renderComponent();
+
+      setPageInfo({
+        alternates: [
+          { href: '/workshops/test-angular-pragmatique', language: 'fr' },
+          { href: '/workshops/pragmatic-angular-testing', language: 'en' },
+        ],
+      });
+
+      await destroyOnceStable();
+
+      await expect
+        .poll(() => document.head.querySelector('link[rel="canonical"]'))
+        .toBeNull();
+      await expect
+        .poll(() => document.head.querySelectorAll('link[rel="alternate"]'))
+        .toHaveLength(0);
+    },
+  );
+
+  it('sets opengraph & twitter meta', async () => {
     const { setPageInfo, getMetaTags } = await renderComponent();
 
     setPageInfo(
@@ -115,7 +186,8 @@ describe('PageComponent', () => {
   });
 
   it('should remove all meta on destroy', async () => {
-    const { setPageInfo, destroy, getMetaTags } = await renderComponent();
+    const { setPageInfo, destroyOnceStable, getMetaTags } =
+      await renderComponent();
 
     setPageInfo(
       createArticlePageInfo({
@@ -130,38 +202,35 @@ describe('PageComponent', () => {
       }),
     );
 
-    destroy();
+    await destroyOnceStable();
 
     expect(getMetaTags()).toEqual([]);
   });
 });
 
 async function renderComponent() {
-  await TestBed.configureTestingModule({
+  TestBed.configureTestingModule({
     providers: [provideMetaFake(), provideTitleFake()],
   });
 
   const fixture = TestBed.createComponent(PageComponent);
-  await fixture.whenStable();
+
   return {
-    destroy() {
+    destroyOnceStable: async () => {
+      await fixture.whenStable();
       fixture.destroy();
     },
-    setPageInfo(info: PageInfo) {
-      fixture.componentRef.setInput('info', info);
-    },
-    getMetaTags() {
-      return TestBed.inject(MetaFake)
+    setPageInfo: (info: PageInfo) =>
+      fixture.componentRef.setInput('info', info),
+    getMetaTags: () =>
+      TestBed.inject(MetaFake)
         .getTags()
         .map((el) => ({
           name: el.name,
           content: el.content,
           property: el.getAttribute('property'),
-        }));
-    },
-    whenStable() {
-      return fixture.whenStable();
-    },
+        })),
+    whenStable: () => fixture.whenStable(),
     titleFake: TestBed.inject(TitleFake),
   };
 }
