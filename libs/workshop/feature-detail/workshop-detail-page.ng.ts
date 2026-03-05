@@ -22,6 +22,7 @@ import {
   WorkshopRequiredSkills,
   WorkshopSessions,
 } from '@marmicode/workshop/ui-detail';
+import { externalLinks } from '@marmicode/shared/router-helpers';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -58,9 +59,7 @@ import {
           <p>Workshop not found.</p>
           <p>
             Please check the URL or
-            <a href="https://forms.gle/EAUNbXtXQFCapQCd8" target="_blank"
-              >contact us</a
-            >.
+            <a [href]="contactFormUrl" target="_blank">contact us</a>.
           </p>
         </mc-error>
       }
@@ -69,9 +68,8 @@ import {
 })
 export class WorkshopDetailPage {
   workshopId = input.required<string>();
-  workshop = computed(() =>
-    this._workshopRepository.findWorkshop(this.workshopId()),
-  );
+
+  contactFormUrl = externalLinks.contactFormUrl;
   info = computed(() =>
     createBasicPageInfo({
       title: this.workshop()?.title,
@@ -80,6 +78,9 @@ export class WorkshopDetailPage {
     }),
   );
   transitionName = computed(() => workshopViewTransitionName(this.workshop()));
+  workshop = computed(() =>
+    this._workshopRepository.findWorkshop(this.workshopId()),
+  );
 
   private _workshopRepository = inject(WorkshopRepository);
 }
