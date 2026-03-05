@@ -5,7 +5,18 @@ const test = base.extend<{ glove: WorskhopDetailGlove }>({
 });
 
 test.describe('workshop detail', () => {
-  test('shows all workshops', async ({ glove, page }) => {
+  test('sets the page language to the workshop language', async ({
+    glove,
+    page,
+  }) => {
+    await glove.goto('test-angular-pragmatique');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
+  });
+
+  test('sets the right canonical and alternate link tags in head', async ({
+    glove,
+    page,
+  }) => {
     await glove.goto('test-angular-pragmatique');
 
     // Assert that a canonical link tag exists in the document head

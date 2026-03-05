@@ -83,6 +83,7 @@ export class WorkshopDetailPage {
     return createBasicPageInfo({
       title: w?.title,
       pictureUri: w?.pictureUri,
+      language: w?.language,
       alternates: allAlternates?.map((alternate) => ({
         path: workshopRouterHelper.detailUrl(alternate.id),
         language: alternate.language,
