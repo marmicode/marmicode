@@ -58,7 +58,7 @@ import gdePictureUri from './gde.webp';
       height: 70px;
       width: 100%;
       bottom: 0;
-      background-color: rgb(32, 52, 75, 0.8);
+      background-color: rgba(32, 52, 75, 0.8);
       display: flex;
       justify-content: center;
       align-items: center;
