@@ -17,7 +17,7 @@ class WorskhopsGlove {
    * Selects a language filter button.
    */
   languageFilter(name: 'All' | 'English' | 'French') {
-    return this._page.getByRole('button', { name });
+    return this._page.getByRole('radio', { name });
   }
 
   workshopTitle() {
@@ -30,7 +30,8 @@ test.describe('workshops', () => {
     await glove.goto();
 
     await expect(glove.workshopTitle()).toContainText([
-      'Pragmatic Angular Testing Workshop',
+      'Pragmatic Angular Testing',
+      'Test Angular Pragmatique',
     ]);
   });
 
@@ -45,15 +46,18 @@ test.describe('workshops', () => {
 
     await expect
       .poll(() => page.title())
-      .toContain('Pragmatic Angular Testing Workshop');
+      .toContain('Pragmatic Angular Testing');
   });
 
   test('filters workshops by language', async ({ glove }) => {
     await glove.goto();
 
     await glove.languageFilter('French').click();
-    await expect(glove.workshopTitle()).toHaveText(
-      'Formation Testing Angular Pragmatique',
-    );
+    await expect(glove.workshopTitle()).toContainText([
+      'Test Angular Pragmatique',
+    ]);
+    await expect(glove.workshopTitle()).not.toContainText([
+      'Pragmatic Angular Testing',
+    ]);
   });
 });
