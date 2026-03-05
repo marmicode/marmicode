@@ -4,6 +4,7 @@ import { MetaDefinition } from '@angular/platform-browser';
 import { describe, expect, it } from 'vitest';
 import { MetaFake, provideMetaFake } from '../testing/meta.fake';
 import { provideTitleFake, TitleFake } from '../testing/title.fake';
+import { HtmlAdapterFake, provideHtmlAdapterFake } from './html-adapter.fake';
 import {
   createArticlePageInfo,
   PageComponent,
@@ -57,22 +58,27 @@ describe('PageComponent', () => {
     await expect.poll(() => titleFake.getTitle()).toBe('Marmicode');
   });
 
-  it.todo('sets html[lang] attribute to page info language', async () => {
-    const { setPageInfo } = await renderComponent();
+  it('sets html[lang] attribute to page info language', async () => {
+    const { htmlAdapterFake, setPageInfo } = await renderComponent();
 
     setPageInfo({ language: 'fr' });
 
-    await expect.poll(() => document.documentElement.lang).toBe('fr');
+    await expect
+      .poll(() => htmlAdapterFake.getHtmlAttribute('lang'))
+      .toBe('fr');
   });
 
-  it.todo('rolls back html[lang] attribute to default (en)', async () => {
-    const { setPageInfo, destroyOnceStable } = await renderComponent();
+  it('rolls back html[lang] attribute to default (en)', async () => {
+    const { htmlAdapterFake, setPageInfo, destroyOnceStable } =
+      await renderComponent();
 
     setPageInfo({ language: 'fr' });
 
     await destroyOnceStable();
 
-    await expect.poll(() => document.documentElement.lang).toBe('en');
+    await expect
+      .poll(() => htmlAdapterFake.getHtmlAttribute('lang'))
+      .toBe('en');
   });
 
   it.todo(
@@ -210,7 +216,11 @@ describe('PageComponent', () => {
 
 async function renderComponent() {
   TestBed.configureTestingModule({
-    providers: [provideMetaFake(), provideTitleFake()],
+    providers: [
+      provideMetaFake(),
+      provideTitleFake(),
+      provideHtmlAdapterFake(),
+    ],
   });
 
   const fixture = TestBed.createComponent(PageComponent);
@@ -231,6 +241,7 @@ async function renderComponent() {
           property: el.getAttribute('property'),
         })),
     whenStable: () => fixture.whenStable(),
+    htmlAdapterFake: TestBed.inject(HtmlAdapterFake),
     titleFake: TestBed.inject(TitleFake),
   };
 }

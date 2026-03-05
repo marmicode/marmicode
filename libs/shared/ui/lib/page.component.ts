@@ -8,6 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
+import { HtmlAdapter } from './html-adapter';
 
 export interface BasicPageInfo {
   description?: string;
@@ -56,8 +57,10 @@ export type PageInfo = BasicPageInfo | ArticlePageInfo;
 export class PageComponent {
   info = input<PageInfo>();
 
+  private _htmlAdapter = inject(HtmlAdapter);
   private _metaService = inject(Meta);
   private _titleService = inject(Title);
+  private _defaultLanguage = 'en';
   private _defaultTitle = 'Marmicode';
 
   constructor() {
@@ -72,6 +75,14 @@ export class PageComponent {
       onCleanup(() => {
         this._titleService.setTitle(this._defaultTitle);
       });
+
+      /* Sync html[lang] with page info language. */
+      if (info.language) {
+        this._htmlAdapter.setHtmlAttribute('lang', info.language);
+        onCleanup(() => {
+          this._htmlAdapter.setHtmlAttribute('lang', this._defaultLanguage);
+        });
+      }
 
       /* Update meta data. */
       const metas = this._infoToMetaTags(info);

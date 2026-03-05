@@ -1,9 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { inject } from '@angular/core';
 import { Meta, MetaDefinition } from '@angular/platform-browser';
-import { OmitPrivate } from '@marmicode/shared/utils';
+import { Public } from '@marmicode/shared/utils';
 
-export class MetaFake implements OmitPrivate<Meta> {
+export class MetaFake implements Public<Meta> {
   private _document = inject(DOCUMENT);
   private _metas: Array<{
     definition: MetaDefinition;

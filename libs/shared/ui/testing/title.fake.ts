@@ -1,7 +1,7 @@
 import { Title } from '@angular/platform-browser';
-import { OmitPrivate } from '@marmicode/shared/utils';
+import { Public } from '@marmicode/shared/utils';
 
-export class TitleFake implements OmitPrivate<Title> {
+export class TitleFake implements Public<Title> {
   private _title: string;
 
   setTitle(title: string) {
