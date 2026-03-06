@@ -125,17 +125,17 @@ export interface SearchInputOption {
 })
 export class SearchInputComponent {
   private _state = inject<RxState<{
-    control: FormControl<Skill | string>;
-}>>(RxState);
+    control: FormControl<Skill | string | null>;
+  }>>(RxState);
 
-  @Input() set control(control: FormControl<Skill | string>) {
+  @Input() set control(control: FormControl<Skill | string | null>) {
     this._state.set({ control });
   }
-  @Input() placeholder: string;
-  @Input() options: SearchInputOption[];
+  @Input() placeholder!: string;
+  @Input() options!: SearchInputOption[];
 
   control$ = this._state.select('control');
-  value$: Observable<string | SearchInputOption>;
+  value$: Observable<string | SearchInputOption | null>;
   reset$ = new Subject<void>();
 
   getOptionLabel = (option: SearchInputOption) => option?.label;

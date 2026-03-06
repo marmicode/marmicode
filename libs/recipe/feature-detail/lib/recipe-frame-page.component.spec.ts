@@ -19,7 +19,12 @@ describe('RecipeFramePageComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            paramMap: of(new Map([['frameSlug', 'install-express-gateway']])),
+            paramMap: of(
+              new Map([
+                ['recipeSlug', 'setup-express-gateway'],
+                ['frameSlug', 'install-express-gateway'],
+              ]),
+            ),
           },
         },
         {

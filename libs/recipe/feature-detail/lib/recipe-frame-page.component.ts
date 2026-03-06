@@ -22,6 +22,11 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
+
+function nonNull<T>(value: T | null): value is T {
+  return value != null;
+}
+import { EMPTY } from 'rxjs';
 import { getRelativeFrameRoute } from './get-relative-frame-route';
 import { Frame, Recipe, RecipeRepository } from './recipe-repository.service';
 import {
@@ -53,7 +58,7 @@ import { SwipeDirective, SwipeModule } from './swipe.directive';
           <mc-resource-title-banner
             [resourceType]="type$ | push"
             [title]="title"
-            [subtitle]="currentFrameTitle$ | push"
+            [subtitle]="(currentFrameTitle$ | push) ?? ''"
           ></mc-resource-title-banner>
         }
     
@@ -71,7 +76,7 @@ import { SwipeDirective, SwipeModule } from './swipe.directive';
           [currentFrameIndex]="currentFrameIndex$ | push"
           [frames]="frames"
           [recipeSlug]="recipeSlug$ | push"
-          [nextFrameRoute]="nextFrameRoute$ | push"
+          [nextFrameRoute]="(nextFrameRoute$ | push) ?? []"
         ></mc-recipe-timeline>
       }
     </mc-page>
@@ -183,6 +188,7 @@ export class RecipeFramePageComponent {
       'recipe',
       this._route.paramMap.pipe(
         map((params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)),
+        filter(nonNull),
         distinctUntilChanged(),
         switchMap((recipeSlug) => this._recipeRepository.getRecipe(recipeSlug)),
       ),
@@ -194,7 +200,9 @@ export class RecipeFramePageComponent {
     this._state.connect(
       'currentFrameSlug',
       this._route.paramMap.pipe(
-        map((params) => params.get(recipeDetailRouterHelper.FRAME_SLUG_PARAM)),
+        map((params) =>
+          params.get(recipeDetailRouterHelper.FRAME_SLUG_PARAM) ?? '',
+        ),
       ),
     );
 
@@ -206,7 +214,7 @@ export class RecipeFramePageComponent {
         this._key$.pipe(filter((key) => key === 'ArrowRight')),
         this.swipeLeft$,
       ).pipe(withLatestFrom(this.nextFrameRoute$)),
-      ([_, route]) => this._tryNavigateToRelativeRoute(route),
+      ([_, route]) => route != null && this._tryNavigateToRelativeRoute(route),
     );
 
     /**
@@ -217,7 +225,7 @@ export class RecipeFramePageComponent {
         this._key$.pipe(filter((key) => key === 'ArrowLeft')),
         this.swipeRight$,
       ).pipe(withLatestFrom(this.previousFrameRoute$)),
-      ([_, route]) => this._tryNavigateToRelativeRoute(route),
+      ([_, route]) => route != null && this._tryNavigateToRelativeRoute(route),
     );
 
     /**
@@ -246,7 +254,7 @@ export class RecipeFramePageComponent {
     return frameSlug ? getRelativeFrameRoute(frameSlug) : null;
   }
 
-  private _tryNavigateToRelativeRoute(route: string[]) {
+  private _tryNavigateToRelativeRoute(route: string[] | null) {
     if (route == null) {
       return;
     }

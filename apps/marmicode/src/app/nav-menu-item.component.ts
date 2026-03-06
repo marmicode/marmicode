@@ -21,9 +21,9 @@ export interface NavMenuEntry {
   selector: 'mc-nav-menu-item',
   template: `
     <!-- Url. -->
-    @if (entry.url) {
+    @if (entry?.url) {
       <a
-        [href]="entry.url"
+        [href]="entry!.url"
         mat-list-item
         rel="noopener"
         role="menuitem"
@@ -34,9 +34,9 @@ export interface NavMenuEntry {
     }
     
     <!-- Route. -->
-    @if (entry.route) {
+    @if (entry?.route) {
       <a
-        [routerLink]="entry.route"
+        [routerLink]="entry!.route"
         mat-list-item
         role="menuitem"
         routerLinkActive="active"
@@ -51,11 +51,11 @@ export interface NavMenuEntry {
           <mat-icon
             [class.primary]="color === 'primary'"
             class="icon"
-            >{{ entry.icon }}</mat-icon
+            >{{ entry?.icon }}</mat-icon
             >
           }
           <span class="content" [class.primary]="color === 'primary'">{{
-            entry.title
+            entry?.title
           }}</span>
         </div>
       </ng-template>

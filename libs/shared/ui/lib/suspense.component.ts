@@ -38,7 +38,7 @@ import { LoadingComponent, LoadingModule } from './loading.component';
     @if (resource.error(); as error) {
       <ng-container
         *ngTemplateOutlet="
-          errorTemplate ?? defaultErrorTemplate;
+          (errorTemplate ?? defaultErrorTemplate)!;
           context: { $implicit: error }
         "
       >
@@ -58,9 +58,9 @@ import { LoadingComponent, LoadingModule } from './loading.component';
   imports: [NgTemplateOutlet, ErrorComponent, LoadingComponent],
 })
 export class SuspenseComponent<T = unknown> {
-  @ContentChild('data') dataTemplate: TemplateRef<{ $implicit: T }>;
-  @ContentChild('error') errorTemplate: TemplateRef<{ $implicit: unknown }>;
-  @ContentChild('suspense') suspenseTemplate: TemplateRef<undefined>;
+  @ContentChild('data') dataTemplate!: TemplateRef<{ $implicit: T }>;
+  @ContentChild('error') errorTemplate!: TemplateRef<{ $implicit: unknown }>;
+  @ContentChild('suspense') suspenseTemplate!: TemplateRef<undefined>;
 
   data$ = input.required<Observable<T>>();
 

@@ -10,7 +10,7 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   template: ` <blockquote>
     <ng-container
       *ngComponentOutlet="
-        MarkdownTokensComponent();
+        (MarkdownTokensComponent() ?? null);
         inputs: { tokens: token.tokens }
       "
     />
@@ -28,7 +28,7 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   imports: [NgComponentOutlet],
 })
 export class MarkdownBlockquoteComponent {
-  @Input() token: MarkdownToken;
+  @Input() token!: MarkdownToken;
 
   MarkdownTokensComponent = rxComputed(markdownTokensLoader);
 }
