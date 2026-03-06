@@ -31,23 +31,23 @@ import { MarkdownTextComponent } from './markdown-text.component';
     @switch (type) {
       <!-- Blockquote. -->
       @case (TokenType.Blockquote) {
-        <mc-markdown-blockquote [token]="tokenAsAny"></mc-markdown-blockquote>
+        <mc-markdown-blockquote [token]="tokenAsAny" />
       }
       <!-- Code. -->
       @case (TokenType.Code) {
-        <mc-markdown-code [token]="tokenAsAny"></mc-markdown-code>
+        <mc-markdown-code [token]="tokenAsAny" />
       }
       <!-- Codespan. -->
       @case (TokenType.Codespan) {
-        <mc-markdown-codespan [token]="tokenAsAny"></mc-markdown-codespan>
+        <mc-markdown-codespan [token]="tokenAsAny" />
       }
       <!-- Emphasis. -->
       @case (TokenType.Emphasis) {
-        <mc-markdown-emphasis [token]="tokenAsAny"></mc-markdown-emphasis>
+        <mc-markdown-emphasis [token]="tokenAsAny" />
       }
       <!-- Heading. -->
       @case (TokenType.Heading) {
-        <mc-markdown-heading [token]="tokenAsAny"></mc-markdown-heading>
+        <mc-markdown-heading [token]="tokenAsAny" />
       }
       <!-- Horizontal Rule. -->
       @case (TokenType.HorizontalRule) {
@@ -55,31 +55,31 @@ import { MarkdownTextComponent } from './markdown-text.component';
       }
       <!-- Link. -->
       @case (TokenType.Link) {
-        <mc-markdown-link [token]="tokenAsAny"></mc-markdown-link>
+        <mc-markdown-link [token]="tokenAsAny" />
       }
       <!-- List. -->
       @case (TokenType.List) {
-        <mc-markdown-list [token]="tokenAsAny"></mc-markdown-list>
+        <mc-markdown-list [token]="tokenAsAny" />
       }
       <!-- List item. -->
       @case (TokenType.ListItem) {
-        <mc-markdown-list-item [token]="tokenAsAny"></mc-markdown-list-item>
+        <mc-markdown-list-item [token]="tokenAsAny" />
       }
       <!-- Media: Image or Video. -->
       @case (TokenType.Media) {
-        <mc-markdown-media [token]="tokenAsAny"></mc-markdown-media>
+        <mc-markdown-media [token]="tokenAsAny" />
       }
       <!-- Paragraph. -->
       @case (TokenType.Paragraph) {
-        <mc-markdown-paragraph [token]="tokenAsAny"></mc-markdown-paragraph>
+        <mc-markdown-paragraph [token]="tokenAsAny" />
       }
       <!-- Strong. -->
       @case (TokenType.Strong) {
-        <mc-markdown-strong [token]="tokenAsAny"></mc-markdown-strong>
+        <mc-markdown-strong [token]="tokenAsAny" />
       }
       <!-- Text. -->
       @case (TokenType.Text) {
-        <mc-markdown-text [token]="tokenAsAny"></mc-markdown-text>
+        <mc-markdown-text [token]="tokenAsAny" />
       }
     }
   `,

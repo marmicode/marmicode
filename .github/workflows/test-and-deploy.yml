@@ -45,6 +45,7 @@ jobs:
         with:
           name: dist
           path: dist
+          include-hidden-files: true
   check-sync:
     name: 🔄 Check Sync
     runs-on: ubuntu-latest
@@ -77,6 +78,7 @@ jobs:
         with:
           name: dist
           path: dist
+          include-hidden-files: true
   check-snapshots:
     name: 📸 Check Snapshots
     runs-on: ubuntu-latest
@@ -127,6 +129,7 @@ jobs:
         with:
           name: dist
           path: dist
+          include-hidden-files: true
   deploy-marmicode-next:
     runs-on: ubuntu-latest
     name: 🚀 Marmicode Next
@@ -176,6 +179,7 @@ jobs:
         with:
           name: dist
           path: dist
+          include-hidden-files: true
   deploy-marmicode:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -217,3 +221,4 @@ jobs:
         with:
           name: dist
           path: dist
+          include-hidden-files: true

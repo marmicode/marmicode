@@ -1,16 +1,17 @@
-
 import {
   ChangeDetectionStrategy,
   Component,
-  forwardRef,
+  computed,
   inject,
+  signal,
 } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 import { createBasicPageInfo, PageComponent } from '@marmicode/shared/ui';
+import { WorkshopLanguage } from '@marmicode/workshop/core';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
 import { WorkshopPreview } from '@marmicode/workshop/ui';
 import { ComingSoon } from './coming-soon.ng';
@@ -20,7 +21,8 @@ import { ComingSoon } from './coming-soon.ng';
   selector: 'mc-workshop-list-page',
   imports: [
     ComingSoon,
-    MatButtonModule,
+    FormsModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatIconModule,
     RouterModule,
@@ -30,8 +32,18 @@ import { ComingSoon } from './coming-soon.ng';
   template: `
     <mc-page [info]="pageInfo">
       <section class="container">
+        <mat-button-toggle-group
+          [(ngModel)]="languageFilter"
+          aria-label="Filter by language"
+        >
+          @for (option of languageOptions; track option) {
+            <mat-button-toggle [value]="option.value">
+              {{ option.label }}
+            </mat-button-toggle>
+          }
+        </mat-button-toggle-group>
         <div class="list">
-          @for (workshop of workshops; track workshop.id) {
+          @for (workshop of filteredWorkshops(); track workshop.id) {
             <mc-workshop-preview class="item" [workshop]="workshop" />
           }
         </div>
@@ -67,6 +79,18 @@ export class WorkshopListPage {
   pageInfo = createBasicPageInfo({
     title: 'Workshops',
   });
-  workshops = inject(WorkshopRepository).getWorkshops();
-  workshopRouterHelper = workshopRouterHelper;
+  filteredWorkshops = computed(() => {
+    const filter = this.languageFilter();
+    return filter != null
+      ? this._workshops.filter((w) => w.language === filter)
+      : this._workshops;
+  });
+  languageFilter = signal<WorkshopLanguage | null>(null);
+  languageOptions: Array<{ label: string; value: WorkshopLanguage | null }> = [
+    { label: 'All', value: null },
+    { label: '🇬🇧 English', value: 'en' },
+    { label: '🇫🇷 French', value: 'fr' },
+  ];
+
+  private _workshops = inject(WorkshopRepository).getWorkshops();
 }

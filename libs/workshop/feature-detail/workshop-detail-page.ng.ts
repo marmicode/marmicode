@@ -16,11 +16,16 @@ import {
   WorkshopAgenda,
   WorkshopBenefits,
   WorkshopDescription,
+  WorkshopFaq,
   WorkshopHero,
   WorkshopInstructor,
   WorkshopRequiredSkills,
   WorkshopSessions,
 } from '@marmicode/workshop/ui-detail';
+import {
+  externalLinks,
+  workshopRouterHelper,
+} from '@marmicode/shared/router-helpers';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,6 +40,7 @@ import {
     WorkshopSessions,
     ErrorComponent,
     WorkshopHero,
+    WorkshopFaq,
   ],
   template: `
     <mc-page [info]="info()">
@@ -44,20 +50,19 @@ import {
           [workshop]="workshop"
           [style.view-transition-name]="transitionName()"
         />
-        <mc-workshop-description [description]="workshop.description" />
+        <mc-workshop-description [workshop]="workshop" />
         <mc-workshop-sessions [workshop]="workshop" />
-        <mc-workshop-benefits [benefits]="workshop.benefits" />
-        <mc-workshop-required-skills [skills]="workshop.requiredSkills" />
-        <mc-workshop-agenda [agenda]="workshop.agenda" />
-        <mc-workshop-instructor />
+        <mc-workshop-benefits [workshop]="workshop" />
+        <mc-workshop-required-skills [workshop]="workshop" />
+        <mc-workshop-agenda [workshop]="workshop" />
+        <mc-workshop-instructor [workshop]="workshop" />
+        <mc-workshop-faq [workshop]="workshop" />
       } @else {
         <mc-error>
           <p>Workshop not found.</p>
           <p>
             Please check the URL or
-            <a href="https://forms.gle/EAUNbXtXQFCapQCd8" target="_blank"
-              >contact us</a
-            >.
+            <a [href]="contactFormUrl" target="_blank">contact us</a>.
           </p>
         </mc-error>
       }
@@ -66,17 +71,30 @@ import {
 })
 export class WorkshopDetailPage {
   workshopId = input.required<string>();
+
+  contactFormUrl = externalLinks.contactFormUrl;
+  info = computed(() => {
+    const w = this.workshop();
+
+    const allAlternates = w?.alternates
+      ? [{ id: w.id, language: w.language }, ...w.alternates]
+      : [];
+
+    return createBasicPageInfo({
+      title: w?.title,
+      pictureUri: w?.pictureUri,
+      language: w?.language,
+      alternates: allAlternates?.map((alternate) => ({
+        path: workshopRouterHelper.detailUrl(alternate.id),
+        language: alternate.language,
+      })),
+      description: w?.description,
+    });
+  });
+  transitionName = computed(() => workshopViewTransitionName(this.workshop()));
   workshop = computed(() =>
     this._workshopRepository.findWorkshop(this.workshopId()),
   );
-  info = computed(() =>
-    createBasicPageInfo({
-      title: this.workshop()?.title,
-      pictureUri: this.workshop()?.pictureUri,
-      description: this.workshop()?.description,
-    }),
-  );
-  transitionName = computed(() => workshopViewTransitionName(this.workshop()));
 
   private _workshopRepository = inject(WorkshopRepository);
 }

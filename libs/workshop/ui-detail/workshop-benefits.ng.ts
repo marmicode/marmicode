@@ -1,16 +1,22 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { WorkshopBenefitCard } from './workshop-benefits-card.ng';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
 import { PageSection } from '@marmicode/shared/ui';
-import { Benefit } from '@marmicode/workshop/core';
+import { Workshop } from '@marmicode/workshop/core';
+import { WorkshopBenefitCard } from './workshop-benefits-card.ng';
+import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-benefits',
   imports: [WorkshopBenefitCard, PageSection],
   template: `
-    <mc-page-section pageTitle="🍱 What you'll learn" color="surface">
+    <mc-page-section [sectionTitle]="sectionTitle()" color="surface">
       <div class="benefits">
-        @for (benefit of benefits(); track benefit) {
+        @for (benefit of workshop().benefits; track benefit) {
           <mc-workshop-benefit-card [benefit]="benefit" />
         }
       </div>
@@ -28,5 +34,9 @@ import { Benefit } from '@marmicode/workshop/core';
   `,
 })
 export class WorkshopBenefits {
-  benefits = input.required<Benefit[]>();
+  workshop = input.required<Workshop>();
+  sectionTitle = computed(
+    () =>
+      `🍱 ${WORKSHOP_DETAIL_LABELS[this.workshop().language].whatYouWillLearn}`,
+  );
 }

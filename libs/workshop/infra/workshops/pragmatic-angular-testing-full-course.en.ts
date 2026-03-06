@@ -1,13 +1,17 @@
 import { createWorkshop } from '@marmicode/workshop/core';
 import pictureUri from './pragmatic-angular-testing.webp';
 import thumbnailUri from './pragmatic-angular-testing-thumbnail.webp';
+import { PRAGMATIC_ANGULAR_TESTING_FULL_COURSE_ID } from './pragmatic-angular-testing-full-course.shared';
 
-export const pragmaticAngularTestingFullCourse = createWorkshop({
-  id: 'pragmatic-angular-testing-full-course',
+export const pragmaticAngularTestingFullCourseEn = createWorkshop({
+  id: PRAGMATIC_ANGULAR_TESTING_FULL_COURSE_ID,
   title: 'Pragmatic Angular Testing Workshop',
+  shortTitle: 'Pragmatic Angular Testing',
   type: 'full',
   subheading: `Three days to turn your testing chaos into a well-seasoned strategy.
 Learn to build tests that survive refactors, migrations, and deadlines.`,
+  pictureAltText:
+    'Younes in apron holding a purple cooking pot overflowing with Angular, Vitest, Playwright, and Testronaut logos in a kitchen setting.',
   pictureUri,
   thumbnailUri,
   duration: 3,
@@ -15,8 +19,7 @@ Learn to build tests that survive refactors, migrations, and deadlines.`,
   customSessionRequestUrl: 'https://forms.gle/TEp9DTM6pHiSFRPY9',
   lumaTag: 'angular-testing',
   description: `
-There are two ways to keep a product stable:  
-**never touch it — or cook up a solid testing strategy.**
+There are two ways to keep a product stable: **never touch it — or cook up a solid testing strategy.**
 
 So… how’s yours holding up?
 
@@ -28,7 +31,7 @@ So… how’s yours holding up?
 
 If any of that hits close to home, this workshop is your way out of the fire.
 
-We’ll stop by the market for key ingredients such as **Fakes, Object Mothers, Gloves, Vitest, Testing Library, Angular CDK Harness, Playwright Component Testing with Testronaut, and Playwright for end-to-end testing**.
+We’ll stop by the market for key ingredients such as **Fakes**, **Object Mothers**, **Gloves**, **Vitest**, **Testronaut** for Playwright Component Testing, **Playwright** for end-to-end testing, and **WallabyJS** for TDD.
 
 Then, back to the kitchen, we’ll prepare a complete, low-maintenance testing menu that matures over three days. You’ll learn how to:
 
@@ -43,6 +46,8 @@ Then, back to the kitchen, we’ll prepare a complete, low-maintenance testing m
 
 Across these three days, you won’t just learn recipes — you’ll refine your testing instincts, challenge habits, and leave with a testing culture you can scale.
 
+Whether you or your AI agents write the tests, you'll need the instincts to tell if they're meaningful or just getting in the way — and a clear testing strategy to guide both your team and your tools.
+
 Small group, plenty of hands-on work, and direct coaching to help you apply each technique to your own codebase.
 
 **No dogma. No silver bullets.** Just three days of practical, battle-tested techniques to help you cook with confidence — and serve code that stays fresh long after the workshop ends.
@@ -52,8 +57,9 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
     price: 970,
     originalPrice: 1270,
   },
+  language: 'en',
   requiredSkills: [
-    `Angular core concepts (e.g. components, inputs/outputs, services)`,
+    `Angular core concepts (e.g. components, inputs/outputs, services, signals, etc.)`,
     `TypeScript fundamentals (e.g. types, interfaces, basic generics)`,
     `Git fundamentals (e.g. cloning, resetting local changes, switching branches)`,
   ],
@@ -97,6 +103,48 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       title: 'Pragmatic Testing Buffet',
       description:
         'Enjoy a buffet of tips and tricks to help you adopt a Pragmatic Testing Strategy.',
+    },
+  ],
+  faqs: [
+    {
+      question: 'Who is this workshop for?',
+      answer:
+        "Angular developers who write tests — or want to start — and want to improve their testing practices. Whether you're dealing with flaky tests, untestable code, or no testing strategy at all — this workshop is for you.",
+    },
+    {
+      question: "What's the experience level?",
+      answer:
+        'You should be comfortable with Angular fundamentals (components, services, inputs/outputs), TypeScript basics, and Git. No prior testing experience is required — we start from the ground up.',
+    },
+    {
+      question: 'What tools do I need?',
+      answer:
+        'A laptop with Node.js, Git, and your favorite IDE. Detailed setup instructions are sent a few days before the workshop.',
+    },
+    {
+      question: 'Is it hands-on?',
+      answer:
+        "Very. You'll alternate between short theory sessions and practical exercises throughout the three days. Small groups ensure direct coaching and feedback.",
+    },
+    {
+      question: 'What if my company uses Jest or Karma?',
+      answer:
+        "The principles and strategies you'll learn apply regardless of your test runner. That said, we use Vitest in the exercises — and you might not want to go back.",
+    },
+    {
+      question: 'Can my company fund this?',
+      answer: 'Yes. Contact me for a quote and administrative details.',
+    },
+    {
+      question:
+        "What's the difference between booking a session and requesting a custom session?",
+      answer:
+        '"Book a Session" lets you join a scheduled cohort. "Custom Session" is for companies who want a private, in-house workshop — with optional adjustments to content, duration, or focus areas.',
+    },
+    {
+      question: 'Is there a money-back guarantee?',
+      answer:
+        "If the workshop doesn't meet your expectations, reach out within 7 days and we'll work it out.",
     },
   ],
   agenda: {

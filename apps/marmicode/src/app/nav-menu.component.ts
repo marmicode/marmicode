@@ -11,6 +11,7 @@ import { MatListModule, MatNavList } from '@angular/material/list';
 import {
   resourceSearchRouterHelper,
   workshopRouterHelper,
+  externalLinks,
 } from '@marmicode/shared/router-helpers';
 import { PushPipe } from '@rx-angular/template/push';
 import {
@@ -122,7 +123,7 @@ export class NavMenuComponent {
     {
       icon: 'phone',
       title: 'Contact Me',
-      url: 'https://forms.gle/EAUNbXtXQFCapQCd8',
+      url: externalLinks.contactFormUrl,
     },
   ];
 

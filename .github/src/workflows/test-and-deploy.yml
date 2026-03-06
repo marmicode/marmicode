@@ -45,6 +45,7 @@ x-steps:
     with:
       name: dist
       path: dist
+      include-hidden-files: true
 
   install-pnpm: &install-pnpm
     uses: pnpm/action-setup@v4

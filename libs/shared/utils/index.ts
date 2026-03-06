@@ -19,4 +19,6 @@ export { TransferStateAdapter } from './lib/transfer-state-adapter.service';
 export { TransferStateHelper } from './lib/transfer-state-helper.service';
 export { WipModule } from './lib/wip.directive';
 export { WipService } from './lib/wip.service';
-export { OmitPrivate } from './lib/omit-private';
+
+export type { Optional } from './lib/typing/optional';
+export type { Public } from './lib/typing/public';

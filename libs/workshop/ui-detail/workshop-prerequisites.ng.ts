@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { PageSection } from '@marmicode/shared/ui';
+import { Workshop } from '@marmicode/workshop/core';
+import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -8,9 +15,9 @@ import { PageSection } from '@marmicode/shared/ui';
   selector: 'mc-workshop-required-skills',
   imports: [PageSection, MatIconModule],
   template: `
-    <mc-page-section pageTitle="🎓 Required Knowledge">
+    <mc-page-section [sectionTitle]="sectionTitle()">
       <ul>
-        @for (skill of skills(); track skill) {
+        @for (skill of workshop().requiredSkills; track skill) {
           <li>
             <mat-icon>check</mat-icon>
             <span>{{ skill }}</span>
@@ -45,5 +52,9 @@ import { PageSection } from '@marmicode/shared/ui';
   `,
 })
 export class WorkshopRequiredSkills {
-  skills = input.required<string[]>();
+  workshop = input.required<Workshop>();
+  sectionTitle = computed(
+    () =>
+      `🎓 ${WORKSHOP_DETAIL_LABELS[this.workshop().language].requiredKnowledge}`,
+  );
 }

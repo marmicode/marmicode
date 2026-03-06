@@ -17,4 +17,17 @@ describe(WorkshopRepository.name, () => {
         '/workshop/infra/workshops/pragmatic-angular-testing-thumbnail.webp',
       );
   });
+
+  it('adds alternate workshops', () => {
+    const workshop = TestBed.inject(WorkshopRepository).findWorkshop(
+      'pragmatic-angular-testing-full-course',
+    );
+
+    expect(workshop?.alternates).toEqual([
+      {
+        id: 'test-angular-pragmatique',
+        language: 'fr',
+      },
+    ]);
+  });
 });

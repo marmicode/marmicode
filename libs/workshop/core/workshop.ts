@@ -1,9 +1,27 @@
+import { Optional } from '@marmicode/shared/utils';
+
 export interface Workshop {
   id: string;
   title: string;
+
+  /**
+   * The alternate is used to display the workshops in the other languages.
+   * This field is populated by `WorkshopRepository`.
+   */
+  alternates?: Array<{ id: string; language: WorkshopLanguage }>;
+
+  /**
+   * The short title is used in the list page.
+   */
+  shortTitle: string;
   type: 'tapas' | 'full';
   location: 'online';
   description: string;
+
+  /**
+   * If set, this will show a Join Waitlist button instead of a Book a Seat button.
+   */
+  waitlistUrl?: string;
 
   /**
    * Tag used to show upcoming sessions.
@@ -18,6 +36,7 @@ export interface Workshop {
    */
   subheading: string;
 
+  pictureAltText: string;
   pictureUri: string;
   thumbnailUri: string;
 
@@ -33,10 +52,25 @@ export interface Workshop {
 
   offer: Offer;
 
+  /**
+   * The language of this workshop.
+   * Used for filtering and display of language chip.
+   */
+  language: WorkshopLanguage;
+
   requiredSkills: string[];
   benefits: Benefit[];
   agenda: Agenda;
+
+  faqs: Faq[];
 }
+
+export interface Faq {
+  question: string;
+  answer: string;
+}
+
+export type WorkshopLanguage = 'en' | 'fr';
 
 export type Offer = EarlyBirdOffer | LastMinuteOffer;
 

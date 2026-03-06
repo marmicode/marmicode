@@ -1,4 +1,4 @@
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,8 +10,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
-import { Workshop } from '@marmicode/workshop/core';
-import { WorkshopTypeLabel } from './workshop-type-label.ng';
+import { Workshop, WorkshopLanguage } from '@marmicode/workshop/core';
+import { formatPrice } from './format-price';
+import { WORKSHOP_PREVIEW_LABELS } from './workshop-preview.i18n';
 import { workshopViewTransitionName } from './workshop-view-transition-name';
 
 @Component({
@@ -23,8 +24,6 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
     MatCardModule,
     MatIconModule,
     RouterModule,
-    CurrencyPipe,
-    WorkshopTypeLabel,
   ],
   template: `
     <mat-card
@@ -33,14 +32,22 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
       role="article"
     >
       <img
+        [alt]="workshop().pictureAltText"
         [src]="workshop().thumbnailUri"
-        alt="workshop image"
         [style.view-transition-name]="transitionName()"
       />
+      @if (languageChip(); as chip) {
+        <span
+          class="language-chip"
+          [attr.aria-label]="'Language: ' + chip.code"
+        >
+          <span class="chip-flag">{{ chip.flag }}</span>
+          <span class="chip-code">{{ chip.code }}</span>
+        </span>
+      }
       <mat-card-content class="content">
         <div class="header">
-          <h3 class="title">{{ workshop().title }}</h3>
-          <mc-workshop-type-label [workshop]="workshop()" class="type" />
+          <h3 class="title">{{ workshop().shortTitle }}</h3>
         </div>
 
         <p class="subheading">{{ workshop().subheading }}</p>
@@ -51,24 +58,20 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
           <span class="duration">
             <mat-icon>schedule</mat-icon>
             <ng-container [ngPlural]="workshop().duration">
-              <ng-template ngPluralCase="=1">1 Day</ng-template>
+              <ng-template ngPluralCase="=1">1 {{ labels().day }}</ng-template>
               <ng-template ngPluralCase="other">
-                {{ workshop().duration }} Days
+                {{ workshop().duration }} {{ labels().days }}
               </ng-template>
             </ng-container>
           </span>
-          <span class="price">
-            From
-            {{ workshop().offer.price | currency: 'EUR' : 'symbol' : '1.0-0' }}
-          </span>
+          <span class="price">{{ labels().from }} {{ formattedPrice() }} </span>
         </div>
 
         <div class="actions">
           <a
             [routerLink]="workshopRouterHelper.detail(workshop().id)"
-            mat-button
-            color="primary"
-            >VIEW DETAILS</a
+            matButton="outlined"
+            >{{ labels().viewDetails | uppercase }}</a
           >
         </div>
       </mat-card-content>
@@ -84,6 +87,30 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
       flex: 1;
     }
 
+    .language-chip {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.65rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+      font-size: 1rem;
+    }
+
+    .chip-flag {
+      line-height: 1;
+      font-size: 1.7rem;
+    }
+
+    .chip-code {
+      font-weight: 700;
+      color: var(--marmicode-primary-color);
+    }
+
     img {
       width: 100%;
       height: 250px;
@@ -93,15 +120,15 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
 
     .header {
       text-align: center;
-      margin-bottom: 1rem;
+      margin: 1rem 0;
     }
 
     .title {
+      color: var(--marmicode-primary-color);
       font-weight: 700;
       font-size: 24px;
-      color: #111827;
       line-height: 1.4;
-      margin-bottom: 0.5em;
+      margin: 0;
     }
 
     .type {
@@ -118,6 +145,7 @@ import { workshopViewTransitionName } from './workshop-view-transition-name';
     }
 
     .subheading {
+      margin-top: 0;
       margin-bottom: 0.7em;
       font-size: 1.1em;
       color: #444;
@@ -154,5 +182,21 @@ export class WorkshopPreview {
   workshop = input.required<Workshop>();
 
   transitionName = computed(() => workshopViewTransitionName(this.workshop()));
+  labels = computed(() => WORKSHOP_PREVIEW_LABELS[this.workshop().language]);
+  languageChip = computed(() => this._languageChips[this.workshop().language]);
+  formattedPrice = computed(() =>
+    formatPrice({
+      price: this.workshop().offer.price,
+      locale: this.workshop().language,
+    }),
+  );
   workshopRouterHelper = workshopRouterHelper;
+
+  private _languageChips: Record<
+    WorkshopLanguage,
+    { flag: string; code: string }
+  > = {
+    en: { flag: '🇬🇧', code: 'EN' },
+    fr: { flag: '🇫🇷', code: 'FR' },
+  };
 }
