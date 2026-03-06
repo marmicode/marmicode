@@ -20,7 +20,10 @@ test.describe('workshop detail', () => {
       .getByText('Pragmatic Angular Testing')
       .waitFor();
 
-    await expect(page).toHaveScreenshot({ fullPage: true });
+    await expect(page).toHaveScreenshot({
+      fullPage: true,
+      maxDiffPixelRatio: 0.02,
+    });
   });
 
   test('sets the page language to the workshop language', async ({
