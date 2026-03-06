@@ -92,7 +92,17 @@ export class ResourceRepository {
           filter: this._wip.isWip() ? {} : { isWip_not: true },
         },
       })
-      .pipe(map(({ data }) => this._toResources(data.resourceCollection)));
+      .pipe(
+        map(({ data }) => {
+          const collection = data?.resourceCollection;
+          if (!collection?.items) {
+            return [];
+          }
+          return this._toResources({
+            items: collection.items.filter((i): i is NonNullable<typeof i> => i != null),
+          });
+        }),
+      );
   }
 
   getResourcesBySkillSlug(skillSlug: string): Observable<Resource[]> {
@@ -106,11 +116,19 @@ export class ResourceRepository {
       })
       .pipe(
         tap(console.log),
-        map(({ data }) =>
-          this._toResources(
-            data.skillCollection.items[0].linkedFrom.resourceCollection,
-          ),
-        ),
+        map(({ data }) => {
+          const skill = data?.skillCollection?.items?.[0];
+          const resourceCollection =
+            skill?.linkedFrom?.resourceCollection;
+          if (!resourceCollection?.items) {
+            return [];
+          }
+          return this._toResources({
+            items: resourceCollection.items.filter(
+              (i: contentful.Resource | null): i is contentful.Resource => i != null,
+            ),
+          });
+        }),
         /* We have to filter again because the previous query also returns
          * resource that have this skill in the `skills` field.
          * AFAIK, there is no way to return only resources that have this
@@ -133,29 +151,37 @@ export class ResourceRepository {
       createResource({
         id: item.sys.id,
         author:
-          item.author &&
-          createAuthor({
-            name: item.author.name,
-            pictureUri: item.author.picture?.url,
-          }),
-        duration: item.duration,
-        isWip: item.isWip,
-        pictureUri: item.picture?.url,
-        releasedAt: item.releasedAt && new Date(Date.parse(item.releasedAt)),
+          item.author != null
+            ? createAuthor({
+                name: item.author.name ?? '',
+                pictureUri: item.author.picture?.url ?? '',
+              })
+            : undefined,
+        duration: item.duration ?? 0,
+        isWip: item.isWip ?? undefined,
+        pictureUri: item.picture?.url ?? undefined,
+        releasedAt:
+          item.releasedAt != null
+            ? new Date(Date.parse(item.releasedAt))
+            : new Date(0),
         requiredSkills: this._toSkills(item.requiredSkillCollection),
         skills: this._toSkills(item.skillCollection),
-        slug: item.slug,
-        summary: item.summary,
-        title: item.title,
+        slug: item.slug ?? '',
+        summary: item.summary ?? '',
+        title: item.title ?? '',
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         type: item.resourceType as any,
-        url: item.url,
+        url: item.url ?? '',
       }),
     );
   }
 
-  private _toSkills(skills: { items: contentful.Skill[] }): Skill[] {
-    return skills?.items.map(skillFragmentToSkill);
+  private _toSkills(
+    skills: { items: (contentful.Skill | null)[] } | null | undefined,
+  ): Skill[] {
+    return (skills?.items ?? [])
+      .filter((s): s is NonNullable<typeof s> => s != null)
+      .map((s) => skillFragmentToSkill(s));
   }
 }
 

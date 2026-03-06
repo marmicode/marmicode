@@ -84,10 +84,10 @@ import { TreeConfig } from './tree-config';
   ],
 })
 export class TreeComponent implements OnInit {
-  @ViewChild('tree', { static: true }) treeEl: ElementRef;
-  @ViewChild('treeContainer', { static: true }) treeContainerEl: ElementRef;
+  @ViewChild('tree', { static: true }) treeEl!: ElementRef;
+  @ViewChild('treeContainer', { static: true }) treeContainerEl!: ElementRef;
 
-  @Input() radius: number;
+  @Input() radius!: number;
   @Input() set treeConfig(treeConfig: TreeConfig) {
     this._treeConfig$.next(treeConfig);
   }

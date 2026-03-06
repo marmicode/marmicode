@@ -7,18 +7,17 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-strong',
-  template: `<strong>
-    <ng-container
-      *ngComponentOutlet="
-        MarkdownTokensComponent();
-        inputs: { tokens: token.tokens }
-      "
-    ></ng-container>
-  </strong>`,
+  template: `@if (MarkdownTokensComponent(); as comp) {
+    <strong>
+      <ng-container
+        *ngComponentOutlet="comp; inputs: { tokens: token.tokens }"
+      ></ng-container>
+    </strong>
+  }`,
   imports: [NgComponentOutlet],
 })
 export class MarkdownStrongComponent {
-  @Input() token: MarkdownTokens.Strong & { tokens?: MarkdownToken[] };
+  @Input() token!: MarkdownTokens.Strong & { tokens?: MarkdownToken[] };
 
   MarkdownTokensComponent = rxComputed(markdownTokensLoader);
 }

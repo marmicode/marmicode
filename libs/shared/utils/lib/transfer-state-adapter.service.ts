@@ -12,7 +12,7 @@ export class TransferStateAdapter {
 
 
   get<T>(key: string): Observable<T> {
-    return of(this._transferState.get<T>(makeStateKey(key), null));
+    return of(this._transferState.get<T>(makeStateKey(key), null as T));
   }
 
   hasKey<T>(key: string) {

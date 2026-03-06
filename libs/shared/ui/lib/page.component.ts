@@ -149,15 +149,17 @@ export class PageComponent {
         },
         {
           property: 'article:author',
-          content: twitter ? `https://twitter.com/${twitter}` : null,
+          content: twitter ? `https://twitter.com/${twitter}` : undefined,
         },
         {
           property: 'twitter:creator',
-          content: twitter ? `@${twitter}` : null,
+          content: twitter ? `@${twitter}` : undefined,
         },
       ];
     }
-    return tags.filter((tag) => tag.content != null);
+    return tags.filter(
+      (tag): tag is typeof tag & { content: string } => tag.content != null,
+    ) as MetaDefinition[];
   }
 
   private _pathToUrl(path: string) {

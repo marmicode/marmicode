@@ -14,12 +14,12 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   selector: 'mc-markdown-link',
   template: ` @if (isHighlightLink$ | push) {
   <mc-highlight-link
-    [color]="color$ | push"
-    [href]="href$ | push"
+    [color]="(color$ | push) ?? ''"
+    [href]="(href$ | push) ?? ''"
     >
     <ng-container
         *ngComponentOutlet="
-          MarkdownTokensComponent();
+          (MarkdownTokensComponent() ?? null);
           inputs: { tokens: tokens$ | push }
         "
     ></ng-container>
@@ -27,12 +27,12 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
 }
 @if ((isHighlightLink$ | push) === false) {
   <a
-    [href]="href$ | push"
+    [href]="(href$ | push) ?? ''"
     target="_blank"
     >
     <ng-container
         *ngComponentOutlet="
-          MarkdownTokensComponent();
+          (MarkdownTokensComponent() ?? null);
           inputs: { tokens: tokens$ | push }
         "
     ></ng-container>
@@ -66,7 +66,7 @@ export class MarkdownLinkComponent {
     ),
   );
   isHighlightLink$ = this.href$.pipe(
-    select((href) => HighlightLinkComponent.canHandleLink(href)),
+    select((href) => href != null && HighlightLinkComponent.canHandleLink(href)),
   );
 
   MarkdownTokensComponent = rxComputed(markdownTokensLoader);

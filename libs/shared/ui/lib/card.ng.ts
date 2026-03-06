@@ -25,7 +25,7 @@ import { Router } from '@angular/router';
       </h3>
       @if (icon()) {
         <div class="icon-container zoom-on-card-hover">
-          <mat-icon class="icon" color="primary" [fontIcon]="icon()"></mat-icon>
+          <mat-icon class="icon" color="primary" [fontIcon]="icon() ?? ''"></mat-icon>
         </div>
       }
     </div>
@@ -143,7 +143,7 @@ export class Card {
     }
 
     if ('href' in link) {
-      this._window.open(link.href, '_blank', 'noopener');
+      this._window?.open(link.href, '_blank', 'noopener');
     } else if ('route' in link) {
       this._router.navigate(link.route);
     }

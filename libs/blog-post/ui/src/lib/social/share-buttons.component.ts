@@ -22,14 +22,14 @@ export type Size = 'normal' | 'small';
   styleUrls: ['./share-buttons.component.scss'],
   template: `
     <share-buttons
-      [description]="twitterTitle$ | push"
+      [description]="(twitterTitle$ | push) ?? ''"
       [theme]="theme"
       [include]="['x']"
       [style.display]="'inline-block'"
     ></share-buttons>
     <share-buttons
-      [description]="defaultTitle$ | push"
-      [title]="defaultTitle$ | push"
+      [description]="(defaultTitle$ | push) ?? ''"
+      [title]="(defaultTitle$ | push) ?? ''"
       [include]="buttons"
       [theme]="theme"
       [style.display]="'inline-block'"

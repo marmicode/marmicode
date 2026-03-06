@@ -47,8 +47,15 @@ export class SwipeDirective {
       this._elementRef.nativeElement,
       'touchstart',
     );
-    const touchmove$ = fromEvent<TouchEvent>(this._window, 'touchmove');
-    const touchend$ = fromEvent<TouchEvent>(this._window, 'touchend');
+    const window = this._window;
+    if (!window) {
+      this.swipeLeft = new Observable<void>();
+      this.swipeRight = new Observable<void>();
+      this._position$ = of(0);
+      return;
+    }
+    const touchmove$ = fromEvent<TouchEvent>(window, 'touchmove');
+    const touchend$ = fromEvent<TouchEvent>(window, 'touchend');
 
     this._position$ = touchstart$.pipe(
       switchMap((touchstart) =>
@@ -75,12 +82,12 @@ export class SwipeDirective {
 
     this.swipeLeft = swipeDistance$.pipe(
       filter((distance) => distance < 0),
-      mapTo(undefined),
+      map(() => undefined as void),
     );
 
     this.swipeRight = swipeDistance$.pipe(
       filter((distance) => distance > 0),
-      mapTo(undefined),
+      map(() => undefined as void),
     );
 
     this._position$.pipe(untilDestroyed(this)).subscribe((position) => {
@@ -109,7 +116,10 @@ export class SwipeDirective {
     });
   }
 
-  private _applyStyle(el: HTMLElement, styles: { [key: string]: string }) {
+  private _applyStyle(
+    el: HTMLElement,
+    styles: { [key: string]: string | undefined },
+  ) {
     for (const [style, value] of Object.entries(styles)) {
       if (value !== undefined) {
         this._renderer.setStyle(el, style, value, RendererStyleFlags2.DashCase);

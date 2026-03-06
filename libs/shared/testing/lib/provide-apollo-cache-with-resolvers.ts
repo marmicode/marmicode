@@ -1,8 +1,5 @@
 import { Provider } from '@angular/core';
-import {
-  FieldPolicy,
-  FieldReadFunction,
-} from '@apollo/client/cache/inmemory/policies';
+import type { FieldPolicy, FieldReadFunction } from '@apollo/client';
 import { InMemoryCache } from '@apollo/client/core';
 import { APOLLO_TESTING_CACHE } from 'apollo-angular/testing';
 

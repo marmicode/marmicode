@@ -102,6 +102,6 @@ Cypress.Commands.add('snapshot', (name = undefined) => {
 });
 
 function isSameOrigin({ url, document }: { url: string; document: Document }) {
-  const origin = document.defaultView.origin;
+  const origin = document.defaultView?.origin ?? '';
   return url.startsWith(origin) || url.match(/^\/[^/]/);
 }

@@ -38,9 +38,9 @@ export class SlideAnimationDirective implements OnInit {
 
   private _slideIndex$ = this._state.select('slideIndex');
 
-  private _leftToRightAnimationFactory: AnimationFactory;
-  private _rightToLeftAnimationFactory: AnimationFactory;
-  private _initialAnimationFactory: AnimationFactory;
+  private _leftToRightAnimationFactory!: AnimationFactory;
+  private _rightToLeftAnimationFactory!: AnimationFactory;
+  private _initialAnimationFactory!: AnimationFactory;
 
   constructor() {
     this._state.hold(
@@ -54,7 +54,7 @@ export class SlideAnimationDirective implements OnInit {
             return this._initialAnimationFactory;
           }
 
-          return current > previous
+          return current != null && current > previous
             ? this._rightToLeftAnimationFactory
             : this._leftToRightAnimationFactory;
         }),

@@ -35,7 +35,8 @@ import { SkillChipComponent, SkillChipModule } from './skill-chip.component';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-card',
-  template: ` <mat-card class="card">
+  template: ` @if (resource) {
+  <mat-card class="card">
     <article class="card-article">
       <!-- Resource picture. -->
       @if (resource.pictureUri) {
@@ -64,7 +65,7 @@ import { SkillChipComponent, SkillChipModule } from './skill-chip.component';
         </p>
 
         <!-- Skills. -->
-        @if (resource.skills?.length > 0) {
+        @if (resource?.skills?.length) {
           <section class="list-container">
             <h3 [style.color]="color" class="list-title">You Will Learn</h3>
             <div class="skills">
@@ -76,7 +77,7 @@ import { SkillChipComponent, SkillChipModule } from './skill-chip.component';
         }
 
         <!-- Required skills. -->
-        @if (resource.requiredSkills?.length > 0) {
+        @if (resource?.requiredSkills?.length) {
           <section class="list-container">
             <h3 [style.color]="color" class="list-title">Required Skills</h3>
             <div class="skills">
@@ -94,7 +95,8 @@ import { SkillChipComponent, SkillChipModule } from './skill-chip.component';
         ></mc-resource-card-action>
       </mat-card-actions>
     </article>
-  </mat-card>`,
+  </mat-card>
+  }`,
   styles: [
     `
       :host {
@@ -167,13 +169,13 @@ import { SkillChipComponent, SkillChipModule } from './skill-chip.component';
   ],
 })
 export class ResourceCardComponent implements OnChanges {
-  @Input() resource: Resource;
-  actionText: string;
-  color: string;
+  @Input() resource!: Resource;
+  actionText!: string;
+  color!: string;
 
   ngOnChanges() {
-    this.color = getResourceTypeColor(this.resource.type);
-    this.actionText = getResourceTypeActionText(this.resource.type);
+    this.color = getResourceTypeColor(this.resource.type) ?? '';
+    this.actionText = getResourceTypeActionText(this.resource.type) ?? '';
   }
 }
 

@@ -33,7 +33,7 @@ import {
     <mc-code-block
       [block]="codeBlock"
       [highlightableZones]="highlightableZones"
-      [highlightZone]="highlightZone"
+      [highlightZone]="highlightZone ?? undefined"
     ></mc-code-block>
   }
   <!-- Markdown. -->
@@ -49,9 +49,9 @@ import {
   imports: [CodeBlockComponent, MarkdownBlockComponent],
 })
 export class BlockComponent {
-  @Input() block: Block;
-  @Input() highlightZone: HighlightZone;
-  @Input() highlightableZones: HighlightZone[];
+  @Input() block!: Block;
+  @Input() highlightZone?: HighlightZone | null;
+  @Input() highlightableZones!: HighlightZone[];
   @Output() highlightZoneChange = new EventEmitter<HighlightZone>();
 
   BlockType = BlockType;
