@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Workshop } from '@marmicode/workshop/core';
-import { pragmaticAngularTestingFullCourseEn } from './workshops/pragmatic-angular-testing-full-course.en';
-import { pragmaticAngularTestingFullCourseFr } from './workshops/pragmatic-angular-testing-full-course.fr';
+import { pragmaticAngularTestingFullCourseEn } from './workshops/pragmatic-angular-testing.en';
+import { pragmaticAngularTestingFullCourseFr } from './workshops/pragmatic-angular-testing.fr';
 
 const WORKSHOPS: Workshop[][] = [
   [pragmaticAngularTestingFullCourseEn, pragmaticAngularTestingFullCourseFr],
