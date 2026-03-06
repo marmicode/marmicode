@@ -63,11 +63,19 @@ export interface Workshop {
   agenda: Agenda;
 
   faqs: Faq[];
+  testimonials?: Testimonial[];
 }
 
 export interface Faq {
   question: string;
   answer: string;
+}
+
+export interface Testimonial {
+  quote: string;
+  authorName: string;
+  authorRole?: string;
+  authorCompany?: string;
 }
 
 export type WorkshopLanguage = 'en' | 'fr';

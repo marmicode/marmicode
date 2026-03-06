@@ -21,6 +21,7 @@ import {
   WorkshopInstructor,
   WorkshopRequiredSkills,
   WorkshopSessions,
+  WorkshopTestimonials,
 } from '@marmicode/workshop/ui-detail';
 import {
   externalLinks,
@@ -38,6 +39,7 @@ import {
     WorkshopInstructor,
     WorkshopRequiredSkills,
     WorkshopSessions,
+    WorkshopTestimonials,
     ErrorComponent,
     WorkshopHero,
     WorkshopFaq,
@@ -53,8 +55,9 @@ import {
         <mc-workshop-description [workshop]="workshop" />
         <mc-workshop-sessions [workshop]="workshop" />
         <mc-workshop-benefits [workshop]="workshop" />
-        <mc-workshop-required-skills [workshop]="workshop" />
+        <mc-workshop-testimonials [workshop]="workshop" />
         <mc-workshop-agenda [workshop]="workshop" />
+        <mc-workshop-required-skills [workshop]="workshop" />
         <mc-workshop-instructor [workshop]="workshop" />
         <mc-workshop-faq [workshop]="workshop" />
       } @else {
