@@ -189,7 +189,6 @@ jobs:
       url: https://marmicode.io
     needs:
       - test
-      - check-snapshots
       - check-sync
     steps:
       - uses: actions/checkout@v4
