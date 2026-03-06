@@ -23,7 +23,7 @@ jobs:
         run: pnpm exec cypress install
 
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install chromium firefox webkit --with-deps
+        run: pnpm exec playwright install chromium firefox webkit --with-deps --only-shell
 
       - uses: nrwl/nx-set-shas@v4
 
