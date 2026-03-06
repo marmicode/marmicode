@@ -129,19 +129,22 @@ export class PageComponent {
   }
 
   private _infoToMetaTags(info: PageInfo): MetaDefinition[] {
-    let tags = [
-      { name: 'description', content: info.description },
-      { property: 'og:description', content: info.description },
-      { property: 'og:image', content: info.pictureUri },
+    let tags: Array<{ name?: string; property?: string; content?: string }> = [
+      { name: 'description', content: info.description ?? undefined },
+      { property: 'og:description', content: info.description ?? undefined },
+      { property: 'og:image', content: info.pictureUri ?? undefined },
       { property: 'twitter:card', content: 'summary_large_image' },
-      { property: 'twitter:description', content: info.description },
+      {
+        property: 'twitter:description',
+        content: info.description ?? undefined,
+      },
       { property: 'twitter:title', content: this._infoToTitle(info) },
     ];
     if ('type' in info && info.type === 'article') {
       const twitter = info.author?.twitter;
       tags = [
         ...tags,
-        { name: 'author', content: info.author?.name },
+        { name: 'author', content: info.author?.name ?? undefined },
         { property: 'og:type', content: info.type },
         {
           property: 'article:published_time',
@@ -149,15 +152,18 @@ export class PageComponent {
         },
         {
           property: 'article:author',
-          content: twitter ? `https://twitter.com/${twitter}` : null,
+          content: twitter ? `https://twitter.com/${twitter}` : undefined,
         },
         {
           property: 'twitter:creator',
-          content: twitter ? `@${twitter}` : null,
+          content: twitter ? `@${twitter}` : undefined,
         },
       ];
     }
-    return tags.filter((tag) => tag.content != null);
+    return tags.filter(
+      (tag): tag is { name?: string; property?: string; content: string } =>
+        tag.content != null && tag.content !== '',
+    ) as MetaDefinition[];
   }
 
   private _pathToUrl(path: string) {

@@ -58,20 +58,20 @@ export class ResourceCardActionComponent implements OnChanges {
     ],
   ]);
 
-  @Input() resource: Resource;
-  actionText: string;
-  color: string;
-  route: string[];
+  @Input() resource!: Resource;
+  actionText!: string;
+  color!: string;
+  route!: string[];
 
   ngOnChanges() {
-    this.actionText = getResourceTypeActionText(this.resource.type);
-    this.color = getResourceTypeColor(this.resource.type);
+    this.actionText = getResourceTypeActionText(this.resource.type) ?? '';
+    this.color = getResourceTypeColor(this.resource.type) ?? '';
     this.route = this._getRoute(this.resource);
   }
 
-  private _getRoute(resource: Resource) {
+  private _getRoute(resource: Resource): string[] {
     const fn = ResourceCardActionComponent._routeFactoryMap.get(resource.type);
-    return fn != null ? fn(resource.slug) : null;
+    return fn != null ? fn(resource.slug) : [];
   }
 }
 

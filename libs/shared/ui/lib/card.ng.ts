@@ -138,7 +138,7 @@ export class Card {
 
   goToLink(event: MouseEvent) {
     const link = this.link();
-    if (link == null) {
+    if (link == null || !this._window) {
       return;
     }
 

@@ -28,20 +28,20 @@ describe('RecipeTimelineComponent', () => {
     component.currentFrameIndex = 0;
     component.frames = [
       {
-        slug: null,
-        title: null,
+        slug: '',
+        title: '',
         duration: 1,
         blocks: [],
       },
       {
-        slug: null,
-        title: null,
+        slug: '',
+        title: '',
         duration: 1,
         blocks: [],
       },
       {
-        slug: null,
-        title: null,
+        slug: '',
+        title: '',
         duration: 1,
         blocks: [],
       },

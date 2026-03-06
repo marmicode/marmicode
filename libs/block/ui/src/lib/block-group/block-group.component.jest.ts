@@ -33,7 +33,7 @@ describe('FrameComponent', () => {
       }),
     );
 
-    expect(getFirstBlock().properties.highlightZone).toEqual({
+    expect(getFirstBlock().properties['highlightZone']).toEqual({
       color: 'red',
       sections: [
         createHighlightSection({

@@ -55,21 +55,27 @@ export class BlogPostRepository {
       })
       .pipe(
         map(({ data }) => {
+          if (!data?.resourceCollection?.items) {
+            throw new Error('Blog post not found');
+          }
           const resource = data.resourceCollection.items[0];
+          if (!resource) throw new Error('Blog post not found');
           return createBlogPost({
-            id: resource.sys.id,
+            id: resource.sys.id ?? '',
             author: {
-              name: resource.author.name,
-              pictureUri: resource.author.picture?.url,
-              twitter: resource.author.twitter,
+              name: resource.author?.name ?? '',
+              pictureUri: resource.author?.picture?.url ?? '',
+              twitter: resource.author?.twitter ?? '',
             },
-            duration: resource.duration,
-            pictureUri: resource.picture?.url,
+            duration: resource.duration ?? 0,
+            pictureUri: resource.picture?.url ?? '',
             releasedAt:
-              resource.releasedAt && new Date(Date.parse(resource.releasedAt)),
-            summary: resource.summary,
-            title: resource.title,
-            text: (resource.content as ContentfulBlogPost).text,
+              resource.releasedAt != null
+                ? new Date(Date.parse(resource.releasedAt))
+                : new Date(0),
+            summary: resource.summary ?? '',
+            title: resource.title ?? '',
+            text: (resource.content as ContentfulBlogPost)?.text ?? '',
           });
         }),
       );

@@ -41,8 +41,8 @@ import { MarkdownTokens } from '@marmicode/block/core';
   imports: [],
 })
 export class MarkdownMediaComponent implements OnChanges {
-  @Input() token: MarkdownTokens.Media;
-  isVideo: boolean;
+  @Input() token!: MarkdownTokens.Media;
+  isVideo = false;
 
   ngOnChanges(changes: SimpleChanges) {
     if ('token' in changes) {

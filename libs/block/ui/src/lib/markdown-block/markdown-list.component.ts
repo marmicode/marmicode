@@ -18,7 +18,7 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   imports: [NgComponentOutlet],
 })
 export class MarkdownListComponent {
-  @Input() token: MarkdownTokens.List;
+  @Input() token!: MarkdownTokens.List;
 
   MarkdownTokensComponent = rxComputed(markdownTokensLoader);
 }

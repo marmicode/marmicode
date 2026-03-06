@@ -241,7 +241,7 @@ We have the services you need:
             twitter: 'yjaaidi',
           },
           duration: 6,
-          pictureUri: null,
+          pictureUri: '',
           releasedAt: new Date(2021, 0, 0),
           summary: 'Life is too short...',
           title: 'End-to-End HTTP request cancelation with RxJS & NestJS',

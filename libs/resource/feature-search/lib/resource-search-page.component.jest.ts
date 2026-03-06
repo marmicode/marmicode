@@ -48,7 +48,7 @@ describe('ResourceSearchComponent', () => {
     mockTransferStateAdapter.isPrerendering.mockReturnValue(false);
     mockTransferStateAdapter.hasKey.mockReturnValue(false);
 
-    const selectedSkillSlug$ = new Subject<string>();
+    const selectedSkillSlug$ = new Subject<string | null>();
 
     TestBed.configureTestingModule({
       providers: [
@@ -81,7 +81,7 @@ describe('ResourceSearchComponent', () => {
 
     return {
       resourceRepository: TestBed.inject(ResourceRepository),
-      setSkillSlug(skillSlug: string) {
+      setSkillSlug(skillSlug: string | null) {
         selectedSkillSlug$.next(skillSlug);
       },
     };

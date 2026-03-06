@@ -84,10 +84,10 @@ import { TreeConfig } from './tree-config';
   ],
 })
 export class TreeComponent implements OnInit {
-  @ViewChild('tree', { static: true }) treeEl: ElementRef;
-  @ViewChild('treeContainer', { static: true }) treeContainerEl: ElementRef;
+  @ViewChild('tree', { static: true }) treeEl!: ElementRef;
+  @ViewChild('treeContainer', { static: true }) treeContainerEl!: ElementRef;
 
-  @Input() radius: number;
+  @Input() radius!: number;
   @Input() set treeConfig(treeConfig: TreeConfig) {
     this._treeConfig$.next(treeConfig);
   }
@@ -102,8 +102,12 @@ export class TreeComponent implements OnInit {
   private _amcore = inject(Amcore);
 
   constructor() {
-    this.treeHeight$ = this._treeConfig$.pipe(map((config) => config.height));
-    this.treeWidth$ = this._treeConfig$.pipe(map((config) => config.width));
+    this.treeHeight$ = this._treeConfig$.pipe(
+      map((config) => config.height ?? 0),
+    );
+    this.treeWidth$ = this._treeConfig$.pipe(
+      map((config) => config.width ?? 0),
+    );
   }
 
   ngOnInit() {
@@ -204,7 +208,7 @@ export class TreeComponent implements OnInit {
         panZoom$,
         this._treeConfig$,
         /* Trigger zoom reset the first time. */
-        this.recenter$.pipe(startWith(null as void)),
+        this.recenter$.pipe(startWith(undefined as unknown as void)),
       ]).pipe(
         tap(([panZoom, treeConfig]) => {
           const viewportWidth = this.treeContainerEl.nativeElement.clientWidth;

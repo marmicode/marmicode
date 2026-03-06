@@ -131,8 +131,8 @@ export class SearchInputComponent {
   @Input() set control(control: FormControl<Skill | string>) {
     this._state.set({ control });
   }
-  @Input() placeholder: string;
-  @Input() options: SearchInputOption[];
+  @Input() placeholder!: string;
+  @Input() options!: SearchInputOption[];
 
   control$ = this._state.select('control');
   value$: Observable<string | SearchInputOption>;

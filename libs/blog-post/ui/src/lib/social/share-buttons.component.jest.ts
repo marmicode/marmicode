@@ -35,11 +35,11 @@ describe('ShareButtonsComponent', () => {
     return {
       getTwitterShareButtonsDescription() {
         return fixture.debugElement.queryAll(By.css('share-buttons'))[0]
-          .properties.description;
+          .properties['description'];
       },
       getOtherShareButtonsDescription() {
         return fixture.debugElement.queryAll(By.css('share-buttons'))[1]
-          .properties.description;
+          .properties['description'];
       },
     };
   }

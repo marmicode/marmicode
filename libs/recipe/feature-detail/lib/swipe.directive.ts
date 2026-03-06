@@ -36,7 +36,7 @@ export class SwipeDirective {
   @Output() swipeRight: Observable<void>;
 
   private _position$: Observable<number>;
-  private _window = inject(DOCUMENT).defaultView;
+  private _window = inject(DOCUMENT).defaultView ?? window;
 
   constructor() {
     /*
@@ -47,8 +47,8 @@ export class SwipeDirective {
       this._elementRef.nativeElement,
       'touchstart',
     );
-    const touchmove$ = fromEvent<TouchEvent>(this._window, 'touchmove');
-    const touchend$ = fromEvent<TouchEvent>(this._window, 'touchend');
+    const touchmove$ = fromEvent<TouchEvent>(this._window!, 'touchmove');
+    const touchend$ = fromEvent<TouchEvent>(this._window!, 'touchend');
 
     this._position$ = touchstart$.pipe(
       switchMap((touchstart) =>
@@ -101,9 +101,9 @@ export class SwipeDirective {
       } else {
         /* Reset everything. */
         this._applyStyle(el, {
-          filter: undefined,
-          ['margin-left']: undefined,
-          width: undefined,
+          filter: undefined as unknown as string,
+          ['margin-left']: undefined as unknown as string,
+          width: undefined as unknown as string,
         });
       }
     });

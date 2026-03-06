@@ -18,7 +18,7 @@ describe('ResourceSearchFormComponent', () => {
   let selectedSkillSlug$: BehaviorSubject<string>;
 
   beforeEach(async () => {
-    selectedSkillSlug$ = new BehaviorSubject<string>(undefined);
+    selectedSkillSlug$ = new BehaviorSubject<string>('');
 
     TestBed.configureTestingModule({
       providers: [

@@ -13,7 +13,7 @@ import {
   TransferStateHelper,
 } from '@marmicode/shared/utils';
 import { PushPipe } from '@rx-angular/template/push';
-import { map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { BlogPostRepository } from './blog-post-repository.service';
 import { blogPostToPageInfo } from './blog-post-to-page-info';
 import { PageComponent } from '@marmicode/shared/ui';
@@ -40,6 +40,7 @@ export class BlogPostDetailPageComponent {
     map((params) =>
       params.get(blogPostDetailRouterHelper.BLOG_POST_SLUG_PARAM),
     ),
+    filter((slug): slug is string => slug != null),
     switchMap((blogPostSlug) =>
       this._blogPostRepository
         .getBlogPost(blogPostSlug)

@@ -29,9 +29,9 @@ import { LinkComponent } from '@marmicode/shared/ui';
   imports: [LinkComponent, MatButton, MatIcon],
 })
 export class ActionButtonComponent {
-  @Input() icon: string;
-  @Input() label: string;
-  @Input() uri: string;
+  @Input() icon!: string;
+  @Input() label!: string;
+  @Input() uri!: string;
 }
 
 @NgModule({
