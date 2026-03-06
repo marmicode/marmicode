@@ -73,7 +73,7 @@ export function getMarkdownLinks(tokens: MarkdownToken[]): string[] {
         return getMarkdownLinks(token.items);
       }
 
-      if ('tokens' in token) {
+      if ('tokens' in token && token.tokens) {
         return getMarkdownLinks(token.tokens);
       }
 

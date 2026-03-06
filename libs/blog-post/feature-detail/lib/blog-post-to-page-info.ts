@@ -5,7 +5,7 @@ export function blogPostToPageInfo(blogPost: BlogPost) {
   return createArticlePageInfo({
     author: blogPost.author,
     description: blogPost.summary,
-    pictureUri: blogPost.pictureUri,
+    pictureUri: blogPost.pictureUri ?? undefined,
     title: blogPost.title,
   });
 }

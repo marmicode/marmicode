@@ -49,7 +49,7 @@ import { resourceSearchRouterHelper } from '@marmicode/shared/router-helpers';
   imports: [MatRipple, RouterLinkActive, RouterLink],
 })
 export class SkillChipComponent {
-  @Input() skill: Skill;
+  @Input() skill!: Skill;
 
   resourceSearchRouterHelper = resourceSearchRouterHelper;
 }

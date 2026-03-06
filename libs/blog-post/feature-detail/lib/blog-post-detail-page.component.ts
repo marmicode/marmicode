@@ -42,7 +42,7 @@ export class BlogPostDetailPageComponent {
     ),
     switchMap((blogPostSlug) =>
       this._blogPostRepository
-        .getBlogPost(blogPostSlug)
+        .getBlogPost(blogPostSlug!)
         .pipe(this._transferStateHelper.transfer(`blog-post-${blogPostSlug}`)),
     ),
     shareReplayWithRefCount(),

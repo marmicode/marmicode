@@ -30,7 +30,7 @@ export class RecipeDetailPageComponent implements OnInit {
       .pipe(
         map((params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)),
         switchMap((recipeSlug) =>
-          this._recipeRepository.getRecipeFirstFrameSlug(recipeSlug),
+          this._recipeRepository.getRecipeFirstFrameSlug(recipeSlug!),
         ),
         switchMap((frameSlug) =>
           this._router.navigate([frameSlug], {

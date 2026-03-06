@@ -8,7 +8,7 @@ test.describe('workshop detail', () => {
   test('shows workshop info', async ({ browserName, glove, page }) => {
     /* Skip WebKit for now because it's flaky on CI: "Failed to take two consecutive stable screenshots." */
     // eslint-disable-next-line playwright/no-skipped-test
-    test.skip(process.env.CI && browserName === 'webkit', 'Skip on WebKit');
+    test.skip(!!process.env.CI && browserName === 'webkit', 'Skip on WebKit');
 
     test.slow();
 
@@ -16,7 +16,7 @@ test.describe('workshop detail', () => {
 
     /* Wait for luma sessions to be loaded. */
     await page
-      .frame({ url: (u) => u.origin === 'https://luma.com' })
+      .frame({ url: (u) => u.origin === 'https://luma.com' })!
       .getByText('Pragmatic Angular Testing')
       .waitFor();
 

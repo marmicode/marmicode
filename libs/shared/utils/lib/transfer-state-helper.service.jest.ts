@@ -23,13 +23,19 @@ describe('transferStateHelper', () => {
   });
 
   let adapter: TransferStateAdapter;
-  beforeEach(() => (adapter = TestBed.inject(TransferStateAdapter)));
+  beforeEach(() => {
+    adapter = TestBed.inject(TransferStateAdapter);
+  });
 
   let helper: TransferStateHelper;
-  beforeEach(() => (helper = TestBed.inject(TransferStateHelper)));
+  beforeEach(() => {
+    helper = TestBed.inject(TransferStateHelper);
+  });
 
   let observer: jest.Mock;
-  beforeEach(() => (observer = jest.fn()));
+  beforeEach(() => {
+    observer = jest.fn();
+  });
 
   describe('when prerendering', () => {
     beforeEach(() => {

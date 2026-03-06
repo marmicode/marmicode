@@ -1,4 +1,4 @@
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 import { createBlogPost } from './blog-post';
 import { BlogPostComponent, BlogPostModule } from './blog-post.component';
 export default {
@@ -9,7 +9,7 @@ export default {
     }),
   ],
 } as Meta;
-const Template: Story = (args) => ({
+const Template: StoryFn = (args) => ({
   component: BlogPostComponent,
   props: args,
 });

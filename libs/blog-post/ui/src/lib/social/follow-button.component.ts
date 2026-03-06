@@ -68,7 +68,7 @@ import { AuthorSocialInfo } from './author-social-info';
 })
 export class FollowButtonComponent {
   @Input()
-  author: AuthorSocialInfo;
+  author!: AuthorSocialInfo;
   faXTwitter = faXTwitter;
 }
 @NgModule({

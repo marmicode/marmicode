@@ -20,8 +20,8 @@ import { HighlightZone } from '../highlight/highlight-zone';
     @for (block of blocks$ | async; track block) {
       <mc-block
         [block]="block"
-        [highlightableZones]="highlightableZones$ | async"
-        [highlightZone]="highlightZone$ | async"
+        [highlightableZones]="(highlightableZones$ | async)!"
+        [highlightZone]="(highlightZone$ | async)!"
         (highlightZoneChange)="onHighlightZone($event)"
         [class.is-row]="desktopLayout === 'row'"
         class="block"

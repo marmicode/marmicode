@@ -9,9 +9,8 @@ import {
 describe('chart utils', () => {
   let topics: Topic[];
 
-  beforeEach(
-    () =>
-      (topics = [
+  beforeEach(() => {
+    topics = [
         createTopic({
           id: 'web-basics',
           name: 'Web Basics',
@@ -41,8 +40,8 @@ describe('chart utils', () => {
           name: 'RxJS',
           depth: 3,
         }),
-      ])
-  );
+      ];
+  });
 
   describe('getTopicsTreeConfig', () => {
     it('should convert topics list to amchart series', () => {

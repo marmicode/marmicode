@@ -21,13 +21,13 @@ import { TriangleComponent } from '@marmicode/shared/ui';
   imports: [TriangleComponent],
 })
 export class ResourceTypeTriangleComponent implements OnChanges {
-  @Input() resourceType: ResourceType;
-  color: string;
-  text: string;
+  @Input() resourceType!: ResourceType;
+  color!: string;
+  text!: string;
 
   ngOnChanges() {
-    this.color = getResourceTypeColor(this.resourceType);
-    this.text = getResourceTypeText(this.resourceType);
+    this.color = getResourceTypeColor(this.resourceType)!;
+    this.text = getResourceTypeText(this.resourceType)!;
   }
 }
 

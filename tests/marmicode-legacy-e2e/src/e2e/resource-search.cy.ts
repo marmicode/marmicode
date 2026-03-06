@@ -29,9 +29,9 @@ describe('resource search', () => {
                             ...allResources.data.resourceCollection,
                             items:
                               allResources.data.resourceCollection.items.filter(
-                                (resource) =>
+                                (resource: any) =>
                                   resource.skillCollection.items.some(
-                                    (skill) => {
+                                    (skill: any) => {
                                       console.log(
                                         skill.slug ===
                                           req.body.variables.skillSlug,

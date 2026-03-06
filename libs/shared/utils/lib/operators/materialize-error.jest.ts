@@ -11,7 +11,9 @@ import {
 describe('materializeError', () => {
   let scheduler: TestScheduler;
 
-  beforeEach(() => (scheduler = getTestScheduler()));
+  beforeEach(() => {
+    scheduler = getTestScheduler();
+  });
 
   it('should materialize data', () => {
     scheduler.run(({ cold, expectObservable, expectSubscriptions }) => {

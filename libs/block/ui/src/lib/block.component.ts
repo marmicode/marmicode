@@ -49,9 +49,9 @@ import {
   imports: [CodeBlockComponent, MarkdownBlockComponent],
 })
 export class BlockComponent {
-  @Input() block: Block;
-  @Input() highlightZone: HighlightZone;
-  @Input() highlightableZones: HighlightZone[];
+  @Input() block!: Block;
+  @Input() highlightZone!: HighlightZone;
+  @Input() highlightableZones!: HighlightZone[];
   @Output() highlightZoneChange = new EventEmitter<HighlightZone>();
 
   BlockType = BlockType;
