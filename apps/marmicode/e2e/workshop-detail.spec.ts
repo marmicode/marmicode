@@ -12,7 +12,7 @@ test.describe('workshop detail', () => {
 
     test.slow();
 
-    await glove.goto('pragmatic-angular-testing-full-course');
+    await glove.goto('pragmatic-angular-testing');
 
     /* Wait for luma sessions to be loaded. */
     await page
@@ -47,7 +47,7 @@ test.describe('workshop detail', () => {
       .soft(canonicalLink)
       .toHaveAttribute(
         'href',
-        'http://localhost:4200/workshops/pragmatic-angular-testing-full-course',
+        'http://localhost:4200/workshops/pragmatic-angular-testing',
       );
     await expect.soft(alternateLinks).toHaveCount(3);
     await expect.soft(alternateLinks.nth(0)).toHaveAttribute('hreflang', 'fr');
@@ -62,7 +62,7 @@ test.describe('workshop detail', () => {
       .soft(alternateLinks.nth(1))
       .toHaveAttribute(
         'href',
-        'http://localhost:4200/workshops/pragmatic-angular-testing-full-course',
+        'http://localhost:4200/workshops/pragmatic-angular-testing',
       );
     await expect
       .soft(alternateLinks.nth(2))
@@ -71,7 +71,7 @@ test.describe('workshop detail', () => {
       .soft(alternateLinks.nth(2))
       .toHaveAttribute(
         'href',
-        'http://localhost:4200/workshops/pragmatic-angular-testing-full-course',
+        'http://localhost:4200/workshops/pragmatic-angular-testing',
       );
   });
 });

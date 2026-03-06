@@ -137,13 +137,14 @@ export class TheMenu {
     },
     {
       icon: 'support_agent',
-      title: 'Coaching & Reviews',
-      description: 'Get tailored help via code reviews or 1.1 sessions.',
+      title: 'Ask the Cook',
+      description:
+        'Stuck on a tricky architecture decision or testing strategy? Get async expert guidance when AI tools fall short.',
       link: { href: 'https://courses.marmicode.io/bundles/ginger-review' },
       services: [
         {
           icon: 'autorenew',
-          text: 'Monthly Code Reviews',
+          text: 'Async Q&A',
           offer: 'from 150€ / month',
         },
         {

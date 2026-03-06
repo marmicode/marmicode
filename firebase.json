@@ -15,6 +15,13 @@
           ]
         }
       ],
+      "redirects": [
+        {
+          "source": "/workshops/pragmatic-angular-testing-full-course",
+          "destination": "/workshops/pragmatic-angular-testing",
+          "type": 301
+        }
+      ],
       "rewrites": [
         {
           "source": "**",
