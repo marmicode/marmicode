@@ -1,7 +1,7 @@
 import { createWorkshop } from '@marmicode/workshop/core';
 import pictureUri from './pragmatic-angular-testing.webp';
 import thumbnailUri from './pragmatic-angular-testing-thumbnail.webp';
-import { PRAGMATIC_ANGULAR_TESTING_FULL_COURSE_ID } from './pragmatic-angular-testing-full-course.shared';
+import { PRAGMATIC_ANGULAR_TESTING_FULL_COURSE_ID } from './pragmatic-angular-testing.shared';
 
 export const pragmaticAngularTestingFullCourseEn = createWorkshop({
   id: PRAGMATIC_ANGULAR_TESTING_FULL_COURSE_ID,
