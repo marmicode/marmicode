@@ -6,3 +6,5 @@ export * from './workshop-description.ng';
 export * from './workshop-instructor.ng';
 export * from './workshop-prerequisites.ng';
 export * from './workshop-sessions.ng';
+export * from './workshop-testimonial-card.ng';
+export * from './workshop-testimonials.ng';

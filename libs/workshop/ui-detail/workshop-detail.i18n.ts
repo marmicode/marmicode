@@ -11,6 +11,7 @@ const WORKSHOP_DETAIL_LABELS_EN = {
   requiredKnowledge: 'Required knowledge',
   program: 'Program',
   instructor: 'Your instructor',
+  testimonials: 'What they say',
   faq: 'Frequently Asked Questions',
 };
 
@@ -24,6 +25,7 @@ const WORKSHOP_DETAIL_LABELS_FR: typeof WORKSHOP_DETAIL_LABELS_EN = {
   requiredKnowledge: 'Prérequis',
   program: 'Programme',
   instructor: 'Votre formateur',
+  testimonials: 'Retour des participants',
   faq: 'Foire aux questions',
 };
 
