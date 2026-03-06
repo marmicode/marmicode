@@ -28,7 +28,7 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   imports: [NgComponentOutlet],
 })
 export class MarkdownBlockquoteComponent {
-  @Input() token: MarkdownToken;
+  @Input() token!: MarkdownToken;
 
   MarkdownTokensComponent = rxComputed(markdownTokensLoader);
 }

@@ -9,6 +9,9 @@
   "exclude": [
     "**/*.spec.ts",
     "**/*.test.ts",
+    "**/*.jest.ts",
+    "**/*.stories.ts",
+    "**/*.stories.tsx",
     "**/*.test.tsx",
     "**/*.spec.tsx",
     "**/*.test.js",

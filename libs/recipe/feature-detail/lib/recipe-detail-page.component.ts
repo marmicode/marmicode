@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { recipeDetailRouterHelper } from '@marmicode/shared/router-helpers';
 import { PageModule } from '@marmicode/shared/ui';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import {
   RecipeRepository,
   RecipeRepositoryModule,
@@ -29,9 +29,11 @@ export class RecipeDetailPageComponent implements OnInit {
     this._route.paramMap
       .pipe(
         map((params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)),
+        filter((recipeSlug): recipeSlug is string => recipeSlug != null),
         switchMap((recipeSlug) =>
           this._recipeRepository.getRecipeFirstFrameSlug(recipeSlug),
         ),
+        filter((frameSlug): frameSlug is string => frameSlug != null),
         switchMap((frameSlug) =>
           this._router.navigate([frameSlug], {
             relativeTo: this._route,

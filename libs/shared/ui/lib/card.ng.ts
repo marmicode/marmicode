@@ -143,7 +143,7 @@ export class Card {
     }
 
     if ('href' in link) {
-      this._window.open(link.href, '_blank', 'noopener');
+      this._window?.open(link.href, '_blank', 'noopener');
     } else if ('route' in link) {
       this._router.navigate(link.route);
     }

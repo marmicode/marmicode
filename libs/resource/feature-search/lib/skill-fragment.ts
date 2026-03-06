@@ -14,8 +14,8 @@ export const skillFragment = gql`
 
 export function skillFragmentToSkill(skill: schema.Skill) {
   return createSkill({
-    id: skill.sys.id,
-    label: skill.label,
-    slug: skill.slug,
+    id: skill.sys?.id ?? '',
+    label: skill.label ?? '',
+    slug: skill.slug ?? '',
   });
 }

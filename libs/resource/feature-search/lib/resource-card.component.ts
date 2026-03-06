@@ -167,13 +167,14 @@ import { SkillChipComponent, SkillChipModule } from './skill-chip.component';
   ],
 })
 export class ResourceCardComponent implements OnChanges {
-  @Input() resource: Resource;
-  actionText: string;
-  color: string;
+  @Input() resource!: Resource;
+  actionText!: string;
+  color!: string;
 
   ngOnChanges() {
-    this.color = getResourceTypeColor(this.resource.type);
-    this.actionText = getResourceTypeActionText(this.resource.type);
+    this.color = getResourceTypeColor(this.resource.type) ?? '';
+    this.actionText =
+      getResourceTypeActionText(this.resource.type) ?? '';
   }
 }
 

@@ -94,7 +94,10 @@ export class WorkshopDetailPage {
       description: w?.description,
     });
   });
-  transitionName = computed(() => workshopViewTransitionName(this.workshop()));
+  transitionName = computed(() => {
+    const w = this.workshop();
+    return w ? workshopViewTransitionName(w) : '';
+  });
   workshop = computed(() =>
     this._workshopRepository.findWorkshop(this.workshopId()),
   );

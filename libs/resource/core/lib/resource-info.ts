@@ -13,7 +13,7 @@ export interface ResourceInfo {
   author?: Author;
   duration: number;
   pictureUri?: string;
-  releasedAt: Date;
+  releasedAt?: Date;
   title: string;
   type: ResourceType;
 }

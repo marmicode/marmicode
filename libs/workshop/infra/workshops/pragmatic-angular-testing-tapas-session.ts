@@ -48,6 +48,7 @@ No dogma. No silver bullets. Just pragmatic Angular testing skills to help you *
     originalPrice: 470,
   },
   language: 'en',
+  faqs: [],
   requiredSkills: [
     `Angular core concepts (e.g. components, inputs/outputs, services)`,
     `TypeScript fundamentals (e.g. types, interfaces, basic generics)`,

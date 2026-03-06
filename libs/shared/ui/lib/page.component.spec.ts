@@ -28,7 +28,7 @@ describe('PageComponent', () => {
   it('does not touch page title if info is null', async () => {
     const { setPageInfo, titleFake } = await renderComponent();
 
-    setPageInfo(null);
+    setPageInfo(null as unknown as PageInfo);
 
     expect(titleFake.getTitle()).toBeUndefined();
   });
@@ -37,7 +37,7 @@ describe('PageComponent', () => {
     const { setPageInfo, titleFake } = await renderComponent();
 
     setPageInfo({
-      title: null,
+      title: undefined,
     });
 
     await expect.poll(() => titleFake.getTitle()).toBe('Marmicode');
@@ -183,7 +183,7 @@ describe('PageComponent', () => {
           content: 'https://twitter.com/yjaaidi',
         },
         { name: '', property: 'twitter:creator', content: '@yjaaidi' },
-      ] satisfies MetaDefinition[]);
+      ]);
   });
 
   it('should reset meta when set to null', async () => {
@@ -191,7 +191,7 @@ describe('PageComponent', () => {
 
     setPageInfo({ title: '🍔' });
 
-    setPageInfo(null);
+    setPageInfo(null as unknown as PageInfo);
 
     expect(getMetaTags()).toEqual([]);
   });
@@ -241,7 +241,7 @@ async function renderComponent() {
       await fixture.whenStable();
       fixture.destroy();
     },
-    setPageInfo: (info: PageInfo) =>
+    setPageInfo: (info: PageInfo | null) =>
       fixture.componentRef.setInput('info', info),
     getMetaTags: () =>
       TestBed.inject(MetaFake)

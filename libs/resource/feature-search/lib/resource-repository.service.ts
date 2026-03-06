@@ -92,7 +92,12 @@ export class ResourceRepository {
           filter: this._wip.isWip() ? {} : { isWip_not: true },
         },
       })
-      .pipe(map(({ data }) => this._toResources(data.resourceCollection)));
+      .pipe(
+        map(({ data }) => {
+          if (!data?.resourceCollection) return [];
+          return this._toResources(data.resourceCollection);
+        }),
+      );
   }
 
   getResourcesBySkillSlug(skillSlug: string): Observable<Resource[]> {
@@ -106,11 +111,16 @@ export class ResourceRepository {
       })
       .pipe(
         tap(console.log),
-        map(({ data }) =>
-          this._toResources(
-            data.skillCollection.items[0].linkedFrom.resourceCollection,
-          ),
-        ),
+        map(({ data }) => {
+          if (!data) return [];
+          const skillItem = data.skillCollection?.items?.[0];
+          const resourceCollection =
+            skillItem?.linkedFrom?.resourceCollection;
+          if (!resourceCollection) {
+            return [];
+          }
+          return this._toResources(resourceCollection);
+        }),
         /* We have to filter again because the previous query also returns
          * resource that have this skill in the `skills` field.
          * AFAIK, there is no way to return only resources that have this
@@ -126,36 +136,48 @@ export class ResourceRepository {
       );
   }
 
-  private _toResources(resourceCollection: {
-    items: contentful.Resource[];
-  }): Resource[] {
-    return resourceCollection.items.map((item) =>
-      createResource({
-        id: item.sys.id,
-        author:
-          item.author &&
-          createAuthor({
-            name: item.author.name,
-            pictureUri: item.author.picture?.url,
-          }),
-        duration: item.duration,
-        isWip: item.isWip,
-        pictureUri: item.picture?.url,
-        releasedAt: item.releasedAt && new Date(Date.parse(item.releasedAt)),
-        requiredSkills: this._toSkills(item.requiredSkillCollection),
-        skills: this._toSkills(item.skillCollection),
-        slug: item.slug,
-        summary: item.summary,
-        title: item.title,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        type: item.resourceType as any,
-        url: item.url,
-      }),
-    );
+  private _toResources(
+    resourceCollection: contentful.ResourceCollection,
+  ): Resource[] {
+    return (resourceCollection.items ?? [])
+      .filter((item): item is contentful.Resource => item != null)
+      .map((item) =>
+        createResource({
+          id: item.sys?.id ?? '',
+          author: item.author
+            ? createAuthor({
+                name: item.author.name ?? '',
+                pictureUri: item.author.picture?.url ?? '',
+              })
+            : undefined,
+          duration: item.duration ?? 0,
+          isWip: item.isWip ?? undefined,
+          pictureUri: item.picture?.url ?? undefined,
+          releasedAt:
+            item.releasedAt != null
+              ? new Date(Date.parse(item.releasedAt))
+              : undefined,
+          requiredSkills: this._toSkills(item.requiredSkillCollection),
+          skills: this._toSkills(item.skillCollection),
+          slug: item.slug ?? '',
+          summary: item.summary ?? '',
+          title: item.title ?? '',
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          type: item.resourceType as any,
+          url: item.url ?? '',
+        }),
+      );
   }
 
-  private _toSkills(skills: { items: contentful.Skill[] }): Skill[] {
-    return skills?.items.map(skillFragmentToSkill);
+  private _toSkills(
+    skills:
+      | { items: Array<contentful.Maybe<contentful.Skill>> }
+      | null
+      | undefined,
+  ): Skill[] {
+    return (skills?.items ?? [])
+      .filter((s): s is contentful.Skill => s != null)
+      .map(skillFragmentToSkill);
   }
 }
 

@@ -52,8 +52,8 @@ export function markdownToFrameBlockGroups(text: string): BlockGroup[] {
           blocks: [
             ...blocks,
             createCodeBlock({
-              code: token.text,
-              language: token.lang,
+              code: token.text ?? '',
+              language: token.lang ?? '',
             }),
           ],
         });

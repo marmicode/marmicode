@@ -183,6 +183,7 @@ export class RecipeFramePageComponent {
       'recipe',
       this._route.paramMap.pipe(
         map((params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)),
+        filter((slug): slug is string => slug != null),
         distinctUntilChanged(),
         switchMap((recipeSlug) => this._recipeRepository.getRecipe(recipeSlug)),
       ),
@@ -194,7 +195,7 @@ export class RecipeFramePageComponent {
     this._state.connect(
       'currentFrameSlug',
       this._route.paramMap.pipe(
-        map((params) => params.get(recipeDetailRouterHelper.FRAME_SLUG_PARAM)),
+        map((params) => params.get(recipeDetailRouterHelper.FRAME_SLUG_PARAM) ?? ''),
       ),
     );
 
@@ -246,7 +247,7 @@ export class RecipeFramePageComponent {
     return frameSlug ? getRelativeFrameRoute(frameSlug) : null;
   }
 
-  private _tryNavigateToRelativeRoute(route: string[]) {
+  private _tryNavigateToRelativeRoute(route: string[] | null) {
     if (route == null) {
       return;
     }

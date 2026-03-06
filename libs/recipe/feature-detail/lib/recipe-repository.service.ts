@@ -109,11 +109,16 @@ export class RecipeRepository {
         },
       })
       .pipe(
-        map(
-          ({ data }) =>
-            (data.resourceCollection.items[0].content as ContentfulRecipe)
-              .frameCollection.items[0].slug,
-        ),
+        map(({ data }) => {
+          if (!data) throw new Error('Recipe query failed');
+          const item = data.resourceCollection?.items?.[0];
+          const content = item?.content as ContentfulRecipe | null | undefined;
+          const firstFrame = content?.frameCollection?.items?.[0];
+          if (!firstFrame?.slug) {
+            throw new Error('Recipe first frame not found');
+          }
+          return firstFrame.slug;
+        }),
       );
   }
 
@@ -127,35 +132,43 @@ export class RecipeRepository {
       })
       .pipe(
         map(({ data }) => {
-          const resource = data.resourceCollection.items[0];
+          if (!data) throw new Error('Recipe query failed');
+          const resource = data.resourceCollection?.items?.[0];
+          if (!resource) {
+            throw new Error('Recipe not found');
+          }
+          const content = resource.content as ContentfulRecipe | null | undefined;
+          const frameItems = content?.frameCollection?.items ?? [];
           return createRecipe({
             id: resource.sys.id,
-            slug: resource.slug,
-            title: resource.title,
+            slug: resource.slug ?? '',
+            title: resource.title ?? '',
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             type: resource.resourceType as any,
-            frames: (
-              resource.content as ContentfulRecipe
-            ).frameCollection.items.map((frame) =>
+            frames: frameItems
+            .filter((frame): frame is NonNullable<typeof frame> => frame != null)
+            .map((frame) =>
               createFrame({
-                blocks: frame.blockCollection.items.map((block) => {
-                  switch (block.__typename) {
-                    case 'CodeBlock':
-                      return createCodeBlock({
-                        code: block.code,
-                        language: block.language,
-                      });
-                    case 'TextBlock':
-                      return createTextBlock({
-                        text: block.text,
-                      });
-                    default:
-                      return null;
-                  }
-                }),
-                duration: frame.duration,
-                slug: frame.slug,
-                title: frame.title,
+                blocks: (frame.blockCollection?.items ?? [])
+                  .map((block) => {
+                    switch (block?.__typename) {
+                      case 'CodeBlock':
+                        return createCodeBlock({
+                          code: block.code ?? '',
+                          language: block.language ?? '',
+                        });
+                      case 'TextBlock':
+                        return createTextBlock({
+                          text: block.text ?? '',
+                        });
+                      default:
+                        return null;
+                    }
+                  })
+                  .filter((b): b is NonNullable<typeof b> => b !== null),
+                duration: frame.duration ?? 0,
+                slug: frame.slug ?? '',
+                title: frame.title ?? '',
               }),
             ),
           });

@@ -38,9 +38,9 @@ export class SlideAnimationDirective implements OnInit {
 
   private _slideIndex$ = this._state.select('slideIndex');
 
-  private _leftToRightAnimationFactory: AnimationFactory;
-  private _rightToLeftAnimationFactory: AnimationFactory;
-  private _initialAnimationFactory: AnimationFactory;
+  private _leftToRightAnimationFactory!: AnimationFactory;
+  private _rightToLeftAnimationFactory!: AnimationFactory;
+  private _initialAnimationFactory!: AnimationFactory;
 
   constructor() {
     this._state.hold(
@@ -50,7 +50,7 @@ export class SlideAnimationDirective implements OnInit {
         pairwise(),
         map(([previous, current]) => {
           /* Run initial animation when directive is loaded. */
-          if (previous == null) {
+          if (previous == null || current == null) {
             return this._initialAnimationFactory;
           }
 

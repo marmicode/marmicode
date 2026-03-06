@@ -2,12 +2,12 @@ export interface BlogPost {
   id: string;
   author: {
     name: string;
-    pictureUri: string;
-    twitter: string;
+    pictureUri?: string | null;
+    twitter?: string | null;
   };
   duration: number;
-  pictureUri: string;
-  releasedAt: Date;
+  pictureUri?: string | null;
+  releasedAt?: Date | null;
   summary: string;
   title: string;
   text: string;

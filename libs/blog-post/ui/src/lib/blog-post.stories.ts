@@ -1,4 +1,5 @@
-import { Meta, Story, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular';
+import type { IStory } from '@storybook/angular';
 import { createBlogPost } from './blog-post';
 import { BlogPostComponent, BlogPostModule } from './blog-post.component';
 export default {
@@ -9,7 +10,7 @@ export default {
     }),
   ],
 } as Meta;
-const Template: Story = (args) => ({
+const Template: IStory = (args: { blogPost: ReturnType<typeof createBlogPost> }) => ({
   component: BlogPostComponent,
   props: args,
 });

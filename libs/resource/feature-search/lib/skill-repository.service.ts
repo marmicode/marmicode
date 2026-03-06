@@ -31,11 +31,12 @@ export class SkillRepository {
         query: allSkills,
       })
       .pipe(
-        map(({ data }) =>
-          data.skillCollection.items.map((skill) =>
-            skillFragmentToSkill(skill),
-          ),
-        ),
+        map(({ data }) => {
+          const items = data?.skillCollection?.items ?? [];
+          return items
+            .filter((s): s is NonNullable<typeof s> => s != null)
+            .map((skill) => skillFragmentToSkill(skill));
+        }),
       );
   }
 }
