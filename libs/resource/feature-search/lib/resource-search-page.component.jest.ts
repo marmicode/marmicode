@@ -23,7 +23,7 @@ describe('ResourceSearchComponent', () => {
   it('should search for all resources if skillSlug is null', () => {
     /* Suppose the skillSlug param is null. */
     const { resourceRepository, setSkillSlug } = createComponent();
-    setSkillSlug(null);
+    setSkillSlug(null as unknown as string);
 
     expect(resourceRepository.getResources).toHaveBeenCalledTimes(1);
     expect(resourceRepository.getResourcesBySkillSlug).toHaveBeenCalledTimes(0);

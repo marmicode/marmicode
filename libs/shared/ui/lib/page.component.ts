@@ -129,7 +129,7 @@ export class PageComponent {
   }
 
   private _infoToMetaTags(info: PageInfo): MetaDefinition[] {
-    let tags = [
+    let tags: Array<{ name?: string; property?: string; content?: string }> = [
       { name: 'description', content: info.description },
       { property: 'og:description', content: info.description },
       { property: 'og:image', content: info.pictureUri },
@@ -149,15 +149,17 @@ export class PageComponent {
         },
         {
           property: 'article:author',
-          content: twitter ? `https://twitter.com/${twitter}` : null,
+          content: twitter ? `https://twitter.com/${twitter}` : undefined,
         },
         {
           property: 'twitter:creator',
-          content: twitter ? `@${twitter}` : null,
+          content: twitter ? `@${twitter}` : undefined,
         },
       ];
     }
-    return tags.filter((tag) => tag.content != null);
+    return tags.filter(
+      (tag): tag is MetaDefinition => tag.content != null,
+    );
   }
 
   private _pathToUrl(path: string) {

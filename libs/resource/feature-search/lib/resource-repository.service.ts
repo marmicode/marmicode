@@ -92,7 +92,7 @@ export class ResourceRepository {
           filter: this._wip.isWip() ? {} : { isWip_not: true },
         },
       })
-      .pipe(map(({ data }) => this._toResources(data.resourceCollection)));
+      .pipe(map(({ data }) => this._toResources(data!.resourceCollection!)));
   }
 
   getResourcesBySkillSlug(skillSlug: string): Observable<Resource[]> {
@@ -108,7 +108,7 @@ export class ResourceRepository {
         tap(console.log),
         map(({ data }) =>
           this._toResources(
-            data.skillCollection.items[0].linkedFrom.resourceCollection,
+            data!.skillCollection!.items[0]!.linkedFrom!.resourceCollection!,
           ),
         ),
         /* We have to filter again because the previous query also returns
@@ -127,35 +127,40 @@ export class ResourceRepository {
   }
 
   private _toResources(resourceCollection: {
-    items: contentful.Resource[];
+    items: Array<contentful.Resource | null>;
   }): Resource[] {
-    return resourceCollection.items.map((item) =>
-      createResource({
-        id: item.sys.id,
-        author:
-          item.author &&
-          createAuthor({
-            name: item.author.name,
-            pictureUri: item.author.picture?.url,
-          }),
-        duration: item.duration,
-        isWip: item.isWip,
-        pictureUri: item.picture?.url,
-        releasedAt: item.releasedAt && new Date(Date.parse(item.releasedAt)),
-        requiredSkills: this._toSkills(item.requiredSkillCollection),
-        skills: this._toSkills(item.skillCollection),
-        slug: item.slug,
-        summary: item.summary,
-        title: item.title,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        type: item.resourceType as any,
-        url: item.url,
-      }),
-    );
+    return resourceCollection.items
+      .filter((item): item is contentful.Resource => item != null)
+      .map((item) =>
+        createResource({
+          id: item.sys.id,
+          author:
+            item.author == null
+              ? undefined
+              : createAuthor({
+                  name: item.author.name!,
+                  pictureUri: item.author.picture?.url ?? '',
+                }),
+          duration: item.duration!,
+          isWip: item.isWip ?? undefined,
+          pictureUri: item.picture?.url ?? undefined,
+          releasedAt: item.releasedAt && new Date(Date.parse(item.releasedAt)),
+          requiredSkills: this._toSkills(item.requiredSkillCollection!),
+          skills: this._toSkills(item.skillCollection!),
+          slug: item.slug!,
+          summary: item.summary!,
+          title: item.title!,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          type: item.resourceType as any,
+          url: item.url!,
+        }),
+      );
   }
 
-  private _toSkills(skills: { items: contentful.Skill[] }): Skill[] {
-    return skills?.items.map(skillFragmentToSkill);
+  private _toSkills(skills: { items: Array<contentful.Skill | null> }): Skill[] {
+    return skills?.items
+      .filter((s): s is contentful.Skill => s != null)
+      .map((s) => skillFragmentToSkill(s));
   }
 }
 

@@ -104,6 +104,6 @@ describe('BlogPostRepository', () => {
       .getBlogPost('end-to-end-http-request-cancelation-with-rxjs-and-nestjs')
       .toPromise();
 
-    expect(blogPost.pictureUri).toBeUndefined();
+    expect(blogPost!.pictureUri).toBeNull();
   });
 });

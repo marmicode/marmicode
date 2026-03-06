@@ -2,7 +2,7 @@ import { Title } from '@angular/platform-browser';
 import { Public } from '@marmicode/shared/utils';
 
 export class TitleFake implements Public<Title> {
-  private _title: string;
+  private _title!: string;
 
   setTitle(title: string) {
     this._title = title;

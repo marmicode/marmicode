@@ -14,12 +14,12 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   selector: 'mc-markdown-link',
   template: ` @if (isHighlightLink$ | push) {
   <mc-highlight-link
-    [color]="color$ | push"
+    [color]="(color$ | push)!"
     [href]="href$ | push"
     >
     <ng-container
         *ngComponentOutlet="
-          MarkdownTokensComponent();
+          MarkdownTokensComponent() ?? null;
           inputs: { tokens: tokens$ | push }
         "
     ></ng-container>
@@ -32,7 +32,7 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
     >
     <ng-container
         *ngComponentOutlet="
-          MarkdownTokensComponent();
+          MarkdownTokensComponent() ?? null;
           inputs: { tokens: tokens$ | push }
         "
     ></ng-container>

@@ -6,7 +6,9 @@ import { progressify, ProgressifyEvent } from './progressify';
 describe('progressify', () => {
   let scheduler: TestScheduler;
 
-  beforeEach(() => (scheduler = getTestScheduler()));
+  beforeEach(() => {
+    scheduler = getTestScheduler();
+  });
 
   it('should add progress info on complete', () => {
     scheduler.run(({ cold, expectObservable }) => {

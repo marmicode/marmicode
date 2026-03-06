@@ -31,14 +31,14 @@ import { isHighlightLink, parseHighlightLink } from './parse-highlight-link';
 export class HighlightLinkComponent implements OnChanges {
   private _elementRef = inject(ElementRef);
 
-  @Input() color: string;
-  @Input() href: string;
+  @Input() color!: string;
+  @Input() href!: string;
 
   /* Add `data-role=highlight-link` attribute for testing. */
   @HostBinding('attr.data-role') dataRole = 'highlight-link';
 
   private _clicked = false;
-  private _zone: HighlightZone;
+  private _zone!: HighlightZone;
 
   static canHandleLink(href: string) {
     return isHighlightLink(href);

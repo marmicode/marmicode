@@ -2,7 +2,7 @@ import { ResourceType } from './resource-type';
 
 export interface Author {
   name: string;
-  pictureUri: string;
+  pictureUri?: string | null;
 }
 
 export function createAuthor(author: Author) {
@@ -12,8 +12,8 @@ export function createAuthor(author: Author) {
 export interface ResourceInfo {
   author?: Author;
   duration: number;
-  pictureUri?: string;
-  releasedAt: Date;
+  pictureUri?: string | null;
+  releasedAt: Date | null;
   title: string;
   type: ResourceType;
 }
