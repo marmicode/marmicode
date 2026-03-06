@@ -124,7 +124,7 @@
     "@storybook/addon-knobs": "8.0.1",
     "@storybook/angular": "10.2.14",
     "@swc-node/register": "1.11.1",
-    "@swc/core": "1.15.8",
+    "@swc/core": "1.15.18",
     "@swc/helpers": "0.5.19",
     "@types/express": "5.0.6",
     "@types/jest": "30.0.0",
