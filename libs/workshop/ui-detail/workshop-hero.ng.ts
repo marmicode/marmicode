@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 import { Hero, LinkComponent } from '@marmicode/shared/ui';
-import { Workshop } from '@marmicode/workshop/core';
+import { Workshop, WorkshopLanguage } from '@marmicode/workshop/core';
 import { formatPrice } from '@marmicode/workshop/ui';
 import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
 import { UPCOMING_SESSIONS_SECTION_ID } from './workshop-sessions.ng';
@@ -92,14 +92,9 @@ import { UPCOMING_SESSIONS_SECTION_ID } from './workshop-sessions.ng';
               color="white"
               [route]="alternate.route"
             >
-              @switch (alternate.language) {
-                @case ('en') {
-                  🇬🇧 Also available in english
-                }
-                @case ('fr') {
-                  🇫🇷 Également disponible en français
-                }
-              }
+              <span>{{ alternate.flag }}</span>
+              <span class="actions-note-text">{{ alternate.text }}</span>
+              <span>→</span>
             </mc-link>
           }
         </div>
@@ -190,6 +185,13 @@ import { UPCOMING_SESSIONS_SECTION_ID } from './workshop-sessions.ng';
       margin: 1rem 0;
     }
 
+    .actions-note-text {
+      margin: 0 0.5rem;
+      text-decoration: underline;
+      text-decoration-color: rgba(255, 255, 255, 0.4);
+      text-underline-offset: 4px;
+    }
+
     .bottom-note {
       color: white;
       font-size: 1.3rem;
@@ -208,7 +210,8 @@ export class WorkshopHero {
 
   alternateWorkshops = computed(() =>
     this.workshop().alternates?.map((alternate) => ({
-      language: alternate.language,
+      flag: this._languageFlags[alternate.language],
+      text: this._alsoAvailableInLanguageTexts[alternate.language],
       route: workshopRouterHelper.detail(alternate.id),
     })),
   );
@@ -225,4 +228,14 @@ export class WorkshopHero {
       locale: this.workshop().language,
     }),
   );
+
+  private _languageFlags: Record<WorkshopLanguage, string> = {
+    en: '🇬🇧',
+    fr: '🇫🇷',
+  };
+
+  private _alsoAvailableInLanguageTexts: Record<WorkshopLanguage, string> = {
+    en: 'Also available in english',
+    fr: 'Également disponible en français',
+  };
 }
