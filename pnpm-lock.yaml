@@ -212,8 +212,8 @@ importers:
         specifier: 30.0.5
         version: 30.0.5
       '@jscutlery/cypress-harness':
-        specifier: 0.8.5
-        version: 0.8.5(@angular/cdk@21.1.6(@angular/common@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@21.1.6(@angular/animations@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1)))(@angular/common@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2))(@babel/core@7.28.5)(@babel/preset-env@7.28.5(@babel/core@7.28.5))(@swc/core@1.15.8(@swc/helpers@0.5.19))(babel-loader@10.0.0(@babel/core@7.28.5)(webpack@5.105.3(@swc/core@1.15.8(@swc/helpers@0.5.19))(esbuild@0.27.3)))(cypress-pipe@2.0.1)(cypress@15.9.0)(esbuild@0.27.3)(typescript@5.9.3)(zone.js@0.15.1)
+        specifier: 0.8.10
+        version: 0.8.10(@angular/cdk@21.1.6(@angular/common@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@21.1.6(@angular/animations@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1)))(@angular/common@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2))(@babel/core@7.28.5)(@babel/preset-env@7.28.5(@babel/core@7.28.5))(@swc/core@1.15.8(@swc/helpers@0.5.19))(babel-loader@10.0.0(@babel/core@7.28.5)(webpack@5.105.3(@swc/core@1.15.8(@swc/helpers@0.5.19))(esbuild@0.27.3)))(cypress-pipe@2.0.1)(cypress@15.9.0)(esbuild@0.27.3)(typescript@5.9.3)(zone.js@0.15.1)
       '@ngrx/schematics':
         specifier: 21.0.1
         version: 21.0.1
@@ -3149,8 +3149,8 @@ packages:
   '@js-sdsl/ordered-map@4.4.2':
     resolution: {integrity: sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw==}
 
-  '@jscutlery/cypress-harness@0.8.5':
-    resolution: {integrity: sha512-BVBnJitN5xy1LEt3l2KGQJNI/q/3zfMYq/UL0r1DGe79JQ/Z72rq7l/tIgFpoRu9n48Sz8qRE527B7ENtDJdzA==}
+  '@jscutlery/cypress-harness@0.8.10':
+    resolution: {integrity: sha512-+JKndLl0cOEz/aGY/PqXn45x9StChPM8sac8tqClcfaKe//p0pzgKNdvzFWQEGO7+zhHpjwL61w/DiSiY0Ebzw==}
     peerDependencies:
       '@angular/cdk': '*'
       cypress: '*'
@@ -18174,7 +18174,7 @@ snapshots:
 
   '@js-sdsl/ordered-map@4.4.2': {}
 
-  '@jscutlery/cypress-harness@0.8.5(@angular/cdk@21.1.6(@angular/common@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@21.1.6(@angular/animations@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1)))(@angular/common@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2))(@babel/core@7.28.5)(@babel/preset-env@7.28.5(@babel/core@7.28.5))(@swc/core@1.15.8(@swc/helpers@0.5.19))(babel-loader@10.0.0(@babel/core@7.28.5)(webpack@5.105.3(@swc/core@1.15.8(@swc/helpers@0.5.19))(esbuild@0.27.3)))(cypress-pipe@2.0.1)(cypress@15.9.0)(esbuild@0.27.3)(typescript@5.9.3)(zone.js@0.15.1)':
+  '@jscutlery/cypress-harness@0.8.10(@angular/cdk@21.1.6(@angular/common@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@21.1.6(@angular/animations@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1)))(@angular/common@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2))(@babel/core@7.28.5)(@babel/preset-env@7.28.5(@babel/core@7.28.5))(@swc/core@1.15.8(@swc/helpers@0.5.19))(babel-loader@10.0.0(@babel/core@7.28.5)(webpack@5.105.3(@swc/core@1.15.8(@swc/helpers@0.5.19))(esbuild@0.27.3)))(cypress-pipe@2.0.1)(cypress@15.9.0)(esbuild@0.27.3)(typescript@5.9.3)(zone.js@0.15.1)':
     dependencies:
       '@angular/cdk': 21.1.6(@angular/common@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@21.1.6(@angular/animations@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1)))(@angular/common@21.1.6(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2)
       '@cypress/webpack-batteries-included-preprocessor': 2.4.1(@cypress/webpack-preprocessor@5.17.1(@babel/core@7.28.5)(@babel/preset-env@7.28.5(@babel/core@7.28.5))(babel-loader@10.0.0(@babel/core@7.28.5)(webpack@5.105.3(@swc/core@1.15.8(@swc/helpers@0.5.19))(esbuild@0.27.3)))(webpack@5.105.3(@swc/core@1.15.8(@swc/helpers@0.5.19))(esbuild@0.27.3)))(typescript@5.9.3)
