@@ -99,7 +99,7 @@
     "@graphql-codegen/schema-ast": "^4.0.0",
     "@graphql-codegen/typescript": "^4.0.0",
     "@jest/globals": "30.0.5",
-    "@jscutlery/cypress-harness": "0.8.5",
+    "@jscutlery/cypress-harness": "0.8.10",
     "@ngrx/schematics": "21.0.1",
     "@ngrx/store-devtools": "21.0.1",
     "@nx/cypress": "22.5.3",
