@@ -8,5 +8,5 @@ import { MarkdownTokens } from '@marmicode/block/core';
   standalone: true,
 })
 export class MarkdownCodespanComponent {
-  @Input() token: MarkdownTokens.Codespan;
+  @Input() token!: MarkdownTokens.Codespan;
 }

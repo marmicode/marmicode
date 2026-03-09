@@ -5,7 +5,6 @@ import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 import { createCodeBlock } from '@marmicode/block/core';
 import { PushPipe } from '@rx-angular/template/push';
 import * as Prism from 'prismjs';
-import { first } from 'rxjs/operators';
 import { createHighlightZone } from '../highlight/highlight-zone';
 import { CodeBlockComponent } from './code-block.component';
 
@@ -25,26 +24,27 @@ describe.skip('CodeBlockComponent', () => {
     fixture = TestBed.createComponent(CodeBlockComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    /* Set line height manually. */
-    component['_state'].set({ lineHeight: 28 });
   });
 
-  it('should compute highlight coordinates', async () => {
-    component.highlightZone = createHighlightZone({
-      color: 'red',
-      sections: [
-        {
-          start: 2,
-          end: 2,
-        },
-        {
-          start: 8,
-          end: 10,
-        },
-      ],
-    });
+  it('should compute highlight coordinates', () => {
+    fixture.componentRef.setInput(
+      'highlightZone',
+      createHighlightZone({
+        color: 'red',
+        sections: [
+          {
+            start: 2,
+            end: 2,
+          },
+          {
+            start: 8,
+            end: 10,
+          },
+        ],
+      }),
+    );
 
-    expect(await component.highlightStyles$.pipe(first()).toPromise()).toEqual([
+    expect(component.highlightStyles()).toEqual([
       {
         color: 'red',
         top: 38 /* 28 (one line height) + 10 (offset). */,
@@ -58,30 +58,25 @@ describe.skip('CodeBlockComponent', () => {
     ]);
   });
 
-  it('should not crash if no highlight is set', async () => {
-    component.highlightZone = null;
-    expect(await component.highlightStyles$.pipe(first()).toPromise()).toEqual(
-      [],
-    );
+  it('should not crash if no highlight is set', () => {
+    expect(component.highlightStyles()).toEqual([]);
   });
 
-  /* This checks an issue where the highlight was triggered on every view check. */
   it('should highlight once on code change', () => {
-    /* Call through as we want the dom to be updated. */
     jest.spyOn(Prism, 'highlightElement');
 
-    component.block = createCodeBlock({
-      language: 'javascript',
-      code: `const younes = '👨🏻‍🍳'`,
-    });
+    fixture.componentRef.setInput(
+      'block',
+      createCodeBlock({
+        language: 'javascript',
+        code: `const younes = '\u{1F468}\u{1F3FB}\u200D\u{1F373}'`,
+      }),
+    );
 
-    /* Wait for view check to call highlight. */
     expect(Prism.highlightElement).toHaveBeenCalledTimes(0);
 
-    /* Trigger view check. */
     fixture.detectChanges();
 
-    /* Double call doesn't trigger highlight twice. */
     fixture.detectChanges();
 
     expect(Prism.highlightElement).toHaveBeenCalledTimes(1);

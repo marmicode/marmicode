@@ -79,6 +79,7 @@ No dogma. No silver bullets. Just pragmatic Angular testing skills to help you *
         'Enjoy a buffet of tips and tricks to help you adopt a Pragmatic Testing Strategy.',
     },
   ],
+  faqs: [],
   agenda: {
     sections: [
       {

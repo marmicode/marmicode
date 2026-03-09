@@ -10,7 +10,7 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   template: `<strong>
     <ng-container
       *ngComponentOutlet="
-        MarkdownTokensComponent();
+        MarkdownTokensComponent() ?? null;
         inputs: { tokens: token.tokens }
       "
     ></ng-container>
@@ -18,7 +18,7 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   imports: [NgComponentOutlet],
 })
 export class MarkdownStrongComponent {
-  @Input() token: MarkdownTokens.Strong & { tokens?: MarkdownToken[] };
+  @Input() token!: MarkdownTokens.Strong & { tokens?: MarkdownToken[] };
 
   MarkdownTokensComponent = rxComputed(markdownTokensLoader);
 }

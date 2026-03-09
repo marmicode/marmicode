@@ -18,7 +18,7 @@ describe('ResourceSearchFormComponent', () => {
   let selectedSkillSlug$: BehaviorSubject<string>;
 
   beforeEach(async () => {
-    selectedSkillSlug$ = new BehaviorSubject<string>(undefined);
+    selectedSkillSlug$ = new BehaviorSubject<string>(undefined as unknown as string);
 
     TestBed.configureTestingModule({
       providers: [
@@ -76,7 +76,9 @@ describe('ResourceSearchFormComponent', () => {
   });
 
   let router: Router;
-  beforeEach(() => (router = TestBed.inject(Router)));
+  beforeEach(() => {
+    router = TestBed.inject(Router);
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ResourceSearchFormComponent);
@@ -123,7 +125,7 @@ describe('ResourceSearchFormComponent', () => {
 
     fixture.detectChanges();
 
-    component.skillControl.setValue(null);
+    component.skillControl.setValue(null as unknown as string);
 
     expect(router.navigate).toHaveBeenCalledWith(['/', 'learn', 'everything']);
   });

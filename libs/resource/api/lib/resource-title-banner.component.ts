@@ -87,9 +87,9 @@ import { ResourceBadgeComponent } from '@marmicode/resource/ui';
   imports: [ResourceBadgeComponent],
 })
 export class ResourceTitleBannerComponent {
-  @Input() resourceType: ResourceType;
-  @Input() title: string;
-  @Input() subtitle: string;
+  @Input() resourceType!: ResourceType;
+  @Input() title!: string;
+  @Input() subtitle!: string;
 }
 
 @NgModule({

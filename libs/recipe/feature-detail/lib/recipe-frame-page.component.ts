@@ -53,7 +53,7 @@ import { SwipeDirective, SwipeModule } from './swipe.directive';
           <mc-resource-title-banner
             [resourceType]="type$ | push"
             [title]="title"
-            [subtitle]="currentFrameTitle$ | push"
+            [subtitle]="(currentFrameTitle$ | push)!"
           ></mc-resource-title-banner>
         }
     
@@ -71,7 +71,7 @@ import { SwipeDirective, SwipeModule } from './swipe.directive';
           [currentFrameIndex]="currentFrameIndex$ | push"
           [frames]="frames"
           [recipeSlug]="recipeSlug$ | push"
-          [nextFrameRoute]="nextFrameRoute$ | push"
+          [nextFrameRoute]="(nextFrameRoute$ | push)!"
         ></mc-recipe-timeline>
       }
     </mc-page>
@@ -182,7 +182,9 @@ export class RecipeFramePageComponent {
     this._state.connect(
       'recipe',
       this._route.paramMap.pipe(
-        map((params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)),
+        map(
+          (params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)!,
+        ),
         distinctUntilChanged(),
         switchMap((recipeSlug) => this._recipeRepository.getRecipe(recipeSlug)),
       ),
@@ -194,7 +196,9 @@ export class RecipeFramePageComponent {
     this._state.connect(
       'currentFrameSlug',
       this._route.paramMap.pipe(
-        map((params) => params.get(recipeDetailRouterHelper.FRAME_SLUG_PARAM)),
+        map(
+          (params) => params.get(recipeDetailRouterHelper.FRAME_SLUG_PARAM)!,
+        ),
       ),
     );
 
@@ -246,7 +250,7 @@ export class RecipeFramePageComponent {
     return frameSlug ? getRelativeFrameRoute(frameSlug) : null;
   }
 
-  private _tryNavigateToRelativeRoute(route: string[]) {
+  private _tryNavigateToRelativeRoute(route: string[] | null) {
     if (route == null) {
       return;
     }

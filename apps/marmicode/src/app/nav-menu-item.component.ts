@@ -95,7 +95,7 @@ export interface NavMenuEntry {
 })
 export class NavMenuItemComponent {
   @Input() color?: 'primary';
-  @Input() entry?: NavMenuEntry;
+  @Input() entry!: NavMenuEntry;
   @Input() showIcon = true;
 }
 
