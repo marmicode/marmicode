@@ -55,21 +55,27 @@ export class BlogPostRepository {
       })
       .pipe(
         map(({ data }) => {
-          const resource = data.resourceCollection.items[0];
+          const resource = data!.resourceCollection!.items[0]!;
           return createBlogPost({
             id: resource.sys.id,
             author: {
-              name: resource.author.name,
-              pictureUri: resource.author.picture?.url,
-              twitter: resource.author.twitter,
+              name: resource.author!.name!,
+              pictureUri:
+                resource.author!.picture != null && resource.author!.picture.url != null
+                  ? resource.author!.picture.url
+                  : undefined,
+              twitter: resource.author!.twitter!,
             },
-            duration: resource.duration,
-            pictureUri: resource.picture?.url,
+            duration: resource.duration!,
+            pictureUri:
+              resource.picture != null && resource.picture.url != null
+                ? resource.picture.url
+                : undefined,
             releasedAt:
               resource.releasedAt && new Date(Date.parse(resource.releasedAt)),
-            summary: resource.summary,
-            title: resource.title,
-            text: (resource.content as ContentfulBlogPost).text,
+            summary: resource.summary!,
+            title: resource.title!,
+            text: (resource.content as ContentfulBlogPost).text!,
           });
         }),
       );

@@ -26,7 +26,7 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
     <ng-template #contentTpl>
       <ng-container
         *ngComponentOutlet="
-          MarkdownTokensComponent();
+          MarkdownTokensComponent() ?? null;
           inputs: { tokens: token.tokens }
         "
         />
@@ -50,7 +50,7 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   imports: [NgComponentOutlet, NgTemplateOutlet],
 })
 export class MarkdownHeadingComponent {
-  @Input() token: MarkdownTokens.Heading & { tokens?: MarkdownToken[] };
+  @Input() token!: MarkdownTokens.Heading & { tokens?: MarkdownToken[] };
 
   MarkdownTokensComponent = rxComputed(markdownTokensLoader);
 }

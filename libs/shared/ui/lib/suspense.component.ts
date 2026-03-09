@@ -58,9 +58,9 @@ import { LoadingComponent, LoadingModule } from './loading.component';
   imports: [NgTemplateOutlet, ErrorComponent, LoadingComponent],
 })
 export class SuspenseComponent<T = unknown> {
-  @ContentChild('data') dataTemplate: TemplateRef<{ $implicit: T }>;
-  @ContentChild('error') errorTemplate: TemplateRef<{ $implicit: unknown }>;
-  @ContentChild('suspense') suspenseTemplate: TemplateRef<undefined>;
+  @ContentChild('data') dataTemplate!: TemplateRef<{ $implicit: T }>;
+  @ContentChild('error') errorTemplate: TemplateRef<{ $implicit: unknown }> | undefined;
+  @ContentChild('suspense') suspenseTemplate: TemplateRef<undefined> | undefined;
 
   data$ = input.required<Observable<T>>();
 

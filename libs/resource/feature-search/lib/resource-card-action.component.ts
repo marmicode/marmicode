@@ -22,7 +22,7 @@ import { Resource } from './resource';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-card-action',
-  template: ` <mc-link [href]="resource.url" [route]="route">
+  template: ` <mc-link [href]="resource!.url" [route]="route != null ? route : undefined">
     <button [style.backgroundColor]="color" class="action-button" mat-flat-button>
       {{ actionText }}
     </button>
@@ -58,18 +58,18 @@ export class ResourceCardActionComponent implements OnChanges {
     ],
   ]);
 
-  @Input() resource: Resource;
-  actionText: string;
-  color: string;
-  route: string[];
+  @Input() resource!: Resource;
+  actionText!: string;
+  color!: string;
+  route!: string[] | null;
 
   ngOnChanges() {
-    this.actionText = getResourceTypeActionText(this.resource.type);
-    this.color = getResourceTypeColor(this.resource.type);
+    this.actionText = getResourceTypeActionText(this.resource.type)!;
+    this.color = getResourceTypeColor(this.resource.type)!;
     this.route = this._getRoute(this.resource);
   }
 
-  private _getRoute(resource: Resource) {
+  private _getRoute(resource: Resource): string[] | null {
     const fn = ResourceCardActionComponent._routeFactoryMap.get(resource.type);
     return fn != null ? fn(resource.slug) : null;
   }

@@ -53,7 +53,7 @@ export class ResourceSearchFormComponent {
   private _skillRepository = inject(SkillRepository);
   private _state = inject<RxState<any>>(RxState);
 
-  skillControl = new FormControl<Skill | string>(null);
+  skillControl = new FormControl<Skill | string | null>(null);
   allSkills$ = this._skillRepository
     .getSkills()
     .pipe(shareReplay({ refCount: true, bufferSize: 1 }));

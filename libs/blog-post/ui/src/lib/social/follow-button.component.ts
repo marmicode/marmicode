@@ -13,7 +13,7 @@ import { AuthorSocialInfo } from './author-social-info';
   selector: 'mc-follow-button',
   template: `
     <!-- Twitter follow button. -->
-    @if (author?.twitter) {
+    @if (author.twitter) {
       <a
         [href]="'https://twitter.com/' + author.twitter"
         target="_blank"
@@ -68,7 +68,7 @@ import { AuthorSocialInfo } from './author-social-info';
 })
 export class FollowButtonComponent {
   @Input()
-  author: AuthorSocialInfo;
+  author!: AuthorSocialInfo;
   faXTwitter = faXTwitter;
 }
 @NgModule({
