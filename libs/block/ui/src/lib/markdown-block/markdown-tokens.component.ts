@@ -14,5 +14,5 @@ import { MarkdownTokenComponent } from './markdown-token.component';
   imports: [MarkdownTokenComponent],
 })
 export class MarkdownTokensComponent {
-  @Input() tokens: MarkdownToken[];
+  @Input() tokens!: MarkdownToken[];
 }

@@ -38,7 +38,7 @@ export class BlogPostDetailPageComponent {
 
   blogPost$ = this._route.paramMap.pipe(
     map((params) =>
-      params.get(blogPostDetailRouterHelper.BLOG_POST_SLUG_PARAM),
+      params.get(blogPostDetailRouterHelper.BLOG_POST_SLUG_PARAM)!,
     ),
     switchMap((blogPostSlug) =>
       this._blogPostRepository

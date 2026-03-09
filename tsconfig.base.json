@@ -76,7 +76,6 @@
       "@marmicode/workshop/ui-detail": ["libs/workshop/ui-detail/index.ts"]
     },
     "strict": true,
-    "strictNullChecks": false,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true

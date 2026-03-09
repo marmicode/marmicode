@@ -32,8 +32,8 @@ export class SkillRepository {
       })
       .pipe(
         map(({ data }) =>
-          data.skillCollection.items.map((skill) =>
-            skillFragmentToSkill(skill),
+          data!.skillCollection!.items.map((skill) =>
+            skillFragmentToSkill(skill!),
           ),
         ),
       );

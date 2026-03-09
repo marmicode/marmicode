@@ -61,7 +61,7 @@ export class LinkComponent {
   color = input<'accent' | 'white'>('accent');
   link = input<Link>();
   href = input<string>();
-  route = input<string[]>();
+  route = input<string[] | undefined>();
   size = input<'small' | 'medium'>('medium');
 
   computedHref = computed(() => {

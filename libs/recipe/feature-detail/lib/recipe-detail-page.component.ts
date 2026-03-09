@@ -28,7 +28,7 @@ export class RecipeDetailPageComponent implements OnInit {
     /* Redirect to first frame meanwhile we implement the recipe presentation page. */
     this._route.paramMap
       .pipe(
-        map((params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)),
+        map((params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)!),
         switchMap((recipeSlug) =>
           this._recipeRepository.getRecipeFirstFrameSlug(recipeSlug),
         ),
