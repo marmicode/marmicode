@@ -10,18 +10,18 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   template: `@if (token.tokens) {
   <ng-container
         *ngComponentOutlet="
-          MarkdownTokensComponent();
+          MarkdownTokensComponent() ?? null;
           inputs: { tokens: token.tokens }
         "
   ></ng-container>
 }
 @if (!token.tokens) {
-  <span>{{ token.raw }}</span>
+  <span>{{ token.raw! }}</span>
 }`,
   imports: [NgComponentOutlet],
 })
 export class MarkdownTextComponent {
-  @Input() token: MarkdownTokens.Text & { tokens?: MarkdownToken[] };
+  @Input() token!: MarkdownTokens.Text & { tokens?: MarkdownToken[] };
 
   MarkdownTokensComponent = rxComputed(markdownTokensLoader);
 }

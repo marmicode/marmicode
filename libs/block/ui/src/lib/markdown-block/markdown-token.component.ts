@@ -99,13 +99,13 @@ import { MarkdownTextComponent } from './markdown-text.component';
   ],
 })
 export class MarkdownTokenComponent implements OnChanges {
-  @Input() token: MarkdownToken;
+  @Input() token!: MarkdownToken;
   TokenType = MarkdownTokenType;
-  type: string;
+  type!: string;
 
   ngOnChanges(changes: SimpleChanges) {
     if ('token' in changes) {
-      this.type = getMarkdownTokenType(this.token);
+      this.type = getMarkdownTokenType(this.token)!;
 
       /* Log unsupported types. */
       if (!(Object.values(MarkdownTokenType) as string[]).includes(this.type)) {
