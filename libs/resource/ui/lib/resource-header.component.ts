@@ -132,15 +132,15 @@ import {
   imports: [ResourceBadgeComponent, DatePipe],
 })
 export class ResourceHeaderComponent implements OnChanges {
-  @Input() resourceInfo: ResourceInfo;
+  @Input() resourceInfo!: ResourceInfo;
   @Input() mode: 'small' | 'large' = 'small';
   @HostBinding('class.large') get isLarge() {
     return this.mode === 'large';
   }
-  color: string;
+  color!: string;
 
   ngOnChanges() {
-    this.color = getResourceTypeColor(this.resourceInfo.type);
+    this.color = getResourceTypeColor(this.resourceInfo.type)!;
   }
 }
 

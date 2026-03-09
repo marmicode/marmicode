@@ -2,11 +2,11 @@ export interface BlogPost {
   id: string;
   author: {
     name: string;
-    pictureUri: string;
+    pictureUri?: string;
     twitter: string;
   };
   duration: number;
-  pictureUri: string;
+  pictureUri?: string;
   releasedAt: Date;
   summary: string;
   title: string;
