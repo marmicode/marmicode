@@ -158,11 +158,11 @@ importers:
         unplugged: true
     devDependencies:
       '@analogjs/vite-plugin-angular':
-        specifier: 2.1.3
-        version: 2.1.3(@angular-devkit/build-angular@21.1.5(c24728963bfeeb8453e662376c65d032))(@angular/build@21.1.5(c02b7f06ef366d50864d63b759ca1c6b))
+        specifier: 2.3.1
+        version: 2.3.1(@angular-devkit/build-angular@21.1.5(c24728963bfeeb8453e662376c65d032))(@angular/build@21.1.5(c02b7f06ef366d50864d63b759ca1c6b))
       '@analogjs/vitest-angular':
-        specifier: 2.1.3
-        version: 2.1.3(@analogjs/vite-plugin-angular@2.1.3(@angular-devkit/build-angular@21.1.5(c24728963bfeeb8453e662376c65d032))(@angular/build@21.1.5(c02b7f06ef366d50864d63b759ca1c6b)))(@angular-devkit/architect@0.2101.5)(vitest@4.0.18)
+        specifier: 2.3.1
+        version: 2.3.1(@analogjs/vite-plugin-angular@2.3.1(@angular-devkit/build-angular@21.1.5(c24728963bfeeb8453e662376c65d032))(@angular/build@21.1.5(c02b7f06ef366d50864d63b759ca1c6b)))(@angular-devkit/architect@0.2101.5)(@angular-devkit/schematics@21.1.5)(vitest@4.0.18)(zone.js@0.15.1)
       '@angular-devkit/architect':
         specifier: 0.2101.5
         version: 0.2101.5
@@ -508,8 +508,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@analogjs/vite-plugin-angular@2.1.3':
-    resolution: {integrity: sha512-mXL3LPMRC0nEWzSLP6sguXYUm+J4l+qRZmR9czhTQKWFP+PbNas6UHF6txe1fQs1pc/tMb7HQPZCEoaPMlol9Q==}
+  '@analogjs/vite-plugin-angular@2.3.1':
+    resolution: {integrity: sha512-6ttSrMFBYwvS5JfovagfhkLaje1RjzztIniBWtH5G8wc6vrud77/sRJWVaVC4Ri4XRBTQ2kG5thSDumccX1B7g==}
     peerDependencies:
       '@angular-devkit/build-angular': ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
       '@angular/build': ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
@@ -519,12 +519,17 @@ packages:
       '@angular/build':
         optional: true
 
-  '@analogjs/vitest-angular@2.1.3':
-    resolution: {integrity: sha512-oRZxP/8cnf7g6e+VDYkILeA2gQLDS+oDrytiPixoA5YQwlroGtB1B3DkPOuzSSlI3Z9YMHkdL3OLKFIcuCDr5g==}
+  '@analogjs/vitest-angular@2.3.1':
+    resolution: {integrity: sha512-wbTLgeWDR9qPohE5vzGi4GJ0oHC/GmAhkzEMbt6xoAHbhvMsRrqsiiku03tejHcPqErMlsBotIeR/huAbJferQ==}
     peerDependencies:
       '@analogjs/vite-plugin-angular': '*'
       '@angular-devkit/architect': '>=0.1500.0 < 0.2200.0'
+      '@angular-devkit/schematics': '>=17.0.0'
       vitest: ^1.3.1 || ^2.0.0 || ^3.0.0 || ^4.0.0
+      zone.js: '>=0.14.0'
+    peerDependenciesMeta:
+      zone.js:
+        optional: true
 
   '@angular-devkit/architect@0.2101.5':
     resolution: {integrity: sha512-eTo6wWzUW5AyBBLTbaUTpBHhGbZhzteErtNGklWkhjicCr/soNH+2mVtvg8bqA8sNreYffK1VXKFsq5NyMh5qg==}
@@ -14412,18 +14417,22 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
 
-  '@analogjs/vite-plugin-angular@2.1.3(@angular-devkit/build-angular@21.1.5(c24728963bfeeb8453e662376c65d032))(@angular/build@21.1.5(c02b7f06ef366d50864d63b759ca1c6b))':
+  '@analogjs/vite-plugin-angular@2.3.1(@angular-devkit/build-angular@21.1.5(c24728963bfeeb8453e662376c65d032))(@angular/build@21.1.5(c02b7f06ef366d50864d63b759ca1c6b))':
     dependencies:
+      tinyglobby: 0.2.15
       ts-morph: 21.0.1
     optionalDependencies:
       '@angular-devkit/build-angular': 21.1.5(c24728963bfeeb8453e662376c65d032)
       '@angular/build': 21.1.5(c02b7f06ef366d50864d63b759ca1c6b)
 
-  '@analogjs/vitest-angular@2.1.3(@analogjs/vite-plugin-angular@2.1.3(@angular-devkit/build-angular@21.1.5(c24728963bfeeb8453e662376c65d032))(@angular/build@21.1.5(c02b7f06ef366d50864d63b759ca1c6b)))(@angular-devkit/architect@0.2101.5)(vitest@4.0.18)':
+  '@analogjs/vitest-angular@2.3.1(@analogjs/vite-plugin-angular@2.3.1(@angular-devkit/build-angular@21.1.5(c24728963bfeeb8453e662376c65d032))(@angular/build@21.1.5(c02b7f06ef366d50864d63b759ca1c6b)))(@angular-devkit/architect@0.2101.5)(@angular-devkit/schematics@21.1.5)(vitest@4.0.18)(zone.js@0.15.1)':
     dependencies:
-      '@analogjs/vite-plugin-angular': 2.1.3(@angular-devkit/build-angular@21.1.5(c24728963bfeeb8453e662376c65d032))(@angular/build@21.1.5(c02b7f06ef366d50864d63b759ca1c6b))
+      '@analogjs/vite-plugin-angular': 2.3.1(@angular-devkit/build-angular@21.1.5(c24728963bfeeb8453e662376c65d032))(@angular/build@21.1.5(c02b7f06ef366d50864d63b759ca1c6b))
       '@angular-devkit/architect': 0.2101.5
+      '@angular-devkit/schematics': 21.1.5
       vitest: 4.0.18(@opentelemetry/api@1.9.0)(@types/node@22.19.14)(@vitest/ui@4.0.18)(jiti@2.6.0)(jsdom@22.1.0)(less@4.4.2)(sass-embedded@1.89.2)(sass@1.97.1)(stylus@0.64.0)(terser@5.46.0)(yaml@2.8.0)
+    optionalDependencies:
+      zone.js: 0.15.1
 
   '@angular-devkit/architect@0.2101.5':
     dependencies:
@@ -21131,14 +21140,14 @@ snapshots:
   '@ts-morph/common@0.22.0':
     dependencies:
       fast-glob: 3.3.3
-      minimatch: 9.0.5
+      minimatch: 9.0.9
       mkdirp: 3.0.1
       path-browserify: 1.0.1
 
   '@ts-morph/common@0.24.0':
     dependencies:
       fast-glob: 3.3.3
-      minimatch: 9.0.5
+      minimatch: 9.0.9
       mkdirp: 3.0.1
       path-browserify: 1.0.1
 
@@ -28254,7 +28263,6 @@ snapshots:
   minimatch@9.0.9:
     dependencies:
       brace-expansion: 2.0.2
-    optional: true
 
   minimist@1.2.8: {}
 
