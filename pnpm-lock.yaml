@@ -78,8 +78,8 @@ importers:
         specifier: 3.2.5
         version: 3.2.5(rxjs@7.8.2)
       '@jscutlery/rx-computed':
-        specifier: 0.7.5
-        version: 0.7.5(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(@jscutlery/operators@3.2.5(rxjs@7.8.2))
+        specifier: 0.7.10
+        version: 0.7.10(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(@jscutlery/operators@3.2.5(rxjs@7.8.2))
       '@ngneat/until-destroy':
         specifier: ^10.0.0
         version: 10.0.0(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2)
@@ -3171,11 +3171,11 @@ packages:
     peerDependencies:
       rxjs: '>=6.0.0'
 
-  '@jscutlery/rx-computed@0.7.5':
-    resolution: {integrity: sha512-EUbsY0j7l/nBTlbr+C04VrUgOYM3/UgJaVJhnkU8gPqPVqaiodObDcM62dH2aSKzAOFuco0kOUfzzgjNzzXIew==}
+  '@jscutlery/rx-computed@0.7.10':
+    resolution: {integrity: sha512-RLcwHv3VMvlJRhsA9TmXpLkPlHn6aIrQ4A4QvR6021Q9IFFr+gFaqRrdJhv2tjsYeGTzTSUJfFY13gak/KdPlQ==}
     peerDependencies:
-      '@angular/core': '>=16.0.0 <20.0.0'
-      '@jscutlery/operators': ^2.0.0
+      '@angular/core': '>=16.0.0 <22.0.0'
+      '@jscutlery/operators': ^3.0.0
 
   '@jsdevtools/ono@7.1.3':
     resolution: {integrity: sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==}
@@ -18831,7 +18831,7 @@ snapshots:
     dependencies:
       rxjs: 7.8.2
 
-  '@jscutlery/rx-computed@0.7.5(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(@jscutlery/operators@3.2.5(rxjs@7.8.2))':
+  '@jscutlery/rx-computed@0.7.10(@angular/core@21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1))(@jscutlery/operators@3.2.5(rxjs@7.8.2))':
     dependencies:
       '@angular/core': 21.1.6(@angular/compiler@21.1.6)(rxjs@7.8.2)(zone.js@0.15.1)
       '@jscutlery/operators': 3.2.5(rxjs@7.8.2)
