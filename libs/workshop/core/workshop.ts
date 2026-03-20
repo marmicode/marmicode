@@ -74,6 +74,7 @@ export interface Faq {
 export interface Testimonial {
   quote: string;
   authorName: string;
+  authorPictureUri?: string;
   authorRole?: string;
   authorCompany?: string;
 }
