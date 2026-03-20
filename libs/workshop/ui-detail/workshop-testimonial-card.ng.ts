@@ -19,8 +19,17 @@ import { Testimonial } from '@marmicode/workshop/core';
       </mat-card-content>
       <mat-card-footer class="footer">
         <div class="author">
-          <span class="author-name">{{ testimonial().authorName }}</span>
-          <span class="author-meta">{{ roleAndCompany() }}</span>
+          @if (testimonial().authorPictureUri) {
+            <img
+              class="author-picture"
+              [src]="testimonial().authorPictureUri"
+              [alt]="testimonial().authorName"
+            />
+          }
+          <div class="author-info">
+            <span class="author-name">{{ testimonial().authorName }}</span>
+            <span class="author-meta">{{ roleAndCompany() }}</span>
+          </div>
         </div>
       </mat-card-footer>
     </mat-card>
@@ -62,10 +71,25 @@ import { Testimonial } from '@marmicode/workshop/core';
 
     .author {
       display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.75rem;
       border-top: 1px solid rgba(56, 0, 48, 0.12);
       padding-top: 1rem;
+    }
+
+    .author-picture {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .author-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
     }
 
     .author-name {

@@ -107,6 +107,13 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
   ],
   testimonials: [
     {
+      authorName: 'Andrew Scott',
+      authorCompany: 'Google',
+      authorRole: 'Angular Core Team Member',
+      authorPictureUri: 'https://avatars.githubusercontent.com/u/479713?v=4',
+      quote: `I've had the pleasure of working with Younes several times over the past year — particularly around testing in a zoneless Angular world — and we consistently find ourselves on the exact same page. We consider him one of the strongest testing experts among the GDEs.`,
+    },
+    {
       authorName: 'Wiemar A. W.',
       authorCompany: '4PS',
       quote:
