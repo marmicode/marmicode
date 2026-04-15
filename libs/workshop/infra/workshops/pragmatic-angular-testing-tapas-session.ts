@@ -5,9 +5,12 @@ import pictureUri from './pragmatic-angular-testing.webp';
 export const pragmaticAngularTestingTapasSession = createWorkshop({
   id: 'pragmatic-angular-testing-tapas-session',
   title: 'Pragmatic Angular Testing Workshop',
+  shortTitle: 'Pragmatic Angular Testing',
   type: 'tapas',
   subheading: `Tired of whack-a-mole bugs, boring manual tests, and fragile suites?
 Let's cook fast, reliable tests that actually help you ship.`,
+  pictureAltText:
+    'Younes in apron holding a purple cooking pot overflowing with Angular, Vitest, Playwright, and Testronaut logos in a kitchen setting.',
   pictureUri,
   thumbnailUri,
   duration: 1,
@@ -41,9 +44,10 @@ No dogma. No silver bullets. Just pragmatic Angular testing skills to help you *
 `,
   offer: {
     type: 'early-bird',
-    price: 270,
-    originalPrice: 350,
+    price: 370,
+    originalPrice: 470,
   },
+  language: 'en',
   requiredSkills: [
     `Angular core concepts (e.g. components, inputs/outputs, services)`,
     `TypeScript fundamentals (e.g. types, interfaces, basic generics)`,

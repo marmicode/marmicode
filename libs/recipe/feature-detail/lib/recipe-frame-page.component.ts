@@ -1,10 +1,5 @@
 import { CommonModule, NgIf, ViewportScroller } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostListener,
-  NgModule,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, NgModule, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlockGroupComponent } from '@marmicode/block/ui';
 import { ResourceTitleBannerComponent } from '@marmicode/resource/api';
@@ -52,32 +47,35 @@ import { SwipeDirective, SwipeModule } from './swipe.directive';
         class="swipable-content"
         mcSlideAnimation
         mcSwipe
-      >
+        >
         <!-- Recipe's title. -->
-        <mc-resource-title-banner
-          *ngIf="title$ | push as title"
-          [resourceType]="type$ | push"
-          [title]="title"
-          [subtitle]="currentFrameTitle$ | push"
-        ></mc-resource-title-banner>
-
+        @if (title$ | push; as title) {
+          <mc-resource-title-banner
+            [resourceType]="type$ | push"
+            [title]="title"
+            [subtitle]="(currentFrameTitle$ | push)!"
+          ></mc-resource-title-banner>
+        }
+    
         <!-- Frame's blocks with code, text etc... -->
-        <mc-block-group
-          *ngIf="currentFrame$ | push as currentFrame"
-          [blockGroup]="currentFrame"
-        ></mc-block-group>
+        @if (currentFrame$ | push; as currentFrame) {
+          <mc-block-group
+            [blockGroup]="currentFrame"
+          ></mc-block-group>
+        }
       </div>
-
+    
       <!-- THE timeline. -->
-      <mc-recipe-timeline
-        *ngIf="frames$ | push as frames"
-        [currentFrameIndex]="currentFrameIndex$ | push"
-        [frames]="frames"
-        [recipeSlug]="recipeSlug$ | push"
-        [nextFrameRoute]="nextFrameRoute$ | push"
-      ></mc-recipe-timeline>
+      @if (frames$ | push; as frames) {
+        <mc-recipe-timeline
+          [currentFrameIndex]="currentFrameIndex$ | push"
+          [frames]="frames"
+          [recipeSlug]="recipeSlug$ | push"
+          [nextFrameRoute]="nextFrameRoute$ | push"
+        ></mc-recipe-timeline>
+      }
     </mc-page>
-  `,
+    `,
   styles: [
     `
       .page {
@@ -103,14 +101,22 @@ import { SwipeDirective, SwipeModule } from './swipe.directive';
     PageComponent,
     SlideAnimationDirective,
     SwipeDirective,
-    NgIf,
     ResourceTitleBannerComponent,
     BlockGroupComponent,
     RecipeTimelineComponent,
-    PushPipe,
-  ],
+    PushPipe
+],
 })
 export class RecipeFramePageComponent {
+  private _recipeRepository = inject(RecipeRepository);
+  private _route = inject(ActivatedRoute);
+  private _router = inject(Router);
+  private _state = inject<RxState<{
+    recipe: Recipe;
+    currentFrameSlug: string;
+}>>(RxState);
+  private _viewportScroller = inject(ViewportScroller);
+
   recipe$ = this._state.select('recipe');
   recipeSlug$ = this.recipe$.pipe(select(map((recipe) => recipe.slug)));
   frames$ = this.recipe$.pipe(select(map((recipe) => recipe.frames)));
@@ -169,20 +175,14 @@ export class RecipeFramePageComponent {
    */
   private _key$ = new Subject<string>();
 
-  constructor(
-    private _recipeRepository: RecipeRepository,
-    private _route: ActivatedRoute,
-    private _router: Router,
-    private _state: RxState<{ recipe: Recipe; currentFrameSlug: string }>,
-    private _viewportScroller: ViewportScroller,
-  ) {
+  constructor() {
     /**
      * Load recipe.
      */
     this._state.connect(
       'recipe',
       this._route.paramMap.pipe(
-        map((params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)),
+        map((params) => params.get(recipeDetailRouterHelper.RECIPE_SLUG_PARAM)!),
         distinctUntilChanged(),
         switchMap((recipeSlug) => this._recipeRepository.getRecipe(recipeSlug)),
       ),
@@ -194,7 +194,7 @@ export class RecipeFramePageComponent {
     this._state.connect(
       'currentFrameSlug',
       this._route.paramMap.pipe(
-        map((params) => params.get(recipeDetailRouterHelper.FRAME_SLUG_PARAM)),
+        map((params) => params.get(recipeDetailRouterHelper.FRAME_SLUG_PARAM)!),
       ),
     );
 
@@ -246,7 +246,7 @@ export class RecipeFramePageComponent {
     return frameSlug ? getRelativeFrameRoute(frameSlug) : null;
   }
 
-  private _tryNavigateToRelativeRoute(route: string[]) {
+  private _tryNavigateToRelativeRoute(route: string[] | null) {
     if (route == null) {
       return;
     }

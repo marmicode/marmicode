@@ -88,12 +88,7 @@
         "inlineStyleLanguage": "scss",
         "browser": "apps/marmicode/src/main.ts",
         "server": "apps/marmicode/src/main.server.ts",
-        "ssr": {
-          "entry": "apps/marmicode/src/server.ts"
-        },
-        "prerender": {
-          "routesFile": "apps/marmicode/marmicode-routes.txt"
-        },
+        "outputMode": "static",
         "loader": {
           ".webp": "file"
         }
@@ -159,8 +154,7 @@
         }
       },
       "defaultConfiguration": "production",
-      "outputs": ["{options.outputPath.base}"],
-      "dependsOn": ["update-routes"]
+      "outputs": ["{options.outputPath.base}"]
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
@@ -175,7 +169,8 @@
           "buildTarget": "marmicode:build:production"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "continuous": true
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -186,12 +181,13 @@
     "lint": {
       "executor": "@nx/eslint:lint"
     },
-    "test": {
+    "jest": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "apps/marmicode/jest.config.ts"
+        "jestConfig": "{projectRoot}/jest.config.ts",
+        "tsConfig": "{projectRoot}/tsconfig.spec.json"
       },
-      "outputs": ["{workspaceRoot}/coverage/apps/marmicode"]
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     },
     "deploy": {
       "executor": "nx:run-commands",
@@ -213,10 +209,6 @@
         "parallel": false
       },
       "dependsOn": ["build"]
-    },
-    "update-routes": {
-      "command": "node --experimental-strip-types apps/marmicode/update-routes.ts -o apps/marmicode/marmicode-routes.txt",
-      "outputs": ["{projectRoot}/marmicode-routes.txt"]
     }
   }
 }

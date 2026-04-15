@@ -38,12 +38,20 @@ export const createNodesV2: CreateNodesV2 = [
                   ],
                   outputs: ['{options.outputFile}'],
                 },
+                jest: {
+                  executor: '@nx/jest:jest',
+                  options: {
+                    jestConfig: '{workspaceRoot}/libs/jest.config.ts',
+                    tsConfig: '{workspaceRoot}/libs/tsconfig.jest.json',
+                    testPathPatterns: [projectRoot],
+                  },
+                  outputs: ['{workspaceRoot}/coverage/{projectRoot}'],
+                },
                 test: {
-                  command: 'vitest',
+                  command: `vitest ${scope}/${name}`,
                   metadata: { technologies: ['vitest'] },
                   options: {
                     cwd: projectRoot,
-                    root: '.',
                   },
                   cache: true,
                   inputs: [

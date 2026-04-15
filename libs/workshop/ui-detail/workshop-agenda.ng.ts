@@ -1,14 +1,15 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { Agenda } from '@marmicode/workshop/core';
 import { PageSection } from '@marmicode/shared/ui';
+import { Workshop } from '@marmicode/workshop/core';
+import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
 @Component({
   selector: 'mc-workshop-agenda',
   imports: [MatExpansionModule, PageSection],
   template: `
-    <mc-page-section pageTitle="🗓️ Agenda">
+    <mc-page-section [sectionTitle]="sectionTitle()">
       <mat-accordion>
-        @for (section of agenda().sections; track section) {
+        @for (section of workshop().agenda.sections; track section) {
           @let isEmpty = section.items.length === 0;
           <mat-expansion-panel [hideToggle]="isEmpty" [inert]="isEmpty">
             <mat-expansion-panel-header>
@@ -64,5 +65,9 @@ import { PageSection } from '@marmicode/shared/ui';
   `,
 })
 export class WorkshopAgenda {
-  agenda = input.required<Agenda>();
+  workshop = input.required<Workshop>();
+
+  sectionTitle = computed(
+    () => `🗓️ ${WORKSHOP_DETAIL_LABELS[this.workshop().language].program}`,
+  );
 }

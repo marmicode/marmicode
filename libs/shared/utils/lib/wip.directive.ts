@@ -1,10 +1,4 @@
-import {
-  Directive,
-  NgModule,
-  OnInit,
-  TemplateRef,
-  ViewContainerRef,
-} from '@angular/core';
+import { Directive, NgModule, OnInit, TemplateRef, ViewContainerRef, inject } from '@angular/core';
 import { WipService } from './wip.service';
 
 @Directive({
@@ -12,11 +6,10 @@ import { WipService } from './wip.service';
     standalone: true,
 })
 export class WipDirective implements OnInit {
-  constructor(
-    private _wipService: WipService,
-    private _templateRef: TemplateRef<unknown>,
-    private _viewContainerRef: ViewContainerRef
-  ) {}
+  private _wipService = inject(WipService);
+  private _templateRef = inject<TemplateRef<unknown>>(TemplateRef);
+  private _viewContainerRef = inject(ViewContainerRef);
+
 
   ngOnInit() {
     if (this._wipService.isWip()) {
@@ -30,11 +23,10 @@ export class WipDirective implements OnInit {
     standalone: true,
 })
 export class NotWipDirective implements OnInit {
-  constructor(
-    private _wipService: WipService,
-    private _templateRef: TemplateRef<unknown>,
-    private _viewContainerRef: ViewContainerRef
-  ) {}
+  private _wipService = inject(WipService);
+  private _templateRef = inject<TemplateRef<unknown>>(TemplateRef);
+  private _viewContainerRef = inject(ViewContainerRef);
+
 
   ngOnInit() {
     if (!this._wipService.isWip()) {

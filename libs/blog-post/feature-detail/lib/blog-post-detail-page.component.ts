@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlogPostModule } from '@marmicode/blog-post/ui';
 import { blogPostDetailRouterHelper } from '@marmicode/shared/router-helpers';
@@ -32,9 +32,13 @@ import { BlogPostComponent } from '@marmicode/blog-post/ui';
   imports: [PageComponent, SuspenseComponent, BlogPostComponent, PushPipe],
 })
 export class BlogPostDetailPageComponent {
+  private _blogPostRepository = inject(BlogPostRepository);
+  private _route = inject(ActivatedRoute);
+  private _transferStateHelper = inject(TransferStateHelper);
+
   blogPost$ = this._route.paramMap.pipe(
     map((params) =>
-      params.get(blogPostDetailRouterHelper.BLOG_POST_SLUG_PARAM),
+      params.get(blogPostDetailRouterHelper.BLOG_POST_SLUG_PARAM)!,
     ),
     switchMap((blogPostSlug) =>
       this._blogPostRepository
@@ -45,12 +49,6 @@ export class BlogPostDetailPageComponent {
   );
 
   pageInfo$ = this.blogPost$.pipe(map(blogPostToPageInfo));
-
-  constructor(
-    private _blogPostRepository: BlogPostRepository,
-    private _route: ActivatedRoute,
-    private _transferStateHelper: TransferStateHelper,
-  ) {}
 }
 
 @NgModule({

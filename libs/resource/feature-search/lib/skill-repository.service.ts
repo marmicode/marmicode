@@ -31,7 +31,11 @@ export class SkillRepository {
         query: allSkills,
       })
       .pipe(
-        map(({ data }) => data.skillCollection.items.map(skillFragmentToSkill)),
+        map(({ data }) =>
+          data!.skillCollection!.items.map((skill) =>
+            skillFragmentToSkill(skill!),
+          ),
+        ),
       );
   }
 }

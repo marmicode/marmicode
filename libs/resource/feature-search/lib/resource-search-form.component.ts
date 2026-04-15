@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { resourceSearchRouterHelper } from '@marmicode/shared/router-helpers';
@@ -48,19 +48,18 @@ import {
   imports: [SearchInputComponent, PushPipe],
 })
 export class ResourceSearchFormComponent {
-  skillControl = new FormControl<Skill | string>(null);
+  private _resourceSearchFacade = inject(ResourceSearchFacade);
+  private _router = inject(Router);
+  private _skillRepository = inject(SkillRepository);
+  private _state = inject<RxState<any>>(RxState);
+
+  skillControl = new FormControl<Skill | string | null>(null);
   allSkills$ = this._skillRepository
     .getSkills()
     .pipe(shareReplay({ refCount: true, bufferSize: 1 }));
   filteredSkills$: Observable<Skill[]>;
 
-  constructor(
-    private _resourceSearchFacade: ResourceSearchFacade,
-    private _router: Router,
-    private _skillRepository: SkillRepository,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    private _state: RxState<any>,
-  ) {
+  constructor() {
     this.filteredSkills$ = combineLatest([
       this.allSkills$,
       concat(

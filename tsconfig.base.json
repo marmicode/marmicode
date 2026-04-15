@@ -8,7 +8,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
@@ -76,7 +76,6 @@
       "@marmicode/workshop/ui-detail": ["libs/workshop/ui-detail/index.ts"]
     },
     "strict": true,
-    "strictNullChecks": false,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true

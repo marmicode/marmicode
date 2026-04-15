@@ -6,7 +6,7 @@ import {
   NgModule,
   OnChanges,
 } from '@angular/core';
-import { MatButtonModule, MatButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import {
   getResourceTypeActionText,
   getResourceTypeColor,
@@ -16,33 +16,28 @@ import {
   blogPostDetailRouterHelper,
   recipeDetailRouterHelper,
 } from '@marmicode/shared/router-helpers';
-import { LinkModule } from '@marmicode/shared/ui';
+import { LinkComponent, LinkModule } from '@marmicode/shared/ui';
 import { Resource } from './resource';
-import { LinkComponent } from '@marmicode/shared/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-card-action',
-  template: ` <mc-link [href]="resource.url" [route]="route">
-    <button
-      [style.backgroundColor]="color"
-      class="action-button"
-      mat-raised-button
-      color="primary"
-    >
+  template: ` <mc-link [href]="resource!.url" [route]="route != null ? route : undefined">
+    <button [style.backgroundColor]="color" class="action-button" mat-flat-button>
       {{ actionText }}
     </button>
   </mc-link>`,
   styles: [
     `
-      .action-button {
+      button.action-button {
+        color: white;
         font-size: 1.1em;
         min-width: 130px;
         text-transform: uppercase;
       }
     `,
   ],
-  imports: [LinkComponent, MatButton],
+  imports: [LinkComponent, MatButtonModule],
 })
 export class ResourceCardActionComponent implements OnChanges {
   private static _routeFactoryMap = new Map<
@@ -63,18 +58,18 @@ export class ResourceCardActionComponent implements OnChanges {
     ],
   ]);
 
-  @Input() resource: Resource;
-  actionText: string;
-  color: string;
-  route: string[];
+  @Input() resource!: Resource;
+  actionText!: string;
+  color!: string;
+  route!: string[] | null;
 
   ngOnChanges() {
-    this.actionText = getResourceTypeActionText(this.resource.type);
-    this.color = getResourceTypeColor(this.resource.type);
+    this.actionText = getResourceTypeActionText(this.resource.type)!;
+    this.color = getResourceTypeColor(this.resource.type)!;
     this.route = this._getRoute(this.resource);
   }
 
-  private _getRoute(resource: Resource) {
+  private _getRoute(resource: Resource): string[] | null {
     const fn = ResourceCardActionComponent._routeFactoryMap.get(resource.type);
     return fn != null ? fn(resource.slug) : null;
   }

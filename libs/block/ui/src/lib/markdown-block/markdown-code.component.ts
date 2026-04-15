@@ -26,14 +26,14 @@ import { CodeBlockComponent } from '../code-block/code-block.component';
   imports: [CodeBlockComponent],
 })
 export class MarkdownCodeComponent implements OnChanges {
-  @Input() token: MarkdownTokens.Code;
-  codeBlock: CodeBlock;
+  @Input() token!: MarkdownTokens.Code;
+  codeBlock!: CodeBlock;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.token) {
+    if ('token' in changes) {
       this.codeBlock = createCodeBlock({
         code: this.token.text,
-        language: this.token.lang,
+        language: this.token.lang!,
       });
     }
   }

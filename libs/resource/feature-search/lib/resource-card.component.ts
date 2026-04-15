@@ -1,4 +1,4 @@
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -38,13 +38,14 @@ import { SkillChipComponent, SkillChipModule } from './skill-chip.component';
   template: ` <mat-card class="card">
     <article class="card-article">
       <!-- Resource picture. -->
-      <img
-        *ngIf="resource.pictureUri"
-        [src]="resource.pictureUri"
-        [alt]="resource.title"
-        class="picture"
-        mat-card-image
-      />
+      @if (resource.pictureUri) {
+        <img
+          [src]="resource.pictureUri"
+          [alt]="resource.title"
+          class="picture"
+          mat-card-image
+        />
+      }
 
       <!-- Resource triangle. -->
       <mc-resource-type-triangle
@@ -63,29 +64,28 @@ import { SkillChipComponent, SkillChipModule } from './skill-chip.component';
         </p>
 
         <!-- Skills. -->
-        <section *ngIf="resource.skills?.length > 0" class="list-container">
-          <h3 [style.color]="color" class="list-title">You Will Learn</h3>
-          <div class="skills">
-            <mc-skill-chip
-              *ngFor="let skill of resource.skills"
-              [skill]="skill"
-            ></mc-skill-chip>
-          </div>
-        </section>
+        @if (resource!.skills!.length > 0) {
+          <section class="list-container">
+            <h3 [style.color]="color" class="list-title">You Will Learn</h3>
+            <div class="skills">
+              @for (skill of resource.skills; track skill.id) {
+                <mc-skill-chip [skill]="skill"></mc-skill-chip>
+              }
+            </div>
+          </section>
+        }
 
         <!-- Required skills. -->
-        <section
-          *ngIf="resource.requiredSkills?.length > 0"
-          class="list-container"
-        >
-          <h3 [style.color]="color" class="list-title">Required Skills</h3>
-          <div class="skills">
-            <mc-skill-chip
-              *ngFor="let skill of resource.requiredSkills"
-              [skill]="skill"
-            ></mc-skill-chip>
-          </div>
-        </section>
+        @if (resource!.requiredSkills!.length > 0) {
+          <section class="list-container">
+            <h3 [style.color]="color" class="list-title">Required Skills</h3>
+            <div class="skills">
+              @for (skill of resource.requiredSkills; track skill.id) {
+                <mc-skill-chip [skill]="skill"></mc-skill-chip>
+              }
+            </div>
+          </section>
+        }
       </mat-card-content>
 
       <mat-card-actions class="actions-container">
@@ -157,25 +157,23 @@ import { SkillChipComponent, SkillChipModule } from './skill-chip.component';
   ],
   imports: [
     MatCard,
-    NgIf,
     MatCardImage,
     ResourceTypeTriangleComponent,
     ResourceHeaderComponent,
     MatCardContent,
-    NgFor,
     SkillChipComponent,
     MatCardActions,
     ResourceCardActionComponent,
   ],
 })
 export class ResourceCardComponent implements OnChanges {
-  @Input() resource: Resource;
-  actionText: string;
-  color: string;
+  @Input() resource!: Resource;
+  actionText!: string;
+  color!: string;
 
   ngOnChanges() {
-    this.color = getResourceTypeColor(this.resource.type);
-    this.actionText = getResourceTypeActionText(this.resource.type);
+    this.color = getResourceTypeColor(this.resource.type)!;
+    this.actionText = getResourceTypeActionText(this.resource.type)!;
   }
 }
 

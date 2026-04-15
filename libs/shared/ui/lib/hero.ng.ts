@@ -62,11 +62,13 @@ import { MatIconModule } from '@angular/material/icon';
     .subtitle {
       font-weight: bold;
       line-height: 1;
+      margin: 1rem 0;
       text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
     }
 
     .title {
       font-size: 3em;
+      margin-bottom: 5px;
     }
 
     .subtitle {

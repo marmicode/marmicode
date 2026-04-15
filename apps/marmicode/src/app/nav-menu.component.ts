@@ -1,21 +1,19 @@
+import { CommonModule } from '@angular/common';
 import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
-import { MatButton, MatButtonModule } from '@angular/material/button';
+  ChangeDetectionStrategy,
+  Component,
+  NgModule,
+  signal,
+} from '@angular/core';
+import { MatButtonModule, MatMiniFabButton } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatListModule, MatNavList } from '@angular/material/list';
 import {
   resourceSearchRouterHelper,
   workshopRouterHelper,
+  externalLinks,
 } from '@marmicode/shared/router-helpers';
 import { PushPipe } from '@rx-angular/template/push';
-import { BehaviorSubject } from 'rxjs';
 import {
   NavMenuEntry,
   NavMenuItemComponent,
@@ -25,15 +23,17 @@ import {
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-nav-menu',
+  imports: [MatNavList, NavMenuItemComponent, MatMiniFabButton, MatIcon],
   template: `
     <!-- Toolbar links. -->
     <div class="mc-flex-row">
       <mat-nav-list class="mc-flex-row mc-hide mc-show-gt-sm" role="menu">
-        <mc-nav-menu-item
-          *ngFor="let entry of entries"
-          [entry]="entry"
-          [showIcon]="false"
-        ></mc-nav-menu-item>
+        @for (entry of entries; track entry) {
+          <mc-nav-menu-item
+            [entry]="entry"
+            [showIcon]="false"
+          ></mc-nav-menu-item>
+        }
       </mat-nav-list>
 
       <button
@@ -42,31 +42,33 @@ import {
         aria-label="menu"
         aria-haspopup="true"
         data-role="menu-button"
-        mat-button
+        matMiniFab
       >
         <mat-icon>menu</mat-icon>
       </button>
     </div>
 
     <!-- Overlay menu. -->
-    <div
-      *ngIf="isMenuDisplayed$ | push"
-      @showHide
-      class="vertical-menu mat-elevation-z1 mc-hide-gt-sm"
-    >
-      <mat-nav-list
-        class="vertical-menu-list"
-        data-role="vertical-menu"
-        role="menu"
+    @if (isMenuDisplayed()) {
+      <div
+        animate.leave="leaving"
+        class="vertical-menu mat-elevation-z1 mc-hide-gt-sm"
       >
-        <mc-nav-menu-item
-          *ngFor="let entry of entries"
-          [entry]="entry"
-          (click)="closeMenu()"
-          color="primary"
-        ></mc-nav-menu-item>
-      </mat-nav-list>
-    </div>
+        <mat-nav-list
+          class="vertical-menu-list"
+          data-role="vertical-menu"
+          role="menu"
+        >
+          @for (entry of entries; track entry) {
+            <mc-nav-menu-item
+              [entry]="entry"
+              (click)="closeMenu()"
+              color="primary"
+            ></mc-nav-menu-item>
+          }
+        </mat-nav-list>
+      </div>
+    }
   `,
   styles: [
     `
@@ -81,6 +83,16 @@ import {
 
         background-color: white;
         overflow: hidden;
+
+        transition: max-height 0.2s ease-in-out;
+        max-height: 100vh;
+        @starting-style {
+          max-height: 0;
+        }
+      }
+
+      .vertical-menu.leaving {
+        max-height: 0;
       }
 
       .vertical-menu-list {
@@ -88,29 +100,9 @@ import {
       }
     `,
   ],
-  animations: [
-    trigger('showHide', [
-      state(
-        'void',
-        style({
-          height: 0,
-        }),
-      ),
-      transition('void <=> *', animate('.1s')),
-    ]),
-  ],
-  imports: [
-    MatNavList,
-    NgFor,
-    NavMenuItemComponent,
-    MatButton,
-    MatIcon,
-    NgIf,
-    PushPipe,
-  ],
 })
 export class NavMenuComponent {
-  isMenuDisplayed$ = new BehaviorSubject<boolean>(false);
+  isMenuDisplayed = signal(false);
 
   entries: NavMenuEntry[] = [
     {
@@ -125,22 +117,22 @@ export class NavMenuComponent {
     },
     {
       icon: 'live_tv',
-      title: 'Learn to Test',
-      url: 'https://courses.marmicode.io',
+      title: 'Get the Course',
+      url: 'https://courses.marmicode.io/courses/pragmatic-angular-testing',
     },
     {
       icon: 'phone',
-      title: 'Help',
-      url: 'https://forms.gle/EAUNbXtXQFCapQCd8',
+      title: 'Contact Me',
+      url: externalLinks.contactFormUrl,
     },
   ];
 
   toggleMenu() {
-    this.isMenuDisplayed$.next(!this.isMenuDisplayed$.value);
+    this.isMenuDisplayed.update((v) => !v);
   }
 
   closeMenu() {
-    this.isMenuDisplayed$.next(false);
+    this.isMenuDisplayed.set(false);
   }
 }
 

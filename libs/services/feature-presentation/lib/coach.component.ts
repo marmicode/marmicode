@@ -1,7 +1,7 @@
 import { PushPipe } from '@rx-angular/template/push';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule, inject } from '@angular/core';
 import { getAssetUri, shareReplayWithRefCount } from '@marmicode/shared/utils';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -94,6 +94,8 @@ import { DottyLineModule, DottyLineComponent } from './dotty-line.component';
   imports: [DottyLineComponent, PushPipe],
 })
 export class CoachComponent {
+  private _breakpointObserver = inject(BreakpointObserver);
+
   coachPictureUri = getAssetUri('coach.webp');
   name = 'Younes Jaaidi';
   isDesktop$ = this._breakpointObserver.observe('(min-width: 960px)').pipe(
@@ -103,7 +105,7 @@ export class CoachComponent {
   picturePosition$: Observable<string>;
   pictureRadius$: Observable<number>;
 
-  constructor(private _breakpointObserver: BreakpointObserver) {
+  constructor() {
     const desktopPictureWidth = 100;
     this.pictureRadius$ = this.isDesktop$.pipe(
       map((isDesktop) => (isDesktop ? desktopPictureWidth : 80)),

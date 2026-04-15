@@ -1,0 +1,103 @@
+import { ElementRef, SimpleChange } from '@angular/core';
+
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { HighlightLinkComponent } from './highlight-link.component';
+import { HighlightZone } from './highlight-zone';
+import { TestBed } from '@angular/core/testing';
+
+describe('Component', () => {
+  let component: HighlightLinkComponent;
+  let mockNativeElement: {
+    dispatchEvent: jest.Mock;
+  };
+
+  beforeEach(() => {
+    mockNativeElement = {
+      dispatchEvent: jest.fn(),
+    };
+    TestBed.configureTestingModule({
+      providers: [
+        HighlightLinkComponent,
+        {
+          provide: ElementRef,
+          useValue: {
+            nativeElement: mockNativeElement,
+          },
+        },
+      ],
+    });
+    component = TestBed.inject(HighlightLinkComponent);
+    component.color = 'red';
+    component.href = 'highlight://1,3-4';
+    component.ngOnChanges({
+      href: new SimpleChange(null, component.href, true),
+    });
+  });
+
+  it('should trigger highlight on click', () => {
+    component.onClick();
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledTimes(1);
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledWith(
+      expect.objectContaining({
+        detail: {
+          color: 'red',
+          sections: [
+            {
+              start: 1,
+              end: 1,
+            },
+            {
+              start: 3,
+              end: 4,
+            },
+          ],
+        } as HighlightZone,
+      }),
+    );
+  });
+
+  it('should trigger highlight on mouse enter', () => {
+    component.onMouseEnter();
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledTimes(1);
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledWith(
+      expect.objectContaining({
+        detail: {
+          color: expect.any(String),
+          sections: expect.any(Array),
+        },
+      }),
+    );
+  });
+
+  it('should cancel highlight on mouse leave', () => {
+    component.onMouseEnter();
+    mockNativeElement.dispatchEvent.mockReset();
+    component.onMouseLeave();
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledTimes(1);
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledWith(
+      expect.objectContaining({ detail: null }),
+    );
+  });
+
+  it('should not cancel highlight on mouse leave if clicked', () => {
+    component.onMouseEnter();
+    component.onClick();
+    mockNativeElement.dispatchEvent.mockReset();
+    component.onMouseLeave();
+    expect(mockNativeElement.dispatchEvent).not.toHaveBeenCalled();
+  });
+
+  /**
+   * This happens when user clicks, leaves and hovers again.
+   */
+  it('should cancel highlight on mouse leave if clicked before enter', () => {
+    component.onClick();
+    component.onMouseEnter();
+    mockNativeElement.dispatchEvent.mockReset();
+    component.onMouseLeave();
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledTimes(1);
+    expect(mockNativeElement.dispatchEvent).toHaveBeenCalledWith(
+      expect.objectContaining({ detail: null }),
+    );
+  });
+});

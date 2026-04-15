@@ -3,7 +3,10 @@
   "compilerOptions": {
     "types": ["node", "jest"],
     "target": "es2020",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "module": "preserve",
+    "lib": ["dom", "es2018.asynciterable", "es2022"]
   },
   "files": [],
   "include": [],

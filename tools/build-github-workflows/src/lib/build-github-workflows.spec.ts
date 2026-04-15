@@ -47,12 +47,15 @@ jobs:
 
   it('should convert anchors', async () => {
     await buildGithubWorkflows();
-    expect(readdir).toBeCalledTimes(1);
-    expect(readdir).toBeCalledWith('.github/src/workflows');
-    expect(readFile).toBeCalledTimes(1);
-    expect(readFile).toBeCalledWith('.github/src/workflows/test.yml', 'utf-8');
-    expect(writeFile).toBeCalledTimes(1);
-    expect(writeFile).toBeCalledWith(
+    expect(readdir).toHaveBeenCalledTimes(1);
+    expect(readdir).toHaveBeenCalledWith('.github/src/workflows');
+    expect(readFile).toHaveBeenCalledTimes(1);
+    expect(readFile).toHaveBeenCalledWith(
+      '.github/src/workflows/test.yml',
+      'utf-8',
+    );
+    expect(writeFile).toHaveBeenCalledTimes(1);
+    expect(writeFile).toHaveBeenCalledWith(
       '.github/workflows/test.yml',
       `# DO NOT EDIT: This file was generated.
 
@@ -68,7 +71,7 @@ jobs:
       - name: Test
         run: yarn test
 `,
-      'utf-8'
+      'utf-8',
     );
   });
 });

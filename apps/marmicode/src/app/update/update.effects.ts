@@ -1,9 +1,4 @@
-import {
-  ApplicationRef,
-  importProvidersFrom,
-  Injectable,
-  NgZone,
-} from '@angular/core';
+import { ApplicationRef, importProvidersFrom, Injectable, NgZone, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SwUpdate } from '@angular/service-worker';
 import { createEffect } from '@ngrx/effects';
@@ -21,6 +16,11 @@ import { UpdateDialogComponent } from './update-dialog.component';
 
 @Injectable()
 export class UpdateEffects {
+  private _applicationRef = inject(ApplicationRef);
+  private _matDialog = inject(MatDialog);
+  private _swUpdate = inject(SwUpdate);
+  private _zone = inject(NgZone);
+
   checkForUpdate$ = createEffect(
     () =>
       /* @hack use `defer()` to create a new observable, otherwise,
@@ -69,13 +69,6 @@ export class UpdateEffects {
       dispatch: false,
     },
   );
-
-  constructor(
-    private _applicationRef: ApplicationRef,
-    private _matDialog: MatDialog,
-    private _swUpdate: SwUpdate,
-    private _zone: NgZone,
-  ) {}
 }
 
 export function provideUpdateEffects() {

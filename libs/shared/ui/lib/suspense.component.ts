@@ -1,50 +1,49 @@
-import { CommonModule, NgIf, NgTemplateOutlet } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
-  Input,
+  input,
   NgModule,
   TemplateRef,
 } from '@angular/core';
-import { Suspense, suspensify } from '@jscutlery/operators';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { PushPipe } from '@rx-angular/template/push';
 import { Observable } from 'rxjs';
-import { ErrorModule, ErrorComponent } from './error.component';
-import { LoadingModule, LoadingComponent } from './loading.component';
+import { ErrorComponent, ErrorModule } from './error.component';
+import { LoadingComponent, LoadingModule } from './loading.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-suspense',
   template: `
-    <ng-container *ngIf="suspense$ | push as suspense">
-      <!-- Data. -->
-      <ng-container *ngIf="suspense.hasValue && suspense.value as data">
-        <ng-container
-          *ngTemplateOutlet="dataTemplate; context: { $implicit: data }"
-        >
-        </ng-container>
+    <!-- Data. -->
+    @if (resource.hasValue()) {
+      <ng-container
+        *ngTemplateOutlet="
+          dataTemplate;
+          context: { $implicit: resource.value() }
+        "
+      >
       </ng-container>
-
-      <!-- Loading. -->
-      <ng-container *ngIf="suspense.pending">
-        <ng-container
-          *ngTemplateOutlet="suspenseTemplate ?? defaultSuspenseTemplate"
-        >
-        </ng-container>
+    }
+    <!-- Loading. -->
+    @if (resource.isLoading()) {
+      <ng-container
+        *ngTemplateOutlet="suspenseTemplate ?? defaultSuspenseTemplate"
+      >
       </ng-container>
-
-      <!-- Error. -->
-      <ng-container *ngIf="suspense.hasError && suspense.error as error">
-        <ng-container
-          *ngTemplateOutlet="
-            errorTemplate ?? defaultErrorTemplate;
-            context: { $implicit: error }
-          "
-        >
-        </ng-container>
+    }
+    <!-- Error. -->
+    @if (resource.error(); as error) {
+      <ng-container
+        *ngTemplateOutlet="
+          errorTemplate ?? defaultErrorTemplate;
+          context: { $implicit: error }
+        "
+      >
       </ng-container>
-    </ng-container>
+    }
 
     <!-- Default error template. -->
     <ng-template #defaultErrorTemplate>
@@ -56,18 +55,19 @@ import { LoadingModule, LoadingComponent } from './loading.component';
       <mc-loading></mc-loading>
     </ng-template>
   `,
-  imports: [NgIf, NgTemplateOutlet, ErrorComponent, LoadingComponent, PushPipe],
+  imports: [NgTemplateOutlet, ErrorComponent, LoadingComponent],
 })
 export class SuspenseComponent<T = unknown> {
-  @ContentChild('data') dataTemplate: TemplateRef<{ $implicit: T }>;
-  @ContentChild('error') errorTemplate: TemplateRef<{ $implicit: unknown }>;
-  @ContentChild('suspense') suspenseTemplate: TemplateRef<undefined>;
+  @ContentChild('data') dataTemplate!: TemplateRef<{ $implicit: T }>;
+  @ContentChild('error') errorTemplate: TemplateRef<{ $implicit: unknown }> | undefined;
+  @ContentChild('suspense') suspenseTemplate: TemplateRef<undefined> | undefined;
 
-  @Input() set data$(data$: Observable<T>) {
-    this.suspense$ = data$?.pipe(suspensify());
-  }
+  data$ = input.required<Observable<T>>();
 
-  suspense$: Observable<Suspense<T>>;
+  resource = rxResource({
+    params: this.data$,
+    stream: ({ params }) => params,
+  });
 }
 
 @NgModule({

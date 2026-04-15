@@ -21,16 +21,18 @@ import { ResourceBadgeComponent } from '@marmicode/resource/ui';
         class="badge"
       ></mc-resource-badge>
     </div>
-
+    
     <!-- eslint-disable-next-line @angular-eslint/template/eqeqeq -->
     <h1 class="title" [class.without-subtitle]="subtitle == null">
       {{ title }}
     </h1>
-
-    <h2 *ngIf="subtitle" class="subtitle">
-      {{ subtitle }}
-    </h2>
-  `,
+    
+    @if (subtitle) {
+      <h2 class="subtitle">
+        {{ subtitle }}
+      </h2>
+    }
+    `,
   styles: [
     `
       :host {
@@ -82,12 +84,12 @@ import { ResourceBadgeComponent } from '@marmicode/resource/ui';
       }
     `,
   ],
-  imports: [ResourceBadgeComponent, NgIf],
+  imports: [ResourceBadgeComponent],
 })
 export class ResourceTitleBannerComponent {
-  @Input() resourceType: ResourceType;
-  @Input() title: string;
-  @Input() subtitle: string;
+  @Input() resourceType!: ResourceType;
+  @Input() title!: string;
+  @Input() subtitle!: string | null;
 }
 
 @NgModule({

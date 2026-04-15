@@ -1,10 +1,7 @@
 const rootMain = require('../../../../.storybook/main');
-
 module.exports = {
   ...rootMain,
-
   core: { ...rootMain.core, builder: 'webpack5' },
-
   stories: [
     ...rootMain.stories,
     '../src/**/*.stories.mdx',
@@ -16,9 +13,7 @@ module.exports = {
     if (rootMain.webpackFinal) {
       config = await rootMain.webpackFinal(config, { configType });
     }
-
     // add your own webpack tweaks if needed
-
     return config;
   },
 };

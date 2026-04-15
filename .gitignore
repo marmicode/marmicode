@@ -42,10 +42,9 @@ Thumbs.db
 
 __percy_snapshots__
 
-apps/marmicode/marmicode-routes.txt
-
 .nx
 nx-cloud.env
 
+.vite
 vite.config.*.timestamp*
 vitest.config.*.timestamp*

@@ -1,12 +1,14 @@
+import { registerLocaleData } from '@angular/common';
 import {
   provideHttpClient,
   withFetch,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import localeFr from '@angular/common/locales/fr';
 import {
   ApplicationConfig,
   importProvidersFrom,
-  provideExperimentalZonelessChangeDetection,
+  provideAppInitializer,
 } from '@angular/core';
 import {
   AnalyticsModule,
@@ -19,11 +21,9 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideRouter,
   withComponentInputBinding,
-  withEnabledBlockingInitialNavigation,
   withInMemoryScrolling,
   withViewTransitions,
 } from '@angular/router';
@@ -46,18 +46,14 @@ export const appConfig: ApplicationConfig = {
     ),
 
     ScreenTrackingService,
+    provideAppInitializer(() => registerLocaleData(localeFr)),
     provideAnalytics(() => getAnalytics()),
-    provideAnimations(),
     provideClientHydration(withEventReplay()),
-    provideExperimentalZonelessChangeDetection(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideHttpClient(withInterceptorsFromDi(), withFetch()),
-    /* HACK: use withEnabledBlockingInitialNavigation() to avoid flicker.
-     * TODO: remove it after migrating to Angular 20. */
     provideRouter(
       routes,
       withComponentInputBinding(),
-      withEnabledBlockingInitialNavigation(),
       withViewTransitions(),
       withInMemoryScrolling({
         anchorScrolling: 'enabled',

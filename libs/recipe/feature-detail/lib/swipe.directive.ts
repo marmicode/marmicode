@@ -4,7 +4,6 @@ import {
   ElementRef,
   inject,
   NgModule,
-  OnInit,
   Output,
   Renderer2,
   RendererStyleFlags2,
@@ -29,17 +28,17 @@ import {
   selector: '[mcSwipe]',
   standalone: true,
 })
-export class SwipeDirective implements OnInit {
+export class SwipeDirective {
+  private _elementRef = inject(ElementRef);
+  private _renderer = inject(Renderer2);
+
   @Output() swipeLeft: Observable<void>;
   @Output() swipeRight: Observable<void>;
 
   private _position$: Observable<number>;
   private _window = inject(DOCUMENT).defaultView;
 
-  constructor(
-    private _elementRef: ElementRef,
-    private _renderer: Renderer2,
-  ) {
+  constructor() {
     /*
      * Using native events instead of HostListeners in order to avoid
      * triggering change detection for nothing.
@@ -48,8 +47,8 @@ export class SwipeDirective implements OnInit {
       this._elementRef.nativeElement,
       'touchstart',
     );
-    const touchmove$ = fromEvent<TouchEvent>(this._window, 'touchmove');
-    const touchend$ = fromEvent<TouchEvent>(this._window, 'touchend');
+    const touchmove$ = fromEvent<TouchEvent>(this._window!, 'touchmove');
+    const touchend$ = fromEvent<TouchEvent>(this._window!, 'touchend');
 
     this._position$ = touchstart$.pipe(
       switchMap((touchstart) =>
@@ -83,9 +82,7 @@ export class SwipeDirective implements OnInit {
       filter((distance) => distance > 0),
       mapTo(undefined),
     );
-  }
 
-  ngOnInit() {
     this._position$.pipe(untilDestroyed(this)).subscribe((position) => {
       const el = this._elementRef.nativeElement;
       if (position !== 0) {
@@ -112,7 +109,7 @@ export class SwipeDirective implements OnInit {
     });
   }
 
-  private _applyStyle(el: HTMLElement, styles: { [key: string]: string }) {
+  private _applyStyle(el: HTMLElement, styles: { [key: string]: string | undefined }) {
     for (const [style, value] of Object.entries(styles)) {
       if (value !== undefined) {
         this._renderer.setStyle(el, style, value, RendererStyleFlags2.DashCase);

@@ -10,7 +10,7 @@ import {
   selector: 'mc-page-section',
   template: `
     <section [class.surface]="color() === 'surface'">
-      <h2>{{ pageTitle() }}</h2>
+      <h2>{{ sectionTitle() }}</h2>
       <ng-content />
     </section>
   `,
@@ -34,10 +34,10 @@ import {
 
     section::before {
       position: absolute;
-      height: 3rem;
+      height: 4rem;
       clip-path: ellipse(60% 100% at 50% 120%);
       background: var(--mc-section-ellipse-background-color);
-      top: -3rem;
+      top: -4rem;
       width: 100%;
       content: '';
     }
@@ -58,7 +58,7 @@ import {
   },
 })
 export class PageSection {
-  pageTitle = input<string>();
+  sectionTitle = input<string>();
   /**
    * The color of the section.
    * - 'surface' for a gradient background

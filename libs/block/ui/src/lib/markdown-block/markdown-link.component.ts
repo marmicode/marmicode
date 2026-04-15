@@ -1,5 +1,5 @@
-import { NgComponentOutlet, NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { NgComponentOutlet } from '@angular/common';
+import { Component, Input, inject } from '@angular/core';
 import { rxComputed } from '@jscutlery/rx-computed';
 import { MarkdownTokens } from '@marmicode/block/core';
 import { select } from '@ngrx/store';
@@ -12,34 +12,41 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
 
 @Component({
   selector: 'mc-markdown-link',
-  template: ` <mc-highlight-link
-      *ngIf="isHighlightLink$ | push"
-      [color]="color$ | push"
-      [href]="href$ | push"
+  template: ` @if (isHighlightLink$ | push) {
+  <mc-highlight-link
+    [color]="(color$ | push)!"
+    [href]="href$ | push"
     >
-      <ng-container
+    <ng-container
         *ngComponentOutlet="
-          MarkdownTokensComponent();
+          MarkdownTokensComponent() ?? null;
           inputs: { tokens: tokens$ | push }
         "
-      ></ng-container>
-    </mc-highlight-link>
-    <a
-      *ngIf="(isHighlightLink$ | push) === false"
-      [href]="href$ | push"
-      target="_blank"
+    ></ng-container>
+  </mc-highlight-link>
+}
+@if ((isHighlightLink$ | push) === false) {
+  <a
+    [href]="href$ | push"
+    target="_blank"
     >
-      <ng-container
+    <ng-container
         *ngComponentOutlet="
-          MarkdownTokensComponent();
+          MarkdownTokensComponent() ?? null;
           inputs: { tokens: tokens$ | push }
         "
-      ></ng-container>
-    </a>`,
+    ></ng-container>
+  </a>
+}`,
   providers: [RxState],
-  imports: [NgComponentOutlet, NgIf, HighlightLinkComponent, PushPipe],
+  imports: [NgComponentOutlet, HighlightLinkComponent, PushPipe],
 })
 export class MarkdownLinkComponent {
+  private _markdownBlockStateService = inject(MarkdownBlockStateService);
+  private _state = inject<RxState<{
+    token: MarkdownTokens.Link;
+}>>(RxState);
+
   @Input() set token(token: MarkdownTokens.Link) {
     this._state.set({ token });
   }
@@ -63,9 +70,4 @@ export class MarkdownLinkComponent {
   );
 
   MarkdownTokensComponent = rxComputed(markdownTokensLoader);
-
-  constructor(
-    private _markdownBlockStateService: MarkdownBlockStateService,
-    private _state: RxState<{ token: MarkdownTokens.Link }>,
-  ) {}
 }

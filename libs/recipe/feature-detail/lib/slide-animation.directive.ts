@@ -6,7 +6,7 @@ import {
   style,
 } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Directive, ElementRef, Input, NgModule, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input, NgModule, OnInit, inject } from '@angular/core';
 import { RxState } from '@rx-angular/state';
 import { concat, Observable, of } from 'rxjs';
 import { distinctUntilChanged, map, pairwise, switchMap } from 'rxjs/operators';
@@ -20,10 +20,16 @@ export enum Direction {
  * Animate depending on index change.
  */
 @Directive({
-    selector: '[mcSlideAnimation]',
-    standalone: true,
+  selector: '[mcSlideAnimation]',
+  standalone: true,
 })
 export class SlideAnimationDirective implements OnInit {
+  private _animationBuilder = inject(AnimationBuilder);
+  private _elementRef = inject(ElementRef);
+  private _state = inject<RxState<{
+    slideIndex: number;
+}>>(RxState);
+
   @Input() set slideIndex(slideIndex: number) {
     this._state.set({ slideIndex });
   }
@@ -32,15 +38,11 @@ export class SlideAnimationDirective implements OnInit {
 
   private _slideIndex$ = this._state.select('slideIndex');
 
-  private _leftToRightAnimationFactory: AnimationFactory;
-  private _rightToLeftAnimationFactory: AnimationFactory;
-  private _initialAnimationFactory: AnimationFactory;
+  private _leftToRightAnimationFactory!: AnimationFactory;
+  private _rightToLeftAnimationFactory!: AnimationFactory;
+  private _initialAnimationFactory!: AnimationFactory;
 
-  constructor(
-    private _animationBuilder: AnimationBuilder,
-    private _elementRef: ElementRef,
-    private _state: RxState<{ slideIndex: number }>
-  ) {
+  constructor() {
     this._state.hold(
       /* Start with null. */
       concat(of(null), this._slideIndex$).pipe(
@@ -52,7 +54,7 @@ export class SlideAnimationDirective implements OnInit {
             return this._initialAnimationFactory;
           }
 
-          return current > previous
+          return current! > previous!
             ? this._rightToLeftAnimationFactory
             : this._leftToRightAnimationFactory;
         }),
@@ -60,22 +62,22 @@ export class SlideAnimationDirective implements OnInit {
           (animationFactory) =>
             new Observable(() => {
               const player = animationFactory.create(
-                this._elementRef.nativeElement
+                this._elementRef.nativeElement,
               );
               player.play();
               return () => player.destroy();
-            })
-        )
-      )
+            }),
+        ),
+      ),
     );
   }
 
   ngOnInit() {
     this._leftToRightAnimationFactory = this._createSlideAnimationFactory(
-      Direction.Right
+      Direction.Right,
     );
     this._rightToLeftAnimationFactory = this._createSlideAnimationFactory(
-      Direction.Left
+      Direction.Left,
     );
     this._initialAnimationFactory = this._animationBuilder.build(
       animate(
@@ -87,8 +89,8 @@ export class SlideAnimationDirective implements OnInit {
           style({
             opacity: 1,
           }),
-        ])
-      )
+        ]),
+      ),
     );
   }
 
@@ -103,14 +105,14 @@ export class SlideAnimationDirective implements OnInit {
             }100%)`,
           }),
           style({ transform: 'translateX(0)' }),
-        ])
-      )
+        ]),
+      ),
     );
   }
 }
 
 @NgModule({
-    exports: [SlideAnimationDirective],
-    imports: [CommonModule, SlideAnimationDirective],
+  exports: [SlideAnimationDirective],
+  imports: [CommonModule, SlideAnimationDirective],
 })
 export class SlideAnimationModule {}

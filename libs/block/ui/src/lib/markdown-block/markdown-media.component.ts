@@ -6,24 +6,21 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { MarkdownTokens } from '@marmicode/block/core';
-import { NgIf } from '@angular/common';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-media',
-  template: `<img
-      *ngIf="!isVideo"
-      [alt]="token.text"
-      [src]="token.href"
-      class="image"
-    />
-    <video
-      *ngIf="isVideo"
-      [src]="token.href"
-      [title]="token.text"
-      class="video"
-      controls
-    ></video> `,
+  template: `@if (!isVideo) {
+      <img [alt]="token.text" [src]="token.href" class="image" />
+    }
+    @if (isVideo) {
+      <video
+        [src]="token.href"
+        [title]="token.text"
+        class="video"
+        controls
+      ></video>
+    }`,
   styles: [
     `
       :host {
@@ -41,14 +38,14 @@ import { NgIf } from '@angular/common';
       }
     `,
   ],
-  imports: [NgIf],
+  imports: [],
 })
 export class MarkdownMediaComponent implements OnChanges {
-  @Input() token: MarkdownTokens.Media;
-  isVideo: boolean;
+  @Input() token!: MarkdownTokens.Media;
+  isVideo!: boolean;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.token) {
+    if ('token' in changes) {
       this.isVideo = this.token.href?.endsWith('.mp4');
     }
   }

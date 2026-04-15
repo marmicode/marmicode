@@ -15,15 +15,22 @@ import { RouterLink, RouterModule } from '@angular/router';
   template: `
     @if (computedHref()) {
       <a
+        [class.small]="size() === 'small'"
+        [class.white]="color() === 'white'"
         [href]="computedHref()"
+        (click)="stopPropagation($event)"
         rel="noopener"
         target="_blank"
-        (click)="stopPropagation($event)"
       >
         <ng-container *ngTemplateOutlet="templateRef"></ng-container>
       </a>
     } @else if (computedRoute()) {
-      <a [routerLink]="computedRoute()" (click)="stopPropagation($event)">
+      <a
+        [class.small]="size() === 'small'"
+        [class.white]="color() === 'white'"
+        [routerLink]="computedRoute()"
+        (click)="stopPropagation($event)"
+      >
         <ng-container *ngTemplateOutlet="templateRef"></ng-container>
       </a>
     } @else {
@@ -38,13 +45,24 @@ import { RouterLink, RouterModule } from '@angular/router';
     a {
       color: var(--marmicode-accent-color);
       text-decoration: none;
+
+      &.small {
+        font-size: 0.9rem;
+        line-height: 0.9;
+      }
+
+      &.white {
+        color: white;
+      }
     }
   `,
 })
 export class LinkComponent {
+  color = input<'accent' | 'white'>('accent');
   link = input<Link>();
   href = input<string>();
-  route = input<string[]>();
+  route = input<string[] | undefined>();
+  size = input<'small' | 'medium'>('medium');
 
   computedHref = computed(() => {
     const link = this.link();

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -18,12 +18,14 @@
     <link rel="shortcut icon" href="/assets/icons/icon-512.jpg" />
     <link rel="manifest" href="manifest.webmanifest" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="theme-color" content="#380030" />
 
     <meta property="og:site_name" content="Marmicode" />
     <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:site" content="@marmicode" />
+    <meta name="twitter:creator" content="@yjaaidi" />
   </head>
   <body class="mat-typography">
     <mc-root>
@@ -79,7 +81,9 @@
       <script lang="javascript">
         setTimeout(() => {
           const errorEl = document.querySelector('#error-fallback');
-          if (errorEl == null) { return; }
+          if (errorEl == null) {
+            return;
+          }
           errorEl.style.display = 'flex';
         }, 5000);
       </script>

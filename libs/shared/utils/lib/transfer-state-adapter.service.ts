@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Platform } from './platform.service';
@@ -7,13 +7,12 @@ import { Platform } from './platform.service';
   providedIn: 'root',
 })
 export class TransferStateAdapter {
-  constructor(
-    private _platform: Platform,
-    private _transferState: TransferState
-  ) {}
+  private _platform = inject(Platform);
+  private _transferState = inject(TransferState);
+
 
   get<T>(key: string): Observable<T> {
-    return of(this._transferState.get<T>(makeStateKey(key), null));
+    return of(this._transferState.get<T>(makeStateKey(key), null as T));
   }
 
   hasKey<T>(key: string) {
