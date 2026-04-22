@@ -10,9 +10,14 @@ export function formatPrice({
     currency: 'EUR',
     maximumFractionDigits: 0,
   });
-  const isFrench =
-    typeof locale === 'string'
-      ? locale.startsWith('fr')
-      : Array.isArray(locale) && locale[0]?.startsWith('fr');
-  return isFrench ? `${formatted} HT` : formatted;
+  return _isFrenchLocale(locale) ? `${formatted} HT` : formatted;
+}
+
+function _isFrenchLocale(locale: Intl.LocalesArgument): boolean {
+  const startsWithFr = (tag: string | Intl.Locale) =>
+    (typeof tag === 'string' ? tag : tag.language).startsWith('fr');
+  if (Array.isArray(locale)) {
+    return locale.length > 0 && startsWithFr(locale[0]);
+  }
+  return startsWithFr(locale as string | Intl.Locale);
 }
