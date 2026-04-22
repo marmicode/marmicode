@@ -157,7 +157,7 @@
     "inquirer-autocomplete-prompt": "^3.0.0",
     "jest": "30.0.5",
     "jest-environment-jsdom": "30.0.5",
-    "jest-preset-angular": "16.0.0",
+    "jest-preset-angular": "16.1.4",
     "jest-util": "30.0.5",
     "jiti": "2.6.0",
     "js-yaml": "^4.0.0",
