@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  origin: 'https://marmicode-next.web.app',
   firebase: {
     apiKey: 'AIzaSyAqFA9ihQdPuX4VwX46RRTEbVOXnYB76gI',
     authDomain: 'marmicode-next.firebaseapp.com',

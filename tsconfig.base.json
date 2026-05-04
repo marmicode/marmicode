@@ -49,6 +49,8 @@
       "@marmicode/services/feature-presentation": [
         "libs/services/feature-presentation/index.ts"
       ],
+      "@marmicode/shared/core": ["libs/shared/core/index.ts"],
+      "@marmicode/shared/infra": ["libs/shared/infra/index.ts"],
       "@marmicode/shared/router-helpers": [
         "libs/shared/router-helpers/index.ts"
       ],
