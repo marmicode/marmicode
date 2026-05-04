@@ -1,4 +1,4 @@
-import { CommonModule, PlatformLocation } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,6 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
+import { PlatformInfo } from '@marmicode/shared/infra';
 import { HtmlAdapter } from './html-adapter';
 
 export interface BasicPageInfo {
@@ -62,7 +63,7 @@ export class PageComponent {
   private _titleService = inject(Title);
   private _defaultLanguage = 'en';
   private _defaultTitle = 'Marmicode';
-  private _platformLocation = inject(PlatformLocation);
+  private _platformInfo = inject(PlatformInfo);
 
   constructor() {
     effect((onCleanup) => {
@@ -160,8 +161,7 @@ export class PageComponent {
   }
 
   private _pathToUrl(path: string) {
-    const { protocol, hostname, port } = this._platformLocation;
-    return new URL(path, `${protocol}//${hostname}:${port}`).toString();
+    return new URL(path, this._platformInfo.getOrigin()).href;
   }
 }
 

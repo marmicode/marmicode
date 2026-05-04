@@ -3,6 +3,7 @@ import {
   MockPlatformLocationConfig,
 } from '@angular/common/testing';
 import { TestBed } from '@angular/core/testing';
+import { provideSiteConfig } from '@marmicode/shared/core';
 import { MetaDefinition } from '@angular/platform-browser';
 import { describe, expect, it } from 'vitest';
 import { MetaFake, provideMetaFake } from '../testing/meta.fake';
@@ -120,6 +121,44 @@ describe('PageComponent', () => {
       ]);
   });
 
+  it('uses PlatformLocation for URLs when site origin is null', async () => {
+    TestBed.configureTestingModule({
+      providers: [
+        provideSiteConfig({ origin: null }),
+        {
+          provide: MOCK_PLATFORM_LOCATION_CONFIG,
+          useValue: {
+            startUrl: 'https://marmicode.io',
+          } satisfies MockPlatformLocationConfig,
+        },
+        provideMetaFake(),
+        provideTitleFake(),
+        provideHtmlAdapterFake(),
+      ],
+    });
+
+    const fixture = TestBed.createComponent(PageComponent);
+    fixture.componentRef.setInput('info', {
+      alternates: [
+        { path: '/workshops/test-angular-pragmatique', language: 'fr' },
+        { path: '/workshops/pragmatic-angular-testing', language: 'en' },
+      ],
+    });
+
+    const htmlAdapterFake = TestBed.inject(HtmlAdapterFake);
+
+    await expect
+      .poll(() => {
+        const link = htmlAdapterFake
+          .getLinkTags()
+          .find((e) => e.rel === 'canonical');
+        return link?.href;
+      })
+      .toBe('https://marmicode.io/workshops/pragmatic-angular-testing');
+
+    fixture.destroy();
+  });
+
   it('removes canonical and alternate links when component is destroyed', async () => {
     const { destroyOnceStable, htmlAdapterFake, setPageInfo } =
       await renderComponent();
@@ -222,12 +261,7 @@ describe('PageComponent', () => {
 async function renderComponent() {
   TestBed.configureTestingModule({
     providers: [
-      {
-        provide: MOCK_PLATFORM_LOCATION_CONFIG,
-        useValue: {
-          startUrl: 'https://marmicode.io',
-        } satisfies MockPlatformLocationConfig,
-      },
+      provideSiteConfig({ origin: 'https://marmicode.io' }),
       provideMetaFake(),
       provideTitleFake(),
       provideHtmlAdapterFake(),
