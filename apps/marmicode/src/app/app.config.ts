@@ -30,12 +30,14 @@ import {
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
+import { provideSiteConfig } from '@marmicode/shared/core';
 import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { provideUpdateEffects } from './update/update.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideSiteConfig({ origin: environment.origin }),
     /* HACK: This is a workaround to fix tracking.
      * Cf. https://github.com/angular/angularfire/issues/3633#issuecomment-2817498717 */
     importProvidersFrom(AnalyticsModule),

@@ -7,6 +7,7 @@ import { environment as environmentNext } from './environment.next';
 export const environment = {
   production: false,
   firebase: environmentNext.firebase,
+  origin: null,
 };
 
 /*
