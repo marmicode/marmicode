@@ -14,6 +14,11 @@ import { HtmlAdapter } from './html-adapter';
 export interface BasicPageInfo {
   description?: string;
   alternates?: Array<{ path: string; language: string }>;
+  /**
+   * The path of the page.
+   * Used to set the canonical link tag.
+   */
+  path?: string;
   language?: string;
   pictureUri?: string;
   title?: string;
@@ -84,13 +89,26 @@ export class PageComponent {
         );
       }
 
-      if (info.alternates) {
-        const tags = info.alternates.map((alternate) =>
+      const tags: Array<{ remove: () => void }> = [];
+
+      if (info.path) {
+        tags.push(
           this._htmlAdapter.upsertLinkTag({
-            rel: 'alternate',
-            hreflang: alternate.language,
-            href: this._pathToUrl(alternate.path),
+            rel: 'canonical',
+            href: this._pathToUrl(info.path),
           }),
+        );
+      }
+
+      if (info.alternates) {
+        tags.push(
+          ...info.alternates.map((alternate) =>
+            this._htmlAdapter.upsertLinkTag({
+              rel: 'alternate',
+              hreflang: alternate.language,
+              href: this._pathToUrl(alternate.path),
+            }),
+          ),
         );
 
         const englishAlternate = info.alternates.find(
@@ -99,10 +117,6 @@ export class PageComponent {
         if (englishAlternate) {
           const href = this._pathToUrl(englishAlternate.path);
           tags.push(
-            this._htmlAdapter.upsertLinkTag({
-              rel: 'canonical',
-              href,
-            }),
             this._htmlAdapter.upsertLinkTag({
               rel: 'alternate',
               href,
@@ -130,7 +144,11 @@ export class PageComponent {
   }
 
   private _infoToMetaTags(info: PageInfo): MetaDefinition[] {
-    const baseTags: Array<{ name?: string; property?: string; content?: string | null }> = [
+    const baseTags: Array<{
+      name?: string;
+      property?: string;
+      content?: string | null;
+    }> = [
       { name: 'description', content: info.description },
       { property: 'og:description', content: info.description },
       { property: 'og:image', content: info.pictureUri },
