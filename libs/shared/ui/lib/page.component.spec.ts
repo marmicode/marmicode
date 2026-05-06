@@ -38,7 +38,7 @@ describe('PageComponent', () => {
     const { setPageInfo, titleFake } = await renderComponent();
 
     setPageInfo({
-      title: null,
+      title: '',
     });
 
     await expect.poll(() => titleFake.getTitle()).toBe('Marmicode');
@@ -85,7 +85,23 @@ describe('PageComponent', () => {
       .toBe('en');
   });
 
-  it('sets canonical and alternate links when `alternates` is provided', async () => {
+  it('sets canonical link when `path` is provided', async () => {
+    const { htmlAdapterFake, setPageInfo } = await renderComponent();
+
+    setPageInfo({
+      path: '/workshops/pragmatic-angular-testing',
+    });
+
+    await expect
+      .poll(
+        () =>
+          htmlAdapterFake.getLinkTags().find((e) => e.rel === 'canonical')
+            ?.href,
+      )
+      .toBe('https://marmicode.io/workshops/pragmatic-angular-testing');
+  });
+
+  it('sets alternate links when `alternates` is provided', async () => {
     const { htmlAdapterFake, setPageInfo } = await renderComponent();
 
     setPageInfo({
@@ -95,12 +111,6 @@ describe('PageComponent', () => {
       ],
     });
 
-    await expect
-      .poll(
-        () =>
-          htmlAdapterFake.getLinkTags().find((e) => e.rel === 'canonical').href,
-      )
-      .toBe('https://marmicode.io/workshops/pragmatic-angular-testing');
     await expect
       .poll(() =>
         htmlAdapterFake.getLinkTags().filter((e) => e.rel === 'alternate'),
@@ -139,10 +149,7 @@ describe('PageComponent', () => {
 
     const fixture = TestBed.createComponent(PageComponent);
     fixture.componentRef.setInput('info', {
-      alternates: [
-        { path: '/workshops/test-angular-pragmatique', language: 'fr' },
-        { path: '/workshops/pragmatic-angular-testing', language: 'en' },
-      ],
+      path: '/workshops/pragmatic-angular-testing',
     });
 
     const htmlAdapterFake = TestBed.inject(HtmlAdapterFake);
@@ -275,7 +282,7 @@ async function renderComponent() {
       await fixture.whenStable();
       fixture.destroy();
     },
-    setPageInfo: (info: PageInfo) =>
+    setPageInfo: (info: PageInfo | null) =>
       fixture.componentRef.setInput('info', info),
     getMetaTags: () =>
       TestBed.inject(MetaFake)
