@@ -48,7 +48,7 @@ test.describe('workshop detail', () => {
       .soft(canonicalLink)
       .toHaveAttribute(
         'href',
-        'http://localhost:4200/workshops/pragmatic-angular-testing',
+        'http://localhost:4200/workshops/test-angular-pragmatique',
       );
     await expect.soft(alternateLinks).toHaveCount(3);
     await expect.soft(alternateLinks.nth(0)).toHaveAttribute('hreflang', 'fr');
