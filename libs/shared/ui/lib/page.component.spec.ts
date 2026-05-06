@@ -34,11 +34,11 @@ describe('PageComponent', () => {
     expect(titleFake.getTitle()).toBeUndefined();
   });
 
-  it('sets default page title if title is null', async () => {
+  it('sets default page title if title is not defined', async () => {
     const { setPageInfo, titleFake } = await renderComponent();
 
     setPageInfo({
-      title: '',
+      title: undefined,
     });
 
     await expect.poll(() => titleFake.getTitle()).toBe('Marmicode');
@@ -240,6 +240,21 @@ describe('PageComponent', () => {
     setPageInfo(null);
 
     expect(getMetaTags()).toEqual([]);
+  });
+
+  it('should remove canonical link on destroy', async () => {
+    const { setPageInfo, destroyOnceStable, htmlAdapterFake } =
+      await renderComponent();
+
+    setPageInfo(
+      createArticlePageInfo({
+        path: '/workshop/pragmatic-angular-testing'
+      }),
+    );
+
+    await destroyOnceStable();
+
+    expect(htmlAdapterFake.getLinkTags()).toEqual([]);
   });
 
   it('should remove all meta on destroy', async () => {
