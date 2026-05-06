@@ -124,16 +124,13 @@ export class PageComponent {
             }),
           );
         }
-
-        onCleanup(() => {
-          tags.forEach((tag) => tag.remove());
-        });
       }
 
       /* Update meta data. */
       const metas = this._infoToMetaTags(info);
       const tagEls = this._metaService.addTags(metas);
       onCleanup(() => {
+        tags.forEach((tag) => tag.remove());
         tagEls.forEach((el) => this._metaService.removeTagElement(el));
       });
     });
