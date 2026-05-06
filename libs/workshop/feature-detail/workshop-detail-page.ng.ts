@@ -87,6 +87,7 @@ export class WorkshopDetailPage {
       title: w?.title,
       pictureUri: w?.pictureUri,
       language: w?.language,
+      path: w ? workshopRouterHelper.detailUrl(w.id) : undefined,
       alternates: allAlternates?.map((alternate) => ({
         path: workshopRouterHelper.detailUrl(alternate.id),
         language: alternate.language,
