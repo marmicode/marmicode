@@ -10,7 +10,6 @@ import { MatCardModule } from '@angular/material/card';
       <mat-card-content class="coming-soon-content">
         <h3>More Workshops Coming Soon!</h3>
         <ul>
-          <li>AI-Assisted TDD</li>
           <li>Modern Angular</li>
           <li>Architecture</li>
           <li>Nx</li>

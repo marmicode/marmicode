@@ -1,5 +1,3 @@
-import { Optional } from '@marmicode/shared/utils';
-
 export interface Workshop {
   id: string;
   title: string;
