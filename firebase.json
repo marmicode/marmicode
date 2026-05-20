@@ -20,6 +20,11 @@
           "source": "/workshops/pragmatic-angular-testing-full-course",
           "destination": "/workshops/pragmatic-angular-testing",
           "type": 301
+        },
+        {
+          "source": "/test.ng",
+          "destination": "https://courses.marmicode.io/courses/pragmatic-angular-testing?utm_source=test.ng",
+          "type": 302
         }
       ],
       "rewrites": [
