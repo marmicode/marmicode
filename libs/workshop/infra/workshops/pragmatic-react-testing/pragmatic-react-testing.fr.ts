@@ -14,8 +14,8 @@ export const pragmaticReactTestingFullCourseFr = createWorkshop({
   thumbnailUri,
   duration: 3,
   location: 'online',
-  customSessionRequestUrl: 'TODO',
-  // waitlistUrl: 'TODO',
+  customSessionRequestUrl: 'https://forms.gle/csDdUN9A8yS1Q9oq7',
+  waitlistUrl: 'https://forms.gle/LeusQt3TnA5vMWa69',
   lumaTag: 'react-testing',
   description: `
 Il y a deux façons de garder un produit stable :
