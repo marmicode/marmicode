@@ -192,11 +192,78 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
       },
       {
         title: '💻 Exercices pratiques : premiers tests',
+        items: ['Conseils et astuces pour des tests précis et maintenables.'],
+      },
+      {
+        title: '👨🏻‍🏫 Object Mothers',
+        items: [
+          'Object Mothers.',
+          'Créer des données de test réutilisables.',
+          'Réduire la duplication dans les tests.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Tests asynchrones',
+        items: [
+          'Tests asynchrones.',
+          'Tester les observables.',
+          'Tester les "signals" et les "effects".',
+        ],
+      },
+      {
+        title: '💻 Exercices pratiques : tests asynchrones',
+        items: ['Pratique des tests asynchrones.'],
+      },
+      {
+        title: '👨🏻‍🏫 Test Doubles et "Mocking"',
+        items: [
+          'Mocks vs Dummies vs Spies vs Stubs vs Fakes.',
+          'Fake it till you Mock it!',
+          'Tests "type-safe".',
+          'Contract testing de "fakes".',
+        ],
+      },
+      {
+        title: '💻 Exercices pratiques : Test Doubles et "Mocking"',
+        items: ['Pratique des Test Doubles.'],
+      },
+      {
+        title: '👨🏻‍🏫 Tests de composants : les différentes saveurs',
+        items: [
+          'Tester un composant.',
+          'Les différents types de tests de composants : isolated vs. shallow vs. integration.',
+          'Interagir avec le DOM.',
+        ],
+      },
+      {
+        title: '💻 Exercices pratiques : tests de composants',
+        items: [
+          'Tests "isolated" de composants.',
+          'Tests "shallow" de composants.',
+          'Tests d\'"intégration" de composants.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Angular Testing Library',
+        items: ['Tests DOM résilients.'],
+      },
+      {
+        title: '👨🏻‍🏫 Vitest Browser Mode',
+        items: ['Tests dans un vrai navigateur.'],
+      },
+      {
+        title:
+          '💻 Exercices pratiques : Angular Testing Library et Vitest Browser Mode',
+        items: [
+          'Pratique Angular Testing Library.',
+          'Pratique Vitest Browser Mode.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 TDD',
         items: [
           'Test-Driven Development : origine et bénéfices.',
           'TDD progressif.',
-          'Conseils et astuces pour des tests précis et maintenables.',
-          'Object Mothers.',
         ],
       },
       {
@@ -216,64 +283,26 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         ],
       },
       {
-        title: '👨🏻‍🏫 Tests asynchrones',
-        items: [
-          'Tests asynchrones.',
-          'Tester les observables.',
-          'Tester les "signals" et les "effects".',
-          '"Fake timers".',
-        ],
+        title: '👨🏻‍🏫 Tester les Inputs',
+        items: ['Tester les inputs des composants.'],
       },
       {
-        title: '💻 Exercices pratiques : tests asynchrones',
-        items: ['Pratique des tests asynchrones.'],
+        title: '👨🏻‍🏫 Tester les Outputs',
+        items: ['Tester les outputs des composants.'],
       },
       {
-        title: '👨🏻‍🏫 Tests de composants',
-        items: [
-          'Tester un composant.',
-          'Les différents types de tests de composants : isolated vs. shallow vs. integration.',
-          'Interagir avec le DOM.',
-        ],
-      },
-      {
-        title: '💻 Exercices pratiques : tests de composants',
-        items: [
-          'Tests "isolated" de composants.',
-          'Tests "shallow" de composants.',
-          'Tests d\'"intégration" de composants.',
-        ],
-      },
-      {
-        title: '👨🏻‍🏫 Test Doubles et "Mocking"',
-        items: [
-          'Mocks vs Dummies vs Spies vs Stubs vs Fakes.',
-          'Fake it till you Mock it!',
-          'Tests "type-safe".',
-          'Contract testing de "fakes".',
-        ],
-      },
-      {
-        title: '💻 Exercices pratiques : Test Doubles et "Mocking"',
-        items: ['Pratique des Test Doubles.'],
-      },
-      {
-        title: '💻 Exercices pratiques : tests de composants (suite)',
+        title: '💻 Exercices pratiques : Inputs, Outputs et formulaires',
         items: [
           'Tester la communication via Inputs et Outputs.',
           'Interagir avec les formulaires.',
         ],
       },
       {
-        title: '👨🏻‍🏫 Angular Testing Library vs. Vitest Browser Mode',
-        items: ['Tests DOM résilients.'],
-      },
-      {
-        title:
-          '💻 Exercices pratiques : Angular Testing Library vs. Vitest Browser Mode',
+        title: '👨🏻‍🏫 Contrôle du temps',
         items: [
-          'Pratique Angular Testing Library.',
-          'Pratique Vitest Browser Mode.',
+          'Utiliser les "fake timers".',
+          'Avancer le temps rapidement.',
+          'Tester un comportement dépendant du temps.',
         ],
       },
       {
@@ -287,6 +316,14 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
       {
         title: '💻 Exercices pratiques : Test Harness',
         items: ['Utiliser un test harness.', 'Implémenter un test harness.'],
+      },
+      {
+        title: '👨🏻‍🏫 Tester le routing',
+        items: [
+          'Tester la logique de routage.',
+          'Tester les guards et resolvers.',
+          'Tester les flux de navigation.',
+        ],
       },
       {
         title: '👨🏻‍🏫 Tests end-to-end avec Playwright',
@@ -326,7 +363,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         ],
       },
       {
-        title: '👨🏻‍🏫 Définir une stratégie de test pragmatique',
+        title: '👨🏻‍🏫 Construire une stratégie de test pragmatique',
         items: [
           "Objectifs d'une stratégie de test.",
           'Choisir quoi tester et comment.',

@@ -222,10 +222,75 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       {
         title: '💻 Hands-on Exercises: First Tests',
         items: [
+          'All-you-can-eat tips & tricks for precise and maintainable tests.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Object Mothers',
+        items: [
+          'Object Mothers.',
+          'Creating reusable test data.',
+          'Reducing test duplication.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Async Testing',
+        items: ['Async testing.', 'Testing observables.', 'Testing effects.'],
+      },
+      {
+        title: '💻 Hands-on Exercises: Async Testing',
+        items: ['Hands-on async testing practice.'],
+      },
+      {
+        title: '👨🏻‍🏫 Test Doubles & "Mocking"',
+        items: [
+          'Mocks vs Dummies vs Spies vs Stubs vs Fakes.',
+          'Fake it till you Mock it!',
+          'Type-safe testing.',
+          'Contract testing fakes.',
+        ],
+      },
+      {
+        title: '💻 Hands-on Exercises: Test Doubles & "Mocking"',
+        items: ['Hands-on test doubles practice.'],
+      },
+      {
+        title: '👨🏻‍🏫 Component Testing Flavors',
+        items: [
+          'Testing a component.',
+          'The different types of component tests: Isolated vs. Shallow vs. Integration.',
+          'Interacting with the DOM.',
+        ],
+      },
+      {
+        title: '💻 Hands-on Exercises: Component Testing',
+        items: [
+          'Component isolated testing.',
+          'Component shallow testing.',
+          'Component integration testing.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Angular Testing Library',
+        items: ['Resilient DOM testing.'],
+      },
+      {
+        title: '👨🏻‍🏫 Vitest Browser Mode',
+        items: ['Testing in a real browser.'],
+      },
+      {
+        title:
+          '💻 Hands-on Exercises: Angular Testing Library & Vitest Browser Mode',
+        items: [
+          'Hands-on Angular Testing Library practice.',
+          'Hands-on Vitest Browser Mode practice.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 TDD',
+        items: [
           'Test-Driven Development: origin & benefits.',
           'Progressive TDD.',
-          'All-you-can-eat tips & tricks for precise and maintainable tests.',
-          'Object Mothers.',
         ],
       },
       {
@@ -245,64 +310,26 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '👨🏻‍🏫 Async Testing',
-        items: [
-          'Async testing.',
-          'Testing observables.',
-          'Testing effects.',
-          'Fake timers.',
-        ],
+        title: '👨🏻‍🏫 Testing Inputs',
+        items: ['Testing component inputs.'],
       },
       {
-        title: '💻 Hands-on Exercises: Async Testing',
-        items: ['Hands-on async testing practice.'],
+        title: '👨🏻‍🏫 Testing Outputs',
+        items: ['Testing component outputs.'],
       },
       {
-        title: '👨🏻‍🏫 Component Testing',
-        items: [
-          'Testing a component.',
-          'The different types of component tests: Isolated vs. Shallow vs. Integration.',
-          'Interacting with the DOM.',
-        ],
-      },
-      {
-        title: '💻 Hands-on Exercises: Component Testing',
-        items: [
-          'Component isolated testing.',
-          'Component shallow testing.',
-          'Component integration testing.',
-        ],
-      },
-      {
-        title: '👨🏻‍🏫 Test Doubles & "Mocking"',
-        items: [
-          'Mocks vs Dummies vs Spies vs Stubs vs Fakes.',
-          'Fake it till you Mock it!',
-          'Type-safe testing.',
-          'Contract testing fakes.',
-        ],
-      },
-      {
-        title: '💻 Hands-on Exercises: Test Doubles & "Mocking"',
-        items: ['Hands-on test doubles practice.'],
-      },
-      {
-        title: '💻 Hands-on Exercises: More Component Testing',
+        title: '💻 Hands-on Exercises: Inputs, Outputs & Forms',
         items: [
           'Testing Inputs & Outputs based communication.',
           'Interacting with forms.',
         ],
       },
       {
-        title: '👨🏻‍🏫 Angular Testing Library vs. Vitest Browser Mode',
-        items: ['Resilient DOM testing.'],
-      },
-      {
-        title:
-          '💻 Hands-on Exercises: Angular Testing Library vs. Vitest Browser Mode',
+        title: '👨🏻‍🏫 Time Control',
         items: [
-          'Hands-on Angular Testing Library practice.',
-          'Hands-on Vitest Browser Mode practice.',
+          'Working with fake timers.',
+          'Fast-forwarding time.',
+          'Testing time-sensitive behavior.',
         ],
       },
       {
@@ -316,6 +343,14 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       {
         title: '💻 Hands-on Exercises: Test Harness',
         items: ['Using a test harness.', 'Implementing a test harness.'],
+      },
+      {
+        title: '👨🏻‍🏫 Router Testing',
+        items: [
+          'Testing routing logic.',
+          'Testing route guards and resolvers.',
+          'Testing navigation flows.',
+        ],
       },
       {
         title: '👨🏻‍🏫 End-to-End Testing with Playwright',
@@ -353,7 +388,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         items: ['Detecting visual regressions with Playwright and Testronaut.'],
       },
       {
-        title: '👨🏻‍🏫 Defining a Pragmatic Testing Strategy',
+        title: '👨🏻‍🏫 Building a Pragmatic Testing Strategy',
         items: [
           'Goals of a testing strategy.',
           'Choosing what to test and how.',

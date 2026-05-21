@@ -174,10 +174,79 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       {
         title: '💻 Hands-on Exercises: First Tests',
         items: [
+          'All-you-can-eat tips & tricks for precise and maintainable tests.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Object Mothers',
+        items: [
+          'Object Mothers.',
+          'Creating reusable test data.',
+          'Reducing test duplication.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Async Testing',
+        items: [
+          'Async testing.',
+          'Testing state updates and effects.',
+          "Testing async hooks (e.g. Tanstack's React Query).",
+        ],
+      },
+      {
+        title: '💻 Hands-on Exercises: Async Testing',
+        items: ['Hands-on async testing practice.'],
+      },
+      {
+        title: '👨🏻‍🏫 Test Doubles & "Mocking"',
+        items: [
+          'Mocks vs Dummies vs Spies vs Stubs vs Fakes.',
+          'Fake it till you Mock it!',
+          'Type-safe testing.',
+          'Contract testing fakes.',
+        ],
+      },
+      {
+        title: '💻 Hands-on Exercises: Test Doubles & "Mocking"',
+        items: ['Hands-on test doubles practice.'],
+      },
+      {
+        title: '👨🏻‍🏫 Component Testing Flavors',
+        items: [
+          'Testing a component.',
+          'The different types of component tests: Isolated vs. Shallow vs. Integration.',
+          'Interacting with the DOM.',
+        ],
+      },
+      {
+        title: '💻 Hands-on Exercises: Component Testing',
+        items: [
+          'Component isolated testing.',
+          'Component shallow testing.',
+          'Component integration testing.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 React Testing Library',
+        items: ['Resilient DOM testing.'],
+      },
+      {
+        title: '👨🏻‍🏫 Vitest Browser Mode',
+        items: ['Testing in a real browser.'],
+      },
+      {
+        title:
+          '💻 Hands-on Exercises: React Testing Library & Vitest Browser Mode',
+        items: [
+          'Hands-on React Testing Library practice.',
+          'Hands-on Vitest Browser Mode practice.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 TDD',
+        items: [
           'Test-Driven Development: origin & benefits.',
           'Progressive TDD.',
-          'All-you-can-eat tips & tricks for precise and maintainable tests.',
-          'Object Mothers.',
         ],
       },
       {
@@ -197,64 +266,26 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '👨🏻‍🏫 Async Testing',
-        items: [
-          'Async testing.',
-          'Testing state updates and effects.',
-          "Testing async hooks (e.g. Tanstack's React Query).",
-          'Fake timers and fast-forward.',
-        ],
+        title: '👨🏻‍🏫 Testing Props',
+        items: ['Testing component props.'],
       },
       {
-        title: '💻 Hands-on Exercises: Async Testing',
-        items: ['Hands-on async testing practice.'],
+        title: '👨🏻‍🏫 Testing Callbacks',
+        items: ['Testing component callbacks.'],
       },
       {
-        title: '👨🏻‍🏫 Component Testing',
-        items: [
-          'Testing a component.',
-          'The different types of component tests: Isolated vs. Shallow vs. Integration.',
-          'Interacting with the DOM.',
-        ],
-      },
-      {
-        title: '💻 Hands-on Exercises: Component Testing',
-        items: [
-          'Component isolated testing.',
-          'Component shallow testing.',
-          'Component integration testing.',
-        ],
-      },
-      {
-        title: '👨🏻‍🏫 Test Doubles & "Mocking"',
-        items: [
-          'Mocks vs Dummies vs Spies vs Stubs vs Fakes.',
-          'Fake it till you Mock it!',
-          'Type-safe testing.',
-          'Contract testing fakes.',
-        ],
-      },
-      {
-        title: '💻 Hands-on Exercises: Test Doubles & "Mocking"',
-        items: ['Hands-on test doubles practice.'],
-      },
-      {
-        title: '💻 Hands-on Exercises: More Component Testing',
+        title: '💻 Hands-on Exercises: Props, Callbacks & Forms',
         items: [
           'Testing Props & Callbacks based communication.',
           'Interacting with forms.',
         ],
       },
       {
-        title: '👨🏻‍🏫 React Testing Library vs. Vitest Browser Mode',
-        items: ['Resilient DOM testing.'],
-      },
-      {
-        title:
-          '💻 Hands-on Exercises: React Testing Library vs. Vitest Browser Mode',
+        title: '👨🏻‍🏫 Time Control',
         items: [
-          'Hands-on React Testing Library practice.',
-          'Hands-on Vitest Browser Mode practice.',
+          'Working with fake timers.',
+          'Fast-forwarding time.',
+          'Testing time-sensitive behavior.',
         ],
       },
       {
@@ -268,6 +299,14 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       {
         title: '💻 Hands-on Exercises: Gloves & Page Objects',
         items: ['Using a Page Object.', 'Implementing a Page Object.'],
+      },
+      {
+        title: '👨🏻‍🏫 Router Testing',
+        items: [
+          'Testing routing logic.',
+          'Testing data loaders and protected routes.',
+          'Testing navigation flows.',
+        ],
       },
       {
         title: '👨🏻‍🏫 End-to-End Testing with Playwright',
@@ -305,7 +344,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         items: ['Detecting visual regressions with Playwright and Testronaut.'],
       },
       {
-        title: '👨🏻‍🏫 Defining a Pragmatic Testing Strategy',
+        title: '👨🏻‍🏫 Building a Pragmatic Testing Strategy',
         items: [
           'Goals of a testing strategy.',
           'Choosing what to test and how.',
