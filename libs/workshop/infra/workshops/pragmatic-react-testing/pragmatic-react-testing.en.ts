@@ -1,10 +1,9 @@
 import { createWorkshop } from '@marmicode/workshop/core';
 import pictureUri from './pragmatic-react-testing.webp';
 import thumbnailUri from './pragmatic-react-testing-thumbnail.webp';
-import { PRAGMATIC_REACT_TESTING_FULL_COURSE_ID } from './pragmatic-react-testing.shared';
 
 export const pragmaticReactTestingFullCourseEn = createWorkshop({
-  id: PRAGMATIC_REACT_TESTING_FULL_COURSE_ID,
+  id: 'pragmatic-react-testing',
   title: 'Pragmatic React Testing Workshop',
   shortTitle: 'Pragmatic React Testing',
   type: 'full',

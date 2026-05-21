@@ -1,10 +1,9 @@
 import { createWorkshop } from '@marmicode/workshop/core';
 import pictureUri from './pragmatic-ui-testing-with-playwright.webp';
 import thumbnailUri from './pragmatic-ui-testing-with-playwright-thumbnail.webp';
-import { PRAGMATIC_UI_TESTING_WITH_PLAYWRIGHT_FULL_COURSE_ID } from './pragmatic-ui-testing-with-playwright.shared';
 
 export const pragmaticUiTestingWithPlaywrightFullCourseEn = createWorkshop({
-  id: PRAGMATIC_UI_TESTING_WITH_PLAYWRIGHT_FULL_COURSE_ID,
+  id: 'pragmatic-ui-testing-with-playwright',
   title: 'Pragmatic UI Testing with Playwright Workshop',
   shortTitle: 'Pragmatic UI Testing with Playwright',
   type: 'full',

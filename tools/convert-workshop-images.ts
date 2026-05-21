@@ -121,6 +121,7 @@ async function _convertFullBanner(jpegPath: string, workshopSlug: string) {
   const webpPath = join(
     __dirname,
     '../libs/workshop/infra/workshops',
+    workshopSlug,
     `${workshopSlug}.webp`,
   );
   console.info(
@@ -130,12 +131,13 @@ async function _convertFullBanner(jpegPath: string, workshopSlug: string) {
 }
 
 async function _convertThumbnailBanner(jpegPath: string, workshopSlug: string) {
-  const workshopsDir = join(__dirname, '../libs/workshop/infra/workshops');
-  const webpPath = join(workshopsDir, `${workshopSlug}-thumbnail.webp`);
-  const croppedJpegPath = join(
-    workshopsDir,
-    `${workshopSlug}-thumbnail-crop.jpg`,
+  const workshopDir = join(
+    __dirname,
+    '../libs/workshop/infra/workshops',
+    workshopSlug,
   );
+  const webpPath = join(workshopDir, `${workshopSlug}-thumbnail.webp`);
+  const croppedJpegPath = join(workshopDir, `${workshopSlug}-thumbnail-crop.jpg`);
 
   console.info(
     chalk.cyan(
