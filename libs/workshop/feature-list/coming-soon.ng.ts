@@ -1,23 +1,30 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { externalLinks } from '@marmicode/shared/router-helpers';
+import { LinkComponent } from '@marmicode/shared/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-coming-soon',
-  imports: [MatCardModule],
+  imports: [MatCardModule, LinkComponent],
   template: `
     <mat-card role="article" class="card">
       <mat-card-content class="coming-soon-content">
         <h3>More Workshops Coming Soon!</h3>
-        <ul>
-          <li>Modern Angular</li>
-          <li>Architecture</li>
-          <li>Nx</li>
-          <li>NestJS</li>
-          <li>...</li>
-        </ul>
         <div role="note" class="coming-soon-note">
-          Stay tuned for updates and new workshop announcements!
+          <p>
+            <mc-link color="accent" [href]="externalLinks.newsletterUrl"
+              ><span aria-hidden="true">🔔</span> Stay tuned</mc-link
+            >
+            for updates and new workshop announcements!
+          </p>
+          <p>
+            <span aria-hidden="true">✉️</span> Or
+            <mc-link color="accent" [href]="externalLinks.contactFormUrl"
+              >reach out</mc-link
+            >
+            if you need <b>help</b> or a <b>custom session</b>.
+          </p>
         </div>
       </mat-card-content>
     </mat-card>
@@ -33,7 +40,7 @@ import { MatCardModule } from '@angular/material/card';
         font-weight: 700;
         font-size: 24px;
         color: #1976d2;
-        margin-bottom: 1em;
+        margin-bottom: 0.5rem;
         text-align: center;
       }
 
@@ -51,7 +58,6 @@ import { MatCardModule } from '@angular/material/card';
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
-      min-height: 300px;
     }
 
     .coming-soon-note {
@@ -61,4 +67,6 @@ import { MatCardModule } from '@angular/material/card';
     }
   `,
 })
-export class ComingSoon {}
+export class ComingSoon {
+  externalLinks = externalLinks;
+}
