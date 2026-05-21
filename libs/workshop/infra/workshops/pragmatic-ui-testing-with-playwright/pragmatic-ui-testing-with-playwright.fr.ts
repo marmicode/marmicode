@@ -17,7 +17,7 @@ Construisez des tests qui résistent au refactoring, aux migrations et au dével
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/xfv9Dae1vHVE7ZjM7',
   waitlistUrl: 'https://forms.gle/jNA7KXRzhXEmFWtM9',
-  lumaTag: 'pragmatic-ui-testing',
+  lumaTag: 'playwright',
   description: `
 Le testing — et plus particulièrement le testing frontend — est indéniablement dans le top 3 des sujets les plus complexes associés au développement d'applications web.
 

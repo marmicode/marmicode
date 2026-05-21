@@ -17,7 +17,7 @@ Learn to build tests that survive refactors, migrations, and AI-assisted develop
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/J9kGUiNeDBFzdZ937',
   waitlistUrl: 'https://forms.gle/mwfc57RfQXdMdMSLA',
-  lumaTag: 'pragmatic-ui-testing',
+  lumaTag: 'playwright',
   description: `
 Testing — and frontend testing in particular — is undeniably in the top 3 most complex topics in web application development.
 
