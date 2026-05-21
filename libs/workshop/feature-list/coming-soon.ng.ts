@@ -14,12 +14,12 @@ import { LinkComponent } from '@marmicode/shared/ui';
         <div role="note" class="coming-soon-note">
           <p>
             <mc-link color="accent" [href]="externalLinks.newsletterUrl"
-              ><span aria-hidden>🔔</span> Stay tuned</mc-link
+              ><span aria-hidden="true">🔔</span> Stay tuned</mc-link
             >
             for updates and new workshop announcements!
           </p>
           <p>
-            <span aria-hidden>✉️</span> Or
+            <span aria-hidden="true">✉️</span> Or
             <mc-link color="accent" [href]="externalLinks.contactFormUrl"
               >reach out</mc-link
             >
