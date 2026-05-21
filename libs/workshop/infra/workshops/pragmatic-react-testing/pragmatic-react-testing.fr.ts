@@ -112,6 +112,22 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
       description: 'Adaptez votre stratégie au développement assisté par IA.',
     },
   ],
+  testimonials: [
+    {
+      authorName: 'Bastien M.',
+      quote:
+        'Super formateur, très dynamique et très compétent sur le sujet, merci !',
+    },
+    {
+      authorName: 'Sylvain L.',
+      quote:
+        "Très intéressant, Younes connaît parfaitement son sujet et anime très bien la formation. J'ai beaucoup apprécié",
+    },
+    {
+      authorName: 'Benoit B.',
+      quote: 'Excellent formateur - passionné par le sujet.',
+    },
+  ],
   faqs: [
     {
       question: "À qui s'adresse cette formation ?",

@@ -111,6 +111,39 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       description: 'Adapt your strategy to AI-assisted development.',
     },
   ],
+  testimonials: [
+    {
+      authorName: 'Wiemar A. W.',
+      authorCompany: '4PS',
+      quote:
+        "As someone beginning to write 'useful' tests, I liked how simple Younes made everything seem. Not a lot of terminology, just a lot of very practical tips. His approach to test doubles provided very practical tips that I will definitely be implementing.",
+    },
+    {
+      authorName: 'Dr Guschtel',
+      quote:
+        "The overview about all the options was awesome. It's great to see how Younes masters all these tools.",
+    },
+    {
+      authorName: 'Janik S.',
+      authorCompany: 'Serviceware',
+      authorRole: 'Software Developer',
+      quote:
+        'Younes is a nice host, very easy going and well explained, well prepared examples and exercises!',
+    },
+    {
+      authorName: 'Tomas L.',
+      authorCompany: 'Rosa',
+      authorRole: 'Software Engineer',
+      quote:
+        'Very great presentation about testing. I loved the super fast feedback loop.',
+    },
+    {
+      authorName: 'Filip S.',
+      authorCompany: 'Motorola Solutions',
+      quote:
+        'Great explanation of differences between mocks, stubs and fakes and how to develop a good testing strategy. The repository with useful examples of different use cases was also great.',
+    },
+  ],
   faqs: [
     {
       question: 'Who is this workshop for?',
