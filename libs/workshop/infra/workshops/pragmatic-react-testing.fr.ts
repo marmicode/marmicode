@@ -1,23 +1,23 @@
 import { createWorkshop } from '@marmicode/workshop/core';
-import pictureUri from './pragmatic-angular-testing.webp';
-import thumbnailUri from './pragmatic-angular-testing-thumbnail.webp';
-import { PRAGMATIC_ANGULAR_TESTING_FULL_COURSE_FR_ID } from './pragmatic-angular-testing.shared';
+import pictureUri from './pragmatic-react-testing.webp';
+import thumbnailUri from './pragmatic-react-testing-thumbnail.webp';
+import { PRAGMATIC_REACT_TESTING_FULL_COURSE_FR_ID } from './pragmatic-react-testing.shared';
 
-export const pragmaticAngularTestingFullCourseFr = createWorkshop({
-  id: PRAGMATIC_ANGULAR_TESTING_FULL_COURSE_FR_ID,
-  title: 'Formation Test Angular Pragmatique',
-  shortTitle: 'Test Angular Pragmatique',
+export const pragmaticReactTestingFullCourseFr = createWorkshop({
+  id: PRAGMATIC_REACT_TESTING_FULL_COURSE_FR_ID,
+  title: 'Formation Test React Pragmatique',
+  shortTitle: 'Test React Pragmatique',
   type: 'full',
   subheading: `Trois jours pour transformer le chaos des tests en une stratégie bien assaisonnée. Construisez des tests qui résistent au refactoring, aux migrations et aux deadlines.`,
   pictureAltText:
-    'Younes en tablier tenant une marmite violette débordante de logos Angular, Vitest, Playwright et Testronaut dans un décor de cuisine.',
+    'Younes en tablier tenant une marmite violette débordante de logos React, Vitest, Playwright et Testronaut dans un décor de cuisine.',
   pictureUri,
   thumbnailUri,
   duration: 3,
   location: 'online',
-  customSessionRequestUrl: 'https://forms.gle/FmSfiVpi7H21twwr9',
-  // waitlistUrl: 'https://forms.gle/8ANywdMWtp5PtPLK9',
-  lumaTag: 'angular-testing',
+  customSessionRequestUrl: 'TODO',
+  // waitlistUrl: 'TODO',
+  lumaTag: 'react-testing',
   description: `
 Il y a deux façons de garder un produit stable :
 **ne jamais y toucher — ou mijoter une solide stratégie de test.**
@@ -32,15 +32,14 @@ Comment tient la vôtre ?
 
 Si ça vous parle, cette formation est votre sortie de secours.
 
-On commence par un tour au marché pour les ingrédients clés : **Fakes**, **Object Mothers**, **Gloves**, **Vitest**, **Testronaut** pour le Playwright Component Testing, **Playwright** pour les tests end-to-end, et **WallabyJS** pour le TDD.
+On commence par un tour au marché pour les ingrédients clés : **Fakes**, **Object Mothers**, **Gloves**, **Vitest**, **Vitest Browser Mode**, **Testronaut** pour le Playwright Component Testing, **Playwright** pour les tests end-to-end, et **WallabyJS** pour le TDD.
 
 Puis, de retour en cuisine, on prépare un menu de tests complet et facile à maintenir, qui mûrit sur trois jours. Vous apprendrez à :
 
 * Écrire des tests maintenables et lisibles qui **résistent au refactoring et aux migrations**.
-* Préparer votre suite pour l'Angular de demain : **Zoneless-ready** et **Signal-friendly**.
 * Maîtriser toutes les saveurs du **TDD** — du Progressif au "Timeboxed".
-* Tester le **code asynchrone** et les "**effects**" avec confiance.
-* Construire et utiliser vos propres **test harnesses** et **Gloves** pour une interaction UI résiliente.
+* Tester le **code asynchrone**, les "**effects**" et les **hooks** (comme React Query de Tanstack) avec confiance.
+* Construire et utiliser vos propres **Page Objects** et **Gloves** pour une interaction UI résiliente.
 * Détecter les **régressions visuelles** avant vos utilisateurs.
 * Écrire des **tests end-to-end rapides et fiables avec Playwright** — et savoir exactement quand choisir entre e2e et component tests.
 * Concevoir une **stratégie de test pragmatique** qui passe à l'échelle, et qui rapporte sur la durée — pas juste écrire de meilleurs tests.
@@ -62,7 +61,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
   },
   language: 'fr',
   requiredSkills: [
-    `Concepts fondamentaux d'Angular (ex. : composants, inputs/outputs, services, signals, etc.)`,
+    `Concepts fondamentaux de React (ex. : composants, props, state, hooks, context)`,
     `Fondamentaux TypeScript (ex. : types, interfaces, génériques basiques)`,
     `Fondamentaux Git (ex. : cloner, réinitialiser les changements locaux, changer de branche)`,
   ],
@@ -76,7 +75,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
       icon: 'build',
       title: 'Outils de Test Modernes',
       description:
-        'Maîtrisez des outils modernes comme Vitest et Playwright Component Testing avec Testronaut.',
+        'Maîtrisez le meilleur de Vitest, Vitest Browser Mode et Playwright Component Testing avec Testronaut.',
     },
     {
       icon: 'visibility',
@@ -114,32 +113,16 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
       description: 'Adaptez votre stratégie au développement assisté par IA.',
     },
   ],
-  testimonials: [
-    {
-      authorName: 'Bastien M.',
-      quote:
-        'Super formateur, très dynamique et très compétent sur le sujet, merci !',
-    },
-    {
-      authorName: 'Sylvain L.',
-      quote:
-        "Très intéressant, Younes connaît parfaitement son sujet et anime très bien la formation. J'ai beaucoup apprécié",
-    },
-    {
-      authorName: 'Benoit B.',
-      quote: 'Excellent formateur - passionné par le sujet.',
-    },
-  ],
   faqs: [
     {
       question: "À qui s'adresse cette formation ?",
       answer:
-        "Aux développeurs Angular qui écrivent déjà des tests — ou qui veulent s'y mettre — et qui souhaitent améliorer leurs pratiques de test. Que vous soyez confrontés à des tests instables, du code difficile à tester, ou une absence de stratégie de test — cette formation est faite pour vous.",
+        "Aux développeurs React qui écrivent déjà des tests — ou qui veulent s'y mettre — et qui souhaitent améliorer leurs pratiques de test. Que vous soyez confrontés à des tests instables, du code difficile à tester, ou une absence de stratégie de test — cette formation est faite pour vous.",
     },
     {
       question: 'Quel niveau est requis ?',
       answer:
-        "Vous devez être à l'aise avec les fondamentaux d'Angular (composants, services, inputs/outputs), les bases de TypeScript, et Git. Aucune expérience préalable en testing n'est nécessaire — on part de zéro.",
+        "Vous devez être à l'aise avec les fondamentaux de React (composants, props, state, hooks), les bases de TypeScript, et Git. Aucune expérience préalable en testing n'est nécessaire — on part de zéro.",
     },
     {
       question: 'Quels outils sont nécessaires ?',
@@ -152,7 +135,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         'Très. Vous alternerez entre courtes sessions théoriques et exercices pratiques pendant trois jours. Les petits groupes garantissent un accompagnement direct et personnalisé.',
     },
     {
-      question: 'Et si mon équipe utilise Jest ou Karma ?',
+      question: 'Et si mon équipe utilise Jest ou Mocha ?',
       answer:
         "Les principes et stratégies enseignés s'appliquent quel que soit votre test runner. Cela dit, on utilise Vitest dans les exercices — et vous risquez de ne plus vouloir revenir en arrière.",
     },
@@ -187,7 +170,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
       {
         title: '👨🏻‍🏫 Vitest',
         items: [
-          'Pourquoi Vitest plutôt que Karma, Jest ou Web Test Runner.',
+          'Pourquoi Vitest plutôt que Jest, Mocha ou Web Test Runner.',
           'Avantages et inconvénients.',
         ],
       },
@@ -201,9 +184,9 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         ],
       },
       {
-        title: '💻 Exercices pratiques : tester un service Angular',
+        title: '💻 Exercices pratiques : tester un custom hook',
         items: [
-          "Tester un service Angular avec l'approche TDD progressif.",
+          "Tester un custom hook React avec l'approche TDD progressif.",
           'Debug avec Vitest.',
         ],
       },
@@ -220,9 +203,9 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         title: '👨🏻‍🏫 Tests asynchrones',
         items: [
           'Tests asynchrones.',
-          'Tester les observables.',
-          'Tester les "signals" et les "effects".',
-          '"Fake timers".',
+          'Tester les mises à jour de state et les "effects".',
+          'Tester les hooks asynchrones (ex. : React Query de Tanstack).',
+          '"Fake timers" et fast-forward.',
         ],
       },
       {
@@ -261,33 +244,33 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
       {
         title: '💻 Exercices pratiques : tests de composants (suite)',
         items: [
-          'Tester la communication via Inputs et Outputs.',
+          'Tester la communication via Props et Callbacks.',
           'Interagir avec les formulaires.',
         ],
       },
       {
-        title: '👨🏻‍🏫 Angular Testing Library vs. Vitest Browser Mode',
+        title: '👨🏻‍🏫 React Testing Library vs. Vitest Browser Mode',
         items: ['Tests DOM résilients.'],
       },
       {
         title:
-          '💻 Exercices pratiques : Angular Testing Library vs. Vitest Browser Mode',
+          '💻 Exercices pratiques : React Testing Library vs. Vitest Browser Mode',
         items: [
-          'Pratique Angular Testing Library.',
+          'Pratique React Testing Library.',
           'Pratique Vitest Browser Mode.',
         ],
       },
       {
-        title: '👨🏻‍🏫 Gloves et Angular CDK Test Harness',
+        title: '👨🏻‍🏫 Gloves et Page Objects',
         items: [
           'Gloves.',
-          "L'histoire derrière Angular CDK Test Harness.",
-          "Quand et comment l'utiliser.",
+          'Le pattern Page Object pour les composants React.',
+          'Quand et comment les utiliser.',
         ],
       },
       {
-        title: '💻 Exercices pratiques : Test Harness',
-        items: ['Utiliser un test harness.', 'Implémenter un test harness.'],
+        title: '💻 Exercices pratiques : Gloves et Page Objects',
+        items: ['Utiliser un Page Object.', 'Implémenter un Page Object.'],
       },
       {
         title: '👨🏻‍🏫 Tests end-to-end avec Playwright',

@@ -1,23 +1,24 @@
 import { createWorkshop } from '@marmicode/workshop/core';
-import pictureUri from './pragmatic-angular-testing.webp';
-import thumbnailUri from './pragmatic-angular-testing-thumbnail.webp';
-import { PRAGMATIC_ANGULAR_TESTING_FULL_COURSE_ID } from './pragmatic-angular-testing.shared';
+import pictureUri from './pragmatic-react-testing.webp';
+import thumbnailUri from './pragmatic-react-testing-thumbnail.webp';
+import { PRAGMATIC_REACT_TESTING_FULL_COURSE_ID } from './pragmatic-react-testing.shared';
 
-export const pragmaticAngularTestingFullCourseEn = createWorkshop({
-  id: PRAGMATIC_ANGULAR_TESTING_FULL_COURSE_ID,
-  title: 'Pragmatic Angular Testing Workshop',
-  shortTitle: 'Pragmatic Angular Testing',
+export const pragmaticReactTestingFullCourseEn = createWorkshop({
+  id: PRAGMATIC_REACT_TESTING_FULL_COURSE_ID,
+  title: 'Pragmatic React Testing Workshop',
+  shortTitle: 'Pragmatic React Testing',
   type: 'full',
   subheading: `Three days to turn testing chaos into a well-seasoned strategy.
 Learn to build tests that survive refactors, migrations, and deadlines.`,
   pictureAltText:
-    'Younes in apron holding a purple cooking pot overflowing with Angular, Vitest, Playwright, and Testronaut logos in a kitchen setting.',
+    'Younes in apron holding a purple cooking pot overflowing with React, Vitest, Playwright, and Testronaut logos in a kitchen setting.',
   pictureUri,
   thumbnailUri,
   duration: 3,
   location: 'online',
-  customSessionRequestUrl: 'https://forms.gle/TEp9DTM6pHiSFRPY9',
-  lumaTag: 'angular-testing',
+  customSessionRequestUrl: 'TODO',
+  // waitlistUrl: 'TODO',
+  lumaTag: 'react-testing',
   description: `
 There are two ways to keep a product stable: **never touch it — or cook up a solid testing strategy.**
 
@@ -31,15 +32,14 @@ So… how’s yours holding up?
 
 If any of that hits close to home, this workshop is your way out of the fire.
 
-We’ll stop by the market for key ingredients such as **Fakes**, **Object Mothers**, **Gloves**, **Vitest**, **Testronaut** for Playwright Component Testing, **Playwright** for end-to-end testing, and **WallabyJS** for TDD.
+We’ll stop by the market for key ingredients such as **Fakes**, **Object Mothers**, **Gloves**, **Vitest**, **Vitest Browser Mode**, **Testronaut** for Playwright Component Testing, **Playwright** for end-to-end testing, and **WallabyJS** for TDD.
 
 Then, back to the kitchen, we’ll prepare a complete, low-maintenance testing menu that matures over three days. You’ll learn how to:
 
 * Write maintainable, human-readable tests that **survive refactors and migrations**.  
-* Prepare your suite for tomorrow’s Angular: **Zoneless-ready** and **Signal-friendly**.  
 * Master all flavors of **TDD** — from Progressive to Timeboxed.  
-* Test **async code** and **effects** with confidence.  
-* Build and use your own **test harnesses** and **Gloves** for resilient UI interaction.  
+* Test **async code**, **effects**, and **hooks** (such as Tanstack's React Query) with confidence.  
+* Build and use your own **Page Objects** and **Gloves** for resilient UI interaction.  
 * Detect **visual regressions** before your users do.  
 * Write fast, reliable **end-to-end tests with Playwright** — and know exactly when to reach for e2e vs. component tests.  
 * Design a **pragmatic testing strategy** that scales across teams, and pays off over time — not just write better tests.  
@@ -61,7 +61,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
   },
   language: 'en',
   requiredSkills: [
-    `Angular core concepts (e.g. components, inputs/outputs, services, signals, etc.)`,
+    `React core concepts (e.g. components, props, state, hooks, context)`,
     `TypeScript fundamentals (e.g. types, interfaces, basic generics)`,
     `Git fundamentals (e.g. cloning, resetting local changes, switching branches)`,
   ],
@@ -75,7 +75,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       icon: 'build',
       title: 'Modern Testing Tools',
       description:
-        'Leverage the best of Vitest and Playwright Component Testing with Testronaut.',
+        'Leverage the best of Vitest, Vitest Browser Mode, and Playwright Component Testing with Testronaut.',
     },
     {
       icon: 'visibility',
@@ -112,64 +112,16 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       description: 'Adapt your strategy to AI-assisted development.',
     },
   ],
-  testimonials: [
-    {
-      authorName: 'Andrew Scott',
-      authorCompany: 'Google',
-      authorRole: 'Angular Core Team Member',
-      authorPictureUri: 'https://avatars.githubusercontent.com/u/479713?v=4',
-      quote: `I've had the pleasure of working with Younes several times over the past year — particularly around testing in a zoneless Angular world — and we consistently find ourselves on the exact same page. We consider him one of the strongest testing experts among the GDEs.`,
-    },
-    {
-      authorName: 'Wiemar A. W.',
-      authorCompany: '4PS',
-      quote:
-        "As someone beginning to write 'useful' tests, I liked how simple Younes made everything seem. Not a lot of terminology, just a lot of very practical tips. His approach to test doubles provided very practical tips that I will definitely be implementing.",
-    },
-    {
-      authorName: 'Dr Guschtel',
-      quote:
-        "The overview about all the options was awesome. It's great to see how Younes masters all these tools.",
-    },
-    {
-      authorName: 'Janik S.',
-      authorCompany: 'Serviceware',
-      authorRole: 'Software Developer',
-      quote:
-        'Younes is a nice host, very easy going and well explained, well prepared examples and exercises!',
-    },
-    {
-      authorName: 'Tomas L.',
-      authorCompany: 'Rosa',
-      authorRole: 'Software Engineer',
-      quote:
-        'Very great presentation about testing. I loved the super fast feedback loop.',
-    },
-    {
-      authorName: 'Filip S.',
-      authorCompany: 'Motorola Solutions',
-      authorRole: 'Senior Angular Developer',
-      quote:
-        'Great explanation of differences between mocks, stubs and fakes and how to develop a good testing strategy. The repository with useful examples of different use cases was also great.',
-    },
-    {
-      authorName: 'Kilian Weber',
-      authorCompany: 'Proses',
-      authorRole: 'Software Developer',
-      quote:
-        'I loved developing my own test strategy and seeing a contract test in a real example. Most importantly, I learned about alternatives to the standard TestBed.',
-    },
-  ],
   faqs: [
     {
       question: 'Who is this workshop for?',
       answer:
-        "Angular developers who write tests — or want to start — and want to improve their testing practices. Whether you're dealing with flaky tests, untestable code, or no testing strategy at all — this workshop is for you.",
+        "React developers who write tests — or want to start — and want to improve their testing practices. Whether you're dealing with flaky tests, untestable code, or no testing strategy at all — this workshop is for you.",
     },
     {
       question: "What's the experience level?",
       answer:
-        'You should be comfortable with Angular fundamentals (components, services, inputs/outputs), TypeScript basics, and Git. No prior testing experience is required — we start from the ground up.',
+        'You should be comfortable with React fundamentals (components, props, state, hooks), TypeScript basics, and Git. No prior testing experience is required — we start from the ground up.',
     },
     {
       question: 'What tools do I need?',
@@ -182,7 +134,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         "Very. You'll alternate between short theory sessions and practical exercises throughout the three days. Small groups ensure direct coaching and feedback.",
     },
     {
-      question: 'What if my company uses Jest or Karma?',
+      question: 'What if my company uses Jest or Mocha?',
       answer:
         "The principles and strategies you'll learn apply regardless of your test runner. That said, we use Vitest in the exercises — and you might not want to go back.",
     },
@@ -216,7 +168,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       {
         title: '👨🏻‍🏫 Vitest',
         items: [
-          'Why Vitest instead of Karma, Jest or Web Test Runner.',
+          'Why Vitest instead of Jest, Mocha or Web Test Runner.',
           'Pros & cons.',
         ],
       },
@@ -230,9 +182,9 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '💻 Hands-on Exercises: Testing an Angular Service',
+        title: '💻 Hands-on Exercises: Testing a Custom Hook',
         items: [
-          'Testing an Angular service with the Progressive TDD approach.',
+          'Testing a React custom hook with the Progressive TDD approach.',
           'Debugging with Vitest.',
         ],
       },
@@ -249,9 +201,9 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         title: '👨🏻‍🏫 Async Testing',
         items: [
           'Async testing.',
-          'Testing observables.',
-          'Testing effects.',
-          'Fake timers.',
+          'Testing state updates and effects.',
+          "Testing async hooks (e.g. Tanstack's React Query).",
+          'Fake timers and fast-forward.',
         ],
       },
       {
@@ -290,33 +242,33 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       {
         title: '💻 Hands-on Exercises: More Component Testing',
         items: [
-          'Testing Inputs & Outputs based communication.',
+          'Testing Props & Callbacks based communication.',
           'Interacting with forms.',
         ],
       },
       {
-        title: '👨🏻‍🏫 Angular Testing Library vs. Vitest Browser Mode',
+        title: '👨🏻‍🏫 React Testing Library vs. Vitest Browser Mode',
         items: ['Resilient DOM testing.'],
       },
       {
         title:
-          '💻 Hands-on Exercises: Angular Testing Library vs. Vitest Browser Mode',
+          '💻 Hands-on Exercises: React Testing Library vs. Vitest Browser Mode',
         items: [
-          'Hands-on Angular Testing Library practice.',
+          'Hands-on React Testing Library practice.',
           'Hands-on Vitest Browser Mode practice.',
         ],
       },
       {
-        title: '👨🏻‍🏫 Gloves & Angular CDK Test Harness',
+        title: '👨🏻‍🏫 Gloves & Page Objects',
         items: [
           'Gloves.',
-          'The story behind Angular CDK Test Harness.',
-          'When and how to use it.',
+          'The Page Object pattern for React components.',
+          'When and how to use them.',
         ],
       },
       {
-        title: '💻 Hands-on Exercises: Test Harness',
-        items: ['Using a test harness.', 'Implementing a test harness.'],
+        title: '💻 Hands-on Exercises: Gloves & Page Objects',
+        items: ['Using a Page Object.', 'Implementing a Page Object.'],
       },
       {
         title: '👨🏻‍🏫 End-to-End Testing with Playwright',
