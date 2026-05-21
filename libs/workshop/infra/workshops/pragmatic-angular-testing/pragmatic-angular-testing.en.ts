@@ -1,10 +1,9 @@
 import { createWorkshop } from '@marmicode/workshop/core';
 import pictureUri from './pragmatic-angular-testing.webp';
 import thumbnailUri from './pragmatic-angular-testing-thumbnail.webp';
-import { PRAGMATIC_ANGULAR_TESTING_FULL_COURSE_ID } from './pragmatic-angular-testing.shared';
 
 export const pragmaticAngularTestingFullCourseEn = createWorkshop({
-  id: PRAGMATIC_ANGULAR_TESTING_FULL_COURSE_ID,
+  id: 'pragmatic-angular-testing',
   title: 'Pragmatic Angular Testing Workshop',
   shortTitle: 'Pragmatic Angular Testing',
   type: 'full',
@@ -42,7 +41,9 @@ Then, back to the kitchen, we’ll prepare a complete, low-maintenance testing m
 * Build and use your own **test harnesses** and **Gloves** for resilient UI interaction.  
 * Detect **visual regressions** before your users do.  
 * Write fast, reliable **end-to-end tests with Playwright** — and know exactly when to reach for e2e vs. component tests.  
-* Design a **pragmatic testing strategy** that scales across teams, and pays off over time — not just write better tests.
+* Design a **pragmatic testing strategy** that scales across teams, and pays off over time — not just write better tests.  
+* Adapt your strategy to **AI-assisted development** — and know when tests act as a safety net for humans vs. a feedback loop for agents.  
+* Turn your test suite into the **strongest harness** for efficient AI-assisted development — not a tax you pay around it.
 
 Across these three days, you won’t just learn recipes — you’ll refine your testing instincts, challenge habits, and leave with a testing culture you can scale.
 
@@ -103,6 +104,11 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       title: 'Pragmatic Testing Buffet',
       description:
         'Enjoy a buffet of tips and tricks to help you adopt a Pragmatic Testing Strategy.',
+    },
+    {
+      icon: 'smart_toy',
+      title: 'AI-Era Testing Strategy',
+      description: 'Adapt your strategy to AI-assisted development.',
     },
   ],
   testimonials: [
@@ -216,10 +222,75 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       {
         title: '💻 Hands-on Exercises: First Tests',
         items: [
+          'All-you-can-eat tips & tricks for precise and maintainable tests.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Object Mothers',
+        items: [
+          'Object Mothers.',
+          'Creating reusable test data.',
+          'Reducing test duplication.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Async Testing',
+        items: ['Async testing.', 'Testing observables.', 'Testing effects.'],
+      },
+      {
+        title: '💻 Hands-on Exercises: Async Testing',
+        items: ['Hands-on async testing practice.'],
+      },
+      {
+        title: '👨🏻‍🏫 Test Doubles & "Mocking"',
+        items: [
+          'Mocks vs Dummies vs Spies vs Stubs vs Fakes.',
+          'Fake it till you Mock it!',
+          'Type-safe testing.',
+          'Contract testing fakes.',
+        ],
+      },
+      {
+        title: '💻 Hands-on Exercises: Test Doubles & "Mocking"',
+        items: ['Hands-on test doubles practice.'],
+      },
+      {
+        title: '👨🏻‍🏫 Component Testing Flavors',
+        items: [
+          'Testing a component.',
+          'The different types of component tests: Isolated vs. Shallow vs. Integration.',
+          'Interacting with the DOM.',
+        ],
+      },
+      {
+        title: '💻 Hands-on Exercises: Component Testing',
+        items: [
+          'Component isolated testing.',
+          'Component shallow testing.',
+          'Component integration testing.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Angular Testing Library vs. Vitest Browser Mode',
+        items: ['Resilient DOM testing.', 'Testing in a real browser.'],
+      },
+      {
+        title:
+          '💻 Hands-on Exercises: Angular Testing Library & Vitest Browser Mode',
+        items: [
+          'Hands-on Angular Testing Library practice.',
+          'Hands-on Vitest Browser Mode practice.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 "Partial" vs. "Full" Browser Mode',
+        items: ['Trade-offs between "Partial" and "Full" Browser Mode.'],
+      },
+      {
+        title: '👨🏻‍🏫 TDD',
+        items: [
           'Test-Driven Development: origin & benefits.',
           'Progressive TDD.',
-          'All-you-can-eat tips & tricks for precise and maintainable tests.',
-          'Object Mothers.',
         ],
       },
       {
@@ -239,64 +310,22 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '👨🏻‍🏫 Async Testing',
-        items: [
-          'Async testing.',
-          'Testing observables.',
-          'Testing effects.',
-          'Fake timers.',
-        ],
+        title: '👨🏻‍🏫 Testing Inputs & Outputs',
+        items: ['Testing component inputs.', 'Testing component outputs.'],
       },
       {
-        title: '💻 Hands-on Exercises: Async Testing',
-        items: ['Hands-on async testing practice.'],
-      },
-      {
-        title: '👨🏻‍🏫 Component Testing',
-        items: [
-          'Testing a component.',
-          'The different types of component tests: Isolated vs. Shallow vs. Integration.',
-          'Interacting with the DOM.',
-        ],
-      },
-      {
-        title: '💻 Hands-on Exercises: Component Testing',
-        items: [
-          'Component isolated testing.',
-          'Component shallow testing.',
-          'Component integration testing.',
-        ],
-      },
-      {
-        title: '👨🏻‍🏫 Test Doubles & "Mocking"',
-        items: [
-          'Mocks vs Dummies vs Spies vs Stubs vs Fakes.',
-          'Fake it till you Mock it!',
-          'Type-safe testing.',
-          'Contract testing fakes.',
-        ],
-      },
-      {
-        title: '💻 Hands-on Exercises: Test Doubles & "Mocking"',
-        items: ['Hands-on test doubles practice.'],
-      },
-      {
-        title: '💻 Hands-on Exercises: More Component Testing',
+        title: '💻 Hands-on Exercises: Inputs, Outputs & Forms',
         items: [
           'Testing Inputs & Outputs based communication.',
           'Interacting with forms.',
         ],
       },
       {
-        title: '👨🏻‍🏫 Angular Testing Library vs. Vitest Browser Mode',
-        items: ['Resilient DOM testing.'],
-      },
-      {
-        title:
-          '💻 Hands-on Exercises: Angular Testing Library vs. Vitest Browser Mode',
+        title: '👨🏻‍🏫 Time Control',
         items: [
-          'Hands-on Angular Testing Library practice.',
-          'Hands-on Vitest Browser Mode practice.',
+          'Working with fake timers.',
+          'Fast-forwarding time.',
+          'Testing time-sensitive behavior.',
         ],
       },
       {
@@ -310,6 +339,14 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       {
         title: '💻 Hands-on Exercises: Test Harness',
         items: ['Using a test harness.', 'Implementing a test harness.'],
+      },
+      {
+        title: '👨🏻‍🏫 Router Testing',
+        items: [
+          'Testing routing logic.',
+          'Testing route guards and resolvers.',
+          'Testing navigation flows.',
+        ],
       },
       {
         title: '👨🏻‍🏫 End-to-End Testing with Playwright',
@@ -347,12 +384,21 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         items: ['Detecting visual regressions with Playwright and Testronaut.'],
       },
       {
-        title: '👨🏻‍🏫 Defining a Pragmatic Testing Strategy',
+        title: '👨🏻‍🏫 Building a Pragmatic Testing Strategy',
         items: [
           'Goals of a testing strategy.',
           'Choosing what to test and how.',
           'Evaluating a testing strategy.',
           'Introducing testing in a legacy codebase.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Testing Strategy in the AI-Assisted Era',
+        items: [
+          "What changes — and what doesn't — when agents write the code or the tests.",
+          'Tests as a feedback loop for the agent vs. tests as a safety net for humans — and why these two roles pull the same suite in different directions.',
+          'The new pains of AI-assisted development: Cognitive Debt, Review Fatigue, and Context Switching Tax — and how a solid testing strategy keeps them in check.',
+          'What and when to choose: Vibe Coding vs. Spec-Driven Development vs. Charted Coding.',
         ],
       },
     ],

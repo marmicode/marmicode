@@ -436,6 +436,9 @@ importers:
       vitest:
         specifier: 4.1.5
         version: 4.1.5(@opentelemetry/api@1.9.1)(@types/node@22.19.14)(@vitest/coverage-v8@4.1.5)(@vitest/ui@4.1.5)(jsdom@22.1.0)(vite@7.3.1(@types/node@22.19.14)(jiti@2.6.0)(less@4.4.2)(sass-embedded@1.89.2)(sass@1.97.3)(stylus@0.64.0)(terser@5.46.0)(yaml@2.8.4))
+      zx:
+        specifier: 8.8.5
+        version: 8.8.5
 
 packages:
 
@@ -15019,6 +15022,11 @@ packages:
   zone.js@0.15.1:
     resolution: {integrity: sha512-XE96n56IQpJM7NAoXswY3XRLcWFW83xe0BiAOeMD7K5k5xecOeul3Qcpx6GqEeeHNkW5DWL5zOyTbEfB4eti8w==}
 
+  zx@8.8.5:
+    resolution: {integrity: sha512-SNgDF5L0gfN7FwVOdEFguY3orU5AkfFZm9B5YSHog/UDHv+lvmd82ZAsOenOkQixigwH2+yyH198AwNdKhj+RA==}
+    engines: {node: '>= 12.17.0'}
+    hasBin: true
+
 snapshots:
 
   '@adobe/css-tools@4.3.3':
@@ -21181,7 +21189,10 @@ snapshots:
     dependencies:
       '@percy/cli-command': 1.31.13(typescript@5.9.3)
     transitivePeerDependencies:
+      - bufferutil
+      - supports-color
       - typescript
+      - utf-8-validate
 
   '@percy/cli-command@1.31.13(typescript@5.9.3)':
     dependencies:
@@ -21198,7 +21209,10 @@ snapshots:
     dependencies:
       '@percy/cli-command': 1.31.13(typescript@5.9.3)
     transitivePeerDependencies:
+      - bufferutil
+      - supports-color
       - typescript
+      - utf-8-validate
 
   '@percy/cli-doctor@1.31.13(typescript@5.9.3)':
     dependencies:
@@ -21234,7 +21248,10 @@ snapshots:
       '@percy/cli-command': 1.31.13(typescript@5.9.3)
       yaml: 2.8.4
     transitivePeerDependencies:
+      - bufferutil
+      - supports-color
       - typescript
+      - utf-8-validate
 
   '@percy/cli-upload@1.31.13(typescript@5.9.3)':
     dependencies:
@@ -21242,7 +21259,10 @@ snapshots:
       fast-glob: 3.3.3
       image-size: 1.2.1
     transitivePeerDependencies:
+      - bufferutil
+      - supports-color
       - typescript
+      - utf-8-validate
 
   '@percy/cli@1.31.13(typescript@5.9.3)':
     dependencies:
@@ -33859,3 +33879,5 @@ snapshots:
   zod@4.3.5: {}
 
   zone.js@0.15.1: {}
+
+  zx@8.8.5: {}
