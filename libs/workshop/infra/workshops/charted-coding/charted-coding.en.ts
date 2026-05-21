@@ -1,10 +1,9 @@
 import { createWorkshop } from '@marmicode/workshop/core';
 import pictureUri from './charted-coding.webp';
 import thumbnailUri from './charted-coding-thumbnail.webp';
-import { CHARTED_CODING_FULL_COURSE_ID } from './charted-coding.shared';
 
 export const chartedCodingFullCourseEn = createWorkshop({
-  id: CHARTED_CODING_FULL_COURSE_ID,
+  id: 'charted-coding',
   title: 'Charted Coding: AI-Assisted Development Without the Drift',
   shortTitle: 'Charted Coding: AI-Assisted Development Without the Drift',
   type: 'full',

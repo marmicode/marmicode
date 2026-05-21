@@ -10,11 +10,13 @@ describe(WorkshopRepository.name, () => {
 
     expect
       .soft(workshop?.pictureUri)
-      .toBe('/workshop/infra/workshops/pragmatic-angular-testing.webp');
+      .toBe(
+        '/workshop/infra/workshops/pragmatic-angular-testing/pragmatic-angular-testing.webp',
+      );
     expect
       .soft(workshop?.thumbnailUri)
       .toBe(
-        '/workshop/infra/workshops/pragmatic-angular-testing-thumbnail.webp',
+        '/workshop/infra/workshops/pragmatic-angular-testing/pragmatic-angular-testing-thumbnail.webp',
       );
   });
 
