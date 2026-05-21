@@ -227,12 +227,8 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         ],
       },
       {
-        title: '👨🏻‍🏫 React Testing Library',
-        items: ['Tests DOM résilients.'],
-      },
-      {
-        title: '👨🏻‍🏫 Vitest Browser Mode',
-        items: ['Tests dans un vrai navigateur.'],
+        title: '👨🏻‍🏫 React Testing Library vs. Vitest Browser Mode',
+        items: ['Tests DOM résilients.', 'Tests dans un vrai navigateur.'],
       },
       {
         title:
@@ -241,6 +237,10 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
           'Pratique React Testing Library.',
           'Pratique Vitest Browser Mode.',
         ],
+      },
+      {
+        title: '👨🏻‍🏫 Browser Mode « Partial » vs. « Full »',
+        items: ['Compromis entre Browser Mode « Partial » et « Full ».'],
       },
       {
         title: '👨🏻‍🏫 TDD',
@@ -266,12 +266,11 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         ],
       },
       {
-        title: '👨🏻‍🏫 Tester les Props',
-        items: ['Tester les props des composants.'],
-      },
-      {
-        title: '👨🏻‍🏫 Tester les Callbacks',
-        items: ['Tester les callbacks des composants.'],
+        title: '👨🏻‍🏫 Tester les Props et Callbacks',
+        items: [
+          'Tester les props des composants.',
+          'Tester les callbacks des composants.',
+        ],
       },
       {
         title: '💻 Exercices pratiques : Props, Callbacks et formulaires',

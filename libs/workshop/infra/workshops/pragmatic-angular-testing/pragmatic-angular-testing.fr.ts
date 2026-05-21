@@ -244,12 +244,8 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         ],
       },
       {
-        title: '👨🏻‍🏫 Angular Testing Library',
-        items: ['Tests DOM résilients.'],
-      },
-      {
-        title: '👨🏻‍🏫 Vitest Browser Mode',
-        items: ['Tests dans un vrai navigateur.'],
+        title: '👨🏻‍🏫 Angular Testing Library vs. Vitest Browser Mode',
+        items: ['Tests DOM résilients.', 'Tests dans un vrai navigateur.'],
       },
       {
         title:
@@ -258,6 +254,10 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
           'Pratique Angular Testing Library.',
           'Pratique Vitest Browser Mode.',
         ],
+      },
+      {
+        title: '👨🏻‍🏫 Browser Mode « Partial » vs. « Full »',
+        items: ['Compromis entre Browser Mode « Partial » et « Full ».'],
       },
       {
         title: '👨🏻‍🏫 TDD',
@@ -283,12 +283,11 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         ],
       },
       {
-        title: '👨🏻‍🏫 Tester les Inputs',
-        items: ['Tester les inputs des composants.'],
-      },
-      {
-        title: '👨🏻‍🏫 Tester les Outputs',
-        items: ['Tester les outputs des composants.'],
+        title: '👨🏻‍🏫 Tester les Inputs et Outputs',
+        items: [
+          'Tester les inputs des composants.',
+          'Tester les outputs des composants.',
+        ],
       },
       {
         title: '💻 Exercices pratiques : Inputs, Outputs et formulaires',

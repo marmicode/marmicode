@@ -271,12 +271,8 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '👨🏻‍🏫 Angular Testing Library',
-        items: ['Resilient DOM testing.'],
-      },
-      {
-        title: '👨🏻‍🏫 Vitest Browser Mode',
-        items: ['Testing in a real browser.'],
+        title: '👨🏻‍🏫 Angular Testing Library vs. Vitest Browser Mode',
+        items: ['Resilient DOM testing.', 'Testing in a real browser.'],
       },
       {
         title:
@@ -285,6 +281,10 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
           'Hands-on Angular Testing Library practice.',
           'Hands-on Vitest Browser Mode practice.',
         ],
+      },
+      {
+        title: '👨🏻‍🏫 "Partial" vs. "Full" Browser Mode',
+        items: ['Trade-offs between "Partial" and "Full" Browser Mode.'],
       },
       {
         title: '👨🏻‍🏫 TDD',
@@ -310,12 +310,8 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
         ],
       },
       {
-        title: '👨🏻‍🏫 Testing Inputs',
-        items: ['Testing component inputs.'],
-      },
-      {
-        title: '👨🏻‍🏫 Testing Outputs',
-        items: ['Testing component outputs.'],
+        title: '👨🏻‍🏫 Testing Inputs & Outputs',
+        items: ['Testing component inputs.', 'Testing component outputs.'],
       },
       {
         title: '💻 Hands-on Exercises: Inputs, Outputs & Forms',
