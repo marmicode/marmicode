@@ -68,6 +68,7 @@
     "@rx-angular/template": "^15.1.0",
     "@storybook/core-server": "8.6.18",
     "apollo-angular": "13.0.0",
+    "crisp-sdk-web": "1.1.2",
     "document-register-element": "^1.7.2",
     "express": "5.2.1",
     "firebase": "^9.9.0",
