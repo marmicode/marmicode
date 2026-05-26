@@ -8,6 +8,7 @@ export const environment = {
   production: false,
   firebase: environmentNext.firebase,
   origin: null,
+  crispWebsiteId: environmentNext.crispWebsiteId,
 };
 
 /*
