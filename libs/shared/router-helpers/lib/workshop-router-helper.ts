@@ -1,6 +1,11 @@
+const WORKSHOP_LIST_PATH = 'workshops';
+const WORKSHOP_DETAIL_RELATIVE_PATH = ':workshopId';
+
 export const workshopRouterHelper = {
-  WORKSHOP_DETAIL_PATH: 'workshops/:workshopId',
-  WORKSHOP_LIST_PATH: 'workshops',
+  WORKSHOP_DETAIL_RELATIVE_PATH,
+  WORKSHOP_DETAIL_PATH: `${WORKSHOP_LIST_PATH}/${WORKSHOP_DETAIL_RELATIVE_PATH}`,
+  WORKSHOP_LIST_PATH,
+
   detail(workshopId: string) {
     return ['/', this.WORKSHOP_LIST_PATH, encodeURIComponent(workshopId)];
   },

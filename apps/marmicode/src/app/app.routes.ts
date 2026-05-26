@@ -7,6 +7,7 @@ import {
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
 import { or } from '@marmicode/shared/utils';
+import { provideChatWidget } from './chat/chat';
 
 export const routes: Routes = [
   /* Blog post detail. */
@@ -48,16 +49,23 @@ export const routes: Routes = [
       ),
   },
 
-  /* Workshop detail. */
-  {
-    path: workshopRouterHelper.WORKSHOP_DETAIL_PATH,
-    loadComponent: () => import('@marmicode/workshop/feature-detail'),
-  },
-
-  /* Workshop list. */
+  /* Workshops. */
   {
     path: workshopRouterHelper.WORKSHOP_LIST_PATH,
-    loadComponent: () => import('@marmicode/workshop/feature-list'),
+    providers: [provideChatWidget()],
+    children: [
+      /* Workshops list. */
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () => import('@marmicode/workshop/feature-list'),
+      },
+      /* Workshop detail. */
+      {
+        path: workshopRouterHelper.WORKSHOP_DETAIL_RELATIVE_PATH,
+        loadComponent: () => import('@marmicode/workshop/feature-detail'),
+      },
+    ],
   },
 
   /* Landing page. */
