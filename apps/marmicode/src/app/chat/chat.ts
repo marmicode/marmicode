@@ -6,7 +6,7 @@ import {
   makeEnvironmentProviders,
   provideEnvironmentInitializer,
 } from '@angular/core';
-import { Platform } from '@marmicode/shared/utils';
+import { Platform, Public } from '@marmicode/shared/utils';
 import { Crisp as CrispSdk } from 'crisp-sdk-web';
 import { environment } from '../../environments/environment';
 
@@ -15,18 +15,24 @@ export function provideChatWidget(): EnvironmentProviders {
     provideEnvironmentInitializer(() => {
       const chat = inject(Chat);
       const destroyRef = inject(DestroyRef);
-      const platform = inject(Platform);
 
-      if (platform.isBrowser()) {
-        chat.showWidget();
-        destroyRef.onDestroy(() => chat.hideWidget());
-      }
+      chat.showWidget();
+      destroyRef.onDestroy(() => chat.hideWidget());
     }),
   ]);
 }
 
+@Injectable({
+  providedIn: 'root',
+  useFactory: () =>
+    inject(Platform).isBrowser() ? inject(CrispChat) : inject(NoopChat),
+})
+abstract class Chat {
+  abstract showWidget(): void;
+  abstract hideWidget(): void;
+}
 @Injectable({ providedIn: 'root' })
-class Chat {
+class CrispChat implements Public<Chat> {
   constructor() {
     CrispSdk.configure(environment.crispWebsiteId, { autoload: false });
   }
@@ -38,4 +44,13 @@ class Chat {
   hideWidget() {
     CrispSdk.chat.hide();
   }
+}
+
+@Injectable({ providedIn: 'root' })
+class NoopChat implements Public<Chat> {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  showWidget() {}
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  hideWidget() {}
 }
