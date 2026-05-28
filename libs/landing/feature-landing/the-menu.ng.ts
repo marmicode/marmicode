@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
+import {
+  externalLinks,
+  workshopRouterHelper,
+} from '@marmicode/shared/router-helpers';
 import { Card, Link, LinkComponent, PageSection } from '@marmicode/shared/ui';
 
 @Component({
@@ -109,7 +112,7 @@ export class TheMenu {
         {
           icon: 'book',
           text: 'Free Cookbook',
-          href: 'https://cookbook.marmicode.io',
+          href: externalLinks.cookbookUrl,
         },
       ],
       buttonText: 'VIEW COURSE',
@@ -122,11 +125,7 @@ export class TheMenu {
       services: [
         {
           icon: 'school',
-          text: 'Angular Testing — Tapas Edition',
-        },
-        {
-          icon: 'architecture',
-          text: 'Architecture, Typescript, Node.js…',
+          text: 'Angular Testing, AI-Assisted Dev, Nx, Playwright, Vitest…',
         },
         {
           icon: 'groups',
@@ -136,24 +135,19 @@ export class TheMenu {
       buttonText: 'SEE ALL WORKSHOPS',
     },
     {
-      icon: 'support_agent',
-      title: 'Ask the Cook',
+      icon: 'explore',
+      title: 'Team Coaching',
       description:
-        'Stuck on a tricky architecture decision or testing strategy? Get async expert guidance when AI tools fall short.',
-      link: { href: 'https://courses.marmicode.io/bundles/ginger-review' },
+        'Stuck on architecture or testing strategy? Get a focused monthly partnership that charts a steadier path to predictable delivery — keeping the bar high as AI writes more of the code.',
+      link: { href: externalLinks.scheduleCallUrl },
       services: [
         {
-          icon: 'autorenew',
-          text: 'Async Q&A',
-          offer: 'from 150€ / month',
-        },
-        {
-          icon: 'person',
-          text: '1:1 Coaching',
-          offer: 'from 800€ / month',
+          icon: 'group',
+          text: 'Team Coaching',
+          offer: 'from 1 500€ / month',
         },
       ],
-      buttonText: 'FIND YOUR FLAVOR',
+      buttonText: 'BOOK A CALL',
     },
   ];
 }
