@@ -111,6 +111,11 @@ export class NavMenuComponent {
       route: resourceSearchRouterHelper.learnEverything(),
     },
     {
+      icon: 'book',
+      title: 'Cookbook',
+      url: externalLinks.cookbookUrl,
+    },
+    {
       icon: 'school',
       title: 'Workshops',
       route: workshopRouterHelper.list(),
