@@ -7,7 +7,7 @@ export const chartedCodingFullCourseFr = createWorkshop({
   title: 'Charted Coding : Développement Assisté par IA Sans Dérive',
   shortTitle: 'Charted Coding : Développement Assisté par IA Sans Dérive',
   type: 'full',
-  subheading: `Une journée pour passer d'un développement assisté par IA rapide mais fragile à des approches durables.
+  subheading: `Une journée pour passer d'un développement assisté par IA imprévisible à des approches durables.
 Cartographier le Vibe Coding et le Spec-Driven Development — puis tracer une voie compatible avec votre architecture.`,
   pictureAltText:
     'Métaphore visuelle du développement assisté par IA cartographié : un chemin clair ou une carte guidant la collaboration entre un développeur et un assistant IA.',
