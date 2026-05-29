@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { RenderMode, ServerRoute } from '@angular/ssr';
 import {
   blogPostDetailRouterHelper,
-  recipeDetailRouterHelper,
+  coachingRouterHelper,
   resourceSearchRouterHelper,
   servicesRouterHelper,
   workshopRouterHelper,
@@ -22,6 +22,11 @@ export const serverRoutes: ServerRoute[] = [
   /* Services */
   {
     path: servicesRouterHelper.SERVICES_PATH,
+    renderMode: RenderMode.Prerender,
+  },
+  /* Coaching */
+  {
+    path: coachingRouterHelper.COACHING_PATH,
     renderMode: RenderMode.Prerender,
   },
   /* Workshops list */
