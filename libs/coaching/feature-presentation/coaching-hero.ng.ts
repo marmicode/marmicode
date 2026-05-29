@@ -12,7 +12,7 @@ import { COACHING_LABELS } from './coaching-presentation.i18n';
   template: `
     <mc-hero
       [pictureUri]="coaching().heroPictureUri"
-      title="Monthly Team Coaching"
+      [title]="coaching().title"
     >
       <ng-content slot="content">
         <p class="badge">{{ coaching().priceLabel }}</p>
