@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {
+  coachingRouterHelper,
   externalLinks,
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
@@ -139,7 +140,7 @@ export class TheMenu {
       title: 'Team Coaching',
       description:
         'Stuck on architecture or testing strategy? Get a focused monthly partnership that charts a steadier path to predictable delivery — keeping the bar high as AI writes more of the code.',
-      link: { href: externalLinks.scheduleCallUrl },
+      link: { route: coachingRouterHelper.coaching() },
       services: [
         {
           icon: 'group',
