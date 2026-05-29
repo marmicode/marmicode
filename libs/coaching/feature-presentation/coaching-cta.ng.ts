@@ -2,7 +2,7 @@ import { UpperCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { CoachingOffering } from '@marmicode/coaching/core';
-import { COACHING_LABELS } from '../feature-presentation/coaching-presentation.i18n';
+import { COACHING_LABELS } from './coaching-presentation.i18n';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
