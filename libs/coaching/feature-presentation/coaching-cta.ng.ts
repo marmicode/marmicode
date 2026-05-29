@@ -56,15 +56,6 @@ import { COACHING_LABELS } from './coaching-presentation.i18n';
       margin: 0 0 2rem;
     }
 
-    .price {
-      padding: 0.5rem 1rem;
-      margin: 0 0 2rem;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      font-size: 1.3em;
-      box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
-    }
-
     a {
       padding: 1.2rem;
       border-radius: 8px;
