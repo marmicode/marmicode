@@ -1,11 +1,10 @@
 import { externalLinks } from '@marmicode/shared/router-helpers';
-import heroPictureUri from '../../shared/ui/lib/cook.webp';
+import heroPictureUri from './coach.webp';
 
 export interface CoachingOffering {
   benefits: string[];
   bookCallUrl: string;
   ctaDescription: string;
-  ctaPriceLabel: string;
   ctaTitle: string;
   description: string;
   heroPictureUri: string;
@@ -35,6 +34,5 @@ Over three months, you get enough momentum to fix what's actually slowing delive
   ctaTitle: 'Make this the quarter your delivery gets predictable',
   ctaDescription:
     "Three months is long enough to fix what's actually slowing your team down — and short enough to prove it pays for itself. You work directly with me the whole way: a Google Developer Expert and Nx Champion with nearly 20 years building and improving real software systems. I only take on a few partnerships at a time, so spots are limited.",
-  ctaPriceLabel: '3 x €2.500,00',
   bookCallUrl: externalLinks.scheduleCallUrl,
 };
