@@ -41,21 +41,6 @@ import { COACHING_LABELS } from './coaching-presentation.i18n';
       );
     }
 
-    .eyebrow {
-      font-size: 1.5em;
-      font-weight: 600;
-      line-height: 1;
-      margin: 1rem 0 0.5rem;
-      text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .headline {
-      font-size: 3em;
-      font-weight: bold;
-      line-height: 1;
-      margin: 0 0 1rem;
-      text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
-    }
 
     .badge {
       padding: 0.5rem 1rem;
