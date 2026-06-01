@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import {
   blogPostDetailRouterHelper,
+  coachingRouterHelper,
   recipeDetailRouterHelper,
   resourceSearchRouterHelper,
   servicesRouterHelper,
@@ -47,6 +48,13 @@ export const routes: Routes = [
       import('@marmicode/services/feature-presentation').then(
         (m) => m.ServicesRoutingModule,
       ),
+  },
+
+  /* Coaching. */
+  {
+    path: coachingRouterHelper.COACHING_PATH,
+    providers: [provideChatWidget()],
+    loadComponent: () => import('@marmicode/coaching/feature-presentation'),
   },
 
   /* Workshops. */
