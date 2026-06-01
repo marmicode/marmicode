@@ -145,10 +145,10 @@ export class TheMenu {
         {
           icon: 'group',
           text: 'Team Coaching',
-          offer: 'from 1 500€ / month',
+          offer: 'from €2 500 / month',
         },
       ],
-      buttonText: 'BOOK A CALL',
+      buttonText: 'LEARN MORE',
     },
   ];
 }
