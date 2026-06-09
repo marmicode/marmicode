@@ -4,6 +4,7 @@ export interface Workshop {
 
   /**
    * The alternate is used to display the workshops in the other languages.
+   *
    * This field is populated by `WorkshopRepository`.
    */
   alternates?: Array<{ id: string; language: WorkshopLanguage }>;
@@ -19,7 +20,15 @@ export interface Workshop {
   /**
    * If set, this will show a Join Waitlist button instead of a Book a Seat button.
    */
-  waitlistUrl?: string;
+  waitlist?: {
+    url: string;
+
+    /**
+     * Next session month in `YYYY-MM` format.
+     * Displayed in the hero.
+     */
+    nextSessionMonth: `${number}-${number}`;
+  };
 
   /**
    * Tag used to show upcoming sessions.

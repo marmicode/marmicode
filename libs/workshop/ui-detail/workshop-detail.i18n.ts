@@ -4,6 +4,8 @@ import { WORKSHOP_SHARED_LABELS } from '@marmicode/workshop/ui';
 const WORKSHOP_DETAIL_LABELS_EN = {
   bookASession: 'Book a seat',
   joinWaitlist: 'Join Waitlist',
+  limitedSpots: 'Limited Spots',
+  nextSession: 'Next Session',
   priceStartsAt: 'starts at',
   requestACustomSession: 'Request a custom session',
   upcomingSessions: 'Upcoming sessions',
@@ -18,6 +20,8 @@ const WORKSHOP_DETAIL_LABELS_EN = {
 const WORKSHOP_DETAIL_LABELS_FR: typeof WORKSHOP_DETAIL_LABELS_EN = {
   bookASession: 'Réserver une place',
   joinWaitlist: "Rejoindre la liste d'attente",
+  limitedSpots: 'Places Limitées',
+  nextSession: 'Prochaine Session',
   priceStartsAt: 'à partir de',
   requestACustomSession: 'Session sur mesure',
   upcomingSessions: 'Sessions à venir',
