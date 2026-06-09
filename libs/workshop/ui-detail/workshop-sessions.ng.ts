@@ -23,7 +23,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
     LumaEvents,
   ],
   template: `
-    @if (!workshop().waitlistUrl) {
+    @if (!workshop().waitlist) {
       <mc-page-section
         [id]="upcomingSessionsSectionId"
         [sectionTitle]="sectionTitle()"

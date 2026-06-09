@@ -76,8 +76,8 @@ import { UPCOMING_SESSIONS_SECTION_ID } from './workshop-sessions.ng';
           }
 
           <div class="actions">
-            @if (workshop().waitlistUrl; as waitlistUrl) {
-              <a [href]="waitlistUrl" matButton="filled" target="_blank">
+            @if (workshop().waitlist; as waitlist) {
+              <a [href]="waitlist.url" matButton="filled" target="_blank">
                 <mat-icon>notifications</mat-icon>
                 {{ labels().joinWaitlist | uppercase }}
               </a>
@@ -281,11 +281,11 @@ export class WorkshopHero {
   );
   labels = computed(() => WORKSHOP_DETAIL_LABELS[this.workshop().language]);
   nextSessionLabel = computed(() => {
-    const { language, nextSessionMonth, waitlistUrl } = this.workshop();
-    if (!waitlistUrl || !nextSessionMonth) {
+    const { language, waitlist } = this.workshop();
+    if (!waitlist) {
       return null;
     }
-    const [year, month] = nextSessionMonth.split('-').map(Number);
+    const [year, month] = waitlist.nextSessionMonth.split('-').map(Number);
     return new Intl.DateTimeFormat(language, {
       month: 'long',
       year: 'numeric',
