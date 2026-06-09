@@ -59,6 +59,22 @@ import { UPCOMING_SESSIONS_SECTION_ID } from './workshop-sessions.ng';
         </p>
 
         <div class="actions-container">
+          @if (nextSessionLabel(); as nextSessionLabel) {
+            <p class="next-session-pill">
+              <span class="next-session-segment">
+                {{ labels().nextSession | uppercase }}
+              </span>
+              <span class="next-session-divider" aria-hidden="true"></span>
+              <span class="next-session-segment">
+                {{ nextSessionLabel | uppercase }}
+              </span>
+              <span class="next-session-divider" aria-hidden="true"></span>
+              <span class="next-session-segment">
+                {{ labels().limitedSpots | uppercase }}
+              </span>
+            </p>
+          }
+
           <div class="actions">
             @if (workshop().waitlistUrl; as waitlistUrl) {
               <a [href]="waitlistUrl" matButton="filled" target="_blank">
@@ -155,6 +171,54 @@ import { UPCOMING_SESSIONS_SECTION_ID } from './workshop-sessions.ng';
       margin-bottom: 2rem;
     }
 
+    .next-session-pill {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem 1.25rem;
+      margin: 0 0 1.5rem;
+      border: 1px solid
+        color-mix(
+          in srgb,
+          var(--marmicode-accent-bright-color) 20%,
+          transparent
+        );
+      border-radius: 9999px;
+
+      background: rgba(20, 30, 35, 0.35);
+      color: var(--marmicode-accent-bright-color);
+      font-size: 0.9em;
+      letter-spacing: 0.05em;
+      text-align: center;
+
+      @media (max-width: 599.98px) {
+        gap: 0.6rem;
+        padding: 0.6rem 0.8rem;
+        margin: 0 0.75rem 1.5rem;
+        font-size: 0.95em;
+        letter-spacing: 0.02em;
+      }
+    }
+
+    .next-session-segment {
+      white-space: nowrap;
+
+      @media (max-width: 599.98px) {
+        flex: 1;
+        white-space: normal;
+      }
+    }
+
+    .next-session-divider {
+      align-self: stretch;
+      width: 1px;
+      background: color-mix(
+        in srgb,
+        var(--marmicode-accent-bright-color) 30%,
+        transparent
+      );
+    }
+
     .actions {
       display: flex;
       align-items: center;
@@ -216,6 +280,17 @@ export class WorkshopHero {
     })),
   );
   labels = computed(() => WORKSHOP_DETAIL_LABELS[this.workshop().language]);
+  nextSessionLabel = computed(() => {
+    const { language, nextSessionMonth, waitlistUrl } = this.workshop();
+    if (!waitlistUrl || !nextSessionMonth) {
+      return null;
+    }
+    const [year, month] = nextSessionMonth.split('-').map(Number);
+    return new Intl.DateTimeFormat(language, {
+      month: 'long',
+      year: 'numeric',
+    }).format(new Date(year, month - 1));
+  });
   upcomingSessionsSectionId = UPCOMING_SESSIONS_SECTION_ID;
   offerType = computed(() => {
     const { offer } = this.workshop();

@@ -22,6 +22,12 @@ export interface Workshop {
   waitlistUrl?: string;
 
   /**
+   * Next session month in `YYYY-MM` format.
+   * Displayed in the hero when `waitlistUrl` is set.
+   */
+  nextSessionMonth?: string;
+
+  /**
    * Tag used to show upcoming sessions.
    */
   lumaTag: string;
