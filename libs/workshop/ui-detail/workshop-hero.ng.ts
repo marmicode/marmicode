@@ -187,7 +187,7 @@ import { UPCOMING_SESSIONS_SECTION_ID } from './workshop-sessions.ng';
 
       background: rgba(20, 30, 35, 0.35);
       color: var(--marmicode-accent-bright-color);
-      font-size: 0.9em;
+      font-size: 0.95em;
       letter-spacing: 0.05em;
       text-align: center;
 
