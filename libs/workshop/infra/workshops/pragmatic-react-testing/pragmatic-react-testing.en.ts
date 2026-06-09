@@ -4,7 +4,7 @@ import thumbnailUri from './pragmatic-react-testing-thumbnail.webp';
 
 export const pragmaticReactTestingFullCourseEn = createWorkshop({
   id: 'pragmatic-react-testing',
-  title: 'Pragmatic React Testing Workshop',
+  title: 'Pragmatic React Testing Debug Workshop',
   shortTitle: 'Pragmatic React Testing',
   type: 'full',
   subheading: `Three days to turn testing chaos into a well-seasoned strategy.
