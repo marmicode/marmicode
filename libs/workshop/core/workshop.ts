@@ -4,7 +4,7 @@ export interface Workshop {
 
   /**
    * The alternate is used to display the workshops in the other languages.
-   * 
+   *
    * This field is populated by `WorkshopRepository`.
    */
   alternates?: Array<{ id: string; language: WorkshopLanguage }>;
@@ -27,7 +27,7 @@ export interface Workshop {
      * Next session month in `YYYY-MM` format.
      * Displayed in the hero.
      */
-    nextSessionMonth: string;
+    nextSessionMonth: `${number}-${number}`;
   };
 
   /**
