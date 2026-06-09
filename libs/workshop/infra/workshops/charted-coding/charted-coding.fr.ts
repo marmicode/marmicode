@@ -16,7 +16,10 @@ Cartographier le Vibe Coding et le Spec-Driven Development — puis tracer une v
   duration: 1,
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/uCFadpa7J578H6zQ6',
-  waitlistUrl: 'https://forms.gle/Ds8TSxkBkSiJddnk7',
+  waitlist: {
+    url: 'https://forms.gle/Ds8TSxkBkSiJddnk7',
+    nextSessionMonth: '2026-09',
+  },
   lumaTag: 'charted-coding',
   description: `
 Les assistants IA — Copilot, Cursor, Claude Code, et autres — font désormais partie du quotidien de nombreuses équipes.

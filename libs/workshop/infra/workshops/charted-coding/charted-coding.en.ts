@@ -16,7 +16,10 @@ Map Vibe Coding and Spec-Driven Development — then chart a path your architect
   duration: 1,
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/xbPQtvj7yRebmtH17',
-  waitlistUrl: 'https://forms.gle/2eefd2ETDwyJ7HiK6',
+  waitlist: {
+    url: 'https://forms.gle/2eefd2ETDwyJ7HiK6',
+    nextSessionMonth: '2026-09',
+  },
   lumaTag: 'charted-coding',
   description: `
 AI assistants — Copilot, Cursor, Claude Code, and others — are now part of many teams' daily workflow.

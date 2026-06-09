@@ -15,7 +15,7 @@ export const pragmaticAngularTestingFullCourseFr = createWorkshop({
   duration: 3,
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/FmSfiVpi7H21twwr9',
-  // waitlistUrl: 'https://forms.gle/8ANywdMWtp5PtPLK9',
+  // waitlist: { url: 'https://forms.gle/8ANywdMWtp5PtPLK9', nextSessionMonth: 'YYYY-MM' },
   lumaTag: 'angular-testing',
   description: `
 Il y a deux façons de garder un produit stable :

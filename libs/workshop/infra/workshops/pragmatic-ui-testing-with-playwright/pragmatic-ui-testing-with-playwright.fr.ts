@@ -16,7 +16,10 @@ Construisez des tests qui résistent au refactoring, aux migrations et au dével
   duration: 3,
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/xfv9Dae1vHVE7ZjM7',
-  waitlistUrl: 'https://forms.gle/jNA7KXRzhXEmFWtM9',
+  waitlist: {
+    url: 'https://forms.gle/jNA7KXRzhXEmFWtM9',
+    nextSessionMonth: '2026-10',
+  },
   lumaTag: 'playwright',
   description: `
 Le testing — et plus particulièrement le testing frontend — est indéniablement dans le top 3 des sujets les plus complexes associés au développement d'applications web.
