@@ -8,7 +8,7 @@ export const chartedCodingFullCourseFr = createWorkshop({
   shortTitle: 'Charted Coding : Développement Assisté par IA Sans Dérive',
   type: 'full',
   subheading: `Une journée pour passer d'un développement assisté par IA imprévisible à des approches durables.
-Cartographier le Vibe Coding et le Spec-Driven Development — puis tracer une voie compatible avec votre architecture.`,
+Cartographier le paysage, tracer une méthode compatible avec votre architecture — puis configurer vos harnesses pour garder les agents sur la trajectoire.`,
   pictureAltText:
     'Métaphore visuelle du développement assisté par IA cartographié : un chemin clair ou une carte guidant la collaboration entre un développeur et un assistant IA.',
   pictureUri,
@@ -32,9 +32,9 @@ Les assistants IA — Copilot, Cursor, Claude Code, et autres — font désormai
 
 Cette formation explore les principales approches du développement assisté par IA — du Vibe Coding au Spec-Driven Development — et vous fournit des **méthodes, outils et techniques agnostiques du framework** qui placent la boucle de feedback au cœur de votre collaboration avec l'agent IA.
 
-**Au menu :** pratique des différentes approches sur un **cas d'usage unique**, identification de leurs forces et limites, puis application d'une **méthode structurée** pour produire du code maintenable, testable et conforme à votre intention.
+**Au menu :** une comparaison du Vibe Coding et du Spec-Driven Development, puis le workflow Charted Coding sur un cas d'usage commun — **Cartographier l'intention**, **Tracer les waypoints**, **Piloter le cycle** — et un bloc **Harness Engineering** : skills, hooks, verification gates, stratégie de tests, Nx boundaries et règles ESLint comme garde-fous que l'agent ne peut pas contourner en silence.
 
-La journée alterne **contenu théorique**, **démonstrations en direct** et **exercices pratiques**, avec pour objectif de vous rendre **autonome** dans le choix et l'application de la bonne approche pour votre contexte.
+La journée alterne **contenu théorique**, **démonstrations en direct** et **exercices pratiques**, avec pour objectif de vous rendre **autonome** dans le choix de la bonne approche et le câblage de la couche déterministe qui la rend durable.
 `,
   offer: {
     type: 'early-bird',
@@ -71,6 +71,12 @@ La journée alterne **contenu théorique**, **démonstrations en direct** et **e
       title: 'Boucles de Feedback Courtes',
       description:
         "Alignez votre intention sur le code produit grâce à des cycles d'itération serrés.",
+    },
+    {
+      icon: 'construction',
+      title: 'Ingénierie du Harness',
+      description:
+        "Mettez en place skills, hooks, tests, Nx boundaries et règles ESLint comme couche de vérification déterministe que l'agent ne peut pas contourner en silence.",
     },
     {
       icon: 'health_and_safety',
@@ -110,7 +116,7 @@ La journée alterne **contenu théorique**, **démonstrations en direct** et **e
     {
       question: "C'est vraiment pratique ?",
       answer:
-        "Oui. Vous pratiquerez toute la journée sur un cas d'usage commun, comparerez les approches sur le même problème, et repartirez avec une synthèse collective et un plan d'action individuel.",
+        "Oui. Après une comparaison cours + démo des principales approches, vous pratiquez le workflow Charted Coding sur un cas d'usage commun — Cartographier l'intention, Tracer les waypoints, Piloter le cycle — puis vous câblez les harnesses (skills, vérification, boundaries). Vous repartez avec une synthèse collective et un plan d'action individuel.",
     },
     {
       question: 'Est-ce lié à un framework particulier ?',
@@ -137,40 +143,12 @@ La journée alterne **contenu théorique**, **démonstrations en direct** et **e
   agenda: {
     sections: [
       {
-        title: '👨🏻‍🏫 Vibe Coding',
+        title: '👨🏻‍🏫 Cartographier le paysage',
         items: [
-          'Définir le "Vibe Coding".',
-          "Quand ça fonctionne (et pourquoi c'est séduisant).",
-          'Les pièges classiques : dérive, problèmes de maintenabilité, illusion de productivité.',
-        ],
-      },
-      {
-        title: '💻 Exercice : Vibe Coding',
-        items: [
-          'Itérer en Vibe Coding sur la fonctionnalité initiale.',
-          'Analyse à froid : ce qui tient, ce qui casse.',
-        ],
-      },
-      {
-        title: '👨🏻‍🏫 Spec-Driven Development & Spec Kit',
-        items: [
-          "L'approche Spec-Driven : Spec Kit (GitHub), BMAD, OpenSpec et alternatives.",
-          'Anatomie et fonctionnement interne de Spec Kit.',
-        ],
-      },
-      {
-        title: '💻 Exercice : approche Spec-Driven',
-        items: [
-          "Revisiter le même cas d'usage avec un workflow spec-driven.",
-          'Avantages et inconvénients — leçons apprises.',
-        ],
-      },
-      {
-        title: '👨🏻‍🏫 Analyse comparative',
-        items: [
-          'Forces et limites de chaque approche selon le contexte.',
-          'Quand le Vibe Coding suffit — et quand il devient dangereux.',
-          'Quand le Spec-Driven est rentable — et quand il devient un frein.',
+          'Définir le "Vibe Coding" : quand ça fonctionne, pourquoi c\'est séduisant, et les pièges classiques (dérive, maintenabilité, illusion de productivité).',
+          'Spec-Driven Development : Spec Kit (GitHub), BMAD, OpenSpec et alternatives — anatomie et fonctionnement de Spec Kit.',
+          "Démo : le même cas d'usage sous les deux approches — ce qui tient, ce qui casse.",
+          'Analyse comparative en narratif : forces et limites selon le contexte ; quand chacune est rentable — et quand elle devient un frein.',
         ],
       },
       {
@@ -178,30 +156,49 @@ La journée alterne **contenu théorique**, **démonstrations en direct** et **e
           '👨🏻‍🏫 Principes : développement incrémental compatible avec les agents',
         items: [
           "Naviguer avec une carte plutôt que dériver : piloter l'agent en gardant le contrôle de la trajectoire.",
-          'Co-construire un "Design Doc" pragmatique avec l\'agent — et orchestrer la revue par des agents spécialisés.',
-          'Le cycle Scaffold → Red → Green → Refactor.',
+          "Cartographier l'intention : co-construire un Design Doc pragmatique avec l'agent — objectifs, comportement, design, stratégie de tests.",
+          "Tracer les waypoints : transformer l'intention en un plan de PRs ordonné et relisable (tranches fines qui ne cassent jamais la mainline).",
+          'Piloter le cycle : Scaffold → Red → Green → Refactor, avec revue progressive après chaque tranche — pas une mega-revue en fin de course.',
           "Les tests comme spécification exécutable et comme boucle de feedback de l'agent IA — en quoi cela diffère du TDD classique.",
           'Compatibilité avec votre stack actuelle (Vitest, JUnit, pytest, etc.) — état d\'esprit "framework-agnostic".',
           'Introduction au Charted Coding.',
         ],
       },
       {
-        title: '💻 Exercice : approche incrémentale',
+        title: "💻 Exercice : Cartographier l'intention",
         items: [
-          "Itérer sur le cas d'usage commun avec la méthode incrémentale.",
+          "Co-rédiger un Design Doc pragmatique avec l'agent sur le cas d'usage commun.",
+          "Figer les objectifs, les non-objectifs, le comportement souhaité et le design de haut niveau avant d'écrire du code.",
         ],
       },
       {
-        title: '👨🏻‍🏫 Extensions : Skills, serveurs MCP, OpenSpec',
+        title: '💻 Exercice : Tracer les waypoints',
         items: [
-          'Étendre la méthode avec des Skills et des serveurs MCP.',
-          'Intégration avec OpenSpec.',
+          'Transformer le Design Doc en un plan de PRs ordonné : tranches fines, indépendamment relisables et mergeables.',
+          'Identifier le scaffolding, les pre-tidy-ups et les waypoints fonctionnels qui gardent la trajectoire sous contrôle.',
         ],
       },
       {
-        title: '💻 Exercice : OpenSpec',
+        title: '💻 Exercice : Piloter le cycle',
         items: [
-          "Pratiquer l'approche incrémentale avec l'intégration OpenSpec.",
+          'Implémenter le premier waypoint avec Scaffold → Red → Green → Refactor.',
+          'Revue progressive : corriger le cap après chaque étape plutôt que de se noyer dans un diff tardif et volumineux.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Ingénierie du harness',
+        items: [
+          "Skills et hooks : encapsuler le jugement pour que l'agent suive le playbook de votre équipe.",
+          "Portes de vérification : boucles de feedback courtes que l'agent doit passer avant d'avancer.",
+          'Stratégie de tests comme harness : spécifications (réellement) exécutables qui empêchent la dérive.',
+          "Nx module boundaries : murs architecturaux que l'agent ne peut pas franchir en silence.",
+        ],
+      },
+      {
+        title: '💻 Exercice : Brancher le harness',
+        items: [
+          "Mettre en place ou étendre des skills/hooks pour le cas d'usage commun.",
+          "Ajouter ou renforcer une porte de vérification (tests, boundaries ou lint) et observer l'agent la respecter.",
         ],
       },
       {

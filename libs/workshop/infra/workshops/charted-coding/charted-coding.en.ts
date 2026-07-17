@@ -8,7 +8,7 @@ export const chartedCodingFullCourseEn = createWorkshop({
   shortTitle: 'Charted Coding: AI-Assisted Development Without the Drift',
   type: 'full',
   subheading: `One day to move from fast-but-fragile AI coding to approaches you can sustain.
-Map Vibe Coding and Spec-Driven Development — then chart a path your architecture can live with.`,
+Map the landscape, chart a method your architecture can live with — then wire harnesses that keep the agents on course.`,
   pictureAltText:
     'Visual metaphor for charted AI-assisted development: a clear path or map guiding collaboration between a developer and an AI assistant.',
   pictureUri,
@@ -32,9 +32,9 @@ AI assistants — Copilot, Cursor, Claude Code, and others — are now part of m
 
 This training explores the main approaches to AI-assisted development — from Vibe Coding to Spec-Driven Development — and equips you with **framework-agnostic methods, tools, and techniques** that put the feedback loop at the heart of your collaboration with the AI agent.
 
-**On the menu:** hands-on practice of the different approaches on a **single use case**, identification of their strengths and limitations, then application of a **structured method** to produce maintainable, testable code that matches your intent.
+**On the menu:** a comparison of Vibe Coding and Spec-Driven Development, then the Charted Coding workflow on a shared use case — **Chart the Intent**, **Plot the Waypoints**, **Steer the Cycle** — and a **Harness Engineering** block: skills, hooks, verification gates, testing strategy, Nx boundaries, and ESLint rules as guardrails the agent cannot drift past.
 
-The day alternates between **theoretical content**, **live demonstrations**, and **hands-on exercises**, with the goal of making you **autonomous** in choosing and applying the right approach for your context.
+The day alternates between **theoretical content**, **live demonstrations**, and **hands-on exercises**, with the goal of making you **autonomous** in choosing the right approach and wiring the deterministic layer that keeps it sustainable.
 `,
   offer: {
     type: 'early-bird',
@@ -71,6 +71,12 @@ The day alternates between **theoretical content**, **live demonstrations**, and
       title: 'Short Feedback Loops',
       description:
         'Align your intent with the code produced using tight iteration cycles.',
+    },
+    {
+      icon: 'construction',
+      title: 'Harness Engineering',
+      description:
+        'Wire skills, hooks, tests, Nx boundaries, and ESLint rules as a deterministic verification layer the agent cannot quietly bypass.',
     },
     {
       icon: 'health_and_safety',
@@ -110,7 +116,7 @@ The day alternates between **theoretical content**, **live demonstrations**, and
     {
       question: 'Is it hands-on?',
       answer:
-        'Yes. You will practice throughout the day on a common use case, compare approaches directly on the same problem, and leave with a collective synthesis and an individual action plan.',
+        'Yes. After a lecture-and-demo comparison of the main approaches, you practice the Charted Coding workflow on a common use case — Chart the Intent, Plot the Waypoints, Steer the Cycle — then wire harnesses (skills, verification, boundaries). You leave with a collective synthesis and an individual action plan.',
     },
     {
       question: 'Is this tied to a specific framework?',
@@ -136,67 +142,62 @@ The day alternates between **theoretical content**, **live demonstrations**, and
   agenda: {
     sections: [
       {
-        title: '👨🏻‍🏫 Vibe Coding',
+        title: '👨🏻‍🏫 Mapping the Landscape',
         items: [
-          'Defining “Vibe Coding”.',
-          'When it works (and why it is appealing).',
-          'Classic pitfalls: drift, maintainability issues, illusion of productivity.',
-        ],
-      },
-      {
-        title: '💻 Exercise: Vibe Coding',
-        items: [
-          'Iterate with Vibe Coding on the initial feature.',
-          'Cool-headed analysis: what holds up and what breaks.',
-        ],
-      },
-      {
-        title: '👨🏻‍🏫 Spec-Driven Development & Spec Kit',
-        items: [
-          'The Spec-Driven approach: Spec Kit (GitHub), BMAD, OpenSpec, and alternatives.',
-          'Anatomy and inner workings of Spec Kit.',
-        ],
-      },
-      {
-        title: '💻 Exercise: Spec-Driven Approach',
-        items: [
-          'Revisit the same use case with a spec-driven workflow.',
-          'Pros and cons — lessons learned.',
-        ],
-      },
-      {
-        title: '👨🏻‍🏫 Comparative Review',
-        items: [
-          'Strengths and limitations of each approach depending on context.',
-          'When Vibe Coding is enough — and when it becomes dangerous.',
-          'When Spec-Driven pays off — and when it becomes a drag.',
+          'Defining "Vibe Coding": when it works, why it is appealing, and classic pitfalls (drift, maintainability, illusion of productivity).',
+          'Spec-Driven Development: Spec Kit (GitHub), BMAD, OpenSpec, and alternatives — anatomy and how Spec Kit works.',
+          'Live demo: the same use case under both approaches — what holds up and what breaks.',
+          'Comparative review as narrative: strengths and limits by context; when each pays off — and when it becomes a drag.',
         ],
       },
       {
         title: '👨🏻‍🏫 Principles: Incremental, Agent-Friendly Development',
         items: [
           'Navigating with a map rather than drifting: steering the agent while keeping control of the trajectory.',
-          'Co-building a pragmatic “Design Doc” with the agent — and orchestrating review by specialized agents.',
-          'The Scaffold → Red → Green → Refactor cycle.',
+          'Chart the Intent: co-building a pragmatic Design Doc with the agent — goals, behavior, design, testing strategy.',
+          'Plot the Waypoints: turning intent into an ordered, reviewable PR plan (thin slices that never break the mainline).',
+          'Steer the Cycle: Scaffold → Red → Green → Refactor, with progressive review after each slice — not a big-bang review at the end.',
           'Tests as executable specification and as the AI agent’s feedback loop — how this differs from classic TDD.',
           'Compatibility with your current stack (Vitest, JUnit, pytest, etc.) — framework-agnostic mindset.',
           'Introduction to Charted Coding.',
         ],
       },
       {
-        title: '💻 Exercise: Incremental Approach',
-        items: ['Iterate on the common use case using the incremental method.'],
-      },
-      {
-        title: '👨🏻‍🏫 Extensions: Skills, MCP Servers, OpenSpec',
+        title: '💻 Exercise: Chart the Intent',
         items: [
-          'Extending the method with Skills and MCP servers.',
-          'Integration with OpenSpec.',
+          'Co-author a pragmatic Design Doc with the agent for the shared use case.',
+          'Lock goals, non-goals, desired behavior, and high-level design before writing code.',
         ],
       },
       {
-        title: '💻 Exercise: OpenSpec',
-        items: ['Practice the incremental approach with OpenSpec integration.'],
+        title: '💻 Exercise: Plot the Waypoints',
+        items: [
+          'Turn the Design Doc into an ordered PR plan: thin, independently reviewable and mergeable slices.',
+          'Identify scaffolding, pre-tidy-ups, and feature waypoints that keep the trajectory under control.',
+        ],
+      },
+      {
+        title: '💻 Exercise: Steer the Cycle',
+        items: [
+          'Implement the first waypoint with Scaffold → Red → Green → Refactor.',
+          'Progressive review: course-correct after each slice instead of drowning in a late mega-diff.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Harness Engineering',
+        items: [
+          "Skills and hooks: packaging judgment so the agent follows your team's playbook.",
+          'Verification gates: short feedback loops the agent must pass before moving on.',
+          'Testing strategy as harness: executable specs (for real) that catch drift early.',
+          'Nx module boundaries: architectural walls the agent cannot quietly cross.',
+        ],
+      },
+      {
+        title: '💻 Exercise: Wiring the Harness',
+        items: [
+          'Set up or extend skills/hooks for the shared use case.',
+          'Add or tighten a verification gate (tests, boundaries, or lint) and watch the agent respect it.',
+        ],
       },
       {
         title: '👨🏻‍🏫 Adoption Strategy',
