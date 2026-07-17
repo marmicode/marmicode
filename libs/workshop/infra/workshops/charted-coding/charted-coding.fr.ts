@@ -22,19 +22,25 @@ Cartographier le paysage, tracer une méthode compatible avec votre architecture
   },
   lumaTag: 'charted-coding',
   description: `
-Les assistants IA — Copilot, Cursor, Claude Code, et autres — font désormais partie du quotidien de nombreuses équipes.
+Les agents de développement — Copilot, Cursor, Claude Code, et autres, font désormais partie du quotidien de nombreuses équipes. **Comment en tirer parti durablement**, sans dégrader la lisibilité du code ni perdre le contrôle de votre architecture ?
 
-**Comment en tirer parti durablement**, sans dégrader la lisibilité du code ni perdre le contrôle de votre architecture ?
+Entre le **Vibe Coding**, rapide mais difficile à maintenir, et le **Spec-Driven Development**, rigoureux mais souvent trop lourd, il existe un workflow qui garde la boucle de feedback courte *et* l'architecture robuste. C'est la trajectoire que trace cette formation.
 
-**Où tracer la ligne** entre le Vibe Coding — rapide mais difficile à maintenir — et une approche plus structurée qui peut parfois sembler trop lourde ?
+**Vous repartirez capables de :**
 
-**Comment garder une boucle de feedback courte** avec l'agent (ou les agents) sans sacrifier la qualité du code produit ni la maintenabilité à long terme ?
+- **Choisir la bonne approche pour chaque contexte** — prototype, fonctionnalité en production, greenfield, brownfield ou legacy.
+- **Garder l'agent sur la trajectoire** avec des boucles de feedback courtes et des tests comme spécification exécutable.
+- **Câbler une couche de vérification déterministe** que l'agent ne peut pas contourner en silence.
 
-Cette formation explore les principales approches du développement assisté par IA — du Vibe Coding au Spec-Driven Development — et vous fournit des **méthodes, outils et techniques agnostiques du framework** qui placent la boucle de feedback au cœur de votre collaboration avec l'agent IA.
+**La trajectoire :** après une comparaison directe du Vibe Coding et du Spec-Driven Development, vous pratiquez le workflow Charted Coding sur un cas d'usage commun :
 
-**Au menu :** une comparaison du Vibe Coding et du Spec-Driven Development, puis le workflow Charted Coding sur un cas d'usage commun — **Cartographier l'intention**, **Tracer les waypoints**, **Piloter le cycle** — et un bloc **Harness Engineering** : skills, hooks, verification gates, stratégie de tests, Nx boundaries et règles ESLint comme garde-fous que l'agent ne peut pas contourner en silence.
+1. **Cartographier l'intention** — co-construire un Design Doc pragmatique avec l'agent et votre équipe.
+2. **Tracer les waypoints** — transformer l'intention en un plan de PRs ordonné de tranches fines et faciles à passer en revue.
+3. **Piloter le cycle** — Scaffold → Red → Green → Refactor, avec revue progressive.
 
-La journée alterne **contenu théorique**, **démonstrations en direct** et **exercices pratiques**, avec pour objectif de vous rendre **autonome** dans le choix de la bonne approche et le câblage de la couche déterministe qui la rend durable.
+Puis vient le bloc **Harness Engineering** : skills, hooks, verification gates, stratégie de tests, Nx boundaries et règles ESLint, que l'agent ne peut pas contourner en silence.
+
+La journée alterne **contenu théorique**, **démonstrations en direct** et **exercices pratiques** — le tout **agnostique du framework**, avec pour objectif de vous rendre **autonome** dans le choix de la bonne approche et le câblage de la couche déterministe qui la rend durable.
 `,
   offer: {
     type: 'early-bird',
