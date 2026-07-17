@@ -22,19 +22,25 @@ Map the landscape, chart a method your architecture can live with — then wire 
   },
   lumaTag: 'charted-coding',
   description: `
-AI assistants — Copilot, Cursor, Claude Code, and others — are now part of many teams' daily workflow.
+Coding agents — Copilot, Cursor, Claude Code, and others, are now part of many teams' daily workflow. **How do you benefit from them sustainably**, without degrading code readability or losing control of your architecture?
 
-**How can you benefit from them sustainably**, without degrading code readability or losing control of your architecture?
+Somewhere between **Vibe Coding**, fast but hard to maintain, and **Spec-Driven Development**, rigorous but often too heavy, there's a workflow that keeps the feedback loop short *and* the architecture robust. That's the route this workshop charts.
 
-**Where do you draw the line** between Vibe Coding — fast but hard to maintain — and a more structured approach that can sometimes feel too heavy?
+**You'll leave able to:**
 
-**How do you keep a short feedback loop** with the agent (or agents) without sacrificing the quality of the code produced and long-term maintainability?
+- **Choose the right approach for each context** — prototype, production feature, greenfield, brownfield, or legacy.
+- **Keep the agent on course** with short feedback loops and tests as executable specification.
+- **Wire a deterministic verification layer** the agent cannot quietly bypass.
 
-This training explores the main approaches to AI-assisted development — from Vibe Coding to Spec-Driven Development — and equips you with **framework-agnostic methods, tools, and techniques** that put the feedback loop at the heart of your collaboration with the AI agent.
+**The route:** after a head-to-head comparison of Vibe Coding and Spec-Driven Development, you'll practice the Charted Coding workflow on a shared use case:
 
-**On the menu:** a comparison of Vibe Coding and Spec-Driven Development, then the Charted Coding workflow on a shared use case — **Chart the Intent**, **Plot the Waypoints**, **Steer the Cycle** — and a **Harness Engineering** block: skills, hooks, verification gates, testing strategy, Nx boundaries, and ESLint rules as guardrails the agent cannot drift past.
+1. **Chart the Intent** — co-build a pragmatic Design Doc with the agent.
+2. **Plot the Waypoints** — turn intent into an ordered PR plan of thin, reviewable slices.
+3. **Steer the Cycle** — Scaffold → Red → Green → Refactor, with progressive review.
 
-The day alternates between **theoretical content**, **live demonstrations**, and **hands-on exercises**, with the goal of making you **autonomous** in choosing the right approach and wiring the deterministic layer that keeps it sustainable.
+Then comes the **Harness Engineering** block: skills, hooks, verification gates, testing strategy, Nx boundaries, and ESLint rules, the agent cannot drift past.
+
+The day alternates between **theoretical content**, **live demonstrations**, and **hands-on exercises** — all **framework-agnostic**, with the goal of making you **autonomous** in choosing the right approach and wiring the deterministic layer that keeps it sustainable.
 `,
   offer: {
     type: 'early-bird',
