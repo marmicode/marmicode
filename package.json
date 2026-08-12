@@ -82,8 +82,8 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@analogjs/vite-plugin-angular": "2.3.1",
-    "@analogjs/vitest-angular": "2.3.1",
+    "@analogjs/vite-plugin-angular": "2.6.4",
+    "@analogjs/vitest-angular": "2.6.4",
     "@angular-devkit/architect": "0.2102.9",
     "@angular-devkit/build-angular": "21.2.9",
     "@angular-devkit/core": "21.2.9",
