@@ -18,7 +18,6 @@ Learn to build tests that survive refactors, migrations, and deadlines.`,
   customSessionRequestUrl: 'https://forms.gle/BFw4AUrzp3LkRLvHA',
   waitlist: {
     url: 'https://forms.gle/ZxCFYeRq73epEyVA6',
-    nextSessionMonth: '2026-09',
   },
   lumaTag: 'react-testing',
   description: `

@@ -18,7 +18,6 @@ Map the landscape, chart a method your architecture can live with — then wire 
   customSessionRequestUrl: 'https://forms.gle/xbPQtvj7yRebmtH17',
   waitlist: {
     url: 'https://forms.gle/2eefd2ETDwyJ7HiK6',
-    nextSessionMonth: '2026-09',
   },
   lumaTag: 'charted-coding',
   description: `

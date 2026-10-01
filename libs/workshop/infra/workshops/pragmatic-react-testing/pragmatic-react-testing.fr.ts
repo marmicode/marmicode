@@ -17,7 +17,6 @@ export const pragmaticReactTestingFullCourseFr = createWorkshop({
   customSessionRequestUrl: 'https://forms.gle/csDdUN9A8yS1Q9oq7',
   waitlist: {
     url: 'https://forms.gle/LeusQt3TnA5vMWa69',
-    nextSessionMonth: '2026-09',
   },
   lumaTag: 'react-testing',
   description: `

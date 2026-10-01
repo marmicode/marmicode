@@ -18,7 +18,6 @@ Learn to build tests that survive refactors, migrations, and AI-assisted develop
   customSessionRequestUrl: 'https://forms.gle/J9kGUiNeDBFzdZ937',
   waitlist: {
     url: 'https://forms.gle/mwfc57RfQXdMdMSLA',
-    nextSessionMonth: '2026-10',
   },
   lumaTag: 'playwright',
   description: `

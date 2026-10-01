@@ -18,7 +18,6 @@ Construisez des tests qui résistent au refactoring, aux migrations et au dével
   customSessionRequestUrl: 'https://forms.gle/xfv9Dae1vHVE7ZjM7',
   waitlist: {
     url: 'https://forms.gle/jNA7KXRzhXEmFWtM9',
-    nextSessionMonth: '2026-10',
   },
   lumaTag: 'playwright',
   description: `
