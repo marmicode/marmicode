@@ -282,7 +282,7 @@ export class WorkshopHero {
   labels = computed(() => WORKSHOP_DETAIL_LABELS[this.workshop().language]);
   nextSessionLabel = computed(() => {
     const { language, waitlist } = this.workshop();
-    if (!waitlist) {
+    if (!waitlist?.nextSessionMonth) {
       return null;
     }
     const [year, month] = waitlist.nextSessionMonth.split('-').map(Number);

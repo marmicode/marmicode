@@ -25,9 +25,9 @@ export interface Workshop {
 
     /**
      * Next session month in `YYYY-MM` format.
-     * Displayed in the hero.
+     * Displayed in the hero when set.
      */
-    nextSessionMonth: `${number}-${number}`;
+    nextSessionMonth?: `${number}-${number}`;
   };
 
   /**
