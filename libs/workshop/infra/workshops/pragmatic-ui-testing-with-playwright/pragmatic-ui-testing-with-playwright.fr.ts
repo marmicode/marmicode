@@ -53,8 +53,8 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
 `,
   offer: {
     type: 'early-bird',
-    price: 970,
-    originalPrice: 1270,
+    price: 1270,
+    originalPrice: 1470,
   },
   language: 'fr',
   requiredSkills: [

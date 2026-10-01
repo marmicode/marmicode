@@ -43,8 +43,8 @@ The day alternates between **theoretical content**, **live demonstrations**, and
 `,
   offer: {
     type: 'early-bird',
-    price: 390,
-    originalPrice: 490,
+    price: 470,
+    originalPrice: 570,
   },
   language: 'en',
   requiredSkills: [

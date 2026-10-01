@@ -43,8 +43,8 @@ La journée alterne **contenu théorique**, **démonstrations en direct** et **e
 `,
   offer: {
     type: 'early-bird',
-    price: 390,
-    originalPrice: 490,
+    price: 470,
+    originalPrice: 570,
   },
   language: 'fr',
   requiredSkills: [

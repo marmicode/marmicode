@@ -44,8 +44,8 @@ No dogma. No silver bullets. Just pragmatic Angular testing skills to help you *
 `,
   offer: {
     type: 'early-bird',
-    price: 370,
-    originalPrice: 470,
+    price: 470,
+    originalPrice: 570,
   },
   language: 'en',
   requiredSkills: [
