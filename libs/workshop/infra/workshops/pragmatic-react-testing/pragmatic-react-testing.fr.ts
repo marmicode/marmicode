@@ -21,15 +21,15 @@ export const pragmaticReactTestingFullCourseFr = createWorkshop({
   lumaTag: 'react-testing',
   description: `
 Il y a deux façons de garder un produit stable :
-**ne jamais y toucher — ou mijoter une solide stratégie de test.**
+**ne jamais y toucher, ou mijoter une solide stratégie de test.**
 
 Comment tient la vôtre ?
 
 * Un refactor et vos tests débordent de la casserole ?
 * Maintenir vos mocks vous semble similaire à bricoler des fusées avec des bouts de ficelle ?
 * Toujours à courir après 100 % de code coverage pendant que les bugs passent entre les mailles du filet ?
-* Les tests end-to-end avaient l'air appétissants — jusqu'à ce que la flakiness et la lenteur causent une indigestion ?
-* À l'approche de la release, vous sautez les tests et servez le plat cru — en croisant les doigts pour que personne ne tombe malade ?
+* Les tests end-to-end avaient l'air appétissants, jusqu'à ce que la flakiness et la lenteur causent une indigestion ?
+* À l'approche de la release, vous sautez les tests et servez le plat cru, en croisant les doigts pour que personne ne tombe malade ?
 
 Si ça vous parle, cette formation est votre sortie de secours.
 
@@ -38,22 +38,22 @@ On commence par un tour au marché pour les ingrédients clés : **Fakes**, **Ob
 Puis, de retour en cuisine, on prépare un menu de tests complet et facile à maintenir, qui mûrit sur trois jours. Vous apprendrez à :
 
 * Écrire des tests maintenables et lisibles qui **résistent au refactoring et aux migrations**.
-* Maîtriser toutes les saveurs du **TDD** — du Progressif au "Timeboxed".
+* Maîtriser toutes les saveurs du **TDD**, du Progressif au "Timeboxed".
 * Tester le **code asynchrone**, les "**effects**" et les **hooks** (comme React Query de Tanstack) avec confiance.
 * Construire et utiliser vos propres **Page Objects** et **Gloves** pour une interaction UI résiliente.
 * Détecter les **régressions visuelles** avant vos utilisateurs.
-* Écrire des **tests end-to-end rapides et fiables avec Playwright** — et savoir exactement quand choisir entre e2e et component tests.
-* Concevoir une **stratégie de test pragmatique** qui passe à l'échelle, et qui rapporte sur la durée — pas juste écrire de meilleurs tests.
-* Adapter votre stratégie au **développement assisté par IA** — et savoir quand les tests servent de filet de sécurité pour les humains vs. de boucle de feedback pour les agents.
-* Faire de votre suite de tests le **harnais le plus solide** d'un développement assisté par IA efficace — et non une taxe supplémentaire.
+* Écrire des **tests end-to-end rapides et fiables avec Playwright**, et savoir exactement quand choisir entre e2e et component tests.
+* Concevoir une **stratégie de test pragmatique** qui passe à l'échelle et qui rapporte sur la durée, au lieu de simplement écrire de meilleurs tests.
+* Adapter votre stratégie au **développement assisté par IA**, et savoir quand les tests servent de filet de sécurité pour les humains vs. de boucle de feedback pour les agents.
+* Faire de votre suite de tests le **harnais le plus solide** d'un développement assisté par IA efficace, et non une taxe supplémentaire.
 
-Au fil de ces trois jours, vous n'apprendrez pas que des recettes — vous affinerez vos instincts de test, remettrez en question vos habitudes, et repartirez avec une culture de test que vous pourrez faire grandir.
+Au fil de ces trois jours, vous n'apprendrez pas que des recettes : vous affinerez vos instincts de test, remettrez en question vos habitudes, et repartirez avec une culture de test que vous pourrez faire grandir.
 
-Que vous écriviez les tests vous-même ou que vos agents IA le fassent, vous aurez besoin des instincts pour distinguer ceux qui ont du sens de ceux qui vous ralentissent — et d'une stratégie de test claire pour guider votre équipe et vos outils.
+Que vous écriviez les tests vous-même ou que vos agents IA le fassent, vous aurez besoin des instincts pour distinguer ceux qui ont du sens de ceux qui vous ralentissent, et d'une stratégie de test claire pour guider votre équipe et vos outils.
 
 Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque technique à votre propre codebase.
 
-**Pas de dogme. Pas de solution miracle.** Trois jours de techniques pratiques et éprouvées pour cuisiner en toute confiance — et servir du code qui reste frais bien après la formation.
+**Pas de dogme. Pas de solution miracle.** Trois jours de techniques pratiques et éprouvées pour cuisiner en toute confiance et servir du code qui reste frais bien après la formation.
 `,
   offer: {
     type: 'early-bird',
@@ -134,12 +134,12 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
     {
       question: "À qui s'adresse cette formation ?",
       answer:
-        "Aux développeurs React qui écrivent déjà des tests — ou qui veulent s'y mettre — et qui souhaitent améliorer leurs pratiques de test. Que vous soyez confrontés à des tests instables, du code difficile à tester, ou une absence de stratégie de test — cette formation est faite pour vous.",
+        "Aux développeurs React qui écrivent déjà des tests (ou qui veulent s'y mettre) et qui souhaitent améliorer leurs pratiques de test. Que vous soyez confrontés à des tests instables, du code difficile à tester, ou une absence de stratégie de test, cette formation est faite pour vous.",
     },
     {
       question: 'Quel niveau est requis ?',
       answer:
-        "Vous devez être à l'aise avec les fondamentaux de React (composants, props, state, hooks), les bases de TypeScript, et Git. Aucune expérience préalable en testing n'est nécessaire — on part de zéro.",
+        "Vous devez être à l'aise avec les fondamentaux de React (composants, props, state, hooks), les bases de TypeScript, et Git. Aucune expérience préalable en testing n'est nécessaire : on part de zéro.",
     },
     {
       question: 'Quels outils sont nécessaires ?',
@@ -154,7 +154,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
     {
       question: 'Et si mon équipe utilise Jest ou Mocha ?',
       answer:
-        "Les principes et stratégies enseignés s'appliquent quel que soit votre test runner. Cela dit, on utilise Vitest dans les exercices — et vous risquez de ne plus vouloir revenir en arrière.",
+        "Les principes et stratégies enseignés s'appliquent quel que soit votre test runner. Cela dit, on utilise Vitest dans les exercices, et vous risquez de ne plus vouloir revenir en arrière.",
     },
     {
       question: 'Ma société peut-elle financer cette formation ?',
@@ -165,7 +165,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
       question:
         'Quelle différence entre réserver une place et demander une session sur mesure ?',
       answer:
-        '"Réserver une Place" vous inscrit à une session planifiée. "Session sur Mesure" s\'adresse aux entreprises qui souhaitent une formation privée — avec la possibilité d\'adapter le contenu, la durée ou les priorités.',
+        '"Réserver une Place" vous inscrit à une session planifiée. "Session sur Mesure" s\'adresse aux entreprises qui souhaitent une formation privée, avec la possibilité d\'adapter le contenu, la durée ou les priorités.',
     },
     {
       question: 'Y a-t-il une garantie satisfait ou remboursé ?',
@@ -374,9 +374,9 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
       {
         title: "👨🏻‍🏫 Stratégie de test à l'ère de l'IA",
         items: [
-          'Ce qui change — et ce qui ne change pas — quand les agents écrivent le code ou les tests.',
-          "Les tests comme boucle de feedback pour l'agent vs. comme filet de sécurité pour les humains — et pourquoi ces deux rôles tirent la même suite dans des directions différentes.",
-          'Les défis du développement assisté par IA : Cognitive Debt, Review Fatigue et Context Switching Tax — et comment une stratégie de test solide les contient.',
+          'Ce qui change (et ce qui ne change pas) quand les agents écrivent le code ou les tests.',
+          "Les tests comme boucle de feedback pour l'agent vs. comme filet de sécurité pour les humains, et pourquoi ces deux rôles tirent la même suite dans des directions différentes.",
+          'Les défis du développement assisté par IA (Cognitive Debt, Review Fatigue et Context Switching Tax), et comment une stratégie de test solide les contient.',
           'Quoi choisir et quand : Vibe Coding vs. Spec-Driven Development vs. Charted Coding.',
         ],
       },

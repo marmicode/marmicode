@@ -7,9 +7,10 @@ export const pragmaticAngularTestingFullCourseFr = createWorkshop({
   title: 'Formation Test Angular Pragmatique',
   shortTitle: 'Test Angular Pragmatique',
   type: 'full',
-  subheading: `Le code généré par vos agents inonde votre codebase. Trois jours pour tendre le filet de sécurité qu'il vous faut.
-Un filet pour votre équipe, une boucle de feedback pour vos agents.
-Et une suite qui résiste aux refactorings, aux migrations et aux deadlines.`,
+  subheading: `Le code généré par vos agents inonde votre codebase.
+Trois jours pour transformer ce chaos en une stratégie bien assaisonnée.
+Un filet de sécurité pour votre équipe, une boucle de feedback pour vos agents,
+et une suite qui résiste aux refactorings, aux migrations et aux deadlines.`,
   pictureAltText:
     'Younes en tablier tenant une marmite violette débordante de logos Angular, Vitest, Playwright et Testronaut dans un décor de cuisine.',
   pictureUri,
