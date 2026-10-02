@@ -4,8 +4,8 @@ import thumbnailUri from './agentic-angular-thumbnail.webp';
 
 export const agenticAngularFullCourseFr = createWorkshop({
   id: 'agentic-angular-fr',
-  title: 'Agentic Angular : cuisiner des agents IA sans se brûler',
-  shortTitle: 'Agentic Angular : cuisiner des agents IA sans se brûler',
+  title: 'Agentic Angular : mijoter des agents IA sans se brûler',
+  shortTitle: 'Agentic Angular : mijoter des agents IA sans se brûler',
   type: 'full',
   subheading: `Trois jours pour intégrer, dans les apps Angular que vous avez déjà, des agents qui tiennent en production.
 Generative UI, human-in-the-loop, sécurité, auth — et un arbre de décision à emporter.`,

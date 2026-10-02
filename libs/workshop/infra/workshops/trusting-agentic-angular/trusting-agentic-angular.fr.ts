@@ -171,7 +171,7 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
     {
       question: 'La construction des agents est-elle couverte ?',
       answer:
-        "Non. L'intégration des agents, la sécurité et la generative UI sont couvertes dans la formation complémentaire « Agentic Angular : cuisiner des agents IA sans se brûler ». Celle-ci prend le relais là où l'autre s'arrête : prouver que ça marche.",
+        "Non. L'intégration des agents, la sécurité et la generative UI sont couvertes dans la formation complémentaire « Agentic Angular : mijoter des agents IA sans se brûler ». Celle-ci prend le relais là où l'autre s'arrête : prouver que ça marche.",
     },
     {
       question: 'Ma société peut-elle financer cette formation ?',
@@ -383,7 +383,7 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
           'Ce qui tourne à chaque commit, chaque nuit, chaque release.',
           'Quand une eval vaut son prix — et quand elle ne le vaut pas.',
           'Un arbre de décision à emporter.',
-          "L'intégration des agents, la sécurité et la generative UI sont couvertes dans la formation complémentaire : « Agentic Angular : cuisiner des agents IA sans se brûler ».",
+          "L'intégration des agents, la sécurité et la generative UI sont couvertes dans la formation complémentaire : « Agentic Angular : mijoter des agents IA sans se brûler ».",
         ],
       },
       {
