@@ -169,7 +169,7 @@ To keep the workshop interactive, each session is **limited to 10 attendees**.
     {
       question: 'Does this cover evals and testing?',
       answer:
-        'Only in passing. Evals, observability, and testing are intentionally out of scope here — they are covered in the companion workshop, "Trusting your AI apps: A Testing and Eval Strategy".',
+        'Only in passing. Evals, observability, and testing are intentionally out of scope here — they are covered in the companion workshop, "Trusting Your Agentic Angular Apps: A Testing and Eval Strategy".',
     },
     {
       question: 'Can my company fund this?',
