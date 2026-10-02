@@ -404,7 +404,7 @@ To keep the workshop interactive, each session is **limited to 10 attendees**.
           'Picking the surface per use case: chat, embedded, or none.',
           'Risk-tiering your tools: auto-run, confirm, forbid.',
           'A takeaway decision tree.',
-          'Evals, observability & testing are covered in the companion workshop: “Trusting your AI apps: A Testing and Eval Strategy”.',
+          'Evals, observability & testing are covered in the companion workshop: “Trusting Your Agentic Angular Apps: A Testing and Eval Strategy”.',
         ],
       },
       {

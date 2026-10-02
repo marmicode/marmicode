@@ -4,8 +4,8 @@ import thumbnailUri from './agentic-angular-thumbnail.webp';
 
 export const agenticAngularFullCourseFr = createWorkshop({
   id: 'agentic-angular-fr',
-  title: 'Agentic Angular : Mijoter des Agents IA Sûrs dans Vos Apps',
-  shortTitle: 'Agentic Angular : Mijoter des Agents IA Sûrs dans Vos Apps',
+  title: 'Agentic Angular : cuisiner des agents IA sans se brûler',
+  shortTitle: 'Agentic Angular : cuisiner des agents IA sans se brûler',
   type: 'full',
   subheading: `Trois jours pour intégrer, dans les apps Angular que vous avez déjà, des agents qui tiennent en production.
 Generative UI, human-in-the-loop, sécurité, auth — et un arbre de décision à emporter.`,
@@ -169,7 +169,7 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
     {
       question: 'Les evals et le testing sont-ils couverts ?',
       answer:
-        "Seulement en passant. Les evals, l'observabilité et le testing sont volontairement hors périmètre ici : ils sont couverts dans la formation complémentaire « Faire Confiance à Vos Apps Angular Agentiques : Stratégie de Tests et d'Evals ».",
+        "Seulement en passant. Les evals, l'observabilité et le testing sont volontairement hors périmètre ici : ils sont couverts dans la formation complémentaire « Agentic Angular : tests et évals pour des agents IA fiables ».",
     },
     {
       question: 'Ma société peut-elle financer cette formation ?',
@@ -408,7 +408,7 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
           "Choisir la surface selon le cas d'usage : chat, embarquée, ou aucune.",
           'Classer vos tools par niveau de risque : exécution automatique, confirmation, interdiction.',
           'Un arbre de décision à emporter.',
-          "Les evals, l'observabilité et le testing sont couverts dans la formation complémentaire « Trusting your AI apps: A Testing and Eval Strategy ».",
+          "Les evals, l'observabilité et le testing sont couverts dans la formation complémentaire « Agentic Angular : tests et évals pour des agents IA fiables ».",
         ],
       },
       {

@@ -4,10 +4,8 @@ import thumbnailUri from './trusting-agentic-angular-thumbnail.webp';
 
 export const trustingAgenticAngularFullCourseFr = createWorkshop({
   id: 'trusting-agentic-angular-fr',
-  title:
-    "Faire Confiance à Vos Apps Angular Agentiques : Stratégie de Tests et d'Evals",
-  shortTitle:
-    "Faire Confiance à Vos Apps Angular Agentiques : Stratégie de Tests et d'Evals",
+  title: 'Agentic Angular : tests et évals pour des agents IA fiables',
+  shortTitle: 'Agentic Angular : tests et évals pour des agents IA fiables',
   type: 'full',
   subheading: `Trois jours pour retracer les frontières de test dans vos apps dopées à l'IA.
 Faker le LLM là où c'est possible, evaluer le reste, et savoir exactement ce que chaque eval vous coûte.`,
@@ -173,7 +171,7 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
     {
       question: 'La construction des agents est-elle couverte ?',
       answer:
-        "Non. L'intégration des agents, la sécurité et la generative UI sont couvertes dans la formation complémentaire « Agentic Angular : Mijoter des Agents IA Sûrs dans Vos Apps ». Celle-ci prend le relais là où l'autre s'arrête : prouver que ça marche.",
+        "Non. L'intégration des agents, la sécurité et la generative UI sont couvertes dans la formation complémentaire « Agentic Angular : cuisiner des agents IA sans se brûler ». Celle-ci prend le relais là où l'autre s'arrête : prouver que ça marche.",
     },
     {
       question: 'Ma société peut-elle financer cette formation ?',
@@ -385,7 +383,7 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
           'Ce qui tourne à chaque commit, chaque nuit, chaque release.',
           'Quand une eval vaut son prix — et quand elle ne le vaut pas.',
           'Un arbre de décision à emporter.',
-          "L'intégration des agents, la sécurité et la generative UI sont couvertes dans la formation complémentaire : « Agentic Angular : Mijoter des Agents IA Sûrs dans Vos Apps ».",
+          "L'intégration des agents, la sécurité et la generative UI sont couvertes dans la formation complémentaire : « Agentic Angular : cuisiner des agents IA sans se brûler ».",
         ],
       },
       {
