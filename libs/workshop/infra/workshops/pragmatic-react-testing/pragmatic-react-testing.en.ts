@@ -21,15 +21,15 @@ Learn to build tests that survive refactors, migrations, and deadlines.`,
   },
   lumaTag: 'react-testing',
   description: `
-There are two ways to keep a product stable: **never touch it — or cook up a solid testing strategy.**
+There are two ways to keep a product stable: **never touch it, or cook up a solid testing strategy.**
 
 So… how’s yours holding up?
 
 * Refactor something and watch the tests boil over?  
 * Maintaining mocks feels like duct tape meets rocket science?  
 * Still chasing 100% coverage while bugs keep crawling through?  
-* End-to-end tests looked tasty at first — until flakiness and slowness caused indigestion?  
-* As release day nears, you skip tests and serve it raw — fingers crossed hoping no one gets burned?
+* End-to-end tests looked tasty at first, until flakiness and slowness caused indigestion?  
+* As release day nears, you skip tests and serve it raw, fingers crossed hoping no one gets burned?
 
 If any of that hits close to home, this workshop is your way out of the fire.
 
@@ -38,22 +38,22 @@ We’ll stop by the market for key ingredients such as **Fakes**, **Object Mothe
 Then, back to the kitchen, we’ll prepare a complete, low-maintenance testing menu that matures over three days. You’ll learn how to:
 
 * Write maintainable, human-readable tests that **survive refactors and migrations**.  
-* Master all flavors of **TDD** — from Progressive to Timeboxed.  
+* Master all flavors of **TDD**, from Progressive to Timeboxed.  
 * Test **async code**, **effects**, and **hooks** (such as Tanstack's React Query) with confidence.  
 * Build and use your own **Page Objects** and **Gloves** for resilient UI interaction.  
 * Detect **visual regressions** before your users do.  
-* Write fast, reliable **end-to-end tests with Playwright** — and know exactly when to reach for e2e vs. component tests.  
-* Design a **pragmatic testing strategy** that scales across teams, and pays off over time — not just write better tests.  
-* Adapt your strategy to **AI-assisted development** — and know when tests act as a safety net for humans vs. a feedback loop for agents.  
-* Turn your test suite into the **strongest harness** for efficient AI-assisted development — not a tax you pay around it.
+* Write fast, reliable **end-to-end tests with Playwright**, and know exactly when to reach for e2e vs. component tests.  
+* Design a **pragmatic testing strategy** that scales across teams and pays off over time, instead of just writing better tests.  
+* Adapt your strategy to **AI-assisted development**, and know when tests act as a safety net for humans vs. a feedback loop for agents.  
+* Turn your test suite into the **strongest harness** for efficient AI-assisted development, not a tax you pay around it.
 
-Across these three days, you won’t just learn recipes — you’ll refine your testing instincts, challenge habits, and leave with a testing culture you can scale.
+Across these three days, you won’t just learn recipes: you’ll refine your testing instincts, challenge habits, and leave with a testing culture you can scale.
 
-Whether you or your AI agents write the tests, you'll need the instincts to tell if they're meaningful or just getting in the way — and a clear testing strategy to guide both your team and your tools.
+Whether you or your AI agents write the tests, you'll need the instincts to tell if they're meaningful or just getting in the way, and a clear testing strategy to guide both your team and your tools.
 
 Small group, plenty of hands-on work, and direct coaching to help you apply each technique to your own codebase.
 
-**No dogma. No silver bullets.** Just three days of practical, battle-tested techniques to help you cook with confidence — and serve code that stays fresh long after the workshop ends.
+**No dogma. No silver bullets.** Just three days of practical, battle-tested techniques to help you cook with confidence and serve code that stays fresh long after the workshop ends.
 `,
   offer: {
     type: 'early-bird',
@@ -150,12 +150,12 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
     {
       question: 'Who is this workshop for?',
       answer:
-        "React developers who write tests — or want to start — and want to improve their testing practices. Whether you're dealing with flaky tests, untestable code, or no testing strategy at all — this workshop is for you.",
+        "React developers who write tests (or want to start) and want to improve their testing practices. Whether you're dealing with flaky tests, untestable code, or no testing strategy at all, this workshop is for you.",
     },
     {
       question: "What's the experience level?",
       answer:
-        'You should be comfortable with React fundamentals (components, props, state, hooks), TypeScript basics, and Git. No prior testing experience is required — we start from the ground up.',
+        'You should be comfortable with React fundamentals (components, props, state, hooks), TypeScript basics, and Git. No prior testing experience is required: we start from the ground up.',
     },
     {
       question: 'What tools do I need?',
@@ -170,7 +170,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
     {
       question: 'What if my company uses Jest or Mocha?',
       answer:
-        "The principles and strategies you'll learn apply regardless of your test runner. That said, we use Vitest in the exercises — and you might not want to go back.",
+        "The principles and strategies you'll learn apply regardless of your test runner. That said, we use Vitest in the exercises, and you might not want to go back.",
     },
     {
       question: 'Can my company fund this?',
@@ -180,7 +180,7 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       question:
         "What's the difference between booking a session and requesting a custom session?",
       answer:
-        '"Book a Session" lets you join a scheduled cohort. "Custom Session" is for companies who want a private, in-house workshop — with optional adjustments to content, duration, or focus areas.',
+        '"Book a Session" lets you join a scheduled cohort. "Custom Session" is for companies who want a private, in-house workshop, with optional adjustments to content, duration, or focus areas.',
     },
     {
       question: 'Is there a money-back guarantee?',
@@ -386,9 +386,9 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
       {
         title: '👨🏻‍🏫 Testing Strategy in the AI-Assisted Era',
         items: [
-          "What changes — and what doesn't — when agents write the code or the tests.",
-          'Tests as a feedback loop for the agent vs. tests as a safety net for humans — and why these two roles pull the same suite in different directions.',
-          'The new pains of AI-assisted development: Cognitive Debt, Review Fatigue, and Context Switching Tax — and how a solid testing strategy keeps them in check.',
+          "What changes (and what doesn't) when agents write the code or the tests.",
+          'Tests as a feedback loop for the agent vs. tests as a safety net for humans, and why these two roles pull the same suite in different directions.',
+          'The new pains of AI-assisted development (Cognitive Debt, Review Fatigue, and Context Switching Tax), and how a solid testing strategy keeps them in check.',
           'What and when to choose: Vibe Coding vs. Spec-Driven Development vs. Charted Coding.',
         ],
       },
