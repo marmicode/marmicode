@@ -15,7 +15,7 @@ export const pragmaticAngularTestingFullCourseFr = createWorkshop({
   duration: 3,
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/FmSfiVpi7H21twwr9',
-  // waitlist: { url: 'https://forms.gle/8ANywdMWtp5PtPLK9', nextSessionMonth: 'YYYY-MM' },
+  // waitlist: { url: 'https://forms.gle/8ANywdMWtp5PtPLK9' },
   lumaTag: 'angular-testing',
   description: `
 Il y a deux façons de garder un produit stable :
@@ -56,8 +56,8 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
 `,
   offer: {
     type: 'early-bird',
-    price: 970,
-    originalPrice: 1270,
+    price: 1270,
+    originalPrice: 1470,
   },
   language: 'fr',
   requiredSkills: [

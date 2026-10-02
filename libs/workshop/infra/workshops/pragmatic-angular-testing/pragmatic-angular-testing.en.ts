@@ -55,8 +55,8 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
 `,
   offer: {
     type: 'early-bird',
-    price: 970,
-    originalPrice: 1270,
+    price: 1270,
+    originalPrice: 1470,
   },
   language: 'en',
   requiredSkills: [

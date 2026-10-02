@@ -18,7 +18,6 @@ Learn to build tests that survive refactors, migrations, and AI-assisted develop
   customSessionRequestUrl: 'https://forms.gle/J9kGUiNeDBFzdZ937',
   waitlist: {
     url: 'https://forms.gle/mwfc57RfQXdMdMSLA',
-    nextSessionMonth: '2026-10',
   },
   lumaTag: 'playwright',
   description: `
@@ -54,8 +53,8 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
 `,
   offer: {
     type: 'early-bird',
-    price: 970,
-    originalPrice: 1270,
+    price: 1270,
+    originalPrice: 1470,
   },
   language: 'en',
   requiredSkills: [

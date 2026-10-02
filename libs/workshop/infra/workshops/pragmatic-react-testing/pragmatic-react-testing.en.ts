@@ -18,7 +18,6 @@ Learn to build tests that survive refactors, migrations, and deadlines.`,
   customSessionRequestUrl: 'https://forms.gle/BFw4AUrzp3LkRLvHA',
   waitlist: {
     url: 'https://forms.gle/ZxCFYeRq73epEyVA6',
-    nextSessionMonth: '2026-09',
   },
   lumaTag: 'react-testing',
   description: `
@@ -58,8 +57,8 @@ Small group, plenty of hands-on work, and direct coaching to help you apply each
 `,
   offer: {
     type: 'early-bird',
-    price: 970,
-    originalPrice: 1270,
+    price: 1270,
+    originalPrice: 1470,
   },
   language: 'en',
   requiredSkills: [

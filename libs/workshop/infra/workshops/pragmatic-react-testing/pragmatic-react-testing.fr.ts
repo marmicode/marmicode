@@ -17,7 +17,6 @@ export const pragmaticReactTestingFullCourseFr = createWorkshop({
   customSessionRequestUrl: 'https://forms.gle/csDdUN9A8yS1Q9oq7',
   waitlist: {
     url: 'https://forms.gle/LeusQt3TnA5vMWa69',
-    nextSessionMonth: '2026-09',
   },
   lumaTag: 'react-testing',
   description: `
@@ -58,8 +57,8 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
 `,
   offer: {
     type: 'early-bird',
-    price: 970,
-    originalPrice: 1270,
+    price: 1270,
+    originalPrice: 1470,
   },
   language: 'fr',
   requiredSkills: [
