@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Workshop } from '@marmicode/workshop/core';
+import { agenticAngularFullCourseEn } from './workshops/agentic-angular/agentic-angular.en';
+import { agenticAngularFullCourseFr } from './workshops/agentic-angular/agentic-angular.fr';
 import { chartedCodingFullCourseEn } from './workshops/charted-coding/charted-coding.en';
 import { chartedCodingFullCourseFr } from './workshops/charted-coding/charted-coding.fr';
 import { pragmaticAngularTestingFullCourseEn } from './workshops/pragmatic-angular-testing/pragmatic-angular-testing.en';
@@ -10,6 +12,7 @@ import { pragmaticUiTestingWithPlaywrightFullCourseEn } from './workshops/pragma
 import { pragmaticUiTestingWithPlaywrightFullCourseFr } from './workshops/pragmatic-ui-testing-with-playwright/pragmatic-ui-testing-with-playwright.fr';
 
 const WORKSHOPS: Workshop[][] = [
+  [agenticAngularFullCourseEn, agenticAngularFullCourseFr],
   [chartedCodingFullCourseEn, chartedCodingFullCourseFr],
   [pragmaticAngularTestingFullCourseEn, pragmaticAngularTestingFullCourseFr],
   [pragmaticReactTestingFullCourseEn, pragmaticReactTestingFullCourseFr],
