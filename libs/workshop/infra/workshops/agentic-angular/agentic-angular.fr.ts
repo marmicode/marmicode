@@ -53,19 +53,19 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
   benefits: [
     {
       icon: 'smart_toy',
-      title: 'Les Bases des Agents, Vite',
+      title: 'Les bases des agents, vite',
       description:
         "La boucle d'agent, les fenêtres de contexte et les tokens — et pourquoi un modèle ne sait pas distinguer les instructions des données, ce qui vous rattrape plus tard.",
     },
     {
       icon: 'explore',
-      title: 'Cartographier la Stack Agentique',
+      title: 'Cartographier la stack agentique',
       description:
         'AG-UI, A2UI, MCP Apps et WebMCP : qui fait quoi, où en est chacun côté maturité et adoption, et ce qui reste un pari.',
     },
     {
       icon: 'cable',
-      title: 'AG-UI Sous le Capot',
+      title: 'AG-UI sous le capot',
       description:
         "Events, cycle de vie d'un run, messages, tool calls et state deltas : lire le protocole avant de toucher au moindre SDK.",
     },
@@ -77,7 +77,7 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
     },
     {
       icon: 'sync_alt',
-      title: 'État Partagé',
+      title: 'État partagé',
       description:
         'Synchronisation bidirectionnelle agent ↔ app, lecture seule vs lecture/écriture, et le streaming et les predictive updates qui donnent la sensation de rapidité.',
     },
@@ -89,25 +89,25 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
     },
     {
       icon: 'pause_circle',
-      title: 'Des Interrupts Qui Tiennent',
+      title: 'Des interrupts qui tiennent',
       description:
         "Suspendre le run côté agent, confirmer les arguments exacts plutôt que l'intention, et reprendre après un rafraîchissement.",
     },
     {
       icon: 'forum',
-      title: 'Threads & Reprise',
+      title: 'Threads & reprise',
       description:
         'Persister des conversations multi-sessions, reprendre après un crash ou une coupure de stream, et annuler un run proprement.',
     },
     {
       icon: 'security',
-      title: "Sécuriser la Frontière de l'Agent",
+      title: "Sécuriser la frontière de l'agent",
       description:
         "Prompt injection, fuite d'informations sensibles, guardrails qui modèrent les streams à la volée, et scoping des tools au moindre privilège.",
     },
     {
       icon: 'key',
-      title: 'Une Auth Qui Atteint le Runtime',
+      title: 'Une auth qui atteint le runtime',
       description:
         "Propager l'identité de l'utilisateur jusqu'au runtime de l'agent, restreindre les tools par utilisateur et par rôle, et verrouiller l'endpoint.",
     },
@@ -119,13 +119,13 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
     },
     {
       icon: 'savings',
-      title: 'Performance & Coûts',
+      title: 'Performance & coûts',
       description:
         'Savoir où partent les tokens, puis réduire la facture et gagner en vitesse pour que le coût ne dépasse pas la valeur de la fonctionnalité.',
     },
     {
       icon: 'account_tree',
-      title: 'Votre Arbre de Décision',
+      title: 'Votre arbre de décision',
       description:
         "Quelles fonctionnalités méritent un agent, quelle surface pour quel cas d'usage, et à quel niveau de risque classer chaque tool. L'arbre, vous l'emportez.",
     },

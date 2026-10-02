@@ -4,8 +4,8 @@ import thumbnailUri from './charted-coding-thumbnail.webp';
 
 export const chartedCodingFullCourseFr = createWorkshop({
   id: 'charted-coding-fr',
-  title: 'Charted Coding : Développement Assisté par IA Sans Dérive',
-  shortTitle: 'Charted Coding : Développement Assisté par IA Sans Dérive',
+  title: 'Charted Coding : développement assisté par IA sans dérive',
+  shortTitle: 'Charted Coding : développement assisté par IA sans dérive',
   type: 'full',
   subheading: `Deux jours pour passer d'un développement assisté par IA rapide mais fragile à une approche que vous pourrez tenir dans la durée.
 Cartographier le paysage, tracer une méthode compatible avec votre architecture, puis construire le « harness » qui garde vos agents sur la trajectoire.`,
@@ -50,13 +50,13 @@ Tout au long, la formation alterne **contenu théorique**, **démonstrations en 
   benefits: [
     {
       icon: 'psychology',
-      title: 'Cartographier le Paysage',
+      title: 'Cartographier le paysage',
       description:
         "Comparez le Vibe Coding, le Spec-Driven Development (Spec Kit, BMAD, OpenSpec, etc.) et le Charted Coding, et reliez chacun aux problèmes qu'il résout ou qu'il crée.",
     },
     {
       icon: 'tune',
-      title: 'La Bonne Approche au Bon Contexte',
+      title: 'La bonne approche au bon contexte',
       description:
         'Choisissez un workflow assisté par IA adapté aux prototypes, fonctionnalités en production, projets greenfield, brownfield ou code legacy.',
     },
@@ -68,13 +68,13 @@ Tout au long, la formation alterne **contenu théorique**, **démonstrations en 
     },
     {
       icon: 'article',
-      title: 'Design Docs Pragmatiques',
+      title: 'Design Docs pragmatiques',
       description:
         'Rédigez des design documents qui fonctionnent à la fois pour les humains et les agents, sans tomber dans la sur-spécification.',
     },
     {
       icon: 'autorenew',
-      title: 'Boucles de Feedback Courtes',
+      title: 'Boucles de feedback courtes',
       description:
         "Alignez votre intention sur le code produit grâce à des cycles d'itération serrés.",
     },
@@ -98,25 +98,25 @@ Tout au long, la formation alterne **contenu théorique**, **démonstrations en 
     },
     {
       icon: 'auto_awesome',
-      title: 'Écrire Vos Propres Skills',
+      title: 'Écrire vos propres skills',
       description:
         'Utilisez skill-creator pour transformer un entretien en skill réutilisable, à progressive disclosure, qui encapsule le jugement de votre équipe.',
     },
     {
       icon: 'trending_up',
-      title: 'Le Pilotage Capitalise',
+      title: 'Le pilotage capitalise',
       description:
         'Capturez les corrections que vous répétez et promouvez-les en skills, pour que la session suivante démarre plus affûtée.',
     },
     {
       icon: 'health_and_safety',
-      title: 'Éviter les Pièges Classiques',
+      title: 'Éviter les pièges classiques',
       description:
         "Évitez la dérive, la perte de contrôle, l'over-engineering, la fatigue de revue et la distraction du multitâche.",
     },
     {
       icon: 'savings',
-      title: 'Maîtriser les Coûts',
+      title: 'Maîtriser les coûts',
       description:
         "Le coût des tokens n'est que la partie émergée. Comparez les workflows sur le temps de revue et le coût de pilotage, pas seulement sur la facture.",
     },
@@ -177,7 +177,7 @@ Tout au long, la formation alterne **contenu théorique**, **démonstrations en 
         ],
       },
       {
-        title: '💻 Exercice : Fatigue de revue',
+        title: '💻 Exercice : fatigue de revue',
         items: [
           'Dix minutes pour trouver les contradictions dans le dossier qui vous est attribué : un Design Doc ou un dossier Spec Kit pour la même fonctionnalité.',
           "Sans agent, sans aller voir l'autre dossier : une expérience directe de la fatigue de revue et des limites d'une spec statique.",
@@ -264,7 +264,7 @@ Tout au long, la formation alterne **contenu théorique**, **démonstrations en 
         ],
       },
       {
-        title: '💻 Exercice : Skill de design sur mesure',
+        title: '💻 Exercice : skill de design sur mesure',
         items: [
           'Installer `skill-creator` et construire une skill `codesign` sur mesure, de zéro, à partir de vos seules réponses.',
           'Essayer la nouvelle skill sur une fonctionnalité de votre choix.',
@@ -280,7 +280,7 @@ Tout au long, la formation alterne **contenu théorique**, **démonstrations en 
         ],
       },
       {
-        title: '💻 Exercice : Feedback rapide',
+        title: '💻 Exercice : feedback rapide',
         items: [
           "Écrire un hook `PostToolUse` ESLint, typé avec les types du SDK Claude, qui renvoie les erreurs de lint directement à l'agent.",
           "Comparer le même prompt avant et après le câblage du hook : le voir se corriger tout seul au lieu d'attendre la revue.",
@@ -294,7 +294,7 @@ Tout au long, la formation alterne **contenu théorique**, **démonstrations en 
         ],
       },
       {
-        title: '💻 Exercice : Feedback architectural',
+        title: '💻 Exercice : feedback architectural',
         items: [
           'Configurer `depConstraints` pour que les modules de type `ui` ne puissent pas importer les modules de type `infra`.',
           'Pointer ESLint sur le graphe de dépendances et voir le même prompt respecter la frontière au lieu de simplement se la faire énoncer.',
@@ -309,7 +309,7 @@ Tout au long, la formation alterne **contenu théorique**, **démonstrations en 
         ],
       },
       {
-        title: '💻 Exercice : Capturer le pilotage',
+        title: '💻 Exercice : capturer le pilotage',
         items: [
           "Implémenter un hook `UserPromptSubmit` qui détecte le pilotage dans vos prompts et l'ajoute à un fichier de learnings.",
           'Implémenter un hook `Stop` qui vous rappelle de lancer `/save-learnings` dès que des learnings sont en attente.',

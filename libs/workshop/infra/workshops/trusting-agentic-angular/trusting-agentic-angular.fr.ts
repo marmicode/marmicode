@@ -73,7 +73,7 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
     },
     {
       icon: 'cable',
-      title: 'Tester à la Frontière AG-UI',
+      title: 'Tester à la frontière AG-UI',
       description:
         "Utilisez le flux d'events comme couture de test : enregistrez et rejouez les streams AG-UI pour des tests frontend sans modèle et sans tokens.",
     },
@@ -85,13 +85,13 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
     },
     {
       icon: 'fact_check',
-      title: 'Les Bases des Evals',
+      title: 'Les bases des evals',
       description:
         "Dataset, task, grader, score : de quoi une eval est faite, en quoi noter diffère d'asserter, et quand lancer les evals hors ligne ou en ligne.",
     },
     {
       icon: 'dataset',
-      title: 'Des Datasets Qui Comptent',
+      title: 'Des datasets qui comptent',
       description:
         'Commencez par un golden dataset écrit à la main, exploitez les traces de production pour les cas réels, et générez les cas limites sans vous mentir à vous-même.',
     },
@@ -103,31 +103,31 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
     },
     {
       icon: 'timeline',
-      title: "Noter les Trajectoires d'Agent",
+      title: "Noter les trajectoires d'agent",
       description:
         "Évaluez le choix des tools, la justesse des arguments et l'ordre des appels sur des conversations multi-tours, pas seulement la réponse finale.",
     },
     {
       icon: 'rocket_launch',
-      title: 'Les Evals dans la CI',
+      title: 'Les evals dans la CI',
       description:
         "Sampling, cache, seuils de passage vs suivi de score, et comment distinguer une eval rouge d'une vraie régression.",
     },
     {
       icon: 'savings',
-      title: 'Payer le Juste Prix',
+      title: 'Payer le juste prix',
       description:
         'Connaissez le coût par run, par PR et par jour — et empêchez la taxe sur la boucle de feedback de ralentir la boucle interne.',
     },
     {
       icon: 'monitoring',
-      title: 'Observabilité & Evals en Ligne',
+      title: 'Observabilité & evals en ligne',
       description:
         "Les traces comme nouvelle stack trace, les evals en ligne et les signaux de retour utilisateur, et le chemin de l'incident de production à l'entrée de dataset.",
     },
     {
       icon: 'account_tree',
-      title: 'Votre Stratégie de Confiance',
+      title: 'Votre stratégie de confiance',
       description:
         "Tester, evaluer ou monitorer — par couche, par risque et par budget. L'arbre de décision, vous l'emportez.",
     },

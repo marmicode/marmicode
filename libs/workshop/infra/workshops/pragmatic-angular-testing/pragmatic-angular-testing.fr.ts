@@ -76,43 +76,43 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
     },
     {
       icon: 'build',
-      title: 'Outils de Test Modernes',
+      title: 'Outils de test modernes',
       description:
         'Maîtrisez des outils modernes comme Vitest et Playwright Component Testing avec Testronaut.',
     },
     {
       icon: 'visibility',
-      title: 'Tests Lisibles et Maintenables',
+      title: 'Tests lisibles et maintenables',
       description:
         "Tests qui décrivent le comportement, pas des détails d'implémentation.",
     },
     {
       icon: 'rocket',
-      title: "Des Tests à l'Épreuve du Temps",
+      title: "Des tests à l'épreuve du temps",
       description:
         'Concevez des tests qui résistent aux migrations et au refactoring avec un minimum de changements.',
     },
     {
       icon: 'theater_comedy',
-      title: 'Le Mocking en toute Simplicité',
+      title: 'Le mocking en toute simplicité',
       description:
         'Maîtrisez les Fakes et les Object Mothers pour simplifier le "mocking" et éviter les pièges habituels.',
     },
     {
       icon: 'language',
-      title: 'Tests End-to-End',
+      title: 'Tests end-to-end',
       description:
         "Écrivez des tests end-to-end fiables avec Playwright et sachez comment choisir l'outil approprié.",
     },
     {
       icon: 'restaurant',
-      title: 'Buffet de Tests Pragmatiques',
+      title: 'Buffet de tests pragmatiques',
       description:
         "Profitez d'un buffet de conseils et de techniques pour adopter une stratégie de test pragmatique.",
     },
     {
       icon: 'smart_toy',
-      title: "Stratégie de Test à l'Ère de l'IA",
+      title: "Stratégie de test à l'ère de l'IA",
       description: 'Adaptez votre stratégie au développement assisté par IA.',
     },
   ],
@@ -178,7 +178,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
   agenda: {
     sections: [
       {
-        title: '👨🏻‍🏫 Introduction aux Tests',
+        title: '👨🏻‍🏫 Introduction aux tests',
         items: [
           'Pourquoi tester ?',
           "Qu'attend-on d'un test ?",

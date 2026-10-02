@@ -65,25 +65,25 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
   benefits: [
     {
       icon: 'language',
-      title: 'Tests UI Framework-Agnostic',
+      title: 'Tests UI framework-agnostic',
       description:
         'Testez vos applications Angular, React, Vue ou sans framework avec la même boîte à outils Playwright.',
     },
     {
       icon: 'visibility',
-      title: 'Tests Lisibles et Maintenables',
+      title: 'Tests lisibles et maintenables',
       description:
         "Écrivez des tests qui décrivent le comportement, pas des détails d'implémentation, et qui résistent au refactoring.",
     },
     {
       icon: 'smart_toy',
-      title: 'Tests Assistés par IA',
+      title: 'Tests assistés par IA',
       description:
         'Connectez Playwright à votre agent IA pour la reproduction, la spécification et la correction de bugs.',
     },
     {
       icon: 'hub',
-      title: 'Réseau, Auth & Maîtrise du Temps',
+      title: 'Réseau, auth & maîtrise du temps',
       description:
         "Maîtrisez l'interception de requêtes, le setup d'auth et l'API Clock de Playwright pour des tests rapides et fiables.",
     },
@@ -95,12 +95,12 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
     },
     {
       icon: 'photo_camera',
-      title: 'Tests de Régression Visuelle',
+      title: 'Tests de régression visuelle',
       description: 'Détectez les régressions visuelles sans douleur.',
     },
     {
       icon: 'restaurant',
-      title: 'Buffet de Tests Pragmatiques',
+      title: 'Buffet de tests pragmatiques',
       description:
         "Profitez d'un buffet de conseils et de techniques pour adopter une stratégie de test UI scalable et rentable.",
     },
@@ -151,7 +151,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
   agenda: {
     sections: [
       {
-        title: '👨🏻‍🏫 Introduction au Testing',
+        title: '👨🏻‍🏫 Introduction au testing',
         items: [
           'Pourquoi tester ?',
           'Les différents types de tests.',
@@ -170,7 +170,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         ],
       },
       {
-        title: '👨🏻‍🏫 Premier Test',
+        title: '👨🏻‍🏫 Premier test',
         items: [
           'Mise en place de Playwright.',
           'Mise en place de Playwright avec Nx.',
@@ -291,7 +291,7 @@ Petit groupe, beaucoup de pratique, et du coaching direct pour appliquer chaque 
         ],
       },
       {
-        title: '👨🏻‍🏫 Tester les Interactions',
+        title: '👨🏻‍🏫 Tester les interactions',
         items: ['Test Doubles : Dummies, Stubs, Spies, Mocks & Fakes.'],
       },
       {
