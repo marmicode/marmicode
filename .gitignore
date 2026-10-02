@@ -38,6 +38,8 @@ testem.log
 .DS_Store
 Thumbs.db
 
+.claude/worktrees
+
 /.firebase
 
 __percy_snapshots__
