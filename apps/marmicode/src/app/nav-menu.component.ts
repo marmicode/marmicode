@@ -9,6 +9,7 @@ import { MatButtonModule, MatMiniFabButton } from '@angular/material/button';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatListModule, MatNavList } from '@angular/material/list';
 import {
+  coachingRouterHelper,
   resourceSearchRouterHelper,
   workshopRouterHelper,
   externalLinks,
@@ -114,6 +115,11 @@ export class NavMenuComponent {
       icon: 'book',
       title: 'Cookbook',
       url: externalLinks.cookbookUrl,
+    },
+    {
+      icon: 'explore',
+      title: 'Coaching',
+      route: coachingRouterHelper.coaching(),
     },
     {
       icon: 'school',
