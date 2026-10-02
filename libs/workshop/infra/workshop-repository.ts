@@ -10,9 +10,12 @@ import { pragmaticReactTestingFullCourseEn } from './workshops/pragmatic-react-t
 import { pragmaticReactTestingFullCourseFr } from './workshops/pragmatic-react-testing/pragmatic-react-testing.fr';
 import { pragmaticUiTestingWithPlaywrightFullCourseEn } from './workshops/pragmatic-ui-testing-with-playwright/pragmatic-ui-testing-with-playwright.en';
 import { pragmaticUiTestingWithPlaywrightFullCourseFr } from './workshops/pragmatic-ui-testing-with-playwright/pragmatic-ui-testing-with-playwright.fr';
+import { trustingAgenticAngularFullCourseEn } from './workshops/trusting-agentic-angular/trusting-agentic-angular.en';
+import { trustingAgenticAngularFullCourseFr } from './workshops/trusting-agentic-angular/trusting-agentic-angular.fr';
 
 const WORKSHOPS: Workshop[][] = [
   [agenticAngularFullCourseEn, agenticAngularFullCourseFr],
+  [trustingAgenticAngularFullCourseEn, trustingAgenticAngularFullCourseFr],
   [chartedCodingFullCourseEn, chartedCodingFullCourseFr],
   [pragmaticAngularTestingFullCourseEn, pragmaticAngularTestingFullCourseFr],
   [pragmaticReactTestingFullCourseEn, pragmaticReactTestingFullCourseFr],
