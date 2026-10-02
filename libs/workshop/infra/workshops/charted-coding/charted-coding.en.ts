@@ -16,9 +16,7 @@ Map the landscape, chart a method your architecture can live with, then engineer
   duration: 2,
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/xbPQtvj7yRebmtH17',
-  waitlist: {
-    url: 'https://forms.gle/2eefd2ETDwyJ7HiK6',
-  },
+  // waitlist: { url: 'https://forms.gle/2eefd2ETDwyJ7HiK6' },
   lumaTag: 'charted-coding',
   description: `
 Coding agents (Claude Code, Cursor, Copilot, and others) are now part of many teams' daily workflow. **How do you benefit from them sustainably**, without degrading code readability, losing control of your architecture, or drowning in review fatigue?
