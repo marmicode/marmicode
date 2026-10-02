@@ -7,13 +7,13 @@ export const chartedCodingFullCourseEn = createWorkshop({
   title: 'Charted Coding: AI-Assisted Development Without the Drift',
   shortTitle: 'Charted Coding: AI-Assisted Development Without the Drift',
   type: 'full',
-  subheading: `One day to move from fast-but-fragile AI coding to approaches you can sustain.
-Map the landscape, chart a method your architecture can live with — then wire harnesses that keep the agents on course.`,
+  subheading: `Two days to move from fast-but-fragile AI coding to approaches you can sustain.
+Map the landscape, chart a method your architecture can live with, then engineer the harness that keeps the agents on course.`,
   pictureAltText:
     'Visual metaphor for charted AI-assisted development: a clear path or map guiding collaboration between a developer and an AI assistant.',
   pictureUri,
   thumbnailUri,
-  duration: 1,
+  duration: 2,
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/xbPQtvj7yRebmtH17',
   waitlist: {
@@ -21,43 +21,45 @@ Map the landscape, chart a method your architecture can live with — then wire 
   },
   lumaTag: 'charted-coding',
   description: `
-Coding agents — Copilot, Cursor, Claude Code, and others, are now part of many teams' daily workflow. **How do you benefit from them sustainably**, without degrading code readability or losing control of your architecture?
+Coding agents (Claude Code, Cursor, Copilot, and others) are now part of many teams' daily workflow. **How do you benefit from them sustainably**, without degrading code readability, losing control of your architecture, or drowning in review fatigue?
 
-Somewhere between **Vibe Coding**, fast but hard to maintain, and **Spec-Driven Development**, rigorous but often too heavy, there's a workflow that keeps the feedback loop short *and* the architecture robust. That's the route this workshop charts.
+Somewhere between **Vibe Coding**, fast but hard to maintain, and **Spec-Driven Development**, rigorous but often too heavy, there's a workflow that keeps the feedback loop short *and* the architecture robust. That's the route this workshop charts, over two days, from first principles to a harness you can run on Monday.
 
 **You'll leave able to:**
 
-- **Choose the right approach for each context** — prototype, production feature, greenfield, brownfield, or legacy.
+- **Choose the right approach for each context**: prototype, production feature, greenfield, brownfield, or legacy.
 - **Keep the agent on course** with short feedback loops and tests as executable specification.
-- **Wire a deterministic verification layer** the agent cannot quietly bypass.
+- **Diagnose and fix context rot** (sycophancy, context clash, confusion, instruction drift, and poisoning) with context isolation and reduction.
+- **Wire a deterministic verification layer**, a gate ladder from hooks to CI, the agent cannot quietly bypass.
+- **Author your own skills** to package your team's judgment and compound what you learn from steering the agent.
 
-**The route:** after a head-to-head comparison of Vibe Coding and Spec-Driven Development, you'll practice the Charted Coding workflow on a shared use case:
+**Day 1 (Mapping the Landscape, Charting the Course):** after a head-to-head comparison of Vibe Coding and Spec-Driven Development and a hands-on look at review fatigue, you'll dig into context engineering and Agent Skills, then practice the Charted Coding workflow on a shared use case:
 
-1. **Chart the Intent** — co-build a pragmatic Design Doc with the agent.
-2. **Plot the Waypoints** — turn intent into an ordered PR plan of thin, reviewable slices.
-3. **Steer the Cycle** — Scaffold → Red → Green → Refactor, with progressive review.
+1. **Chart the Intent**: co-build a pragmatic Design Doc with the agent.
+2. **Plot the Waypoints**: turn intent into an ordered PR plan of thin, reviewable slices.
+3. **Steer the Cycle**: Scaffold → Red → Green → Refactor, with progressive review, and **Chorus Programming** to keep collective ownership alive.
 
-Then comes the **Harness Engineering** block: skills, hooks, verification gates, testing strategy, Nx boundaries, and ESLint rules, the agent cannot drift past.
+**Day 2 (Steering the Ship, Dropping Anchor):** the **Harness Engineering** block covers skill authoring, hooks, verification gates, a backpressure gate ladder, testing strategy, Nx boundaries, and ESLint rules the agent cannot drift past, then **Steering Capture**, turning the corrections you repeat into skills, and a synthesis session to leave with your own action plan.
 
-The day alternates between **theoretical content**, **live demonstrations**, and **hands-on exercises** — all **framework-agnostic**, with the goal of making you **autonomous** in choosing the right approach and wiring the deterministic layer that keeps it sustainable.
+Both days alternate between **theoretical content**, **live demonstrations**, and **hands-on exercises**, all **framework-agnostic**, with the goal of making you **autonomous** in choosing the right approach and wiring the deterministic layer that keeps it sustainable.
 `,
   offer: {
     type: 'early-bird',
-    price: 470,
-    originalPrice: 570,
+    price: 870,
+    originalPrice: 1070,
   },
   language: 'en',
   requiredSkills: [
-    `Development experience in a typed language (TypeScript, Java, C#, Python with types, etc.) — exercises use TypeScript`,
+    `Development experience in a typed language (TypeScript, Java, C#, Python with types, etc.); exercises use TypeScript`,
     `Familiarity with automated testing`,
-    `Prior use of an AI assistant to generate code (Copilot, Cursor, Claude, etc.) — occasional use is sufficient`,
+    `Prior use of an AI assistant to generate code (Claude, Cursor, Copilot, etc.); occasional use is sufficient`,
   ],
   benefits: [
     {
       icon: 'psychology',
       title: 'Map the Landscape',
       description:
-        'Contrast Vibe Coding and Spec-Driven Development (Spec Kit, BMAD, OpenSpec, etc.) and tie them to a structured, test-driven approach.',
+        'Contrast Vibe Coding, Spec-Driven Development (Spec Kit, BMAD, OpenSpec, etc.), and Charted Coding, and tie each to the pain points it solves or creates.',
     },
     {
       icon: 'tune',
@@ -66,10 +68,16 @@ The day alternates between **theoretical content**, **live demonstrations**, and
         'Choose an AI-assisted workflow suited to prototypes, production features, greenfield, brownfield, or legacy code.',
     },
     {
+      icon: 'hub',
+      title: 'Engineer the Context',
+      description:
+        'Diagnose context rot (sycophancy, context clash, confusion, instruction drift, poisoning) and fix it with sub-agents, handoff docs, compaction, and progressive disclosure.',
+    },
+    {
       icon: 'article',
       title: 'Pragmatic Design Docs',
       description:
-        'Write design documents that work for both humans and agents — without drowning in over-specification.',
+        'Write design documents that work for both humans and agents, without drowning in over-specification.',
     },
     {
       icon: 'autorenew',
@@ -78,10 +86,34 @@ The day alternates between **theoretical content**, **live demonstrations**, and
         'Align your intent with the code produced using tight iteration cycles.',
     },
     {
+      icon: 'diversity_3',
+      title: 'Chorus Programming',
+      description:
+        'Keep collective ownership alive: code live with your team and your agents on a shared branch, with small commits and cheap, continuous review.',
+    },
+    {
       icon: 'construction',
       title: 'Harness Engineering',
       description:
         'Wire skills, hooks, tests, Nx boundaries, and ESLint rules as a deterministic verification layer the agent cannot quietly bypass.',
+    },
+    {
+      icon: 'speed',
+      title: 'Backpressure & the Gate Ladder',
+      description:
+        'Match each check to its risk and latency, from on-write hooks to git hooks, CI, and agentic workflows, to catch bad changes before they compound.',
+    },
+    {
+      icon: 'auto_awesome',
+      title: 'Author Your Own Skills',
+      description:
+        'Use skill-creator to turn an interview into a reusable, progressively-disclosed skill that packages your team’s judgment.',
+    },
+    {
+      icon: 'trending_up',
+      title: 'Steering Compounds',
+      description:
+        'Capture the corrections you repeat and promote them into skills, so the next session starts smarter.',
     },
     {
       icon: 'health_and_safety',
@@ -90,16 +122,10 @@ The day alternates between **theoretical content**, **live demonstrations**, and
         'Steer clear of drift, loss of control, over-engineering, review fatigue, and multitasking distraction.',
     },
     {
-      icon: 'groups',
-      title: 'Fit Your Team',
-      description:
-        'Integrate these practices into daily workflows and clarify collaboration patterns around tests, prompting, and review.',
-    },
-    {
       icon: 'savings',
       title: 'Control Costs',
       description:
-        'Token spend is just the start. Cut the hidden costs: steering, reviewing, and rejecting AI output.',
+        'Token spend is just the start. Compare workflows on review time and steering cost, not just the invoice.',
     },
   ],
   faqs: [
@@ -116,12 +142,17 @@ The day alternates between **theoretical content**, **live demonstrations**, and
     {
       question: 'What tools do I need?',
       answer:
-        'A computer with internet access, microphone, webcam, an up-to-date browser, installation rights, and a working AI assistant (Copilot, Cursor, Claude Code, or equivalent).',
+        'A computer with internet access, microphone, webcam, an up-to-date browser, installation rights, and a working AI assistant (Claude Code, Cursor, Copilot, or equivalent).',
     },
     {
       question: 'Is it hands-on?',
       answer:
-        'Yes. After a lecture-and-demo comparison of the main approaches, you practice the Charted Coding workflow on a common use case — Chart the Intent, Plot the Waypoints, Steer the Cycle — then wire harnesses (skills, verification, boundaries). You leave with a collective synthesis and an individual action plan.',
+        'Yes. After a lecture-and-demo comparison of the main approaches, you practice the Charted Coding workflow on a common use case (Chart the Intent, Plot the Waypoints, Steer the Cycle), then author your own skill and wire a harness (hooks, verification gates, Nx boundaries). You leave with a collective synthesis and an individual action plan.',
+    },
+    {
+      question: "What's the difference between day 1 and day 2?",
+      answer:
+        'Day 1 maps the landscape (Vibe Coding vs. Spec-Driven Development, context engineering, Agent Skills) and charts the course: Chart the Intent, Plot the Waypoints, Steer the Cycle, with Chorus Programming for collective ownership. Day 2 steers the ship: skill authoring, Harness Engineering, the backpressure gate ladder, hooks, and Nx boundaries, then drops anchor with Steering Capture and your own action plan.',
     },
     {
       question: 'Is this tied to a specific framework?',
@@ -136,7 +167,7 @@ The day alternates between **theoretical content**, **live demonstrations**, and
       question:
         "What's the difference between booking a session and requesting a custom session?",
       answer:
-        '"Book a Session" lets you join a scheduled session with other participants. "Custom Session" is for companies who want a private, in-house workshop — with optional adjustments to content, duration, or focus areas.',
+        '"Book a Session" lets you join a scheduled session with other participants. "Custom Session" is for companies who want a private, in-house workshop, with optional adjustments to content, duration, or focus areas.',
     },
     {
       question: 'Is there a money-back guarantee?',
@@ -147,50 +178,87 @@ The day alternates between **theoretical content**, **live demonstrations**, and
   agenda: {
     sections: [
       {
-        title: '👨🏻‍🏫 Mapping the Landscape',
+        title: '👨🏻‍🏫 Day 1 · Captain, We’re Drifting',
         items: [
-          'Defining "Vibe Coding": when it works, why it is appealing, and classic pitfalls (drift, maintainability, illusion of productivity).',
-          'Spec-Driven Development: Spec Kit (GitHub), BMAD, OpenSpec, and alternatives — anatomy and how Spec Kit works.',
-          'Live demo: the same use case under both approaches — what holds up and what breaks.',
-          'Comparative review as narrative: strengths and limits by context; when each pays off — and when it becomes a drag.',
+          'Defining "Vibe Coding": when it works, why it is appealing, and classic pitfalls (drift, cognitive debt / deskilling, isolated and unconscious decisions, not enough checkpoints).',
+          'Spec-Driven Development: Spec Kit (GitHub), BMAD, OpenSpec, and alternatives; anatomy and how Spec Kit works.',
+          'Live demo: the same use case under both approaches, showing what holds up and what breaks.',
+          'Comparative review as narrative: strengths and limits by context; when each pays off, and when it becomes a drag.',
+          'Slow feedback loops, the context-switching tax, and steering cost: naming the hidden costs of AI-assisted development.',
         ],
       },
       {
-        title: '👨🏻‍🏫 Principles: Incremental, Agent-Friendly Development',
+        title: '💻 Exercise 101 · Review Fatigue',
+        items: [
+          'Ten minutes to find contradictions in your assigned packet: a Design Doc or a Spec Kit folder for the same feature.',
+          'No agent, no cross-checking the other packet: a firsthand look at review fatigue and the limits of a static spec.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Context Engineering',
+        items: [
+          'Context rot: how accuracy degrades well before the context window fills up.',
+          'Symptoms to recognize: sycophancy, context clash / contradiction, confusion, instruction drift, distraction, poisoning.',
+          'Context isolation: sub-agents and handoff docs instead of one sprawling conversation.',
+          'Context reduction: compaction, compute offloading, and reducing tool verbosity.',
+          'Progressive disclosure, and CLI vs. MCP trade-offs for tool definitions.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Agent Skills',
+        items: [
+          'Anatomy of a skill: SKILL.md, references/, scripts/, assets/, and why progressive disclosure keeps context lean.',
+          'A short history: CLAUDE.md, AGENTS.md, Claude Skills, Agent Skills.',
+          'Managing skills like npm packages: `npx skills add / install / update / remove`.',
+        ],
+      },
+      {
+        title: '💻 Exercise 201 · Skill Unfolding',
+        items: [
+          'Run the same prompt twice: once with no skill installed, once with `angular-developer` installed.',
+          'Note which reference files the agent opens in each round: progressive disclosure, observed directly.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Charting the Course: Incremental, Agent-Friendly Development',
         items: [
           'Navigating with a map rather than drifting: steering the agent while keeping control of the trajectory.',
-          'Chart the Intent: co-building a pragmatic Design Doc with the agent — goals, behavior, design, testing strategy.',
+          'Chart the Intent: co-building a pragmatic Design Doc with the agent, covering goals, behavior, design, and testing strategy.',
           'Plot the Waypoints: turning intent into an ordered, reviewable PR plan (thin slices that never break the mainline).',
-          'Steer the Cycle: Scaffold → Red → Green → Refactor, with progressive review after each slice — not a big-bang review at the end.',
-          'Tests as executable specification and as the AI agent’s feedback loop — how this differs from classic TDD.',
-          'Compatibility with your current stack (Vitest, JUnit, pytest, etc.) — framework-agnostic mindset.',
-          'Introduction to Charted Coding.',
+          'Steer the Cycle: Scaffold → Red → Green → Refactor, with progressive review after each slice, not a big-bang review at the end.',
+          'Tests as executable specification and as the AI agent’s feedback loop: how this differs from classic TDD.',
+          'Compatibility with your current stack (Vitest, JUnit, pytest, etc.): a framework-agnostic mindset.',
+          'Cost and delay compared, step by step, against a "common" Spec Kit flow.',
         ],
       },
       {
-        title: '💻 Exercise: Chart the Intent',
+        title: '💻 Exercise 301 · Charted Design',
         items: [
-          'Co-author a pragmatic Design Doc with the agent for the shared use case.',
-          'Lock goals, non-goals, desired behavior, and high-level design before writing code.',
+          'Install the Charted Coding skills with `npx skills add marmicode/skills`.',
+          'Co-build a weekly meal-plan Design Doc with `/charted-design`: the hard part is the testing strategy and the ordered PR plan, not the feature list.',
+          'Answer the agent’s questions and edit the doc as you go. No implementation yet.',
         ],
       },
       {
-        title: '💻 Exercise: Plot the Waypoints',
+        title: '👨🏻‍🏫 Chorus Programming',
         items: [
-          'Turn the Design Doc into an ordered PR plan: thin, independently reviewable and mergeable slices.',
-          'Identify scaffolding, pre-tidy-ups, and feature waypoints that keep the trajectory under control.',
+          'Why pair programming drifts into isolation and mob programming into tunnels, and what both lose: collective ownership.',
+          'Limbo: live, shared programming ("how low can you go?"), small commits that never break the build.',
+          'Rules: live communication, a chorus size of 2 (max 3), co-design, and one person free to focus on behavior while others handle structure.',
+          'Outcome: cheaper review because everyone has already seen most of the code, faster development, and drift caught early.',
         ],
       },
       {
-        title: '💻 Exercise: Steer the Cycle',
+        title: '💻 Exercise 302 · Charted Implementation',
         items: [
-          'Implement the first waypoint with Scaffold → Red → Green → Refactor.',
-          'Progressive review: course-correct after each slice instead of drowning in a late mega-diff.',
+          'Implement the meal plan with `/charted-scaffold`, `/charted-red`, `/charted-green`, or `/charted-continue`.',
+          'The goal is to feel the right step granularity: thin slices, PR by PR.',
         ],
       },
       {
-        title: '👨🏻‍🏫 Harness Engineering',
+        title: '👨🏻‍🏫 Day 2 · Steering the Ship: Harness Engineering',
         items: [
+          'The harness as a system: model, context, tools, constraints, feedback loop, orchestration, memory (skills, ADRs), and the human in the loop.',
           "Skills and hooks: packaging judgment so the agent follows your team's playbook.",
           'Verification gates: short feedback loops the agent must pass before moving on.',
           'Testing strategy as harness: executable specs (for real) that catch drift early.',
@@ -198,22 +266,77 @@ The day alternates between **theoretical content**, **live demonstrations**, and
         ],
       },
       {
-        title: '💻 Exercise: Wiring the Harness',
+        title: '👨🏻‍🏫 Skill Authoring',
         items: [
-          'Set up or extend skills/hooks for the shared use case.',
-          'Add or tighten a verification gate (tests, boundaries, or lint) and watch the agent respect it.',
+          'Using `/skill-creator` to turn an interview into a packaged, reusable skill instead of a one-off prompt.',
+          'Nudging the agent to interview with `AskUserQuestion` rather than free-form chat.',
+          'Writing the design doc as the skill is created, so you can review, edit, and commit it as you go.',
         ],
       },
       {
-        title: '👨🏻‍🏫 Adoption Strategy',
+        title: '💻 Exercise 303 · Custom Design Skill',
         items: [
-          'Integrating the method into an existing team workflow.',
-          'Collaboration patterns: who writes the tests, who drives the AI, who reviews.',
+          'Install `skill-creator` and build a custom `codesign` skill from scratch, from your answers alone.',
+          'Try the new skill on a feature of your choice.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Backpressure & the Gate Ladder',
+        items: [
+          'Backpressure: catching bad or superfluous changes before they compound, instead of after a big-bang review.',
+          'The gate ladder, matched to latency and risk: on-write hooks and git hooks (~seconds), CI and agentic workflows (~minutes), human review (~minutes to hours).',
+          'Hooks in practice: UserPromptSubmit, PreToolUse / PostToolUse, Stop, and why there is no "standard" yet (and the compat layers that exist).',
+        ],
+      },
+      {
+        title: '💻 Exercise 401 · Fast Feedback',
+        items: [
+          'Write a `PostToolUse` ESLint hook, typed against Claude SDK’s types, that feeds lint failures straight back to the agent.',
+          'Compare the same prompt before and after the hook is wired: watch it self-correct instead of waiting for review.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Nx Implicit Libraries & Architecture Boundaries',
+        items: [
+          'Implicit libraries: any `index.ts` becomes a tagged project (platform / scope / type) without hand-written `project.json` files.',
+          'Enforcing module boundaries with dependency constraints so an agent cannot quietly cross an architectural wall.',
+        ],
+      },
+      {
+        title: '💻 Exercise 402 · Architecture Feedback',
+        items: [
+          'Configure `depConstraints` so modules of type `ui` cannot import modules of type `infra`.',
+          'Point ESLint at the dependency graph and watch the same prompt respect the boundary instead of just being told about it.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Dropping Anchor: Steering Compounds',
+        items: [
+          'A correction you have made twice is a skill you have not written yet.',
+          'Capture: a hook notices the correction and writes it down while you are still in the moment.',
+          'Promote: the note becomes a skill, and the next session starts smarter.',
+        ],
+      },
+      {
+        title: '💻 Exercise 403 · Steering Capture',
+        items: [
+          'Implement a `UserPromptSubmit` hook that detects steering in your prompts and appends it to a learnings file.',
+          'Implement a `Stop` hook that reminds you to run `/save-learnings` whenever learnings are pending.',
+        ],
+      },
+      {
+        title: '👨🏻‍🏫 Adoption Strategy: Your Monday',
+        items: [
+          'Integrating the method into an existing team workflow, and collaboration patterns: who writes the tests, who drives the AI, who reviews.',
+          'Building your own "let\'s cook" skill that branches by task (spike, bug fix, small change, or major feature) and unfolds a different workflow for legacy code.',
+          'Deterministic Design Doc and ADR templates: markdown + checkboxes + emojis you can check with a script, not a human.',
+          'Setting up fast-feedback hooks: lint on write, `nx affected` or `vitest --changed` on Stop.',
         ],
       },
       {
         title: '👨🏻‍🏫 Synthesis and Action Plan',
         items: [
+          'Cheatsheet: typed hooks, treating third-party skills like npm packages (supply chain and prompt-injection risk), progressive disclosure, and compounding learnings into reviewed, evaluated skills.',
           'Choosing the right approach for the task at hand.',
           'Q&A and feedback from participants.',
         ],
