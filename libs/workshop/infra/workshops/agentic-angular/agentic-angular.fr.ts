@@ -169,7 +169,7 @@ Pour garder la formation interactive, chaque session est **limitée à 10 partic
     {
       question: 'Les evals et le testing sont-ils couverts ?',
       answer:
-        "Seulement en passant. Les evals, l'observabilité et le testing sont volontairement hors périmètre ici : ils sont couverts dans la formation complémentaire « Trusting your AI apps: A Testing and Eval Strategy ».",
+        "Seulement en passant. Les evals, l'observabilité et le testing sont volontairement hors périmètre ici : ils sont couverts dans la formation complémentaire « Faire Confiance à Vos Apps Angular Agentiques : Stratégie de Tests et d'Evals ».",
     },
     {
       question: 'Ma société peut-elle financer cette formation ?',
