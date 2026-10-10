@@ -95,7 +95,7 @@
     "@angular/cli": "21.1.5",
     "@angular/compiler-cli": "21.1.6",
     "@angular/language-service": "21.1.6",
-    "@babel/runtime": "7.28.6",
+    "@babel/runtime": "7.29.10",
     "@graphql-cli/codegen": "^3.0.0",
     "@graphql-codegen/schema-ast": "^4.0.0",
     "@graphql-codegen/typescript": "^4.0.0",
@@ -178,7 +178,7 @@
     "zx": "8.8.5"
   },
   "dependenciesMeta": {
-    "@babel/runtime@7.28.6": {
+    "@babel/runtime@7.29.10": {
       "unplugged": true
     },
     "ngx-sharebuttons@11.0.0": {
