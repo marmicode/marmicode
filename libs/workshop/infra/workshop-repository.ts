@@ -14,9 +14,9 @@ import { trustingAgenticAngularFullCourseEn } from './workshops/trusting-agentic
 import { trustingAgenticAngularFullCourseFr } from './workshops/trusting-agentic-angular/trusting-agentic-angular.fr';
 
 const WORKSHOPS: Workshop[][] = [
-  [agenticAngularFullCourseEn, agenticAngularFullCourseFr],
-  [trustingAgenticAngularFullCourseEn, trustingAgenticAngularFullCourseFr],
   [chartedCodingFullCourseEn, chartedCodingFullCourseFr],
+  [trustingAgenticAngularFullCourseEn, trustingAgenticAngularFullCourseFr],
+  [agenticAngularFullCourseEn, agenticAngularFullCourseFr],
   [pragmaticAngularTestingFullCourseEn, pragmaticAngularTestingFullCourseFr],
   [pragmaticReactTestingFullCourseEn, pragmaticReactTestingFullCourseFr],
   [
