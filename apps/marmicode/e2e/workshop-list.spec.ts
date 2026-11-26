@@ -17,6 +17,10 @@ test.describe('workshop list', () => {
   });
 
   test('go to workshop when clicking on title', async ({ glove, page }) => {
+    /* This test renders two pages: the list, then the workshop.
+     * On the dev server, that does not fit in the default timeout on slow browsers. */
+    test.slow();
+
     await glove.goto();
 
     await glove
