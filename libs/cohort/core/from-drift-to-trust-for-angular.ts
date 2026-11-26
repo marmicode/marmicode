@@ -51,7 +51,7 @@ const WEEKS = [
   },
   {
     emoji: '🔬',
-    title: 'Proving It Holds',
+    title: 'Learn From the Drift',
     items: [
       "Extract your team's agent sessions and analyze where the trajectories drifted.",
       'Turn the patterns into skills, then evaluate them so the fix survives the next model update.',

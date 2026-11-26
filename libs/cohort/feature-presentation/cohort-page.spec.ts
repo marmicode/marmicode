@@ -70,7 +70,7 @@ describe(CohortPage, () => {
             ['Week 2', '👀', 'Give the Agent Eyes'],
             ['Week 3', '🧭', 'The Charted Coding Cycle'],
             ['Week 4', '⚓', 'The Harness'],
-            ['Week 5', '🔬', 'Proving It Holds'],
+            ['Week 5', '🔬', 'Learn From the Drift'],
             ['Week 6', '🔁', 'The Charted Loop'],
           ],
         },
