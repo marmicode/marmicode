@@ -46,8 +46,13 @@ test.describe('workshop list', () => {
 class WorkshopListGlove {
   constructor(private _page: Page) {}
 
+  /**
+   * This does not wait for the `load` event:
+   * it depends on third parties (e.g. chat widget),
+   * and it can take most of the test timeout on slow browsers.
+   */
   goto() {
-    return this._page.goto('/workshops');
+    return this._page.goto('/workshops', { waitUntil: 'domcontentloaded' });
   }
 
   /**

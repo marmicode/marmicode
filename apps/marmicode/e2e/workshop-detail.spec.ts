@@ -12,7 +12,7 @@ test.describe('workshop detail', () => {
 
     test.slow();
 
-    await glove.goto('pragmatic-angular-testing');
+    await glove.goto('pragmatic-angular-testing', { waitUntil: 'load' });
 
     /* Wait for luma sessions to be loaded. */
     await page
@@ -80,7 +80,17 @@ test.describe('workshop detail', () => {
 class WorkshopDetailGlove {
   constructor(private _page: Page) {}
 
-  goto(workshopId: string) {
-    return this._page.goto(`/workshops/${workshopId}`);
+  /**
+   * By default, this does not wait for the `load` event:
+   * it depends on third parties (e.g. sessions calendar, chat widget),
+   * and it can take most of the test timeout on slow browsers.
+   */
+  goto(
+    workshopId: string,
+    {
+      waitUntil = 'domcontentloaded',
+    }: { waitUntil?: 'domcontentloaded' | 'load' } = {},
+  ) {
+    return this._page.goto(`/workshops/${workshopId}`, { waitUntil });
   }
 }
