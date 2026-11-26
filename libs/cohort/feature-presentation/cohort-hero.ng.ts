@@ -18,7 +18,7 @@ import { COHORT_LABELS } from './cohort-presentation.i18n';
         <p slot="note" class="actions-note">{{ labels.waitlistNote }}</p>
       }
 
-      <p slot="footer" class="bottom-note">{{ labels.frenchNote }}</p>
+      <p slot="note" class="secondary-note">{{ labels.frenchNote }}</p>
     </mc-training-hero>
   `,
   styles: `
@@ -30,15 +30,22 @@ import { COHORT_LABELS } from './cohort-presentation.i18n';
       position: relative;
     }
 
-    .actions-note {
+    /* The notes under the actions: sizes are in "em" to follow the banner on small screens. */
+    .actions-note,
+    .secondary-note {
       margin: 1rem 1rem 0;
+      text-align: center;
+      text-wrap: balance;
     }
 
-    .bottom-note {
-      color: white;
-      font-size: 1.3rem;
-      text-align: center;
-      margin: 0 1rem 2rem;
+    .actions-note {
+      font-size: 1em;
+    }
+
+    .secondary-note {
+      margin-top: 0.4rem;
+      font-size: 0.85em;
+      opacity: 0.8;
     }
   `,
 })
