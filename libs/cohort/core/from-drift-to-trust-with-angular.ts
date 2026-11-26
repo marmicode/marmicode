@@ -28,15 +28,13 @@ and the team practices that keep your agents on course.`,
   description: `
 Coding agents write Angular code faster than any team can review it. The code is almost right, the tests are green because the agent edited them until they passed, and you either review every line or merge on faith. **That is drift.**
 
-This cohort is six weeks to replace it with **trust you can explain**: tests the agent can't game, a harness it can't quietly bypass, a workflow of small charted steps, and a team habit of learning from every agent session.
+This cohort is six weeks to replace it with **trust you can explain**: tests the agent can't game, a harness it can't quietly bypass, changes organized in small charted steps so you can focus on what matters, and a team habit of learning from every agent session.
 
 **The format: a course, a live session every week, and a community.**
 
 - **Six live sessions**: one a week, three hours, hands-on. 3 pm to 6 pm Central European Time, which is 9 am to noon US Eastern. You leave each one with something to apply to your own code.
 - **The video course**: [Pragmatic Angular Testing](https://courses.marmicode.io) is included: 53 lessons, 4.5 hours, with exercises, a tutor and solutions. You watch the testing fundamentals before week 1, so live time goes to building the whole workflow around your agent: tests, harness, evals and team rollout.
-- **A private Discord**: ask between sessions and compare notes with the rest of the cohort.
-
-*Test-first here means tests as your agent's harness and feedback loop. It does not mean TDD dogma.*
+- **A private Discord**: I'm there between sessions to answer your questions, and you compare notes with the rest of the cohort.
 `,
   benefits: [
     {
@@ -55,7 +53,7 @@ This cohort is six weeks to replace it with **trust you can explain**: tests the
       icon: 'visibility',
       title: 'Runtime Truth',
       description:
-        'The agent guesses at a bug from the source code. Teach it to analyze the running test before it proposes a fix.',
+        'The agent guesses at bugs from the source code, or scatters console.log calls and goes in circles. Teach it to analyze runtime values and the real state of your app instead.',
     },
     {
       icon: 'route',
@@ -98,7 +96,7 @@ This cohort is six weeks to replace it with **trust you can explain**: tests the
         title: '🧭 Week 3: The Charted Coding Cycle',
         items: [
           'Write a design doc with the agent, split it into small PRs, then go scaffold, red, green.',
-          'Review at every step, not at the end.',
+          'Each step has a precise intent, so you steer while the change is still small instead of untangling one big diff at the end.',
           'You leave with a design doc and a first merged PR for a real feature.',
         ],
       },
@@ -122,7 +120,7 @@ This cohort is six weeks to replace it with **trust you can explain**: tests the
         title: '🔁 Week 6: The Charted Loop',
         items: [
           'Let the agent run a whole PR on its own, with a loop that knows when it is done and when it is stuck.',
-          'Review it commit by commit, then plan the rollout to your team.',
+          'Get back a PR whose commits tell the story, so you review intents instead of a wall of diff, then plan the rollout to your team.',
           'You leave with a loop you can run unattended, and a rollout plan for your team.',
         ],
       },
