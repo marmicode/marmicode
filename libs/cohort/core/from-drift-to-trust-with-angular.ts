@@ -152,19 +152,9 @@ This cohort is six weeks to replace it with **trust you can explain**: tests the
         'Three hours live, plus practice on your own code. Plan for the 4.5 hours of video course before week 1.',
     },
     {
-      question: 'Do I have to practice TDD?',
-      answer:
-        'No. Tests come first here because they are how the agent knows it is done. You keep your own way of working.',
-    },
-    {
       question: 'Can I join with my team?',
       answer:
         'Yes. Weeks 5 and 6 are built around team practices, so they work best with at least one teammate.',
-    },
-    {
-      question: 'What does it cost?',
-      answer:
-        'The early bird price is €1,570 per attendee, instead of €1,870. The Pragmatic Angular Testing video course is included.',
     },
     {
       question: 'Is the waitlist a commitment?',
