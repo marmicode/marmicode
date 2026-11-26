@@ -38,6 +38,17 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
     ></ng-container>
   </a>
 }`,
+  styles: `
+    a {
+      /* Without these variables, links keep the browser's own style. */
+      color: var(--mc-markdown-link-color, revert);
+      text-decoration-color: var(
+        --mc-markdown-link-decoration-color,
+        currentColor
+      );
+      text-underline-offset: var(--mc-markdown-link-underline-offset, auto);
+    }
+  `,
   providers: [RxState],
   imports: [NgComponentOutlet, HighlightLinkComponent, PushPipe],
 })

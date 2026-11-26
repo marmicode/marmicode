@@ -23,7 +23,7 @@ import { appRouterHelper } from './app-router-helper';
               <mc-link
                 color="white"
                 size="small"
-                href="https://courses.marmicode.io/courses/pragmatic-angular-testing"
+                [href]="externalLinks.pragmaticAngularTestingCourseUrl"
               >
                 ✅ Angular Testing Course
               </mc-link>

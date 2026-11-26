@@ -1,4 +1,7 @@
-import { cohortRouterHelper } from '@marmicode/shared/router-helpers';
+import {
+  cohortRouterHelper,
+  externalLinks,
+} from '@marmicode/shared/router-helpers';
 import { createCohort } from './cohort';
 import pictureUri from './from-drift-to-trust-with-angular.webp';
 
@@ -33,7 +36,7 @@ This cohort is six weeks to replace it with **trust you can explain**: tests the
 **The format: a course, a live session every week, and a community.**
 
 - **Six live sessions**: one a week, three hours, hands-on. 3 pm to 6 pm Central European Time, which is 9 am to noon US Eastern. You leave each one with something to apply to your own code.
-- **The video course**: [Pragmatic Angular Testing](https://courses.marmicode.io) is included: 53 lessons, 4.5 hours, with exercises, a tutor and solutions. You watch the testing fundamentals before week 1, so live time goes to building the whole workflow around your agent: tests, harness, evals and team rollout.
+- **The video course**: [Pragmatic Angular Testing](${externalLinks.pragmaticAngularTestingCourseUrl}) is included: 53 lessons, 4.5 hours, with exercises, a tutor and solutions. You watch the testing fundamentals before week 1, so live time goes to building the whole workflow around your agent: tests, harness, evals and team rollout.
 - **A private Discord**: I'm there between sessions to answer your questions, and you compare notes with the rest of the cohort.
 `,
   benefits: [

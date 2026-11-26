@@ -14,6 +14,15 @@ import { Training } from '@marmicode/training/core';
   `,
   styles: `
     .content {
+      /* Links use the accent color, like the rest of the site. */
+      --mc-markdown-link-color: var(--marmicode-accent-color);
+      --mc-markdown-link-decoration-color: color-mix(
+        in srgb,
+        var(--marmicode-accent-color) 40%,
+        transparent
+      );
+      --mc-markdown-link-underline-offset: 4px;
+
       max-width: 1000px;
       margin: 0 auto;
       padding: 1rem 2rem 0 2rem;
