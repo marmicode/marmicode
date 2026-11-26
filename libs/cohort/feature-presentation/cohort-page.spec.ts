@@ -47,6 +47,24 @@ describe(CohortPage, () => {
       .toContain('Also available in French, fundable up to 100% via OPCO.');
   });
 
+  it('shows how the cohort is organized: a live session every week, the video course and the community', async () => {
+    const { getSchedule } = mountCohortPage();
+
+    await expect
+      .poll(() => getSchedule())
+      .toEqual([
+        {
+          label: 'Live session',
+          cells: ['3 h', '3 h', '3 h', '3 h', '3 h', '3 h'],
+        },
+        {
+          label: 'Video course',
+          cells: ['Pragmatic Angular Testing, at your own pace'],
+        },
+        { label: 'Discord', cells: ['Private community, open all week'] },
+      ]);
+  });
+
   it('lists the six weeks in order', async () => {
     const { getProgramTitles } = mountCohortPage();
 
@@ -89,6 +107,16 @@ function mountCohortPage() {
         .map((link) => link.href),
     getBannerText: () =>
       document.querySelector('mc-cohort-hero')?.textContent ?? '',
+    /* The rows of the schedule that have a label, with their cells. */
+    getSchedule: () =>
+      Array.from(document.querySelectorAll('mc-cohort-schedule .row'))
+        .map((row) => ({
+          label: row.querySelector('.row-label')?.textContent?.trim(),
+          cells: Array.from(row.querySelectorAll('.cell')).map((cell) =>
+            cell.textContent?.trim(),
+          ),
+        }))
+        .filter((row) => row.label),
     getProgramTitles: () =>
       Array.from(
         document.querySelectorAll('mc-training-agenda mat-panel-title'),

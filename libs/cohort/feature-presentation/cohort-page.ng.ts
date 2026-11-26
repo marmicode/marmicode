@@ -18,6 +18,7 @@ import {
 } from '@marmicode/training/ui';
 import { CohortHero } from './cohort-hero.ng';
 import { CohortRouteDiagram } from './cohort-route-diagram.ng';
+import { CohortSchedule } from './cohort-schedule.ng';
 
 /**
  * The cohort page is made of the same sections as the workshop pages,
@@ -29,6 +30,7 @@ import { CohortRouteDiagram } from './cohort-route-diagram.ng';
   imports: [
     CohortHero,
     CohortRouteDiagram,
+    CohortSchedule,
     PageComponent,
     PageSection,
     TrainingAgenda,
@@ -44,6 +46,12 @@ import { CohortRouteDiagram } from './cohort-route-diagram.ng';
     <mc-page [info]="pageInfo">
       <mc-cohort-hero [cohort]="cohort" />
       <mc-training-description [training]="cohort" />
+      <mc-page-section sectionTitle="📅 How the cohort is organized">
+        <mc-cohort-schedule
+          [schedule]="cohort.schedule"
+          [weekCount]="cohort.agenda.sections.length"
+        />
+      </mc-page-section>
       <mc-page-section sectionTitle="🧭 The workflow you will build">
         <mc-cohort-route-diagram />
       </mc-page-section>

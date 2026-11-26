@@ -11,6 +11,17 @@ export const FROM_DRIFT_TO_TRUST_WITH_ANGULAR = createCohort({
   shortTitle: 'From Drift to Trust',
   location: 'online',
   nextCohort: 'Early 2027',
+  schedule: {
+    liveSession: { label: 'Live session', duration: '3 h' },
+    videoCourse: {
+      label: 'Video course',
+      description: 'Pragmatic Angular Testing, at your own pace',
+    },
+    community: {
+      label: 'Discord',
+      description: 'Private community, open all week',
+    },
+  },
   /* @todo replace with the cohort's own picture: this is the Charted Coding one. */
   pictureUri,
   pictureAltText:
