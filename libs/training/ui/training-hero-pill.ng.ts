@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   imports: [UpperCasePipe],
   template: `
     <p class="pill">
-      @for (segment of segments(); track segment; let isFirst = $first) {
+      @for (segment of segments(); track $index; let isFirst = $first) {
         @if (!isFirst) {
           <span class="divider" aria-hidden="true"></span>
         }
