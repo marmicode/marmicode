@@ -41,7 +41,7 @@ describe(TrainingCallToAction, () => {
       });
   });
 
-  it('links to the waitlist', async () => {
+  it('links to the waitlist, in a new tab that cannot reach back to this page', async () => {
     const { getLinks } = mountTrainingCallToAction(
       trainingMother
         .withBasicInfo('Charted Coding')
@@ -55,6 +55,7 @@ describe(TrainingCallToAction, () => {
         {
           text: 'JOIN WAITLIST',
           url: 'https://waitlist.example/charted-coding',
+          rel: 'noopener',
         },
       ]);
   });
@@ -76,6 +77,7 @@ function mountTrainingCallToAction(training: Training) {
         /* The link starts with its icon's name. */
         text: link.textContent?.replace('notifications', '').trim(),
         url: link.getAttribute('href'),
+        rel: link.getAttribute('rel'),
       })),
   };
 }

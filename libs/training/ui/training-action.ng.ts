@@ -22,6 +22,7 @@ import { RouterLink } from '@angular/router';
     @if (href(); as href) {
       <a
         class="action"
+        rel="noopener"
         target="_blank"
         [class.secondary]="variant() === 'secondary'"
         [href]="href"

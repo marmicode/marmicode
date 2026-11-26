@@ -69,7 +69,14 @@ import { TRAINING_LABELS } from './training.i18n';
 
     .actions {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 1rem;
+
+      @media (max-width: 599.98px) {
+        flex-direction: column;
+        align-items: stretch;
+      }
     }
   `,
 })
