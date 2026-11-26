@@ -1,11 +1,11 @@
-import { WorkshopLanguage } from '@marmicode/workshop/core';
+import { TrainingLanguage } from '@marmicode/training/core';
 
 export function formatPrice({
   price,
   locale,
 }: {
   price: number;
-  locale: WorkshopLanguage;
+  locale: TrainingLanguage;
 }): string {
   const formatted = price.toLocaleString(locale, {
     style: 'currency',

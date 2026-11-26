@@ -1,15 +1,15 @@
 import { Component, computed, input } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { PageSection } from '@marmicode/shared/ui';
-import { Workshop } from '@marmicode/workshop/core';
-import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
+import { Training } from '@marmicode/training/core';
+import { TRAINING_LABELS } from './training.i18n';
 @Component({
-  selector: 'mc-workshop-agenda',
+  selector: 'mc-training-agenda',
   imports: [MatExpansionModule, PageSection],
   template: `
     <mc-page-section [sectionTitle]="sectionTitle()">
       <mat-accordion>
-        @for (section of workshop().agenda.sections; track section) {
+        @for (section of training().agenda.sections; track section) {
           @let isEmpty = section.items.length === 0;
           <mat-expansion-panel [hideToggle]="isEmpty" [inert]="isEmpty">
             <mat-expansion-panel-header>
@@ -64,10 +64,10 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
     }
   `,
 })
-export class WorkshopAgenda {
-  workshop = input.required<Workshop>();
+export class TrainingAgenda {
+  training = input.required<Training>();
 
   sectionTitle = computed(
-    () => `🗓️ ${WORKSHOP_DETAIL_LABELS[this.workshop().language].program}`,
+    () => `🗓️ ${TRAINING_LABELS[this.training().language].program}`,
   );
 }

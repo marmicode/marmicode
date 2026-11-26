@@ -3,6 +3,7 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
 import {
   blogPostDetailRouterHelper,
   coachingRouterHelper,
+  cohortRouterHelper,
   resourceSearchRouterHelper,
   servicesRouterHelper,
   workshopRouterHelper,
@@ -27,6 +28,11 @@ export const serverRoutes: ServerRoute[] = [
   /* Coaching */
   {
     path: coachingRouterHelper.COACHING_PATH,
+    renderMode: RenderMode.Prerender,
+  },
+  /* Cohort: From Drift to Trust with Angular */
+  {
+    path: cohortRouterHelper.FROM_DRIFT_TO_TRUST_WITH_ANGULAR_PATH,
     renderMode: RenderMode.Prerender,
   },
   /* Workshops list */

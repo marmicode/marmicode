@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
 import { Workshop, WorkshopLanguage } from '@marmicode/workshop/core';
-import { formatPrice } from './format-price';
+import { formatPrice } from '@marmicode/training/ui';
 import { WORKSHOP_PREVIEW_LABELS } from './workshop-preview.i18n';
 import { workshopViewTransitionName } from './workshop-view-transition-name';
 
