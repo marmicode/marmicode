@@ -6,7 +6,7 @@ import { createCohort } from './cohort';
 import pictureUri from './from-drift-to-trust-for-angular.webp';
 
 /**
- * The six weeks of the cohort: the schedule and the program are both derived from them.
+ * The six weeks of the cohort: the schedule and the agenda are both derived from them.
  */
 const WEEKS = [
   {
@@ -15,8 +15,9 @@ const WEEKS = [
     items: [
       'Why almost-right code erodes trust, and what a test must do to stop it.',
       'A test strategy for agent-written code: how wide each test goes, what to fake, and how a contract keeps the fake honest.',
-      'You leave with a contract-tested fake, and a test strategy for one feature of your own app.',
     ],
+    outcome:
+      'You leave with a contract-tested fake, and a test strategy for one feature of your own app.',
   },
   {
     emoji: '👀',
@@ -24,8 +25,9 @@ const WEEKS = [
     items: [
       'Hand the agent your testing judgment as a skill, then compare its tests with yours.',
       'Let it inspect runtime values in the running test instead of guessing from the source.',
-      'You leave with an agent that writes tests the way you would, and checks the runtime before it proposes a fix.',
     ],
+    outcome:
+      'You leave with an agent that writes tests the way you would, and checks the runtime before it proposes a fix.',
   },
   {
     emoji: '🧭',
@@ -33,8 +35,9 @@ const WEEKS = [
     items: [
       'Write a design doc with the agent, split it into small PRs, then go scaffold, red, green.',
       'Each step has a precise intent, so you steer while the change is still small instead of untangling one big diff at the end.',
-      'You leave with a design doc and a first merged PR for a real feature.',
     ],
+    outcome:
+      'You leave with a design doc and a first merged PR for a real feature.',
   },
   {
     emoji: '⚓',
@@ -42,8 +45,9 @@ const WEEKS = [
     items: [
       "Back pressure and guardrails the agent can't quietly bypass.",
       'The agent catches its own mistakes before it hands control back to you.',
-      'You leave with checks wired into your agent that run on every change, including your architecture boundaries.',
     ],
+    outcome:
+      'You leave with checks wired into your agent that run on every change, including your architecture boundaries.',
   },
   {
     emoji: '🔬',
@@ -51,8 +55,9 @@ const WEEKS = [
     items: [
       "Extract your team's agent sessions and analyze where the trajectories drifted.",
       'Turn the patterns into skills, then evaluate them so the fix survives the next model update.',
-      'You leave with a repeatable retrospective on your agent sessions, and one skill with an eval behind it.',
     ],
+    outcome:
+      'You leave with a repeatable retrospective on your agent sessions, and one skill with an eval behind it.',
   },
   {
     emoji: '🔁',
@@ -60,8 +65,9 @@ const WEEKS = [
     items: [
       'Let the agent run a whole PR on its own, with a loop that knows when it is done and when it is stuck.',
       'Get back a PR whose commits tell the story, so you review intents instead of a wall of diff, then plan the rollout to your team.',
-      'You leave with a loop you can run unattended, and a rollout plan for your team.',
     ],
+    outcome:
+      'You leave with a loop you can run unattended, and a rollout plan for your team.',
   },
 ];
 
@@ -79,7 +85,7 @@ export const FROM_DRIFT_TO_TRUST_FOR_ANGULAR = createCohort({
       description: 'Pragmatic Angular Testing, at your own pace',
     },
     liveSession: { when: 'Every week', label: 'Live session', duration: '3 h' },
-    weeks: WEEKS.map(({ emoji, title }) => ({ emoji, title })),
+    weeks: WEEKS,
     community: {
       emoji: '💬',
       when: 'Between sessions',
@@ -154,9 +160,9 @@ This cohort is six weeks to replace it with **trust you can explain**: tests the
     },
   ],
   agenda: {
-    sections: WEEKS.map(({ emoji, title, items }, index) => ({
+    sections: WEEKS.map(({ emoji, title, items, outcome }, index) => ({
       title: `${emoji} Week ${index + 1}: ${title}`,
-      items,
+      items: [...items, outcome],
     })),
   },
   requiredSkills: [

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  signal,
+} from '@angular/core';
 import { Cohort } from '@marmicode/cohort/core';
 import { COHORT_LABELS } from './cohort-presentation.i18n';
 
@@ -7,6 +12,8 @@ import { COHORT_LABELS } from './cohort-presentation.i18n';
  * the video course first, then a live session every week, with the community in between.
  *
  * The cards are small versions of `mc-card`: a colored band with an emoji in a circle.
+ *
+ * It is also the program: the card of a week opens what that week covers.
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,17 +39,48 @@ import { COHORT_LABELS } from './cohort-presentation.i18n';
             {{ schedule().liveSession.duration }}</span
           >
         </h3>
-        <ol class="weeks">
+        <ol class="weeks" [style.--mc-week-count]="schedule().weeks.length">
           @for (week of schedule().weeks; track $index) {
+            @let number = $index + 1;
+            @let selected = $index === selectedWeek();
             <li
-              class="card"
+              class="week"
+              [style.--mc-week-index]="$index"
               [style.--mc-week-progress]="
                 $index / (schedule().weeks.length - 1)
               "
             >
-              <span class="band">{{ labels.week }} {{ $index + 1 }}</span>
-              <span class="emoji" aria-hidden="true">{{ week.emoji }}</span>
-              <span class="text">{{ week.title }}</span>
+              <button
+                type="button"
+                class="card"
+                [id]="'week-' + number"
+                [class.selected]="selected"
+                [attr.aria-expanded]="selected"
+                [attr.aria-controls]="'week-' + number + '-program'"
+                (click)="selectedWeek.set($index)"
+              >
+                <span class="band">{{ labels.week }} {{ number }}</span>
+                <span class="emoji" aria-hidden="true">{{ week.emoji }}</span>
+                <span class="text">{{ week.title }}</span>
+              </button>
+              <div
+                class="program"
+                role="region"
+                [id]="'week-' + number + '-program'"
+                [attr.aria-labelledby]="'week-' + number"
+                [hidden]="!selected"
+              >
+                <h4>
+                  {{ week.emoji }} {{ labels.week }} {{ number }}:
+                  {{ week.title }}
+                </h4>
+                <ul>
+                  @for (item of week.items; track $index) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+                <p class="outcome">{{ week.outcome }}</p>
+              </div>
             </li>
           }
         </ol>
@@ -103,15 +141,30 @@ import { COHORT_LABELS } from './cohort-presentation.i18n';
       color: #6b7280;
     }
 
+    /*
+     * Each week brings a card and its program, which takes a whole row.
+     * As the flow is dense, the other cards stay together around the opened program.
+     */
     .weeks {
+      --mc-week-gap: 0.75rem;
+
       display: grid;
-      flex: 1;
-      grid-auto-columns: minmax(0, 1fr);
-      grid-auto-flow: column;
-      gap: 0.75rem;
+      grid-auto-flow: row dense;
+      grid-template-columns: repeat(var(--mc-week-count), minmax(0, 1fr));
+      gap: var(--mc-week-gap);
       margin: 0;
       padding: 0;
       list-style: none;
+    }
+
+    .week {
+      --mc-week-color: color-mix(
+        in oklab,
+        var(--mc-schedule-end-color) calc(var(--mc-week-progress) * 100%),
+        var(--mc-schedule-start-color)
+      );
+
+      display: contents;
     }
 
     .card {
@@ -127,6 +180,36 @@ import { COHORT_LABELS } from './cohort-presentation.i18n';
         rgba(0, 0, 0, 0.14) 0 1px 1px 0,
         rgba(0, 0, 0, 0.12) 0 1px 3px 0;
       text-align: center;
+    }
+
+    button.card {
+      padding: 0;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      transition: box-shadow 0.2s ease-in-out;
+    }
+
+    button.card:hover {
+      box-shadow:
+        rgba(0, 0, 0, 0.25) 0 3px 3px -1px,
+        rgba(0, 0, 0, 0.2) 0 5px 10px 0;
+    }
+
+    button.card:focus-visible {
+      outline: 2px solid var(--marmicode-accent-color);
+      outline-offset: 2px;
+    }
+
+    button.card.selected {
+      box-shadow:
+        0 0 0 2px var(--mc-week-color),
+        rgba(0, 0, 0, 0.2) 0 5px 10px 0;
+    }
+
+    /* The video course does not grow with the opened program next to it. */
+    .video-course .card {
+      flex: none;
     }
 
     .band {
@@ -179,6 +262,84 @@ import { COHORT_LABELS } from './cohort-presentation.i18n';
       text-wrap: balance;
     }
 
+    .program {
+      display: grid;
+      position: relative;
+      grid-column: 1 / -1;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 0.75rem 2rem;
+      align-items: start;
+      margin-top: 0.5rem;
+      padding: 1.25rem 1.5rem 1.5rem;
+      border-top: 4px solid var(--mc-week-color);
+      border-radius: 12px;
+      background: white;
+      box-shadow:
+        rgba(0, 0, 0, 0.2) 0 2px 1px -1px,
+        rgba(0, 0, 0, 0.14) 0 1px 1px 0,
+        rgba(0, 0, 0, 0.12) 0 1px 3px 0;
+      color: var(--marmicode-primary-color);
+      line-height: 1.5;
+    }
+
+    .program[hidden] {
+      display: none;
+    }
+
+    /* An arrow from the program to the card of its week. */
+    .program::before {
+      position: absolute;
+      top: -20px;
+      left: calc(
+        (var(--mc-week-index) + 0.5) * (100% + var(--mc-week-gap)) /
+          var(--mc-week-count) - var(--mc-week-gap) / 2
+      );
+      transform: translateX(-50%);
+      border: 8px solid transparent;
+      border-bottom-color: var(--mc-week-color);
+      content: '';
+    }
+
+    .program h4 {
+      grid-column: 1 / -1;
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .program ul {
+      display: grid;
+      gap: 0.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .program li {
+      position: relative;
+      padding-left: 1.5em;
+    }
+
+    .program li::before {
+      position: absolute;
+      left: 0;
+      color: var(--marmicode-accent-color);
+      content: '→';
+    }
+
+    .outcome {
+      margin: 0;
+      padding: 0.75rem 1rem;
+      border-left: 4px solid var(--marmicode-accent-color);
+      border-radius: 4px 10px 10px 4px;
+      background: color-mix(
+        in srgb,
+        var(--marmicode-accent-bright-color) 35%,
+        white
+      );
+      font-weight: 500;
+    }
+
     /* The community runs under everything else, as a single line. */
     .community .card {
       flex-direction: row;
@@ -209,16 +370,35 @@ import { COHORT_LABELS } from './cohort-presentation.i18n';
       }
 
       .weeks {
-        grid-auto-flow: row;
         grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .program {
+        grid-template-columns: minmax(0, 1fr);
+        margin-top: 0;
+      }
+
+      /* The cards are on several rows, so the arrow would not point to the right one. */
+      .program::before {
+        content: none;
       }
     }
 
     /* On small screens, every card becomes a line. */
     @media (max-width: 599.98px) {
       .weeks {
+        --mc-week-gap: 0.5rem;
+
         grid-template-columns: minmax(0, 1fr);
-        gap: 0.5rem;
+      }
+
+      /* The card just above already tells which week it is. */
+      .program h4 {
+        display: none;
+      }
+
+      .program {
+        padding: 1rem;
       }
 
       .card {
@@ -252,6 +432,11 @@ import { COHORT_LABELS } from './cohort-presentation.i18n';
 })
 export class CohortSchedule {
   schedule = input.required<Cohort['schedule']>();
+
+  /**
+   * The index of the week whose program is opened.
+   */
+  protected selectedWeek = signal(0);
 
   protected labels = COHORT_LABELS;
 }

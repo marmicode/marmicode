@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideSiteConfig } from '@marmicode/shared/core';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { CohortPage } from './cohort-page.ng';
 
 describe(CohortPage, () => {
@@ -81,18 +81,41 @@ describe(CohortPage, () => {
       ]);
   });
 
-  it('lists the six weeks in order', async () => {
-    const { getProgramTitles } = mountCohortPage();
+  it('shows the program of the first week', async () => {
+    const { getOpenedPrograms } = mountCohortPage();
 
     await expect
-      .poll(() => getProgramTitles())
+      .poll(() => getOpenedPrograms())
       .toEqual([
-        "🧪 Week 1: Tests Agents Can't Cheat",
-        '👀 Week 2: Give the Agent Eyes',
-        '🧭 Week 3: The Charted Coding Cycle',
-        '⚓ Week 4: The Harness',
-        '🔬 Week 5: Proving It Holds',
-        '🔁 Week 6: The Charted Loop',
+        {
+          title: "🧪 Week 1: Tests Agents Can't Cheat",
+          items: [
+            'Why almost-right code erodes trust, and what a test must do to stop it.',
+            'A test strategy for agent-written code: how wide each test goes, what to fake, and how a contract keeps the fake honest.',
+          ],
+          outcome:
+            'You leave with a contract-tested fake, and a test strategy for one feature of your own app.',
+        },
+      ]);
+  });
+
+  it('shows the program of another week when its card is clicked', async () => {
+    const { clickWeek, getOpenedPrograms } = mountCohortPage();
+
+    await clickWeek('Week 4');
+
+    await expect
+      .poll(() => getOpenedPrograms())
+      .toEqual([
+        {
+          title: '⚓ Week 4: The Harness',
+          items: [
+            "Back pressure and guardrails the agent can't quietly bypass.",
+            'The agent catches its own mistakes before it hands control back to you.',
+          ],
+          outcome:
+            'You leave with checks wired into your agent that run on every change, including your architecture boundaries.',
+        },
       ]);
   });
 
@@ -133,10 +156,30 @@ function mountCohortPage() {
           ),
         }),
       ),
-    getProgramTitles: () =>
+    /* The page is not rendered yet when the test starts, so this waits for the card. */
+    clickWeek: async (label: string) => {
+      const card = await vi.waitUntil(() =>
+        Array.from(
+          document.querySelectorAll<HTMLButtonElement>(
+            'mc-cohort-schedule button',
+          ),
+        ).find((button) => button.textContent?.includes(label)),
+      );
+      card.click();
+    },
+    /* The programs that are not hidden: there is one per week, and a single one is opened. */
+    getOpenedPrograms: () =>
       Array.from(
-        document.querySelectorAll('mc-training-agenda mat-panel-title'),
-      ).map((title) => title.textContent?.trim()),
+        document.querySelectorAll(
+          'mc-cohort-schedule [role="region"]:not([hidden])',
+        ),
+      ).map((program) => ({
+        title: program.querySelector('h4')?.textContent?.trim(),
+        items: Array.from(program.querySelectorAll('li')).map((item) =>
+          item.textContent?.trim(),
+        ),
+        outcome: program.querySelector('.outcome')?.textContent?.trim(),
+      })),
     getLinkUrls: (text: string) =>
       Array.from(document.querySelectorAll('a'))
         .filter((link) => link.textContent?.includes(text))

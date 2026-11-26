@@ -7,7 +7,6 @@ import {
   PageSection,
 } from '@marmicode/shared/ui';
 import {
-  TrainingAgenda,
   TrainingBenefits,
   TrainingCallToAction,
   TrainingDescription,
@@ -23,6 +22,8 @@ import { CohortSchedule } from './cohort-schedule.ng';
 /**
  * The cohort page is made of the same sections as the workshop pages,
  * plus the route diagram and a closing call to action.
+ *
+ * The schedule replaces the agenda: it shows the program of each week.
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,7 +34,6 @@ import { CohortSchedule } from './cohort-schedule.ng';
     CohortSchedule,
     PageComponent,
     PageSection,
-    TrainingAgenda,
     TrainingBenefits,
     TrainingCallToAction,
     TrainingDescription,
@@ -46,7 +46,7 @@ import { CohortSchedule } from './cohort-schedule.ng';
     <mc-page [info]="pageInfo">
       <mc-cohort-hero [cohort]="cohort" />
       <mc-training-description [training]="cohort" />
-      <mc-page-section sectionTitle="📅 How the cohort is organized">
+      <mc-page-section sectionTitle="📅 The program, week by week">
         <mc-cohort-schedule [schedule]="cohort.schedule" />
       </mc-page-section>
       <mc-page-section
@@ -57,7 +57,6 @@ import { CohortSchedule } from './cohort-schedule.ng';
       </mc-page-section>
       <mc-training-benefits [training]="cohort" />
       <mc-training-testimonials [training]="cohort" />
-      <mc-training-agenda [training]="cohort" />
       <mc-training-required-skills [training]="cohort" />
       <mc-training-instructor [training]="cohort" />
       <mc-training-faq [training]="cohort" />

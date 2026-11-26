@@ -17,7 +17,18 @@ export interface Cohort extends Training {
     /**
      * One entry per week, each with a live session.
      */
-    weeks: Array<{ emoji: string; title: string }>;
+    weeks: Array<{
+      emoji: string;
+      title: string;
+      /**
+       * What the live session covers.
+       */
+      items: string[];
+      /**
+       * What attendees leave the session with, e.g. "You leave with a design doc."
+       */
+      outcome: string;
+    }>;
     community: ScheduleTrack & { description: string };
   };
 }
