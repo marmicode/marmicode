@@ -339,13 +339,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 1rem;
-      overflow-x: auto;
     }
 
     svg {
       display: block;
       width: 100%;
-      min-width: 760px;
       height: auto;
       font-family: Roboto, 'Helvetica Neue', sans-serif;
     }
