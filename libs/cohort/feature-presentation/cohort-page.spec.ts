@@ -39,6 +39,14 @@ describe(CohortPage, () => {
     expect(getBannerText()).toContain('EARLY 2027');
   });
 
+  it('mentions the French cohort and OPCO funding in the banner', async () => {
+    const { getBannerText } = mountCohortPage();
+
+    await expect
+      .poll(() => getBannerText())
+      .toContain('Also available in French, fundable up to 100% via OPCO.');
+  });
+
   it('lists the six weeks in order', async () => {
     const { getProgramTitles } = mountCohortPage();
 

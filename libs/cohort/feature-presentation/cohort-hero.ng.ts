@@ -17,6 +17,8 @@ import { COHORT_LABELS } from './cohort-presentation.i18n';
       @if (cohort().waitlist) {
         <p slot="note" class="actions-note">{{ labels.waitlistNote }}</p>
       }
+
+      <p slot="footer" class="bottom-note">{{ labels.frenchNote }}</p>
     </mc-training-hero>
   `,
   styles: `
@@ -30,6 +32,13 @@ import { COHORT_LABELS } from './cohort-presentation.i18n';
 
     .actions-note {
       margin: 1rem 1rem 0;
+    }
+
+    .bottom-note {
+      color: white;
+      font-size: 1.3rem;
+      text-align: center;
+      margin: 0 1rem 2rem;
     }
   `,
 })
