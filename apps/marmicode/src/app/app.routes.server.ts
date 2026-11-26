@@ -30,6 +30,11 @@ export const serverRoutes: ServerRoute[] = [
     path: coachingRouterHelper.COACHING_PATH,
     renderMode: RenderMode.Prerender,
   },
+  /* Cohorts list: redirects to the single cohort for now */
+  {
+    path: cohortRouterHelper.COHORT_LIST_PATH,
+    renderMode: RenderMode.Prerender,
+  },
   /* Cohort: From Drift to Trust with Angular */
   {
     path: cohortRouterHelper.FROM_DRIFT_TO_TRUST_WITH_ANGULAR_PATH,
