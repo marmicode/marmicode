@@ -9,7 +9,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-page-section',
   template: `
-    <section [class.surface]="color() === 'surface'">
+    <section
+      [class.surface]="color() === 'surface'"
+      [class.dark]="color() === 'dark'"
+    >
       <h2>{{ sectionTitle() }}</h2>
       <ng-content />
     </section>
@@ -50,6 +53,10 @@ import {
       text-transform: uppercase;
       text-align: center;
     }
+
+    section.dark h2 {
+      color: white;
+    }
   `,
   host: {
     '[style.--mc-section-background-color]': 'backgroundColors().section',
@@ -64,8 +71,9 @@ export class PageSection {
    * - 'surface' for a gradient background
    * - 'plain' for a white background
    * - 'grey' for a grey background (only used to match luma events background)
+   * - 'dark' for a band in the primary color, like the banner and the footer
    */
-  color = input<'surface' | 'plain' | 'grey'>('plain');
+  color = input<'surface' | 'plain' | 'grey' | 'dark'>('plain');
 
   protected backgroundColors = computed<{
     ellipse: string;
@@ -84,6 +92,11 @@ export class PageSection {
         };
       case 'grey':
         return { ellipse: '#f7f8f9', section: '#f7f8f9' };
+      case 'dark':
+        return {
+          ellipse: 'var(--marmicode-primary-color)',
+          section: 'var(--marmicode-primary-color)',
+        };
       default:
         return { ellipse: 'white', section: 'white' };
     }

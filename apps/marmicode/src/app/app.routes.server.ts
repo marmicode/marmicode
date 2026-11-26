@@ -35,9 +35,9 @@ export const serverRoutes: ServerRoute[] = [
     path: cohortRouterHelper.COHORT_LIST_PATH,
     renderMode: RenderMode.Prerender,
   },
-  /* Cohort: From Drift to Trust with Angular */
+  /* Cohort: From Drift to Trust for Angular */
   {
-    path: cohortRouterHelper.FROM_DRIFT_TO_TRUST_WITH_ANGULAR_PATH,
+    path: cohortRouterHelper.FROM_DRIFT_TO_TRUST_FOR_ANGULAR_PATH,
     renderMode: RenderMode.Prerender,
   },
   /* Workshops list */

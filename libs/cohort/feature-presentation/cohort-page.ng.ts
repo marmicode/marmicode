@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FROM_DRIFT_TO_TRUST_WITH_ANGULAR } from '@marmicode/cohort/core';
+import { FROM_DRIFT_TO_TRUST_FOR_ANGULAR } from '@marmicode/cohort/core';
 import { cohortRouterHelper } from '@marmicode/shared/router-helpers';
 import {
   createBasicPageInfo,
@@ -47,12 +47,12 @@ import { CohortSchedule } from './cohort-schedule.ng';
       <mc-cohort-hero [cohort]="cohort" />
       <mc-training-description [training]="cohort" />
       <mc-page-section sectionTitle="📅 How the cohort is organized">
-        <mc-cohort-schedule
-          [schedule]="cohort.schedule"
-          [weekCount]="cohort.agenda.sections.length"
-        />
+        <mc-cohort-schedule [schedule]="cohort.schedule" />
       </mc-page-section>
-      <mc-page-section sectionTitle="🧭 The workflow you will build">
+      <mc-page-section
+        sectionTitle="🧭 The workflow you will build"
+        color="dark"
+      >
         <mc-cohort-route-diagram />
       </mc-page-section>
       <mc-training-benefits [training]="cohort" />
@@ -66,7 +66,7 @@ import { CohortSchedule } from './cohort-schedule.ng';
   `,
 })
 export class CohortPage {
-  protected cohort = FROM_DRIFT_TO_TRUST_WITH_ANGULAR;
+  protected cohort = FROM_DRIFT_TO_TRUST_FOR_ANGULAR;
 
   protected pageInfo = createBasicPageInfo({
     title: this.cohort.title,

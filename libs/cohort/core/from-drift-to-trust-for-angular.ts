@@ -3,21 +3,86 @@ import {
   externalLinks,
 } from '@marmicode/shared/router-helpers';
 import { createCohort } from './cohort';
-import pictureUri from './from-drift-to-trust-with-angular.webp';
+import pictureUri from './from-drift-to-trust-for-angular.webp';
 
-export const FROM_DRIFT_TO_TRUST_WITH_ANGULAR = createCohort({
-  id: cohortRouterHelper.FROM_DRIFT_TO_TRUST_WITH_ANGULAR_ID,
-  title: 'From Drift to Trust: a 6-week cohort for Angular developers',
+/**
+ * The six weeks of the cohort: the schedule and the program are both derived from them.
+ */
+const WEEKS = [
+  {
+    emoji: '🧪',
+    title: "Tests Agents Can't Cheat",
+    items: [
+      'Why almost-right code erodes trust, and what a test must do to stop it.',
+      'A test strategy for agent-written code: how wide each test goes, what to fake, and how a contract keeps the fake honest.',
+      'You leave with a contract-tested fake, and a test strategy for one feature of your own app.',
+    ],
+  },
+  {
+    emoji: '👀',
+    title: 'Give the Agent Eyes',
+    items: [
+      'Hand the agent your testing judgment as a skill, then compare its tests with yours.',
+      'Let it inspect runtime values in the running test instead of guessing from the source.',
+      'You leave with an agent that writes tests the way you would, and checks the runtime before it proposes a fix.',
+    ],
+  },
+  {
+    emoji: '🧭',
+    title: 'The Charted Coding Cycle',
+    items: [
+      'Write a design doc with the agent, split it into small PRs, then go scaffold, red, green.',
+      'Each step has a precise intent, so you steer while the change is still small instead of untangling one big diff at the end.',
+      'You leave with a design doc and a first merged PR for a real feature.',
+    ],
+  },
+  {
+    emoji: '⚓',
+    title: 'The Harness',
+    items: [
+      "Back pressure and guardrails the agent can't quietly bypass.",
+      'The agent catches its own mistakes before it hands control back to you.',
+      'You leave with checks wired into your agent that run on every change, including your architecture boundaries.',
+    ],
+  },
+  {
+    emoji: '🔬',
+    title: 'Proving It Holds',
+    items: [
+      "Extract your team's agent sessions and analyze where the trajectories drifted.",
+      'Turn the patterns into skills, then evaluate them so the fix survives the next model update.',
+      'You leave with a repeatable retrospective on your agent sessions, and one skill with an eval behind it.',
+    ],
+  },
+  {
+    emoji: '🔁',
+    title: 'The Charted Loop',
+    items: [
+      'Let the agent run a whole PR on its own, with a loop that knows when it is done and when it is stuck.',
+      'Get back a PR whose commits tell the story, so you review intents instead of a wall of diff, then plan the rollout to your team.',
+      'You leave with a loop you can run unattended, and a rollout plan for your team.',
+    ],
+  },
+];
+
+export const FROM_DRIFT_TO_TRUST_FOR_ANGULAR = createCohort({
+  id: cohortRouterHelper.FROM_DRIFT_TO_TRUST_FOR_ANGULAR_ID,
+  title: 'From Drift to Trust: Test-First Agentic Engineering for Angular',
   shortTitle: 'From Drift to Trust',
   location: 'online',
   nextCohort: 'Early 2027',
   schedule: {
-    liveSession: { label: 'Live session', duration: '3 h' },
     videoCourse: {
+      emoji: '🎬',
+      when: 'Before week 1',
       label: 'Video course',
       description: 'Pragmatic Angular Testing, at your own pace',
     },
+    liveSession: { when: 'Every week', label: 'Live session', duration: '3 h' },
+    weeks: WEEKS.map(({ emoji, title }) => ({ emoji, title })),
     community: {
+      emoji: '💬',
+      when: 'Between sessions',
       label: 'Discord',
       description: 'Private community, open all week',
     },
@@ -89,56 +154,10 @@ This cohort is six weeks to replace it with **trust you can explain**: tests the
     },
   ],
   agenda: {
-    sections: [
-      {
-        title: "🧪 Week 1: Tests Agents Can't Cheat",
-        items: [
-          'Why almost-right code erodes trust, and what a test must do to stop it.',
-          'A test strategy for agent-written code: how wide each test goes, what to fake, and how a contract keeps the fake honest.',
-          'You leave with a contract-tested fake, and a test strategy for one feature of your own app.',
-        ],
-      },
-      {
-        title: '👀 Week 2: Give the Agent Eyes',
-        items: [
-          'Hand the agent your testing judgment as a skill, then compare its tests with yours.',
-          'Let it inspect runtime values in the running test instead of guessing from the source.',
-          'You leave with an agent that writes tests the way you would, and checks the runtime before it proposes a fix.',
-        ],
-      },
-      {
-        title: '🧭 Week 3: The Charted Coding Cycle',
-        items: [
-          'Write a design doc with the agent, split it into small PRs, then go scaffold, red, green.',
-          'Each step has a precise intent, so you steer while the change is still small instead of untangling one big diff at the end.',
-          'You leave with a design doc and a first merged PR for a real feature.',
-        ],
-      },
-      {
-        title: '⚓ Week 4: The Harness',
-        items: [
-          "Back pressure and guardrails the agent can't quietly bypass.",
-          'The agent catches its own mistakes before it hands control back to you.',
-          'You leave with checks wired into your agent that run on every change, including your architecture boundaries.',
-        ],
-      },
-      {
-        title: '🔬 Week 5: Proving It Holds',
-        items: [
-          "Extract your team's agent sessions and analyze where the trajectories drifted.",
-          'Turn the patterns into skills, then evaluate them so the fix survives the next model update.',
-          'You leave with a repeatable retrospective on your agent sessions, and one skill with an eval behind it.',
-        ],
-      },
-      {
-        title: '🔁 Week 6: The Charted Loop',
-        items: [
-          'Let the agent run a whole PR on its own, with a loop that knows when it is done and when it is stuck.',
-          'Get back a PR whose commits tell the story, so you review intents instead of a wall of diff, then plan the rollout to your team.',
-          'You leave with a loop you can run unattended, and a rollout plan for your team.',
-        ],
-      },
-    ],
+    sections: WEEKS.map(({ emoji, title, items }, index) => ({
+      title: `${emoji} Week ${index + 1}: ${title}`,
+      items,
+    })),
   },
   requiredSkills: [
     'Comfortable with Angular and TypeScript',

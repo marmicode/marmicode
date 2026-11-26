@@ -1,143 +1,257 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Cohort } from '@marmicode/cohort/core';
+import { COHORT_LABELS } from './cohort-presentation.i18n';
 
 /**
  * How the cohort is organized at a glance:
- * a live session every week, with the video course and the community running alongside.
+ * the video course first, then a live session every week, with the community in between.
+ *
+ * The cards are small versions of `mc-card`: a colored band with an emoji in a circle.
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-cohort-schedule',
   template: `
     <div class="schedule">
-      <div class="row" aria-hidden="true">
-        <div class="row-label"></div>
-        <div class="weeks week-labels">
-          @for (week of weeks(); track week) {
-            <div>W{{ week }}</div>
+      <section class="track video-course">
+        <h3 class="when">{{ schedule().videoCourse.when }}</h3>
+        <div class="card">
+          <span class="band">{{ schedule().videoCourse.label }}</span>
+          <span class="emoji" aria-hidden="true">{{
+            schedule().videoCourse.emoji
+          }}</span>
+          <span class="text">{{ schedule().videoCourse.description }}</span>
+        </div>
+      </section>
+
+      <section class="track live-sessions">
+        <h3 class="when">
+          {{ schedule().liveSession.when
+          }}<span class="when-detail"
+            >: {{ schedule().liveSession.label }},
+            {{ schedule().liveSession.duration }}</span
+          >
+        </h3>
+        <ol class="weeks">
+          @for (week of schedule().weeks; track $index) {
+            <li
+              class="card"
+              [style.--mc-week-progress]="
+                $index / (schedule().weeks.length - 1)
+              "
+            >
+              <span class="band">{{ labels.week }} {{ $index + 1 }}</span>
+              <span class="emoji" aria-hidden="true">{{ week.emoji }}</span>
+              <span class="text">{{ week.title }}</span>
+            </li>
           }
-        </div>
-      </div>
+        </ol>
+      </section>
 
-      <div class="row">
-        <div class="row-label">{{ schedule().liveSession.label }}</div>
-        <div class="weeks">
-          @for (week of weeks(); track week) {
-            <div class="cell session">
-              {{ schedule().liveSession.duration }}
-            </div>
-          }
+      <section class="track community">
+        <h3 class="when">{{ schedule().community.when }}</h3>
+        <div class="card">
+          <span class="band">{{ schedule().community.label }}</span>
+          <span class="emoji" aria-hidden="true">{{
+            schedule().community.emoji
+          }}</span>
+          <span class="text">{{ schedule().community.description }}</span>
         </div>
-      </div>
-
-      <div class="row">
-        <div class="row-label">{{ schedule().videoCourse.label }}</div>
-        <div class="cell track video-course">
-          {{ schedule().videoCourse.description }}
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="row-label">{{ schedule().community.label }}</div>
-        <div class="cell track community">
-          {{ schedule().community.description }}
-        </div>
-      </div>
+      </section>
     </div>
   `,
   styles: `
     :host {
+      /* The gradient of 'mc-card' headers, with a darker end to keep the white text readable. */
+      --mc-schedule-start-color: #6a125d;
+      --mc-schedule-end-color: #17847b;
+      --mc-schedule-community-color: #53e0d9;
+
       display: block;
       padding: 0 1rem;
     }
 
     .schedule {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 6fr);
+      gap: 1.5rem 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .track {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      box-sizing: border-box;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 1.75rem;
-      border-radius: 24px;
-      background: var(--marmicode-primary-color);
-      color: white;
+      gap: 0.6rem;
+      min-width: 0;
     }
 
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.5rem 1rem;
+    .community {
+      grid-column: 1 / -1;
     }
 
-    .row-label {
-      flex: 0 0 130px;
+    .when {
+      margin: 0;
+      color: var(--marmicode-accent-color);
+      font-size: 0.8rem;
       font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .when-detail {
+      color: #6b7280;
     }
 
     .weeks {
       display: grid;
-      flex: 1 1 260px;
+      flex: 1;
       grid-auto-columns: minmax(0, 1fr);
       grid-auto-flow: column;
-      gap: 0.5rem;
-      min-width: 0;
+      gap: 0.75rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
 
-    .week-labels {
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      opacity: 0.7;
+    .card {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 12px;
+      background: white;
+      box-shadow:
+        rgba(0, 0, 0, 0.2) 0 2px 1px -1px,
+        rgba(0, 0, 0, 0.14) 0 1px 1px 0,
+        rgba(0, 0, 0, 0.12) 0 1px 3px 0;
       text-align: center;
     }
 
-    .cell {
+    .band {
+      align-self: stretch;
+      padding: 0.6rem 0.5rem 1.75rem;
+      background: var(--mc-schedule-start-color);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* The weeks go from one end of the gradient to the other: from drift to trust. */
+    .weeks .band {
+      background: linear-gradient(
+        135deg,
+        color-mix(
+          in oklab,
+          var(--mc-schedule-end-color) calc(var(--mc-week-progress) * 80%),
+          var(--mc-schedule-start-color)
+        ),
+        color-mix(
+          in oklab,
+          var(--mc-schedule-end-color) calc(20% + var(--mc-week-progress) * 80%),
+          var(--mc-schedule-start-color)
+        )
+      );
+    }
+
+    .emoji {
       display: flex;
       align-items: center;
-      box-sizing: border-box;
-      border-radius: 14px;
-      font-weight: 500;
-    }
-
-    .session {
       justify-content: center;
-      min-height: 72px;
-      background: var(--marmicode-accent-bright-color);
-      color: #00201c;
+      width: 44px;
+      height: 44px;
+      margin-top: -22px;
+      border: 1px solid #4a7a82;
+      border-radius: 50%;
+      background: white;
+      font-size: 1.3rem;
     }
 
-    .track {
-      flex: 1 1 260px;
-      min-width: 0;
-      min-height: 52px;
-      padding: 0.5rem 1.1rem;
+    .text {
+      padding: 0.6rem 0.75rem 1rem;
+      color: var(--marmicode-primary-color);
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.35;
+      text-wrap: balance;
     }
 
-    .video-course {
-      background: #ffd7ef;
+    /* The community runs under everything else, as a single line. */
+    .community .card {
+      flex-direction: row;
+      text-align: start;
+    }
+
+    .community .band {
+      display: flex;
+      align-items: center;
+      align-self: stretch;
+      padding: 0.75rem 2.25rem 0.75rem 1.25rem;
+      background: var(--mc-schedule-community-color);
       color: var(--marmicode-primary-color);
     }
 
-    .community {
-      border: 1.5px dashed rgba(255, 255, 255, 0.6);
+    .community .emoji {
+      flex: none;
+      margin: 0 0 0 -22px;
+    }
+
+    .community .text {
+      padding: 0.75rem 1rem;
+    }
+
+    @media (max-width: 899.98px) {
+      .schedule {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .weeks {
+        grid-auto-flow: row;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    /* On small screens, every card becomes a line. */
+    @media (max-width: 599.98px) {
+      .weeks {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.5rem;
+      }
+
+      .card {
+        flex-direction: row;
+        text-align: start;
+      }
+
+      .band {
+        display: flex;
+        flex: none;
+        align-items: center;
+        box-sizing: border-box;
+        width: 6.5rem;
+        padding: 0.75rem 1.75rem 0.75rem 0.9rem;
+      }
+
+      .community .band {
+        padding: 0.75rem 1.75rem 0.75rem 0.9rem;
+      }
+
+      .emoji {
+        flex: none;
+        margin: 0 0 0 -22px;
+      }
+
+      .text {
+        padding: 0.75rem;
+      }
     }
   `,
 })
 export class CohortSchedule {
   schedule = input.required<Cohort['schedule']>();
-  /**
-   * Number of weeks the cohort lasts.
-   */
-  weekCount = input.required<number>();
 
-  protected weeks = computed(() =>
-    Array.from({ length: this.weekCount() }, (_, index) => index + 1),
-  );
+  protected labels = COHORT_LABELS;
 }

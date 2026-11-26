@@ -10,7 +10,7 @@ describe(CohortPage, () => {
     await expect
       .poll(() => document.title)
       .toBe(
-        'From Drift to Trust: a 6-week cohort for Angular developers | Marmicode',
+        'From Drift to Trust: Test-First Agentic Engineering for Angular | Marmicode',
       );
   });
 
@@ -20,7 +20,7 @@ describe(CohortPage, () => {
     await expect
       .poll(() => getCanonicalUrls())
       .toEqual([
-        'https://marmicode.io/cohorts/from-drift-to-trust-with-angular',
+        'https://marmicode.io/cohorts/from-drift-to-trust-for-angular',
       ]);
   });
 
@@ -47,21 +47,37 @@ describe(CohortPage, () => {
       .toContain('Also available in French, fundable up to 100% via OPCO.');
   });
 
-  it('shows how the cohort is organized: a live session every week, the video course and the community', async () => {
+  it('shows how the cohort is organized: the video course first, a live session every week, and the community', async () => {
     const { getSchedule } = mountCohortPage();
 
     await expect
       .poll(() => getSchedule())
       .toEqual([
         {
-          label: 'Live session',
-          cells: ['3 h', '3 h', '3 h', '3 h', '3 h', '3 h'],
+          when: 'Before week 1',
+          cards: [
+            [
+              'Video course',
+              '🎬',
+              'Pragmatic Angular Testing, at your own pace',
+            ],
+          ],
         },
         {
-          label: 'Video course',
-          cells: ['Pragmatic Angular Testing, at your own pace'],
+          when: 'Every week: Live session, 3 h',
+          cards: [
+            ['Week 1', '🧪', "Tests Agents Can't Cheat"],
+            ['Week 2', '👀', 'Give the Agent Eyes'],
+            ['Week 3', '🧭', 'The Charted Coding Cycle'],
+            ['Week 4', '⚓', 'The Harness'],
+            ['Week 5', '🔬', 'Proving It Holds'],
+            ['Week 6', '🔁', 'The Charted Loop'],
+          ],
         },
-        { label: 'Discord', cells: ['Private community, open all week'] },
+        {
+          when: 'Between sessions',
+          cards: [['Discord', '💬', 'Private community, open all week']],
+        },
       ]);
   });
 
@@ -107,16 +123,16 @@ function mountCohortPage() {
         .map((link) => link.href),
     getBannerText: () =>
       document.querySelector('mc-cohort-hero')?.textContent ?? '',
-    /* The rows of the schedule that have a label, with their cells. */
+    /* The tracks of the schedule: when each one happens, and the parts of its cards. */
     getSchedule: () =>
-      Array.from(document.querySelectorAll('mc-cohort-schedule .row'))
-        .map((row) => ({
-          label: row.querySelector('.row-label')?.textContent?.trim(),
-          cells: Array.from(row.querySelectorAll('.cell')).map((cell) =>
-            cell.textContent?.trim(),
+      Array.from(document.querySelectorAll('mc-cohort-schedule section')).map(
+        (track) => ({
+          when: track.querySelector('h3')?.textContent?.trim(),
+          cards: Array.from(track.querySelectorAll('.card')).map((card) =>
+            Array.from(card.children).map((part) => part.textContent?.trim()),
           ),
-        }))
-        .filter((row) => row.label),
+        }),
+      ),
     getProgramTitles: () =>
       Array.from(
         document.querySelectorAll('mc-training-agenda mat-panel-title'),

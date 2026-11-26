@@ -8,14 +8,27 @@ export interface Cohort extends Training {
   nextCohort: string;
 
   /**
-   * How the cohort is organized week after week.
-   * Displayed as a schedule with one live session per week.
+   * How the cohort is organized: the video course first,
+   * then a live session every week, with the community in between.
    */
   schedule: {
-    liveSession: { label: string; duration: string };
-    videoCourse: { label: string; description: string };
-    community: { label: string; description: string };
+    videoCourse: ScheduleTrack & { description: string };
+    liveSession: Omit<ScheduleTrack, 'emoji'> & { duration: string };
+    /**
+     * One entry per week, each with a live session.
+     */
+    weeks: Array<{ emoji: string; title: string }>;
+    community: ScheduleTrack & { description: string };
   };
+}
+
+interface ScheduleTrack {
+  emoji: string;
+  /**
+   * When it happens, e.g. "Before week 1".
+   */
+  when: string;
+  label: string;
 }
 
 export function createCohort(cohort: Cohort): Cohort {
