@@ -288,7 +288,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <text class="caption start" x="1070" y="172">the Charted loop</text>
         <text class="small-label" x="1070" y="304">Hands on helm</text>
 
-        <!-- Prove it holds. -->
+        <!-- Learn from the drift. -->
         <rect
           class="panel"
           x="1000.5"
@@ -297,7 +297,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
           height="321"
           rx="16"
         />
-        <text class="panel-label" x="1022" y="388">Prove it holds</text>
+        <text class="panel-label" x="1022" y="388">Learn from the drift</text>
         <g class="week" transform="translate(1022 400)">
           <rect width="58" height="22" rx="11" />
           <text x="29" y="15">WEEK 5</text>
@@ -386,7 +386,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         </li>
         <li class="block">
           <header>
-            <h3>Prove it holds</h3>
+            <h3>Learn from the drift</h3>
             <span class="week-tag">Week 5</span>
           </header>
           <ol class="steps">
