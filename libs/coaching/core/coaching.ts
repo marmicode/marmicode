@@ -17,7 +17,7 @@ export interface CoachingOffering {
 export const COACHING: CoachingOffering = {
   title: 'Monthly Team Coaching',
   description:
-    'A focused monthly partnership that charts a steadier path to predictable, stable delivery — keeping the bar high even as AI writes more of the code.',
+    'A focused monthly partnership that charts a steadier path to predictable, stable delivery — keeping the bar high even as agents write the code.',
   priceLabel: 'Starting at €2500 / month',
   heroPictureUri,
   benefits: [
