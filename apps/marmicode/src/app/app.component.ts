@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { WipService } from '@marmicode/shared/utils';
@@ -43,4 +44,12 @@ import { SiteNav } from './site-nav.ng';
 })
 export class AppComponent {
   protected isWip = inject(WipService).isWip();
+
+  constructor() {
+    if (this.isWip) {
+      /* Router anchor scrolling ignores CSS `scroll-margin-top`, so keep
+       * anchors below the floating nav (and the workshop's sticky tabs). */
+      inject(ViewportScroller).setOffset([0, 150]);
+    }
+  }
 }
