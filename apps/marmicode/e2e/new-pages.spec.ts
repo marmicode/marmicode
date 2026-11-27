@@ -28,7 +28,7 @@ test.describe('new pages', () => {
       },
       { url: '/coaching', heading: 'Monthly Team Coaching' },
       {
-        url: '/learn/everything',
+        url: '/library',
         heading: 'Recipes, talks & tips, on the house.',
       },
     ]) {

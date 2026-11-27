@@ -11,7 +11,7 @@ describe(NotFoundPage.name, () => {
     const { getHeading, getLinkHref, hasImage } = await mountNotFoundPage();
 
     expect(getHeading()).toBe('Oups! The page pot is empty.');
-    expect(getLinkHref('Library')).toBe('/learn/everything');
+    expect(getLinkHref('Library')).toBe('/library');
     expect(getLinkHref('Training')).toBe('/workshops');
     expect(getLinkHref('Coaching')).toBe('/coaching');
     expect(getLinkHref('Back to the kitchen')).toBe('/');

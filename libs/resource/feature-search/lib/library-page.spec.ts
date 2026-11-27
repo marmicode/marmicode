@@ -85,16 +85,6 @@ describe(LibraryPage.name, () => {
     expect(getPressedFilters()).toEqual(['All', 'All topics']);
   });
 
-  it('skill routes still work', async () => {
-    const { getHeading, getRowTitles } = await mountLibraryPage({
-      url: '/learn/angular-signals',
-    });
-
-    expect(getRowTitles()).toEqual([APR_2023_ARTICLE.title]);
-    /* The heading names the skill instead of "Everything". */
-    expect(getHeading()).toBe('Angular Signals');
-  });
-
   it('cookbook banner links to the cookbook', async () => {
     const { getCookbookLink, isAboveTheList } = await mountLibraryPage();
 
@@ -177,13 +167,13 @@ const RESOURCES = [
 ];
 
 async function mountLibraryPage({
-  url = '/learn/everything',
+  url = '/library',
   resources = RESOURCES,
 }: { url?: string; resources?: Resource[] } = {}) {
   TestBed.configureTestingModule({
     providers: [
       provideRouter(
-        [{ path: 'learn/:skillSlug', component: LibraryPage }],
+        [{ path: 'library', component: LibraryPage }],
         withComponentInputBinding(),
       ),
       provideSiteConfig({ origin: 'https://marmicode.io' }),
@@ -233,7 +223,7 @@ async function mountLibraryPage({
           0
       );
     },
-    /* The list heading: "Everything", the skill, or the live result count. */
+    /* The list heading: "Everything", or the live result count. */
     getHeading: () => getTextContent(host.querySelector('[role="status"]')),
     /* The pressed kind and topic filters. */
     getPressedFilters: () =>

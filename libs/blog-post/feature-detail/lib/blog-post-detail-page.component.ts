@@ -116,7 +116,7 @@ export class BlogPostDetailPageComponent {
   private _transferStateHelper = inject(TransferStateHelper);
 
   protected readonly libraryLink: Link = {
-    route: resourceSearchRouterHelper.learnEverything(),
+    route: resourceSearchRouterHelper.library(),
   };
   protected readonly newsletterUrl = externalLinks.newsletterUrl;
 

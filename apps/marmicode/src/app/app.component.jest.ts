@@ -15,7 +15,7 @@ describe(AppComponent.name, () => {
     const { getNavLink } = await mountApp({ wip: true });
 
     expect(getNavLink('Library')).toEqual({
-      href: '/learn/everything',
+      href: '/library',
       target: null,
     });
     expect(getNavLink('Training')).toEqual({

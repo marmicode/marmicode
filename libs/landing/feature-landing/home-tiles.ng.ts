@@ -19,7 +19,7 @@ import { Badge } from '@marmicode/shared/ui';
   template: `
     <a
       class="tile mc-surface mc-surface-interactive"
-      [routerLink]="resourceSearchRouterHelper.learnEverything()"
+      [routerLink]="resourceSearchRouterHelper.library()"
     >
       <div class="head">
         <div class="ico" aria-hidden="true">
@@ -91,8 +91,8 @@ import { Badge } from '@marmicode/shared/ui';
       <h3>Coaching</h3>
       <p>
         Stuck on architecture or testing strategy? Get a focused monthly
-        partnership that charts a steadier path to predictable delivery.
-        Keeping the bar high as agents write the code.
+        partnership that charts a steadier path to predictable delivery. Keeping
+        the bar high as agents write the code.
       </p>
       <span class="price">from €2 500 / month</span>
       <span class="go"

@@ -12,10 +12,16 @@ test.describe('removed pages', () => {
     await expect.poll(() => glove.pathname()).toBe('/coaching');
 
     await glove.goto('/recipe/anything/step');
-    await expect.poll(() => glove.pathname()).toBe('/learn/everything');
+    await expect.poll(() => glove.pathname()).toBe('/library');
 
     await glove.goto('/tutorial/anything');
-    await expect.poll(() => glove.pathname()).toBe('/learn/everything');
+    await expect.poll(() => glove.pathname()).toBe('/library');
+
+    await glove.goto('/learn/everything');
+    await expect.poll(() => glove.pathname()).toBe('/library');
+
+    await glove.goto('/learn/angular-signals');
+    await expect.poll(() => glove.pathname()).toBe('/library');
   });
 });
 

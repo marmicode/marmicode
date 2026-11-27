@@ -186,7 +186,7 @@ export class NotFoundPage {
       icon: 'library',
       title: 'Library',
       description: 'Articles, videos & the cookbook',
-      route: resourceSearchRouterHelper.learnEverything(),
+      route: resourceSearchRouterHelper.library(),
     },
     {
       icon: 'training',

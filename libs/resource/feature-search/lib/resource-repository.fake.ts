@@ -18,12 +18,4 @@ export class ResourceRepositoryFake implements Public<ResourceRepository> {
   getResources(): Observable<Resource[]> {
     return of(this._resources);
   }
-
-  getResourcesBySkillSlug(skillSlug: string): Observable<Resource[]> {
-    return of(
-      this._resources.filter((resource) =>
-        resource.skills.some((skill) => skill.slug === skillSlug),
-      ),
-    );
-  }
 }

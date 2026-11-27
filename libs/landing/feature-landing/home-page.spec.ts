@@ -10,7 +10,7 @@ describe(HomePage.name, () => {
     const { getTiles } = await mountHomePage();
 
     expect(getTiles()).toEqual([
-      { heading: 'The Library', href: '/learn/everything' },
+      { heading: 'The Library', href: '/library' },
       { heading: 'Training', href: '/workshops' },
       { heading: 'Coaching', href: '/coaching' },
     ]);

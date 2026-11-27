@@ -22,13 +22,23 @@
           "type": 301
         },
         {
+          "source": "/learn",
+          "destination": "/library",
+          "type": 301
+        },
+        {
+          "source": "/learn/**",
+          "destination": "/library",
+          "type": 301
+        },
+        {
           "source": "/recipe/**",
-          "destination": "/learn/everything",
+          "destination": "/library",
           "type": 301
         },
         {
           "source": "/tutorial/**",
-          "destination": "/learn/everything",
+          "destination": "/library",
           "type": 301
         },
         {

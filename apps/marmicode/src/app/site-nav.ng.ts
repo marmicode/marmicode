@@ -195,9 +195,9 @@ export class SiteNav {
   protected readonly entries: NavEntry[] = [
     {
       label: 'Library',
-      route: resourceSearchRouterHelper.learnEverything(),
+      route: resourceSearchRouterHelper.library(),
       sectionPaths: [
-        resourceSearchRouterHelper.LEARN_PATH,
+        resourceSearchRouterHelper.LIBRARY_PATH,
         blogPostDetailRouterHelper.BLOG_POST_DETAIL_PATH,
       ],
     },

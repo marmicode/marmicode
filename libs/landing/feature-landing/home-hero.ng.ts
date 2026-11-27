@@ -35,10 +35,7 @@ import { Badge, Button } from '@marmicode/shared/ui';
           <path d="m12 5 7 7-7 7" />
         </svg>
       </a>
-      <a
-        mcButton="ghost"
-        [routerLink]="resourceSearchRouterHelper.learnEverything()"
-      >
+      <a mcButton="ghost" [routerLink]="resourceSearchRouterHelper.library()">
         Browse the library
       </a>
     </div>

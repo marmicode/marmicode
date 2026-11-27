@@ -50,12 +50,12 @@ describe(BlogPostArticle.name, () => {
     const { getBackLink, getTableOfContentsLinks, getText, getTitle } =
       await mountBlogPostArticle({
         blogPost: BLOG_POST,
-        backLink: { route: ['/', 'learn', 'everything'] },
+        backLink: { route: ['/', 'library'] },
       });
 
     expect(getTitle()).toBe(BLOG_POST.title);
     expect(getText()).toContain('6 min read');
-    expect(getBackLink()?.getAttribute('href')).toBe('/learn/everything');
+    expect(getBackLink()?.getAttribute('href')).toBe('/library');
     expect(getTableOfContentsLinks()).toEqual([
       { title: 'Why', href: expect.stringMatching(/#why$/) },
       { title: 'Set it up', href: expect.stringMatching(/#set-it-up$/) },

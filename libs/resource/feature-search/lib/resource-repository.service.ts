@@ -13,7 +13,7 @@ import {
 import { WipService } from '@marmicode/shared/utils';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { createResource, Resource } from './resource';
 import { Skill } from './skill';
 import { skillFragment, skillFragmentToSkill } from './skill-fragment';
@@ -65,23 +65,6 @@ const getAllResources = gql`
   }
 `;
 
-const getResourcesBySkill = gql`
-  ${resourceFragment}
-  query getResourcesBySkill($skillSlug: String!) {
-    skillCollection(limit: 1, where: { slug: $skillSlug }) {
-      items {
-        linkedFrom {
-          resourceCollection {
-            items {
-              ...ResourceFragment
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 /* The types the site renders: recipes and tutorials are gone, for instance. */
 const RESOURCE_TYPES = new Set<string>(Object.values(ResourceType));
 
@@ -106,42 +89,6 @@ export class ResourceRepository {
               (i): i is NonNullable<typeof i> => i != null,
             ),
           }),
-        ),
-      );
-  }
-
-  getResourcesBySkillSlug(skillSlug: string): Observable<Resource[]> {
-    console.log(skillSlug);
-    return this._contentfulClient
-      .query<Query>({
-        query: getResourcesBySkill,
-        variables: {
-          skillSlug,
-        },
-      })
-      .pipe(
-        tap(console.log),
-        map(({ data }) => {
-          const collection =
-            data!.skillCollection!.items[0]!.linkedFrom!.resourceCollection!;
-          return this._toResources({
-            items: collection.items.filter(
-              (i: contentful.Resource | null): i is contentful.Resource =>
-                i != null,
-            ),
-          });
-        }),
-        /* We have to filter again because the previous query also returns
-         * resource that have this skill in the `skills` field.
-         * AFAIK, there is no way to return only resources that have this
-         * skill in `requiredSkills` field. */
-        map((resources) =>
-          resources.filter(
-            (resource) =>
-              resource.skills.find((skill) => skill.slug === skillSlug) &&
-              /* Hide wip resources except if we are in wip mode. */
-              (this._wip.isWip() || resource.isWip !== true),
-          ),
         ),
       );
   }

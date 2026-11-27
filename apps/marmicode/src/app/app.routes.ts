@@ -24,7 +24,7 @@ export const routes: Routes = [
     children: [
       {
         path: '**',
-        redirectTo: resourceSearchRouterHelper.learnEverythingUrl(),
+        redirectTo: resourceSearchRouterHelper.libraryUrl(),
       },
     ],
   },
@@ -33,14 +33,25 @@ export const routes: Routes = [
     children: [
       {
         path: '**',
-        redirectTo: resourceSearchRouterHelper.learnEverythingUrl(),
+        redirectTo: resourceSearchRouterHelper.libraryUrl(),
       },
     ],
   },
 
-  /* Resource search. */
+  /* The library moved from `/learn/*` to `/library`. */
   {
-    path: resourceSearchRouterHelper.LEARN_PATH,
+    path: resourceSearchRouterHelper.LEGACY_LEARN_PATH,
+    children: [
+      {
+        path: '**',
+        redirectTo: resourceSearchRouterHelper.libraryUrl(),
+      },
+    ],
+  },
+
+  /* Library. */
+  {
+    path: resourceSearchRouterHelper.LIBRARY_PATH,
     loadChildren: () =>
       import('@marmicode/resource/feature-search').then(
         (m) => m.ResourceSearchRoutingModule,

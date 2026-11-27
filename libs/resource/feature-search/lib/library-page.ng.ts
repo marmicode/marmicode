@@ -3,16 +3,12 @@ import {
   Component,
   computed,
   inject,
-  input,
   signal,
 } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { ResourceKind, ResourceTopic } from '@marmicode/resource/core';
 import { ResourceRow } from '@marmicode/resource/ui';
-import {
-  externalLinks,
-  resourceSearchRouterHelper,
-} from '@marmicode/shared/router-helpers';
+import { externalLinks } from '@marmicode/shared/router-helpers';
 import {
   Button,
   createBasicPageInfo,
@@ -222,11 +218,6 @@ import { toResourceRowData } from './to-resource-row-data';
   `,
 })
 export class LibraryPage {
-  /**
-   * Route param: a skill slug, or `everything`.
-   */
-  skillSlug = input<string>();
-
   protected readonly newsletterUrl = externalLinks.newsletterUrl;
   protected readonly pageInfo = createBasicPageInfo({
     title: 'Library',
@@ -246,38 +237,20 @@ export class LibraryPage {
   private readonly _resourceRepository = inject(ResourceRepository);
   private readonly _transferStateHelper = inject(TransferStateHelper);
 
-  private readonly _skillSlug = computed(
-    () => this.skillSlug() ?? resourceSearchRouterHelper.EVERYTHING,
-  );
-
   private readonly _resources = rxResource({
-    params: this._skillSlug,
-    stream: ({ params: skillSlug }) =>
-      (skillSlug === resourceSearchRouterHelper.EVERYTHING
-        ? this._resourceRepository.getResources()
-        : this._resourceRepository.getResourcesBySkillSlug(skillSlug)
-      ).pipe(this._transferStateHelper.transfer(`library:${skillSlug}`)),
+    stream: () =>
+      this._resourceRepository
+        .getResources()
+        .pipe(this._transferStateHelper.transfer('library')),
   });
 
   /**
-   * Reading `value()` throws when loading failed (e.g. unknown skill):
+   * Reading `value()` throws when loading failed:
    * fall back to no resources, which shows the empty state.
    */
   private readonly _loadedResources = computed(() =>
     this._resources.hasValue() ? this._resources.value() : [],
   );
-
-  /** The selected skill's label, found in its resources. */
-  private readonly _skillLabel = computed(() => {
-    const skillSlug = this._skillSlug();
-    if (skillSlug === resourceSearchRouterHelper.EVERYTHING) {
-      return undefined;
-    }
-    const skill = this._loadedResources()
-      .flatMap((resource) => [...resource.skills, ...resource.requiredSkills])
-      .find((skill) => skill.slug === skillSlug);
-    return skill?.label ?? skillSlug;
-  });
 
   protected readonly isLoading = computed(() => this._resources.isLoading());
 
@@ -313,10 +286,10 @@ export class LibraryPage {
       );
   });
 
-  /** "Everything" or the skill's label, or the live result count while filtering. */
+  /** "Everything", or the live result count while filtering. */
   protected readonly heading = computed(() => {
     if (!this._isFiltering()) {
-      return this._skillLabel() ?? 'Everything';
+      return 'Everything';
     }
     const count = this.rows().length;
     return `${count} ${count === 1 ? 'result' : 'results'}`;

@@ -98,7 +98,7 @@ import {
 export class SiteFooter {
   protected readonly externalLinks = externalLinks;
   protected readonly sections = [
-    { label: 'Library', route: resourceSearchRouterHelper.learnEverything() },
+    { label: 'Library', route: resourceSearchRouterHelper.library() },
     { label: 'Training', route: workshopRouterHelper.list() },
     { label: 'Coaching', route: coachingRouterHelper.coaching() },
   ];

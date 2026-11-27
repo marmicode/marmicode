@@ -48,22 +48,10 @@ export const serverRoutes: ServerRoute[] = [
       return workshopRepo.getWorkshops().map((w) => ({ workshopId: w.id }));
     },
   },
-  /* Learn by skill */
+  /* Library */
   {
-    path: `${resourceSearchRouterHelper.LEARN_PATH}/:${resourceSearchRouterHelper.SKILL_SLUG_PARAM}`,
+    path: resourceSearchRouterHelper.LIBRARY_PATH,
     renderMode: RenderMode.Prerender,
-    async getPrerenderParams() {
-      const slugs = await _queryContentfulSlugs({ content_type: 'skill' });
-      return [
-        {
-          [resourceSearchRouterHelper.SKILL_SLUG_PARAM]:
-            resourceSearchRouterHelper.EVERYTHING,
-        },
-        ...slugs.map((slug) => ({
-          [resourceSearchRouterHelper.SKILL_SLUG_PARAM]: slug,
-        })),
-      ];
-    },
   },
   /* Blog post detail */
   {
