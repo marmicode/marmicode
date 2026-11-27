@@ -1,8 +1,9 @@
-import { describe, it } from 'vitest';
-import { getResourceKind } from './resource-type';
+import { describe, expect, it } from 'vitest';
+import { getResourceKind, ResourceType } from './resource-type';
 
 describe(getResourceKind.name, () => {
   it.todo('videos vs articles', () => {
-    // Assert `getResourceKind('external-video')` is `'video'` and `getResourceKind('blog-post')` is `'article'`.
+    expect(getResourceKind(ResourceType.ExternalVideo)).toBe('video');
+    expect(getResourceKind(ResourceType.BlogPost)).toBe('article');
   });
 });
