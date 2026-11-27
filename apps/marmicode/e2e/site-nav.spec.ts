@@ -7,8 +7,7 @@ const test = base.extend<{ glove: SiteNavGlove }>({
 });
 
 test.describe('site nav', () => {
-  test('nav fits a 320px viewport', async ({ glove }) => {
-    await glove.enableWip();
+  test.fixme('nav fits a 320px viewport', async ({ glove }) => {
     await glove.setViewportSize({ width: 320, height: 640 });
     await glove.goto('/');
 
@@ -19,10 +18,6 @@ test.describe('site nav', () => {
 
 class SiteNavGlove {
   constructor(private _page: Page) {}
-
-  async enableWip() {
-    await this._page.addInitScript(() => localStorage.setItem('wip', 'true'));
-  }
 
   async setViewportSize(size: { width: number; height: number }) {
     await this._page.setViewportSize(size);

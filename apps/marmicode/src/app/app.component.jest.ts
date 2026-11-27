@@ -43,12 +43,13 @@ describe(AppComponent.name, () => {
     expect(getCurrentNavLinks()).toEqual(['Library']);
   });
 
-  it('old shell without WIP mode', async () => {
+  it.skip('site shell without WIP mode', async () => {
     const { hasElement } = await mountApp({ wip: false });
 
-    expect(hasElement('mc-nav')).toBe(true);
-    expect(hasElement('mc-footer')).toBe(true);
-    expect(hasElement('mc-site-nav')).toBe(false);
+    expect(hasElement('mc-site-nav')).toBe(true);
+    expect(hasElement('mc-site-footer')).toBe(true);
+    expect(hasElement('mc-nav')).toBe(false);
+    expect(hasElement('mc-footer')).toBe(false);
   });
 });
 

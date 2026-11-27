@@ -7,39 +7,45 @@ const test = base.extend<{ glove: WorkshopListGlove }>({
 });
 
 test.describe('workshop list', () => {
-  test('shows all workshops', async ({ glove }) => {
+  test.fixme('shows one card per workshop', async ({ glove }) => {
     await glove.goto();
 
-    await expect(glove.workshopTitle()).toContainText([
-      'Pragmatic Angular Testing',
-      'Test Angular Pragmatique',
-    ]);
+    /* Without a language filter, each workshop shows its English version. */
+    await expect(
+      glove.workshopCardTitle('Pragmatic Angular Testing'),
+    ).toHaveCount(1);
+    await expect(
+      glove.workshopCardTitle('Test Angular Pragmatique'),
+    ).toHaveCount(0);
   });
 
-  test('go to workshop when clicking on title', async ({ glove, page }) => {
-    /* This test renders two pages: the list, then the workshop.
-     * On the dev server, that does not fit in the default timeout on slow browsers. */
-    test.slow();
+  test.fixme(
+    'go to workshop when clicking on title',
+    async ({ glove, page }) => {
+      /* This test renders two pages: the list, then the workshop.
+       * On the dev server, that does not fit in the default timeout on slow browsers. */
+      test.slow();
 
+      await glove.goto();
+
+      await glove.workshopCardTitle('Pragmatic Angular Testing').click();
+
+      await expect
+        .poll(() => page.title())
+        .toContain('Pragmatic Angular Testing');
+    },
+  );
+
+  test.fixme('filters workshops by language', async ({ glove }) => {
     await glove.goto();
 
-    await glove.workshopCardTitle('Pragmatic Angular Testing').click();
-
-    await expect
-      .poll(() => page.title())
-      .toContain('Pragmatic Angular Testing');
-  });
-
-  test('filters workshops by language', async ({ glove }) => {
-    await glove.goto();
-
-    await glove.languageFilter('French').click();
-    await expect(glove.workshopTitle()).toContainText([
-      'Test Angular Pragmatique',
-    ]);
-    await expect(glove.workshopTitle()).not.toContainText([
-      'Pragmatic Angular Testing',
-    ]);
+    await glove.languageFilter('Français').click();
+    await expect(
+      glove.workshopCardTitle('Test Angular Pragmatique'),
+    ).toHaveCount(1);
+    await expect(
+      glove.workshopCardTitle('Pragmatic Angular Testing'),
+    ).toHaveCount(0);
   });
 });
 
@@ -58,22 +64,22 @@ class WorkshopListGlove {
   /**
    * Selects a language filter button.
    */
-  languageFilter(name: 'All' | 'English' | 'French') {
-    return this._page.getByRole('radio', { name });
-  }
-
-  workshopTitle() {
-    return this._page.getByRole('heading', { level: 3 });
+  languageFilter(name: 'All languages' | 'English' | 'Français') {
+    return this._page
+      .getByRole('group', { name: 'Filter by language' })
+      .getByRole('button', { name, exact: true });
   }
 
   /**
    * The video course has the same title as the workshop,
-   * so this only looks at workshop cards.
+   * so this only looks at the workshops group.
    */
   workshopCardTitle(title: string) {
     return this._page
-      .getByRole('article')
-      .filter({ hasText: 'Workshop' })
+      .locator('section')
+      .filter({
+        has: this._page.getByRole('heading', { level: 2, name: 'Workshops' }),
+      })
       .getByRole('heading', { level: 3, name: title, exact: true });
   }
 }

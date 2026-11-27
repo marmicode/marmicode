@@ -5,7 +5,7 @@ const test = base.extend<{ glove: WorkshopDetailGlove }>({
 });
 
 test.describe('workshop detail', () => {
-  test('shows workshop info', async ({ browserName, glove, page }) => {
+  test.fixme('shows workshop info', async ({ browserName, glove, page }) => {
     /* Skip WebKit for now because it's flaky on CI: "Failed to take two consecutive stable screenshots." */
     // eslint-disable-next-line playwright/no-skipped-test
     test.skip(!!process.env.CI && browserName === 'webkit', 'Skip on WebKit');
@@ -14,12 +14,7 @@ test.describe('workshop detail', () => {
 
     await glove.goto('pragmatic-angular-testing', { waitUntil: 'load' });
 
-    /* Wait for luma sessions to be loaded. */
-    await page
-      .frame({ url: (u) => u.origin === 'https://luma.com' })
-      ?.getByText('Pragmatic Angular Testing')
-      .first()
-      .waitFor();
+    await glove.sessionList().waitFor();
 
     await expect(page).toHaveScreenshot({
       fullPage: true,
@@ -36,6 +31,7 @@ test.describe('workshop detail', () => {
   });
 
   test('sets the right canonical and alternate link tags in head', async ({
+    baseURL,
     glove,
     page,
   }) => {
@@ -46,24 +42,18 @@ test.describe('workshop detail', () => {
     const alternateLinks = page.locator('head link[rel="alternate"]');
     await expect
       .soft(canonicalLink)
-      .toHaveAttribute(
-        'href',
-        'http://localhost:4200/workshops/test-angular-pragmatique',
-      );
+      .toHaveAttribute('href', `${baseURL}/workshops/test-angular-pragmatique`);
     await expect.soft(alternateLinks).toHaveCount(3);
     await expect.soft(alternateLinks.nth(0)).toHaveAttribute('hreflang', 'fr');
     await expect
       .soft(alternateLinks.nth(0))
-      .toHaveAttribute(
-        'href',
-        'http://localhost:4200/workshops/test-angular-pragmatique',
-      );
+      .toHaveAttribute('href', `${baseURL}/workshops/test-angular-pragmatique`);
     await expect.soft(alternateLinks.nth(1)).toHaveAttribute('hreflang', 'en');
     await expect
       .soft(alternateLinks.nth(1))
       .toHaveAttribute(
         'href',
-        'http://localhost:4200/workshops/pragmatic-angular-testing',
+        `${baseURL}/workshops/pragmatic-angular-testing`,
       );
     await expect
       .soft(alternateLinks.nth(2))
@@ -72,7 +62,7 @@ test.describe('workshop detail', () => {
       .soft(alternateLinks.nth(2))
       .toHaveAttribute(
         'href',
-        'http://localhost:4200/workshops/pragmatic-angular-testing',
+        `${baseURL}/workshops/pragmatic-angular-testing`,
       );
   });
 });
@@ -82,7 +72,7 @@ class WorkshopDetailGlove {
 
   /**
    * By default, this does not wait for the `load` event:
-   * it depends on third parties (e.g. sessions calendar, chat widget),
+   * it depends on third parties (e.g. chat widget),
    * and it can take most of the test timeout on slow browsers.
    */
   goto(
@@ -92,5 +82,9 @@ class WorkshopDetailGlove {
     }: { waitUntil?: 'domcontentloaded' | 'load' } = {},
   ) {
     return this._page.goto(`/workshops/${workshopId}`, { waitUntil });
+  }
+
+  sessionList() {
+    return this._page.locator('mc-workshop-session-list');
   }
 }

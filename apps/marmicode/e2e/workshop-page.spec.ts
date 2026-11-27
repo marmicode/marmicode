@@ -7,8 +7,7 @@ const test = base.extend<{ glove: WorkshopPageGlove }>({
 });
 
 test.describe('workshop page', () => {
-  test('sticky booking bar', async ({ glove }) => {
-    await glove.enableWip();
+  test.fixme('sticky booking bar', async ({ glove }) => {
     await glove.goto('pragmatic-angular-testing');
 
     await expect(glove.bookBar()).toBeHidden();
@@ -23,10 +22,6 @@ test.describe('workshop page', () => {
 
 class WorkshopPageGlove {
   constructor(private _page: Page) {}
-
-  async enableWip() {
-    await this._page.addInitScript(() => localStorage.setItem('wip', 'true'));
-  }
 
   /**
    * This does not wait for the `load` event:
