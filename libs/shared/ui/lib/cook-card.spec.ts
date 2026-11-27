@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { CookCard } from './cook-card.ng';
 
 describe(CookCard.name, () => {
-  it.todo('cook card banner keeps the same bio', async () => {
+  it('cook card banner keeps the same bio', async () => {
     const banner = await mountCookCard({ appearance: 'banner' });
     const card = await mountCookCard();
 
