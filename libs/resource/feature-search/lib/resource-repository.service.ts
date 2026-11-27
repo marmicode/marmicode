@@ -155,12 +155,12 @@ export class ResourceRepository {
     );
     return items.map((item) => {
       const requiredSkills = this._toSkills({
-        items: item.requiredSkillCollection!.items!.filter(
+        items: (item.requiredSkillCollection?.items ?? []).filter(
           (s): s is contentful.Skill => s != null,
         ),
       });
       const skills = this._toSkills({
-        items: item.skillCollection!.items!.filter(
+        items: (item.skillCollection?.items ?? []).filter(
           (s): s is contentful.Skill => s != null,
         ),
       });

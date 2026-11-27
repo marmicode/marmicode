@@ -29,6 +29,25 @@ describe(ResourceRepository.name, () => {
       'pragmatic-angular-testing',
     ]);
   });
+
+  it('library maps resources without skill collections to no skills', async () => {
+    const { getResources } = setUp({
+      items: [
+        {
+          ...createContentfulResource({
+            resourceType: 'blog-post',
+            slug: 'pragmatic-angular-testing',
+          }),
+          requiredSkillCollection: null,
+          skillCollection: null,
+        },
+      ],
+    });
+
+    const [resource] = await getResources();
+
+    expect.soft(resource).toMatchObject({ requiredSkills: [], skills: [] });
+  });
 });
 
 function setUp({ items }: { items: unknown[] }) {
