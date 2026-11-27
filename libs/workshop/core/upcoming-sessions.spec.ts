@@ -53,6 +53,40 @@ describe(getUpcomingSessions.name, () => {
       }),
     ).toHaveLength(0);
   });
+
+  it("keeps a session until the end of its last day in the session's timezone", () => {
+    const workshops = [
+      createWorkshop({
+        id: 'workshop-a',
+        sessions: [createSession({ startDate: '2026-11-27', timezone: 'PT' })],
+      }),
+    ];
+
+    /* 2026-11-27 17:00 in Los Angeles, but already 2026-11-28 in UTC. */
+    expect(
+      getUpcomingSessions({
+        workshops,
+        today: new Date('2026-11-28T01:00:00Z'),
+      }),
+    ).toHaveLength(1);
+  });
+
+  it("drops a session once its last day is over in the session's timezone", () => {
+    const workshops = [
+      createWorkshop({
+        id: 'workshop-a',
+        sessions: [createSession({ startDate: '2026-11-27', timezone: 'CET' })],
+      }),
+    ];
+
+    /* 2026-11-28 00:30 in Paris, but still 2026-11-27 in UTC. */
+    expect(
+      getUpcomingSessions({
+        workshops,
+        today: new Date('2026-11-27T23:30:00Z'),
+      }),
+    ).toHaveLength(0);
+  });
 });
 
 function createWorkshop({
@@ -68,16 +102,18 @@ function createWorkshop({
 function createSession({
   startDate,
   endDate,
+  timezone = 'CET',
 }: {
   startDate: IsoDate;
   endDate?: IsoDate;
+  timezone?: Session['timezone'];
 }): Session {
   return {
     startDate,
     endDate,
     startTime: '09:30',
     endTime: '18:00',
-    timezone: 'CET',
+    timezone,
     url: `https://luma.com/${startDate}`,
   };
 }
