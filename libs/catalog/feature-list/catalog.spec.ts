@@ -2,7 +2,12 @@ import { TestBed } from '@angular/core/testing';
 import { FROM_DRIFT_TO_TRUST_FOR_ANGULAR } from '@marmicode/cohort/core';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
 import { describe, expect, it } from 'vitest';
-import { cohortToPreview, pickVersion, toTrainingOffers } from './catalog';
+import {
+  cohortToPreview,
+  pickVersion,
+  toTrainingOffers,
+  TrainingOffer,
+} from './catalog';
 
 describe(cohortToPreview, () => {
   it('shows the duration in weeks', () => {
@@ -46,8 +51,14 @@ describe(toTrainingOffers, () => {
 
 describe(pickVersion, () => {
   it.todo('picking a version follows the language filter', () => {
-    // Take the Pragmatic Angular Testing offer.
-    // Assert `pickVersion` with `null` gives "Pragmatic Angular Testing", with `'fr'` gives "Test Angular Pragmatique".
+    const offer = findWorkshopOffer('pragmatic-angular-testing');
+
+    expect
+      .soft(pickVersion({ offer, language: null })?.title)
+      .toBe('Pragmatic Angular Testing');
+    expect
+      .soft(pickVersion({ offer, language: 'fr' })?.title)
+      .toBe('Test Angular Pragmatique');
   });
 
   it.todo('english-only offers disappear in French', () => {
@@ -55,3 +66,18 @@ describe(pickVersion, () => {
     // Assert `pickVersion` with `'fr'` returns `null`.
   });
 });
+
+function findWorkshopOffer(workshopId: string): TrainingOffer {
+  const offer = toTrainingOffers({
+    cohorts: [],
+    workshops: TestBed.inject(WorkshopRepository).getWorkshops(),
+    videoCourses: [],
+    today: new Date('2026-11-27'),
+  }).find((offer) =>
+    offer.versions.some((version) => version.id === workshopId),
+  );
+  if (offer == null) {
+    throw new Error(`Offer not found: ${workshopId}`);
+  }
+  return offer;
+}
