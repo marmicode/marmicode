@@ -35,8 +35,12 @@ describe(CohortLandingPage.name, () => {
     expect(getLinks('Join the waitlist')).toEqual([waitlistLink, waitlistLink]);
   });
 
-  it.todo('keeps the canonical URL', () => {
-    // Assert the canonical link is `/cohorts/from-drift-to-trust-for-angular`.
+  it.todo('keeps the canonical URL', async () => {
+    const { getCanonicalUrls } = await mountCohortLandingPage();
+
+    expect(getCanonicalUrls()).toEqual([
+      'https://marmicode.io/cohorts/from-drift-to-trust-for-angular',
+    ]);
   });
 });
 
@@ -54,6 +58,14 @@ async function mountCohortLandingPage() {
   const host: HTMLElement = fixture.nativeElement;
 
   return {
+    getCanonicalUrls() {
+      return Array.from(
+        document.head.querySelectorAll<HTMLLinkElement>(
+          'link[rel="canonical"]',
+        ),
+        (link) => link.href,
+      );
+    },
     getHeroText() {
       return getTextContent(host.querySelector('mc-training-page-hero'));
     },
