@@ -58,9 +58,18 @@ describe(TrainingListPage.name, () => {
     expect(titles).not.toContain('Pragmatic Angular Testing');
   });
 
-  it.todo('combines format and language filters', () => {
-    // Click "Workshops", then "Français".
-    // Assert only workshop cards, all in French, and the count says "6 trainings".
+  it.todo('combines format and language filters', async () => {
+    const { click, getCount, getGroups } = await mountTrainingListPage();
+
+    await click('Workshops');
+    await click('Français');
+
+    const groups = getGroups();
+    expect(groups.map(({ heading }) => heading)).toEqual(['Formations']);
+    expect(new Set(groups[0]?.cards.map(({ lang }) => lang))).toEqual(
+      new Set(['fr']),
+    );
+    expect(getCount()).toBe('6 trainings');
   });
 
   it.todo('shows everything again when nothing matches', () => {
@@ -112,6 +121,7 @@ async function mountTrainingListPage({
         cards: Array.from(section.querySelectorAll('mc-training-tile')).map(
           (card) => ({
             title: getTextContent(card.querySelector('h3')),
+            lang: card.querySelector('[lang]')?.getAttribute('lang'),
             languages: Array.from(card.querySelectorAll('.language-chip')).map(
               (chip) => getTextContent(chip),
             ),
@@ -127,6 +137,8 @@ async function mountTrainingListPage({
         ?.click();
       await fixture.whenStable();
     },
+    /* The live count of matching trainings. */
+    getCount: () => getTextContent(host.querySelector('[role="status"]')),
     getGroups,
     getGroup: (heading: string) =>
       getGroups().find((group) => group.heading === heading),
