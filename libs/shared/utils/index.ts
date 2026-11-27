@@ -16,6 +16,7 @@ export {
 export { shareReplayWithRefCount } from './lib/operators/share-replay-with-ref-count';
 export { Platform } from './lib/platform.service';
 export { or } from './lib/route-matchers';
+export { TODAY } from './lib/today';
 export { TransferStateAdapter } from './lib/transfer-state-adapter.service';
 export { TransferStateHelper } from './lib/transfer-state-helper.service';
 export { WipModule } from './lib/wip.directive';
