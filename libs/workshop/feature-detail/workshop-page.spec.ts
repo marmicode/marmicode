@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideSiteConfig } from '@marmicode/shared/core';
 import { TODAY } from '@marmicode/shared/utils';
+import { WorkshopRepository } from '@marmicode/workshop/infra';
 import { describe, expect, it } from 'vitest';
 import { WorkshopPage } from './workshop-page.ng';
 
@@ -58,8 +59,19 @@ describe(WorkshopPage.name, () => {
     expect(getGlanceFacts()['Next session']).toMatch(/Jan 12\s?–\s?14, 2027/);
   });
 
-  it.todo('program shows 8 items, then the rest', () => {
-    // Assert 8 visible timeline items and a "Show the full program" toggle; open it and assert every agenda item is listed.
+  it.todo('program shows 8 items, then the rest', async () => {
+    const { getProgramToggle, getVisibleProgramSteps, openFullProgram } =
+      await mountWorkshopPage({ workshopId: 'pragmatic-angular-testing' });
+    const { sections } = TestBed.inject(WorkshopRepository).findWorkshop(
+      'pragmatic-angular-testing',
+    )!.agenda;
+
+    expect(getVisibleProgramSteps()).toHaveLength(8);
+    expect(getProgramToggle()).toContain('Show the full program');
+
+    await openFullProgram();
+
+    expect(getVisibleProgramSteps()).toHaveLength(sections.length);
   });
 
   it.todo('french workshop in French', () => {
@@ -111,6 +123,20 @@ async function mountWorkshopPage({
           getTextContent(fact.querySelector('dd')),
         ]),
       );
+    },
+    getProgramToggle() {
+      return getTextContent(host.querySelector('mc-workshop-program summary'));
+    },
+    /* Timeline steps that are not folded in the closed "full program" toggle. */
+    getVisibleProgramSteps() {
+      return Array.from(host.querySelectorAll('mc-workshop-program li'))
+        .filter((item) => item.querySelector(':scope > h3'))
+        .filter((step) => !step.closest('details:not([open])'))
+        .map((step) => getTextContent(step.querySelector('h3')));
+    },
+    async openFullProgram() {
+      host.querySelector<HTMLElement>('mc-workshop-program summary')?.click();
+      await fixture.whenStable();
     },
     getSessionListLinks() {
       return Array.from(
