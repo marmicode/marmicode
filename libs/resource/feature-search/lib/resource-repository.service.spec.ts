@@ -9,7 +9,7 @@ import { describe, expect, it } from 'vitest';
 import { ResourceRepository } from './resource-repository.service';
 
 describe(ResourceRepository.name, () => {
-  it.todo('library skips recipes', async () => {
+  it('library skips recipes', async () => {
     const { getResources } = setUp({
       items: [
         createContentfulResource({

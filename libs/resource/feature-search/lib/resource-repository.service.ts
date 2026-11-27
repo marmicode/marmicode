@@ -5,7 +5,11 @@ import {
   provideContentfulClient,
   Query,
 } from '@marmicode/contentful/infra';
-import { createAuthor, getResourceTopics } from '@marmicode/resource/core';
+import {
+  createAuthor,
+  getResourceTopics,
+  ResourceType,
+} from '@marmicode/resource/core';
 import { WipService } from '@marmicode/shared/utils';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
@@ -78,6 +82,9 @@ const getResourcesBySkill = gql`
   }
 `;
 
+/* The types the site renders: recipes and tutorials are gone, for instance. */
+const RESOURCE_TYPES = new Set<string>(Object.values(ResourceType));
+
 @Injectable()
 export class ResourceRepository {
   private _contentfulClient = inject(ContentfulClient);
@@ -142,7 +149,11 @@ export class ResourceRepository {
   private _toResources(resourceCollection: {
     items: contentful.Resource[];
   }): Resource[] {
-    return resourceCollection.items.map((item) => {
+    const items = resourceCollection.items.filter(
+      (item) =>
+        item.resourceType != null && RESOURCE_TYPES.has(item.resourceType),
+    );
+    return items.map((item) => {
       const requiredSkills = this._toSkills({
         items: item.requiredSkillCollection!.items!.filter(
           (s): s is contentful.Skill => s != null,
@@ -178,8 +189,7 @@ export class ResourceRepository {
         topics: getResourceTopics({
           skillSlugs: [...skills, ...requiredSkills].map(({ slug }) => slug),
         }),
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        type: item.resourceType as any,
+        type: item.resourceType as ResourceType,
         url: item.url!,
       });
     });
