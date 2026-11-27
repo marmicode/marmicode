@@ -6,7 +6,11 @@ import {
   signal,
 } from '@angular/core';
 import { FROM_DRIFT_TO_TRUST_FOR_ANGULAR } from '@marmicode/cohort/core';
-import { SegmentedControl, SegmentedControlOption } from '@marmicode/shared/ui';
+import {
+  Button,
+  SegmentedControl,
+  SegmentedControlOption,
+} from '@marmicode/shared/ui';
 import { TODAY } from '@marmicode/shared/utils';
 import { TrainingFormat, TrainingLanguage } from '@marmicode/training/core';
 import {
@@ -31,7 +35,7 @@ import {
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-training-list-page',
-  imports: [SegmentedControl, TrainingTile],
+  imports: [Button, SegmentedControl, TrainingTile],
   template: `
     <mc-segmented-control
       ariaLabel="Filter by format"
@@ -58,6 +62,13 @@ import {
           <mc-training-tile [training]="training" />
         }
       </section>
+    } @empty {
+      <div class="empty">
+        <p>Nothing matches these filters yet.</p>
+        <button mcButton="ghost" type="button" (click)="resetFilters()">
+          Show everything
+        </button>
+      </div>
     }
   `,
 })
@@ -119,6 +130,11 @@ export class TrainingListPage {
     );
     return `${count} ${count === 1 ? 'training' : 'trainings'}`;
   });
+
+  protected resetFilters() {
+    this.formatFilter.set(null);
+    this.languageFilter.set(null);
+  }
 }
 
 const GROUP_FORMATS: TrainingFormat[] = ['cohort', 'workshop', 'video-course'];

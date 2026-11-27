@@ -72,7 +72,7 @@ describe(TrainingListPage.name, () => {
     expect(getCount()).toBe('6 trainings');
   });
 
-  it.todo('shows everything again when nothing matches', async () => {
+  it('shows everything again when nothing matches', async () => {
     const { click, getGroups, getText } = await mountTrainingListPage();
 
     await click('Cohort');
