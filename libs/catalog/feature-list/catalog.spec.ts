@@ -47,8 +47,23 @@ describe(toTrainingOffers, () => {
   });
 
   it.todo('versions carry their own next session', () => {
-    // Call `toTrainingOffers` with today = 2026-11-27.
-    // Assert Pragmatic Angular Testing EN has next session "Jan 12–14", FR has "5–7 janv.", and Pragmatic React Testing has none.
+    const offers = toTrainingOffers({
+      cohorts: [],
+      workshops: TestBed.inject(WorkshopRepository).getWorkshops(),
+      videoCourses: [],
+      today: new Date('2026-11-27'),
+    });
+    const versions = offers.flatMap((offer) => offer.versions);
+    const nextSessionDates = (id: string) =>
+      versions.find((version) => version.id === id)?.nextSessionDates;
+
+    expect
+      .soft(nextSessionDates('pragmatic-angular-testing'))
+      .toMatch(/^Jan 12\s?–\s?14$/);
+    expect
+      .soft(nextSessionDates('test-angular-pragmatique'))
+      .toMatch(/^5\s?–\s?7 janv\.$/);
+    expect.soft(nextSessionDates('pragmatic-react-testing')).toBeUndefined();
   });
 });
 
