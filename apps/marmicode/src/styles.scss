@@ -52,24 +52,10 @@ body {
 }
 
 body {
-  /* @hack: setting background color to the nav's color to affect ios status bar color. */
+  /* Also shows on overscroll and behind the iOS status bar. */
   background-color: var(--mc-dark-bg);
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
-
-.mc-tertiary {
-  @include mat.theme(
-    (
-      color: theme-colors.$tertiary-palette,
-      typography: Roboto,
-      density: 0,
-    )
-  );
-}
-
-.mc-primary-text {
-  color: $marmicode-primary-color;
 }
 
 .mc-overlay-backdrop {
@@ -92,31 +78,9 @@ body {
   flex-direction: row;
 }
 
-@media screen and (max-width: 599px) {
-  .mc-hide.mc-show-gt-xs {
-    display: none !important;
-  }
-}
-
-@media screen and (min-width: 600px) {
-  .mc-hide-gt-xs {
-    display: none !important;
-  }
-}
-
-@media screen and (max-width: 959px) {
-  .mc-hide.mc-show-gt-sm {
-    display: none !important;
-  }
-}
-
 @media screen and (min-width: 960px) {
   .mc-flex-row-gt-sm {
     flex-direction: row;
-  }
-
-  .mc-hide-gt-sm {
-    display: none !important;
   }
 }
 
