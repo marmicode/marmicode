@@ -15,9 +15,13 @@ describe(HomePage.name, () => {
     ]);
   });
 
-  it.todo('hero chip points to the cohort', () => {
-    // Mount `HomePage`.
-    // Assert the chip mentions "From Drift to Trust" and "6-week", and links to `/cohorts/from-drift-to-trust-for-angular`.
+  it.todo('hero chip points to the cohort', async () => {
+    const { getHeroLink } = await mountHomePage();
+
+    const chip = getHeroLink('From Drift to Trust');
+
+    expect(chip?.text).toContain('6-week');
+    expect(chip?.href).toBe('/cohorts/from-drift-to-trust-for-angular');
   });
 
   it.todo('upcoming events list the workshop sessions', () => {
@@ -46,6 +50,16 @@ async function mountHomePage() {
   const host: HTMLElement = fixture.nativeElement;
 
   return {
+    /* First link of the hero that contains `text`. */
+    getHeroLink(text: string) {
+      const anchor = Array.from(
+        host.querySelectorAll<HTMLAnchorElement>('mc-home-hero a'),
+      ).find((anchor) => getTextContent(anchor)?.includes(text));
+
+      return anchor
+        ? { text: getTextContent(anchor), href: anchor.getAttribute('href') }
+        : undefined;
+    },
     /* Each tile is a link with a heading. */
     getTiles() {
       return Array.from(
