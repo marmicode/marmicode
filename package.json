@@ -32,7 +32,6 @@
   },
   "private": true,
   "dependencies": {
-    "@amcharts/amcharts4": "^4.9.28",
     "@angular/animations": "21.1.6",
     "@angular/cdk": "21.1.6",
     "@angular/common": "21.1.6",
@@ -56,7 +55,6 @@
     "@fortawesome/free-solid-svg-icons": "6.7.2",
     "@jscutlery/operators": "3.2.10",
     "@jscutlery/rx-computed": "0.7.5",
-    "@ngneat/until-destroy": "^10.0.0",
     "@nx/angular": "22.5.3",
     "@rx-angular/cdk": "^19.0.0",
     "@rx-angular/state": "^15.0.0",
@@ -71,7 +69,6 @@
     "graphql-tag": "^2.10.4",
     "marked": "^1.2.7",
     "ngx-sharebuttons": "17.0.0",
-    "panzoom": "^9.2.5",
     "prismjs": "^1.20.0",
     "rxjs": "7.8.2",
     "tslib": "^2.3.0"
