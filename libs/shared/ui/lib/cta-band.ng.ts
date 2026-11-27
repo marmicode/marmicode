@@ -1,5 +1,12 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Link, LinkComponent } from './link.component';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Button } from './button.ng';
+import { Link } from './link.component';
 
 /**
  * Closing call-to-action band: 'solid' (newsletter) or 'dashed' (in-house offer).
@@ -8,7 +15,7 @@ import { Link, LinkComponent } from './link.component';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-cta-band',
-  imports: [LinkComponent],
+  imports: [Button, RouterLink],
   host: {
     '[class.dashed]': "appearance() === 'dashed'",
   },
@@ -20,7 +27,13 @@ import { Link, LinkComponent } from './link.component';
       }
       <ng-content />
     </div>
-    <mc-link class="action" [link]="link()">{{ linkLabel() }}</mc-link>
+    @if (href(); as href) {
+      <a class="action" mcButton [href]="href" rel="noopener" target="_blank">
+        {{ linkLabel() }}
+      </a>
+    } @else {
+      <a class="action" mcButton [routerLink]="route()">{{ linkLabel() }}</a>
+    }
   `,
   styles: `
     :host {
@@ -66,27 +79,8 @@ import { Link, LinkComponent } from './link.component';
       color: var(--mc-dark-muted);
     }
 
-    /* Same look as mcButton, applied to the link rendered by mc-link. */
-    .action ::ng-deep a {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 20px;
-      border-radius: 12px;
-      background: var(--mc-gradient);
-      color: var(--mc-dark-bg);
-      font-weight: 600;
+    .action {
       white-space: nowrap;
-      transition: transform 0.15s;
-    }
-
-    .action ::ng-deep a:hover {
-      transform: translateY(-1px);
-    }
-
-    .action ::ng-deep a:focus-visible {
-      outline: 2px solid var(--mc-accent);
-      outline-offset: 2px;
     }
   `,
 })
@@ -96,4 +90,13 @@ export class CtaBand {
   link = input.required<Link>();
   linkLabel = input.required<string>();
   appearance = input<'solid' | 'dashed'>('solid');
+
+  protected readonly href = computed(() => {
+    const link = this.link();
+    return 'href' in link ? link.href : undefined;
+  });
+  protected readonly route = computed(() => {
+    const link = this.link();
+    return 'route' in link ? link.route : undefined;
+  });
 }
