@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 
 /* Jest's `it.todo` does not accept a body, so WIP tests use `it.skip`. */
 describe(AppComponent.name, () => {
-  it.skip('nav links to the three sections and the contact form', async () => {
+  it('nav links to the three sections and the contact form', async () => {
     const { getNavLink } = await mountApp({ wip: true });
 
     expect(getNavLink('Library')).toEqual({

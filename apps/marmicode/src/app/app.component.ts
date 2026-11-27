@@ -1,16 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { WipService } from '@marmicode/shared/utils';
 import { Footer } from './footer.ng';
 import { NavModule } from './nav.component';
+import { SiteNav } from './site-nav.ng';
 
 @Component({
   selector: 'mc-root',
-  imports: [Footer, NavModule, RouterModule],
+  imports: [Footer, NavModule, RouterModule, SiteNav],
   template: `
-    <mc-nav>
+    @if (isWip) {
+      <mc-site-nav />
       <router-outlet />
-      <mc-footer />
-    </mc-nav>
+    } @else {
+      <mc-nav>
+        <router-outlet />
+        <mc-footer />
+      </mc-nav>
+    }
   `,
   styles: `
     :host {
@@ -20,4 +27,6 @@ import { NavModule } from './nav.component';
     }
   `,
 })
-export class AppComponent {}
+export class AppComponent {
+  protected isWip = inject(WipService).isWip();
+}
