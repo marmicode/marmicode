@@ -24,6 +24,7 @@
       "@marmicode/coaching/feature-presentation": [
         "libs/coaching/feature-presentation/index.ts"
       ],
+      "@marmicode/catalog/feature-list": ["libs/catalog/feature-list/index.ts"],
       "@marmicode/cohort/core": ["libs/cohort/core/index.ts"],
       "@marmicode/cohort/feature-presentation": [
         "libs/cohort/feature-presentation/index.ts"
@@ -79,9 +80,6 @@
       "@marmicode/workshop/core": ["libs/workshop/core/index.ts"],
       "@marmicode/workshop/feature-detail": [
         "libs/workshop/feature-detail/index.ts"
-      ],
-      "@marmicode/workshop/feature-list": [
-        "libs/workshop/feature-list/index.ts"
       ],
       "@marmicode/workshop/infra": ["libs/workshop/infra/index.ts"],
       "@marmicode/workshop/ui": ["libs/workshop/ui/index.ts"],

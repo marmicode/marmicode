@@ -108,7 +108,7 @@ export class TheMenu {
         {
           icon: 'school',
           text: 'Pragmatic Angular Testing',
-          offer: 'starts at 80€',
+          offer: 'starts at 120€',
         },
         {
           icon: 'book',

@@ -10,3 +10,4 @@ export type {
   Training,
   TrainingLanguage,
 } from './training';
+export type { TrainingFormat } from './training-format';
