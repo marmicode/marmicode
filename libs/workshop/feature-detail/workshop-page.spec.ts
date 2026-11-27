@@ -74,7 +74,7 @@ describe(WorkshopPage.name, () => {
     expect(getVisibleProgramSteps()).toHaveLength(sections.length);
   });
 
-  it.todo('french workshop in French', async () => {
+  it('french workshop in French', async () => {
     const { getHeroText, getSessionRows } = await mountWorkshopPage({
       workshopId: 'test-angular-pragmatique',
     });

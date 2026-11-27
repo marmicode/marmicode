@@ -66,6 +66,51 @@ import {
           [breadcrumb]="breadcrumb()"
           [training]="workshop"
         >
+          @if (workshop.waitlist; as waitlist) {
+            <a
+              mcButton
+              slot="actions"
+              [href]="waitlist.url"
+              rel="noopener"
+              target="_blank"
+            >
+              {{ labels.joinWaitlist }}
+            </a>
+          } @else {
+            <a mcButton slot="actions" [routerLink]="[]" fragment="sessions">
+              {{ labels.bookASession }}
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          }
+          <a
+            mcButton="ghost"
+            slot="actions"
+            [href]="workshop.customSessionRequestUrl"
+            rel="noopener"
+            target="_blank"
+          >
+            {{ labels.requestACustomSession }}
+          </a>
+
+          @for (alternate of alternates(); track alternate.route) {
+            <a
+              class="alternate"
+              slot="note"
+              [attr.lang]="alternate.language"
+              [routerLink]="alternate.route"
+            >
+              <span aria-hidden="true">{{ alternate.flag }}</span>
+              {{ alternate.text }}
+              <span aria-hidden="true">→</span>
+            </a>
+          }
+          @if (labels.opcoNote) {
+            <p slot="note" class="opco">{{ labels.opcoNote }}</p>
+          }
+
           <div slot="aside" class="price-card">
             @if (offerLabel(); as offerLabel) {
               <mc-badge variant="highlight">{{ offerLabel }}</mc-badge>
@@ -213,6 +258,36 @@ import {
       font-weight: 700;
       letter-spacing: -0.035em;
       line-height: 1.08;
+    }
+
+    svg {
+      flex: none;
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .alternate {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 2px;
+      border-bottom: 1px solid var(--mc-dark-line-strong);
+      color: var(--mc-dark-muted);
+      text-decoration: none;
+    }
+
+    .alternate:hover {
+      border-color: var(--mc-accent);
+      color: var(--mc-dark-text);
+    }
+
+    .opco {
+      margin: 0;
     }
 
     /* Hero price card, overlapping the picture. */
@@ -387,6 +462,18 @@ export class WorkshopPage {
   );
   protected labels = computed(
     () => WORKSHOP_DETAIL_LABELS[this.workshop()?.language ?? 'en'],
+  );
+  /* "🇫🇷 Également disponible en français →", in the alternate's language. */
+  protected alternates = computed(() =>
+    (this.workshop()?.alternates ?? []).map(({ id, language }) => {
+      const labels = WORKSHOP_DETAIL_LABELS[language];
+      return {
+        flag: labels.flag,
+        language,
+        route: workshopRouterHelper.detail(id),
+        text: labels.alsoAvailableInThisLanguage,
+      };
+    }),
   );
   protected breadcrumb = computed(() => [
     {

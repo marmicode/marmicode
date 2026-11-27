@@ -3,11 +3,13 @@ import { WorkshopLanguage } from '@marmicode/workshop/core';
 import { WORKSHOP_SHARED_LABELS } from '@marmicode/workshop/ui';
 
 const WORKSHOP_DETAIL_LABELS_EN = {
+  alsoAvailableInThisLanguage: 'Also available in English',
   bookASession: 'Book a seat',
   breadcrumbTraining: 'Training',
   breadcrumbWorkshops: 'Workshops',
   dayLowercase: 'day',
   daysLowercase: 'days',
+  flag: '🇬🇧',
   glance: {
     duration: 'Duration',
     format: 'Format',
@@ -27,6 +29,7 @@ const WORKSHOP_DETAIL_LABELS_EN = {
     'None of these dates work? Bring the workshop to your team.',
   online: 'Online',
   onTheStove: 'on the stove',
+  opcoNote: '',
   orRequestACustomSession: 'or request a custom session for your team →',
   overview: 'overview',
   perSeat: 'per seat',
@@ -44,11 +47,13 @@ const WORKSHOP_DETAIL_LABELS_EN = {
 };
 
 const WORKSHOP_DETAIL_LABELS_FR: typeof WORKSHOP_DETAIL_LABELS_EN = {
+  alsoAvailableInThisLanguage: 'Également disponible en français',
   bookASession: 'Réserver une place',
   breadcrumbTraining: 'Formations',
   breadcrumbWorkshops: 'Ateliers',
   dayLowercase: 'jour',
   daysLowercase: 'jours',
+  flag: '🇫🇷',
   glance: {
     duration: 'Durée',
     format: 'Format',
@@ -68,6 +73,7 @@ const WORKSHOP_DETAIL_LABELS_FR: typeof WORKSHOP_DETAIL_LABELS_EN = {
     'Aucune date ne vous convient ? Organisez la formation pour votre équipe.',
   online: 'En ligne',
   onTheStove: 'aux fourneaux',
+  opcoNote: "🇫🇷 Formation finançable jusqu'à 100% via OPCO.",
   orRequestACustomSession:
     'ou demandez une session sur mesure pour votre équipe →',
   overview: 'aperçu',
