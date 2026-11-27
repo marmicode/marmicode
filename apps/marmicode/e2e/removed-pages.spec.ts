@@ -22,6 +22,14 @@ test.describe('removed pages', () => {
 
     await glove.goto('/learn/angular-signals');
     await expect.poll(() => glove.pathname()).toBe('/library');
+
+    await glove.goto('/workshops');
+    await expect.poll(() => glove.pathname()).toBe('/trainings');
+
+    await glove.goto('/workshops/pragmatic-angular-testing');
+    await expect
+      .poll(() => glove.pathname())
+      .toBe('/trainings/pragmatic-angular-testing');
   });
 });
 

@@ -11,7 +11,7 @@ describe(HomePage.name, () => {
 
     expect(getTiles()).toEqual([
       { heading: 'The Library', href: '/library' },
-      { heading: 'Training', href: '/workshops' },
+      { heading: 'Training', href: '/trainings' },
       { heading: 'Coaching', href: '/coaching' },
     ]);
   });
@@ -42,7 +42,7 @@ describe(HomePage.name, () => {
       { date: 'JAN 05', title: 'Test Angular Pragmatique' },
       { date: 'JAN 12', title: 'Pragmatic Angular Testing' },
     ]);
-    expect(rows.at(-1)?.href).toBe('/workshops/pragmatic-angular-testing');
+    expect(rows.at(-1)?.href).toBe('/trainings/pragmatic-angular-testing');
     expect(rows[0]?.lang).toBe('fr');
   });
 
@@ -53,7 +53,7 @@ describe(HomePage.name, () => {
 
     expect(getEventRows()).toEqual([]);
     expect(getEventsText()).toContain('No public session scheduled right now.');
-    expect(getEventsLinks()).toEqual(['/workshops']);
+    expect(getEventsLinks()).toEqual(['/trainings']);
   });
 });
 

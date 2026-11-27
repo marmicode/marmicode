@@ -11,6 +11,7 @@ import {
   Button,
   createBasicPageInfo,
   CtaBand,
+  NewsletterForm,
   PageComponent,
   PageHeader,
   SegmentedControl,
@@ -41,6 +42,7 @@ import {
   imports: [
     Button,
     CtaBand,
+    NewsletterForm,
     PageComponent,
     PageHeader,
     SegmentedControl,
@@ -51,7 +53,7 @@ import {
       <mc-page-header
         class="wrap"
         eyebrow="// training"
-        description="Learn in a group over a few weeks, in a live workshop, or at your own pace. In-house sessions can be OPCO-financed."
+        [description]="description"
       >
         Hands-on training,
         <span class="mc-gradient-text">from testing to agentic dev.</span>
@@ -111,16 +113,15 @@ import {
           linkLabel="Contact me"
           [link]="{ href: externalLinks.contactFormUrl }"
         >
-          <p>
-            Every workshop can run privately, on your codebase. More are on the
-            stove —
-            <a
-              [href]="externalLinks.newsletterUrl"
-              rel="noopener"
-              target="_blank"
-              >get notified</a
-            >.
-          </p>
+          <p>Every workshop can run privately, on your codebase.</p>
+        </mc-cta-band>
+
+        <mc-cta-band
+          class="newsletter"
+          description="New workshops and session dates. No spam, just the sauce."
+          heading="More workshops are on the stove."
+        >
+          <mc-newsletter-form ctaAction />
         </mc-cta-band>
       </div>
     </mc-page>
@@ -227,15 +228,15 @@ import {
       padding: 16px 0 120px;
     }
 
-    .cta p a {
-      border-bottom: 1px solid rgba(var(--mc-accent-rgb), 0.4);
-      color: var(--mc-accent);
-      text-decoration: none;
+    .newsletter {
+      margin-top: 24px;
     }
   `,
 })
 export class TrainingListPage {
   protected readonly externalLinks = externalLinks;
+  protected readonly description = `Learn in a group over a few weeks, in a live workshop, or at your own pace.
+In-house sessions can be OPCO-financed.`;
   protected readonly pageInfo = createBasicPageInfo({
     title: 'Training',
     description:

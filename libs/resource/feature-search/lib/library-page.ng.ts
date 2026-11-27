@@ -8,11 +8,11 @@ import {
 import { rxResource } from '@angular/core/rxjs-interop';
 import { ResourceKind, ResourceTopic } from '@marmicode/resource/core';
 import { ResourceRow } from '@marmicode/resource/ui';
-import { externalLinks } from '@marmicode/shared/router-helpers';
 import {
   Button,
   createBasicPageInfo,
   CtaBand,
+  NewsletterForm,
   PageComponent,
   PageHeader,
   SegmentedControl,
@@ -25,7 +25,7 @@ import { TopicFilter } from './topic-filter.ng';
 import { toResourceRowData } from './to-resource-row-data';
 
 /**
- * Dark library: every resource (or a skill's resources), one per row,
+ * Dark library: every resource, one per row,
  * filtered by kind, topic and search.
  */
 @Component({
@@ -35,6 +35,7 @@ import { toResourceRowData } from './to-resource-row-data';
     Button,
     CookbookBanner,
     CtaBand,
+    NewsletterForm,
     PageComponent,
     PageHeader,
     ResourceRow,
@@ -100,11 +101,11 @@ import { toResourceRowData } from './to-resource-row-data';
 
         <mc-cta-band
           class="newsletter"
-          description="New articles, videos and workshop dates — no spam, just the sauce."
+          description="New articles, videos and workshop dates. No spam, just the sauce."
           heading="Fresh recipes in your inbox."
-          linkLabel="Subscribe"
-          [link]="{ href: newsletterUrl }"
-        />
+        >
+          <mc-newsletter-form ctaAction />
+        </mc-cta-band>
       </main>
     </mc-page>
   `,
@@ -218,7 +219,6 @@ import { toResourceRowData } from './to-resource-row-data';
   `,
 })
 export class LibraryPage {
-  protected readonly newsletterUrl = externalLinks.newsletterUrl;
   protected readonly pageInfo = createBasicPageInfo({
     title: 'Library',
     description: 'JavaScript, Angular & Testing Resources',

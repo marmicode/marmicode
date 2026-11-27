@@ -12,7 +12,7 @@ describe(TrainingPageHero.name, () => {
 
     expect(getHeading()).toBe('Pragmatic Angular Testing');
     expect(getBreadcrumbLinks()).toEqual([
-      { text: 'Training', href: '/workshops' },
+      { text: 'Training', href: '/trainings' },
     ]);
     expect(getAsideText()).toBe('€1,270 per seat');
   });
@@ -34,7 +34,7 @@ async function mountTrainingPageHero() {
       .withBasicInfo('Pragmatic Angular Testing')
       .build();
     breadcrumb = [
-      { label: 'Training', link: { route: ['/workshops'] } },
+      { label: 'Training', link: { route: ['/trainings'] } },
       { label: 'Workshops' },
     ];
   }

@@ -55,7 +55,7 @@ class WorkshopListGlove {
    * and it can take most of the test timeout on slow browsers.
    */
   goto() {
-    return this._page.goto('/workshops', { waitUntil: 'domcontentloaded' });
+    return this._page.goto('/trainings', { waitUntil: 'domcontentloaded' });
   }
 
   /**
@@ -74,6 +74,6 @@ class WorkshopListGlove {
   workshopCardTitle(title: string) {
     return this._page
       .getByRole('heading', { level: 3, name: title, exact: true })
-      .filter({ has: this._page.locator('a[href^="/workshops/"]') });
+      .filter({ has: this._page.locator('a[href^="/trainings/"]') });
   }
 }

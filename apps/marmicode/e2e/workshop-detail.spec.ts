@@ -42,18 +42,18 @@ test.describe('workshop detail', () => {
     const alternateLinks = page.locator('head link[rel="alternate"]');
     await expect
       .soft(canonicalLink)
-      .toHaveAttribute('href', `${baseURL}/workshops/test-angular-pragmatique`);
+      .toHaveAttribute('href', `${baseURL}/trainings/test-angular-pragmatique`);
     await expect.soft(alternateLinks).toHaveCount(3);
     await expect.soft(alternateLinks.nth(0)).toHaveAttribute('hreflang', 'fr');
     await expect
       .soft(alternateLinks.nth(0))
-      .toHaveAttribute('href', `${baseURL}/workshops/test-angular-pragmatique`);
+      .toHaveAttribute('href', `${baseURL}/trainings/test-angular-pragmatique`);
     await expect.soft(alternateLinks.nth(1)).toHaveAttribute('hreflang', 'en');
     await expect
       .soft(alternateLinks.nth(1))
       .toHaveAttribute(
         'href',
-        `${baseURL}/workshops/pragmatic-angular-testing`,
+        `${baseURL}/trainings/pragmatic-angular-testing`,
       );
     await expect
       .soft(alternateLinks.nth(2))
@@ -62,7 +62,7 @@ test.describe('workshop detail', () => {
       .soft(alternateLinks.nth(2))
       .toHaveAttribute(
         'href',
-        `${baseURL}/workshops/pragmatic-angular-testing`,
+        `${baseURL}/trainings/pragmatic-angular-testing`,
       );
   });
 });
@@ -81,7 +81,7 @@ class WorkshopDetailGlove {
       waitUntil = 'domcontentloaded',
     }: { waitUntil?: 'domcontentloaded' | 'load' } = {},
   ) {
-    return this._page.goto(`/workshops/${workshopId}`, { waitUntil });
+    return this._page.goto(`/trainings/${workshopId}`, { waitUntil });
   }
 
   sessionList() {

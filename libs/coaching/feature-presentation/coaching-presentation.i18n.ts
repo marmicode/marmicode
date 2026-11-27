@@ -19,8 +19,7 @@ export const COACHING_LABELS = {
     },
     {
       title: 'Async support',
-      description:
-        'Questions and PR reviews in between, answered within 48 hours.',
+      description: 'Focused questions in between, answered within 48 hours.',
     },
     {
       title: 'Written report',
@@ -28,5 +27,5 @@ export const COACHING_LABELS = {
         'Prioritized recommendations, so the team knows what to do next.',
     },
   ],
-  loopRepeat: 'Repeat monthly — three months is the sweet spot.',
+  loopRepeat: 'Repeat monthly. Three months is the sweet spot.',
 };

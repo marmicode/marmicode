@@ -14,11 +14,11 @@ test.describe('new pages', () => {
     for (const { url, heading } of [
       { url: '/', heading: 'Trust, baked in.' },
       {
-        url: '/workshops',
+        url: '/trainings',
         heading: 'Hands-on training, from testing to agentic dev.',
       },
       {
-        url: '/workshops/pragmatic-angular-testing',
+        url: '/trainings/pragmatic-angular-testing',
         heading: 'Pragmatic Angular Testing Workshop',
       },
       {

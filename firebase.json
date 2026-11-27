@@ -43,7 +43,17 @@
         },
         {
           "source": "/workshops/pragmatic-angular-testing-full-course",
-          "destination": "/workshops/pragmatic-angular-testing",
+          "destination": "/trainings/pragmatic-angular-testing",
+          "type": 301
+        },
+        {
+          "source": "/workshops",
+          "destination": "/trainings",
+          "type": 301
+        },
+        {
+          "source": "/workshops/:workshopId",
+          "destination": "/trainings/:workshopId",
           "type": 301
         },
         {

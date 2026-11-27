@@ -1,1 +1,5 @@
-export { COACHING, type CoachingOffering } from './coaching';
+export {
+  COACHING,
+  type CoachingBenefit,
+  type CoachingOffering,
+} from './coaching';

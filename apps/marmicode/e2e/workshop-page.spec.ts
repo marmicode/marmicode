@@ -28,7 +28,7 @@ class WorkshopPageGlove {
    * it depends on third parties (e.g. chat widget).
    */
   async goto(workshopId: string) {
-    await this._page.goto(`/workshops/${workshopId}`, {
+    await this._page.goto(`/trainings/${workshopId}`, {
       waitUntil: 'domcontentloaded',
     });
   }

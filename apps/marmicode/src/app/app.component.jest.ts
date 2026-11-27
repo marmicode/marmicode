@@ -19,7 +19,7 @@ describe(AppComponent.name, () => {
       target: null,
     });
     expect(getNavLink('Training')).toEqual({
-      href: '/workshops',
+      href: '/trainings',
       target: null,
     });
     expect(getNavLink('Coaching')).toEqual({

@@ -32,7 +32,7 @@ describe(WorkshopPage.name, () => {
     expect(frenchRows).toEqual([
       expect.objectContaining({
         text: expect.stringContaining('janvier 2027'),
-        href: '/workshops/test-angular-pragmatique',
+        href: '/trainings/test-angular-pragmatique',
       }),
     ]);
   });
@@ -53,7 +53,7 @@ describe(WorkshopPage.name, () => {
       await mountWorkshopPage({ workshopId: 'pragmatic-angular-testing' });
 
     expect(getBreadcrumbLinks()).toEqual([
-      { text: 'Training', href: '/workshops' },
+      { text: 'Training', href: '/trainings' },
     ]);
     expect(getHeroText()).toContain('€1,270');
     expect(getGlanceFacts()['Next session']).toMatch(/Jan 12\s?–\s?14, 2027/);

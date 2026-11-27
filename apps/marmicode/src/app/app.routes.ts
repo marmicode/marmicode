@@ -97,7 +97,24 @@ export const routes: Routes = [
     ],
   },
 
-  /* Workshops. */
+  /* Trainings moved from `/workshops` to `/trainings`. */
+  {
+    path: workshopRouterHelper.LEGACY_WORKSHOP_LIST_PATH,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: workshopRouterHelper.listUrl(),
+      },
+      {
+        path: workshopRouterHelper.WORKSHOP_DETAIL_RELATIVE_PATH,
+        redirectTo: ({ params }) =>
+          workshopRouterHelper.detailUrl(params['workshopId']),
+      },
+    ],
+  },
+
+  /* Trainings. */
   {
     path: workshopRouterHelper.WORKSHOP_LIST_PATH,
     providers: [provideChatWidget()],

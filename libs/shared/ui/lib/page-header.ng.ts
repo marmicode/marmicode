@@ -33,9 +33,11 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       line-height: 1;
     }
 
+    /* Line breaks in the description start a new line. */
     p {
-      max-width: 56ch;
+      max-width: 64ch;
       margin: 0;
+      white-space: pre-line;
       color: var(--mc-dark-muted);
       font-size: clamp(17px, 2vw, 19px);
     }

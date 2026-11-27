@@ -18,9 +18,7 @@ import { COACHING_LABELS } from './coaching-presentation.i18n';
       <span class="mc-eyebrow">// {{ labels.rhythmEyebrow }}</span>
       <h2>
         {{ title().start }}
-        @if (title().end; as end) {
-          <span class="mc-gradient-text">{{ end }}</span>
-        }
+        <span class="mc-gradient-text">{{ title().end }}</span>
       </h2>
       @for (paragraph of paragraphs(); track $index) {
         <p>{{ paragraph }}</p>
@@ -182,14 +180,8 @@ export class CoachingRhythm {
   coaching = input.required<CoachingOffering>();
 
   protected labels = COACHING_LABELS;
-  /* "More than advice" + gradient "a team that needs me less over time". */
-  protected title = computed(() => {
-    const [start, ...rest] = this.coaching().philosophyTitle.split(' — ');
-    return {
-      start: rest.length > 0 ? `${start} —` : start,
-      end: rest.join(' — '),
-    };
-  });
+  /* "More than advice," + gradient "a team that needs me less over time". */
+  protected title = computed(() => this.coaching().philosophyTitle);
   protected paragraphs = computed(() =>
     this.coaching().philosophyContent.split('\n\n'),
   );

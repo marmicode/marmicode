@@ -12,7 +12,7 @@ describe(NotFoundPage.name, () => {
 
     expect(getHeading()).toBe('Oups! The page pot is empty.');
     expect(getLinkHref('Library')).toBe('/library');
-    expect(getLinkHref('Training')).toBe('/workshops');
+    expect(getLinkHref('Training')).toBe('/trainings');
     expect(getLinkHref('Coaching')).toBe('/coaching');
     expect(getLinkHref('Back to the kitchen')).toBe('/');
     expect(hasImage()).toBe(false);

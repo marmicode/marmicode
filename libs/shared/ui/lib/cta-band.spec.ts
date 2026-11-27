@@ -1,4 +1,4 @@
-import { inputBinding, signal } from '@angular/core';
+import { Component, inputBinding, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { describe, expect, it } from 'vitest';
@@ -28,6 +28,27 @@ describe(CtaBand.name, () => {
         target: '_blank',
         rel: 'noopener',
       });
+  });
+
+  it('cta band shows its projected action when it has no link', async () => {
+    @Component({
+      imports: [CtaBand],
+      template: `
+        <mc-cta-band heading="Fresh recipes in your inbox.">
+          <form ctaAction aria-label="Subscribe"></form>
+        </mc-cta-band>
+      `,
+    })
+    class CtaBandHost {}
+
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+    const fixture = TestBed.createComponent(CtaBandHost);
+    await fixture.whenStable();
+
+    expect(document.querySelector('form')?.getAttribute('aria-label')).toBe(
+      'Subscribe',
+    );
+    expect(document.querySelector('a')).toBeNull();
   });
 });
 

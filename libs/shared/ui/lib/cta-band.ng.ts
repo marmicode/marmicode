@@ -11,6 +11,7 @@ import { Link } from './link.component';
 /**
  * Closing call-to-action band: 'solid' (newsletter) or 'dashed' (in-house offer).
  * Projected content goes under the description, e.g. a paragraph with a secondary link.
+ * Without a link, content marked `ctaAction` takes the action's place, e.g. a form.
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,8 +32,10 @@ import { Link } from './link.component';
       <a class="action" mcButton [href]="href" rel="noopener" target="_blank">
         {{ linkLabel() }}
       </a>
+    } @else if (route(); as route) {
+      <a class="action" mcButton [routerLink]="route">{{ linkLabel() }}</a>
     } @else {
-      <a class="action" mcButton [routerLink]="route()">{{ linkLabel() }}</a>
+      <ng-content select="[ctaAction]" />
     }
   `,
   styles: `
@@ -87,16 +90,16 @@ import { Link } from './link.component';
 export class CtaBand {
   heading = input.required<string>();
   description = input<string>();
-  link = input.required<Link>();
-  linkLabel = input.required<string>();
+  link = input<Link>();
+  linkLabel = input<string>();
   appearance = input<'solid' | 'dashed'>('solid');
 
   protected readonly href = computed(() => {
     const link = this.link();
-    return 'href' in link ? link.href : undefined;
+    return link && 'href' in link ? link.href : undefined;
   });
   protected readonly route = computed(() => {
     const link = this.link();
-    return 'route' in link ? link.route : undefined;
+    return link && 'route' in link ? link.route : undefined;
   });
 }

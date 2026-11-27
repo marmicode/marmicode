@@ -359,8 +359,8 @@ export class CoachingLandingPage {
   protected contactFormUrl = externalLinks.contactFormUrl;
   /* "Monthly Team" + gradient "Coaching". */
   protected title = splitLastWord(this.coaching.title);
-  protected benefits = this.coaching.benefits.map(splitBenefit);
-  /* "Make this the quarter your delivery gets" + gradient "predictable". */
+  protected benefits = this.coaching.benefits;
+  /* "Make this the quarter your team ships code it can" + gradient "trust". */
   protected ctaTitle = splitLastWord(this.coaching.ctaTitle);
 }
 
@@ -370,20 +370,4 @@ function splitLastWord(text: string) {
     start: text.slice(0, Math.max(lastSpaceIndex, 0)),
     end: text.slice(lastSpaceIndex + 1),
   };
-}
-
-/* "Deep-dive session — 4 hours, once a month. …" → bold headline + detail. */
-function splitBenefit(benefit: string) {
-  const separatorIndex = benefit.indexOf(' — ');
-  if (separatorIndex === -1) {
-    return { headline: benefit, detail: '' };
-  }
-  return {
-    headline: benefit.slice(0, separatorIndex),
-    detail: upperFirst(benefit.slice(separatorIndex + ' — '.length)),
-  };
-}
-
-function upperFirst(text: string) {
-  return text.charAt(0).toUpperCase() + text.slice(1);
 }

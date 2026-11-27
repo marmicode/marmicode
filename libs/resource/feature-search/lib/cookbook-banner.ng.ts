@@ -14,8 +14,8 @@ import { externalLinks } from '@marmicode/shared/router-helpers';
         <b>The Cookbook</b>
         <span class="tag">Free</span>
         <small>
-          Bite-sized recipes for pragmatic testing and modern Angular, ready to
-          copy into your codebase.
+          The sauce (the why), the ingredients (the tools) and the recipes (the
+          how) for testing, Angular and Nx.
         </small>
       </span>
       <span class="go">

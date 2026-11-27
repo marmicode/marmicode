@@ -1,10 +1,13 @@
-const WORKSHOP_LIST_PATH = 'workshops';
+const WORKSHOP_LIST_PATH = 'trainings';
+/* Trainings used to live under `/workshops`: it redirects to `/trainings` now. */
+const LEGACY_WORKSHOP_LIST_PATH = 'workshops';
 const WORKSHOP_DETAIL_RELATIVE_PATH = ':workshopId';
 
 export const workshopRouterHelper = {
   WORKSHOP_DETAIL_RELATIVE_PATH,
   WORKSHOP_DETAIL_PATH: `${WORKSHOP_LIST_PATH}/${WORKSHOP_DETAIL_RELATIVE_PATH}`,
   WORKSHOP_LIST_PATH,
+  LEGACY_WORKSHOP_LIST_PATH,
 
   detail(workshopId: string) {
     return ['/', this.WORKSHOP_LIST_PATH, encodeURIComponent(workshopId)];
@@ -14,5 +17,8 @@ export const workshopRouterHelper = {
   },
   list() {
     return ['/', this.WORKSHOP_LIST_PATH];
+  },
+  listUrl() {
+    return `/${this.WORKSHOP_LIST_PATH}`;
   },
 };

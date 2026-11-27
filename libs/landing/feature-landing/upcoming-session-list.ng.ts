@@ -15,7 +15,7 @@ import { formatSessionDates, formatSessionTimes } from '@marmicode/workshop/ui';
 
 /**
  * One row per session: "DEC 08" date tile, workshop title (with `lang`), "Workshop · Online · 🇬🇧 English · Dec 8–9 · 9:30–18:00 CET".
- * Each row links to the workshop page. Empty list: "No public session scheduled right now." + link to /workshops.
+ * Each row links to the workshop page. Empty list: "No public session scheduled right now." + link to /trainings.
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

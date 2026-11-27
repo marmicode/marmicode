@@ -7,6 +7,7 @@ export { CtaBand } from './lib/cta-band.ng';
 export { ErrorComponent } from './lib/error.component';
 export { Link, LinkComponent } from './lib/link.component';
 export { LoadingComponent } from './lib/loading.component';
+export { NewsletterForm } from './lib/newsletter-form.ng';
 export {
   ArticlePageInfo,
   BasicPageInfo,

@@ -4,12 +4,12 @@ import { BlogPostArticle } from '@marmicode/blog-post/ui';
 import { ResourceRow } from '@marmicode/resource/ui';
 import {
   blogPostDetailRouterHelper,
-  externalLinks,
   resourceSearchRouterHelper,
 } from '@marmicode/shared/router-helpers';
 import {
   CtaBand,
   Link,
+  NewsletterForm,
   PageComponent,
   SuspenseComponent,
 } from '@marmicode/shared/ui';
@@ -58,11 +58,11 @@ import { blogPostToPageInfo } from './blog-post-to-page-info';
 
         <mc-cta-band
           class="newsletter"
-          description="New articles, videos and workshop dates — no spam, just the sauce."
+          description="New articles, videos and workshop dates. No spam, just the sauce."
           heading="Fresh recipes in your inbox."
-          linkLabel="Subscribe"
-          [link]="{ href: newsletterUrl }"
-        />
+        >
+          <mc-newsletter-form ctaAction />
+        </mc-cta-band>
       </div>
     </mc-page>
   `,
@@ -104,6 +104,7 @@ import { blogPostToPageInfo } from './blog-post-to-page-info';
   imports: [
     BlogPostArticle,
     CtaBand,
+    NewsletterForm,
     PageComponent,
     PushPipe,
     ResourceRow,
@@ -118,7 +119,6 @@ export class BlogPostDetailPageComponent {
   protected readonly libraryLink: Link = {
     route: resourceSearchRouterHelper.library(),
   };
-  protected readonly newsletterUrl = externalLinks.newsletterUrl;
 
   private _blogPostSlug$ = this._route.paramMap.pipe(
     map(

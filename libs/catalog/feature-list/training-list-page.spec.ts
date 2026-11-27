@@ -109,7 +109,7 @@ describe(TrainingListPage.name, () => {
       getGroup('Formations')?.cards.find(
         ({ title }) => title === 'Test Angular Pragmatique',
       )?.link,
-    ).toEqual({ href: '/workshops/test-angular-pragmatique', target: null });
+    ).toEqual({ href: '/trainings/test-angular-pragmatique', target: null });
   });
 
   it('cards show the next session', async () => {
