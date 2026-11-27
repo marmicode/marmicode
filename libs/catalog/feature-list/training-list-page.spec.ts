@@ -39,7 +39,7 @@ describe(TrainingListPage.name, () => {
     ]);
   });
 
-  it.todo('french filter shows French copy only', async () => {
+  it('french filter shows French copy only', async () => {
     const { click, getGroups } = await mountTrainingListPage();
 
     await click('Français');
