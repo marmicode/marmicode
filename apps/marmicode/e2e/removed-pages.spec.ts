@@ -7,7 +7,7 @@ const test = base.extend<{ glove: RemovedPagesGlove }>({
 });
 
 test.describe('removed pages', () => {
-  test.fixme('removed pages redirect', async ({ glove }) => {
+  test('removed pages redirect', async ({ glove }) => {
     await glove.goto('/services');
     await expect.poll(() => glove.pathname()).toBe('/coaching');
 

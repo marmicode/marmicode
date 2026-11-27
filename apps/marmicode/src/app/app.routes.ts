@@ -3,12 +3,10 @@ import {
   blogPostDetailRouterHelper,
   coachingRouterHelper,
   cohortRouterHelper,
-  recipeDetailRouterHelper,
   resourceSearchRouterHelper,
-  servicesRouterHelper,
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
-import { matchWip, or } from '@marmicode/shared/utils';
+import { matchWip } from '@marmicode/shared/utils';
 import { provideChatWidget } from './chat/chat';
 
 export const routes: Routes = [
@@ -21,16 +19,24 @@ export const routes: Routes = [
       ),
   },
 
-  /* Recipe detail. */
+  /* Recipes and tutorials are gone: send them to the library. */
   {
-    matcher: or([
-      recipeDetailRouterHelper.RECIPE_DETAIL_PATH,
-      recipeDetailRouterHelper.TUTORIAL_DETAIL_PATH,
-    ]),
-    loadChildren: () =>
-      import('@marmicode/recipe/feature-detail').then(
-        (m) => m.RecipeDetailRoutingModule,
-      ),
+    path: 'recipe',
+    children: [
+      {
+        path: '**',
+        redirectTo: resourceSearchRouterHelper.learnEverythingUrl(),
+      },
+    ],
+  },
+  {
+    path: 'tutorial',
+    children: [
+      {
+        path: '**',
+        redirectTo: resourceSearchRouterHelper.learnEverythingUrl(),
+      },
+    ],
   },
 
   /* Resource search. */
@@ -42,13 +48,11 @@ export const routes: Routes = [
       ),
   },
 
-  /* Services */
+  /* Services became coaching. */
   {
-    path: servicesRouterHelper.SERVICES_PATH,
-    loadChildren: () =>
-      import('@marmicode/services/feature-presentation').then(
-        (m) => m.ServicesRoutingModule,
-      ),
+    path: 'services',
+    pathMatch: 'full',
+    redirectTo: coachingRouterHelper.coachingUrl(),
   },
 
   /* Coaching. */

@@ -17,6 +17,21 @@
       ],
       "redirects": [
         {
+          "source": "/services",
+          "destination": "/coaching",
+          "type": 301
+        },
+        {
+          "source": "/recipe/**",
+          "destination": "/learn/everything",
+          "type": 301
+        },
+        {
+          "source": "/tutorial/**",
+          "destination": "/learn/everything",
+          "type": 301
+        },
+        {
           "source": "/workshops/pragmatic-angular-testing-full-course",
           "destination": "/workshops/pragmatic-angular-testing",
           "type": 301

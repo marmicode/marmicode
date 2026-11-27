@@ -5,7 +5,6 @@ import {
   coachingRouterHelper,
   cohortRouterHelper,
   resourceSearchRouterHelper,
-  servicesRouterHelper,
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
@@ -18,11 +17,6 @@ export const serverRoutes: ServerRoute[] = [
   /* Landing */
   {
     path: '',
-    renderMode: RenderMode.Prerender,
-  },
-  /* Services */
-  {
-    path: servicesRouterHelper.SERVICES_PATH,
     renderMode: RenderMode.Prerender,
   },
   /* Coaching */
@@ -85,20 +79,6 @@ export const serverRoutes: ServerRoute[] = [
       }));
     },
   },
-  /* Recipe detail */
-  //   {
-  //     path: `${recipeDetailRouterHelper.RECIPE_DETAIL_PATH}/:${recipeDetailRouterHelper.RECIPE_SLUG_PARAM}`,
-  //     renderMode: RenderMode.Prerender,
-  //     async getPrerenderParams() {
-  //       const slugs = await _queryContentfulSlugs({
-  //         content_type: 'resource',
-  //         'fields.resourceType': 'recipe',
-  //       });
-  //       return slugs.map((slug) => ({
-  //         [recipeDetailRouterHelper.RECIPE_SLUG_PARAM]: slug,
-  //       }));
-  //     },
-  //   },
   /* Catch-all: fallback to CSR */
   {
     path: '**',

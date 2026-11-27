@@ -8,4 +8,7 @@ export const resourceSearchRouterHelper = {
   learnEverything() {
     return ['/', this.LEARN_PATH, this.EVERYTHING];
   },
+  learnEverythingUrl() {
+    return `/${this.LEARN_PATH}/${this.EVERYTHING}`;
+  },
 };

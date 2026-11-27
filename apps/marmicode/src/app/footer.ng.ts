@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   externalLinks,
   resourceSearchRouterHelper,
-  servicesRouterHelper,
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
 import { LinkComponent } from '@marmicode/shared/ui';
@@ -185,7 +184,6 @@ import { appRouterHelper } from './app-router-helper';
 export class Footer {
   appRouterHelper = appRouterHelper;
   resourceSearchRouterHelper = resourceSearchRouterHelper;
-  servicesRouterHelper = servicesRouterHelper;
   workshopRouterHelper = workshopRouterHelper;
   externalLinks = externalLinks;
   year = new Date().getFullYear();
