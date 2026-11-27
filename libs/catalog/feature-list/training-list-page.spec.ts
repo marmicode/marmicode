@@ -39,9 +39,23 @@ describe(TrainingListPage.name, () => {
     ]);
   });
 
-  it.todo('french filter shows French copy only', () => {
-    // Mount, then click "Français".
-    // Assert the cards show "Test Angular Pragmatique", no cohort or video course groups, and French group descriptions.
+  it.todo('french filter shows French copy only', async () => {
+    const { click, getGroups } = await mountTrainingListPage();
+
+    await click('Français');
+
+    const groups = getGroups();
+    const titles = groups.flatMap(({ cards }) =>
+      cards.map(({ title }) => title),
+    );
+    /* Only the workshops are offered in French. */
+    expect(groups).toEqual([
+      expect.objectContaining({
+        description: expect.stringContaining('un à trois jours'),
+      }),
+    ]);
+    expect(titles).toContain('Test Angular Pragmatique');
+    expect(titles).not.toContain('Pragmatic Angular Testing');
   });
 
   it.todo('combines format and language filters', () => {
@@ -106,6 +120,13 @@ async function mountTrainingListPage({
       }));
 
   return {
+    /* Clicks a filter or a button by its accessible text. */
+    async click(name: string) {
+      Array.from(host.querySelectorAll('button'))
+        .find((button) => getAccessibleText(button) === name)
+        ?.click();
+      await fixture.whenStable();
+    },
     getGroups,
     getGroup: (heading: string) =>
       getGroups().find((group) => group.heading === heading),
@@ -116,7 +137,7 @@ function getTextContent(element: Element | null) {
   return element?.textContent?.replace(/\s+/g, ' ').trim();
 }
 
-/* Good enough for headings: the text without the parts hidden from screen readers. */
+/* Good enough for headings and buttons: the text without the parts hidden from screen readers. */
 function getAccessibleText(element: Element | null) {
   const clone = element?.cloneNode(true) as Element | undefined;
   clone
