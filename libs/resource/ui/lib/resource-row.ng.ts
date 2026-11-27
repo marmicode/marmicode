@@ -69,6 +69,13 @@ export interface ResourceRowData {
           }
         </h3>
         <p>{{ resource().summary }}</p>
+        @if (resource().topicLabels.length > 0) {
+          <ul class="topic-tags" aria-label="Topics">
+            @for (label of resource().topicLabels; track label) {
+              <li class="topic-tag">{{ label }}</li>
+            }
+          </ul>
+        }
       </div>
 
       <span class="read" aria-hidden="true">
@@ -210,6 +217,24 @@ export interface ResourceRowData {
       font-size: 15px;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
+    }
+
+    .topic-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 2px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .topic-tag {
+      padding: 3px 10px;
+      border: 1px solid rgba(var(--mc-accent-rgb), 0.25);
+      border-radius: 999px;
+      background: rgba(var(--mc-accent-rgb), 0.1);
+      color: var(--mc-accent-bright);
+      font-size: 12px;
     }
 
     .read {

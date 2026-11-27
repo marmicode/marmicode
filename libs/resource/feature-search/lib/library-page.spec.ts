@@ -29,7 +29,7 @@ describe(LibraryPage.name, () => {
     });
   });
 
-  it.todo('rows show topic tags, not skills', async () => {
+  it('rows show topic tags, not skills', async () => {
     /* `angular-aot-testing` maps to Testing and Angular. */
     const { getRows, getText } = await mountLibraryPage({
       resources: [NOV_2024_ARTICLE],
