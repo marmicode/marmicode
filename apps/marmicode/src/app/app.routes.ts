@@ -55,7 +55,24 @@ export const routes: Routes = [
   {
     path: coachingRouterHelper.COACHING_PATH,
     providers: [provideChatWidget()],
-    loadComponent: () => import('@marmicode/coaching/feature-presentation'),
+    children: [
+      /* Coaching page (WIP). */
+      {
+        path: '',
+        pathMatch: 'full',
+        canMatch: [matchWip],
+        loadComponent: () =>
+          import('@marmicode/coaching/feature-presentation').then(
+            (m) => m.CoachingLandingPage,
+          ),
+      },
+      /* Coaching page. */
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () => import('@marmicode/coaching/feature-presentation'),
+      },
+    ],
   },
 
   /* Cohorts. */
