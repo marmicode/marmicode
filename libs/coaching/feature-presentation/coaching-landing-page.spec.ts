@@ -15,7 +15,7 @@ describe(CoachingLandingPage.name, () => {
     expect(benefits[0].detail).toMatch(/^4 hours/);
   });
 
-  it.todo('book a fit call', async () => {
+  it('book a fit call', async () => {
     const { getLinks } = await mountCoachingLandingPage();
 
     const bookCallLink = {

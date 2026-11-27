@@ -1,7 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { COACHING } from '@marmicode/coaching/core';
-import { coachingRouterHelper } from '@marmicode/shared/router-helpers';
-import { createBasicPageInfo, PageComponent } from '@marmicode/shared/ui';
+import {
+  coachingRouterHelper,
+  externalLinks,
+} from '@marmicode/shared/router-helpers';
+import {
+  Badge,
+  Button,
+  ClosingSection,
+  createBasicPageInfo,
+  PageComponent,
+} from '@marmicode/shared/ui';
 import { COACHING_LABELS } from './coaching-presentation.i18n';
 
 /**
@@ -12,9 +21,46 @@ import { COACHING_LABELS } from './coaching-presentation.i18n';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-coaching-landing-page',
-  imports: [PageComponent],
+  imports: [Badge, Button, ClosingSection, PageComponent],
   template: `
     <mc-page [info]="pageInfo" theme="dark">
+      <header class="wrap hero">
+        <div>
+          <span class="mc-eyebrow">// {{ labels.heroEyebrow }}</span>
+          <h1>
+            {{ title.start }}
+            <span class="mc-gradient-text">{{ title.end }}</span>
+          </h1>
+          <mc-badge variant="highlight">{{ coaching.priceLabel }}</mc-badge>
+          <p class="description">{{ coaching.description }}</p>
+          <div class="actions">
+            <a
+              mcButton
+              [href]="coaching.bookCallUrl"
+              rel="noopener"
+              target="_blank"
+            >
+              {{ labels.bookFitCall }}
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <figure class="portrait">
+          <img
+            [alt]="labels.coachPictureAltText"
+            [src]="coaching.heroPictureUri"
+          />
+          <figcaption class="card">
+            <b>{{ labels.coachName }}</b>
+            <span>{{ labels.coachRole }}</span>
+          </figcaption>
+        </figure>
+      </header>
+
       <section id="benefits" class="wrap">
         <span class="mc-eyebrow">// {{ labels.benefitsEyebrow }}</span>
         <h2>{{ labels.benefitsTitle }}</h2>
@@ -50,6 +96,39 @@ import { COACHING_LABELS } from './coaching-presentation.i18n';
           }
         </ul>
       </section>
+
+      <section class="wrap closing">
+        <mc-closing-section
+          [description]="coaching.ctaDescription"
+          [eyebrow]="'// ' + labels.closingEyebrow"
+        >
+          {{ ctaTitle.start }}
+          <span class="mc-gradient-text">{{ ctaTitle.end }}</span>
+          <a
+            mcButton
+            slot="actions"
+            [href]="coaching.bookCallUrl"
+            rel="noopener"
+            target="_blank"
+          >
+            {{ labels.bookFitCall }}
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+          <a
+            mcButton="ghost"
+            slot="actions"
+            [href]="contactFormUrl"
+            rel="noopener"
+            target="_blank"
+          >
+            {{ labels.askAQuestionFirst }}
+          </a>
+          <p slot="actions" class="price-line">{{ coaching.priceLabel }}</p>
+        </mc-closing-section>
+      </section>
     </mc-page>
   `,
   styles: `
@@ -61,6 +140,117 @@ import { COACHING_LABELS } from './coaching-presentation.i18n';
     section {
       position: relative;
       padding: 24px 0 72px;
+    }
+
+    /* Hero: copy on the left, the coach on the right. */
+    .hero {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 56px;
+      align-items: center;
+      /* The shell already leaves 80px for the floating nav. */
+      padding: 60px 0 40px;
+    }
+
+    h1 {
+      margin: 14px 0 18px;
+      font-size: clamp(42px, 6.4vw, 76px);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 0.98;
+    }
+
+    .hero mc-badge {
+      padding: 5px 12px;
+      font-size: 13px;
+    }
+
+    .description {
+      max-width: 50ch;
+      margin: 18px 0 30px;
+      color: var(--mc-dark-muted);
+      font-size: clamp(17px, 2vw, 19px);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .portrait {
+      position: relative;
+      margin: 0;
+    }
+
+    .portrait img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 4.4;
+      object-fit: cover;
+      object-position: 50% 25%;
+      border: 1px solid var(--mc-dark-line-strong);
+      border-radius: 28px;
+      box-shadow: 0 40px 80px -40px rgba(var(--mc-violet-rgb), 0.7);
+    }
+
+    /* Name card overlapping the picture's bottom-left corner. */
+    .portrait .card {
+      position: absolute;
+      bottom: 28px;
+      left: -24px;
+      display: grid;
+      gap: 2px;
+      padding: 14px 16px;
+      border: 1px solid var(--mc-dark-line-strong);
+      border-radius: 16px;
+      background: rgba(26, 17, 32, 0.85);
+      box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(12px);
+    }
+
+    .portrait .card b {
+      font-size: 15px;
+    }
+
+    .portrait .card span {
+      color: var(--mc-dark-muted);
+      font-size: 12.5px;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 36px;
+        padding-top: 40px;
+      }
+
+      .portrait {
+        max-width: 440px;
+      }
+
+      .portrait .card {
+        left: 12px;
+      }
+    }
+
+    #benefits {
+      padding-top: 40px;
+    }
+
+    .closing {
+      padding-top: 24px;
+    }
+
+    /* Under the closing actions. */
+    .price-line {
+      flex-basis: 100%;
+      margin: 6px 0 0;
+      color: var(--mc-dark-muted);
+      font-family: var(--mc-font-mono);
+      font-size: 13px;
     }
 
     /* Leaves room for the floating nav. */
@@ -152,7 +342,20 @@ export class CoachingLandingPage {
     description: this.coaching.description,
     path: coachingRouterHelper.coachingUrl(),
   });
+  protected contactFormUrl = externalLinks.contactFormUrl;
+  /* "Monthly Team" + gradient "Coaching". */
+  protected title = splitLastWord(this.coaching.title);
   protected benefits = this.coaching.benefits.map(splitBenefit);
+  /* "Make this the quarter your delivery gets" + gradient "predictable". */
+  protected ctaTitle = splitLastWord(this.coaching.ctaTitle);
+}
+
+function splitLastWord(text: string) {
+  const lastSpaceIndex = text.lastIndexOf(' ');
+  return {
+    start: text.slice(0, Math.max(lastSpaceIndex, 0)),
+    end: text.slice(lastSpaceIndex + 1),
+  };
 }
 
 /* "Deep-dive session — 4 hours, once a month. …" → bold headline + detail. */
