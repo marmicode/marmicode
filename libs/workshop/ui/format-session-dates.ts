@@ -3,20 +3,23 @@ import { IsoDate, Session, WorkshopLanguage } from '@marmicode/workshop/core';
 /**
  * en: "Jan 12–14, 2027" (or "Dec 30, 2026 – Jan 1, 2027"); fr: "12–14 janv. 2027".
  * `short: true` drops the year: "Jan 12–14" / "5–7 janv.".
+ * `month: 'long'` spells the month out: "January 12–14, 2027" / "12–14 janvier 2027".
  * Uses `Intl.DateTimeFormat#formatRange` on UTC dates with `timeZone: 'UTC'`, so the day never shifts.
  */
 export function formatSessionDates({
   session,
   language,
   short = false,
+  month = 'short',
 }: {
   session: Session;
   language: WorkshopLanguage;
   short?: boolean;
+  month?: 'short' | 'long';
 }): string {
   const format = new Intl.DateTimeFormat(LOCALES[language], {
     day: 'numeric',
-    month: 'short',
+    month,
     year: short ? undefined : 'numeric',
     timeZone: 'UTC',
   });

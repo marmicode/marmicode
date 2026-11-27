@@ -9,7 +9,7 @@ import {
   externalLinks,
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
-import { createBasicPageInfo, PageComponent } from '@marmicode/shared/ui';
+import { createBasicPageInfo, Link, PageComponent } from '@marmicode/shared/ui';
 import { TODAY } from '@marmicode/shared/utils';
 import { getUpcomingSessions } from '@marmicode/workshop/core';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
@@ -37,6 +37,8 @@ import {
           <span class="mc-eyebrow">// {{ labels.onTheStove }}</span>
           <h2>{{ labels.upcomingSessions }}</h2>
           <mc-workshop-session-list
+            [otherSessions]="otherSessions()"
+            [otherWorkshopLink]="otherWorkshopLink()"
             [sessions]="sessions()"
             [workshop]="workshop"
           />
@@ -112,6 +114,28 @@ export class WorkshopPage {
     return workshop
       ? getUpcomingSessions({ workshops: [workshop], today: this._today() })
       : [];
+  });
+  /* The other-language version of this workshop. */
+  private _otherWorkshop = computed(() => {
+    const alternate = this.workshop()?.alternates?.[0];
+    return alternate
+      ? this._workshopRepository.findWorkshop(alternate.id)
+      : undefined;
+  });
+  protected otherSessions = computed(() => {
+    const otherWorkshop = this._otherWorkshop();
+    return otherWorkshop
+      ? getUpcomingSessions({
+          workshops: [otherWorkshop],
+          today: this._today(),
+        })
+      : [];
+  });
+  protected otherWorkshopLink = computed<Link | undefined>(() => {
+    const otherWorkshop = this._otherWorkshop();
+    return otherWorkshop
+      ? { route: workshopRouterHelper.detail(otherWorkshop.id) }
+      : undefined;
   });
 
   private _today = inject(TODAY);

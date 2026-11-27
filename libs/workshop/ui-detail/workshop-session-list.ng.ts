@@ -4,6 +4,7 @@ import {
   computed,
   input,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Link } from '@marmicode/shared/ui';
 import {
   Session,
@@ -24,6 +25,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-session-list',
+  imports: [RouterLink],
   template: `
     <ul>
       @for (row of rows(); track row.key) {
@@ -39,6 +41,34 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
             </span>
             <span class="book">
               {{ row.bookLabel }}
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </span>
+          </a>
+        </li>
+      }
+      @for (row of otherRows(); track row.key) {
+        <li>
+          <a
+            class="session other"
+            [attr.href]="row.href ?? null"
+            [attr.lang]="row.language"
+            [attr.rel]="row.href ? 'noopener' : null"
+            [attr.target]="row.href ? '_blank' : null"
+            [routerLink]="row.route ?? null"
+          >
+            <span class="cal" aria-hidden="true">
+              <b>{{ row.calendar.day }}</b>
+              <span>{{ row.calendar.month }}</span>
+            </span>
+            <span class="info">
+              <h3>{{ row.dates }}</h3>
+              <small>{{ row.details }}</small>
+            </span>
+            <span class="book ghost">
+              {{ row.goLabel }}
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
@@ -96,19 +126,19 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
       border-radius: 14px;
       background: rgba(var(--mc-accent-rgb), 0.1);
       text-align: center;
+    }
 
-      b {
-        display: block;
-        font-size: 28px;
-        letter-spacing: -0.02em;
-        line-height: 1;
-      }
+    .cal b {
+      display: block;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
 
-      span {
-        color: var(--mc-accent);
-        font-family: var(--mc-font-mono);
-        font-size: 12px;
-      }
+    .cal span {
+      color: var(--mc-accent);
+      font-family: var(--mc-font-mono);
+      font-size: 12px;
     }
 
     h3 {
@@ -133,6 +163,26 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
       font-weight: 600;
       line-height: 1.2;
       white-space: nowrap;
+    }
+
+    .other {
+      border-style: dashed;
+      background: transparent;
+    }
+
+    .other .cal {
+      border-color: var(--mc-dark-line-strong);
+      background: transparent;
+    }
+
+    .other .cal span {
+      color: var(--mc-dark-muted);
+    }
+
+    .book.ghost {
+      border-color: var(--mc-dark-line-strong);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--mc-dark-text);
     }
 
     svg {
@@ -187,6 +237,24 @@ export class WorkshopSessionList {
       };
     }),
   );
+  /* "5–7 janvier 2027 · 🇫🇷 Français", in the other workshop's language. */
+  protected otherRows = computed(() => {
+    const link = this.otherWorkshopLink();
+    return this.otherSessions().map(({ workshop, session }) => {
+      const { language } = workshop;
+      const labels = WORKSHOP_DETAIL_LABELS[language];
+      return {
+        key: `${workshop.id}-${session.startDate}`,
+        calendar: formatCalendar({ session, language }),
+        dates: `${formatSessionDates({ session, language, month: 'long' })} · ${labels.languageName}`,
+        details: `${labels.sameWorkshopInThisLanguage} · ${workshop.shortTitle}`,
+        goLabel: labels.seeTheWorkshop,
+        href: link && 'href' in link ? link.href : undefined,
+        language,
+        route: link && 'route' in link ? link.route : undefined,
+      };
+    });
+  });
 }
 
 /**

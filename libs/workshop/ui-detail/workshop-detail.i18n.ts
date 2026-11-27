@@ -12,6 +12,8 @@ const WORKSHOP_DETAIL_LABELS_EN = {
   online: 'Online',
   onTheStove: 'on the stove',
   requestACustomSession: 'Request a custom session',
+  sameWorkshopInThisLanguage: 'Same workshop in English',
+  seeTheWorkshop: 'See the workshop',
   upcomingSessions: 'Upcoming sessions',
 };
 
@@ -25,6 +27,8 @@ const WORKSHOP_DETAIL_LABELS_FR: typeof WORKSHOP_DETAIL_LABELS_EN = {
   online: 'En ligne',
   onTheStove: 'aux fourneaux',
   requestACustomSession: 'Session sur mesure',
+  sameWorkshopInThisLanguage: 'Même formation en français',
+  seeTheWorkshop: 'Voir la formation',
   upcomingSessions: 'Sessions à venir',
 };
 

@@ -21,7 +21,7 @@ describe(WorkshopPage.name, () => {
     expect(row?.target).toBe('_blank');
   });
 
-  it.todo('shows the other-language sessions', async () => {
+  it('shows the other-language sessions', async () => {
     const { getSessionRows } = await mountWorkshopPage({
       workshopId: 'pragmatic-angular-testing',
     });
