@@ -18,7 +18,7 @@ describe(TrainingListPage.name, () => {
     ]);
   });
 
-  it.todo('groups trainings by format with a description', async () => {
+  it('groups trainings by format with a description', async () => {
     const { getGroups } = await mountTrainingListPage();
 
     expect(

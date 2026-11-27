@@ -8,6 +8,7 @@ import { FROM_DRIFT_TO_TRUST_FOR_ANGULAR } from '@marmicode/cohort/core';
 import { TODAY } from '@marmicode/shared/utils';
 import { TrainingFormat } from '@marmicode/training/core';
 import {
+  TRAINING_FORMAT_DESCRIPTIONS,
   TRAINING_FORMAT_EMOJIS,
   TrainingTile,
   TrainingTileData,
@@ -32,10 +33,13 @@ import {
   template: `
     @for (group of groups(); track group.format) {
       <section>
-        <h2>
-          <span aria-hidden="true">{{ group.emoji }}</span>
-          {{ group.label }}
-        </h2>
+        <header>
+          <h2>
+            <span aria-hidden="true">{{ group.emoji }}</span>
+            {{ group.label }}
+          </h2>
+          <p>{{ group.description }}</p>
+        </header>
         @for (training of group.trainings; track training.id) {
           <mc-training-tile [training]="training" />
         }
@@ -55,6 +59,7 @@ export class TrainingListPage {
     GROUPS.map((group) => ({
       ...group,
       emoji: TRAINING_FORMAT_EMOJIS[group.format],
+      description: TRAINING_FORMAT_DESCRIPTIONS.en[group.format],
       trainings: this._offers
         .filter((offer) => offer.format === group.format)
         .map((offer) => pickVersion({ offer, language: null }))
