@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest';
 import { TrainingListPage } from './training-list-page.ng';
 
 describe(TrainingListPage.name, () => {
-  it.todo('lists each workshop once with its languages', async () => {
+  it('lists each workshop once with its languages', async () => {
     const { getGroup } = await mountTrainingListPage();
 
     const cards = getGroup('Workshops')?.cards.filter(
