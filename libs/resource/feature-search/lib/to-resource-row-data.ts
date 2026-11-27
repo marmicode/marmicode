@@ -4,10 +4,7 @@ import {
   ResourceType,
 } from '@marmicode/resource/core';
 import { ResourceRowData } from '@marmicode/resource/ui';
-import {
-  blogPostDetailRouterHelper,
-  recipeDetailRouterHelper,
-} from '@marmicode/shared/router-helpers';
+import { blogPostDetailRouterHelper } from '@marmicode/shared/router-helpers';
 import { Link } from '@marmicode/shared/ui';
 import { Resource } from './resource';
 
@@ -41,7 +38,4 @@ const ROUTE_FACTORIES: Partial<
 > = {
   [ResourceType.BlogPost]: (slug) =>
     blogPostDetailRouterHelper.blogPostDetail(slug),
-  [ResourceType.Recipe]: (slug) => recipeDetailRouterHelper.recipeDetail(slug),
-  [ResourceType.Tutorial]: (slug) =>
-    recipeDetailRouterHelper.tutorialDetail(slug),
 };

@@ -45,9 +45,6 @@
       "@marmicode/learning-map/feature-tree": [
         "libs/learning-map/feature-tree/index.ts"
       ],
-      "@marmicode/recipe/feature-detail": [
-        "libs/recipe/feature-detail/index.ts"
-      ],
       "@marmicode/resource/api": ["libs/resource/api/index.ts"],
       "@marmicode/resource/core": ["libs/resource/core/index.ts"],
       "@marmicode/resource/feature-search": [
@@ -57,9 +54,6 @@
         "libs/resource/feature-search/testing/index.ts"
       ],
       "@marmicode/resource/ui": ["libs/resource/ui/index.ts"],
-      "@marmicode/services/feature-presentation": [
-        "libs/services/feature-presentation/index.ts"
-      ],
       "@marmicode/shared/core": ["libs/shared/core/index.ts"],
       "@marmicode/shared/infra": ["libs/shared/infra/index.ts"],
       "@marmicode/shared/router-helpers": [

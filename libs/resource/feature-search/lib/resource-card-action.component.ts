@@ -12,18 +12,22 @@ import {
   getResourceTypeColor,
   ResourceType,
 } from '@marmicode/resource/core';
-import {
-  blogPostDetailRouterHelper,
-  recipeDetailRouterHelper,
-} from '@marmicode/shared/router-helpers';
+import { blogPostDetailRouterHelper } from '@marmicode/shared/router-helpers';
 import { LinkComponent, LinkModule } from '@marmicode/shared/ui';
 import { Resource } from './resource';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-card-action',
-  template: ` <mc-link [href]="resource!.url" [route]="route != null ? route : undefined">
-    <button [style.backgroundColor]="color" class="action-button" mat-flat-button>
+  template: ` <mc-link
+    [href]="resource!.url"
+    [route]="route != null ? route : undefined"
+  >
+    <button
+      [style.backgroundColor]="color"
+      class="action-button"
+      mat-flat-button
+    >
       {{ actionText }}
     </button>
   </mc-link>`,
@@ -47,14 +51,6 @@ export class ResourceCardActionComponent implements OnChanges {
     [
       ResourceType.BlogPost,
       (slug) => blogPostDetailRouterHelper.blogPostDetail(slug),
-    ],
-    [
-      ResourceType.Recipe,
-      (slug) => recipeDetailRouterHelper.recipeDetail(slug),
-    ],
-    [
-      ResourceType.Tutorial,
-      (slug) => recipeDetailRouterHelper.tutorialDetail(slug),
     ],
   ]);
 
