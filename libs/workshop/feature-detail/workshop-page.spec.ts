@@ -74,9 +74,16 @@ describe(WorkshopPage.name, () => {
     expect(getVisibleProgramSteps()).toHaveLength(sections.length);
   });
 
-  it.todo('french workshop in French', () => {
-    // Mount with `workshopId="test-angular-pragmatique"`.
-    // Assert "Réserver une place", French session dates, and the OPCO note.
+  it.todo('french workshop in French', async () => {
+    const { getHeroText, getSessionRows } = await mountWorkshopPage({
+      workshopId: 'test-angular-pragmatique',
+    });
+
+    const [row] = getSessionRows();
+
+    expect(getHeroText()).toContain('Réserver une place');
+    expect(getHeroText()).toContain('OPCO');
+    expect(row?.text).toMatch(/5\s?–\s?7 janv\. 2027/);
   });
 });
 
