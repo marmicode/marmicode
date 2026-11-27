@@ -1,4 +1,5 @@
 export { Author, ResourceInfo, createAuthor } from './lib/resource-info';
+export { getResourceLink } from './lib/resource-link';
 export {
   RESOURCE_TOPICS,
   ResourceTopic,
