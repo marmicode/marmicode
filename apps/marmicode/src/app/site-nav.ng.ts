@@ -1,11 +1,20 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import {
+  blogPostDetailRouterHelper,
   coachingRouterHelper,
+  cohortRouterHelper,
   externalLinks,
   resourceSearchRouterHelper,
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
+import { filter, map } from 'rxjs';
 import { appRouterHelper } from './app-router-helper';
 
 /**
@@ -26,7 +35,13 @@ import { appRouterHelper } from './app-router-helper';
         </a>
         <nav class="links">
           @for (entry of entries; track entry.label) {
-            <a [routerLink]="entry.route">{{ entry.label }}</a>
+            <a
+              [attr.aria-current]="
+                entry.label === currentEntryLabel() ? 'page' : null
+              "
+              [routerLink]="entry.route"
+              >{{ entry.label }}</a
+            >
           }
         </nav>
         <a
@@ -101,6 +116,11 @@ import { appRouterHelper } from './app-router-helper';
       background: rgba(255, 255, 255, 0.06);
     }
 
+    .links a[aria-current='page'] {
+      color: var(--mc-dark-text);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
     .cta {
       padding: 9px 16px;
       border-radius: 999px;
@@ -120,9 +140,57 @@ import { appRouterHelper } from './app-router-helper';
 export class SiteNav {
   protected readonly appRouterHelper = appRouterHelper;
   protected readonly externalLinks = externalLinks;
-  protected readonly entries = [
-    { label: 'Library', route: resourceSearchRouterHelper.learnEverything() },
-    { label: 'Training', route: workshopRouterHelper.list() },
-    { label: 'Coaching', route: coachingRouterHelper.coaching() },
+  protected readonly entries: NavEntry[] = [
+    {
+      label: 'Library',
+      route: resourceSearchRouterHelper.learnEverything(),
+      sectionPaths: [
+        resourceSearchRouterHelper.LEARN_PATH,
+        blogPostDetailRouterHelper.BLOG_POST_DETAIL_PATH,
+      ],
+    },
+    {
+      label: 'Training',
+      route: workshopRouterHelper.list(),
+      sectionPaths: [
+        workshopRouterHelper.WORKSHOP_LIST_PATH,
+        cohortRouterHelper.COHORT_LIST_PATH,
+      ],
+    },
+    {
+      label: 'Coaching',
+      route: coachingRouterHelper.coaching(),
+      sectionPaths: [coachingRouterHelper.COACHING_PATH],
+    },
   ];
+
+  private _router = inject(Router);
+  private _firstPathSegment = toSignal(
+    this._router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map(() => this._getFirstPathSegment()),
+    ),
+    { initialValue: this._getFirstPathSegment() },
+  );
+
+  protected readonly currentEntryLabel = computed(() => {
+    const firstPathSegment = this._firstPathSegment();
+    return this.entries.find(
+      (entry) =>
+        firstPathSegment != null &&
+        entry.sectionPaths.includes(firstPathSegment),
+    )?.label;
+  });
+
+  private _getFirstPathSegment(): string | undefined {
+    return this._router.parseUrl(this._router.url).root.children['primary']
+      ?.segments[0]?.path;
+  }
+}
+
+interface NavEntry {
+  label: string;
+  route: string[];
+  /** First URL segments for which this entry is the current section. */
+  sectionPaths: string[];
 }

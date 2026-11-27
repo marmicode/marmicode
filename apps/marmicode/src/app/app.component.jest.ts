@@ -33,7 +33,7 @@ describe(AppComponent.name, () => {
     });
   });
 
-  it.skip('nav highlights the current section', async () => {
+  it('nav highlights the current section', async () => {
     const { getCurrentNavLinks, navigate } = await mountApp({ wip: true });
 
     await navigate('/cohorts/from-drift-to-trust-for-angular');
