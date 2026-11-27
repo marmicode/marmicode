@@ -1,7 +1,6 @@
-export interface Workshop {
-  id: string;
-  title: string;
+import { Training, TrainingLanguage } from '@marmicode/training/core';
 
+export interface Workshop extends Training {
   /**
    * The alternate is used to display the workshops in the other languages.
    *
@@ -9,42 +8,13 @@ export interface Workshop {
    */
   alternates?: Array<{ id: string; language: WorkshopLanguage }>;
 
-  /**
-   * The short title is used in the list page.
-   */
-  shortTitle: string;
   type: 'tapas' | 'full';
-  location: 'online';
-  description: string;
-
-  /**
-   * If set, this will show a Join Waitlist button instead of a Book a Seat button.
-   */
-  waitlist?: {
-    url: string;
-
-    /**
-     * Next session month in `YYYY-MM` format.
-     * Displayed in the hero when set.
-     */
-    nextSessionMonth?: `${number}-${number}`;
-  };
 
   /**
    * Tag used to show upcoming sessions.
    */
   lumaTag: string;
 
-  /**
-   * The subheading is a short description of the workshop.
-   * It is displayed in the workshop banner.
-   *
-   * It supports markdown.
-   */
-  subheading: string;
-
-  pictureAltText: string;
-  pictureUri: string;
   thumbnailUri: string;
 
   /**
@@ -56,65 +26,9 @@ export interface Workshop {
    * Google form url for custom session requests.
    */
   customSessionRequestUrl: string;
-
-  offer: Offer;
-
-  /**
-   * The language of this workshop.
-   * Used for filtering and display of language chip.
-   */
-  language: WorkshopLanguage;
-
-  requiredSkills: string[];
-  benefits: Benefit[];
-  agenda: Agenda;
-
-  faqs: Faq[];
-  testimonials?: Testimonial[];
 }
 
-export interface Faq {
-  question: string;
-  answer: string;
-}
-
-export interface Testimonial {
-  quote: string;
-  authorName: string;
-  authorPictureUri?: string;
-  authorRole?: string;
-  authorCompany?: string;
-}
-
-export type WorkshopLanguage = 'en' | 'fr';
-
-export type Offer = EarlyBirdOffer | LastMinuteOffer;
-
-export interface EarlyBirdOffer {
-  type: 'early-bird';
-  price: number;
-  originalPrice: number;
-}
-
-export interface LastMinuteOffer {
-  type: 'last-minute';
-  price: number;
-}
-
-export interface Benefit {
-  icon: string;
-  title: string;
-  description: string;
-}
-
-export interface Agenda {
-  sections: AgendaSection[];
-}
-
-export interface AgendaSection {
-  title: string;
-  items: string[];
-}
+export type WorkshopLanguage = TrainingLanguage;
 
 export interface Session {
   /**

@@ -5,12 +5,12 @@ import {
   input,
 } from '@angular/core';
 import { CookCard, PageSection } from '@marmicode/shared/ui';
-import { Workshop } from '@marmicode/workshop/core';
-import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
+import { Training } from '@marmicode/training/core';
+import { TRAINING_LABELS } from './training.i18n';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-workshop-instructor',
+  selector: 'mc-training-instructor',
   imports: [PageSection, CookCard],
   template: `
     <mc-page-section [sectionTitle]="sectionTitle()" color="surface">
@@ -18,9 +18,9 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
     </mc-page-section>
   `,
 })
-export class WorkshopInstructor {
-  workshop = input.required<Workshop>();
+export class TrainingInstructor {
+  training = input.required<Training>();
   sectionTitle = computed(
-    () => `👨🏻‍🏫 ${WORKSHOP_DETAIL_LABELS[this.workshop().language].instructor}`,
+    () => `👨🏻‍🏫 ${TRAINING_LABELS[this.training().language].instructor}`,
   );
 }

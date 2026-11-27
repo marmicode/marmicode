@@ -5,20 +5,20 @@ import {
   input,
 } from '@angular/core';
 import { PageSection } from '@marmicode/shared/ui';
-import { Workshop } from '@marmicode/workshop/core';
-import { WorkshopTestimonialCard } from './workshop-testimonial-card.ng';
-import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
+import { Training } from '@marmicode/training/core';
+import { TrainingTestimonialCard } from './training-testimonial-card.ng';
+import { TRAINING_LABELS } from './training.i18n';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-workshop-testimonials',
-  imports: [WorkshopTestimonialCard, PageSection],
+  selector: 'mc-training-testimonials',
+  imports: [TrainingTestimonialCard, PageSection],
   template: `
     @if (testimonials().length > 0) {
       <mc-page-section [sectionTitle]="sectionTitle()" color="surface">
         <div class="testimonials">
           @for (testimonial of testimonials(); track testimonial.authorName) {
-            <mc-workshop-testimonial-card [testimonial]="testimonial" />
+            <mc-training-testimonial-card [testimonial]="testimonial" />
           }
         </div>
       </mc-page-section>
@@ -37,10 +37,10 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
     }
   `,
 })
-export class WorkshopTestimonials {
-  workshop = input.required<Workshop>();
-  testimonials = computed(() => this.workshop().testimonials ?? []);
+export class TrainingTestimonials {
+  training = input.required<Training>();
+  testimonials = computed(() => this.training().testimonials ?? []);
   sectionTitle = computed(
-    () => `💬 ${WORKSHOP_DETAIL_LABELS[this.workshop().language].testimonials}`,
+    () => `💬 ${TRAINING_LABELS[this.training().language].testimonials}`,
   );
 }

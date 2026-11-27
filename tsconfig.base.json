@@ -24,6 +24,12 @@
       "@marmicode/coaching/feature-presentation": [
         "libs/coaching/feature-presentation/index.ts"
       ],
+      "@marmicode/cohort/core": ["libs/cohort/core/index.ts"],
+      "@marmicode/cohort/feature-presentation": [
+        "libs/cohort/feature-presentation/index.ts"
+      ],
+      "@marmicode/training/core": ["libs/training/core/index.ts"],
+      "@marmicode/training/ui": ["libs/training/ui/index.ts"],
       "@marmicode/block/api": ["libs/block/api/index.ts"],
       "@marmicode/block/core": ["libs/block/core/index.ts"],
       "@marmicode/block/ui": ["libs/block/ui/src/index.ts"],

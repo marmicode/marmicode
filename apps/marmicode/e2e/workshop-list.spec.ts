@@ -17,6 +17,10 @@ test.describe('workshop list', () => {
   });
 
   test('go to workshop when clicking on title', async ({ glove, page }) => {
+    /* This test renders two pages: the list, then the workshop.
+     * On the dev server, that does not fit in the default timeout on slow browsers. */
+    test.slow();
+
     await glove.goto();
 
     await glove
@@ -46,8 +50,13 @@ test.describe('workshop list', () => {
 class WorkshopListGlove {
   constructor(private _page: Page) {}
 
+  /**
+   * This does not wait for the `load` event:
+   * it depends on third parties (e.g. chat widget),
+   * and it can take most of the test timeout on slow browsers.
+   */
   goto() {
-    return this._page.goto('/workshops');
+    return this._page.goto('/workshops', { waitUntil: 'domcontentloaded' });
   }
 
   /**

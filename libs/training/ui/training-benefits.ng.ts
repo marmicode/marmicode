@@ -5,19 +5,19 @@ import {
   input,
 } from '@angular/core';
 import { PageSection } from '@marmicode/shared/ui';
-import { Workshop } from '@marmicode/workshop/core';
-import { WorkshopBenefitCard } from './workshop-benefits-card.ng';
-import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
+import { Training } from '@marmicode/training/core';
+import { TrainingBenefitCard } from './training-benefit-card.ng';
+import { TRAINING_LABELS } from './training.i18n';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-workshop-benefits',
-  imports: [WorkshopBenefitCard, PageSection],
+  selector: 'mc-training-benefits',
+  imports: [TrainingBenefitCard, PageSection],
   template: `
     <mc-page-section [sectionTitle]="sectionTitle()" color="surface">
       <div class="benefits">
-        @for (benefit of workshop().benefits; track benefit) {
-          <mc-workshop-benefit-card [benefit]="benefit" />
+        @for (benefit of training().benefits; track benefit) {
+          <mc-training-benefit-card [benefit]="benefit" />
         }
       </div>
     </mc-page-section>
@@ -33,10 +33,9 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
     }
   `,
 })
-export class WorkshopBenefits {
-  workshop = input.required<Workshop>();
+export class TrainingBenefits {
+  training = input.required<Training>();
   sectionTitle = computed(
-    () =>
-      `🍱 ${WORKSHOP_DETAIL_LABELS[this.workshop().language].whatYouWillLearn}`,
+    () => `🍱 ${TRAINING_LABELS[this.training().language].whatYouWillLearn}`,
   );
 }

@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Benefit } from '@marmicode/workshop/core';
+import { Benefit } from '@marmicode/training/core';
 import { Card } from '@marmicode/shared/ui';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-workshop-benefit-card',
+  selector: 'mc-training-benefit-card',
   imports: [MatCardModule, MatIconModule, Card],
   template: `
     <mc-card [icon]="benefit().icon">
@@ -15,6 +15,6 @@ import { Card } from '@marmicode/shared/ui';
     </mc-card>
   `,
 })
-export class WorkshopBenefitCard {
+export class TrainingBenefitCard {
   benefit = input.required<Benefit>();
 }

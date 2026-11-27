@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import {
   blogPostDetailRouterHelper,
   coachingRouterHelper,
+  cohortRouterHelper,
   recipeDetailRouterHelper,
   resourceSearchRouterHelper,
   servicesRouterHelper,
@@ -55,6 +56,24 @@ export const routes: Routes = [
     path: coachingRouterHelper.COACHING_PATH,
     providers: [provideChatWidget()],
     loadComponent: () => import('@marmicode/coaching/feature-presentation'),
+  },
+
+  /* Cohorts. */
+  {
+    path: cohortRouterHelper.COHORT_LIST_PATH,
+    children: [
+      /* There is a single cohort for now, so the list redirects to it. */
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: cohortRouterHelper.FROM_DRIFT_TO_TRUST_FOR_ANGULAR_ID,
+      },
+      /* From Drift to Trust for Angular. */
+      {
+        path: cohortRouterHelper.FROM_DRIFT_TO_TRUST_FOR_ANGULAR_ID,
+        loadComponent: () => import('@marmicode/cohort/feature-presentation'),
+      },
+    ],
   },
 
   /* Workshops. */

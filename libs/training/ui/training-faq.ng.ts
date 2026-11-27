@@ -6,18 +6,18 @@ import {
 } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { PageSection } from '@marmicode/shared/ui';
-import { Workshop } from '@marmicode/workshop/core';
-import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
+import { Training } from '@marmicode/training/core';
+import { TRAINING_LABELS } from './training.i18n';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-workshop-faq',
+  selector: 'mc-training-faq',
   imports: [MatExpansionModule, PageSection],
   template: `
-    @if (workshop().faqs.length > 0) {
+    @if (training().faqs.length > 0) {
       <mc-page-section [sectionTitle]="sectionTitle()">
         <mat-accordion>
-          @for (faq of workshop().faqs; track faq.question) {
+          @for (faq of training().faqs; track faq.question) {
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title> {{ faq.question }} </mat-panel-title>
@@ -37,10 +37,10 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
     }
   `,
 })
-export class WorkshopFaq {
-  workshop = input.required<Workshop>();
+export class TrainingFaq {
+  training = input.required<Training>();
 
   sectionTitle = computed(
-    () => `🙋 ${WORKSHOP_DETAIL_LABELS[this.workshop().language].faq}`,
+    () => `🙋 ${TRAINING_LABELS[this.training().language].faq}`,
   );
 }

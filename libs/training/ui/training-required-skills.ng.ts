@@ -6,18 +6,17 @@ import {
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { PageSection } from '@marmicode/shared/ui';
-import { Workshop } from '@marmicode/workshop/core';
-import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
+import { Training } from '@marmicode/training/core';
+import { TRAINING_LABELS } from './training.i18n';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  selector: 'mc-workshop-required-skills',
+  selector: 'mc-training-required-skills',
   imports: [PageSection, MatIconModule],
   template: `
     <mc-page-section [sectionTitle]="sectionTitle()">
       <ul>
-        @for (skill of workshop().requiredSkills; track skill) {
+        @for (skill of training().requiredSkills; track skill) {
           <li>
             <mat-icon>check</mat-icon>
             <span>{{ skill }}</span>
@@ -51,10 +50,9 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
     }
   `,
 })
-export class WorkshopRequiredSkills {
-  workshop = input.required<Workshop>();
+export class TrainingRequiredSkills {
+  training = input.required<Training>();
   sectionTitle = computed(
-    () =>
-      `🎓 ${WORKSHOP_DETAIL_LABELS[this.workshop().language].requiredKnowledge}`,
+    () => `🎓 ${TRAINING_LABELS[this.training().language].requiredKnowledge}`,
   );
 }

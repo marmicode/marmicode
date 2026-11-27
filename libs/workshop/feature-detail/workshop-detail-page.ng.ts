@@ -13,15 +13,18 @@ import {
 import { WorkshopRepository } from '@marmicode/workshop/infra';
 import { workshopViewTransitionName } from '@marmicode/workshop/ui';
 import {
-  WorkshopAgenda,
-  WorkshopBenefits,
-  WorkshopDescription,
-  WorkshopFaq,
+  TrainingAgenda,
+  TrainingBenefits,
+  TrainingDescription,
+  TrainingFaq,
+  TrainingInstructor,
+  TrainingRequiredSkills,
+  TrainingTestimonials,
+} from '@marmicode/training/ui';
+import {
+  WorkshopCallToAction,
   WorkshopHero,
-  WorkshopInstructor,
-  WorkshopRequiredSkills,
   WorkshopSessions,
-  WorkshopTestimonials,
 } from '@marmicode/workshop/ui-detail';
 import {
   externalLinks,
@@ -32,17 +35,18 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-detail-page',
   imports: [
-    PageComponent,
-    WorkshopAgenda,
-    WorkshopBenefits,
-    WorkshopDescription,
-    WorkshopInstructor,
-    WorkshopRequiredSkills,
-    WorkshopSessions,
-    WorkshopTestimonials,
     ErrorComponent,
+    PageComponent,
+    TrainingAgenda,
+    TrainingBenefits,
+    TrainingDescription,
+    TrainingFaq,
+    TrainingInstructor,
+    TrainingRequiredSkills,
+    TrainingTestimonials,
+    WorkshopCallToAction,
     WorkshopHero,
-    WorkshopFaq,
+    WorkshopSessions,
   ],
   template: `
     <mc-page [info]="info()">
@@ -52,14 +56,15 @@ import {
           [workshop]="workshop"
           [style.view-transition-name]="transitionName()"
         />
-        <mc-workshop-description [workshop]="workshop" />
+        <mc-training-description [training]="workshop" />
         <mc-workshop-sessions [workshop]="workshop" />
-        <mc-workshop-benefits [workshop]="workshop" />
-        <mc-workshop-testimonials [workshop]="workshop" />
-        <mc-workshop-agenda [workshop]="workshop" />
-        <mc-workshop-required-skills [workshop]="workshop" />
-        <mc-workshop-instructor [workshop]="workshop" />
-        <mc-workshop-faq [workshop]="workshop" />
+        <mc-training-benefits [training]="workshop" />
+        <mc-training-testimonials [training]="workshop" />
+        <mc-training-agenda [training]="workshop" />
+        <mc-training-required-skills [training]="workshop" />
+        <mc-training-instructor [training]="workshop" />
+        <mc-training-faq [training]="workshop" />
+        <mc-workshop-call-to-action [workshop]="workshop" />
       } @else {
         <mc-error>
           <p>Workshop not found.</p>

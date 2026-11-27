@@ -129,7 +129,7 @@ export class NavMenuComponent {
     {
       icon: 'live_tv',
       title: 'Get the Course',
-      url: 'https://courses.marmicode.io/courses/pragmatic-angular-testing',
+      url: externalLinks.pragmaticAngularTestingCourseUrl,
     },
     {
       icon: 'phone',

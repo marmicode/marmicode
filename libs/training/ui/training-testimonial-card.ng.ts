@@ -5,11 +5,11 @@ import {
   input,
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { Testimonial } from '@marmicode/workshop/core';
+import { Testimonial } from '@marmicode/training/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mc-workshop-testimonial-card',
+  selector: 'mc-training-testimonial-card',
   imports: [MatCardModule],
   template: `
     <mat-card class="card" appearance="outlined">
@@ -105,7 +105,7 @@ import { Testimonial } from '@marmicode/workshop/core';
     }
   `,
 })
-export class WorkshopTestimonialCard {
+export class TrainingTestimonialCard {
   testimonial = input.required<Testimonial>();
 
   roleAndCompany = computed(() => {
