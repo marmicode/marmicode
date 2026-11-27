@@ -9,7 +9,4 @@ export {
   ResourceKind,
   ResourceType,
   getResourceKind,
-  getResourceTypeActionText,
-  getResourceTypeColor,
-  getResourceTypeText,
 } from './lib/resource-type';

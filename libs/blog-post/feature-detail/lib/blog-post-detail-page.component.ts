@@ -1,12 +1,6 @@
-import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  NgModule,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BlogPostArticle, BlogPostModule } from '@marmicode/blog-post/ui';
+import { BlogPostArticle } from '@marmicode/blog-post/ui';
 import { ResourceRow } from '@marmicode/resource/ui';
 import {
   blogPostDetailRouterHelper,
@@ -17,9 +11,7 @@ import {
   CtaBand,
   Link,
   PageComponent,
-  PageModule,
   SuspenseComponent,
-  SuspenseModule,
 } from '@marmicode/shared/ui';
 import {
   shareReplayWithRefCount,
@@ -158,16 +150,3 @@ export class BlogPostDetailPageComponent {
 
   pageInfo$ = this.blogPost$.pipe(map(blogPostToPageInfo));
 }
-
-@NgModule({
-  exports: [BlogPostDetailPageComponent],
-  imports: [
-    CommonModule,
-    PageModule,
-    BlogPostModule,
-    SuspenseModule,
-    PushPipe,
-    BlogPostDetailPageComponent,
-  ],
-})
-export class BlogPostDetailPageModule {}
