@@ -49,6 +49,12 @@ export function cohortToPreview(cohort: Cohort): TrainingTileData {
     pictureAltText: cohort.pictureAltText,
     duration: `${weekCount} ${weekCount === 1 ? labels.week : labels.weeks}`,
     price: cohort.offer.price,
+    ...(cohort.offer.type === 'early-bird'
+      ? {
+          badge: OFFER_LABELS[cohort.language].earlyBird,
+          originalPrice: cohort.offer.originalPrice,
+        }
+      : {}),
     link: { route: cohortRouterHelper.detail(cohort.id) },
   };
 }
@@ -170,6 +176,11 @@ const TRAINING_LANGUAGES: TrainingLanguage[] = ['en', 'fr'];
 function sortLanguages(languages: TrainingLanguage[]): TrainingLanguage[] {
   return TRAINING_LANGUAGES.filter((language) => languages.includes(language));
 }
+
+const OFFER_LABELS: Record<TrainingLanguage, { earlyBird: string }> = {
+  en: { earlyBird: 'Early bird' },
+  fr: { earlyBird: 'Early bird' },
+};
 
 const WEEK_LABELS: Record<TrainingLanguage, { week: string; weeks: string }> = {
   en: { week: 'Week', weeks: 'Weeks' },

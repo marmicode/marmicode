@@ -23,7 +23,7 @@ describe(cohortToPreview, () => {
     ).toBe('6 Semaines');
   });
 
-  it.todo('early-bird cohort shows its original price', () => {
+  it('early-bird cohort shows its original price', () => {
     expect(cohortToPreview(FROM_DRIFT_TO_TRUST_FOR_ANGULAR)).toMatchObject({
       badge: 'Early bird',
       price: 1570,
