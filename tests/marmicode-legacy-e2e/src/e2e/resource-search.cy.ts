@@ -71,11 +71,11 @@ describe('resource search', () => {
   it('should list resources', () => {
     /* Wait for resources to appear. */
     getAllHarnesses(ResourceCardHarness).should('have.length', 14);
-    cy.snapshot();
   });
 
   it('should filter resources by skill', () => {
     cy.get('a').contains('Angular AOT Testing').click();
     getAllHarnesses(ResourceCardHarness).should('have.length', 1);
+    cy.snapshot();
   });
 });

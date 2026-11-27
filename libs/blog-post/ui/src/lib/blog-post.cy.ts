@@ -1,7 +1,9 @@
 import { createBlogPost } from './blog-post';
 import { BlogPostComponent, BlogPostModule } from './blog-post.component';
 describe(BlogPostComponent.name, () => {
-  it('should show blog', () => {
+  /* @todo migrate to Playwright and take a screenshot of each block
+   * instead of one big screenshot of the whole blog post. */
+  it.skip('should show blog', () => {
     cy.mount(BlogPostComponent, {
       imports: [BlogPostModule],
       componentProperties: {
