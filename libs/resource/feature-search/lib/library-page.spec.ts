@@ -85,9 +85,14 @@ describe(LibraryPage.name, () => {
     expect(getPressedFilters()).toEqual(['All', 'All topics']);
   });
 
-  it.todo('skill routes still work', () => {
-    // Mount on `/learn/angular-signals` with the fake repository.
-    // Assert only that skill's resources are listed.
+  it.todo('skill routes still work', async () => {
+    const { getHeading, getRowTitles } = await mountLibraryPage({
+      url: '/learn/angular-signals',
+    });
+
+    expect(getRowTitles()).toEqual([APR_2023_ARTICLE.title]);
+    /* The heading names the skill instead of "Everything". */
+    expect(getHeading()).toBe('Angular Signals');
   });
 
   it.todo('cookbook banner links to the cookbook', () => {
