@@ -39,7 +39,7 @@ describe(LibraryPage.name, () => {
     expect(getText()).not.toMatch(/you will learn/i);
   });
 
-  it.todo('filters by kind, topic and search', async () => {
+  it('filters by kind, topic and search', async () => {
     const { click, getHeading, getRowTitles, search } =
       await mountLibraryPage();
 
