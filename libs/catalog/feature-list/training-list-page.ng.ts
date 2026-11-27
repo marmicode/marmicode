@@ -34,10 +34,16 @@ import {
   imports: [SegmentedControl, TrainingTile],
   template: `
     <mc-segmented-control
+      ariaLabel="Filter by format"
+      [options]="formatOptions"
+      [(value)]="formatFilter"
+    />
+    <mc-segmented-control
       ariaLabel="Filter by language"
       [options]="languageOptions"
       [(value)]="languageFilter"
     />
+    <span role="status">{{ count() }}</span>
 
     @for (group of groups(); track group.format) {
       <section>
@@ -56,6 +62,17 @@ import {
   `,
 })
 export class TrainingListPage {
+  protected readonly formatFilter = signal<TrainingFormat | null>(null);
+  protected readonly formatOptions: SegmentedControlOption<TrainingFormat | null>[] =
+    [
+      { value: null, label: 'All' },
+      ...GROUP_FORMATS.map((format) => ({
+        value: format,
+        label: GROUP_LABELS.en[format],
+        emoji: TRAINING_FORMAT_EMOJIS[format],
+      })),
+    ];
+
   protected readonly languageFilter = signal<TrainingLanguage | null>(null);
   protected readonly languageOptions: SegmentedControlOption<TrainingLanguage | null>[] =
     [
@@ -76,18 +93,31 @@ export class TrainingListPage {
    * Groups with no training matching the filters are hidden.
    */
   protected readonly groups = computed(() => {
+    const formatFilter = this.formatFilter();
     const language = this.languageFilter();
     const copyLanguage = language ?? 'en';
-    return GROUP_FORMATS.map((format) => ({
-      format,
-      emoji: TRAINING_FORMAT_EMOJIS[format],
-      label: GROUP_LABELS[copyLanguage][format],
-      description: TRAINING_FORMAT_DESCRIPTIONS[copyLanguage][format],
-      trainings: this._offers
-        .filter((offer) => offer.format === format)
-        .map((offer) => pickVersion({ offer, language }))
-        .filter((training): training is TrainingTileData => training != null),
-    })).filter((group) => group.trainings.length > 0);
+    return GROUP_FORMATS.filter(
+      (format) => formatFilter == null || format === formatFilter,
+    )
+      .map((format) => ({
+        format,
+        emoji: TRAINING_FORMAT_EMOJIS[format],
+        label: GROUP_LABELS[copyLanguage][format],
+        description: TRAINING_FORMAT_DESCRIPTIONS[copyLanguage][format],
+        trainings: this._offers
+          .filter((offer) => offer.format === format)
+          .map((offer) => pickVersion({ offer, language }))
+          .filter((training): training is TrainingTileData => training != null),
+      }))
+      .filter((group) => group.trainings.length > 0);
+  });
+
+  protected readonly count = computed(() => {
+    const count = this.groups().reduce(
+      (count, group) => count + group.trainings.length,
+      0,
+    );
+    return `${count} ${count === 1 ? 'training' : 'trainings'}`;
   });
 }
 

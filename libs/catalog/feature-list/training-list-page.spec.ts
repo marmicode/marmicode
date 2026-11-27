@@ -58,7 +58,7 @@ describe(TrainingListPage.name, () => {
     expect(titles).not.toContain('Pragmatic Angular Testing');
   });
 
-  it.todo('combines format and language filters', async () => {
+  it('combines format and language filters', async () => {
     const { click, getCount, getGroups } = await mountTrainingListPage();
 
     await click('Workshops');
