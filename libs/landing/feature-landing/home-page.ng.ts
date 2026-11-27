@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { createBasicPageInfo, PageComponent } from '@marmicode/shared/ui';
+import { HomeHero } from './home-hero.ng';
 import { HomeTiles } from './home-tiles.ng';
 
 /**
@@ -10,10 +11,12 @@ import { HomeTiles } from './home-tiles.ng';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-home-page',
-  imports: [HomeTiles, PageComponent],
+  imports: [HomeHero, HomeTiles, PageComponent],
   template: `
     <mc-page [info]="pageInfo" theme="dark">
-      <section class="wrap">
+      <mc-home-hero class="wrap" />
+
+      <section class="wrap tiles-section">
         <span class="mc-eyebrow">// what's cooking</span>
         <h2>Pick what you're hungry for.</h2>
         <mc-home-tiles />
@@ -28,6 +31,10 @@ import { HomeTiles } from './home-tiles.ng';
 
     section {
       padding: 72px 0;
+    }
+
+    .tiles-section {
+      padding-top: 48px;
     }
 
     h2 {

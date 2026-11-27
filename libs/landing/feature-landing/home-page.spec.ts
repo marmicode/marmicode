@@ -15,7 +15,7 @@ describe(HomePage.name, () => {
     ]);
   });
 
-  it.todo('hero chip points to the cohort', async () => {
+  it('hero chip points to the cohort', async () => {
     const { getHeroLink } = await mountHomePage();
 
     const chip = getHeroLink('From Drift to Trust');
