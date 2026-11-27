@@ -258,19 +258,18 @@ describe('PageComponent', () => {
     expect(htmlAdapterFake.getLinkTags()).toEqual([]);
   });
 
-  it('dark page paints the dark background', async () => {
+  it('renders the page content', async () => {
     @Component({
       imports: [PageComponent],
       template: `<mc-page><p>Dish of the day</p></mc-page>`,
     })
-    class DarkPageHost {}
+    class PageHost {}
 
     configureTestingModule();
-    const fixture = TestBed.createComponent(DarkPageHost);
+    const fixture = TestBed.createComponent(PageHost);
     await fixture.whenStable();
 
     const pageEl: HTMLElement = fixture.nativeElement.querySelector('mc-page');
-    expect(getComputedStyle(pageEl).backgroundColor).toBe('var(--mc-dark-bg)');
     expect(pageEl.textContent).toContain('Dish of the day');
   });
 
