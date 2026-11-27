@@ -2,8 +2,8 @@
  * Emulated encapsulation doesn't work either because prismjs html is generated dynamically.
  * Cf. https://github.com/cypress-io/cypress/issues/8843 */
 
- @use 'prism-tomorrow' as prism-tomorrow;
- @use 'prism-line-numbers' as prism-line-numbers;
+@use 'prism-tomorrow' as prism-tomorrow;
+@use 'prism-line-numbers' as prism-line-numbers;
 
 mc-code-block {
   /* @hack using a symbolic link to end with a `.scss` extension instead of `.css`
@@ -20,7 +20,7 @@ mc-code-block {
 
   .code-container {
     position: relative;
-    margin: .5em;
+    margin: 0.5em;
   }
 
   .highlight {
@@ -32,7 +32,7 @@ mc-code-block {
     position: absolute;
     left: 0;
     width: 3em;
-    opacity: .5;
+    opacity: 0.5;
   }
 
   /* @hack using more specific selector. */
@@ -41,5 +41,102 @@ mc-code-block {
     height: 100%;
     border-radius: 10px;
     margin: 0;
+  }
+}
+
+/* The language and the copy button only show on dark pages, so the light rendering is unchanged. */
+mc-code-block .code-head {
+  display: none;
+}
+
+.mc-page-dark mc-code-block {
+  overflow: hidden;
+  margin: 1.6em 0;
+  border: 1px solid var(--mc-dark-line-strong);
+  border-radius: 16px;
+  background: #0c070e;
+
+  .code-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px 9px 16px;
+    border-bottom: 1px solid var(--mc-dark-line);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--mc-dark-muted);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .lang {
+    margin-right: auto;
+    font-family: var(--mc-font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .copy {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border: 1px solid var(--mc-dark-line-strong);
+    border-radius: 8px;
+    color: var(--mc-dark-muted);
+    font-family: var(--mc-font-sans);
+    font-size: 12.5px;
+    cursor: pointer;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+
+    &:hover {
+      border-color: rgba(var(--mc-accent-rgb), 0.5);
+      color: var(--mc-dark-text);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--mc-accent);
+      outline-offset: 2px;
+    }
+
+    svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  }
+
+  .code-container {
+    margin: 0;
+  }
+
+  pre.preformatted {
+    border-radius: 0;
+    background: transparent;
+    color: #e8e0ea;
+    font-family: var(--mc-font-mono);
+    font-size: 14px;
+    line-height: 1.7;
+    tab-size: 2;
+  }
+
+  pre.preformatted,
+  pre.preformatted code {
+    font-family: var(--mc-font-mono);
+  }
+
+  .line-numbers .line-numbers-rows {
+    border-right-color: var(--mc-dark-line);
+  }
+
+  .line-numbers-rows > span:before {
+    color: #5e5363;
   }
 }

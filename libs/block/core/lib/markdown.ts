@@ -97,22 +97,38 @@ export function _isMarkdownTokenLink(
 /**
  * Slug id of a heading (e.g. "Set it up" => "set-it-up"), so that a table of contents
  * can link to the rendered heading.
- *
- * @deprecated 🚧 work in progress
  */
 export function getMarkdownHeadingId(
   token: MarkdownTokens.Heading & { tokens?: MarkdownToken[] },
 ): string {
-  throw new Error('🚧 work in progress');
+  return getMarkdownHeadingText(token)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 /**
  * Plain text of a heading, without its inline markdown (e.g. "Using `inject`" => "Using inject").
- *
- * @deprecated 🚧 work in progress
  */
 export function getMarkdownHeadingText(
   token: MarkdownTokens.Heading & { tokens?: MarkdownToken[] },
 ): string {
-  throw new Error('🚧 work in progress');
+  return _getPlainText(token.tokens ?? []).trim() || token.text;
+}
+
+function _getPlainText(tokens: MarkdownToken[]): string {
+  return tokens
+    .map((token) => {
+      if (token.tokens != null && token.tokens.length > 0) {
+        return _getPlainText(token.tokens);
+      }
+      /* `text` is HTML-escaped (e.g. `&#39;`): use `raw`, without the backticks of code spans. */
+      const raw = 'raw' in token ? token.raw : '';
+      return getMarkdownTokenType(token) === MarkdownTokenType.Codespan
+        ? raw.replace(/^`+\s?|\s?`+$/g, '')
+        : raw;
+    })
+    .join('');
 }

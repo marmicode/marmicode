@@ -9,7 +9,7 @@ describe(CodeBlockComponent.name, () => {
     uninstallClipboardFake();
   });
 
-  it.todo('copy button copies the code', async () => {
+  it('copy button copies the code', async () => {
     const clipboard = installClipboardFake();
     const { clickCopy, getCopyButton } = await mountCodeBlock(
       createCodeBlock({

@@ -1,5 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, EventEmitter, input, Input, NgModule, Output, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  EventEmitter,
+  input,
+  Input,
+  NgModule,
+  Output,
+  inject,
+} from '@angular/core';
 import { MarkdownBlock, parseMarkdown } from '@marmicode/block/core';
 import { HighlightZone } from '../highlight/highlight-zone';
 import { MarkdownBlockStateService } from './markdown-block-state.service';
@@ -35,6 +45,17 @@ import { MarkdownModule } from './markdown.module';
           font-size: 21px;
           line-height: 31px;
         }
+      }
+
+      :host-context(.mc-page-dark) {
+        margin: 0;
+        color: #e6dde8;
+        font-family: var(--mc-font-sans);
+        font-size: 18px;
+        line-height: 1.75;
+        --mc-markdown-link-color: var(--mc-accent-bright);
+        --mc-markdown-link-decoration-color: rgba(var(--mc-accent-rgb), 0.45);
+        --mc-markdown-link-underline-offset: 4px;
       }
     `,
   ],

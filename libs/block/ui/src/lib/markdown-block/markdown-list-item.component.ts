@@ -15,6 +15,15 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
       "
     ></ng-container>
   </li>`,
+  styles: `
+    :host-context(.mc-page-dark) li {
+      margin-top: 0.4em;
+
+      &::marker {
+        color: var(--mc-accent);
+      }
+    }
+  `,
   imports: [NgComponentOutlet],
 })
 export class MarkdownListItemComponent {

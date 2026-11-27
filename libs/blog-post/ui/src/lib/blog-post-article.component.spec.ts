@@ -10,7 +10,7 @@ import {
 } from './blog-post-article.component';
 
 describe(getTableOfContents.name, () => {
-  it.todo('table of contents from headings', () => {
+  it('table of contents from headings', () => {
     const toc = getTableOfContents(`Intro.
 
 ## Why
@@ -33,7 +33,7 @@ Done.`);
 });
 
 describe(BlogPostArticle.name, () => {
-  it.todo('article header and table of contents', async () => {
+  it('article header and table of contents', async () => {
     const { getBackLink, getTableOfContentsLinks, getText, getTitle } =
       await mountBlogPostArticle({
         blogPost: BLOG_POST,

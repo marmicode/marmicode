@@ -23,6 +23,23 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
         font-size: 1.5em;
         line-height: 1.5em;
       }
+
+      /* A callout on dark pages. */
+      :host-context(.mc-page-dark) blockquote {
+        margin: 1.6em 0;
+        padding: 2px 20px;
+        border: 1px solid rgba(var(--mc-accent-rgb), 0.35);
+        border-radius: 16px;
+        background: linear-gradient(
+          160deg,
+          rgba(var(--mc-accent-rgb), 0.12),
+          rgba(26, 17, 32, 0.6) 70%
+        );
+        color: inherit;
+        font-family: inherit;
+        font-size: 16px;
+        line-height: 1.65;
+      }
     `,
   ],
   imports: [NgComponentOutlet],

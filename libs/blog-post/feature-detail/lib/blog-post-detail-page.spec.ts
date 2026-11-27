@@ -14,7 +14,7 @@ import { BlogPostDetailPageComponent } from './blog-post-detail-page.component';
 import { BlogPostRepository } from './blog-post-repository.service';
 
 describe(BlogPostDetailPageComponent.name, () => {
-  it.todo('keep cooking excludes the current post', async () => {
+  it('keep cooking excludes the current post', async () => {
     const { getKeepCookingTitles } = await mountBlogPostDetailPage({
       slug: CURRENT_POST.slug,
       resources: [

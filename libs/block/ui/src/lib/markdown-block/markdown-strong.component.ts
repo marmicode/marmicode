@@ -15,6 +15,12 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
       "
     ></ng-container>
   </strong>`,
+  styles: `
+    :host-context(.mc-page-dark) strong {
+      color: var(--mc-dark-text);
+      font-weight: 600;
+    }
+  `,
   imports: [NgComponentOutlet],
 })
 export class MarkdownStrongComponent {
