@@ -3,3 +3,5 @@
 {"createdAt":"2026-11-27T15:28:31.717Z","type":"tag","value":"test"}
 
 {"createdAt":"2026-11-27T15:38:15.649Z","type":"untag","value":"test structural low"}
+
+{"createdAt":"2026-11-27T15:38:21.557Z","type":"tag","value":"structural"}
