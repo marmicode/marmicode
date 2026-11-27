@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { Button } from './button.ng';
 
 describe(Button.name, () => {
-  it.todo('button renders both variants', async () => {
+  it('button renders both variants', async () => {
     const { getLink, getButton } = await mountButtons();
 
     expect(getLink()).toEqual({ text: 'Book a seat', href: '/x' });

@@ -2,13 +2,11 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 /**
  * `<a mcButton>` / `<button mcButton="ghost">`: gradient primary or outlined ghost.
- *
- * @deprecated 🚧 work in progress
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'a[mcButton], button[mcButton]',
-  template: `Button - 🚧 work in progress`,
+  template: `<ng-content />`,
 })
 export class Button {
   variant = input('primary', {
