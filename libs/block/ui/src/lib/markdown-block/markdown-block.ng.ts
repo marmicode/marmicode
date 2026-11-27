@@ -27,32 +27,17 @@ import { MarkdownModule } from './markdown.module';
     `
       :host {
         display: block;
-        margin: 10px;
 
-        color: #292929;
-        font-family: Georgia, 'Times New Roman', Times, serif;
+        color: #e6dde8;
+        font-family: var(--mc-font-sans);
         font-weight: 400;
         text-rendering: optimizeLegibility;
         word-break: break-word;
         -webkit-font-smoothing: antialiased;
 
         font-size: 18px;
-        line-height: 28px;
-      }
-
-      @media (min-width: 960px) {
-        :host {
-          font-size: 21px;
-          line-height: 31px;
-        }
-      }
-
-      :host-context(.mc-page-dark) {
-        margin: 0;
-        color: #e6dde8;
-        font-family: var(--mc-font-sans);
-        font-size: 18px;
         line-height: 1.75;
+
         --mc-markdown-link-color: var(--mc-accent-bright);
         --mc-markdown-link-decoration-color: rgba(var(--mc-accent-rgb), 0.45);
         --mc-markdown-link-underline-offset: 4px;

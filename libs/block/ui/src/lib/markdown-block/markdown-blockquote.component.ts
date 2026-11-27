@@ -17,15 +17,8 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   </blockquote>`,
   styles: [
     `
+      /* A callout. */
       blockquote {
-        color: rgba(117, 117, 117, 1);
-        font-family: Georgia, Cambria, 'Times New Roman', Times, serif;
-        font-size: 1.5em;
-        line-height: 1.5em;
-      }
-
-      /* A callout on dark pages. */
-      :host-context(.mc-page-dark) blockquote {
         margin: 1.6em 0;
         padding: 2px 20px;
         border: 1px solid rgba(var(--mc-accent-rgb), 0.35);
@@ -35,8 +28,6 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
           rgba(var(--mc-accent-rgb), 0.12),
           rgba(26, 17, 32, 0.6) 70%
         );
-        color: inherit;
-        font-family: inherit;
         font-size: 16px;
         line-height: 1.65;
       }

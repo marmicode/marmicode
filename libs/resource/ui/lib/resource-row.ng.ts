@@ -45,12 +45,26 @@ export interface ResourceRowData {
           <!-- Decorative: the title says it all. -->
           <span class="placeholder" aria-hidden="true">
             @if (resource().kind === 'video') {
-              <svg viewBox="0 0 24 24">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.6"
+                viewBox="0 0 24 24"
+              >
                 <rect x="2" y="5" width="20" height="14" rx="3" />
                 <polygon points="10 9 15 12 10 15" />
               </svg>
             } @else {
-              <svg viewBox="0 0 24 24">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.6"
+                viewBox="0 0 24 24"
+              >
                 <path
                   d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"
                 />
@@ -177,11 +191,6 @@ export interface ResourceRowData {
       svg {
         width: 28px;
         height: 28px;
-        fill: none;
-        stroke: currentColor;
-        stroke-width: 1.6;
-        stroke-linecap: round;
-        stroke-linejoin: round;
       }
     }
 

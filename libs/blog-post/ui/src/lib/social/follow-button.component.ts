@@ -24,8 +24,16 @@ import { AuthorSocialInfo } from './author-social-info';
   `,
   styles: [
     `
+      /* A pill, as the prototype's follow links. */
       a {
+        display: inline-block;
+        border-radius: 999px;
         text-decoration: none;
+      }
+
+      a:focus-visible {
+        outline: 2px solid var(--mc-accent);
+        outline-offset: 2px;
       }
 
       .button {
@@ -36,66 +44,29 @@ import { AuthorSocialInfo } from './author-social-info';
         align-content: center;
 
         cursor: pointer;
-        background-color: #fff;
-        color: #000;
-        border: 2px solid;
-        border-radius: 0.2em;
-        height: 2.5em;
-        font-size: 14px;
-        font-weight: bold;
+        padding: 6px 12px;
+        border: 1px solid var(--mc-dark-line-strong);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--mc-dark-muted);
+        font: inherit;
+        font-size: 13px;
+        font-weight: 500;
         outline: none;
         transition:
-          background-color 0.3s,
-          color 0.3s;
+          color 0.2s,
+          border-color 0.2s;
       }
 
       .button:hover {
-        background-color: #000;
-        color: #fff;
+        border-color: rgba(var(--mc-accent-rgb), 0.5);
+        color: var(--mc-dark-text);
       }
 
       .icon {
-        font-size: 1.2em;
+        font-size: 1em;
         text-align: center;
         margin-right: 5px;
-      }
-
-      /* Dark pages: a pill, as the prototype's follow links. */
-      :host-context(.mc-page-dark) {
-        a {
-          display: inline-block;
-          border-radius: 999px;
-        }
-
-        a:focus-visible {
-          outline: 2px solid var(--mc-accent);
-          outline-offset: 2px;
-        }
-
-        .button {
-          height: auto;
-          padding: 6px 12px;
-          border: 1px solid var(--mc-dark-line-strong);
-          border-radius: 999px;
-          background: transparent;
-          color: var(--mc-dark-muted);
-          font: inherit;
-          font-size: 13px;
-          font-weight: 500;
-          transition:
-            color 0.2s,
-            border-color 0.2s;
-        }
-
-        .button:hover {
-          border-color: rgba(var(--mc-accent-rgb), 0.5);
-          background: transparent;
-          color: var(--mc-dark-text);
-        }
-
-        .icon {
-          font-size: 1em;
-        }
       }
     `,
   ],

@@ -1,13 +1,14 @@
 @use '../../../../../../node_modules/ngx-sharebuttons/themes/outline';
 
-/* Dark pages: small outlined icon buttons. */
-.mc-page-dark mc-share-buttons {
+/* Small outlined icon buttons.
+ * `.sb-outline` makes these rules win over the outline theme's. */
+mc-share-buttons {
   display: inline-flex;
   flex-wrap: wrap;
   gap: 6px;
 
-  share-buttons .sb-wrapper,
-  share-buttons .sb-wrapper:hover {
+  .sb-outline .sb-wrapper,
+  .sb-outline .sb-wrapper:hover {
     --sb-background: transparent;
     --sb-border: 1px solid var(--mc-dark-line-strong);
     --sb-border-radius: 10px;
@@ -22,7 +23,7 @@
       border-color 0.2s;
   }
 
-  share-buttons .sb-wrapper:hover {
+  .sb-outline .sb-wrapper:hover {
     --sb-border: 1px solid rgba(var(--mc-accent-rgb), 0.5);
     --sb-color: var(--mc-dark-text);
   }

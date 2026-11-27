@@ -16,7 +16,7 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
     ></ng-container>
   </li>`,
   styles: `
-    :host-context(.mc-page-dark) li {
+    li {
       margin-top: 0.4em;
 
       &::marker {

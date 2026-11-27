@@ -39,40 +39,31 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   `,
   styles: [
     `
-      h1 {
-        font-size: 1.5em;
-        font-weight: 500;
-        margin-top: 30px;
-      }
-
       h1,
       h2,
       h3 {
-        line-height: 1.2em;
+        color: var(--mc-dark-text);
+        font-weight: 650;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
       }
 
-      :host-context(.mc-page-dark) {
-        h1,
-        h2,
-        h3 {
-          color: var(--mc-dark-text);
-          font-weight: 650;
-          letter-spacing: -0.03em;
-          line-height: 1.15;
-        }
+      h1 {
+        margin-top: 30px;
+        font-size: 1.5em;
+      }
 
-        h2 {
-          margin: 2em 0 0.7em;
-          font-size: 30px;
-          /* Keeps the heading clear of the floating nav when jumping to it. */
-          scroll-margin-top: 96px;
-        }
+      h2 {
+        margin: 2em 0 0.7em;
+        font-size: 30px;
+        /* Keeps the heading clear of the floating nav when jumping to it. */
+        scroll-margin-top: 96px;
+      }
 
-        h3 {
-          margin: 1.6em 0 0.6em;
-          font-size: 22px;
-          letter-spacing: -0.02em;
-        }
+      h3 {
+        margin: 1.6em 0 0.6em;
+        font-size: 22px;
+        letter-spacing: -0.02em;
       }
     `,
   ],

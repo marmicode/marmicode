@@ -33,11 +33,18 @@ import { HighlightZone } from '../highlight/highlight-zone';
      * to allow code horizontal scroll in favor of swipe. */
     '(touchstart)': '$event.stopPropagation()',
   },
-  template: ` <!-- Only shown on dark pages. -->
-    <div class="code-head">
+  template: ` <div class="code-head">
       <span class="lang">{{ block().language }}</span>
       <button class="copy" type="button" (click)="copy()">
-        <svg aria-hidden="true" viewBox="0 0 24 24">
+        <svg
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          viewBox="0 0 24 24"
+        >
           <rect x="9" y="9" width="12" height="12" rx="2" />
           <path d="M5 15V5a2 2 0 0 1 2-2h10" />
         </svg>

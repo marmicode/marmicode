@@ -6,7 +6,7 @@ import { MarkdownTokens } from '@marmicode/block/core';
   selector: 'mc-markdown-codespan',
   template: ` <code>{{ token.text }}</code> `,
   styles: `
-    :host-context(.mc-page-dark) code {
+    code {
       padding: 0.12em 0.42em;
       border: 1px solid var(--mc-dark-line);
       border-radius: 6px;
