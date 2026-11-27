@@ -86,7 +86,8 @@ import { appRouterHelper } from './app-router-helper';
 
     .brand {
       display: flex;
-      align-items: center;
+      /* Sits the wordmark's baseline on the bottom of the pot (the image's bottom edge). */
+      align-items: baseline;
       gap: 8px;
       margin-right: auto;
       color: var(--mc-dark-text);
