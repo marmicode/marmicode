@@ -1,4 +1,6 @@
+import { TestBed } from '@angular/core/testing';
 import { FROM_DRIFT_TO_TRUST_FOR_ANGULAR } from '@marmicode/cohort/core';
+import { WorkshopRepository } from '@marmicode/workshop/infra';
 import { describe, expect, it } from 'vitest';
 import { cohortToPreview, pickVersion, toTrainingOffers } from './catalog';
 
@@ -24,8 +26,16 @@ describe(cohortToPreview, () => {
 
 describe(toTrainingOffers, () => {
   it.todo('workshops with alternates become one offer', () => {
-    // Call `toTrainingOffers` with the real `WorkshopRepository` workshops.
-    // Assert one offer per workshop (6), each with versions `['en', 'fr']`.
+    const offers = toTrainingOffers({
+      cohorts: [],
+      workshops: TestBed.inject(WorkshopRepository).getWorkshops(),
+      videoCourses: [],
+      today: new Date('2026-11-27'),
+    });
+
+    expect(
+      offers.map((offer) => offer.versions.map((version) => version.language)),
+    ).toEqual(Array.from({ length: 6 }, () => ['en', 'fr']));
   });
 
   it.todo('versions carry their own next session', () => {
