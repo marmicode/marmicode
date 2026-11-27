@@ -7,7 +7,7 @@ const test = base.extend<{ glove: HomeGlove }>({
 });
 
 test.describe('home', () => {
-  test.fixme('WIP route serves the new home', async ({ glove }) => {
+  test('WIP route serves the new home', async ({ glove }) => {
     await glove.goto('/');
     await expect(glove.heading("Let's Cook Better Apps!")).toBeVisible();
 

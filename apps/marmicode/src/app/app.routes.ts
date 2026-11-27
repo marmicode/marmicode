@@ -8,7 +8,7 @@ import {
   servicesRouterHelper,
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
-import { or } from '@marmicode/shared/utils';
+import { matchWip, or } from '@marmicode/shared/utils';
 import { provideChatWidget } from './chat/chat';
 
 export const routes: Routes = [
@@ -93,6 +93,15 @@ export const routes: Routes = [
         loadComponent: () => import('@marmicode/workshop/feature-detail'),
       },
     ],
+  },
+
+  /* Home page (WIP). */
+  {
+    path: '',
+    pathMatch: 'full',
+    canMatch: [matchWip],
+    loadComponent: () =>
+      import('@marmicode/landing/feature-landing').then((m) => m.HomePage),
   },
 
   /* Landing page. */
