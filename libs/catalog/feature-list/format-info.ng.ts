@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { TrainingFormat, TrainingLanguage } from '@marmicode/training/core';
 import {
+  TRAINING_FORMAT_DESCRIPTIONS,
   TRAINING_FORMAT_EMOJIS,
   TRAINING_FORMAT_LABELS,
 } from '@marmicode/training/ui';
@@ -132,7 +133,7 @@ export class FormatInfo {
       value: format,
       emoji: TRAINING_FORMAT_EMOJIS[format],
       label: TRAINING_FORMAT_LABELS[language][format],
-      description: this.labels().descriptions[format],
+      description: TRAINING_FORMAT_DESCRIPTIONS[language][format],
     }));
   });
 
@@ -172,27 +173,11 @@ const FORMATS: TrainingFormat[] = ['video-course', 'cohort', 'workshop'];
 const FORMAT_INFO_LABELS_EN = {
   buttonLabel: 'What do the formats mean?',
   title: 'Which format fits you?',
-  descriptions: {
-    'video-course':
-      'Self-paced: watch the lessons and do the exercises whenever you want.',
-    cohort:
-      'A multi-week program with a group: a live session every week, a video course with assignments, and a private community.',
-    workshop:
-      'Live and hands-on, over one to three days. Public sessions, or in-house for your team.',
-  } satisfies Record<TrainingFormat, string>,
 };
 
 const FORMAT_INFO_LABELS_FR: typeof FORMAT_INFO_LABELS_EN = {
   buttonLabel: 'Que signifient les formats ?',
   title: 'Quel format vous convient ?',
-  descriptions: {
-    'video-course':
-      'À votre rythme : regardez les leçons et faites les exercices quand vous le souhaitez.',
-    cohort:
-      'Un programme de plusieurs semaines en groupe : une session live chaque semaine, un cours vidéo avec des exercices, et une communauté privée.',
-    workshop:
-      'En direct et pratique, sur un à trois jours. Sessions publiques, ou en intra pour votre équipe.',
-  },
 };
 
 const FORMAT_INFO_LABELS: Record<
