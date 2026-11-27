@@ -6,14 +6,15 @@ import { describe, expect, it } from 'vitest';
 import { WorkshopPage } from './workshop-page.ng';
 
 describe(WorkshopPage.name, () => {
-  it.todo('lists upcoming sessions with Luma links', async () => {
+  it('lists upcoming sessions with Luma links', async () => {
     const { getSessionRows } = await mountWorkshopPage({
       workshopId: 'pragmatic-angular-testing',
     });
 
     const [row] = getSessionRows();
 
-    expect(row?.text).toContain('Jan 12–14, 2027');
+    /* `Intl` puts thin spaces around the range dash. */
+    expect(row?.text).toMatch(/Jan 12\s?–\s?14, 2027/);
     expect(row?.text).toContain('9:30–18:00 CET');
     expect(row?.text).toContain('Book a seat');
     expect(row?.href).toBe('https://luma.com/73n2dvji');
