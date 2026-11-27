@@ -41,6 +41,25 @@ export interface ResourceRowData {
       <div class="thumb">
         @if (resource().pictureUri; as pictureUri) {
           <img alt="" [src]="pictureUri" />
+        } @else {
+          <!-- Decorative: the title says it all. -->
+          <span class="placeholder" aria-hidden="true">
+            @if (resource().kind === 'video') {
+              <svg viewBox="0 0 24 24">
+                <rect x="2" y="5" width="20" height="14" rx="3" />
+                <polygon points="10 9 15 12 10 15" />
+              </svg>
+            } @else {
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"
+                />
+                <path d="M14 3v5h5" />
+                <path d="M9 13h6" />
+                <path d="M9 17h4" />
+              </svg>
+            }
+          </span>
         }
         @if (resource().kind === 'video') {
           <span class="play">
@@ -130,6 +149,40 @@ export interface ResourceRowData {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    /* Dotted grid fading out, as on the prototype's generated thumbnails. */
+    .thumb::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(
+        rgba(255, 255, 255, 0.07) 1px,
+        transparent 1px
+      );
+      background-size: 14px 14px;
+      mask-image: linear-gradient(to bottom, #000, transparent 85%);
+    }
+
+    .placeholder {
+      position: relative;
+      display: grid;
+      place-items: center;
+      padding: 10px 14px;
+      border: 1px solid var(--mc-dark-line-strong);
+      border-radius: 10px;
+      background: rgba(17, 10, 19, 0.6);
+      color: rgba(244, 238, 245, 0.92);
+
+      svg {
+        width: 28px;
+        height: 28px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
     }
 
     .play {

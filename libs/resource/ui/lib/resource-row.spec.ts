@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { ResourceRow, ResourceRowData } from './resource-row.ng';
 
 describe(ResourceRow.name, () => {
-  it.todo('row falls back to a placeholder thumbnail', async () => {
+  it('row falls back to a placeholder thumbnail', async () => {
     const { getThumbnail } = await mountResourceRow({
       ...ARTICLE,
       pictureUri: undefined,
