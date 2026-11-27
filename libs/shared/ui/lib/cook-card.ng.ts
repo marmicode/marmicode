@@ -160,14 +160,14 @@ import gdePictureUri from './gde.webp';
       margin: 0;
       padding: 0;
       list-style: none;
+    }
 
-      li {
-        padding: 6px 12px;
-        border: 1px solid var(--mc-dark-line-strong);
-        border-radius: 999px;
-        color: var(--mc-dark-muted);
-        font-size: 13px;
-      }
+    .chips li {
+      padding: 6px 12px;
+      border: 1px solid var(--mc-dark-line-strong);
+      border-radius: 999px;
+      color: var(--mc-dark-muted);
+      font-size: 13px;
     }
 
     @media (max-width: 760px) {
