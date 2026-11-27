@@ -176,7 +176,7 @@ const FORMAT_INFO_LABELS_EN = {
     'video-course':
       'Self-paced: watch the lessons and do the exercises whenever you want.',
     cohort:
-      'A multi-week program with a group: a live session every week, a video course to prepare, and a private community.',
+      'A multi-week program with a group: a live session every week, a video course with assignments, and a private community.',
     workshop:
       'Live and hands-on, over one to three days. Public sessions, or in-house for your team.',
   } satisfies Record<TrainingFormat, string>,
@@ -189,7 +189,7 @@ const FORMAT_INFO_LABELS_FR: typeof FORMAT_INFO_LABELS_EN = {
     'video-course':
       'À votre rythme : regardez les leçons et faites les exercices quand vous le souhaitez.',
     cohort:
-      'Un programme de plusieurs semaines en groupe : une session live chaque semaine, un cours vidéo pour se préparer, et une communauté privée.',
+      'Un programme de plusieurs semaines en groupe : une session live chaque semaine, un cours vidéo avec des exercices, et une communauté privée.',
     workshop:
       'En direct et pratique, sur un à trois jours. Sessions publiques, ou en intra pour votre équipe.',
   },
