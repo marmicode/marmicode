@@ -90,10 +90,26 @@ describe(TrainingListPage.name, () => {
     ]);
   });
 
-  it.todo('cards keep their links', () => {
-    // Assert the cohort links to `/cohorts/from-drift-to-trust-for-angular`.
-    // Assert the video course links to the course URL in a new tab.
-    // Assert a French workshop links to its French detail page.
+  it.todo('cards keep their links', async () => {
+    const { click, getGroup } = await mountTrainingListPage();
+
+    expect(getGroup('Cohort')?.cards[0]?.link).toEqual({
+      href: '/cohorts/from-drift-to-trust-for-angular',
+      target: null,
+    });
+    expect(getGroup('Video course')?.cards[0]?.link).toEqual({
+      href: 'https://courses.marmicode.io/courses/pragmatic-angular-testing',
+      target: '_blank',
+      rel: 'noopener',
+    });
+
+    await click('Français');
+
+    expect(
+      getGroup('Formations')?.cards.find(
+        ({ title }) => title === 'Test Angular Pragmatique',
+      )?.link,
+    ).toEqual({ href: '/workshops/test-angular-pragmatique', target: null });
   });
 
   it.todo('cards show the next session', () => {
@@ -134,6 +150,7 @@ async function mountTrainingListPage({
           (card) => ({
             title: getTextContent(card.querySelector('h3')),
             lang: card.querySelector('[lang]')?.getAttribute('lang'),
+            link: getLink(card.querySelector('h3 a')),
             languages: Array.from(card.querySelectorAll('.language-chip')).map(
               (chip) => getTextContent(chip),
             ),
@@ -155,6 +172,19 @@ async function mountTrainingListPage({
     getText: () => getTextContent(host),
     getGroup: (heading: string) =>
       getGroups().find((group) => group.heading === heading),
+  };
+}
+
+/* The link's destination, and whether it opens in a new tab. */
+function getLink(anchor: Element | null) {
+  if (!anchor) {
+    return undefined;
+  }
+  const target = anchor.getAttribute('target');
+  return {
+    href: anchor.getAttribute('href'),
+    target,
+    ...(target === '_blank' ? { rel: anchor.getAttribute('rel') } : {}),
   };
 }
 
