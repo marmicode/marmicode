@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideSiteConfig } from '@marmicode/shared/core';
+import { externalLinks } from '@marmicode/shared/router-helpers';
 import { describe, expect, it } from 'vitest';
 import { CoachingLandingPage } from './coaching-landing-page.ng';
 
@@ -14,8 +15,14 @@ describe(CoachingLandingPage.name, () => {
     expect(benefits[0].detail).toMatch(/^4 hours/);
   });
 
-  it.todo('book a fit call', () => {
-    // Assert two **Book a fit call** links to `externalLinks.scheduleCallUrl` with `target="_blank"`.
+  it.todo('book a fit call', async () => {
+    const { getLinks } = await mountCoachingLandingPage();
+
+    const bookCallLink = {
+      href: externalLinks.scheduleCallUrl,
+      target: '_blank',
+    };
+    expect(getLinks('Book a fit call')).toEqual([bookCallLink, bookCallLink]);
   });
 });
 
@@ -39,6 +46,14 @@ async function mountCoachingLandingPage() {
         headline: getTextContent(benefit.querySelector('h3')),
         detail: getTextContent(benefit.querySelector('p')),
       }));
+    },
+    getLinks(text: string) {
+      return Array.from(host.querySelectorAll<HTMLAnchorElement>('a'))
+        .filter((anchor) => getTextContent(anchor).includes(text))
+        .map((anchor) => ({
+          href: anchor.getAttribute('href'),
+          target: anchor.getAttribute('target'),
+        }));
     },
   };
 }
