@@ -30,8 +30,28 @@ describe(getUpcomingSessions.name, () => {
   });
 
   it.todo('keeps a session until its last day', () => {
-    // - Arrange a session from 2026-11-26 to 2026-11-28.
-    // - Assert it is kept on 2026-11-28 and dropped on 2026-11-29.
+    const workshops = [
+      createWorkshop({
+        id: 'workshop-a',
+        sessions: [
+          createSession({ startDate: '2026-11-26', endDate: '2026-11-28' }),
+        ],
+      }),
+    ];
+
+    expect(
+      getUpcomingSessions({
+        workshops,
+        today: new Date('2026-11-28T12:00:00Z'),
+      }),
+    ).toHaveLength(1);
+
+    expect(
+      getUpcomingSessions({
+        workshops,
+        today: new Date('2026-11-29T12:00:00Z'),
+      }),
+    ).toHaveLength(0);
   });
 });
 
