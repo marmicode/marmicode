@@ -46,7 +46,7 @@ describe(HomePage.name, () => {
     expect(rows[0]?.lang).toBe('fr');
   });
 
-  it.todo('no upcoming events', async () => {
+  it('no upcoming events', async () => {
     const { getEventRows, getEventsText, getEventsLinks } = await mountHomePage(
       { today: '2030-01-01' },
     );

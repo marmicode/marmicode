@@ -16,33 +16,60 @@ import { formatSessionDates, formatSessionTimes } from '@marmicode/workshop/ui';
 /**
  * One row per session: "DEC 08" date tile, workshop title (with `lang`), "Workshop · Online · 🇬🇧 English · Dec 8–9 · 9:30–18:00 CET".
  * Each row links to the workshop page. Empty list: "No public session scheduled right now." + link to /workshops.
- *
- * @deprecated 🚧 work in progress
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-upcoming-session-list',
   imports: [RouterLink],
   template: `
-    <ul>
-      @for (row of rows(); track row.key) {
-        <li>
-          <a class="row" [routerLink]="row.route" [attr.lang]="row.language">
-            <time [attr.datetime]="row.startDate">{{ row.dateTile }}</time>
-            <div>
-              <h3>{{ row.title }}</h3>
-              <small>{{ row.details }}</small>
-            </div>
-            <span class="go">{{ row.goLabel }} →</span>
-          </a>
-        </li>
-      }
-    </ul>
+    @if (rows().length === 0) {
+      <p class="empty">
+        No public session scheduled right now.
+        <a [routerLink]="workshopRouterHelper.list()">See all trainings →</a>
+      </p>
+    } @else {
+      <ul>
+        @for (row of rows(); track row.key) {
+          <li>
+            <a class="row" [routerLink]="row.route" [attr.lang]="row.language">
+              <time [attr.datetime]="row.startDate">{{ row.dateTile }}</time>
+              <div>
+                <h3>{{ row.title }}</h3>
+                <small>{{ row.details }}</small>
+              </div>
+              <span class="go">{{ row.goLabel }} →</span>
+            </a>
+          </li>
+        }
+      </ul>
+    }
   `,
   styles: `
     :host {
       display: block;
       margin-top: 32px;
+    }
+
+    .empty {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0;
+      padding: 24px;
+      border: 1px dashed var(--mc-dark-line-strong);
+      border-radius: 20px;
+      color: var(--mc-dark-muted);
+    }
+
+    .empty a {
+      color: var(--mc-dark-text);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .empty a:hover {
+      color: var(--mc-accent-bright);
     }
 
     ul {
@@ -113,6 +140,8 @@ import { formatSessionDates, formatSessionTimes } from '@marmicode/workshop/ui';
 })
 export class UpcomingSessionList {
   sessions = input.required<UpcomingSession[]>();
+
+  protected readonly workshopRouterHelper = workshopRouterHelper;
 
   protected readonly rows = computed(() =>
     this.sessions().map(({ workshop, session }) => {
