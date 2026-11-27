@@ -5,7 +5,7 @@ import {
   provideContentfulClient,
   Query,
 } from '@marmicode/contentful/infra';
-import { createAuthor } from '@marmicode/resource/core';
+import { createAuthor, getResourceTopics } from '@marmicode/resource/core';
 import { WipService } from '@marmicode/shared/utils';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
@@ -142,8 +142,18 @@ export class ResourceRepository {
   private _toResources(resourceCollection: {
     items: contentful.Resource[];
   }): Resource[] {
-    return resourceCollection.items.map((item) =>
-      createResource({
+    return resourceCollection.items.map((item) => {
+      const requiredSkills = this._toSkills({
+        items: item.requiredSkillCollection!.items!.filter(
+          (s): s is contentful.Skill => s != null,
+        ),
+      });
+      const skills = this._toSkills({
+        items: item.skillCollection!.items!.filter(
+          (s): s is contentful.Skill => s != null,
+        ),
+      });
+      return createResource({
         id: item.sys.id,
         author:
           item.author != null
@@ -160,24 +170,19 @@ export class ResourceRepository {
             ? item.picture.url
             : undefined,
         releasedAt: new Date(Date.parse(item.releasedAt!)),
-        requiredSkills: this._toSkills({
-          items: item.requiredSkillCollection!.items!.filter(
-            (s): s is contentful.Skill => s != null,
-          ),
-        }),
-        skills: this._toSkills({
-          items: item.skillCollection!.items!.filter(
-            (s): s is contentful.Skill => s != null,
-          ),
-        }),
+        requiredSkills,
+        skills,
         slug: item.slug!,
         summary: item.summary!,
         title: item.title!,
+        topics: getResourceTopics({
+          skillSlugs: [...skills, ...requiredSkills].map(({ slug }) => slug),
+        }),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         type: item.resourceType as any,
         url: item.url!,
-      }),
-    );
+      });
+    });
   }
 
   private _toSkills(skills: { items: contentful.Skill[] }): Skill[] {
