@@ -21,6 +21,7 @@ Generative UI, human-in-the-loop, sécurité, auth — et un arbre de décision 
     url: 'https://docs.google.com/forms/d/1yFLewI_0Nadd3_UeOL8PT33NoO3YxLQajjEM3skvmZk/viewform',
   },
   lumaTag: 'agentic-angular',
+  sessions: [],
   description: `
 L'écart entre une démo d'agent et un agent en production est bien réel : **des confirmations que l'agent ne peut pas contourner**, une identité qui atteint vraiment le runtime, des threads qui survivent à un rafraîchissement de page, des réponses qui arrivent en streaming avant que l'utilisateur n'abandonne, une facture de tokens qui ne dépasse pas la valeur de la fonctionnalité, et une réponse pour le jour où quelqu'un collera un document contenant des instructions cachées.
 

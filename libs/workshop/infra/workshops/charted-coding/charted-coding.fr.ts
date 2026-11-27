@@ -18,6 +18,16 @@ Cartographier le paysage, tracer une méthode compatible avec votre architecture
   customSessionRequestUrl: 'https://forms.gle/uCFadpa7J578H6zQ6',
   // waitlist: { url: 'https://forms.gle/Ds8TSxkBkSiJddnk7' },
   lumaTag: 'charted-coding',
+  sessions: [
+    {
+      startDate: '2026-12-01',
+      endDate: '2026-12-02',
+      startTime: '09:30',
+      endTime: '18:00',
+      timezone: 'CET',
+      url: 'https://luma.com/40eun1mi',
+    },
+  ],
   description: `
 Les agents de développement (Claude Code, Cursor, Copilot, et autres) font désormais partie du quotidien de nombreuses équipes. **Comment en tirer parti durablement**, sans dégrader la lisibilité du code, perdre le contrôle de votre architecture, ou se noyer dans la fatigue de revue ?
 

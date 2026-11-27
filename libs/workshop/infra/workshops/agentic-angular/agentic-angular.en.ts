@@ -21,6 +21,7 @@ Generative UI, human-in-the-loop, security, auth — and a takeaway decision tre
     url: 'https://docs.google.com/forms/d/1PhkR41Zu21Rux5hajJB77UjR5L_LRZNdJqDAJmuY90I/viewform',
   },
   lumaTag: 'agentic-angular',
+  sessions: [],
   description: `
 The gap between an agent demo and an agent in production is real: **confirmations the agent can't bypass**, identity that actually reaches the runtime, threads that survive a page refresh, responses that stream in before users give up, a token bill that doesn't outgrow the feature, and an answer for the day someone pastes a document with hidden instructions in it.
 

@@ -20,6 +20,16 @@ et une suite qui résiste aux refactorings, aux migrations et aux deadlines.`,
   customSessionRequestUrl: 'https://forms.gle/FmSfiVpi7H21twwr9',
   // waitlist: { url: 'https://forms.gle/8ANywdMWtp5PtPLK9' },
   lumaTag: 'angular-testing',
+  sessions: [
+    {
+      startDate: '2027-01-05',
+      endDate: '2027-01-07',
+      startTime: '09:30',
+      endTime: '18:00',
+      timezone: 'CET',
+      url: 'https://luma.com/yd61qspc',
+    },
+  ],
   description: `
 Il y a deux façons de garder un produit stable :
 **ne jamais y toucher — ou mijoter une solide stratégie de test.**
