@@ -5,6 +5,10 @@ export default {
 
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {},
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|webp|svg|ttf|woff|woff2)$':
+      '<rootDir>/../../libs/__mocks__/image-stub.js',
+  },
   displayName: 'marmicode',
   testMatch: ['**/*.jest.ts'],
   snapshotSerializers: [
