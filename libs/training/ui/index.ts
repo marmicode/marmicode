@@ -17,3 +17,4 @@ export * from './training.i18n';
 export * from './training-format.i18n';
 export * from './training-preview.ng';
 export * from './training-tile-data';
+export * from './training-tile.ng';
