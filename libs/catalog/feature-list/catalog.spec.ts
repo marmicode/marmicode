@@ -62,8 +62,14 @@ describe(pickVersion, () => {
   });
 
   it.todo('english-only offers disappear in French', () => {
-    // Take the cohort offer.
-    // Assert `pickVersion` with `'fr'` returns `null`.
+    const [offer] = toTrainingOffers({
+      cohorts: [FROM_DRIFT_TO_TRUST_FOR_ANGULAR],
+      workshops: [],
+      videoCourses: [],
+      today: new Date('2026-11-27'),
+    });
+
+    expect(pickVersion({ offer, language: 'fr' })).toBeNull();
   });
 });
 
