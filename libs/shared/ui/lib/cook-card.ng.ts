@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import cookPictureUri from './cook.webp';
 import gdePictureUri from './gde.webp';
@@ -87,6 +87,14 @@ import gdePictureUri from './gde.webp';
   `,
 })
 export class CookCard {
+  /**
+   * 'card' = the current light card (old training pages).
+   * 'banner' = dark horizontal block: photo left, bio right, credential chips (home, workshop, cohort).
+   * Both render the same bio copy, so the text lives in one place.
+   *
+   * @deprecated 🚧 work in progress
+   */
+  appearance = input<'card' | 'banner'>('card');
   cookPictureUri = cookPictureUri;
   gdePictureUri = gdePictureUri;
 }
