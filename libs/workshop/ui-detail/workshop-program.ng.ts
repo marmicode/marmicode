@@ -91,7 +91,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
 
     .legend {
       position: sticky;
-      top: 96px;
+      top: 150px;
       display: grid;
       gap: 12px;
       color: var(--mc-dark-muted);

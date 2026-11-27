@@ -44,6 +44,10 @@ const WORKSHOP_DETAIL_LABELS_EN = {
   sameWorkshopInThisLanguage: 'Same workshop in English',
   seeTheWorkshop: 'See the workshop',
   smallGroup: 'small group',
+  faqTab: 'FAQ',
+  onThisPage: 'On this page',
+  sessionsTab: 'Sessions',
+  overviewTab: 'Overview',
   upcomingSessions: 'Upcoming sessions',
 };
 
@@ -90,6 +94,10 @@ const WORKSHOP_DETAIL_LABELS_FR: typeof WORKSHOP_DETAIL_LABELS_EN = {
   sameWorkshopInThisLanguage: 'Même formation en français',
   seeTheWorkshop: 'Voir la formation',
   smallGroup: 'petit groupe',
+  faqTab: 'FAQ',
+  onThisPage: 'Sur cette page',
+  sessionsTab: 'Sessions',
+  overviewTab: 'Aperçu',
   upcomingSessions: 'Sessions à venir',
 };
 

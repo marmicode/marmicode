@@ -18,9 +18,11 @@ import {
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
 import {
+  Accordion,
   Badge,
   Button,
   ClosingSection,
+  CookCard,
   createBasicPageInfo,
   Link,
   PageComponent,
@@ -29,7 +31,9 @@ import { TODAY } from '@marmicode/shared/utils';
 import {
   formatPrice,
   RequiredKnowledgeCard,
+  TrainingBenefitGrid,
   TrainingPageHero,
+  TrainingQuoteGrid,
 } from '@marmicode/training/ui';
 import { getUpcomingSessions, Workshop } from '@marmicode/workshop/core';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
@@ -38,30 +42,34 @@ import {
   WORKSHOP_DETAIL_LABELS,
   WorkshopBookBar,
   WorkshopProgram,
+  WorkshopSectionTabs,
   WorkshopSessionList,
 } from '@marmicode/workshop/ui-detail';
 
 /**
  * Dark workshop page: hero, section tabs, overview, sessions, benefits, testimonials,
  * program, the cook, FAQ, closing section and the sticky booking bar.
- *
- * @deprecated 🚧 work in progress
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-workshop-page',
   imports: [
+    Accordion,
     Badge,
     Button,
     ClosingSection,
+    CookCard,
     LowerCasePipe,
     MarkdownBlockComponent,
     PageComponent,
     RequiredKnowledgeCard,
     RouterLink,
+    TrainingBenefitGrid,
     TrainingPageHero,
+    TrainingQuoteGrid,
     WorkshopBookBar,
     WorkshopProgram,
+    WorkshopSectionTabs,
     WorkshopSessionList,
   ],
   template: `
@@ -133,6 +141,8 @@ import {
             <small>{{ priceDetails() }}</small>
           </div>
         </mc-training-page-hero>
+
+        <mc-workshop-section-tabs class="wrap" [language]="workshop.language" />
 
         <section id="overview" class="wrap overview">
           <div class="prose">
@@ -225,6 +235,30 @@ import {
           />
         </section>
 
+        <section id="learn" class="wrap">
+          <span class="mc-eyebrow"
+            >// {{ labels.whatYouWillLearn | lowercase }}</span
+          >
+          <h2>{{ labels.whatYouWillLearn }}</h2>
+          <mc-training-benefit-grid
+            class="section-content"
+            [benefits]="workshop.benefits"
+          />
+        </section>
+
+        @if (workshop.testimonials?.length) {
+          <section id="testimonials" class="wrap">
+            <span class="mc-eyebrow"
+              >// {{ labels.testimonials | lowercase }}</span
+            >
+            <h2>{{ labels.testimonials }}</h2>
+            <mc-training-quote-grid
+              class="section-content"
+              [testimonials]="workshop.testimonials ?? []"
+            />
+          </section>
+        }
+
         <section id="program" class="wrap">
           <span class="mc-eyebrow">// {{ labels.program | lowercase }}</span>
           <h2>{{ labels.program }}</h2>
@@ -232,6 +266,16 @@ import {
             [agenda]="workshop.agenda"
             [language]="workshop.language"
           />
+        </section>
+
+        <section class="wrap">
+          <mc-cook-card appearance="banner" />
+        </section>
+
+        <section id="faq" class="wrap">
+          <span class="mc-eyebrow">// {{ labels.faqTab | lowercase }}</span>
+          <h2>{{ labels.faq }}</h2>
+          <mc-accordion class="section-content" [items]="faqItems()" />
         </section>
 
         <section class="wrap closing">
@@ -297,11 +341,20 @@ import {
 
     section {
       position: relative;
-      padding: 72px 0;
+      padding: 24px 0 72px;
     }
 
+    #overview {
+      padding-top: 72px;
+    }
+
+    /* Leaves room for the floating nav and the sticky section tabs. */
     [id] {
-      scroll-margin-top: 96px;
+      scroll-margin-top: 150px;
+    }
+
+    .section-content {
+      margin-top: 36px;
     }
 
     h2 {
@@ -371,6 +424,10 @@ import {
       color: var(--mc-dark-muted);
     }
 
+    .glance s {
+      margin-left: 6px;
+    }
+
     .price-card small {
       display: block;
       margin-top: 2px;
@@ -416,9 +473,15 @@ import {
 
     .aside {
       position: sticky;
-      top: 96px;
+      top: 150px;
       display: grid;
       gap: 14px;
+    }
+
+    @media (max-width: 960px) {
+      .aside {
+        position: static;
+      }
     }
 
     .glance {
@@ -467,6 +530,7 @@ import {
     }
 
     .glance [mcButton] {
+      box-sizing: border-box;
       justify-content: center;
       width: 100%;
       margin-top: 16px;
@@ -603,6 +667,12 @@ export class WorkshopPage {
       : undefined;
   });
 
+  protected faqItems = computed(() =>
+    this._requireWorkshop().faqs.map(({ question, answer }) => ({
+      title: question,
+      content: answer,
+    })),
+  );
   /* Closing section: "Dinner's" + gradient "ready!". */
   protected closing = computed(() => {
     const { callToAction, subheading } = this._requireWorkshop();

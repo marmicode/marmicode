@@ -19,8 +19,6 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
  * `sessions`: this workshop's upcoming sessions, each with **Book a seat** → `session.url` (new tab).
  * `otherSessions`: the other-language version's sessions, as dashed rows in that language (`lang`), linking to `otherWorkshopLink`.
  * Both empty: "No session scheduled yet." + custom session link (+ waitlist link when set).
- *
- * @deprecated 🚧 work in progress
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -43,6 +43,7 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
       left: 50%;
       bottom: 16px;
       z-index: 25;
+      box-sizing: border-box;
       display: flex;
       align-items: center;
       gap: 14px;
