@@ -29,9 +29,16 @@ describe(SegmentedControl.name, () => {
       ]);
   });
 
-  it.todo('segmented control hides emojis from screen readers', () => {
-    // Mount with an option `{ label: 'Cohort', emoji: '👥' }`.
-    // Assert the button's accessible name is "Cohort".
+  it.todo('segmented control hides emojis from screen readers', async () => {
+    const { getButtons, getButtonTexts } = await mountSegmentedControl({
+      options: [{ value: 'cohort', label: 'Cohort', emoji: '👥' }],
+      value: 'cohort',
+    });
+
+    /* The emoji is shown... */
+    expect(getButtonTexts()).toEqual(['👥 Cohort']);
+    /* ...but not announced. */
+    expect(getButtons()).toEqual([{ name: 'Cohort', pressed: 'true' }]);
   });
 });
 
@@ -63,6 +70,10 @@ async function mountSegmentedControl<T>({
 
   return {
     getValue: () => fixture.componentInstance.value(),
+    getButtonTexts: () =>
+      getButtonElements().map((button) =>
+        button.textContent?.replace(/\s+/g, ' ').trim(),
+      ),
     getButtons: () =>
       getButtonElements().map((button) => ({
         name: getAccessibleName(button),
