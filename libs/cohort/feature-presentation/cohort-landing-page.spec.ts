@@ -15,7 +15,7 @@ describe(CohortLandingPage.name, () => {
     expect(getHeroText()).toContain('Early 2027');
   });
 
-  it.todo('route lists every week with its outcome', async () => {
+  it('route lists every week with its outcome', async () => {
     const { getRouteWeeks } = await mountCohortLandingPage();
 
     expect(getRouteWeeks()).toEqual(

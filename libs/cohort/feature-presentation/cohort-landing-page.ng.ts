@@ -9,6 +9,7 @@ import {
   TrainingPageHero,
 } from '@marmicode/training/ui';
 import { COHORT_LABELS } from './cohort-presentation.i18n';
+import { CohortRoute } from './cohort-route.ng';
 
 /**
  * Dark cohort page: hero with the offer card, description and format, the weekly route,
@@ -19,7 +20,7 @@ import { COHORT_LABELS } from './cohort-presentation.i18n';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-cohort-landing-page',
-  imports: [Badge, PageComponent, TrainingPageHero],
+  imports: [Badge, CohortRoute, PageComponent, TrainingPageHero],
   template: `
     <mc-page theme="dark">
       <mc-training-page-hero
@@ -44,12 +45,43 @@ import { COHORT_LABELS } from './cohort-presentation.i18n';
           </p>
         </div>
       </mc-training-page-hero>
+
+      <section id="program" class="wrap">
+        <span class="mc-eyebrow">// {{ labels.programEyebrow }}</span>
+        <h2>{{ labels.programTitle }}</h2>
+        <mc-cohort-route
+          class="section-content"
+          [weeks]="cohort.schedule.weeks"
+        />
+      </section>
     </mc-page>
   `,
   styles: `
     .wrap {
       width: min(1180px, 100% - 32px);
       margin-inline: auto;
+    }
+
+    section {
+      position: relative;
+      padding: 24px 0 72px;
+    }
+
+    /* Leaves room for the floating nav. */
+    [id] {
+      scroll-margin-top: 110px;
+    }
+
+    .section-content {
+      margin-top: 36px;
+    }
+
+    h2 {
+      margin: 10px 0 0;
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
     }
 
     /* Hero offer card, under the picture. */
