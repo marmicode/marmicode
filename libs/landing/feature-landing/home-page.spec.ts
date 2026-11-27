@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideSiteConfig } from '@marmicode/shared/core';
+import { TODAY } from '@marmicode/shared/utils';
 import { describe, expect, it } from 'vitest';
 import { HomePage } from './home-page.ng';
 
@@ -24,10 +25,25 @@ describe(HomePage.name, () => {
     expect(chip?.href).toBe('/cohorts/from-drift-to-trust-for-angular');
   });
 
-  it.todo('upcoming events list the workshop sessions', () => {
-    // Provide `TODAY` as 2026-11-27 and mount `HomePage` with the real `WorkshopRepository`.
-    // Assert the rows in order: Charted Coding (FR, Dec 1), Charted Coding (EN, Dec 8), Test Angular Pragmatique (Jan 5), Pragmatic Angular Testing (Jan 12).
-    // Assert the last row links to `/workshops/pragmatic-angular-testing` and the first row has `lang="fr"`.
+  it.todo('upcoming events list the workshop sessions', async () => {
+    const { getEventRows } = await mountHomePage({ today: '2026-11-27' });
+
+    const rows = getEventRows();
+
+    expect(rows.map(({ date, title }) => ({ date, title }))).toEqual([
+      {
+        date: 'DEC 01',
+        title: 'Charted Coding : développement assisté par IA sans dérive',
+      },
+      {
+        date: 'DEC 08',
+        title: 'Charted Coding: AI-Assisted Development Without the Drift',
+      },
+      { date: 'JAN 05', title: 'Test Angular Pragmatique' },
+      { date: 'JAN 12', title: 'Pragmatic Angular Testing' },
+    ]);
+    expect(rows.at(-1)?.href).toBe('/workshops/pragmatic-angular-testing');
+    expect(rows[0]?.lang).toBe('fr');
   });
 
   it.todo('no upcoming events', () => {
@@ -36,11 +52,14 @@ describe(HomePage.name, () => {
   });
 });
 
-async function mountHomePage() {
+async function mountHomePage({
+  today = '2026-11-27',
+}: { today?: string } = {}) {
   TestBed.configureTestingModule({
     providers: [
       provideRouter([]),
       provideSiteConfig({ origin: 'https://marmicode.io' }),
+      { provide: TODAY, useValue: () => new Date(today) },
     ],
   });
 
@@ -50,6 +69,19 @@ async function mountHomePage() {
   const host: HTMLElement = fixture.nativeElement;
 
   return {
+    /* Each upcoming session is a link with a date tile and a heading. */
+    getEventRows() {
+      return Array.from(
+        host.querySelectorAll<HTMLAnchorElement>('mc-upcoming-session-list a'),
+      )
+        .filter((anchor) => anchor.querySelector('h3'))
+        .map((anchor) => ({
+          date: getTextContent(anchor.querySelector('time')),
+          title: getTextContent(anchor.querySelector('h3')),
+          href: anchor.getAttribute('href'),
+          lang: anchor.getAttribute('lang'),
+        }));
+    },
     /* First link of the hero that contains `text`. */
     getHeroLink(text: string) {
       const anchor = Array.from(
