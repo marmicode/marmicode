@@ -58,18 +58,9 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-.mc-flex {
-  flex: 1;
-}
-
 .mc-flex-column {
   display: flex;
   flex-direction: column;
-}
-
-.mc-flex-row {
-  display: flex !important;
-  flex-direction: row;
 }
 
 @media screen and (min-width: 960px) {
