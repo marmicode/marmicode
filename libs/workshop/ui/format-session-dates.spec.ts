@@ -26,8 +26,22 @@ describe(formatSessionDates.name, () => {
   });
 
   it.todo('formats a range across months and a single day', () => {
-    // - Assert Dec 30, 2026 → Jan 1, 2027 shows both months and years.
-    // - Assert a session without `endDate` shows one day.
+    expect(
+      formatSessionDates({
+        session: createSession({
+          startDate: '2026-12-30',
+          endDate: '2027-01-01',
+        }),
+        language: 'en',
+      }),
+    ).toMatch(/Dec 30, 2026\s?–\s?Jan 1, 2027/);
+
+    expect(
+      formatSessionDates({
+        session: createSession({ startDate: '2027-01-12' }),
+        language: 'en',
+      }),
+    ).toBe('Jan 12, 2027');
   });
 });
 
