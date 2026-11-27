@@ -46,7 +46,7 @@ describe(toTrainingOffers, () => {
     ).toEqual(Array.from({ length: 6 }, () => ['en', 'fr']));
   });
 
-  it.todo('versions carry their own next session', () => {
+  it('versions carry their own next session', () => {
     const offers = toTrainingOffers({
       cohorts: [],
       workshops: TestBed.inject(WorkshopRepository).getWorkshops(),

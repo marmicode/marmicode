@@ -6,8 +6,9 @@ import {
 } from '@marmicode/shared/router-helpers';
 import { TrainingFormat, TrainingLanguage } from '@marmicode/training/core';
 import { TrainingPreviewData, TrainingTileData } from '@marmicode/training/ui';
-import { Workshop } from '@marmicode/workshop/core';
+import { getUpcomingSessions, Workshop } from '@marmicode/workshop/core';
 import {
+  formatSessionDates,
   WORKSHOP_SHARED_LABELS,
   workshopViewTransitionName,
 } from '@marmicode/workshop/ui';
@@ -63,10 +64,10 @@ export function workshopToPreview(
   workshop: Workshop,
   { today }: { today?: Date } = {},
 ): TrainingTileData {
-  if (today !== undefined) {
-    throw new Error('🚧 work in progress');
-  }
   const labels = WORKSHOP_SHARED_LABELS[workshop.language];
+  const [nextSession] = today
+    ? getUpcomingSessions({ workshops: [workshop], today })
+    : [];
   return {
     id: workshop.id,
     format: 'workshop',
@@ -81,6 +82,15 @@ export function workshopToPreview(
     pictureAltText: workshop.pictureAltText,
     duration: `${workshop.duration} ${workshop.duration === 1 ? labels.day : labels.days}`,
     price: workshop.offer.price,
+    ...(nextSession
+      ? {
+          nextSessionDates: formatSessionDates({
+            session: nextSession.session,
+            language: workshop.language,
+            short: true,
+          }),
+        }
+      : {}),
     link: { route: workshopRouterHelper.detail(workshop.id) },
     viewTransitionName: workshopViewTransitionName(workshop),
   };
@@ -107,6 +117,7 @@ export interface TrainingOffer {
 export function toTrainingOffers({
   cohorts,
   workshops,
+  today,
 }: {
   cohorts: Cohort[];
   workshops: Workshop[];
@@ -132,7 +143,7 @@ export function toTrainingOffers({
     group.forEach(({ id }) => groupedIds.add(id));
     workshopOffers.push({
       format: 'workshop',
-      versions: group.map((version) => workshopToPreview(version)),
+      versions: group.map((version) => workshopToPreview(version, { today })),
     });
   }
   return [
