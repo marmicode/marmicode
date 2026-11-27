@@ -5,7 +5,7 @@ import {
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
 import { TrainingFormat, TrainingLanguage } from '@marmicode/training/core';
-import { TrainingPreviewData, TrainingTileData } from '@marmicode/training/ui';
+import { TrainingTileData } from '@marmicode/training/ui';
 import { getUpcomingSessions, Workshop } from '@marmicode/workshop/core';
 import {
   formatSessionDates,
@@ -18,10 +18,11 @@ import pragmaticAngularTestingVideoCourseThumbnailUri from './pragmatic-angular-
 /**
  * The video course lives on courses.marmicode.io, so it only has a preview here.
  */
-export const PRAGMATIC_ANGULAR_TESTING_VIDEO_COURSE: TrainingPreviewData = {
+export const PRAGMATIC_ANGULAR_TESTING_VIDEO_COURSE: TrainingTileData = {
   id: 'pragmatic-angular-testing-video-course',
   format: 'video-course',
   language: 'en',
+  languages: ['en'],
   title: 'Pragmatic Angular Testing',
   subheading: `Learn Angular testing at your own pace.
 53 lessons with exercises, a tutor and solutions.`,
@@ -99,8 +100,6 @@ export function workshopToPreview(
 /**
  * One training, offered in one or more languages.
  * `versions` is never empty.
- *
- * @deprecated 🚧 work in progress
  */
 export interface TrainingOffer {
   format: TrainingFormat;
@@ -111,12 +110,11 @@ export interface TrainingOffer {
  * Groups language versions with `Workshop.alternates`, keeping repository order.
  * The cohort and the video course become single-version offers.
  * `today` picks each version's next session.
- *
- * @deprecated 🚧 work in progress
  */
 export function toTrainingOffers({
   cohorts,
   workshops,
+  videoCourses,
   today,
 }: {
   cohorts: Cohort[];
@@ -154,6 +152,12 @@ export function toTrainingOffers({
       }),
     ),
     ...workshopOffers,
+    ...videoCourses.map(
+      (videoCourse): TrainingOffer => ({
+        format: 'video-course',
+        versions: [videoCourse],
+      }),
+    ),
   ];
 }
 

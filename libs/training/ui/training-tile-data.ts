@@ -4,8 +4,6 @@ import { TrainingPreviewData } from './training-preview.ng';
 /**
  * What a dark training tile shows.
  * Backward compatible with `TrainingPreviewData`.
- *
- * @deprecated 🚧 work in progress
  */
 export interface TrainingTileData extends TrainingPreviewData {
   /**
