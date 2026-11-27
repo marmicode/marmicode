@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { CoachingLandingPage } from './coaching-landing-page.ng';
 
 describe(CoachingLandingPage.name, () => {
-  it.todo('benefits split into headline and detail', async () => {
+  it('benefits split into headline and detail', async () => {
     const { getBenefits } = await mountCoachingLandingPage();
 
     const benefits = getBenefits();
