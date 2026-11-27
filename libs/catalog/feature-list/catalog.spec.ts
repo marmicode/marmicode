@@ -25,7 +25,7 @@ describe(cohortToPreview, () => {
 });
 
 describe(toTrainingOffers, () => {
-  it.todo('workshops with alternates become one offer', () => {
+  it('workshops with alternates become one offer', () => {
     const offers = toTrainingOffers({
       cohorts: [],
       workshops: TestBed.inject(WorkshopRepository).getWorkshops(),

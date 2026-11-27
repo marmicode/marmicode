@@ -55,7 +55,7 @@ export function cohortToPreview(cohort: Cohort): TrainingPreviewData {
 export function workshopToPreview(
   workshop: Workshop,
   { today }: { today?: Date } = {},
-): TrainingPreviewData {
+): TrainingTileData {
   if (today !== undefined) {
     throw new Error('🚧 work in progress');
   }
@@ -64,6 +64,10 @@ export function workshopToPreview(
     id: workshop.id,
     format: 'workshop',
     language: workshop.language,
+    languages: sortLanguages([
+      workshop.language,
+      ...(workshop.alternates ?? []).map((alternate) => alternate.language),
+    ]),
     title: workshop.shortTitle,
     subheading: workshop.subheading,
     thumbnailUri: workshop.thumbnailUri,
@@ -93,13 +97,37 @@ export interface TrainingOffer {
  *
  * @deprecated 🚧 work in progress
  */
-export function toTrainingOffers(args: {
+export function toTrainingOffers({
+  workshops,
+}: {
   cohorts: Cohort[];
   workshops: Workshop[];
   videoCourses: TrainingTileData[];
   today: Date;
 }): TrainingOffer[] {
-  throw new Error('🚧 work in progress');
+  const workshopsById = new Map(
+    workshops.map((workshop) => [workshop.id, workshop]),
+  );
+  const groupedIds = new Set<string>();
+  const workshopOffers: TrainingOffer[] = [];
+  for (const workshop of workshops) {
+    if (groupedIds.has(workshop.id)) {
+      continue;
+    }
+    const group = [
+      workshop,
+      ...(workshop.alternates ?? []).flatMap((alternate) => {
+        const alternateWorkshop = workshopsById.get(alternate.id);
+        return alternateWorkshop ? [alternateWorkshop] : [];
+      }),
+    ];
+    group.forEach(({ id }) => groupedIds.add(id));
+    workshopOffers.push({
+      format: 'workshop',
+      versions: group.map((version) => workshopToPreview(version)),
+    });
+  }
+  return workshopOffers;
 }
 
 /**
@@ -113,6 +141,15 @@ export function pickVersion(args: {
   language: TrainingLanguage | null;
 }): TrainingTileData | null {
   throw new Error('🚧 work in progress');
+}
+
+const TRAINING_LANGUAGES: TrainingLanguage[] = ['en', 'fr'];
+
+/**
+ * English first, without duplicates.
+ */
+function sortLanguages(languages: TrainingLanguage[]): TrainingLanguage[] {
+  return TRAINING_LANGUAGES.filter((language) => languages.includes(language));
 }
 
 const WEEK_LABELS: Record<TrainingLanguage, { week: string; weeks: string }> = {
