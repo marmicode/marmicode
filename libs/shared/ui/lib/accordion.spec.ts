@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { Accordion } from './accordion.ng';
 
 describe(Accordion.name, () => {
-  it.todo('accordion opens one item', async () => {
+  it('accordion opens one item', async () => {
     const { clickTitle, getItems } = await mountAccordion([
       { title: 'Is it online?', content: 'Yes, on Zoom.' },
       { title: 'Can I get a refund?', content: 'Up to a week before.' },
