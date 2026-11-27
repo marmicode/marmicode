@@ -7,7 +7,7 @@ const test = base.extend<{ glove: WorkshopPageGlove }>({
 });
 
 test.describe('workshop page', () => {
-  test.fixme('sticky booking bar', async ({ glove }) => {
+  test('sticky booking bar', async ({ glove }) => {
     await glove.enableWip();
     await glove.goto('pragmatic-angular-testing');
 

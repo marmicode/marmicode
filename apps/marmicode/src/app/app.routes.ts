@@ -97,6 +97,15 @@ export const routes: Routes = [
         pathMatch: 'full',
         loadComponent: () => import('@marmicode/catalog/feature-list'),
       },
+      /* Workshop page (WIP). */
+      {
+        path: workshopRouterHelper.WORKSHOP_DETAIL_RELATIVE_PATH,
+        canMatch: [matchWip],
+        loadComponent: () =>
+          import('@marmicode/workshop/feature-detail').then(
+            (m) => m.WorkshopPage,
+          ),
+      },
       /* Workshop detail. */
       {
         path: workshopRouterHelper.WORKSHOP_DETAIL_RELATIVE_PATH,

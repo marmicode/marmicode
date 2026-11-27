@@ -1,9 +1,14 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   computed,
+  DestroyRef,
+  ElementRef,
   inject,
   input,
+  signal,
+  viewChild,
 } from '@angular/core';
 import { LowerCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -15,6 +20,7 @@ import {
 import {
   Badge,
   Button,
+  ClosingSection,
   createBasicPageInfo,
   Link,
   PageComponent,
@@ -30,6 +36,7 @@ import { WorkshopRepository } from '@marmicode/workshop/infra';
 import { formatSessionDates } from '@marmicode/workshop/ui';
 import {
   WORKSHOP_DETAIL_LABELS,
+  WorkshopBookBar,
   WorkshopProgram,
   WorkshopSessionList,
 } from '@marmicode/workshop/ui-detail';
@@ -46,12 +53,14 @@ import {
   imports: [
     Badge,
     Button,
+    ClosingSection,
     LowerCasePipe,
     MarkdownBlockComponent,
     PageComponent,
     RequiredKnowledgeCard,
     RouterLink,
     TrainingPageHero,
+    WorkshopBookBar,
     WorkshopProgram,
     WorkshopSessionList,
   ],
@@ -224,6 +233,49 @@ import {
             [language]="workshop.language"
           />
         </section>
+
+        <section class="wrap closing">
+          <mc-closing-section
+            [description]="closing().description"
+            [eyebrow]="closing().eyebrow"
+          >
+            {{ closing().titleStart }}
+            <span class="mc-gradient-text">{{ closing().titleEnd }}</span>
+            @if (workshop.waitlist; as waitlist) {
+              <a
+                mcButton
+                slot="actions"
+                [href]="waitlist.url"
+                rel="noopener"
+                target="_blank"
+              >
+                {{ labels.joinWaitlist }}
+              </a>
+            } @else {
+              <a mcButton slot="actions" [routerLink]="[]" fragment="sessions">
+                {{ labels.bookASession }}
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </a>
+            }
+            <a
+              mcButton="ghost"
+              slot="actions"
+              [href]="workshop.customSessionRequestUrl"
+              rel="noopener"
+              target="_blank"
+            >
+              {{ labels.requestACustomSession }}
+            </a>
+          </mc-closing-section>
+        </section>
+
+        <mc-workshop-book-bar
+          [visible]="bookBarVisible()"
+          [workshop]="workshop"
+        />
       } @else {
         <section class="wrap">
           <h2>Workshop not found.</h2>
@@ -551,8 +603,57 @@ export class WorkshopPage {
       : undefined;
   });
 
+  /* Closing section: "Dinner's" + gradient "ready!". */
+  protected closing = computed(() => {
+    const { callToAction, subheading } = this._requireWorkshop();
+    const labels = this.labels();
+    const title = callToAction?.title ?? labels.callToActionTitle;
+    const lastSpaceIndex = title.lastIndexOf(' ');
+    return {
+      description:
+        callToAction?.description ?? subheading.replaceAll('\n', ' '),
+      eyebrow: `// ${labels.closingEyebrow}`,
+      titleStart: title.slice(0, Math.max(lastSpaceIndex, 0)),
+      titleEnd: title.slice(lastSpaceIndex + 1),
+    };
+  });
+  /* Visible once the hero is scrolled away, until the closing section shows up. */
+  protected bookBarVisible = computed(
+    () => !this._heroVisible() && !this._closingVisible(),
+  );
+
+  private _heroVisible = signal(true);
+  private _closingVisible = signal(false);
+  private _hero = viewChild(TrainingPageHero, { read: ElementRef });
+  private _closingSection = viewChild(ClosingSection, { read: ElementRef });
   private _today = inject(TODAY);
   private _workshopRepository = inject(WorkshopRepository);
+
+  constructor() {
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      if (typeof IntersectionObserver === 'undefined') {
+        return;
+      }
+      const observe = (
+        element: ElementRef<HTMLElement> | undefined,
+        isVisible: (visible: boolean) => void,
+      ) => {
+        if (!element) {
+          return;
+        }
+        const observer = new IntersectionObserver(([entry]) =>
+          isVisible(entry.isIntersecting),
+        );
+        observer.observe(element.nativeElement);
+        destroyRef.onDestroy(() => observer.disconnect());
+      };
+      observe(this._hero(), (visible) => this._heroVisible.set(visible));
+      observe(this._closingSection(), (visible) =>
+        this._closingVisible.set(visible),
+      );
+    });
+  }
 
   /* Only called from the template's `@if (workshop())` branch. */
   private _requireWorkshop(): Workshop {
