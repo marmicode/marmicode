@@ -95,8 +95,13 @@ describe(LibraryPage.name, () => {
     expect(getHeading()).toBe('Angular Signals');
   });
 
-  it.todo('cookbook banner links to the cookbook', () => {
-    // Assert a link to `https://cookbook.marmicode.io` with `target="_blank"` sits above the list.
+  it.todo('cookbook banner links to the cookbook', async () => {
+    const { getCookbookLink, isAboveTheList } = await mountLibraryPage();
+
+    const link = getCookbookLink();
+
+    expect(link?.getAttribute('target')).toBe('_blank');
+    expect(isAboveTheList(link)).toBe(true);
   });
 });
 
@@ -214,6 +219,19 @@ async function mountLibraryPage({
         .find((button) => getAccessibleText(button) === name)
         ?.click();
       await harness.fixture.whenStable();
+    },
+    getCookbookLink: () =>
+      host.querySelector('a[href="https://cookbook.marmicode.io"]'),
+    /* Whether the element comes before the first resource row. */
+    isAboveTheList: (element: Element | null) => {
+      const firstRow = host.querySelector('mc-resource-row');
+      return (
+        element != null &&
+        firstRow != null &&
+        (element.compareDocumentPosition(firstRow) &
+          Node.DOCUMENT_POSITION_FOLLOWING) !==
+          0
+      );
     },
     /* The list heading: "Everything", the skill, or the live result count. */
     getHeading: () => getTextContent(host.querySelector('[role="status"]')),
