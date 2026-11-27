@@ -46,9 +46,14 @@ describe(HomePage.name, () => {
     expect(rows[0]?.lang).toBe('fr');
   });
 
-  it.todo('no upcoming events', () => {
-    // Provide `TODAY` as 2030-01-01 and mount `HomePage`.
-    // Assert "No public session scheduled right now." and a link to `/workshops`.
+  it.todo('no upcoming events', async () => {
+    const { getEventRows, getEventsText, getEventsLinks } = await mountHomePage(
+      { today: '2030-01-01' },
+    );
+
+    expect(getEventRows()).toEqual([]);
+    expect(getEventsText()).toContain('No public session scheduled right now.');
+    expect(getEventsLinks()).toEqual(['/workshops']);
   });
 });
 
@@ -81,6 +86,14 @@ async function mountHomePage({
           href: anchor.getAttribute('href'),
           lang: anchor.getAttribute('lang'),
         }));
+    },
+    getEventsLinks() {
+      return Array.from(
+        host.querySelectorAll<HTMLAnchorElement>('mc-upcoming-session-list a'),
+      ).map((anchor) => anchor.getAttribute('href'));
+    },
+    getEventsText() {
+      return getTextContent(host.querySelector('mc-upcoming-session-list'));
     },
     /* First link of the hero that contains `text`. */
     getHeroLink(text: string) {
