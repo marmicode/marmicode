@@ -53,7 +53,7 @@ import { toResourceRowData } from './to-resource-row-data';
         description="Articles, videos and the cookbook. Search by what you want to learn, or just browse what's fresh."
       >
         Recipes, talks &amp; tips,
-        <span class="mc-gradient-text">free to cook.</span>
+        <span class="mc-gradient-text">on the house.</span>
       </mc-page-header>
 
       <mc-cookbook-banner class="wrap cookbook" />

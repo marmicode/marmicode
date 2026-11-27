@@ -29,7 +29,7 @@ test.describe('new pages', () => {
       { url: '/coaching', heading: 'Monthly Team Coaching' },
       {
         url: '/learn/everything',
-        heading: 'Recipes, talks & tips, free to cook.',
+        heading: 'Recipes, talks & tips, on the house.',
       },
     ]) {
       await glove.goto(url);
