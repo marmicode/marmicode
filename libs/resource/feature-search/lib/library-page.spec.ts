@@ -62,9 +62,27 @@ describe(LibraryPage.name, () => {
     expect(getRowTitles()).toEqual([APR_2023_ARTICLE.title]);
   });
 
-  it.todo('empty search shows the empty state', () => {
-    // Type "xyz".
-    // Assert "That one hasn't been cooked yet."; click **Show everything** and assert all rows are back with empty search and filters.
+  it.todo('empty search shows the empty state', async () => {
+    const {
+      click,
+      getPressedFilters,
+      getRowTitles,
+      getSearch,
+      getText,
+      search,
+    } = await mountLibraryPage();
+
+    await click('Videos');
+    await search('xyz');
+
+    expect(getRowTitles()).toEqual([]);
+    expect(getText()).toContain("That one hasn't been cooked yet.");
+
+    await click('Show everything');
+
+    expect(getRowTitles()).toEqual(RESOURCES.map(({ title }) => title));
+    expect(getSearch()).toBe('');
+    expect(getPressedFilters()).toEqual(['All', 'All topics']);
   });
 
   it.todo('skill routes still work', () => {
@@ -194,8 +212,15 @@ async function mountLibraryPage({
     },
     /* The list heading: "Everything", the skill, or the live result count. */
     getHeading: () => getTextContent(host.querySelector('[role="status"]')),
+    /* The pressed kind and topic filters. */
+    getPressedFilters: () =>
+      Array.from(host.querySelectorAll('button[aria-pressed="true"]')).map(
+        (button) => getAccessibleText(button),
+      ),
     getRows,
     getRowTitles: () => getRows().map(({ title }) => title),
+    getSearch: () =>
+      host.querySelector<HTMLInputElement>('input[type="search"]')?.value,
     getText: () => getTextContent(host),
     async search(text: string) {
       const input = host.querySelector<HTMLInputElement>(
