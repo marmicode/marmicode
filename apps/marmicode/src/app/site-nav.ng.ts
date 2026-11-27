@@ -28,8 +28,17 @@ import { appRouterHelper } from './app-router-helper';
     <header class="nav">
       <div class="bar">
         <a class="brand" [routerLink]="appRouterHelper.home()">
-          <img alt="Marmicode" height="30" src="/assets/logo-white.svg" />
-          <span aria-hidden="true">Marmicode</span>
+          <span class="logo">
+            <img
+              alt="Marmicode"
+              class="pot"
+              height="19"
+              src="/assets/logo-white-pot.svg"
+              width="34"
+            />
+            <img alt="" class="steam" src="/assets/logo-white-steam.svg" />
+          </span>
+          <span aria-hidden="true" class="wordmark">Marmicode</span>
         </a>
         <nav class="links">
           @for (entry of entries; track entry.label) {
@@ -86,12 +95,34 @@ import { appRouterHelper } from './app-router-helper';
 
     .brand {
       display: flex;
-      /* Sits the wordmark's baseline on the bottom of the pot (the image's bottom edge). */
-      align-items: baseline;
+      /* Centers the pot and the wordmark as a pair; the steam is decoration and stays out of layout. */
+      align-items: center;
       gap: 8px;
       margin-right: auto;
       color: var(--mc-dark-text);
       font-weight: 600;
+    }
+
+    .logo {
+      position: relative;
+      display: block;
+    }
+
+    .pot {
+      display: block;
+    }
+
+    /* Shares the pot's bottom edge and width (same viewBox x-range), so it rises above the pot. */
+    .steam {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    .wordmark {
+      line-height: 1;
     }
 
     .links {
@@ -146,7 +177,7 @@ import { appRouterHelper } from './app-router-helper';
         font-size: 13px;
       }
 
-      .brand span,
+      .wordmark,
       .cta .long {
         display: none;
       }

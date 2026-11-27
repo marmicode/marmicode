@@ -7,7 +7,7 @@ describe(CookCard.name, () => {
     const { getText } = await mountCookCard();
 
     expect(getText()).toContain('Software Cook');
-    expect(getText()).toContain('Google Developer Expert');
+    expect(getText()).toContain('Angular GDE');
   });
 });
 
