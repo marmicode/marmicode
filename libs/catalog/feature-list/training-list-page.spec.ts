@@ -125,9 +125,19 @@ describe(TrainingListPage.name, () => {
     expect(getNextSession('Pragmatic React Testing')).toBeUndefined();
   });
 
-  it.todo('cards are announced in their language', () => {
-    // Filter "Français".
-    // Assert a card has `lang="fr"` and visually hidden text in French.
+  it.todo('cards are announced in their language', async () => {
+    const { click, getGroup } = await mountTrainingListPage();
+
+    await click('Français');
+
+    expect(
+      getGroup('Formations')?.cards.find(
+        ({ title }) => title === 'Test Angular Pragmatique',
+      ),
+    ).toMatchObject({
+      lang: 'fr',
+      hiddenText: 'Langues : anglais, français',
+    });
   });
 });
 
@@ -160,6 +170,8 @@ async function mountTrainingListPage({
             lang: card.querySelector('[lang]')?.getAttribute('lang'),
             link: getLink(card.querySelector('h3 a')),
             nextSession: getTextContent(card.querySelector('.next-session')),
+            /* Only announced to screen readers. */
+            hiddenText: getTextContent(card.querySelector('.visually-hidden')),
             languages: Array.from(card.querySelectorAll('.language-chip')).map(
               (chip) => getTextContent(chip),
             ),
