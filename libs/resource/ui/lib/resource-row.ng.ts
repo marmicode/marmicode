@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ResourceKind } from '@marmicode/resource/core';
 import { Link } from '@marmicode/shared/ui';
 
@@ -24,14 +30,264 @@ export interface ResourceRowData {
 
 /**
  * One resource per full-width row; the whole row is the link.
- *
- * @deprecated 🚧 work in progress
+ * As in `TrainingTile`, the title link covers the whole row.
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-resource-row',
-  template: `ResourceRow - 🚧 work in progress`,
+  imports: [RouterLink],
+  template: `
+    <article class="mc-surface mc-surface-interactive">
+      <div class="thumb">
+        @if (resource().pictureUri; as pictureUri) {
+          <img alt="" [src]="pictureUri" />
+        }
+        @if (resource().kind === 'video') {
+          <span class="play">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <polygon points="7 4 20 12 7 20" />
+            </svg>
+            {{ resource().duration }} min
+          </span>
+        }
+      </div>
+
+      <div class="content">
+        <div class="meta">
+          <span class="type">{{ labels().type }}</span>
+          <span>{{ details() }}</span>
+        </div>
+        <h3>
+          @if (href(); as href) {
+            <a class="title-link" [href]="href" rel="noopener" target="_blank">
+              {{ resource().title }}
+            </a>
+          } @else {
+            <a class="title-link" [routerLink]="route()">
+              {{ resource().title }}
+            </a>
+          }
+        </h3>
+        <p>{{ resource().summary }}</p>
+      </div>
+
+      <span class="read" aria-hidden="true">
+        {{ labels().action }}
+        <svg viewBox="0 0 24 24">
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+      </span>
+    </article>
+  `,
+  styles: `
+    :host {
+      display: block;
+    }
+
+    article {
+      position: relative;
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 28px;
+      padding: 14px 28px 14px 14px;
+      color: var(--mc-dark-text);
+    }
+
+    .thumb {
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border: 1px solid var(--mc-dark-line);
+      border-radius: 13px;
+      background:
+        radial-gradient(
+          70% 90% at 20% 10%,
+          rgba(var(--mc-violet-rgb), 0.55),
+          transparent 65%
+        ),
+        radial-gradient(
+          60% 80% at 90% 100%,
+          rgba(var(--mc-accent-rgb), 0.32),
+          transparent 65%
+        ),
+        #1e1426;
+    }
+
+    img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .play {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px 4px 8px;
+      border: 1px solid var(--mc-dark-line-strong);
+      border-radius: 999px;
+      background: rgba(17, 10, 19, 0.8);
+      color: var(--mc-dark-text);
+      font-family: var(--mc-font-mono);
+      font-size: 12px;
+
+      svg {
+        width: 11px;
+        height: 11px;
+        fill: currentColor;
+        stroke: none;
+      }
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2px 10px;
+      color: var(--mc-dark-muted);
+      font-size: 12.5px;
+    }
+
+    .type {
+      color: var(--mc-accent);
+      font-family: var(--mc-font-mono);
+      font-size: 11.5px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.28;
+    }
+
+    .title-link {
+      color: inherit;
+      text-decoration: none;
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+      }
+
+      &:focus-visible {
+        outline: none;
+
+        &::after {
+          outline: 2px solid var(--mc-accent);
+          outline-offset: -2px;
+        }
+      }
+    }
+
+    p {
+      display: -webkit-box;
+      overflow: hidden;
+      max-width: 80ch;
+      margin: 0;
+      color: var(--mc-dark-muted);
+      font-size: 15px;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .read {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--mc-dark-muted);
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+
+      svg {
+        flex: none;
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    }
+
+    article:hover .read {
+      color: var(--mc-accent-bright);
+    }
+
+    @media (max-width: 760px) {
+      article {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 12px 12px 20px;
+      }
+
+      .thumb {
+        aspect-ratio: 16 / 7;
+      }
+
+      .content {
+        padding: 0 8px;
+      }
+
+      .read {
+        display: none;
+      }
+    }
+  `,
 })
 export class ResourceRow {
   resource = input.required<ResourceRowData>();
+
+  protected readonly labels = computed(() => KIND_LABELS[this.resource().kind]);
+
+  /** "Nov 2024 · 6 min read" for articles, "Oct 2022" for videos (their duration is on the thumbnail). */
+  protected readonly details = computed(() => {
+    const { kind, duration, releasedAt } = this.resource();
+    const date = DATE_FORMAT.format(new Date(releasedAt));
+    return kind === 'article' ? `${date} · ${duration} min read` : date;
+  });
+
+  protected readonly href = computed(() => {
+    const link = this.resource().link;
+    return 'href' in link ? link.href : undefined;
+  });
+
+  protected readonly route = computed(() => {
+    const link = this.resource().link;
+    return 'route' in link ? link.route : undefined;
+  });
 }
+
+const DATE_FORMAT = new Intl.DateTimeFormat('en', {
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
+const KIND_LABELS: Record<ResourceKind, { type: string; action: string }> = {
+  article: { type: 'Article', action: 'Read' },
+  video: { type: 'Video', action: 'Watch' },
+};

@@ -11,7 +11,7 @@ import { ResourceRepositoryFake } from './resource-repository.fake';
 import { Skill } from './skill';
 
 describe(LibraryPage.name, () => {
-  it.todo('lists resources newest first, one per row', async () => {
+  it('lists resources newest first, one per row', async () => {
     const { getRows } = await mountLibraryPage({
       resources: [APR_2023_ARTICLE, OCT_2022_VIDEO, NOV_2024_ARTICLE],
     });
@@ -125,6 +125,8 @@ async function mountLibraryPage({
 
   const harness = await RouterTestingHarness.create();
   await harness.navigateByUrl(url);
+  /* Resources load in an effect, after the navigation settles. */
+  await harness.fixture.whenStable();
 
   const host: HTMLElement = harness.routeNativeElement!;
 
