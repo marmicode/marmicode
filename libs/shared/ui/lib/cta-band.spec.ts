@@ -6,7 +6,7 @@ import { CtaBand } from './cta-band.ng';
 import { Link } from './link.component';
 
 describe(CtaBand.name, () => {
-  it.todo('cta band links internally and externally', async () => {
+  it('cta band links internally and externally', async () => {
     const { getLink, setLink } = await mountCtaBand({ route: ['/x'] });
 
     await expect
