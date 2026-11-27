@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { CatalogPage } from './catalog-page.ng';
 
 describe(CatalogPage, () => {
-  it('lists the cohort, the video course and the workshops', async () => {
+  it('lists the cohort, the workshops and the video course', async () => {
     const { getCards } = mountCatalogPage();
 
     await expect
@@ -13,11 +13,19 @@ describe(CatalogPage, () => {
       .toEqual(
         expect.arrayContaining([
           { format: '👥 Cohort', title: 'From Drift to Trust' },
-          { format: '🎬 Video course', title: 'Pragmatic Angular Testing' },
           { format: '🧑‍🍳 Workshop', title: 'Pragmatic Angular Testing' },
           { format: '🧑‍🍳 Formation', title: 'Test Angular Pragmatique' },
+          { format: '🎬 Video course', title: 'Pragmatic Angular Testing' },
         ]),
       );
+  });
+
+  it('lists the cohort first, then the workshops, then the video course', async () => {
+    const { getFormatOrder } = mountCatalogPage();
+
+    await expect
+      .poll(() => getFormatOrder())
+      .toEqual(['👥 Cohort', '🧑‍🍳 Workshop', '🎬 Video course']);
   });
 
   it('links the video course to the course platform', async () => {
@@ -142,12 +150,19 @@ function mountCatalogPage() {
 
   const normalize = (text?: string | null) => text?.replace(/\s+/g, ' ').trim();
 
+  const getCards = () =>
+    getCardElements().map((card) => ({
+      format: normalize(card.querySelector('.format-chip')?.textContent),
+      title: normalize(card.querySelector('h3')?.textContent),
+    }));
+
   return {
-    getCards: () =>
-      getCardElements().map((card) => ({
-        format: normalize(card.querySelector('.format-chip')?.textContent),
-        title: normalize(card.querySelector('h3')?.textContent),
-      })),
+    getCards,
+    /* The formats in the order they appear, French workshops counted as workshops. */
+    getFormatOrder: () =>
+      getCards()
+        .map(({ format }) => format?.replace('Formation', 'Workshop'))
+        .filter((format, index, formats) => format !== formats[index - 1]),
     getCardLink: (format: string) =>
       getCardElements()
         .find(
