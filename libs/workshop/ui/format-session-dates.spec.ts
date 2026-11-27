@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { formatSessionDates } from './format-session-dates';
 
 describe(formatSessionDates.name, () => {
-  it.todo('formats dates in both languages', () => {
+  it('formats dates in both languages', () => {
     const session = createSession({
       startDate: '2027-01-12',
       endDate: '2027-01-14',
