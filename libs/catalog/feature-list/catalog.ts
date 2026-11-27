@@ -4,8 +4,8 @@ import {
   externalLinks,
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
-import { TrainingLanguage } from '@marmicode/training/core';
-import { TrainingPreviewData } from '@marmicode/training/ui';
+import { TrainingFormat, TrainingLanguage } from '@marmicode/training/core';
+import { TrainingPreviewData, TrainingTileData } from '@marmicode/training/ui';
 import { Workshop } from '@marmicode/workshop/core';
 import {
   WORKSHOP_SHARED_LABELS,
@@ -52,7 +52,13 @@ export function cohortToPreview(cohort: Cohort): TrainingPreviewData {
   };
 }
 
-export function workshopToPreview(workshop: Workshop): TrainingPreviewData {
+export function workshopToPreview(
+  workshop: Workshop,
+  { today }: { today?: Date } = {},
+): TrainingPreviewData {
+  if (today !== undefined) {
+    throw new Error('🚧 work in progress');
+  }
   const labels = WORKSHOP_SHARED_LABELS[workshop.language];
   return {
     id: workshop.id,
@@ -67,6 +73,46 @@ export function workshopToPreview(workshop: Workshop): TrainingPreviewData {
     link: { route: workshopRouterHelper.detail(workshop.id) },
     viewTransitionName: workshopViewTransitionName(workshop),
   };
+}
+
+/**
+ * One training, offered in one or more languages.
+ * `versions` is never empty.
+ *
+ * @deprecated 🚧 work in progress
+ */
+export interface TrainingOffer {
+  format: TrainingFormat;
+  versions: TrainingTileData[];
+}
+
+/**
+ * Groups language versions with `Workshop.alternates`, keeping repository order.
+ * The cohort and the video course become single-version offers.
+ * `today` picks each version's next session.
+ *
+ * @deprecated 🚧 work in progress
+ */
+export function toTrainingOffers(args: {
+  cohorts: Cohort[];
+  workshops: Workshop[];
+  videoCourses: TrainingTileData[];
+  today: Date;
+}): TrainingOffer[] {
+  throw new Error('🚧 work in progress');
+}
+
+/**
+ * `null` language: the English version, else the first one.
+ * Returns `null` when the offer isn't available in `language`.
+ *
+ * @deprecated 🚧 work in progress
+ */
+export function pickVersion(args: {
+  offer: TrainingOffer;
+  language: TrainingLanguage | null;
+}): TrainingTileData | null {
+  throw new Error('🚧 work in progress');
 }
 
 const WEEK_LABELS: Record<TrainingLanguage, { week: string; weeks: string }> = {

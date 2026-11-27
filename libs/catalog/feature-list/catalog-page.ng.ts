@@ -212,7 +212,9 @@ export class CatalogPage {
 
   private _trainings: TrainingPreviewData[] = [
     cohortToPreview(FROM_DRIFT_TO_TRUST_FOR_ANGULAR),
-    ...inject(WorkshopRepository).getWorkshops().map(workshopToPreview),
+    ...inject(WorkshopRepository)
+      .getWorkshops()
+      .map((workshop) => workshopToPreview(workshop)),
     PRAGMATIC_ANGULAR_TESTING_VIDEO_COURSE,
   ];
 

@@ -16,3 +16,4 @@ export * from './training-testimonials.ng';
 export * from './training.i18n';
 export * from './training-format.i18n';
 export * from './training-preview.ng';
+export * from './training-tile-data';
