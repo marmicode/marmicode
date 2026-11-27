@@ -37,9 +37,14 @@ function toUtcDate(isoDate: IsoDate): Date {
 
 /**
  * "9:30–18:00 CET"
- *
- * @deprecated 🚧 work in progress
  */
 export function formatSessionTimes(session: Session): string {
-  throw new Error('🚧 work in progress');
+  return `${formatTime(session.startTime)}–${formatTime(session.endTime)} ${session.timezone}`;
+}
+
+/**
+ * '09:30' → '9:30'
+ */
+function formatTime(time: string): string {
+  return time.replace(/^0(\d)/, '$1');
 }
