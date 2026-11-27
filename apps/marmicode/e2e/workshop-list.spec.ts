@@ -23,11 +23,7 @@ test.describe('workshop list', () => {
 
     await glove.goto();
 
-    await glove
-      .workshopTitle()
-      .filter({ hasText: 'Pragmatic Angular Testing' })
-      .first()
-      .click();
+    await glove.workshopCardTitle('Pragmatic Angular Testing').click();
 
     await expect
       .poll(() => page.title())
@@ -68,5 +64,16 @@ class WorkshopListGlove {
 
   workshopTitle() {
     return this._page.getByRole('heading', { level: 3 });
+  }
+
+  /**
+   * The video course has the same title as the workshop,
+   * so this only looks at workshop cards.
+   */
+  workshopCardTitle(title: string) {
+    return this._page
+      .getByRole('article')
+      .filter({ hasText: 'Workshop' })
+      .getByRole('heading', { level: 3, name: title, exact: true });
   }
 }

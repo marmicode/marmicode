@@ -85,7 +85,7 @@ export const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        loadComponent: () => import('@marmicode/workshop/feature-list'),
+        loadComponent: () => import('@marmicode/catalog/feature-list'),
       },
       /* Workshop detail. */
       {
