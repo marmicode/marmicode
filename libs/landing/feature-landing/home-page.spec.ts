@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { provideSiteConfig } from '@marmicode/shared/core';
 import { describe, expect, it } from 'vitest';
 import { HomePage } from './home-page.ng';
 
 describe(HomePage.name, () => {
-  it.todo('home tiles link to the three sections', async () => {
+  it('home tiles link to the three sections', async () => {
     const { getTiles } = await mountHomePage();
 
     expect(getTiles()).toEqual([
@@ -33,7 +34,10 @@ describe(HomePage.name, () => {
 
 async function mountHomePage() {
   TestBed.configureTestingModule({
-    providers: [provideRouter([])],
+    providers: [
+      provideRouter([]),
+      provideSiteConfig({ origin: 'https://marmicode.io' }),
+    ],
   });
 
   const fixture = TestBed.createComponent(HomePage);
