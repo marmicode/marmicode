@@ -25,7 +25,7 @@ describe(formatSessionDates.name, () => {
     expect(shortDates).not.toMatch(/2027/);
   });
 
-  it.todo('formats a range across months and a single day', () => {
+  it('formats a range across months and a single day', () => {
     expect(
       formatSessionDates({
         session: createSession({

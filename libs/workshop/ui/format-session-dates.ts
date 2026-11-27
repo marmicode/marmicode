@@ -4,8 +4,6 @@ import { IsoDate, Session, WorkshopLanguage } from '@marmicode/workshop/core';
  * en: "Jan 12–14, 2027" (or "Dec 30, 2026 – Jan 1, 2027"); fr: "12–14 janv. 2027".
  * `short: true` drops the year: "Jan 12–14" / "5–7 janv.".
  * Uses `Intl.DateTimeFormat#formatRange` on UTC dates with `timeZone: 'UTC'`, so the day never shifts.
- *
- * @deprecated 🚧 work in progress
  */
 export function formatSessionDates({
   session,
