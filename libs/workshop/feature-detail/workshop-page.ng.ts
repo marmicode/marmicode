@@ -25,6 +25,7 @@ import {
   CookCard,
   createBasicPageInfo,
   Link,
+  NewsletterBand,
   PageComponent,
 } from '@marmicode/shared/ui';
 import { TODAY } from '@marmicode/shared/utils';
@@ -37,7 +38,10 @@ import {
 } from '@marmicode/training/ui';
 import { getUpcomingSessions, Workshop } from '@marmicode/workshop/core';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
-import { formatSessionDates } from '@marmicode/workshop/ui';
+import {
+  formatSessionDates,
+  workshopViewTransitionName,
+} from '@marmicode/workshop/ui';
 import {
   WORKSHOP_DETAIL_LABELS,
   WorkshopBookBar,
@@ -61,6 +65,7 @@ import {
     CookCard,
     LowerCasePipe,
     MarkdownBlockComponent,
+    NewsletterBand,
     PageComponent,
     RequiredKnowledgeCard,
     RouterLink,
@@ -82,6 +87,7 @@ import {
           class="wrap"
           [breadcrumb]="breadcrumb()"
           [training]="workshop"
+          [viewTransitionName]="viewTransitionName()"
         >
           @if (workshop.waitlist; as waitlist) {
             <a
@@ -276,6 +282,15 @@ import {
           <span class="mc-eyebrow">// {{ labels.faqTab | lowercase }}</span>
           <h2>{{ labels.faq }}</h2>
           <mc-accordion class="section-content" [items]="faqItems()" />
+        </section>
+
+        <section class="wrap">
+          <mc-newsletter-band
+            [description]="labels.newsletterDescription"
+            [heading]="labels.newsletterHeading"
+            [language]="workshop.language"
+            source="workshop"
+          />
         </section>
 
         <section class="wrap closing">
@@ -576,6 +591,10 @@ export class WorkshopPage {
   protected workshop = computed(() =>
     this._workshopRepository.findWorkshop(this.workshopId()),
   );
+  protected viewTransitionName = computed(() => {
+    const workshop = this.workshop();
+    return workshop ? workshopViewTransitionName(workshop) : undefined;
+  });
   protected labels = computed(
     () => WORKSHOP_DETAIL_LABELS[this.workshop()?.language ?? 'en'],
   );

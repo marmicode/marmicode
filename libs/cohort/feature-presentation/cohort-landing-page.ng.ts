@@ -17,6 +17,7 @@ import {
   ClosingSection,
   CookCard,
   createBasicPageInfo,
+  NewsletterBand,
   PageComponent,
 } from '@marmicode/shared/ui';
 import { Offer } from '@marmicode/training/core';
@@ -49,6 +50,7 @@ import { CohortRouteDiagram } from './cohort-route-diagram.ng';
     CookCard,
     LowerCasePipe,
     MarkdownBlockComponent,
+    NewsletterBand,
     PageComponent,
     RequiredKnowledgeCard,
     RouterLink,
@@ -175,6 +177,14 @@ import { CohortRouteDiagram } from './cohort-route-diagram.ng';
         <span class="mc-eyebrow">// {{ labels.faqEyebrow }}</span>
         <h2>{{ trainingLabels.faq }}</h2>
         <mc-accordion class="section-content" [items]="faqItems" />
+      </section>
+
+      <section class="wrap">
+        <mc-newsletter-band
+          description="Get the next cohort dates and new recipes in your inbox. No spam, just the sauce."
+          heading="Not ready to join yet?"
+          source="cohort"
+        />
       </section>
 
       <section class="wrap">

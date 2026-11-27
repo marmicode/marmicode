@@ -11,8 +11,7 @@ import { ResourceRow } from '@marmicode/resource/ui';
 import {
   Button,
   createBasicPageInfo,
-  CtaBand,
-  NewsletterForm,
+  NewsletterBand,
   PageComponent,
   PageHeader,
   SegmentedControl,
@@ -34,8 +33,7 @@ import { toResourceRowData } from './to-resource-row-data';
   imports: [
     Button,
     CookbookBanner,
-    CtaBand,
-    NewsletterForm,
+    NewsletterBand,
     PageComponent,
     PageHeader,
     ResourceRow,
@@ -99,13 +97,12 @@ import { toResourceRowData } from './to-resource-row-data';
           }
         </div>
 
-        <mc-cta-band
+        <mc-newsletter-band
           class="newsletter"
           description="New articles, videos and workshop dates. No spam, just the sauce."
           heading="Fresh recipes in your inbox."
-        >
-          <mc-newsletter-form ctaAction />
-        </mc-cta-band>
+          source="library"
+        />
       </main>
     </mc-page>
   `,

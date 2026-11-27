@@ -92,7 +92,7 @@ import { Badge } from '@marmicode/shared/ui';
       <p>
         Stuck on architecture or testing strategy? Get a focused monthly
         partnership that charts a steadier path to predictable delivery. Keeping
-        the bar high as agents write the code.
+        the bar high, even with agents writing the code.
       </p>
       <span class="price">from €2 500 / month</span>
       <span class="go"

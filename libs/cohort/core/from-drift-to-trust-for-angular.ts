@@ -100,7 +100,7 @@ export const FROM_DRIFT_TO_TRUST_FOR_ANGULAR = createCohort({
   /* @todo replace with the cohort's own picture: this is the Charted Coding one. */
   pictureUri,
   pictureAltText:
-    'Visual metaphor for charted AI-assisted development: a clear path or map guiding collaboration between a developer and an AI assistant.',
+    'Visual metaphor for charted AI-assisted development: a clear path or map guiding collaboration between a developer and a coding agent.',
   offer: {
     type: 'early-bird',
     price: 1570,

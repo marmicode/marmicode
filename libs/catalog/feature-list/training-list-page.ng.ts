@@ -11,7 +11,7 @@ import {
   Button,
   createBasicPageInfo,
   CtaBand,
-  NewsletterForm,
+  NewsletterBand,
   PageComponent,
   PageHeader,
   SegmentedControl,
@@ -42,7 +42,7 @@ import {
   imports: [
     Button,
     CtaBand,
-    NewsletterForm,
+    NewsletterBand,
     PageComponent,
     PageHeader,
     SegmentedControl,
@@ -116,13 +116,12 @@ import {
           <p>Every workshop can run privately, on your codebase.</p>
         </mc-cta-band>
 
-        <mc-cta-band
+        <mc-newsletter-band
           class="newsletter"
           description="New workshops and session dates. No spam, just the sauce."
           heading="More workshops are on the stove."
-        >
-          <mc-newsletter-form ctaAction />
-        </mc-cta-band>
+          source="trainings"
+        />
       </div>
     </mc-page>
   `,

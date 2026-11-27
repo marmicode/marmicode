@@ -10,6 +10,7 @@ import {
   Button,
   ClosingSection,
   createBasicPageInfo,
+  NewsletterBand,
   PageComponent,
 } from '@marmicode/shared/ui';
 import { COACHING_LABELS } from './coaching-presentation.i18n';
@@ -26,6 +27,7 @@ import { CoachingRhythm } from './coaching-rhythm.ng';
     Button,
     ClosingSection,
     CoachingRhythm,
+    NewsletterBand,
     PageComponent,
     RouterLink,
   ],
@@ -109,6 +111,14 @@ import { CoachingRhythm } from './coaching-rhythm.ng';
 
       <section id="how" class="wrap">
         <mc-coaching-rhythm [coaching]="coaching" />
+      </section>
+
+      <section class="wrap">
+        <mc-newsletter-band
+          description="Articles and videos on keeping the bar high with coding agents. No spam, just the sauce."
+          heading="Not ready for a call yet?"
+          source="coaching"
+        />
       </section>
 
       <section class="wrap closing">

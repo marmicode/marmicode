@@ -5,6 +5,7 @@ import {
   ClosingSection,
   CookCard,
   createBasicPageInfo,
+  NewsletterBand,
   PageComponent,
 } from '@marmicode/shared/ui';
 import { TODAY } from '@marmicode/shared/utils';
@@ -26,6 +27,7 @@ import { UpcomingSessionList } from './upcoming-session-list.ng';
     CookCard,
     HomeHero,
     HomeTiles,
+    NewsletterBand,
     PageComponent,
     UpcomingSessionList,
   ],
@@ -47,6 +49,14 @@ import { UpcomingSessionList } from './upcoming-session-list.ng';
 
       <section class="wrap">
         <mc-cook-card />
+      </section>
+
+      <section class="wrap">
+        <mc-newsletter-band
+          description="New articles, videos and workshop dates. No spam, just the sauce."
+          heading="Fresh recipes in your inbox."
+          source="home"
+        />
       </section>
 
       <section class="wrap contact-section">

@@ -10,7 +10,7 @@ export const chartedCodingFullCourseEn = createWorkshop({
   subheading: `Two days to move from fast-but-fragile AI coding to approaches you can sustain.
 Map the landscape, chart a method your architecture can live with, then engineer the harness that keeps the agents on course.`,
   pictureAltText:
-    'Visual metaphor for charted AI-assisted development: a clear path or map guiding collaboration between a developer and an AI assistant.',
+    'Visual metaphor for charted AI-assisted development: a clear path or map guiding collaboration between a developer and a coding agent.',
   pictureUri,
   thumbnailUri,
   duration: 2,
@@ -54,7 +54,7 @@ Throughout, the workshop alternates between **theoretical content**, **live demo
   requiredSkills: [
     `Comfortable with TypeScript; exercises and tooling (Vitest, ESLint) come from the JavaScript ecosystem`,
     `Familiarity with automated testing`,
-    `Prior use of an AI assistant to generate code (Claude, Cursor, Copilot, etc.); occasional use is sufficient`,
+    `Prior use of a coding agent to generate code (Claude, Cursor, Copilot, etc.); occasional use is sufficient`,
   ],
   benefits: [
     {
@@ -134,17 +134,17 @@ Throughout, the workshop alternates between **theoretical content**, **live demo
     {
       question: 'Who is this workshop for?',
       answer:
-        'Developers using or wanting to use AI assistants effectively; leads and tech leads framing AI usage; architects and CTOs industrializing AI-assisted development without sacrificing quality; and teams struggling with drift in generated code who want a structured, reproducible approach.',
+        'Developers using or wanting to use coding agents effectively; leads and tech leads framing AI usage; architects and CTOs industrializing AI-assisted development without sacrificing quality; and teams struggling with drift in generated code who want a structured, reproducible approach.',
     },
     {
       question: "What's the experience level?",
       answer:
-        'You should be comfortable with TypeScript, familiar with automated testing, and have tried an AI coding assistant at least occasionally.',
+        'You should be comfortable with TypeScript, familiar with automated testing, and have tried a coding agent at least occasionally.',
     },
     {
       question: 'What tools do I need?',
       answer:
-        'A computer with internet access, microphone, webcam, an up-to-date browser, installation rights, and a working AI assistant (Claude Code, Cursor, Copilot, or equivalent).',
+        'A computer with internet access, microphone, webcam, an up-to-date browser, installation rights, and a working coding agent (Claude Code, Cursor, Copilot, or equivalent).',
     },
     {
       question: 'Is it hands-on?',

@@ -103,7 +103,7 @@ export class SiteFooter {
     { label: 'Coaching', route: coachingRouterHelper.coaching() },
   ];
   protected readonly socials = [
-    { label: 'YouTube', href: 'https://youtube.com/@marmicode' },
+    { label: 'YouTube', href: 'https://www.youtube.com/@YounesCooks' },
     { label: 'Bluesky', href: 'https://bsky.app/profile/younesjd.dev' },
     { label: 'X', href: 'https://x.com/yjaaidi' },
     { label: 'LinkedIn', href: 'https://linkedin.com/in/yjaaidi' },

@@ -7,9 +7,8 @@ import {
   resourceSearchRouterHelper,
 } from '@marmicode/shared/router-helpers';
 import {
-  CtaBand,
   Link,
-  NewsletterForm,
+  NewsletterBand,
   PageComponent,
   SuspenseComponent,
 } from '@marmicode/shared/ui';
@@ -56,13 +55,12 @@ import { blogPostToPageInfo } from './blog-post-to-page-info';
           <ng-template #error />
         </mc-suspense>
 
-        <mc-cta-band
+        <mc-newsletter-band
           class="newsletter"
           description="New articles, videos and workshop dates. No spam, just the sauce."
           heading="Fresh recipes in your inbox."
-        >
-          <mc-newsletter-form ctaAction />
-        </mc-cta-band>
+          source="blog"
+        />
       </div>
     </mc-page>
   `,
@@ -103,8 +101,7 @@ import { blogPostToPageInfo } from './blog-post-to-page-info';
   `,
   imports: [
     BlogPostArticle,
-    CtaBand,
-    NewsletterForm,
+    NewsletterBand,
     PageComponent,
     PushPipe,
     ResourceRow,

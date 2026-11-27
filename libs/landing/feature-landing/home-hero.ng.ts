@@ -25,7 +25,7 @@ import { Badge, Button } from '@marmicode/shared/ui';
     <h1>Trust, <span class="mc-gradient-text">baked in.</span></h1>
     <p>
       Training, coaching and recipes for teams who want to ship with confidence,
-      even as agents write the code.
+      even with agents writing the code.
     </p>
     <div class="actions">
       <a mcButton [routerLink]="workshopRouterHelper.list()">

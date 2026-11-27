@@ -11,6 +11,9 @@ const WORKSHOP_DETAIL_LABELS_EN = {
   dayLowercase: 'day',
   daysLowercase: 'days',
   flag: '🇬🇧',
+  newsletterDescription:
+    'Get the next session dates and new recipes in your inbox. No spam, just the sauce.',
+  newsletterHeading: 'Not ready to book yet?',
   glance: {
     duration: 'Duration',
     format: 'Format',
@@ -59,6 +62,9 @@ const WORKSHOP_DETAIL_LABELS_FR: typeof WORKSHOP_DETAIL_LABELS_EN = {
   dayLowercase: 'jour',
   daysLowercase: 'jours',
   flag: '🇫🇷',
+  newsletterDescription:
+    'Recevez les prochaines dates de sessions et les nouvelles recettes par e-mail. Pas de spam, juste la sauce.',
+  newsletterHeading: 'Pas encore prêt à réserver ?',
   glance: {
     duration: 'Durée',
     format: 'Format',

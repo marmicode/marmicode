@@ -68,7 +68,11 @@ import { Training } from '@marmicode/training/core';
       [class.mc-surface]="asideLayout() === 'attached'"
       [class.mc-surface-highlighted]="asideLayout() === 'attached'"
     >
-      <img [alt]="training().pictureAltText" [src]="training().pictureUri" />
+      <img
+        [alt]="training().pictureAltText"
+        [src]="training().pictureUri"
+        [style.view-transition-name]="viewTransitionName()"
+      />
       <div class="aside">
         <ng-content select="[slot=aside]" />
       </div>
@@ -219,6 +223,8 @@ export class TrainingPageHero {
   /** e.g. [{ label: 'Training', link }, { label: 'Workshops' }] */
   breadcrumb = input.required<Array<{ label: string; link?: Link }>>();
   asideLayout = input<'overlap' | 'attached'>('overlap');
+  /** Shared with the matching list tile so the picture morphs between the two pages. */
+  viewTransitionName = input<string>();
 
   protected crumbs = computed(() =>
     this.breadcrumb().map(({ label, link }) => ({

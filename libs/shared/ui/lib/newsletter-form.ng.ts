@@ -1,9 +1,18 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { externalLinks } from '@marmicode/shared/router-helpers';
 import { Button } from './button.ng';
+import { NEWSLETTER_TAG_IDS, NewsletterSource } from './newsletter-tags';
 
 /**
  * Email input posting straight to Mailchimp in a new tab, like the cookbook's.
+ * Tags the subscriber with the `source`'s Mailchimp tags.
  * Submitting stays disabled until the email is valid.
  */
 @Component({
@@ -13,7 +22,7 @@ import { Button } from './button.ng';
   template: `
     <form
       #form
-      aria-label="Newsletter registration form"
+      [attr.aria-label]="labels().form"
       method="post"
       rel="noopener"
       target="_blank"
@@ -29,16 +38,22 @@ import { Button } from './button.ng';
           value=""
           [name]="newsletterForm.honeypotName"
         />
+        @if (tags(); as tags) {
+          <input name="tags" type="hidden" [value]="tags" />
+        }
       </div>
       <input
-        aria-label="Email address"
         autocomplete="email"
         name="EMAIL"
+        [attr.aria-label]="labels().email"
         placeholder="i-am@curious.dev"
         required
         type="email"
       />
-      <button mcButton type="submit" [disabled]="!isValid()">Subscribe</button>
+      <button mcButton type="submit" [disabled]="!isValid()">
+        {{ labels().subscribe }}
+      </button>
+      <small class="hint">{{ labels().hint }}</small>
     </form>
   `,
   styles: `
@@ -85,6 +100,12 @@ import { Button } from './button.ng';
       flex: none;
     }
 
+    .hint {
+      flex-basis: 100%;
+      color: var(--mc-dark-muted);
+      font-size: 12.5px;
+    }
+
     button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
@@ -93,6 +114,31 @@ import { Button } from './button.ng';
   `,
 })
 export class NewsletterForm {
+  source = input.required<NewsletterSource>();
+  language = input<'en' | 'fr'>('en');
+
   protected readonly newsletterForm = externalLinks.newsletterForm;
   protected readonly isValid = signal(false);
+  protected readonly labels = computed(() => LABELS[this.language()]);
+  /* Comma-separated Mailchimp tag IDs, or undefined when the source has none. */
+  protected readonly tags = computed(
+    () => this._tagIds[this.source()].join(',') || undefined,
+  );
+
+  private _tagIds = inject(NEWSLETTER_TAG_IDS);
 }
+
+const LABELS = {
+  en: {
+    form: 'Newsletter registration form',
+    email: 'Email address',
+    subscribe: 'Subscribe',
+    hint: 'About one email a month. Unsubscribe anytime.',
+  },
+  fr: {
+    form: "Formulaire d'inscription à la newsletter",
+    email: 'Adresse e-mail',
+    subscribe: "S'abonner",
+    hint: 'Environ un e-mail par mois. Désinscription à tout moment.',
+  },
+};
