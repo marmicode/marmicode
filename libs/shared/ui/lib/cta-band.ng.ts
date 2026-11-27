@@ -3,6 +3,7 @@ import { Link, LinkComponent } from './link.component';
 
 /**
  * Closing call-to-action band: 'solid' (newsletter) or 'dashed' (in-house offer).
+ * Projected content goes under the description, e.g. a paragraph with a secondary link.
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,6 +18,7 @@ import { Link, LinkComponent } from './link.component';
       @if (description()) {
         <p>{{ description() }}</p>
       }
+      <ng-content />
     </div>
     <mc-link class="action" [link]="link()">{{ linkLabel() }}</mc-link>
   `,

@@ -20,8 +20,8 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       display: block;
       position: relative;
       z-index: 1;
-      /* Leaves room for the floating nav. */
-      padding: 150px 0 36px;
+      /* The shell already leaves 80px for the floating nav. */
+      padding: 70px 0 36px;
     }
 
     h1 {
