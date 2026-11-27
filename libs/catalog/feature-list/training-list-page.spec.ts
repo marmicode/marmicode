@@ -72,10 +72,22 @@ describe(TrainingListPage.name, () => {
     expect(getCount()).toBe('6 trainings');
   });
 
-  it.todo('shows everything again when nothing matches', () => {
-    // Click "Cohort", then "Français".
-    // Assert "Nothing matches these filters yet.".
-    // Click **Show everything** and assert all groups are back.
+  it.todo('shows everything again when nothing matches', async () => {
+    const { click, getGroups, getText } = await mountTrainingListPage();
+
+    await click('Cohort');
+    await click('Français');
+
+    expect(getGroups()).toEqual([]);
+    expect(getText()).toContain('Nothing matches these filters yet.');
+
+    await click('Show everything');
+
+    expect(getGroups().map(({ heading }) => heading)).toEqual([
+      'Cohort',
+      'Workshops',
+      'Video course',
+    ]);
   });
 
   it.todo('cards keep their links', () => {
@@ -140,6 +152,7 @@ async function mountTrainingListPage({
     /* The live count of matching trainings. */
     getCount: () => getTextContent(host.querySelector('[role="status"]')),
     getGroups,
+    getText: () => getTextContent(host),
     getGroup: (heading: string) =>
       getGroups().find((group) => group.heading === heading),
   };
