@@ -6,7 +6,7 @@ import { TrainingPageHero } from './training-page-hero.ng';
 import { trainingMother } from './training.mother';
 
 describe(TrainingPageHero.name, () => {
-  it.todo('hero renders the breadcrumb and projected content', async () => {
+  it('hero renders the breadcrumb and projected content', async () => {
     const { getHeading, getBreadcrumbLinks, getAsideText } =
       await mountTrainingPageHero();
 
