@@ -1,6 +1,7 @@
 import { TrainingLanguage } from '@marmicode/training/core';
 
 const TRAINING_LABELS_EN = {
+  atAGlance: 'at a glance',
   callToActionTitle: "Dinner's ready!",
   earlyBird: '🐣 Early Bird',
   faq: 'Frequently Asked Questions',
@@ -16,6 +17,7 @@ const TRAINING_LABELS_EN = {
 };
 
 const TRAINING_LABELS_FR: typeof TRAINING_LABELS_EN = {
+  atAGlance: 'en bref',
   callToActionTitle: 'À table !',
   earlyBird: '🐣 Early Bird',
   faq: 'Foire aux questions',
