@@ -85,7 +85,7 @@ describe(LibraryPage.name, () => {
     expect(getPressedFilters()).toEqual(['All', 'All topics']);
   });
 
-  it.todo('skill routes still work', async () => {
+  it('skill routes still work', async () => {
     const { getHeading, getRowTitles } = await mountLibraryPage({
       url: '/learn/angular-signals',
     });

@@ -218,13 +218,29 @@ export class LibraryPage {
   private readonly _resourceRepository = inject(ResourceRepository);
   private readonly _transferStateHelper = inject(TransferStateHelper);
 
+  private readonly _skillSlug = computed(
+    () => this.skillSlug() ?? resourceSearchRouterHelper.EVERYTHING,
+  );
+
   private readonly _resources = rxResource({
-    params: () => this.skillSlug() ?? resourceSearchRouterHelper.EVERYTHING,
+    params: this._skillSlug,
     stream: ({ params: skillSlug }) =>
       (skillSlug === resourceSearchRouterHelper.EVERYTHING
         ? this._resourceRepository.getResources()
         : this._resourceRepository.getResourcesBySkillSlug(skillSlug)
       ).pipe(this._transferStateHelper.transfer(`library:${skillSlug}`)),
+  });
+
+  /** The selected skill's label, found in its resources. */
+  private readonly _skillLabel = computed(() => {
+    const skillSlug = this._skillSlug();
+    if (skillSlug === resourceSearchRouterHelper.EVERYTHING) {
+      return undefined;
+    }
+    const skill = (this._resources.value() ?? [])
+      .flatMap((resource) => [...resource.skills, ...resource.requiredSkills])
+      .find((skill) => skill.slug === skillSlug);
+    return skill?.label ?? skillSlug;
   });
 
   protected readonly isLoading = computed(() => this._resources.isLoading());
@@ -261,10 +277,10 @@ export class LibraryPage {
       );
   });
 
-  /** "Everything", or the live result count while filtering. */
+  /** "Everything" or the skill's label, or the live result count while filtering. */
   protected readonly heading = computed(() => {
     if (!this._isFiltering()) {
-      return 'Everything';
+      return this._skillLabel() ?? 'Everything';
     }
     const count = this.rows().length;
     return `${count} ${count === 1 ? 'result' : 'results'}`;
