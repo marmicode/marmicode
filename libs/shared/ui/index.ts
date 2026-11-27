@@ -9,7 +9,10 @@ export { Link, LinkComponent } from './lib/link.component';
 export { LoadingComponent } from './lib/loading.component';
 export { NewsletterBand } from './lib/newsletter-band.ng';
 export { NewsletterForm } from './lib/newsletter-form.ng';
-export { NEWSLETTER_TAG_IDS, NewsletterSource } from './lib/newsletter-tags';
+export {
+  formatNewsletterContext,
+  NewsletterSource,
+} from './lib/newsletter-source';
 export {
   ArticlePageInfo,
   BasicPageInfo,

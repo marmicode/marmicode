@@ -7,6 +7,8 @@ export const externalLinks = {
     action:
       'https://marmicode.us3.list-manage.com/subscribe/post?u=915d6ba70c9c00912ba326214&id=71255f30c7&f_id=00dbc1e5f0',
     honeypotName: 'b_915d6ba70c9c00912ba326214_71255f30c7',
+    /* The merge tag of the audience's `Context` field. */
+    contextFieldName: 'CONTEXT',
   },
   pragmaticAngularTestingCourseUrl:
     'https://courses.marmicode.io/courses/pragmatic-angular-testing',

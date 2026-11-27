@@ -290,6 +290,7 @@ import {
             [heading]="labels.newsletterHeading"
             [language]="workshop.language"
             source="workshop"
+            [sourceId]="workshop.id"
           />
         </section>
 

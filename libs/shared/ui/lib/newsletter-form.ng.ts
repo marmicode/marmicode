@@ -2,17 +2,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  inject,
   input,
   signal,
 } from '@angular/core';
 import { externalLinks } from '@marmicode/shared/router-helpers';
 import { Button } from './button.ng';
-import { NEWSLETTER_TAG_IDS, NewsletterSource } from './newsletter-tags';
+import { formatNewsletterContext, NewsletterSource } from './newsletter-source';
 
 /**
  * Email input posting straight to Mailchimp in a new tab, like the cookbook's.
- * Tags the subscriber with the `source`'s Mailchimp tags.
+ * Fills the subscriber's Mailchimp `Context` field with where they signed up.
  * Submitting stays disabled until the email is valid.
  */
 @Component({
@@ -38,9 +37,11 @@ import { NEWSLETTER_TAG_IDS, NewsletterSource } from './newsletter-tags';
           value=""
           [name]="newsletterForm.honeypotName"
         />
-        @if (tags(); as tags) {
-          <input name="tags" type="hidden" [value]="tags" />
-        }
+        <input
+          type="hidden"
+          [name]="newsletterForm.contextFieldName"
+          [value]="context()"
+        />
       </div>
       <input
         autocomplete="email"
@@ -115,17 +116,19 @@ import { NEWSLETTER_TAG_IDS, NewsletterSource } from './newsletter-tags';
 })
 export class NewsletterForm {
   source = input.required<NewsletterSource>();
+  /** e.g. the workshop's id. */
+  sourceId = input<string>();
   language = input<'en' | 'fr'>('en');
 
   protected readonly newsletterForm = externalLinks.newsletterForm;
   protected readonly isValid = signal(false);
   protected readonly labels = computed(() => LABELS[this.language()]);
-  /* Comma-separated Mailchimp tag IDs, or undefined when the source has none. */
-  protected readonly tags = computed(
-    () => this._tagIds[this.source()].join(',') || undefined,
+  protected readonly context = computed(() =>
+    formatNewsletterContext({
+      source: this.source(),
+      sourceId: this.sourceId(),
+    }),
   );
-
-  private _tagIds = inject(NEWSLETTER_TAG_IDS);
 }
 
 const LABELS = {

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CtaBand } from './cta-band.ng';
 import { NewsletterForm } from './newsletter-form.ng';
-import { NewsletterSource } from './newsletter-tags';
+import { NewsletterSource } from './newsletter-source';
 
 /**
  * Newsletter call-to-action band: the page's own heading and description, then the email form.
@@ -16,6 +16,7 @@ import { NewsletterSource } from './newsletter-tags';
         ctaAction
         [language]="language()"
         [source]="source()"
+        [sourceId]="sourceId()"
       />
     </mc-cta-band>
   `,
@@ -29,5 +30,6 @@ export class NewsletterBand {
   heading = input.required<string>();
   description = input.required<string>();
   source = input.required<NewsletterSource>();
+  sourceId = input<string>();
   language = input<'en' | 'fr'>('en');
 }

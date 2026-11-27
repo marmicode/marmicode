@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { describe, expect, it } from 'vitest';
 import { NewsletterForm } from './newsletter-form.ng';
-import { NEWSLETTER_TAG_IDS, NewsletterSource } from './newsletter-tags';
+import { NewsletterSource } from './newsletter-source';
 
 describe(NewsletterForm.name, () => {
   it('newsletter form disables subscribing until the email is valid', async () => {
@@ -28,19 +28,19 @@ describe(NewsletterForm.name, () => {
     });
   });
 
-  it('newsletter form tags the subscriber with the source tags', async () => {
-    const { getTags } = await mountNewsletterForm({
-      source: 'workshop',
-      tagIds: { workshop: ['111', '222'] },
-    });
+  it('newsletter form sends where the subscriber signed up as context', async () => {
+    const { getContext } = await mountNewsletterForm({ source: 'home' });
 
-    expect(getTags()).toBe('111,222');
+    expect(getContext()).toBe('website:home');
   });
 
-  it('newsletter form sends no tags when the source has none', async () => {
-    const { getTags } = await mountNewsletterForm({ source: 'home' });
+  it('newsletter form sends the workshop id as context', async () => {
+    const { getContext } = await mountNewsletterForm({
+      source: 'workshop',
+      sourceId: 'charted-coding-fr',
+    });
 
-    expect(getTags()).toBeUndefined();
+    expect(getContext()).toBe('website:workshop:charted-coding-fr');
   });
 
   it('newsletter form speaks french', async () => {
@@ -55,32 +55,16 @@ describe(NewsletterForm.name, () => {
 async function mountNewsletterForm({
   language = 'en',
   source = 'home',
-  tagIds = {},
+  sourceId,
 }: {
   language?: 'en' | 'fr';
   source?: NewsletterSource;
-  tagIds?: Partial<Record<NewsletterSource, string[]>>;
+  sourceId?: string;
 } = {}) {
-  TestBed.configureTestingModule({
-    providers: [
-      {
-        provide: NEWSLETTER_TAG_IDS,
-        useValue: {
-          blog: [],
-          coaching: [],
-          cohort: [],
-          home: [],
-          library: [],
-          trainings: [],
-          workshop: [],
-          ...tagIds,
-        },
-      },
-    ],
-  });
   const fixture = TestBed.createComponent(NewsletterForm);
   fixture.componentRef.setInput('language', language);
   fixture.componentRef.setInput('source', source);
+  fixture.componentRef.setInput('sourceId', sourceId);
   await fixture.whenStable();
 
   const getEmailInput = () =>
@@ -103,8 +87,8 @@ async function mountNewsletterForm({
       document
         .querySelector<HTMLButtonElement>('button[type="submit"]')
         ?.textContent?.trim(),
-    getTags: () =>
-      document.querySelector<HTMLInputElement>('input[name="tags"]')?.value,
+    getContext: () =>
+      document.querySelector<HTMLInputElement>('input[name="CONTEXT"]')?.value,
     getForm: () => {
       const form = document.querySelector('form');
       return {
