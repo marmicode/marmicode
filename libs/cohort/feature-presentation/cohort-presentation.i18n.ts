@@ -5,6 +5,7 @@ export const COHORT_LABELS = {
   nextCohort: 'Next cohort',
   programEyebrow: 'the program',
   programTitle: 'The program, week by week.',
+  joinTheWaitlist: 'Join the waitlist',
   frenchNote: '🇫🇷 Also available in French, fundable up to 100% via OPCO.',
   week: 'Week',
   youLeaveWith: 'You leave with',

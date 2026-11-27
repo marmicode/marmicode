@@ -25,7 +25,7 @@ describe(CohortLandingPage.name, () => {
     );
   });
 
-  it.todo('waitlist links at the top and the bottom', async () => {
+  it('waitlist links at the top and the bottom', async () => {
     const { getLinks } = await mountCohortLandingPage();
 
     const waitlistLink = {
