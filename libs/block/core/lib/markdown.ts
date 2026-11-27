@@ -83,13 +83,36 @@ export function getMarkdownLinks(tokens: MarkdownToken[]): string[] {
 }
 
 export function _isMarkdownTokenList(
-  token: MarkdownToken
+  token: MarkdownToken,
 ): token is MarkdownTokens.List {
   return getMarkdownTokenType(token) === MarkdownTokenType.List;
 }
 
 export function _isMarkdownTokenLink(
-  token: MarkdownToken
+  token: MarkdownToken,
 ): token is MarkdownTokens.Link {
   return getMarkdownTokenType(token) === MarkdownTokenType.Link;
+}
+
+/**
+ * Slug id of a heading (e.g. "Set it up" => "set-it-up"), so that a table of contents
+ * can link to the rendered heading.
+ *
+ * @deprecated 🚧 work in progress
+ */
+export function getMarkdownHeadingId(
+  token: MarkdownTokens.Heading & { tokens?: MarkdownToken[] },
+): string {
+  throw new Error('🚧 work in progress');
+}
+
+/**
+ * Plain text of a heading, without its inline markdown (e.g. "Using `inject`" => "Using inject").
+ *
+ * @deprecated 🚧 work in progress
+ */
+export function getMarkdownHeadingText(
+  token: MarkdownTokens.Heading & { tokens?: MarkdownToken[] },
+): string {
+  throw new Error('🚧 work in progress');
 }

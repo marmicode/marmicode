@@ -1,5 +1,6 @@
 import { inject, Injectable, NgModule } from '@angular/core';
 import { BlogPost, createBlogPost } from '@marmicode/blog-post/ui';
+import { ResourceRowData } from '@marmicode/resource/ui';
 import {
   BlogPost as ContentfulBlogPost,
   ContentfulClient,
@@ -61,7 +62,8 @@ export class BlogPostRepository {
             author: {
               name: resource.author!.name!,
               pictureUri:
-                resource.author!.picture != null && resource.author!.picture.url != null
+                resource.author!.picture != null &&
+                resource.author!.picture.url != null
                   ? resource.author!.picture.url
                   : undefined,
               twitter: resource.author!.twitter!,
@@ -79,6 +81,18 @@ export class BlogPostRepository {
           });
         }),
       );
+  }
+
+  /**
+   * Newest resources except `excludeSlug`, mapped for `ResourceRow` (topics via `getResourceTopics`).
+   *
+   * @deprecated 🚧 work in progress
+   */
+  getLatestResources(args: {
+    excludeSlug: string;
+    limit: number;
+  }): Observable<ResourceRowData[]> {
+    throw new Error('🚧 work in progress');
   }
 }
 
