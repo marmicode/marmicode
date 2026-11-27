@@ -2,6 +2,7 @@ import {
   MOCK_PLATFORM_LOCATION_CONFIG,
   MockPlatformLocationConfig,
 } from '@angular/common/testing';
+import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideSiteConfig } from '@marmicode/shared/core';
 import { MetaDefinition } from '@angular/platform-browser';
@@ -248,7 +249,7 @@ describe('PageComponent', () => {
 
     setPageInfo(
       createArticlePageInfo({
-        path: '/workshop/pragmatic-angular-testing'
+        path: '/workshop/pragmatic-angular-testing',
       }),
     );
 
@@ -257,9 +258,20 @@ describe('PageComponent', () => {
     expect(htmlAdapterFake.getLinkTags()).toEqual([]);
   });
 
-  it.todo('dark page paints the dark background', () => {
-    // Mount `PageComponent` with `theme="dark"` and some projected content.
-    // Assert the host's computed background colour is `--mc-dark-bg` and the projected content renders.
+  it.todo('dark page paints the dark background', async () => {
+    @Component({
+      imports: [PageComponent],
+      template: `<mc-page theme="dark"><p>Dish of the day</p></mc-page>`,
+    })
+    class DarkPageHost {}
+
+    configureTestingModule();
+    const fixture = TestBed.createComponent(DarkPageHost);
+    await fixture.whenStable();
+
+    const pageEl: HTMLElement = fixture.nativeElement.querySelector('mc-page');
+    expect(getComputedStyle(pageEl).backgroundColor).toBe('var(--mc-dark-bg)');
+    expect(pageEl.textContent).toContain('Dish of the day');
   });
 
   it('should remove all meta on destroy', async () => {
@@ -285,7 +297,7 @@ describe('PageComponent', () => {
   });
 });
 
-async function renderComponent() {
+function configureTestingModule() {
   TestBed.configureTestingModule({
     providers: [
       provideSiteConfig({ origin: 'https://marmicode.io' }),
@@ -294,6 +306,10 @@ async function renderComponent() {
       provideHtmlAdapterFake(),
     ],
   });
+}
+
+async function renderComponent() {
+  configureTestingModule();
 
   const fixture = TestBed.createComponent(PageComponent);
 
