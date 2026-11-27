@@ -81,6 +81,16 @@ export const routes: Routes = [
     path: workshopRouterHelper.WORKSHOP_LIST_PATH,
     providers: [provideChatWidget()],
     children: [
+      /* Training list (WIP). */
+      {
+        path: '',
+        pathMatch: 'full',
+        canMatch: [matchWip],
+        loadComponent: () =>
+          import('@marmicode/catalog/feature-list').then(
+            (m) => m.TrainingListPage,
+          ),
+      },
       /* Workshops list. */
       {
         path: '',
