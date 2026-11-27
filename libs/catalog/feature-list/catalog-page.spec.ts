@@ -26,9 +26,9 @@ describe(CatalogPage, () => {
     await expect
       .poll(() => getGroups())
       .toEqual([
-        { heading: '👥 Cohort', formats: ['👥 Cohort'] },
-        { heading: '🧑‍🍳 Workshops', formats: ['🧑‍🍳 Workshop', '🧑‍🍳 Formation'] },
-        { heading: '🎬 Video course', formats: ['🎬 Video course'] },
+        ['👥 Cohort'],
+        ['🧑‍🍳 Workshop', '🧑‍🍳 Formation'],
+        ['🎬 Video course'],
       ]);
   });
 
@@ -37,9 +37,7 @@ describe(CatalogPage, () => {
 
     await click('French');
 
-    await expect
-      .poll(() => getGroups())
-      .toEqual([{ heading: '🧑‍🍳 Workshops', formats: ['🧑‍🍳 Formation'] }]);
+    await expect.poll(() => getGroups()).toEqual([['🧑‍🍳 Formation']]);
   });
 
   it('links the video course to the course platform', async () => {
@@ -172,18 +170,15 @@ function mountCatalogPage() {
 
   return {
     getCards,
-    /* Each group's heading, and the distinct formats of the cards in it. */
+    /* The distinct formats of the cards in each list. */
     getGroups: () =>
-      Array.from(document.querySelectorAll('section.group')).map((group) => ({
-        heading: normalize(group.querySelector('h2')?.textContent),
-        formats: [
-          ...new Set(
-            Array.from(group.querySelectorAll('.format-chip')).map((chip) =>
-              normalize(chip.textContent),
-            ),
+      Array.from(document.querySelectorAll('.list')).map((list) => [
+        ...new Set(
+          Array.from(list.querySelectorAll('.format-chip')).map((chip) =>
+            normalize(chip.textContent),
           ),
-        ],
-      })),
+        ),
+      ]),
     getCardLink: (format: string) =>
       getCardElements()
         .find(

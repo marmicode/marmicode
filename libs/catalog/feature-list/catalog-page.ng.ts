@@ -76,20 +76,11 @@ import { FormatInfo } from './format-info.ng';
         </div>
 
         @for (group of groups(); track group.format) {
-          <section
-            class="group"
-            [attr.aria-labelledby]="group.format + '-heading'"
-          >
-            <h2 class="group-heading" [id]="group.format + '-heading'">
-              <span aria-hidden="true">{{ group.emoji }}</span>
-              {{ group.heading }}
-            </h2>
-            <div class="list">
-              @for (training of group.trainings; track training.id) {
-                <mc-training-preview class="item" [training]="training" />
-              }
-            </div>
-          </section>
+          <div class="list">
+            @for (training of group.trainings; track training.id) {
+              <mc-training-preview class="item" [training]="training" />
+            }
+          </div>
         } @empty {
           <div role="status" class="empty">
             <p>Nothing matches these filters yet.</p>
@@ -143,23 +134,6 @@ import { FormatInfo } from './format-info.ng';
       .toggle-emoji {
         display: none;
       }
-    }
-
-    .group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      width: 100%;
-    }
-
-    .group-heading {
-      display: flex;
-      gap: 0.4em;
-      margin: 0;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--marmicode-primary-color);
     }
 
     .list {
@@ -218,7 +192,7 @@ export class CatalogPage {
   formatInfoLanguage = computed(() => this.languageFilter() ?? 'en');
 
   /**
-   * One group per format, so different formats never share a row.
+   * One list per format, so different formats never share a row.
    * Groups with no training matching the filters are hidden.
    */
   groups = computed(() => {
@@ -227,7 +201,6 @@ export class CatalogPage {
     return GROUPS.filter((group) => format == null || group.format === format)
       .map((group) => ({
         ...group,
-        emoji: TRAINING_FORMAT_EMOJIS[group.format],
         trainings: this._trainings.filter(
           (training) =>
             training.format === group.format &&
@@ -249,8 +222,8 @@ export class CatalogPage {
   }
 }
 
-const GROUPS: Array<{ format: TrainingFormat; heading: string }> = [
-  { format: 'cohort', heading: 'Cohort' },
-  { format: 'workshop', heading: 'Workshops' },
-  { format: 'video-course', heading: 'Video course' },
+const GROUPS: Array<{ format: TrainingFormat }> = [
+  { format: 'cohort' },
+  { format: 'workshop' },
+  { format: 'video-course' },
 ];
