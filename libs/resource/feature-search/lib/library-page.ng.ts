@@ -9,10 +9,14 @@ import {
 import { rxResource } from '@angular/core/rxjs-interop';
 import { ResourceKind, ResourceTopic } from '@marmicode/resource/core';
 import { ResourceRow } from '@marmicode/resource/ui';
-import { resourceSearchRouterHelper } from '@marmicode/shared/router-helpers';
+import {
+  externalLinks,
+  resourceSearchRouterHelper,
+} from '@marmicode/shared/router-helpers';
 import {
   Button,
   createBasicPageInfo,
+  CtaBand,
   PageComponent,
   PageHeader,
   SegmentedControl,
@@ -34,6 +38,7 @@ import { toResourceRowData } from './to-resource-row-data';
   imports: [
     Button,
     CookbookBanner,
+    CtaBand,
     PageComponent,
     PageHeader,
     ResourceRow,
@@ -77,7 +82,9 @@ import { toResourceRowData } from './to-resource-row-data';
         />
       </div>
 
-      <mc-topic-filter class="wrap topics" [(value)]="topicFilter" />
+      <div class="wrap topics">
+        <mc-topic-filter [(value)]="topicFilter" />
+      </div>
 
       <main class="wrap">
         <div class="rows">
@@ -94,6 +101,14 @@ import { toResourceRowData } from './to-resource-row-data';
             }
           }
         </div>
+
+        <mc-cta-band
+          class="newsletter"
+          description="New articles, videos and workshop dates — no spam, just the sauce."
+          heading="Fresh recipes in your inbox."
+          linkLabel="Subscribe"
+          [link]="{ href: newsletterUrl }"
+        />
       </main>
     </mc-page>
   `,
@@ -195,6 +210,10 @@ import { toResourceRowData } from './to-resource-row-data';
       gap: 12px;
     }
 
+    .newsletter {
+      margin-top: 72px;
+    }
+
     .empty {
       padding: 56px 0;
       color: var(--mc-dark-muted);
@@ -208,6 +227,7 @@ export class LibraryPage {
    */
   skillSlug = input<string>();
 
+  protected readonly newsletterUrl = externalLinks.newsletterUrl;
   protected readonly pageInfo = createBasicPageInfo({
     title: 'Library',
     description: 'JavaScript, Angular & Testing Resources',
