@@ -47,8 +47,15 @@ describe(WorkshopPage.name, () => {
     expect(getGlanceFacts()).not.toHaveProperty('Next session');
   });
 
-  it.todo('hero and at a glance', () => {
-    // Assert the breadcrumb links to `/workshops`, the price "€1,270", and the at-a-glance next session "Jan 12–14, 2027".
+  it.todo('hero and at a glance', async () => {
+    const { getBreadcrumbLinks, getGlanceFacts, getHeroText } =
+      await mountWorkshopPage({ workshopId: 'pragmatic-angular-testing' });
+
+    expect(getBreadcrumbLinks()).toEqual([
+      { text: 'Training', href: '/workshops' },
+    ]);
+    expect(getHeroText()).toContain('€1,270');
+    expect(getGlanceFacts()['Next session']).toMatch(/Jan 12\s?–\s?14, 2027/);
   });
 
   it.todo('program shows 8 items, then the rest', () => {
@@ -83,6 +90,19 @@ async function mountWorkshopPage({
   const host: HTMLElement = fixture.nativeElement;
 
   return {
+    getBreadcrumbLinks() {
+      return Array.from(
+        host.querySelectorAll<HTMLAnchorElement>(
+          'nav[aria-label="Breadcrumb"] a',
+        ),
+      ).map((anchor) => ({
+        text: getTextContent(anchor),
+        href: anchor.getAttribute('href'),
+      }));
+    },
+    getHeroText() {
+      return getTextContent(host.querySelector('mc-training-page-hero'));
+    },
     /* "At a glance" facts, e.g. { 'Duration': '3 days' }. */
     getGlanceFacts() {
       return Object.fromEntries(
