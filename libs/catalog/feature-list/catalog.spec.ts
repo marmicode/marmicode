@@ -61,7 +61,7 @@ describe(pickVersion, () => {
       .toBe('Test Angular Pragmatique');
   });
 
-  it.todo('english-only offers disappear in French', () => {
+  it('english-only offers disappear in French', () => {
     const [offer] = toTrainingOffers({
       cohorts: [FROM_DRIFT_TO_TRUST_FOR_ANGULAR],
       workshops: [],

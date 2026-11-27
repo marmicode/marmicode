@@ -35,13 +35,14 @@ export const PRAGMATIC_ANGULAR_TESTING_VIDEO_COURSE: TrainingPreviewData = {
   link: { href: externalLinks.pragmaticAngularTestingCourseUrl },
 };
 
-export function cohortToPreview(cohort: Cohort): TrainingPreviewData {
+export function cohortToPreview(cohort: Cohort): TrainingTileData {
   const weekCount = cohort.schedule.weeks.length;
   const labels = WEEK_LABELS[cohort.language];
   return {
     id: cohort.id,
     format: 'cohort',
     language: cohort.language,
+    languages: [cohort.language],
     title: cohort.shortTitle,
     subheading: cohort.subheading,
     thumbnailUri: cohort.pictureUri,
@@ -98,6 +99,7 @@ export interface TrainingOffer {
  * @deprecated 🚧 work in progress
  */
 export function toTrainingOffers({
+  cohorts,
   workshops,
 }: {
   cohorts: Cohort[];
@@ -127,7 +129,15 @@ export function toTrainingOffers({
       versions: group.map((version) => workshopToPreview(version)),
     });
   }
-  return workshopOffers;
+  return [
+    ...cohorts.map(
+      (cohort): TrainingOffer => ({
+        format: 'cohort',
+        versions: [cohortToPreview(cohort)],
+      }),
+    ),
+    ...workshopOffers,
+  ];
 }
 
 /**
