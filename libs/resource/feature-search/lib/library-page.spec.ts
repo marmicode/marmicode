@@ -95,7 +95,7 @@ describe(LibraryPage.name, () => {
     expect(getHeading()).toBe('Angular Signals');
   });
 
-  it.todo('cookbook banner links to the cookbook', async () => {
+  it('cookbook banner links to the cookbook', async () => {
     const { getCookbookLink, isAboveTheList } = await mountLibraryPage();
 
     const link = getCookbookLink();

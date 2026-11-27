@@ -20,6 +20,7 @@ import {
 } from '@marmicode/shared/ui';
 import { TransferStateHelper } from '@marmicode/shared/utils';
 import { ResourceRepository } from './resource-repository.service';
+import { CookbookBanner } from './cookbook-banner.ng';
 import { TopicFilter } from './topic-filter.ng';
 import { toResourceRowData } from './to-resource-row-data';
 
@@ -32,6 +33,7 @@ import { toResourceRowData } from './to-resource-row-data';
   selector: 'mc-library-page',
   imports: [
     Button,
+    CookbookBanner,
     PageComponent,
     PageHeader,
     ResourceRow,
@@ -48,6 +50,8 @@ import { toResourceRowData } from './to-resource-row-data';
         Recipes, talks &amp; tips,
         <span class="mc-gradient-text">free to cook.</span>
       </mc-page-header>
+
+      <mc-cookbook-banner class="wrap cookbook" />
 
       <div class="wrap tools">
         <h2>
@@ -98,6 +102,10 @@ import { toResourceRowData } from './to-resource-row-data';
       display: block;
       width: min(1180px, 100% - 32px);
       margin-inline: auto;
+    }
+
+    .cookbook {
+      margin-top: 8px;
     }
 
     .tools {
