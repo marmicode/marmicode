@@ -39,10 +39,27 @@ describe(LibraryPage.name, () => {
     expect(getText()).not.toMatch(/you will learn/i);
   });
 
-  it.todo('filters by kind, topic and search', () => {
-    // Click "Videos" and assert only video rows; reset.
-    // Click "RxJS" and assert only RxJS rows and the heading "N results"; reset.
-    // Type "signals" and assert only matching rows.
+  it.todo('filters by kind, topic and search', async () => {
+    const { click, getHeading, getRowTitles, search } =
+      await mountLibraryPage();
+
+    await click('Videos');
+    expect(getRowTitles()).toEqual([
+      OCT_2022_VIDEO.title,
+      JUL_2020_VIDEO.title,
+    ]);
+    await click('All');
+
+    await click('RxJS');
+    expect(getRowTitles()).toEqual([
+      APR_2023_ARTICLE.title,
+      JUL_2020_VIDEO.title,
+    ]);
+    expect(getHeading()).toBe('2 results');
+    await click('All topics');
+
+    await search('signals');
+    expect(getRowTitles()).toEqual([APR_2023_ARTICLE.title]);
   });
 
   it.todo('empty search shows the empty state', () => {
@@ -71,6 +88,10 @@ const ANGULAR_CYPRESS_COMPONENT_TESTING = aSkill({
 const ANGULAR_SIGNALS = aSkill({
   label: 'Angular Signals',
   slug: 'angular-signals',
+});
+const PROPAGATING_HTTP_REQUEST_CANCELATION = aSkill({
+  label: 'Propagating HTTP Request Cancelation',
+  slug: 'propagating-http-request-cancelation',
 });
 const RXJS_BASICS = aSkill({ label: 'RxJS Basics', slug: 'rxjs-basics' });
 
@@ -108,7 +129,24 @@ const OCT_2022_VIDEO = aResource({
   skills: [ANGULAR_CYPRESS_COMPONENT_TESTING],
 });
 
-const RESOURCES = [NOV_2024_ARTICLE, APR_2023_ARTICLE, OCT_2022_VIDEO];
+const JUL_2020_VIDEO = aResource({
+  title: 'What happens when you cancel an HTTP Request?',
+  summary:
+    'Following a cancelled request all the way from the browser to the backend.',
+  type: ResourceType.ExternalVideo,
+  slug: 'what-happens-when-you-cancel-an-http-request',
+  url: 'https://www.youtube.com/watch?v=cancel-http-request',
+  releasedAt: new Date('2020-07-02'),
+  duration: 25,
+  skills: [PROPAGATING_HTTP_REQUEST_CANCELATION],
+});
+
+const RESOURCES = [
+  NOV_2024_ARTICLE,
+  APR_2023_ARTICLE,
+  OCT_2022_VIDEO,
+  JUL_2020_VIDEO,
+];
 
 async function mountLibraryPage({
   url = '/learn/everything',
@@ -135,18 +173,41 @@ async function mountLibraryPage({
 
   const host: HTMLElement = harness.routeNativeElement!;
 
+  /* One row per resource, in display order. */
+  const getRows = () =>
+    Array.from(host.querySelectorAll('mc-resource-row')).map((row) => ({
+      title: getTextContent(row.querySelector('h3')),
+      playBadge: getTextContent(row.querySelector('.play')),
+      action: getTextContent(row.querySelector('.read')),
+      topicTags: Array.from(row.querySelectorAll('.topic-tag')).map((tag) =>
+        getTextContent(tag),
+      ),
+    }));
+
   return {
-    /* One row per resource, in display order. */
-    getRows: () =>
-      Array.from(host.querySelectorAll('mc-resource-row')).map((row) => ({
-        title: getTextContent(row.querySelector('h3')),
-        playBadge: getTextContent(row.querySelector('.play')),
-        action: getTextContent(row.querySelector('.read')),
-        topicTags: Array.from(row.querySelectorAll('.topic-tag')).map((tag) =>
-          getTextContent(tag),
-        ),
-      })),
+    /* Clicks a filter or a button by its accessible text. */
+    async click(name: string) {
+      Array.from(host.querySelectorAll('button'))
+        .find((button) => getAccessibleText(button) === name)
+        ?.click();
+      await harness.fixture.whenStable();
+    },
+    /* The list heading: "Everything", the skill, or the live result count. */
+    getHeading: () => getTextContent(host.querySelector('[role="status"]')),
+    getRows,
+    getRowTitles: () => getRows().map(({ title }) => title),
     getText: () => getTextContent(host),
+    async search(text: string) {
+      const input = host.querySelector<HTMLInputElement>(
+        'input[type="search"]',
+      );
+      if (!input) {
+        throw new Error('Search input not found');
+      }
+      input.value = text;
+      input.dispatchEvent(new Event('input'));
+      await harness.fixture.whenStable();
+    },
   };
 }
 
@@ -178,4 +239,13 @@ function aResource(
 
 function getTextContent(element: Element | null) {
   return element?.textContent?.replace(/\s+/g, ' ').trim();
+}
+
+/* Good enough for buttons: the text without the parts hidden from screen readers. */
+function getAccessibleText(element: Element | null) {
+  const clone = element?.cloneNode(true) as Element | undefined;
+  clone
+    ?.querySelectorAll('[aria-hidden="true"]')
+    .forEach((hidden) => hidden.remove());
+  return getTextContent(clone ?? null);
 }
