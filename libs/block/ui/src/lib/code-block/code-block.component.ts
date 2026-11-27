@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT, NgClass } from '@angular/common';
+import { DOCUMENT, NgClass } from '@angular/common';
 import {
   afterRenderEffect,
   ChangeDetectionStrategy,
@@ -8,7 +8,6 @@ import {
   ElementRef,
   inject,
   input,
-  NgModule,
   signal,
   viewChild,
   ViewEncapsulation,
@@ -181,9 +180,3 @@ export class CodeBlockComponent {
     }));
   }
 }
-
-@NgModule({
-  exports: [CodeBlockComponent],
-  imports: [CommonModule, CodeBlockComponent],
-})
-export class CodeBlockModule {}

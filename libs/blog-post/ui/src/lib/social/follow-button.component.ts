@@ -1,10 +1,4 @@
-import { CommonModule, NgIf } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  NgModule,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { AuthorSocialInfo } from './author-social-info';
@@ -77,8 +71,3 @@ export class FollowButtonComponent {
   author!: AuthorSocialInfo;
   faXTwitter = faXTwitter;
 }
-@NgModule({
-  exports: [FollowButtonComponent],
-  imports: [CommonModule, FontAwesomeModule, FollowButtonComponent],
-})
-export class FollowButtonModule {}

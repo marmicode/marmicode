@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, NgModule, ViewEncapsulation, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  ViewEncapsulation,
+  inject,
+} from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import {
   faFacebookF,
@@ -39,11 +45,13 @@ export type Size = 'normal' | 'small';
   imports: [ShareButtons, PushPipe],
 })
 export class ShareButtonsComponent {
-  private _state = inject<RxState<{
-    title: string;
-    author: AuthorSocialInfo;
-    size: Size;
-}>>(RxState);
+  private _state = inject<
+    RxState<{
+      title: string;
+      author: AuthorSocialInfo;
+      size: Size;
+    }>
+  >(RxState);
 
   @Input()
   set author(author: AuthorSocialInfo) {
@@ -105,8 +113,3 @@ export class ShareButtonsComponent {
     this._state.set({ size: 'normal' });
   }
 }
-@NgModule({
-  exports: [ShareButtonsComponent],
-  imports: [ShareButtonsComponent],
-})
-export class ShareButtonsModule {}

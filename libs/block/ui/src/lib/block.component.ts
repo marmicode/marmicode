@@ -1,10 +1,8 @@
-import { CommonModule, NgSwitch, NgSwitchCase } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
-  NgModule,
   Output,
 } from '@angular/core';
 import {
@@ -13,39 +11,33 @@ import {
   CodeBlock,
   MarkdownBlock,
 } from '@marmicode/block/core';
-import {
-  CodeBlockModule,
-  CodeBlockComponent,
-} from './code-block/code-block.component';
+import { CodeBlockComponent } from './code-block/code-block.component';
 import { HighlightZone } from './highlight/highlight-zone';
-import {
-  MarkdownBlockModule,
-  MarkdownBlockComponent,
-} from './markdown-block/markdown-block.ng';
+import { MarkdownBlockComponent } from './markdown-block/markdown-block.ng';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-block',
   template: `
-@switch (block.type) {
-  <!-- Code. -->
-  @case (BlockType.Code) {
-    <mc-code-block
-      [block]="codeBlock"
-      [highlightableZones]="highlightableZones ?? undefined"
-      [highlightZone]="highlightZone ?? undefined"
-    ></mc-code-block>
-  }
-  <!-- Markdown. -->
-  @case (BlockType.Markdown) {
-    <mc-markdown-block
-      [block]="markdownBlock"
-      [highlightableZones]="highlightableZones ?? []"
-      (highlightZoneChange)="highlightZoneChange.emit($event)"
-    ></mc-markdown-block>
-  }
-}
-`,
+    @switch (block.type) {
+      <!-- Code. -->
+      @case (BlockType.Code) {
+        <mc-code-block
+          [block]="codeBlock"
+          [highlightableZones]="highlightableZones ?? undefined"
+          [highlightZone]="highlightZone ?? undefined"
+        ></mc-code-block>
+      }
+      <!-- Markdown. -->
+      @case (BlockType.Markdown) {
+        <mc-markdown-block
+          [block]="markdownBlock"
+          [highlightableZones]="highlightableZones ?? []"
+          (highlightZoneChange)="highlightZoneChange.emit($event)"
+        ></mc-markdown-block>
+      }
+    }
+  `,
   imports: [CodeBlockComponent, MarkdownBlockComponent],
 })
 export class BlockComponent {
@@ -64,9 +56,3 @@ export class BlockComponent {
     return this.block as MarkdownBlock;
   }
 }
-
-@NgModule({
-  exports: [BlockComponent],
-  imports: [CommonModule, CodeBlockModule, MarkdownBlockModule, BlockComponent],
-})
-export class BlockModule {}

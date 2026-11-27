@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,7 +5,6 @@ import {
   HostBinding,
   HostListener,
   Input,
-  NgModule,
   OnChanges,
   SimpleChanges,
   inject,
@@ -112,9 +110,3 @@ export class HighlightLinkComponent implements OnChanges {
     );
   }
 }
-
-@NgModule({
-  exports: [HighlightLinkComponent],
-  imports: [CommonModule, HighlightLinkComponent],
-})
-export class HighlightLinkModule {}

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,7 +5,6 @@ import {
   EventEmitter,
   input,
   Input,
-  NgModule,
   Output,
   inject,
 } from '@angular/core';
@@ -14,7 +12,6 @@ import { MarkdownBlock, parseMarkdown } from '@marmicode/block/core';
 import { HighlightZone } from '../highlight/highlight-zone';
 import { MarkdownBlockStateService } from './markdown-block-state.service';
 import { MarkdownTokensComponent } from './markdown-tokens.component';
-import { MarkdownModule } from './markdown.module';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -77,9 +74,3 @@ export class MarkdownBlockComponent {
     this.highlightZoneChange.emit(event.detail);
   }
 }
-
-@NgModule({
-  exports: [MarkdownBlockComponent],
-  imports: [CommonModule, MarkdownModule, MarkdownBlockComponent],
-})
-export class MarkdownBlockModule {}

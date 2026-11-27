@@ -4,9 +4,9 @@ export { Button } from './lib/button.ng';
 export { ClosingSection } from './lib/closing-section.ng';
 export { CookCard } from './lib/cook-card.ng';
 export { CtaBand } from './lib/cta-band.ng';
-export { ErrorComponent, ErrorModule } from './lib/error.component';
-export { Link, LinkComponent, LinkModule } from './lib/link.component';
-export { LoadingComponent, LoadingModule } from './lib/loading.component';
+export { ErrorComponent } from './lib/error.component';
+export { Link, LinkComponent } from './lib/link.component';
+export { LoadingComponent } from './lib/loading.component';
 export {
   ArticlePageInfo,
   BasicPageInfo,
@@ -14,11 +14,10 @@ export {
   createBasicPageInfo,
   PageComponent,
   PageInfo,
-  PageModule,
 } from './lib/page.component';
 export { PageHeader } from './lib/page-header.ng';
 export {
   SegmentedControl,
   SegmentedControlOption,
 } from './lib/segmented-control.ng';
-export { SuspenseComponent, SuspenseModule } from './lib/suspense.component';
+export { SuspenseComponent } from './lib/suspense.component';

@@ -1,8 +1,6 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  NgModule,
   effect,
   inject,
   input,
@@ -222,9 +220,3 @@ export class PageComponent {
     return new URL(path, this._platformInfo.getOrigin()).href;
   }
 }
-
-@NgModule({
-  exports: [PageComponent],
-  imports: [CommonModule, PageComponent],
-})
-export class PageModule {}
