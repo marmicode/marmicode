@@ -5,6 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { LowerCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MarkdownBlockComponent } from '@marmicode/block/ui';
 import {
@@ -29,6 +30,7 @@ import { WorkshopRepository } from '@marmicode/workshop/infra';
 import { formatSessionDates } from '@marmicode/workshop/ui';
 import {
   WORKSHOP_DETAIL_LABELS,
+  WorkshopProgram,
   WorkshopSessionList,
 } from '@marmicode/workshop/ui-detail';
 
@@ -44,11 +46,13 @@ import {
   imports: [
     Badge,
     Button,
+    LowerCasePipe,
     MarkdownBlockComponent,
     PageComponent,
     RequiredKnowledgeCard,
     RouterLink,
     TrainingPageHero,
+    WorkshopProgram,
     WorkshopSessionList,
   ],
   template: `
@@ -164,6 +168,15 @@ import {
             [otherWorkshopLink]="otherWorkshopLink()"
             [sessions]="sessions()"
             [workshop]="workshop"
+          />
+        </section>
+
+        <section id="program" class="wrap">
+          <span class="mc-eyebrow">// {{ labels.program | lowercase }}</span>
+          <h2>{{ labels.program }}</h2>
+          <mc-workshop-program
+            [agenda]="workshop.agenda"
+            [language]="workshop.language"
           />
         </section>
       } @else {

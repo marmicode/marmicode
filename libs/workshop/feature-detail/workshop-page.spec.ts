@@ -59,7 +59,7 @@ describe(WorkshopPage.name, () => {
     expect(getGlanceFacts()['Next session']).toMatch(/Jan 12\s?–\s?14, 2027/);
   });
 
-  it.todo('program shows 8 items, then the rest', async () => {
+  it('program shows 8 items, then the rest', async () => {
     const { getProgramToggle, getVisibleProgramSteps, openFullProgram } =
       await mountWorkshopPage({ workshopId: 'pragmatic-angular-testing' });
     const { sections } = TestBed.inject(WorkshopRepository).findWorkshop(
