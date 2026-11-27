@@ -5,6 +5,8 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // Attribute selector on native elements, like `button[mat-button]`, so links and buttons keep their semantics.
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'a[mcButton], button[mcButton]',
   host: {
     '[class.ghost]': "variant() === 'ghost'",
