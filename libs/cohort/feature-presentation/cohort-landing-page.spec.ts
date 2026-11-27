@@ -25,8 +25,14 @@ describe(CohortLandingPage.name, () => {
     );
   });
 
-  it.todo('waitlist links at the top and the bottom', () => {
-    // Assert two **Join the waitlist** links to the waitlist URL, opened in a new tab.
+  it.todo('waitlist links at the top and the bottom', async () => {
+    const { getLinks } = await mountCohortLandingPage();
+
+    const waitlistLink = {
+      href: 'https://docs.google.com/forms/d/1rQfN5CjQnxDJs6yoSKVMahPOVeYEX9DjDC7vEeRB-eU/viewform',
+      target: '_blank',
+    };
+    expect(getLinks('Join the waitlist')).toEqual([waitlistLink, waitlistLink]);
   });
 
   it.todo('keeps the canonical URL', () => {
@@ -60,6 +66,14 @@ async function mountCohortLandingPage() {
           outcome: getTextContent(week.querySelector('.outcome')),
         }),
       );
+    },
+    getLinks(text: string) {
+      return Array.from(host.querySelectorAll<HTMLAnchorElement>('a'))
+        .filter((anchor) => getTextContent(anchor).includes(text))
+        .map((anchor) => ({
+          href: anchor.getAttribute('href'),
+          target: anchor.getAttribute('target'),
+        }));
     },
     getCrossedOutPrices() {
       return Array.from(
