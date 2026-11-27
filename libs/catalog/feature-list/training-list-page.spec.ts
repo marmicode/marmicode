@@ -90,7 +90,7 @@ describe(TrainingListPage.name, () => {
     ]);
   });
 
-  it.todo('cards keep their links', async () => {
+  it('cards keep their links', async () => {
     const { click, getGroup } = await mountTrainingListPage();
 
     expect(getGroup('Cohort')?.cards[0]?.link).toEqual({
