@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { getResourceTopics } from './resource-topic';
 
 describe(getResourceTopics.name, () => {
-  it.todo('maps skills to ordered, unique topics', () => {
+  it('maps skills to ordered, unique topics', () => {
     const rxjsSlug = 'rxjs-basics';
     const signalsSlug = 'angular-signals';
 
