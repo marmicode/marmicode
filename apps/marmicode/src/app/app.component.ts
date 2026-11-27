@@ -36,6 +36,8 @@ import { SiteNav } from './site-nav.ng';
       position: relative;
       z-index: 0;
       padding-top: 80px;
+      /* Dark behind the floating nav, instead of the old plum body background. */
+      background-color: var(--mc-dark-bg);
     }
   `,
 })
