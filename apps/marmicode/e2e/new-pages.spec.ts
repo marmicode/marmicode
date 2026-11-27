@@ -12,7 +12,7 @@ test.describe('new pages', () => {
     test.slow();
 
     for (const { url, heading } of [
-      { url: '/', heading: "Let's cook better apps." },
+      { url: '/', heading: 'Trust, baked in.' },
       {
         url: '/workshops',
         heading: 'Hands-on training, from testing to agentic dev.',

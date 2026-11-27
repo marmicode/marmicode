@@ -9,7 +9,7 @@ import {
 import { Badge, Button } from '@marmicode/shared/ui';
 
 /**
- * Dark hero: cohort chip, "Let's cook better apps.", pitch, and the
+ * Dark hero: cohort chip, "Trust, baked in.", pitch, and the
  * **Explore training** / **Browse the library** buttons.
  */
 @Component({
@@ -22,7 +22,7 @@ import { Badge, Button } from '@marmicode/shared/ui';
       {{ cohort.shortTitle }} · {{ cohortWeekCount }}-week cohort, enrolling now
       →
     </a>
-    <h1>Let's cook <span class="mc-gradient-text">better apps.</span></h1>
+    <h1>Trust, <span class="mc-gradient-text">baked in.</span></h1>
     <p>
       Training, coaching and recipes for teams who want to ship with confidence
       — even as AI writes more of the code.

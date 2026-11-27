@@ -118,7 +118,7 @@ export class HomePage {
   }).slice(0, MAX_UPCOMING_SESSIONS);
 
   pageInfo = createBasicPageInfo({
-    title: 'Cook better apps with Marmicode',
+    title: 'Trust, baked in',
     description:
       'Workshops, courses, and coaching to help you build better Angular apps. Learn from a Google Developer Expert and eXtreme Programming coach.',
   });
