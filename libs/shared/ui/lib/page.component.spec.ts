@@ -258,7 +258,7 @@ describe('PageComponent', () => {
     expect(htmlAdapterFake.getLinkTags()).toEqual([]);
   });
 
-  it.todo('dark page paints the dark background', async () => {
+  it('dark page paints the dark background', async () => {
     @Component({
       imports: [PageComponent],
       template: `<mc-page theme="dark"><p>Dish of the day</p></mc-page>`,

@@ -51,12 +51,64 @@ export type PageInfo = BasicPageInfo | ArticlePageInfo;
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-page',
-  template: `<ng-content />`,
+  host: {
+    '[class.mc-page-dark]': "theme() === 'dark'",
+  },
+  template: `
+    @if (theme() === 'dark') {
+      <div class="glow" aria-hidden="true"></div>
+    }
+    <ng-content />
+  `,
   styles: `
     :host {
       display: block;
       background-color: white;
       min-height: 100%;
+    }
+
+    :host(.mc-page-dark) {
+      position: relative;
+      isolation: isolate;
+      background-color: var(--mc-dark-bg);
+      color: var(--mc-dark-text);
+      font-family: var(--mc-font-sans);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .glow {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 900px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .glow::before,
+    .glow::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      border-radius: 50%;
+      filter: blur(90px);
+    }
+
+    .glow::before {
+      width: 620px;
+      height: 620px;
+      top: -260px;
+      transform: translateX(-80%);
+      background: rgba(var(--mc-violet-rgb), 0.38);
+    }
+
+    .glow::after {
+      width: 520px;
+      height: 520px;
+      top: -160px;
+      transform: translateX(10%);
+      background: rgba(var(--mc-accent-rgb), 0.26);
     }
   `,
 })
@@ -65,8 +117,6 @@ export class PageComponent {
   /**
    * 'dark' paints the dark background, the dark text colour, the sans font,
    * and the ambient violet/accent glow behind the top of the page.
-   *
-   * @deprecated 🚧 work in progress
    */
   theme = input<'light' | 'dark'>('light');
 
