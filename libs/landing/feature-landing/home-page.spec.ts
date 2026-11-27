@@ -25,7 +25,7 @@ describe(HomePage.name, () => {
     expect(chip?.href).toBe('/cohorts/from-drift-to-trust-for-angular');
   });
 
-  it.todo('upcoming events list the workshop sessions', async () => {
+  it('upcoming events list the workshop sessions', async () => {
     const { getEventRows } = await mountHomePage({ today: '2026-11-27' });
 
     const rows = getEventRows();
