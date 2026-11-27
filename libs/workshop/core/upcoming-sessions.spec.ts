@@ -3,7 +3,7 @@ import { getUpcomingSessions } from './upcoming-sessions';
 import { IsoDate, Session, Workshop } from './workshop';
 
 describe(getUpcomingSessions.name, () => {
-  it.todo('keeps upcoming sessions, soonest first', () => {
+  it('keeps upcoming sessions, soonest first', () => {
     const workshops = [
       createWorkshop({
         id: 'workshop-a',
