@@ -14,6 +14,8 @@ describe(getResourceTopics.name, () => {
   });
 
   it.todo('ignores unknown skills', () => {
-    // Call `getResourceTopics` with `['unknown-skill']` and assert `[]`.
+    const topics = getResourceTopics({ skillSlugs: ['unknown-skill'] });
+
+    expect(topics).toEqual([]);
   });
 });
