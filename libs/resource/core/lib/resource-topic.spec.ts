@@ -1,11 +1,16 @@
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { getResourceTopics } from './resource-topic';
 
 describe(getResourceTopics.name, () => {
   it.todo('maps skills to ordered, unique topics', () => {
-    // Pick from the map an RxJS skill slug and a signals skill slug that also maps to Angular.
-    // Call `getResourceTopics` with `[rxjsSlug, signalsSlug, signalsSlug]`.
-    // Assert `['angular', 'signals', 'rxjs']` (topic order, no duplicates).
+    const rxjsSlug = 'rxjs-basics';
+    const signalsSlug = 'angular-signals';
+
+    const topics = getResourceTopics({
+      skillSlugs: [rxjsSlug, signalsSlug, signalsSlug],
+    });
+
+    expect(topics).toEqual(['angular', 'signals', 'rxjs']);
   });
 
   it.todo('ignores unknown skills', () => {
