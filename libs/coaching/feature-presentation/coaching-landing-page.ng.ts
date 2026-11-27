@@ -30,7 +30,7 @@ import { CoachingRhythm } from './coaching-rhythm.ng';
     RouterLink,
   ],
   template: `
-    <mc-page [info]="pageInfo" theme="dark">
+    <mc-page [info]="pageInfo">
       <header class="wrap hero">
         <div>
           <span class="mc-eyebrow">// {{ labels.heroEyebrow }}</span>

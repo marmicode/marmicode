@@ -26,7 +26,7 @@ import { blogPostToPageInfo } from './blog-post-to-page-info';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-blog-post-detail-page',
   template: `
-    <mc-page [info]="pageInfo$ | push" theme="dark">
+    <mc-page [info]="pageInfo$ | push">
       <mc-suspense [data$]="blogPost$">
         <ng-template #data let-blogPost>
           <mc-blog-post-article

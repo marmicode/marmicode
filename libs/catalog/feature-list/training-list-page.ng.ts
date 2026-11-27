@@ -47,7 +47,7 @@ import {
     TrainingTile,
   ],
   template: `
-    <mc-page [info]="pageInfo" theme="dark">
+    <mc-page [info]="pageInfo">
       <mc-page-header
         class="wrap"
         eyebrow="// training"

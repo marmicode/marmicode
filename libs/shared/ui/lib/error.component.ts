@@ -8,7 +8,7 @@ import { getAssetUri } from '@marmicode/shared/utils';
   template: `<img
       [src]="pictureUri"
       alt="Sad Marmicode"
-      class="error-animation mc-primary-text"
+      class="error-animation"
     />
     <div class="error-message">
       <ng-content></ng-content>

@@ -51,25 +51,16 @@ export type PageInfo = BasicPageInfo | ArticlePageInfo;
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-page',
-  host: {
-    '[class.mc-page-dark]': "theme() === 'dark'",
-  },
   template: `
-    @if (theme() === 'dark') {
-      <div class="glow" aria-hidden="true"></div>
-    }
+    <div class="glow" aria-hidden="true"></div>
     <ng-content />
   `,
   styles: `
     :host {
       display: block;
-      background-color: white;
-      min-height: 100%;
-    }
-
-    :host(.mc-page-dark) {
       position: relative;
       isolation: isolate;
+      min-height: 100%;
       background-color: var(--mc-dark-bg);
       color: var(--mc-dark-text);
       font-family: var(--mc-font-sans);
@@ -114,11 +105,6 @@ export type PageInfo = BasicPageInfo | ArticlePageInfo;
 })
 export class PageComponent {
   info = input<PageInfo>();
-  /**
-   * 'dark' paints the dark background, the dark text colour, the sans font,
-   * and the ambient violet/accent glow behind the top of the page.
-   */
-  theme = input<'light' | 'dark'>('light');
 
   private _htmlAdapter = inject(HtmlAdapter);
   private _metaService = inject(Meta);

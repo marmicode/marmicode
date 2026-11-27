@@ -16,7 +16,7 @@ import { Button, PageComponent } from '@marmicode/shared/ui';
   selector: 'mc-not-found-page',
   imports: [Button, PageComponent, RouterLink],
   template: `
-    <mc-page theme="dark">
+    <mc-page>
       <main class="wrap">
         <div>
           <span class="code mc-gradient-text">404</span>

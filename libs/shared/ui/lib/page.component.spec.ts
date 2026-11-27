@@ -261,7 +261,7 @@ describe('PageComponent', () => {
   it('dark page paints the dark background', async () => {
     @Component({
       imports: [PageComponent],
-      template: `<mc-page theme="dark"><p>Dish of the day</p></mc-page>`,
+      template: `<mc-page><p>Dish of the day</p></mc-page>`,
     })
     class DarkPageHost {}
 

@@ -57,7 +57,7 @@ import { CohortRouteDiagram } from './cohort-route-diagram.ng';
     TrainingQuoteGrid,
   ],
   template: `
-    <mc-page [info]="pageInfo" theme="dark">
+    <mc-page [info]="pageInfo">
       <mc-training-page-hero
         asideLayout="attached"
         class="wrap"
@@ -155,7 +155,7 @@ import { CohortRouteDiagram } from './cohort-route-diagram.ng';
           [language]="cohort.language"
           [skills]="cohort.requiredSkills"
         />
-        <mc-cook-card appearance="banner" />
+        <mc-cook-card />
       </section>
 
       @if (cohort.testimonials?.length) {

@@ -73,7 +73,7 @@ import {
     WorkshopSessionList,
   ],
   template: `
-    <mc-page [info]="info()" theme="dark">
+    <mc-page [info]="info()">
       @if (workshop(); as workshop) {
         @let labels = this.labels();
         @let price = this.price();
@@ -269,7 +269,7 @@ import {
         </section>
 
         <section class="wrap">
-          <mc-cook-card appearance="banner" />
+          <mc-cook-card />
         </section>
 
         <section id="faq" class="wrap">

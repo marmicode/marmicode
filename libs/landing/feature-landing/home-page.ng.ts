@@ -30,7 +30,7 @@ import { UpcomingSessionList } from './upcoming-session-list.ng';
     UpcomingSessionList,
   ],
   template: `
-    <mc-page [info]="pageInfo" theme="dark">
+    <mc-page [info]="pageInfo">
       <mc-home-hero class="wrap" />
 
       <section class="wrap tiles-section">
@@ -46,7 +46,7 @@ import { UpcomingSessionList } from './upcoming-session-list.ng';
       </section>
 
       <section class="wrap">
-        <mc-cook-card appearance="banner" />
+        <mc-cook-card />
       </section>
 
       <section class="wrap contact-section">
