@@ -259,13 +259,21 @@ export class LibraryPage {
       ).pipe(this._transferStateHelper.transfer(`library:${skillSlug}`)),
   });
 
+  /**
+   * Reading `value()` throws when loading failed (e.g. unknown skill):
+   * fall back to no resources, which shows the empty state.
+   */
+  private readonly _loadedResources = computed(() =>
+    this._resources.hasValue() ? this._resources.value() : [],
+  );
+
   /** The selected skill's label, found in its resources. */
   private readonly _skillLabel = computed(() => {
     const skillSlug = this._skillSlug();
     if (skillSlug === resourceSearchRouterHelper.EVERYTHING) {
       return undefined;
     }
-    const skill = (this._resources.value() ?? [])
+    const skill = this._loadedResources()
       .flatMap((resource) => [...resource.skills, ...resource.requiredSkills])
       .find((skill) => skill.slug === skillSlug);
     return skill?.label ?? skillSlug;
@@ -285,7 +293,7 @@ export class LibraryPage {
     const kind = this.kindFilter();
     const topic = this.topicFilter();
     const query = this.query().trim().toLowerCase();
-    return (this._resources.value() ?? [])
+    return this._loadedResources()
       .filter((resource) => topic == null || resource.topics.includes(topic))
       .map((resource) => ({
         id: resource.id ?? resource.slug,
