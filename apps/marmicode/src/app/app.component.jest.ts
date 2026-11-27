@@ -43,7 +43,7 @@ describe(AppComponent.name, () => {
     expect(getCurrentNavLinks()).toEqual(['Library']);
   });
 
-  it.skip('old shell without WIP mode', async () => {
+  it('old shell without WIP mode', async () => {
     const { hasElement } = await mountApp({ wip: false });
 
     expect(hasElement('mc-nav')).toBe(true);
