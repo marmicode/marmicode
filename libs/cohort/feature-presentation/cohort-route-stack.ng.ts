@@ -69,7 +69,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
           <h3>Autonomy dial</h3>
           <span class="week-tag">Week 6</span>
         </header>
-        <p>From hands on helm to autopilot: the Charted loop.</p>
+        <p>From hands on helm to autopilot.</p>
       </li>
     </ol>
   `,

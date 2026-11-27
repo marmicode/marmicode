@@ -286,9 +286,8 @@ import { CohortRouteStack } from './cohort-route-stack.ng';
           marker-end="url(#cohort-arrow-pink)"
           marker-start="url(#cohort-arrow-pink)"
         />
-        <circle class="dial-knob" cx="1046" cy="166" r="12" />
+        <circle class="dial-knob" cx="1046" cy="190" r="12" />
         <text class="small-label" x="1070" y="138">Autopilot</text>
-        <text class="caption start" x="1070" y="172">the Charted loop</text>
         <text class="small-label" x="1070" y="304">Hands on helm</text>
 
         <!-- Learn from the drift. -->
@@ -425,10 +424,6 @@ import { CohortRouteStack } from './cohort-route-stack.ng';
       fill: var(--diagram-ink);
       font-size: 14px;
       font-style: italic;
-    }
-
-    .caption.start {
-      fill: var(--diagram-link-text);
     }
 
     .doc {
