@@ -8,7 +8,7 @@ import {
 } from './testing/local-storage.fake';
 
 describe(matchWip.name, () => {
-  it.todo('matches only in WIP mode', () => {
+  it('matches only in WIP mode', () => {
     const { localStorageFake, runMatchWip } = setUp();
 
     localStorageFake.setItem('wip', 'true');
