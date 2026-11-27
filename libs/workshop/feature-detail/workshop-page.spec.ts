@@ -1,11 +1,23 @@
-import { describe, it } from 'vitest';
+import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { provideSiteConfig } from '@marmicode/shared/core';
+import { TODAY } from '@marmicode/shared/utils';
+import { describe, expect, it } from 'vitest';
 import { WorkshopPage } from './workshop-page.ng';
 
 describe(WorkshopPage.name, () => {
-  it.todo('lists upcoming sessions with Luma links', () => {
-    // Provide `TODAY` as 2026-11-27 and mount `WorkshopPage` with `workshopId="pragmatic-angular-testing"`.
-    // Assert the session row mentions Jan 12–14, 2027 and "9:30–18:00 CET".
-    // Assert **Book a seat** links to `https://luma.com/73n2dvji` with `target="_blank"`.
+  it.todo('lists upcoming sessions with Luma links', async () => {
+    const { getSessionRows } = await mountWorkshopPage({
+      workshopId: 'pragmatic-angular-testing',
+    });
+
+    const [row] = getSessionRows();
+
+    expect(row?.text).toContain('Jan 12–14, 2027');
+    expect(row?.text).toContain('9:30–18:00 CET');
+    expect(row?.text).toContain('Book a seat');
+    expect(row?.href).toBe('https://luma.com/73n2dvji');
+    expect(row?.target).toBe('_blank');
   });
 
   it.todo('shows the other-language sessions', () => {
@@ -32,3 +44,45 @@ describe(WorkshopPage.name, () => {
     // Assert "Réserver une place", French session dates, and the OPCO note.
   });
 });
+
+async function mountWorkshopPage({
+  workshopId,
+  today = '2026-11-27',
+}: {
+  workshopId: string;
+  today?: string;
+}) {
+  TestBed.configureTestingModule({
+    providers: [
+      provideRouter([]),
+      provideSiteConfig({ origin: 'https://marmicode.io' }),
+      { provide: TODAY, useValue: () => new Date(today) },
+    ],
+  });
+
+  const fixture = TestBed.createComponent(WorkshopPage);
+  fixture.componentRef.setInput('workshopId', workshopId);
+  await fixture.whenStable();
+
+  const host: HTMLElement = fixture.nativeElement;
+
+  return {
+    /* Each session row is a link with a heading. */
+    getSessionRows() {
+      return Array.from(
+        host.querySelectorAll<HTMLAnchorElement>('mc-workshop-session-list a'),
+      )
+        .filter((anchor) => anchor.querySelector('h3'))
+        .map((anchor) => ({
+          text: getTextContent(anchor),
+          href: anchor.getAttribute('href'),
+          target: anchor.getAttribute('target'),
+          lang: anchor.getAttribute('lang'),
+        }));
+    },
+  };
+}
+
+function getTextContent(element: Element | null) {
+  return element?.textContent?.replace(/\s+/g, ' ').trim();
+}
