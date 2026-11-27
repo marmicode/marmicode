@@ -155,8 +155,11 @@ import { Button, PageComponent } from '@marmicode/shared/ui';
     }
 
     .door small {
+      display: block;
+      margin-top: 2px;
       color: var(--mc-dark-muted);
       font-size: 13px;
+      line-height: 1.4;
     }
 
     .ico {
