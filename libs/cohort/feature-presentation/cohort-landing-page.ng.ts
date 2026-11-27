@@ -3,11 +3,15 @@ import {
   Cohort,
   FROM_DRIFT_TO_TRUST_FOR_ANGULAR,
 } from '@marmicode/cohort/core';
-import { workshopRouterHelper } from '@marmicode/shared/router-helpers';
+import {
+  cohortRouterHelper,
+  workshopRouterHelper,
+} from '@marmicode/shared/router-helpers';
 import {
   Badge,
   Button,
   ClosingSection,
+  createBasicPageInfo,
   PageComponent,
 } from '@marmicode/shared/ui';
 import { Offer } from '@marmicode/training/core';
@@ -37,7 +41,7 @@ import { CohortRoute } from './cohort-route.ng';
     TrainingPageHero,
   ],
   template: `
-    <mc-page theme="dark">
+    <mc-page [info]="pageInfo" theme="dark">
       <mc-training-page-hero
         asideLayout="attached"
         class="wrap"
@@ -209,6 +213,14 @@ import { CohortRoute } from './cohort-route.ng';
 export class CohortLandingPage {
   protected cohort = FROM_DRIFT_TO_TRUST_FOR_ANGULAR;
   protected labels = COHORT_LABELS;
+  /* Same page info as `CohortPage`. */
+  protected pageInfo = createBasicPageInfo({
+    title: this.cohort.title,
+    /* The description is a long markdown text, while the subheading sums the cohort up. */
+    description: this.cohort.subheading.replaceAll('\n', ' '),
+    pictureUri: this.cohort.pictureUri,
+    path: cohortRouterHelper.detailUrl(this.cohort.id),
+  });
   protected breadcrumb = [
     {
       label: this.labels.breadcrumbTraining,

@@ -35,7 +35,7 @@ describe(CohortLandingPage.name, () => {
     expect(getLinks('Join the waitlist')).toEqual([waitlistLink, waitlistLink]);
   });
 
-  it.todo('keeps the canonical URL', async () => {
+  it('keeps the canonical URL', async () => {
     const { getCanonicalUrls } = await mountCohortLandingPage();
 
     expect(getCanonicalUrls()).toEqual([
