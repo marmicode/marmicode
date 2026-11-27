@@ -10,6 +10,7 @@ const TRAINING_LABELS_EN = {
   priceStartsAt: 'starts at',
   program: 'Program',
   requiredKnowledge: 'Required knowledge',
+  requiredKnowledgeEyebrow: 'required knowledge',
   testimonials: 'What they say',
   whatYouWillLearn: 'What you will learn',
 };
@@ -24,6 +25,7 @@ const TRAINING_LABELS_FR: typeof TRAINING_LABELS_EN = {
   priceStartsAt: 'à partir de',
   program: 'Programme',
   requiredKnowledge: 'Prérequis',
+  requiredKnowledgeEyebrow: 'prérequis',
   testimonials: 'Retour des participants',
   whatYouWillLearn: 'Ce que vous apprendrez',
 };

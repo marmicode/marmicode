@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { RequiredKnowledgeCard } from './required-knowledge-card.ng';
 
 describe(RequiredKnowledgeCard.name, () => {
-  it.todo('required knowledge is localized', async () => {
+  it('required knowledge is localized', async () => {
     const { getHeading, getItems } = await mountRequiredKnowledgeCard({
       language: 'fr',
       skills: ['Les bases d’Angular', 'Les bases de TypeScript'],
