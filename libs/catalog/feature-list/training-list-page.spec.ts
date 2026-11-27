@@ -112,9 +112,17 @@ describe(TrainingListPage.name, () => {
     ).toEqual({ href: '/workshops/test-angular-pragmatique', target: null });
   });
 
-  it.todo('cards show the next session', () => {
-    // Provide `TODAY` as 2026-11-27 and mount.
-    // Assert the Pragmatic Angular Testing card shows "Next · Jan 12–14" and the Pragmatic React Testing card shows no next session.
+  it.todo('cards show the next session', async () => {
+    const { getGroup } = await mountTrainingListPage({ today: '2026-11-27' });
+
+    const getNextSession = (title: string) =>
+      getGroup('Workshops')?.cards.find((card) => card.title === title)
+        ?.nextSession;
+
+    expect(getNextSession('Pragmatic Angular Testing')).toMatch(
+      /^Next · Jan 12\s?–\s?14$/,
+    );
+    expect(getNextSession('Pragmatic React Testing')).toBeUndefined();
   });
 
   it.todo('cards are announced in their language', () => {
@@ -151,6 +159,7 @@ async function mountTrainingListPage({
             title: getTextContent(card.querySelector('h3')),
             lang: card.querySelector('[lang]')?.getAttribute('lang'),
             link: getLink(card.querySelector('h3 a')),
+            nextSession: getTextContent(card.querySelector('.next-session')),
             languages: Array.from(card.querySelectorAll('.language-chip')).map(
               (chip) => getTextContent(chip),
             ),
