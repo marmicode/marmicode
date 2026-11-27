@@ -1,11 +1,32 @@
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { getUpcomingSessions } from './upcoming-sessions';
+import { IsoDate, Session, Workshop } from './workshop';
 
 describe(getUpcomingSessions.name, () => {
   it.todo('keeps upcoming sessions, soonest first', () => {
-    // - Arrange two workshops: one with sessions on 2026-12-08 and 2026-11-20, one with a session on 2026-12-01.
-    // - Call `getUpcomingSessions` with today = 2026-11-27.
-    // - Assert the start dates are `['2026-12-01', '2026-12-08']`.
+    const workshops = [
+      createWorkshop({
+        id: 'workshop-a',
+        sessions: [
+          createSession({ startDate: '2026-12-08' }),
+          createSession({ startDate: '2026-11-20' }),
+        ],
+      }),
+      createWorkshop({
+        id: 'workshop-b',
+        sessions: [createSession({ startDate: '2026-12-01' })],
+      }),
+    ];
+
+    const upcomingSessions = getUpcomingSessions({
+      workshops,
+      today: new Date('2026-11-27T12:00:00Z'),
+    });
+
+    expect(upcomingSessions.map(({ session }) => session.startDate)).toEqual([
+      '2026-12-01',
+      '2026-12-08',
+    ]);
   });
 
   it.todo('keeps a session until its last day', () => {
@@ -13,3 +34,30 @@ describe(getUpcomingSessions.name, () => {
     // - Assert it is kept on 2026-11-28 and dropped on 2026-11-29.
   });
 });
+
+function createWorkshop({
+  id,
+  sessions,
+}: {
+  id: string;
+  sessions: Session[];
+}): Workshop {
+  return { id, sessions } as Workshop;
+}
+
+function createSession({
+  startDate,
+  endDate,
+}: {
+  startDate: IsoDate;
+  endDate?: IsoDate;
+}): Session {
+  return {
+    startDate,
+    endDate,
+    startTime: '09:30',
+    endTime: '18:00',
+    timezone: 'CET',
+    url: `https://luma.com/${startDate}`,
+  };
+}
