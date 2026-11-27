@@ -11,7 +11,7 @@ import { formatPrice } from './format-price';
 import { TrainingTileData } from './training-tile-data';
 
 /**
- * Dark training card. The title link covers the whole card, as in TrainingPreview.
+ * Dark training card. The title link covers the whole card.
  * Carries `lang`, and announces its languages in the card's own language (visually hidden).
  */
 @Component({

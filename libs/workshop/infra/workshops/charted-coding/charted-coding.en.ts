@@ -17,7 +17,6 @@ Map the landscape, chart a method your architecture can live with, then engineer
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/xbPQtvj7yRebmtH17',
   // waitlist: { url: 'https://forms.gle/2eefd2ETDwyJ7HiK6' },
-  lumaTag: 'charted-coding',
   sessions: [
     {
       startDate: '2026-12-08',

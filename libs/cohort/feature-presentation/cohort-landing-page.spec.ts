@@ -35,6 +35,40 @@ describe(CohortLandingPage.name, () => {
     expect(getLinks('Join the waitlist')).toEqual([waitlistLink, waitlistLink]);
   });
 
+  it('sets the page title', async () => {
+    await mountCohortLandingPage();
+
+    expect(document.title).toBe(
+      'From Drift to Trust: Test-First Agentic Engineering for Angular | Marmicode',
+    );
+  });
+
+  it('banner mentions the French cohort and OPCO funding', async () => {
+    const { getHeroText } = await mountCohortLandingPage();
+
+    expect(getHeroText()).toContain(
+      'Also available in French, fundable up to 100% via OPCO.',
+    );
+  });
+
+  it('format shows the video course first, a live session every week, and the community', async () => {
+    const { getFormatTracks } = await mountCohortLandingPage();
+
+    expect(getFormatTracks()).toEqual([
+      {
+        when: 'Before week 1',
+        label: 'Video course',
+        description: 'Pragmatic Angular Testing, at your own pace',
+      },
+      { when: 'Every week · 3 h', label: 'Live session', description: '' },
+      {
+        when: 'Between sessions',
+        label: 'Discord',
+        description: 'Private community, open all week',
+      },
+    ]);
+  });
+
   it('keeps the canonical URL', async () => {
     const { getCanonicalUrls } = await mountCohortLandingPage();
 
@@ -78,6 +112,14 @@ async function mountCohortLandingPage() {
           outcome: getTextContent(week.querySelector('.outcome')),
         }),
       );
+    },
+    /* The format tracks of the overview: when each one happens, its label and description. */
+    getFormatTracks() {
+      return Array.from(host.querySelectorAll('.format .track'), (track) => ({
+        when: getTextContent(track.querySelector('.when')),
+        label: getTextContent(track.querySelector('h3')),
+        description: getTextContent(track.querySelector('p')),
+      }));
     },
     getLinks(text: string) {
       return Array.from(host.querySelectorAll<HTMLAnchorElement>('a'))

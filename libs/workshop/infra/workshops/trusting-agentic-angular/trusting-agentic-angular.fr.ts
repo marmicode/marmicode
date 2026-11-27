@@ -20,7 +20,6 @@ Faker le LLM là où c'est possible, evaluer le reste, et savoir exactement ce q
   waitlist: {
     url: 'https://docs.google.com/forms/d/16y7K8Wp5HDmWSkYW692M4dMUrb_I3gqLLjempQA0v3o/viewform',
   },
-  lumaTag: 'trusting-agentic-angular',
   sessions: [],
   description: `
 Les fonctionnalités IA ont introduit du **comportement non déterministe** dans nos apps. Construire une stratégie de test robuste était déjà difficile avec du code déterministe — les enjeux sont maintenant plus élevés. Quelle confiance avez-vous dans ce que vous mettez en production ? Que se passe-t-il quand vous changez de LLM, ajustez les instructions d'un agent, ou mettez à jour une dépendance au milieu ?

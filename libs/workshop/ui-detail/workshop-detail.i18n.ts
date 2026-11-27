@@ -23,7 +23,6 @@ const WORKSHOP_DETAIL_LABELS_EN = {
     price: 'Price',
   },
   languageName: '🇬🇧 English',
-  limitedSpots: 'Limited Spots',
   nextSession: 'Next Session',
   noSessionScheduledYet: 'No session scheduled yet.',
   noneOfTheseDatesWork:
@@ -72,7 +71,6 @@ const WORKSHOP_DETAIL_LABELS_FR: typeof WORKSHOP_DETAIL_LABELS_EN = {
     price: 'Prix',
   },
   languageName: '🇫🇷 Français',
-  limitedSpots: 'Places Limitées',
   nextSession: 'Prochaine Session',
   noSessionScheduledYet: 'Aucune session programmée pour le moment.',
   noneOfTheseDatesWork:

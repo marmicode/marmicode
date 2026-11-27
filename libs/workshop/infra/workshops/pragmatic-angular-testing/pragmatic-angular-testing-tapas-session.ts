@@ -16,7 +16,6 @@ Let's cook fast, reliable tests that actually help you ship.`,
   duration: 1,
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/scCAxEmgP4LmnULo6',
-  lumaTag: 'angular-testing-tapas',
   sessions: [],
   description: `
 Two ways to keep your app stable:

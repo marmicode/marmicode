@@ -17,7 +17,6 @@ Cartographier le paysage, tracer une méthode compatible avec votre architecture
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/uCFadpa7J578H6zQ6',
   // waitlist: { url: 'https://forms.gle/Ds8TSxkBkSiJddnk7' },
-  lumaTag: 'charted-coding',
   sessions: [
     {
       startDate: '2026-12-01',

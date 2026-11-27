@@ -19,7 +19,6 @@ et une suite qui résiste aux refactorings, aux migrations et aux deadlines.`,
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/FmSfiVpi7H21twwr9',
   // waitlist: { url: 'https://forms.gle/8ANywdMWtp5PtPLK9' },
-  lumaTag: 'angular-testing',
   sessions: [
     {
       startDate: '2027-01-05',

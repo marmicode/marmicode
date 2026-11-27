@@ -20,7 +20,6 @@ Fake the LLM where you can, eval what's left, and know exactly what each eval co
   waitlist: {
     url: 'https://docs.google.com/forms/d/1Orsy9rGHbok0NMRvf_8aesF26ZiNdI65qh4IkOUsUpM/viewform',
   },
-  lumaTag: 'trusting-agentic-angular',
   sessions: [],
   description: `
 AI features brought **non-deterministic behavior** into our apps. Building a robust testing strategy was hard enough with deterministic code — now the stakes are higher. How confident are you in what you ship? What happens when you swap the LLM, tweak an agent's instructions, or upgrade a dependency in the middle?

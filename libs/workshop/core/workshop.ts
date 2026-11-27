@@ -11,12 +11,7 @@ export interface Workshop extends Training {
   type: 'tapas' | 'full';
 
   /**
-   * Tag used to show upcoming sessions.
-   */
-  lumaTag: string;
-
-  /**
-   * Upcoming sessions, displayed on the workshop page and in the upcoming events.
+   * Upcoming sessions, displayed on the workshop page, the home page and the training list.
    * Sessions in the past are ignored.
    */
   sessions: Session[];

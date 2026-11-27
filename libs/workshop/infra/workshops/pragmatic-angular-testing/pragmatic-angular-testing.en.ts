@@ -17,7 +17,6 @@ And a suite that survives refactors, migrations, and deadlines.`,
   duration: 3,
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/TEp9DTM6pHiSFRPY9',
-  lumaTag: 'angular-testing',
   sessions: [
     {
       startDate: '2027-01-12',
