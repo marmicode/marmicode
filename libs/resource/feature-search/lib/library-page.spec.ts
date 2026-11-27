@@ -29,9 +29,14 @@ describe(LibraryPage.name, () => {
     });
   });
 
-  it.todo('rows show topic tags, not skills', () => {
-    // Arrange a resource with skills mapping to Testing and Angular.
-    // Assert its row shows the tags "Testing" and "Angular", and no "You will learn" text.
+  it.todo('rows show topic tags, not skills', async () => {
+    /* `angular-aot-testing` maps to Testing and Angular. */
+    const { getRows, getText } = await mountLibraryPage({
+      resources: [NOV_2024_ARTICLE],
+    });
+
+    expect(getRows()[0]?.topicTags).toEqual(['Testing', 'Angular']);
+    expect(getText()).not.toMatch(/you will learn/i);
   });
 
   it.todo('filters by kind, topic and search', () => {
@@ -137,7 +142,11 @@ async function mountLibraryPage({
         title: getTextContent(row.querySelector('h3')),
         playBadge: getTextContent(row.querySelector('.play')),
         action: getTextContent(row.querySelector('.read')),
+        topicTags: Array.from(row.querySelectorAll('.topic-tag')).map((tag) =>
+          getTextContent(tag),
+        ),
       })),
+    getText: () => getTextContent(host),
   };
 }
 
