@@ -4,6 +4,7 @@ import {
   externalLinks,
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
+import { TrainingLanguage } from '@marmicode/training/core';
 import { TrainingPreviewData } from '@marmicode/training/ui';
 import { Workshop } from '@marmicode/workshop/core';
 import {
@@ -36,6 +37,7 @@ export const PRAGMATIC_ANGULAR_TESTING_VIDEO_COURSE: TrainingPreviewData = {
 
 export function cohortToPreview(cohort: Cohort): TrainingPreviewData {
   const weekCount = cohort.schedule.weeks.length;
+  const labels = WEEK_LABELS[cohort.language];
   return {
     id: cohort.id,
     format: 'cohort',
@@ -44,7 +46,7 @@ export function cohortToPreview(cohort: Cohort): TrainingPreviewData {
     subheading: cohort.subheading,
     thumbnailUri: cohort.pictureUri,
     pictureAltText: cohort.pictureAltText,
-    duration: `${weekCount} Weeks`,
+    duration: `${weekCount} ${weekCount === 1 ? labels.week : labels.weeks}`,
     price: cohort.offer.price,
     link: { route: cohortRouterHelper.detail(cohort.id) },
   };
@@ -66,3 +68,8 @@ export function workshopToPreview(workshop: Workshop): TrainingPreviewData {
     viewTransitionName: workshopViewTransitionName(workshop),
   };
 }
+
+const WEEK_LABELS: Record<TrainingLanguage, { week: string; weeks: string }> = {
+  en: { week: 'Week', weeks: 'Weeks' },
+  fr: { week: 'Semaine', weeks: 'Semaines' },
+};

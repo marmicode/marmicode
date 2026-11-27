@@ -135,6 +135,18 @@ describe(CatalogPage, () => {
       '🧑‍🍳 Workshop',
     ]);
   });
+
+  it('announces the language of each card in that language', async () => {
+    const { getCardLanguages } = mountCatalogPage();
+
+    await expect
+      .poll(() => getCardLanguages('Test Angular Pragmatique'))
+      .toEqual({ lang: 'fr', label: 'Langue : français' });
+    expect(getCardLanguages('From Drift to Trust')).toEqual({
+      lang: 'en',
+      label: 'Language: English',
+    });
+  });
 });
 
 function mountCatalogPage() {
@@ -200,6 +212,18 @@ function mountCatalogPage() {
           '[aria-label="Filter by format"] mat-button-toggle',
         ),
       ).map((option) => normalize(option.textContent)),
+    /* The card's language, and how screen readers announce it. */
+    getCardLanguages: (title: string) => {
+      const card = getCardElements().find(
+        (card) => normalize(card.querySelector('h3')?.textContent) === title,
+      );
+      return {
+        lang: card?.querySelector('[role="article"]')?.getAttribute('lang'),
+        label: normalize(
+          card?.querySelector('.language-chip .visually-hidden')?.textContent,
+        ),
+      };
+    },
     /* Clicks a filter or a button by its text or label. */
     click: async (name: string) => (await findButton(name)).click(),
   };

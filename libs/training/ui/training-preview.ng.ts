@@ -55,7 +55,7 @@ export interface TrainingPreviewData {
     UpperCasePipe,
   ],
   template: `
-    <mat-card class="card" role="article">
+    <mat-card class="card" role="article" [attr.lang]="training().language">
       <img
         [alt]="training().pictureAltText"
         [src]="training().thumbnailUri"
@@ -65,13 +65,14 @@ export interface TrainingPreviewData {
         <span aria-hidden="true">{{ format().emoji }}</span>
         {{ format().label }}
       </span>
-      <span class="chip language-chip" [attr.aria-label]="languageChip().label">
+      <span class="chip language-chip">
         <span class="chip-flag" aria-hidden="true">{{
           languageChip().flag
         }}</span>
         <span class="chip-code" aria-hidden="true">{{
           languageChip().code
         }}</span>
+        <span class="visually-hidden">{{ languageChip().label }}</span>
       </span>
       <mat-card-content class="content">
         <h3 class="title">
@@ -149,6 +150,15 @@ export interface TrainingPreviewData {
 
     .language-chip {
       right: 0.75rem;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
 
     .chip-flag {
@@ -275,6 +285,6 @@ const LANGUAGE_CHIPS: Record<
   TrainingLanguage,
   { flag: string; code: string; label: string }
 > = {
-  en: { flag: '🇬🇧', code: 'EN', label: 'Language: EN' },
-  fr: { flag: '🇫🇷', code: 'FR', label: 'Language: FR' },
+  en: { flag: '🇬🇧', code: 'EN', label: 'Language: English' },
+  fr: { flag: '🇫🇷', code: 'FR', label: 'Langue : français' },
 };
