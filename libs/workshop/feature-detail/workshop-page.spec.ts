@@ -36,7 +36,7 @@ describe(WorkshopPage.name, () => {
     ]);
   });
 
-  it.todo('no upcoming session', async () => {
+  it('no upcoming session', async () => {
     const { getGlanceFacts, getSessionListLinks, getSessionListText } =
       await mountWorkshopPage({ workshopId: 'pragmatic-react-testing' });
 

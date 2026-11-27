@@ -9,6 +9,9 @@ const WORKSHOP_DETAIL_LABELS_EN = {
   languageName: '🇬🇧 English',
   limitedSpots: 'Limited Spots',
   nextSession: 'Next Session',
+  noSessionScheduledYet: 'No session scheduled yet.',
+  noneOfTheseDatesWork:
+    'None of these dates work? Bring the workshop to your team.',
   online: 'Online',
   onTheStove: 'on the stove',
   requestACustomSession: 'Request a custom session',
@@ -24,6 +27,9 @@ const WORKSHOP_DETAIL_LABELS_FR: typeof WORKSHOP_DETAIL_LABELS_EN = {
   languageName: '🇫🇷 Français',
   limitedSpots: 'Places Limitées',
   nextSession: 'Prochaine Session',
+  noSessionScheduledYet: 'Aucune session programmée pour le moment.',
+  noneOfTheseDatesWork:
+    'Aucune date ne vous convient ? Organisez la formation pour votre équipe.',
   online: 'En ligne',
   onTheStove: 'aux fourneaux',
   requestACustomSession: 'Session sur mesure',

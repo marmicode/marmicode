@@ -27,57 +27,89 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
   selector: 'mc-workshop-session-list',
   imports: [RouterLink],
   template: `
-    <ul>
-      @for (row of rows(); track row.key) {
-        <li>
-          <a class="session" [href]="row.href" rel="noopener" target="_blank">
-            <span class="cal" aria-hidden="true">
-              <b>{{ row.calendar.day }}</b>
-              <span>{{ row.calendar.month }}</span>
-            </span>
-            <span class="info">
-              <h3>{{ row.dates }}</h3>
-              <small>{{ row.details }}</small>
-            </span>
-            <span class="book">
-              {{ row.bookLabel }}
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </span>
-          </a>
-        </li>
-      }
-      @for (row of otherRows(); track row.key) {
-        <li>
+    @let labels = this.labels();
+    @let workshop = this.workshop();
+
+    @if (isEmpty()) {
+      <div class="empty">
+        <p>{{ labels.noSessionScheduledYet }}</p>
+        <div class="empty-links">
+          @if (workshop.waitlist; as waitlist) {
+            <a [href]="waitlist.url" rel="noopener" target="_blank"
+              >{{ labels.joinWaitlist }} →</a
+            >
+          }
           <a
-            class="session other"
-            [attr.href]="row.href ?? null"
-            [attr.lang]="row.language"
-            [attr.rel]="row.href ? 'noopener' : null"
-            [attr.target]="row.href ? '_blank' : null"
-            [routerLink]="row.route ?? null"
+            [href]="workshop.customSessionRequestUrl"
+            rel="noopener"
+            target="_blank"
+            >{{ labels.requestACustomSession }} →</a
           >
-            <span class="cal" aria-hidden="true">
-              <b>{{ row.calendar.day }}</b>
-              <span>{{ row.calendar.month }}</span>
-            </span>
-            <span class="info">
-              <h3>{{ row.dates }}</h3>
-              <small>{{ row.details }}</small>
-            </span>
-            <span class="book ghost">
-              {{ row.goLabel }}
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </span>
-          </a>
-        </li>
-      }
-    </ul>
+        </div>
+      </div>
+    } @else {
+      <ul>
+        @for (row of rows(); track row.key) {
+          <li>
+            <a class="session" [href]="row.href" rel="noopener" target="_blank">
+              <span class="cal" aria-hidden="true">
+                <b>{{ row.calendar.day }}</b>
+                <span>{{ row.calendar.month }}</span>
+              </span>
+              <span class="info">
+                <h3>{{ row.dates }}</h3>
+                <small>{{ row.details }}</small>
+              </span>
+              <span class="book">
+                {{ row.bookLabel }}
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </span>
+            </a>
+          </li>
+        }
+        @for (row of otherRows(); track row.key) {
+          <li>
+            <a
+              class="session other"
+              [attr.href]="row.href ?? null"
+              [attr.lang]="row.language"
+              [attr.rel]="row.href ? 'noopener' : null"
+              [attr.target]="row.href ? '_blank' : null"
+              [routerLink]="row.route ?? null"
+            >
+              <span class="cal" aria-hidden="true">
+                <b>{{ row.calendar.day }}</b>
+                <span>{{ row.calendar.month }}</span>
+              </span>
+              <span class="info">
+                <h3>{{ row.dates }}</h3>
+                <small>{{ row.details }}</small>
+              </span>
+              <span class="book ghost">
+                {{ row.goLabel }}
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </span>
+            </a>
+          </li>
+        }
+      </ul>
+
+      <p class="after-sessions">
+        <span>{{ labels.noneOfTheseDatesWork }}</span>
+        <a
+          [href]="workshop.customSessionRequestUrl"
+          rel="noopener"
+          target="_blank"
+          >{{ labels.requestACustomSession }} →</a
+        >
+      </p>
+    }
   `,
   styles: `
     :host {
@@ -196,6 +228,51 @@ import { WORKSHOP_DETAIL_LABELS } from './workshop-detail.i18n';
       stroke-linejoin: round;
     }
 
+    .empty {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px 24px;
+      padding: 24px;
+      border: 1px dashed var(--mc-dark-line-strong);
+      border-radius: 20px;
+      color: var(--mc-dark-muted);
+    }
+
+    .empty p {
+      margin: 0;
+    }
+
+    .empty-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+    }
+
+    .empty a,
+    .after-sessions a {
+      border-bottom: 1px solid rgba(var(--mc-accent-rgb), 0.4);
+      color: var(--mc-accent);
+      text-decoration: none;
+    }
+
+    .empty a:hover,
+    .after-sessions a:hover {
+      color: var(--mc-accent-bright);
+    }
+
+    .after-sessions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px 16px;
+      margin: 16px 0 0;
+      color: var(--mc-dark-muted);
+      font-size: 15px;
+    }
+
     @media (max-width: 640px) {
       .session {
         grid-template-columns: 72px 1fr;
@@ -216,6 +293,15 @@ export class WorkshopSessionList {
   /** Built by the page with `workshopRouterHelper`: `ui-detail` can't import `shared/router-helpers`. */
   otherWorkshopLink = input<Link>();
 
+  protected labels = computed(
+    () => WORKSHOP_DETAIL_LABELS[this.workshop().language],
+  );
+  /* With a waitlist, the waitlist replaces the sessions, as on the old page. */
+  protected isEmpty = computed(
+    () =>
+      this.workshop().waitlist != null ||
+      (this.sessions().length === 0 && this.otherSessions().length === 0),
+  );
   protected rows = computed(() =>
     this.sessions().map(({ workshop, session }) => {
       const { language } = workshop;
