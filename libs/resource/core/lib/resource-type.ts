@@ -54,16 +54,11 @@ export function getResourceTypeActionText(resourceType: ResourceType) {
   return resourceTypeActionMap.get(resourceType);
 }
 
-/**
- * @deprecated 🚧 work in progress
- */
 export type ResourceKind = 'article' | 'video';
 
 /**
  * `external-video` is a video; every other type reads as an article.
- *
- * @deprecated 🚧 work in progress
  */
-export function getResourceKind(_type: ResourceType): ResourceKind {
-  throw new Error('🚧 work in progress');
+export function getResourceKind(type: ResourceType): ResourceKind {
+  return type === ResourceType.ExternalVideo ? 'video' : 'article';
 }
