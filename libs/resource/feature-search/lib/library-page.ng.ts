@@ -11,6 +11,7 @@ import { ResourceKind, ResourceTopic } from '@marmicode/resource/core';
 import { ResourceRow } from '@marmicode/resource/ui';
 import { resourceSearchRouterHelper } from '@marmicode/shared/router-helpers';
 import {
+  Button,
   createBasicPageInfo,
   PageComponent,
   PageHeader,
@@ -30,6 +31,7 @@ import { toResourceRowData } from './to-resource-row-data';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-library-page',
   imports: [
+    Button,
     PageComponent,
     PageHeader,
     ResourceRow,
@@ -77,6 +79,15 @@ import { toResourceRowData } from './to-resource-row-data';
         <div class="rows">
           @for (row of rows(); track row.id) {
             <mc-resource-row [resource]="row.data" />
+          } @empty {
+            @if (!isLoading()) {
+              <div class="empty">
+                <p>That one hasn't been cooked yet.</p>
+                <button mcButton="ghost" type="button" (click)="resetFilters()">
+                  Show everything
+                </button>
+              </div>
+            }
           }
         </div>
       </main>
@@ -175,6 +186,12 @@ import { toResourceRowData } from './to-resource-row-data';
       flex-direction: column;
       gap: 12px;
     }
+
+    .empty {
+      padding: 56px 0;
+      color: var(--mc-dark-muted);
+      text-align: center;
+    }
   `,
 })
 export class LibraryPage {
@@ -209,6 +226,8 @@ export class LibraryPage {
         : this._resourceRepository.getResourcesBySkillSlug(skillSlug)
       ).pipe(this._transferStateHelper.transfer(`library:${skillSlug}`)),
   });
+
+  protected readonly isLoading = computed(() => this._resources.isLoading());
 
   private readonly _isFiltering = computed(
     () =>
@@ -250,4 +269,10 @@ export class LibraryPage {
     const count = this.rows().length;
     return `${count} ${count === 1 ? 'result' : 'results'}`;
   });
+
+  protected resetFilters() {
+    this.kindFilter.set(null);
+    this.topicFilter.set(null);
+    this.query.set('');
+  }
 }

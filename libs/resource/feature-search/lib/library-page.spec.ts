@@ -62,7 +62,7 @@ describe(LibraryPage.name, () => {
     expect(getRowTitles()).toEqual([APR_2023_ARTICLE.title]);
   });
 
-  it.todo('empty search shows the empty state', async () => {
+  it('empty search shows the empty state', async () => {
     const {
       click,
       getPressedFilters,
