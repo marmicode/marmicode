@@ -9,4 +9,24 @@ export const COACHING_LABELS = {
   benefitsEyebrow: 'what you get',
   benefitsTitle: 'Every month, three ingredients.',
   closingEyebrow: 'spots are limited',
+  howItWorks: 'How it works',
+  rhythmEyebrow: 'how it works',
+  loopEyebrow: 'the monthly rhythm',
+  loopSteps: [
+    {
+      title: 'Deep-dive',
+      description: '4 hours on the one thing that moves the needle, recorded.',
+    },
+    {
+      title: 'Async support',
+      description:
+        'Questions and PR reviews in between, answered within 48 hours.',
+    },
+    {
+      title: 'Written report',
+      description:
+        'Prioritized recommendations, so the team knows what to do next.',
+    },
+  ],
+  loopRepeat: 'Repeat monthly — three months is the sweet spot.',
 };

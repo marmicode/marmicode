@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { COACHING } from '@marmicode/coaching/core';
 import {
   coachingRouterHelper,
@@ -12,16 +13,22 @@ import {
   PageComponent,
 } from '@marmicode/shared/ui';
 import { COACHING_LABELS } from './coaching-presentation.i18n';
+import { CoachingRhythm } from './coaching-rhythm.ng';
 
 /**
  * Dark coaching page: hero with the coach picture, benefit tiles, the monthly rhythm and closing section.
- *
- * @deprecated 🚧 work in progress
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-coaching-landing-page',
-  imports: [Badge, Button, ClosingSection, PageComponent],
+  imports: [
+    Badge,
+    Button,
+    ClosingSection,
+    CoachingRhythm,
+    PageComponent,
+    RouterLink,
+  ],
   template: `
     <mc-page [info]="pageInfo" theme="dark">
       <header class="wrap hero">
@@ -45,6 +52,9 @@ import { COACHING_LABELS } from './coaching-presentation.i18n';
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
               </svg>
+            </a>
+            <a mcButton="ghost" [routerLink]="[]" fragment="how">
+              {{ labels.howItWorks }}
             </a>
           </div>
         </div>
@@ -95,6 +105,10 @@ import { COACHING_LABELS } from './coaching-presentation.i18n';
             </li>
           }
         </ul>
+      </section>
+
+      <section id="how" class="wrap">
+        <mc-coaching-rhythm [coaching]="coaching" />
       </section>
 
       <section class="wrap closing">
