@@ -50,7 +50,7 @@ describe(toTrainingOffers, () => {
 });
 
 describe(pickVersion, () => {
-  it.todo('picking a version follows the language filter', () => {
+  it('picking a version follows the language filter', () => {
     const offer = findWorkshopOffer('pragmatic-angular-testing');
 
     expect

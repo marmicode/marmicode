@@ -133,14 +133,23 @@ export function toTrainingOffers({
 /**
  * `null` language: the English version, else the first one.
  * Returns `null` when the offer isn't available in `language`.
- *
- * @deprecated 🚧 work in progress
  */
-export function pickVersion(args: {
+export function pickVersion({
+  offer,
+  language,
+}: {
   offer: TrainingOffer;
   language: TrainingLanguage | null;
 }): TrainingTileData | null {
-  throw new Error('🚧 work in progress');
+  if (language == null) {
+    return (
+      offer.versions.find((version) => version.language === 'en') ??
+      offer.versions[0]
+    );
+  }
+  return (
+    offer.versions.find((version) => version.language === language) ?? null
+  );
 }
 
 const TRAINING_LANGUAGES: TrainingLanguage[] = ['en', 'fr'];
