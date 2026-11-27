@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { FROM_DRIFT_TO_TRUST_FOR_ANGULAR } from '@marmicode/cohort/core';
 import { provideSiteConfig } from '@marmicode/shared/core';
 import { describe, expect, it } from 'vitest';
 import { CohortLandingPage } from './cohort-landing-page.ng';
@@ -14,8 +15,14 @@ describe(CohortLandingPage.name, () => {
     expect(getHeroText()).toContain('Early 2027');
   });
 
-  it.todo('route lists every week with its outcome', () => {
-    // Assert one entry per week of `FROM_DRIFT_TO_TRUST_FOR_ANGULAR.schedule.weeks`, in order, each with its title and outcome.
+  it.todo('route lists every week with its outcome', async () => {
+    const { getRouteWeeks } = await mountCohortLandingPage();
+
+    expect(getRouteWeeks()).toEqual(
+      FROM_DRIFT_TO_TRUST_FOR_ANGULAR.schedule.weeks.map(
+        ({ title, outcome }) => ({ title, outcome }),
+      ),
+    );
   });
 
   it.todo('waitlist links at the top and the bottom', () => {
@@ -43,6 +50,16 @@ async function mountCohortLandingPage() {
   return {
     getHeroText() {
       return getTextContent(host.querySelector('mc-training-page-hero'));
+    },
+    /* The weeks of the route, in order: the week items are nested lists. */
+    getRouteWeeks() {
+      return Array.from(
+        host.querySelectorAll('mc-cohort-route ol > li'),
+        (week) => ({
+          title: getTextContent(week.querySelector('h3')),
+          outcome: getTextContent(week.querySelector('.outcome')),
+        }),
+      );
     },
     getCrossedOutPrices() {
       return Array.from(
