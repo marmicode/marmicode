@@ -12,7 +12,7 @@ body {
   --marmicode-accent-color: #{$marmicode-accent-color};
   --marmicode-accent-bright-color: #{$marmicode-accent-bright-color};
 
-  color-scheme: light;
+  color-scheme: dark;
 
   @include mat.theme(
     (
