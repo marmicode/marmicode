@@ -21,9 +21,19 @@ describe(WorkshopPage.name, () => {
     expect(row?.target).toBe('_blank');
   });
 
-  it.todo('shows the other-language sessions', () => {
-    // Same page.
-    // Assert a row with `lang="fr"` mentions janvier 2027 and links to `/workshops/test-angular-pragmatique`.
+  it.todo('shows the other-language sessions', async () => {
+    const { getSessionRows } = await mountWorkshopPage({
+      workshopId: 'pragmatic-angular-testing',
+    });
+
+    const frenchRows = getSessionRows().filter((row) => row.lang === 'fr');
+
+    expect(frenchRows).toEqual([
+      expect.objectContaining({
+        text: expect.stringContaining('janvier 2027'),
+        href: '/workshops/test-angular-pragmatique',
+      }),
+    ]);
   });
 
   it.todo('no upcoming session', () => {
