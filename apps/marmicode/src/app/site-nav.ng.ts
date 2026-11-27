@@ -19,8 +19,6 @@ import { appRouterHelper } from './app-router-helper';
 
 /**
  * Floating, rounded, frosted nav bar: logo, Library, Training, Coaching and a "Contact me" button.
- *
- * @deprecated 🚧 work in progress
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -134,6 +132,28 @@ import { appRouterHelper } from './app-router-helper';
 
     .cta:hover {
       background: var(--mc-accent-bright);
+    }
+
+    @media (max-width: 600px) {
+      .bar {
+        gap: 2px;
+        padding-left: 10px;
+      }
+
+      .links a {
+        padding: 8px 7px;
+        font-size: 13px;
+      }
+
+      .brand span,
+      .cta .long {
+        display: none;
+      }
+
+      .cta {
+        padding: 9px 12px;
+        font-size: 13px;
+      }
     }
   `,
 })

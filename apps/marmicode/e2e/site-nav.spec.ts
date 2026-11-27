@@ -7,7 +7,7 @@ const test = base.extend<{ glove: SiteNavGlove }>({
 });
 
 test.describe('site nav', () => {
-  test.fixme('nav fits a 320px viewport', async ({ glove }) => {
+  test('nav fits a 320px viewport', async ({ glove }) => {
     await glove.enableWip();
     await glove.setViewportSize({ width: 320, height: 640 });
     await glove.goto('/');
