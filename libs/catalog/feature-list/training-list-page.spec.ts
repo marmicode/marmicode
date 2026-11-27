@@ -112,7 +112,7 @@ describe(TrainingListPage.name, () => {
     ).toEqual({ href: '/workshops/test-angular-pragmatique', target: null });
   });
 
-  it.todo('cards show the next session', async () => {
+  it('cards show the next session', async () => {
     const { getGroup } = await mountTrainingListPage({ today: '2026-11-27' });
 
     const getNextSession = (title: string) =>

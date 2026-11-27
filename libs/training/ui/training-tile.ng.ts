@@ -22,6 +22,11 @@ import { TrainingTileData } from './training-tile-data';
   template: `
     <article [attr.lang]="training().language">
       <div class="chips">
+        @if (training().nextSessionDates; as nextSessionDates) {
+          <mc-badge class="next-session" variant="accent">
+            {{ labels().next }} · {{ nextSessionDates }}
+          </mc-badge>
+        }
         @for (chip of languageChips(); track chip.code) {
           <mc-badge class="language-chip">
             <span aria-hidden="true">{{ chip.flag }}</span>
@@ -51,6 +56,9 @@ export class TrainingTile {
   /** Accent border + glow, used for the cohort. */
   highlighted = input(false);
 
+  protected labels = computed(
+    () => TRAINING_TILE_LABELS[this.training().language],
+  );
   protected href = computed(() => {
     const link = this.training().link;
     return 'href' in link ? link.href : undefined;
@@ -69,3 +77,8 @@ const LANGUAGE_CHIPS: Record<TrainingLanguage, { flag: string; code: string }> =
     en: { flag: '🇬🇧', code: 'EN' },
     fr: { flag: '🇫🇷', code: 'FR' },
   };
+
+const TRAINING_TILE_LABELS: Record<TrainingLanguage, { next: string }> = {
+  en: { next: 'Next' },
+  fr: { next: 'Prochaine' },
+};
