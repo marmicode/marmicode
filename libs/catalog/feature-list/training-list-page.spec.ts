@@ -1,10 +1,21 @@
-import { describe, it } from 'vitest';
+import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { provideSiteConfig } from '@marmicode/shared/core';
+import { TODAY } from '@marmicode/shared/utils';
+import { describe, expect, it } from 'vitest';
 import { TrainingListPage } from './training-list-page.ng';
 
 describe(TrainingListPage.name, () => {
-  it.todo('lists each workshop once with its languages', () => {
-    // Mount `TrainingListPage`.
-    // Assert one "Pragmatic Angular Testing" workshop card, with language chips EN and FR.
+  it.todo('lists each workshop once with its languages', async () => {
+    const { getGroup } = await mountTrainingListPage();
+
+    const cards = getGroup('Workshops')?.cards.filter(
+      (card) => card.title === 'Pragmatic Angular Testing',
+    );
+
+    expect(cards).toEqual([
+      expect.objectContaining({ languages: ['🇬🇧 EN', '🇫🇷 FR'] }),
+    ]);
   });
 
   it.todo('groups trainings by format with a description', () => {
@@ -45,3 +56,54 @@ describe(TrainingListPage.name, () => {
     // Assert a card has `lang="fr"` and visually hidden text in French.
   });
 });
+
+async function mountTrainingListPage({
+  today = '2026-11-27',
+}: { today?: string } = {}) {
+  TestBed.configureTestingModule({
+    providers: [
+      provideRouter([]),
+      provideSiteConfig({ origin: 'https://marmicode.io' }),
+      { provide: TODAY, useValue: () => new Date(today) },
+    ],
+  });
+
+  const fixture = TestBed.createComponent(TrainingListPage);
+  await fixture.whenStable();
+
+  const host: HTMLElement = fixture.nativeElement;
+
+  /* One section per format, with a heading and its training tiles. */
+  const getGroups = () =>
+    Array.from(host.querySelectorAll('section'))
+      .filter((section) => section.querySelector('h2'))
+      .map((section) => ({
+        heading: getAccessibleText(section.querySelector('h2')),
+        cards: Array.from(section.querySelectorAll('mc-training-tile')).map(
+          (card) => ({
+            title: getTextContent(card.querySelector('h3')),
+            languages: Array.from(card.querySelectorAll('.language-chip')).map(
+              (chip) => getTextContent(chip),
+            ),
+          }),
+        ),
+      }));
+
+  return {
+    getGroup: (heading: string) =>
+      getGroups().find((group) => group.heading === heading),
+  };
+}
+
+function getTextContent(element: Element | null) {
+  return element?.textContent?.replace(/\s+/g, ' ').trim();
+}
+
+/* Good enough for headings: the text without the parts hidden from screen readers. */
+function getAccessibleText(element: Element | null) {
+  const clone = element?.cloneNode(true) as Element | undefined;
+  clone
+    ?.querySelectorAll('[aria-hidden="true"]')
+    .forEach((hidden) => hidden.remove());
+  return getTextContent(clone ?? null);
+}
