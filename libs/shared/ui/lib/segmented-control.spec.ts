@@ -7,7 +7,7 @@ import {
 } from './segmented-control.ng';
 
 describe(SegmentedControl.name, () => {
-  it.todo('segmented control selects one option', async () => {
+  it('segmented control selects one option', async () => {
     const { click, getButtons, getValue } = await mountSegmentedControl({
       options: [
         { value: null, label: 'All' },

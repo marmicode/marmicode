@@ -20,7 +20,21 @@ export interface SegmentedControlOption<T> {
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-segmented-control',
-  template: `SegmentedControl - 🚧 work in progress`,
+  host: {
+    role: 'group',
+    '[attr.aria-label]': 'ariaLabel()',
+  },
+  template: `
+    @for (option of options(); track option.value) {
+      <button
+        type="button"
+        [attr.aria-pressed]="option.value === value()"
+        (click)="value.set(option.value)"
+      >
+        {{ option.label }}
+      </button>
+    }
+  `,
 })
 export class SegmentedControl<T> {
   options = input.required<SegmentedControlOption<T>[]>();
