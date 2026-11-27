@@ -18,10 +18,25 @@ describe(TrainingListPage.name, () => {
     ]);
   });
 
-  it.todo('groups trainings by format with a description', () => {
-    // Mount `TrainingListPage`.
-    // Assert the group headings in order are Cohort, Workshops, Video course.
-    // Assert each has its description (e.g. Workshops mentions "one to three days").
+  it.todo('groups trainings by format with a description', async () => {
+    const { getGroups } = await mountTrainingListPage();
+
+    expect(
+      getGroups().map(({ heading, description }) => ({
+        heading,
+        description,
+      })),
+    ).toEqual([
+      { heading: 'Cohort', description: expect.stringContaining('multi-week') },
+      {
+        heading: 'Workshops',
+        description: expect.stringContaining('one to three days'),
+      },
+      {
+        heading: 'Video course',
+        description: expect.stringContaining('Self-paced'),
+      },
+    ]);
   });
 
   it.todo('french filter shows French copy only', () => {
@@ -79,6 +94,7 @@ async function mountTrainingListPage({
       .filter((section) => section.querySelector('h2'))
       .map((section) => ({
         heading: getAccessibleText(section.querySelector('h2')),
+        description: getTextContent(section.querySelector(':scope > header p')),
         cards: Array.from(section.querySelectorAll('mc-training-tile')).map(
           (card) => ({
             title: getTextContent(card.querySelector('h3')),
@@ -90,6 +106,7 @@ async function mountTrainingListPage({
       }));
 
   return {
+    getGroups,
     getGroup: (heading: string) =>
       getGroups().find((group) => group.heading === heading),
   };
