@@ -13,7 +13,7 @@ describe(getResourceTopics.name, () => {
     expect(topics).toEqual(['angular', 'signals', 'rxjs']);
   });
 
-  it.todo('ignores unknown skills', () => {
+  it('ignores unknown skills', () => {
     const topics = getResourceTopics({ skillSlugs: ['unknown-skill'] });
 
     expect(topics).toEqual([]);
