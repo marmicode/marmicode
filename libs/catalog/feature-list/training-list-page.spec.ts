@@ -125,7 +125,7 @@ describe(TrainingListPage.name, () => {
     expect(getNextSession('Pragmatic React Testing')).toBeUndefined();
   });
 
-  it.todo('cards are announced in their language', async () => {
+  it('cards are announced in their language', async () => {
     const { click, getGroup } = await mountTrainingListPage();
 
     await click('Français');

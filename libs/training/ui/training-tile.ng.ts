@@ -19,6 +19,16 @@ import { TrainingTileData } from './training-tile-data';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-training-tile',
   imports: [Badge, RouterLink],
+  styles: `
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  `,
   template: `
     <article [attr.lang]="training().language">
       <div class="chips">
@@ -28,11 +38,11 @@ import { TrainingTileData } from './training-tile-data';
           </mc-badge>
         }
         @for (chip of languageChips(); track chip.code) {
-          <mc-badge class="language-chip">
-            <span aria-hidden="true">{{ chip.flag }}</span>
-            {{ chip.code }}
+          <mc-badge class="language-chip" aria-hidden="true">
+            {{ chip.flag }} {{ chip.code }}
           </mc-badge>
         }
+        <span class="visually-hidden">{{ languagesLabel() }}</span>
       </div>
       <h3>
         <!-- The title link covers the whole card, so the card is clickable. -->
@@ -56,6 +66,14 @@ export class TrainingTile {
   /** Accent border + glow, used for the cohort. */
   highlighted = input(false);
 
+  /* e.g. "Languages: English, French" or "Langue : français". */
+  protected languagesLabel = computed(() => {
+    const { language, languages } = this.training();
+    const labels = TRAINING_TILE_LABELS[language];
+    return `${languages.length > 1 ? labels.languages : labels.language} ${languages
+      .map((offeredLanguage) => labels.languageNames[offeredLanguage])
+      .join(', ')}`;
+  });
   protected labels = computed(
     () => TRAINING_TILE_LABELS[this.training().language],
   );
@@ -78,7 +96,25 @@ const LANGUAGE_CHIPS: Record<TrainingLanguage, { flag: string; code: string }> =
     fr: { flag: '🇫🇷', code: 'FR' },
   };
 
-const TRAINING_TILE_LABELS: Record<TrainingLanguage, { next: string }> = {
-  en: { next: 'Next' },
-  fr: { next: 'Prochaine' },
+const TRAINING_TILE_LABELS: Record<
+  TrainingLanguage,
+  {
+    language: string;
+    languages: string;
+    languageNames: Record<TrainingLanguage, string>;
+    next: string;
+  }
+> = {
+  en: {
+    language: 'Language:',
+    languages: 'Languages:',
+    languageNames: { en: 'English', fr: 'French' },
+    next: 'Next',
+  },
+  fr: {
+    language: 'Langue :',
+    languages: 'Langues :',
+    languageNames: { en: 'anglais', fr: 'français' },
+    next: 'Prochaine',
+  },
 };
