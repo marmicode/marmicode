@@ -21,10 +21,11 @@ const WEEKS = [
   },
   {
     emoji: '👀',
-    title: 'Give the Agent Eyes',
+    title: 'Runtime Truth',
     items: [
       'Hand the agent your testing judgment as a skill, then compare its tests with yours.',
-      'Let it inspect runtime values in the running test instead of guessing from the source.',
+      'Let it inspect runtime values in the running test with Wallaby instead of guessing from the source.',
+      'Give your agent fast and precise feedback through the Chrome DevTools Protocol and WebMCP.',
     ],
     outcome:
       'You leave with an agent that writes tests the way you would, and checks the runtime before it proposes a fix.',
@@ -33,8 +34,9 @@ const WEEKS = [
     emoji: '🧭',
     title: 'The Charted Coding Cycle',
     items: [
-      'Write a design doc with the agent, split it into small PRs, then go scaffold, red, green.',
-      'Each step has a precise intent, so you steer while the change is still small instead of untangling one big diff at the end.',
+      'Chart the intent with a design doc, then plot the waypoints: small PRs that let agents and humans focus, work in parallel, and switch context less.',
+      'Go scaffold, red, green: each step has a precise intent, so you steer while the change is still small instead of untangling one big diff at the end.',
+      'Make the agent keep behavioral and structural changes apart, so you focus on what matters and a deterministic check finds the needle in the haystack.',
     ],
     outcome:
       'You leave with a design doc and a first merged PR for a real feature.',
@@ -45,6 +47,7 @@ const WEEKS = [
     items: [
       "Back pressure and guardrails the agent can't quietly bypass.",
       'The agent catches its own mistakes before it hands control back to you.',
+      "Architecture boundaries the agent can't quietly cross, enforced with Nx even if your project doesn't use Nx.",
     ],
     outcome:
       'You leave with checks wired into your agent that run on every change, including your architecture boundaries.',
@@ -53,6 +56,7 @@ const WEEKS = [
     emoji: '🔬',
     title: 'Learn From the Drift',
     items: [
+      'Detect when you steer the agent, and compound the learnings as you go.',
       "Extract your team's agent sessions and analyze where the trajectories drifted.",
       'Turn the patterns into skills, then evaluate them so the fix survives the next model update.',
     ],
@@ -63,7 +67,7 @@ const WEEKS = [
     emoji: '🔁',
     title: 'The Charted Loop',
     items: [
-      'Let the agent run a whole PR on its own, with a loop that knows when it is done and when it is stuck.',
+      'Loop engineering: let the agent run a whole PR on its own, with a loop that knows when it is done and when it is stuck.',
       'Get back a PR whose commits tell the story, so you review intents instead of a wall of diff, then plan the rollout to your team.',
     ],
     outcome:

@@ -67,7 +67,7 @@ describe(CohortPage, () => {
           when: 'Every week: Live session, 3 h',
           cards: [
             ['Week 1', '🧪', "Tests Agents Can't Cheat"],
-            ['Week 2', '👀', 'Give the Agent Eyes'],
+            ['Week 2', '👀', 'Runtime Truth'],
             ['Week 3', '🧭', 'The Charted Coding Cycle'],
             ['Week 4', '⚓', 'The Harness'],
             ['Week 5', '🔬', 'Learn From the Drift'],
@@ -112,6 +112,7 @@ describe(CohortPage, () => {
           items: [
             "Back pressure and guardrails the agent can't quietly bypass.",
             'The agent catches its own mistakes before it hands control back to you.',
+            "Architecture boundaries the agent can't quietly cross, enforced with Nx even if your project doesn't use Nx.",
           ],
           outcome:
             'You leave with checks wired into your agent that run on every change, including your architecture boundaries.',
