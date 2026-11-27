@@ -52,7 +52,7 @@ import { UpcomingSessionList } from './upcoming-session-list.ng';
       <section class="wrap contact-section">
         <mc-closing-section
           eyebrow="// contact"
-          description="Workshop, coaching, or just a question — I usually reply within a day."
+          description="Workshop, coaching, or just a question."
         >
           Let's cook something <span class="mc-gradient-text">together.</span>
           <a

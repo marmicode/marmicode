@@ -30,7 +30,7 @@ import { Badge } from '@marmicode/shared/ui';
         </div>
       </div>
       <h3>The Library</h3>
-      <p>Articles, videos and the free cookbook.</p>
+      <p>Articles, videos and the free cookbooks.</p>
       <ul class="list">
         <li>Articles & videos<small>Testing, Angular, agentic dev…</small></li>
         <li>The Cookbook<small>Free</small></li>
@@ -91,8 +91,8 @@ import { Badge } from '@marmicode/shared/ui';
       <h3>Coaching</h3>
       <p>
         Stuck on architecture or testing strategy? Get a focused monthly
-        partnership that charts a steadier path to predictable delivery —
-        keeping the bar high as AI writes more of the code.
+        partnership that charts a steadier path to predictable delivery.
+        Keeping the bar high as agents write the code.
       </p>
       <span class="price">from €2 500 / month</span>
       <span class="go"
