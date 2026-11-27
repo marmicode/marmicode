@@ -14,8 +14,6 @@ export interface SegmentedControlOption<T> {
 
 /**
  * A row of toggle buttons where exactly one is pressed (`aria-pressed`).
- *
- * @deprecated 🚧 work in progress
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,6 +29,9 @@ export interface SegmentedControlOption<T> {
         [attr.aria-pressed]="option.value === value()"
         (click)="value.set(option.value)"
       >
+        @if (option.emoji) {
+          <span aria-hidden="true">{{ option.emoji }}</span>
+        }
         {{ option.label }}
       </button>
     }

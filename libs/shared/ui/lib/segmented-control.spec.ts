@@ -29,7 +29,7 @@ describe(SegmentedControl.name, () => {
       ]);
   });
 
-  it.todo('segmented control hides emojis from screen readers', async () => {
+  it('segmented control hides emojis from screen readers', async () => {
     const { getButtons, getButtonTexts } = await mountSegmentedControl({
       options: [{ value: 'cohort', label: 'Cohort', emoji: '👥' }],
       value: 'cohort',
