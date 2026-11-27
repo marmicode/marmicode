@@ -43,9 +43,12 @@ describe(AppComponent.name, () => {
     expect(getCurrentNavLinks()).toEqual(['Library']);
   });
 
-  it.skip('old shell without WIP mode', () => {
-    // Arrange WIP mode off; mount `AppComponent`.
-    // Assert the old `mc-nav` and `mc-footer` render, and `mc-site-nav` doesn't.
+  it.skip('old shell without WIP mode', async () => {
+    const { hasElement } = await mountApp({ wip: false });
+
+    expect(hasElement('mc-nav')).toBe(true);
+    expect(hasElement('mc-footer')).toBe(true);
+    expect(hasElement('mc-site-nav')).toBe(false);
   });
 });
 
@@ -91,6 +94,9 @@ async function mountApp({ wip }: { wip: boolean }) {
             target: link.getAttribute('target'),
           }
         : undefined;
+    },
+    hasElement(selector: string) {
+      return host.querySelector(selector) != null;
     },
     async navigate(url: string) {
       await TestBed.inject(Router).navigateByUrl(url);
