@@ -2,10 +2,9 @@ import { NgComponentOutlet } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { rxComputed } from '@jscutlery/rx-computed';
 import { MarkdownTokens } from '@marmicode/block/core';
-import { select } from '@ngrx/store';
 import { RxState } from '@rx-angular/state';
 import { PushPipe } from '@rx-angular/template/push';
-import { combineLatest } from 'rxjs';
+import { combineLatest, distinctUntilChanged, map } from 'rxjs';
 import { HighlightLinkComponent } from '../highlight/highlight-link.component';
 import { MarkdownBlockStateService } from './markdown-block-state.service';
 import { markdownTokensLoader } from './markdown-tokens-loader';
@@ -13,31 +12,25 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
 @Component({
   selector: 'mc-markdown-link',
   template: ` @if (isHighlightLink$ | push) {
-  <mc-highlight-link
-    [color]="(color$ | push)!"
-    [href]="href$ | push"
-    >
-    <ng-container
-        *ngComponentOutlet="
-          MarkdownTokensComponent() ?? null;
-          inputs: { tokens: tokens$ | push }
-        "
-    ></ng-container>
-  </mc-highlight-link>
-}
-@if ((isHighlightLink$ | push) === false) {
-  <a
-    [href]="href$ | push"
-    target="_blank"
-    >
-    <ng-container
-        *ngComponentOutlet="
-          MarkdownTokensComponent() ?? null;
-          inputs: { tokens: tokens$ | push }
-        "
-    ></ng-container>
-  </a>
-}`,
+      <mc-highlight-link [color]="(color$ | push)!" [href]="href$ | push">
+        <ng-container
+          *ngComponentOutlet="
+            MarkdownTokensComponent() ?? null;
+            inputs: { tokens: tokens$ | push }
+          "
+        ></ng-container>
+      </mc-highlight-link>
+    }
+    @if ((isHighlightLink$ | push) === false) {
+      <a [href]="href$ | push" target="_blank">
+        <ng-container
+          *ngComponentOutlet="
+            MarkdownTokensComponent() ?? null;
+            inputs: { tokens: tokens$ | push }
+          "
+        ></ng-container>
+      </a>
+    }`,
   styles: `
     a {
       /* Without these variables, links keep the browser's own style. */
@@ -54,9 +47,11 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
 })
 export class MarkdownLinkComponent {
   private _markdownBlockStateService = inject(MarkdownBlockStateService);
-  private _state = inject<RxState<{
-    token: MarkdownTokens.Link;
-}>>(RxState);
+  private _state = inject<
+    RxState<{
+      token: MarkdownTokens.Link;
+    }>
+  >(RxState);
 
   @Input() set token(token: MarkdownTokens.Link) {
     this._state.set({ token });
@@ -69,15 +64,17 @@ export class MarkdownLinkComponent {
     this._markdownBlockStateService.highlightableZones$,
     this.href$,
   ]).pipe(
-    select(([highlightableZones, href]) =>
+    map(([highlightableZones, href]) =>
       HighlightLinkComponent.getColor({
         highlightableZones,
         href,
       }),
     ),
+    distinctUntilChanged(),
   );
   isHighlightLink$ = this.href$.pipe(
-    select((href) => HighlightLinkComponent.canHandleLink(href)),
+    map((href) => HighlightLinkComponent.canHandleLink(href)),
+    distinctUntilChanged(),
   );
 
   MarkdownTokensComponent = rxComputed(markdownTokensLoader);
