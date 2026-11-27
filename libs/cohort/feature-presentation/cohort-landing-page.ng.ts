@@ -1,4 +1,7 @@
+import { LowerCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { MarkdownBlockComponent } from '@marmicode/block/ui';
 import {
   Cohort,
   FROM_DRIFT_TO_TRUST_FOR_ANGULAR,
@@ -8,37 +11,50 @@ import {
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
 import {
+  Accordion,
   Badge,
   Button,
   ClosingSection,
+  CookCard,
   createBasicPageInfo,
   PageComponent,
 } from '@marmicode/shared/ui';
 import { Offer } from '@marmicode/training/core';
 import {
   formatPrice,
+  RequiredKnowledgeCard,
   TRAINING_LABELS,
+  TrainingBenefitGrid,
   TrainingPageHero,
+  TrainingQuoteGrid,
 } from '@marmicode/training/ui';
 import { COHORT_LABELS } from './cohort-presentation.i18n';
 import { CohortRoute } from './cohort-route.ng';
+import { CohortRouteDiagram } from './cohort-route-diagram.ng';
 
 /**
  * Dark cohort page: hero with the offer card, description and format, the weekly route,
  * the workflow diagram, benefits, required knowledge with the cook, testimonials, FAQ and closing section.
- *
- * @deprecated 🚧 work in progress
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-cohort-landing-page',
   imports: [
+    Accordion,
     Badge,
     Button,
     ClosingSection,
     CohortRoute,
+    CohortRouteDiagram,
+    CookCard,
+    LowerCasePipe,
+    MarkdownBlockComponent,
     PageComponent,
+    RequiredKnowledgeCard,
+    RouterLink,
+    TrainingBenefitGrid,
     TrainingPageHero,
+    TrainingQuoteGrid,
   ],
   template: `
     <mc-page [info]="pageInfo" theme="dark">
@@ -48,6 +64,15 @@ import { CohortRoute } from './cohort-route.ng';
         [breadcrumb]="breadcrumb"
         [training]="cohort"
       >
+        <a mcButton="ghost" slot="actions" [routerLink]="[]" fragment="program">
+          {{ labels.seeTheProgram }}
+        </a>
+
+        @if (cohort.waitlist) {
+          <p slot="note">{{ labels.waitlistNote }}</p>
+        }
+        <p slot="note">{{ labels.frenchNote }}</p>
+
         <div slot="aside" class="offer">
           <div class="price-row">
             @if (offerLabel; as offerLabel) {
@@ -70,6 +95,33 @@ import { CohortRoute } from './cohort-route.ng';
         </div>
       </mc-training-page-hero>
 
+      <section id="overview" class="wrap overview">
+        <div class="prose">
+          <span class="mc-eyebrow">// {{ labels.whyEyebrow }}</span>
+          <h2>
+            {{ shortTitle.start }}
+            <span class="mc-gradient-text">{{ shortTitle.end }}</span>
+          </h2>
+          <mc-markdown-block [block]="cohort.description" />
+        </div>
+
+        <div class="format">
+          <span class="mc-eyebrow">// {{ labels.formatEyebrow }}</span>
+          @for (track of format; track track.label) {
+            <div class="track mc-surface">
+              <span class="emoji" aria-hidden="true">{{ track.emoji }}</span>
+              <div>
+                <span class="when">{{ track.when }}</span>
+                <h3>{{ track.label }}</h3>
+                @if (track.description) {
+                  <p>{{ track.description }}</p>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+
       <section id="program" class="wrap">
         <span class="mc-eyebrow">// {{ labels.programEyebrow }}</span>
         <h2>{{ labels.programTitle }}</h2>
@@ -77,6 +129,52 @@ import { CohortRoute } from './cohort-route.ng';
           class="section-content"
           [weeks]="cohort.schedule.weeks"
         />
+      </section>
+
+      <section id="workflow" class="wrap">
+        <span class="mc-eyebrow">// {{ labels.workflowEyebrow }}</span>
+        <h2>{{ labels.workflowTitle }}</h2>
+        <div class="workflow mc-surface section-content">
+          <mc-cohort-route-diagram />
+        </div>
+      </section>
+
+      <section id="learn" class="wrap">
+        <span class="mc-eyebrow"
+          >// {{ trainingLabels.whatYouWillLearn | lowercase }}</span
+        >
+        <h2>{{ trainingLabels.whatYouWillLearn }}</h2>
+        <mc-training-benefit-grid
+          class="section-content"
+          [benefits]="cohort.benefits"
+        />
+      </section>
+
+      <section class="wrap knowledge">
+        <mc-required-knowledge-card
+          [language]="cohort.language"
+          [skills]="cohort.requiredSkills"
+        />
+        <mc-cook-card appearance="banner" />
+      </section>
+
+      @if (cohort.testimonials?.length) {
+        <section id="testimonials" class="wrap">
+          <span class="mc-eyebrow"
+            >// {{ trainingLabels.testimonials | lowercase }}</span
+          >
+          <h2>{{ trainingLabels.testimonials }}</h2>
+          <mc-training-quote-grid
+            class="section-content"
+            [testimonials]="cohort.testimonials ?? []"
+          />
+        </section>
+      }
+
+      <section id="faq" class="wrap">
+        <span class="mc-eyebrow">// {{ labels.faqEyebrow }}</span>
+        <h2>{{ trainingLabels.faq }}</h2>
+        <mc-accordion class="section-content" [items]="faqItems" />
       </section>
 
       <section class="wrap">
@@ -132,6 +230,103 @@ import { CohortRoute } from './cohort-route.ng';
 
     .section-content {
       margin-top: 36px;
+    }
+
+    #overview {
+      padding-top: 72px;
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    /* Description next to the format. */
+    .overview {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .overview {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+      }
+    }
+
+    .prose mc-markdown-block {
+      margin: 12px 0 0;
+      color: #d9cfdc;
+      font-family: var(--mc-font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      --mc-markdown-link-color: var(--mc-accent);
+    }
+
+    .format {
+      display: grid;
+      gap: 12px;
+    }
+
+    .track {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 18px 20px;
+    }
+
+    .track .emoji {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(var(--mc-accent-rgb), 0.25);
+      border-radius: 12px;
+      background: rgba(var(--mc-accent-rgb), 0.1);
+      font-size: 22px;
+    }
+
+    .track .when {
+      color: var(--mc-accent);
+      font-family: var(--mc-font-mono);
+      font-size: 12px;
+    }
+
+    .track h3 {
+      margin: 0 0 4px;
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .track p {
+      margin: 0;
+      color: var(--mc-dark-muted);
+      font-size: 14.5px;
+    }
+
+    /* The route diagram, on a dark surface instead of the old plum section. */
+    .workflow {
+      padding: clamp(16px, 3vw, 32px) 0;
+    }
+
+    .workflow mc-cohort-route-diagram {
+      --diagram-background: var(--mc-dark-surface);
+    }
+
+    /* Required knowledge next to the cook. */
+    .knowledge {
+      display: grid;
+      grid-template-columns: 340px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    @media (max-width: 920px) {
+      .knowledge {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     h2 {
@@ -221,6 +416,24 @@ export class CohortLandingPage {
     pictureUri: this.cohort.pictureUri,
     path: cohortRouterHelper.detailUrl(this.cohort.id),
   });
+  protected trainingLabels = TRAINING_LABELS[this.cohort.language];
+  /* "From Drift to" + gradient "Trust". */
+  protected shortTitle = splitLastWord(this.cohort.shortTitle);
+  /* The video course first, then a live session every week, with the community in between. */
+  protected format = [
+    this.cohort.schedule.videoCourse,
+    {
+      emoji: this.labels.liveSessionEmoji,
+      when: `${this.cohort.schedule.liveSession.when} · ${this.cohort.schedule.liveSession.duration}`,
+      label: this.cohort.schedule.liveSession.label,
+      description: undefined,
+    },
+    this.cohort.schedule.community,
+  ];
+  protected faqItems = this.cohort.faqs.map(({ question, answer }) => ({
+    title: question,
+    content: answer,
+  }));
   protected breadcrumb = [
     {
       label: this.labels.breadcrumbTraining,
@@ -247,13 +460,22 @@ export class CohortLandingPage {
 }
 
 function getClosing({ callToAction, nextCohort, subheading }: Cohort) {
-  const title = callToAction?.title ?? TRAINING_LABELS.en.callToActionTitle;
-  const lastSpaceIndex = title.lastIndexOf(' ');
+  const { start, end } = splitLastWord(
+    callToAction?.title ?? TRAINING_LABELS.en.callToActionTitle,
+  );
   return {
     description: callToAction?.description ?? subheading.replaceAll('\n', ' '),
     eyebrow: `// ${nextCohort.toLowerCase()}`,
-    titleStart: title.slice(0, Math.max(lastSpaceIndex, 0)),
-    titleEnd: title.slice(lastSpaceIndex + 1),
+    titleStart: start,
+    titleEnd: end,
+  };
+}
+
+function splitLastWord(text: string) {
+  const lastSpaceIndex = text.lastIndexOf(' ');
+  return {
+    start: text.slice(0, Math.max(lastSpaceIndex, 0)),
+    end: text.slice(lastSpaceIndex + 1),
   };
 }
 
