@@ -62,6 +62,13 @@ export type PageInfo = BasicPageInfo | ArticlePageInfo;
 })
 export class PageComponent {
   info = input<PageInfo>();
+  /**
+   * 'dark' paints the dark background, the dark text colour, the sans font,
+   * and the ambient violet/accent glow behind the top of the page.
+   *
+   * @deprecated 🚧 work in progress
+   */
+  theme = input<'light' | 'dark'>('light');
 
   private _htmlAdapter = inject(HtmlAdapter);
   private _metaService = inject(Meta);

@@ -257,6 +257,11 @@ describe('PageComponent', () => {
     expect(htmlAdapterFake.getLinkTags()).toEqual([]);
   });
 
+  it.todo('dark page paints the dark background', () => {
+    // Mount `PageComponent` with `theme="dark"` and some projected content.
+    // Assert the host's computed background colour is `--mc-dark-bg` and the projected content renders.
+  });
+
   it('should remove all meta on destroy', async () => {
     const { setPageInfo, destroyOnceStable, getMetaTags } =
       await renderComponent();

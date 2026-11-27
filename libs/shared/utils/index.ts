@@ -1,5 +1,6 @@
 export { getAssetUri } from './lib/get-asset-uri';
 export { LocalStorage } from './lib/local-storage.service';
+export { matchWip } from './lib/match-wip';
 export {
   dematerializeData,
   dematerializeError,
