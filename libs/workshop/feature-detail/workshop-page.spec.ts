@@ -36,10 +36,15 @@ describe(WorkshopPage.name, () => {
     ]);
   });
 
-  it.todo('no upcoming session', () => {
-    // Mount with `workshopId="pragmatic-react-testing"`.
-    // Assert "No session scheduled yet." and the custom session link.
-    // Assert the "at a glance" card has no "Next session" entry.
+  it.todo('no upcoming session', async () => {
+    const { getGlanceFacts, getSessionListLinks, getSessionListText } =
+      await mountWorkshopPage({ workshopId: 'pragmatic-react-testing' });
+
+    expect(getSessionListText()).toContain('No session scheduled yet.');
+    expect(getSessionListLinks()).toContain(
+      'https://forms.gle/BFw4AUrzp3LkRLvHA',
+    );
+    expect(getGlanceFacts()).not.toHaveProperty('Next session');
   });
 
   it.todo('hero and at a glance', () => {
@@ -78,6 +83,23 @@ async function mountWorkshopPage({
   const host: HTMLElement = fixture.nativeElement;
 
   return {
+    /* "At a glance" facts, e.g. { 'Duration': '3 days' }. */
+    getGlanceFacts() {
+      return Object.fromEntries(
+        Array.from(host.querySelectorAll('dl > div')).map((fact) => [
+          getTextContent(fact.querySelector('dt')),
+          getTextContent(fact.querySelector('dd')),
+        ]),
+      );
+    },
+    getSessionListLinks() {
+      return Array.from(
+        host.querySelectorAll<HTMLAnchorElement>('mc-workshop-session-list a'),
+      ).map((anchor) => anchor.getAttribute('href'));
+    },
+    getSessionListText() {
+      return getTextContent(host.querySelector('mc-workshop-session-list'));
+    },
     /* Each session row is a link with a heading. */
     getSessionRows() {
       return Array.from(
