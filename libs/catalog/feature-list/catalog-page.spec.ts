@@ -20,12 +20,26 @@ describe(CatalogPage, () => {
       );
   });
 
-  it('lists the cohort first, then the workshops, then the video course', async () => {
-    const { getFormatOrder } = mountCatalogPage();
+  it('groups trainings by format: the cohort first, then the workshops, then the video course', async () => {
+    const { getGroups } = mountCatalogPage();
 
     await expect
-      .poll(() => getFormatOrder())
-      .toEqual(['👥 Cohort', '🧑‍🍳 Workshop', '🎬 Video course']);
+      .poll(() => getGroups())
+      .toEqual([
+        { heading: '👥 Cohort', formats: ['👥 Cohort'] },
+        { heading: '🧑‍🍳 Workshops', formats: ['🧑‍🍳 Workshop', '🧑‍🍳 Formation'] },
+        { heading: '🎬 Video course', formats: ['🎬 Video course'] },
+      ]);
+  });
+
+  it('hides the groups with no matching training', async () => {
+    const { getGroups, click } = mountCatalogPage();
+
+    await click('French');
+
+    await expect
+      .poll(() => getGroups())
+      .toEqual([{ heading: '🧑‍🍳 Workshops', formats: ['🧑‍🍳 Formation'] }]);
   });
 
   it('links the video course to the course platform', async () => {
@@ -158,11 +172,18 @@ function mountCatalogPage() {
 
   return {
     getCards,
-    /* The formats in the order they appear, French workshops counted as workshops. */
-    getFormatOrder: () =>
-      getCards()
-        .map(({ format }) => format?.replace('Formation', 'Workshop'))
-        .filter((format, index, formats) => format !== formats[index - 1]),
+    /* Each group's heading, and the distinct formats of the cards in it. */
+    getGroups: () =>
+      Array.from(document.querySelectorAll('section.group')).map((group) => ({
+        heading: normalize(group.querySelector('h2')?.textContent),
+        formats: [
+          ...new Set(
+            Array.from(group.querySelectorAll('.format-chip')).map((chip) =>
+              normalize(chip.textContent),
+            ),
+          ),
+        ],
+      })),
     getCardLink: (format: string) =>
       getCardElements()
         .find(

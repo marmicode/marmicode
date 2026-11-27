@@ -75,13 +75,22 @@ import { FormatInfo } from './format-info.ng';
           </div>
         </div>
 
-        @if (filteredTrainings().length > 0) {
-          <div class="list">
-            @for (training of filteredTrainings(); track training.id) {
-              <mc-training-preview class="item" [training]="training" />
-            }
-          </div>
-        } @else {
+        @for (group of groups(); track group.format) {
+          <section
+            class="group"
+            [attr.aria-labelledby]="group.format + '-heading'"
+          >
+            <h2 class="group-heading" [id]="group.format + '-heading'">
+              <span aria-hidden="true">{{ group.emoji }}</span>
+              {{ group.heading }}
+            </h2>
+            <div class="list">
+              @for (training of group.trainings; track training.id) {
+                <mc-training-preview class="item" [training]="training" />
+              }
+            </div>
+          </section>
+        } @empty {
           <div role="status" class="empty">
             <p>Nothing matches these filters yet.</p>
             <button matButton="outlined" type="button" (click)="resetFilters()">
@@ -134,6 +143,23 @@ import { FormatInfo } from './format-info.ng';
       .toggle-emoji {
         display: none;
       }
+    }
+
+    .group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .group-heading {
+      display: flex;
+      gap: 0.4em;
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--marmicode-primary-color);
     }
 
     .list {
@@ -191,14 +217,24 @@ export class CatalogPage {
    */
   formatInfoLanguage = computed(() => this.languageFilter() ?? 'en');
 
-  filteredTrainings = computed(() => {
+  /**
+   * One group per format, so different formats never share a row.
+   * Groups with no training matching the filters are hidden.
+   */
+  groups = computed(() => {
     const language = this.languageFilter();
     const format = this.formatFilter();
-    return this._trainings.filter(
-      (training) =>
-        (language == null || training.language === language) &&
-        (format == null || training.format === format),
-    );
+    return GROUPS.filter((group) => format == null || group.format === format)
+      .map((group) => ({
+        ...group,
+        emoji: TRAINING_FORMAT_EMOJIS[group.format],
+        trainings: this._trainings.filter(
+          (training) =>
+            training.format === group.format &&
+            (language == null || training.language === language),
+        ),
+      }))
+      .filter((group) => group.trainings.length > 0);
   });
 
   private _trainings: TrainingPreviewData[] = [
@@ -212,3 +248,9 @@ export class CatalogPage {
     this.formatFilter.set(null);
   }
 }
+
+const GROUPS: Array<{ format: TrainingFormat; heading: string }> = [
+  { format: 'cohort', heading: 'Cohort' },
+  { format: 'workshop', heading: 'Workshops' },
+  { format: 'video-course', heading: 'Video course' },
+];
