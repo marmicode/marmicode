@@ -7,7 +7,7 @@ const test = base.extend<{ glove: NewPagesGlove }>({
 });
 
 test.describe('new pages', () => {
-  test.fixme('new pages without WIP mode', async ({ glove }) => {
+  test('new pages without WIP mode', async ({ glove }) => {
     /* This test renders six pages on the dev server. */
     test.slow();
 
@@ -58,7 +58,7 @@ class NewPagesGlove {
 
   /* The floating nav. */
   siteNav() {
-    return this._page.locator('mc-site-nav');
+    return this._page.locator('mc-site-nav header');
   }
 
   oldNav() {

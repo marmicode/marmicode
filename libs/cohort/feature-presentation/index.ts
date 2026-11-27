@@ -1,5 +1,5 @@
-import { CohortPage } from './cohort-page.ng';
+import { CohortLandingPage } from './cohort-landing-page.ng';
 
-export { CohortLandingPage } from './cohort-landing-page.ng';
+export { CohortLandingPage };
 
-export default CohortPage;
+export default CohortLandingPage;

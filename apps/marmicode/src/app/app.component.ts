@@ -1,29 +1,19 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { WipService } from '@marmicode/shared/utils';
-import { Footer } from './footer.ng';
-import { NavModule } from './nav.component';
 import { SiteFooter } from './site-footer.ng';
 import { SiteNav } from './site-nav.ng';
 
 @Component({
   selector: 'mc-root',
-  imports: [Footer, NavModule, RouterModule, SiteFooter, SiteNav],
+  imports: [RouterModule, SiteFooter, SiteNav],
   template: `
-    @if (isWip) {
-      <mc-site-nav />
-      <!-- Keeps the old light pages' first content below the floating nav. -->
-      <div class="wip-content">
-        <router-outlet />
-      </div>
-      <mc-site-footer />
-    } @else {
-      <mc-nav>
-        <router-outlet />
-        <mc-footer />
-      </mc-nav>
-    }
+    <mc-site-nav />
+    <!-- Keeps the pages' first content below the floating nav. -->
+    <div class="content">
+      <router-outlet />
+    </div>
+    <mc-site-footer />
   `,
   styles: `
     :host {
@@ -32,24 +22,19 @@ import { SiteNav } from './site-nav.ng';
       height: 100%;
     }
 
-    .wip-content {
+    .content {
       /* position relative & z-index 0 prevent code or anything else from overlapping on the nav. */
       position: relative;
       z-index: 0;
       padding-top: 80px;
-      /* Dark behind the floating nav, instead of the old plum body background. */
       background-color: var(--mc-dark-bg);
     }
   `,
 })
 export class AppComponent {
-  protected isWip = inject(WipService).isWip();
-
   constructor() {
-    if (this.isWip) {
-      /* Router anchor scrolling ignores CSS `scroll-margin-top`, so keep
-       * anchors below the floating nav (and the workshop's sticky tabs). */
-      inject(ViewportScroller).setOffset([0, 150]);
-    }
+    /* Router anchor scrolling ignores CSS `scroll-margin-top`, so keep
+     * anchors below the floating nav (and the workshop's sticky tabs). */
+    inject(ViewportScroller).setOffset([0, 150]);
   }
 }

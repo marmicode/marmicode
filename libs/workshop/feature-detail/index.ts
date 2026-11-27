@@ -1,5 +1,5 @@
-import { WorkshopDetailPage } from './workshop-detail-page.ng';
+import { WorkshopPage } from './workshop-page.ng';
 
-export { WorkshopPage } from './workshop-page.ng';
+export { WorkshopPage };
 
-export default WorkshopDetailPage;
+export default WorkshopPage;

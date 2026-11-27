@@ -7,7 +7,7 @@ const test = base.extend<{ glove: WorkshopListGlove }>({
 });
 
 test.describe('workshop list', () => {
-  test.fixme('shows one card per workshop', async ({ glove }) => {
+  test('shows one card per workshop', async ({ glove }) => {
     await glove.goto();
 
     /* Without a language filter, each workshop shows its English version. */
@@ -19,24 +19,21 @@ test.describe('workshop list', () => {
     ).toHaveCount(0);
   });
 
-  test.fixme(
-    'go to workshop when clicking on title',
-    async ({ glove, page }) => {
-      /* This test renders two pages: the list, then the workshop.
-       * On the dev server, that does not fit in the default timeout on slow browsers. */
-      test.slow();
+  test('go to workshop when clicking on title', async ({ glove, page }) => {
+    /* This test renders two pages: the list, then the workshop.
+     * On the dev server, that does not fit in the default timeout on slow browsers. */
+    test.slow();
 
-      await glove.goto();
+    await glove.goto();
 
-      await glove.workshopCardTitle('Pragmatic Angular Testing').click();
+    await glove.workshopCardTitle('Pragmatic Angular Testing').click();
 
-      await expect
-        .poll(() => page.title())
-        .toContain('Pragmatic Angular Testing');
-    },
-  );
+    await expect
+      .poll(() => page.title())
+      .toContain('Pragmatic Angular Testing');
+  });
 
-  test.fixme('filters workshops by language', async ({ glove }) => {
+  test('filters workshops by language', async ({ glove }) => {
     await glove.goto();
 
     await glove.languageFilter('Français').click();
@@ -72,14 +69,11 @@ class WorkshopListGlove {
 
   /**
    * The video course has the same title as the workshop,
-   * so this only looks at the workshops group.
+   * so this only looks at titles linking to a workshop page.
    */
   workshopCardTitle(title: string) {
     return this._page
-      .locator('section')
-      .filter({
-        has: this._page.getByRole('heading', { level: 2, name: 'Workshops' }),
-      })
-      .getByRole('heading', { level: 3, name: title, exact: true });
+      .getByRole('heading', { level: 3, name: title, exact: true })
+      .filter({ has: this._page.locator('a[href^="/workshops/"]') });
   }
 }

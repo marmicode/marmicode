@@ -6,7 +6,6 @@ import {
   resourceSearchRouterHelper,
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
-import { matchWip } from '@marmicode/shared/utils';
 import { provideChatWidget } from './chat/chat';
 
 export const routes: Routes = [
@@ -60,16 +59,6 @@ export const routes: Routes = [
     path: coachingRouterHelper.COACHING_PATH,
     providers: [provideChatWidget()],
     children: [
-      /* Coaching page (WIP). */
-      {
-        path: '',
-        pathMatch: 'full',
-        canMatch: [matchWip],
-        loadComponent: () =>
-          import('@marmicode/coaching/feature-presentation').then(
-            (m) => m.CoachingLandingPage,
-          ),
-      },
       /* Coaching page. */
       {
         path: '',
@@ -89,15 +78,6 @@ export const routes: Routes = [
         pathMatch: 'full',
         redirectTo: cohortRouterHelper.FROM_DRIFT_TO_TRUST_FOR_ANGULAR_ID,
       },
-      /* From Drift to Trust for Angular (WIP). */
-      {
-        path: cohortRouterHelper.FROM_DRIFT_TO_TRUST_FOR_ANGULAR_ID,
-        canMatch: [matchWip],
-        loadComponent: () =>
-          import('@marmicode/cohort/feature-presentation').then(
-            (m) => m.CohortLandingPage,
-          ),
-      },
       /* From Drift to Trust for Angular. */
       {
         path: cohortRouterHelper.FROM_DRIFT_TO_TRUST_FOR_ANGULAR_ID,
@@ -111,32 +91,13 @@ export const routes: Routes = [
     path: workshopRouterHelper.WORKSHOP_LIST_PATH,
     providers: [provideChatWidget()],
     children: [
-      /* Training list (WIP). */
-      {
-        path: '',
-        pathMatch: 'full',
-        canMatch: [matchWip],
-        loadComponent: () =>
-          import('@marmicode/catalog/feature-list').then(
-            (m) => m.TrainingListPage,
-          ),
-      },
-      /* Workshops list. */
+      /* Training list. */
       {
         path: '',
         pathMatch: 'full',
         loadComponent: () => import('@marmicode/catalog/feature-list'),
       },
-      /* Workshop page (WIP). */
-      {
-        path: workshopRouterHelper.WORKSHOP_DETAIL_RELATIVE_PATH,
-        canMatch: [matchWip],
-        loadComponent: () =>
-          import('@marmicode/workshop/feature-detail').then(
-            (m) => m.WorkshopPage,
-          ),
-      },
-      /* Workshop detail. */
+      /* Workshop page. */
       {
         path: workshopRouterHelper.WORKSHOP_DETAIL_RELATIVE_PATH,
         loadComponent: () => import('@marmicode/workshop/feature-detail'),
@@ -144,33 +105,17 @@ export const routes: Routes = [
     ],
   },
 
-  /* Home page (WIP). */
-  {
-    path: '',
-    pathMatch: 'full',
-    canMatch: [matchWip],
-    loadComponent: () =>
-      import('@marmicode/landing/feature-landing').then((m) => m.HomePage),
-  },
-
-  /* Landing page. */
+  /* Home page. */
   {
     path: '',
     pathMatch: 'full',
     loadComponent: () => import('@marmicode/landing/feature-landing'),
   },
 
-  /* Not found (WIP). */
-  {
-    path: '**',
-    canMatch: [matchWip],
-    loadComponent: () =>
-      import('./not-found-page.ng').then((m) => m.NotFoundPage),
-  },
-
   /* Not found. */
   {
     path: '**',
-    loadComponent: () => import('./not-found.ng'),
+    loadComponent: () =>
+      import('./not-found-page.ng').then((m) => m.NotFoundPage),
   },
 ];

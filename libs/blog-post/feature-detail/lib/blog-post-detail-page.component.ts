@@ -6,11 +6,7 @@ import {
   inject,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  BlogPostArticle,
-  BlogPostComponent,
-  BlogPostModule,
-} from '@marmicode/blog-post/ui';
+import { BlogPostArticle, BlogPostModule } from '@marmicode/blog-post/ui';
 import { ResourceRow } from '@marmicode/resource/ui';
 import {
   blogPostDetailRouterHelper,
@@ -28,7 +24,6 @@ import {
 import {
   shareReplayWithRefCount,
   TransferStateHelper,
-  WipService,
 } from '@marmicode/shared/utils';
 import { PushPipe } from '@rx-angular/template/push';
 import { map, switchMap } from 'rxjs/operators';
@@ -39,55 +34,45 @@ import { blogPostToPageInfo } from './blog-post-to-page-info';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-blog-post-detail-page',
   template: `
-    @if (isWip) {
-      <mc-page [info]="pageInfo$ | push" theme="dark">
-        <mc-suspense [data$]="blogPost$">
-          <ng-template #data let-blogPost>
-            <mc-blog-post-article
-              [backLink]="libraryLink"
-              [blogPost]="blogPost"
-            />
-          </ng-template>
-        </mc-suspense>
-
-        <div class="wrap end">
-          <mc-suspense [data$]="latestResources$">
-            <ng-template #data let-resources>
-              @if (resources.length > 0) {
-                <section class="more" aria-labelledby="keep-cooking">
-                  <span class="mc-eyebrow">// keep cooking</span>
-                  <h2 id="keep-cooking">More from the library</h2>
-                  <div class="rows">
-                    @for (resource of resources; track resource.title) {
-                      <mc-resource-row [resource]="resource" />
-                    }
-                  </div>
-                </section>
-              }
-            </ng-template>
-            <!-- "Keep cooking" is a bonus: nothing while it loads or if it fails. -->
-            <ng-template #suspense />
-            <ng-template #error />
-          </mc-suspense>
-
-          <mc-cta-band
-            class="newsletter"
-            description="New articles, videos and workshop dates — no spam, just the sauce."
-            heading="Fresh recipes in your inbox."
-            linkLabel="Subscribe"
-            [link]="{ href: newsletterUrl }"
+    <mc-page [info]="pageInfo$ | push" theme="dark">
+      <mc-suspense [data$]="blogPost$">
+        <ng-template #data let-blogPost>
+          <mc-blog-post-article
+            [backLink]="libraryLink"
+            [blogPost]="blogPost"
           />
-        </div>
-      </mc-page>
-    } @else {
-      <mc-page [info]="pageInfo$ | push">
-        <mc-suspense [data$]="blogPost$">
-          <ng-template #data let-blogPost>
-            <mc-blog-post [blogPost]="blogPost"></mc-blog-post>
+        </ng-template>
+      </mc-suspense>
+
+      <div class="wrap end">
+        <mc-suspense [data$]="latestResources$">
+          <ng-template #data let-resources>
+            @if (resources.length > 0) {
+              <section class="more" aria-labelledby="keep-cooking">
+                <span class="mc-eyebrow">// keep cooking</span>
+                <h2 id="keep-cooking">More from the library</h2>
+                <div class="rows">
+                  @for (resource of resources; track resource.title) {
+                    <mc-resource-row [resource]="resource" />
+                  }
+                </div>
+              </section>
+            }
           </ng-template>
+          <!-- "Keep cooking" is a bonus: nothing while it loads or if it fails. -->
+          <ng-template #suspense />
+          <ng-template #error />
         </mc-suspense>
-      </mc-page>
-    }
+
+        <mc-cta-band
+          class="newsletter"
+          description="New articles, videos and workshop dates — no spam, just the sauce."
+          heading="Fresh recipes in your inbox."
+          linkLabel="Subscribe"
+          [link]="{ href: newsletterUrl }"
+        />
+      </div>
+    </mc-page>
   `,
   styles: `
     .wrap {
@@ -126,7 +111,6 @@ import { blogPostToPageInfo } from './blog-post-to-page-info';
   `,
   imports: [
     BlogPostArticle,
-    BlogPostComponent,
     CtaBand,
     PageComponent,
     PushPipe,
@@ -139,7 +123,6 @@ export class BlogPostDetailPageComponent {
   private _route = inject(ActivatedRoute);
   private _transferStateHelper = inject(TransferStateHelper);
 
-  protected readonly isWip = inject(WipService).isWip();
   protected readonly libraryLink: Link = {
     route: resourceSearchRouterHelper.learnEverything(),
   };

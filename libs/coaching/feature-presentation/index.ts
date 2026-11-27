@@ -1,5 +1,5 @@
-import { CoachingPage } from './coaching-page.ng';
+import { CoachingLandingPage } from './coaching-landing-page.ng';
 
-export { CoachingLandingPage } from './coaching-landing-page.ng';
+export { CoachingLandingPage };
 
-export default CoachingPage;
+export default CoachingLandingPage;

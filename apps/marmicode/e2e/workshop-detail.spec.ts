@@ -5,7 +5,7 @@ const test = base.extend<{ glove: WorkshopDetailGlove }>({
 });
 
 test.describe('workshop detail', () => {
-  test.fixme('shows workshop info', async ({ browserName, glove, page }) => {
+  test('shows workshop info', async ({ browserName, glove, page }) => {
     /* Skip WebKit for now because it's flaky on CI: "Failed to take two consecutive stable screenshots." */
     // eslint-disable-next-line playwright/no-skipped-test
     test.skip(!!process.env.CI && browserName === 'webkit', 'Skip on WebKit');

@@ -52,8 +52,8 @@ body {
 }
 
 body {
-  /* @hack: setting background color to toolbar color to affect ios status bar color. */
-  background-color: $marmicode-primary-color;
+  /* @hack: setting background color to the nav's color to affect ios status bar color. */
+  background-color: var(--mc-dark-bg);
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }

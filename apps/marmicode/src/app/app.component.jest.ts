@@ -10,7 +10,6 @@ import {
 } from '@marmicode/shared/utils/testing';
 import { AppComponent } from './app.component';
 
-/* Jest's `it.todo` does not accept a body, so WIP tests use `it.skip`. */
 describe(AppComponent.name, () => {
   it('nav links to the three sections and the contact form', async () => {
     const { getNavLink } = await mountApp({ wip: true });
@@ -43,7 +42,7 @@ describe(AppComponent.name, () => {
     expect(getCurrentNavLinks()).toEqual(['Library']);
   });
 
-  it.skip('site shell without WIP mode', async () => {
+  it('site shell without WIP mode', async () => {
     const { hasElement } = await mountApp({ wip: false });
 
     expect(hasElement('mc-site-nav')).toBe(true);
