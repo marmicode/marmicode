@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { TrainingQuoteGrid } from './training-quote-grid.ng';
 
 describe(TrainingQuoteGrid.name, () => {
-  it.todo('quotes fall back to initials', async () => {
+  it('quotes fall back to initials', async () => {
     const { getPictures, getDecorativeTexts } = await mountTrainingQuoteGrid([
       {
         quote: 'My tests finally survive refactors.',
