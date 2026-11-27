@@ -519,17 +519,19 @@ export class BlogPostArticle {
 }
 
 /**
- * `## Heading` lines of the markdown, with slug ids matching the rendered headings.
+ * Top-level headings of the markdown (usually `##`, but some posts use `#` for their
+ * sections and `##` for sub-steps), with slug ids matching the rendered headings.
  */
 export function getTableOfContents(
   text: string,
 ): Array<{ id: string; title: string }> {
-  return parseMarkdown(text)
-    .filter(
-      (token): token is MarkdownTokens.Heading =>
-        getMarkdownTokenType(token) === MarkdownTokenType.Heading &&
-        (token as MarkdownTokens.Heading).depth === 2,
-    )
+  const headings = parseMarkdown(text).filter(
+    (token): token is MarkdownTokens.Heading =>
+      getMarkdownTokenType(token) === MarkdownTokenType.Heading,
+  );
+  const topDepth = Math.min(...headings.map((heading) => heading.depth));
+  return headings
+    .filter((heading) => heading.depth === topDepth)
     .map((token) => ({
       id: getMarkdownHeadingId(token),
       title: getMarkdownHeadingText(token),

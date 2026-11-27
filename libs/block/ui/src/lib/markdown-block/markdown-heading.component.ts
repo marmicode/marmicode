@@ -12,19 +12,19 @@ import { markdownTokensLoader } from './markdown-tokens-loader';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-markdown-heading',
   template: `
+    <!-- Ids let a table of contents link to the section. -->
     @if (token.depth === 1) {
-      <h1>
+      <h1 [id]="id">
         <ng-container *ngTemplateOutlet="contentTpl" />
       </h1>
     }
     @if (token.depth === 2) {
-      <!-- The id lets a table of contents link to the section. -->
       <h2 [id]="id">
         <ng-container *ngTemplateOutlet="contentTpl" />
       </h2>
     }
     @if (token.depth === 3) {
-      <h3>
+      <h3 [id]="id">
         <ng-container *ngTemplateOutlet="contentTpl" />
       </h3>
     }

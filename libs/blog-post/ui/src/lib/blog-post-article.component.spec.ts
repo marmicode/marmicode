@@ -30,6 +30,19 @@ Done.`);
       { id: 'set-it-up', title: 'Set it up' },
     ]);
   });
+
+  it('table of contents from top-level headings', () => {
+    const toc = getTableOfContents(`# Why
+
+## Step one
+
+# How`);
+
+    expect(toc).toEqual([
+      { id: 'why', title: 'Why' },
+      { id: 'how', title: 'How' },
+    ]);
+  });
 });
 
 describe(BlogPostArticle.name, () => {
