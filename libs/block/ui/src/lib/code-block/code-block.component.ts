@@ -88,7 +88,12 @@ export class CodeBlockComponent {
     if (clipboard == null) {
       return;
     }
-    await clipboard.writeText(this.code());
+    try {
+      await clipboard.writeText(this.code());
+    } catch {
+      /* Denied (e.g. no clipboard permission): nothing was copied, so say nothing. */
+      return;
+    }
     this.isCopied.set(true);
     clearTimeout(this._copiedTimeout);
     this._copiedTimeout = setTimeout(() => this.isCopied.set(false), 2_000);

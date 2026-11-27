@@ -536,9 +536,9 @@ export function getTableOfContents(
     }));
 }
 
+/* Local time, as the current blog post page. */
 const DATE_FORMAT = new Intl.DateTimeFormat('en', {
   day: 'numeric',
   month: 'short',
   year: 'numeric',
-  timeZone: 'UTC',
 });

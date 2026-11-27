@@ -127,9 +127,11 @@ mc-code-block .code-head {
     tab-size: 2;
   }
 
+  /* The code and its line numbers must share the line height, or they drift apart. */
   pre.preformatted,
   pre.preformatted code {
     font-family: var(--mc-font-mono);
+    line-height: 1.7;
   }
 
   .line-numbers .line-numbers-rows {
