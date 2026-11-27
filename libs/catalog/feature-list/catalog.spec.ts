@@ -24,8 +24,11 @@ describe(cohortToPreview, () => {
   });
 
   it.todo('early-bird cohort shows its original price', () => {
-    // Map `FROM_DRIFT_TO_TRUST_FOR_ANGULAR`.
-    // Assert `badge: 'Early bird'`, `price: 1570` and `originalPrice: 1870`.
+    expect(cohortToPreview(FROM_DRIFT_TO_TRUST_FOR_ANGULAR)).toMatchObject({
+      badge: 'Early bird',
+      price: 1570,
+      originalPrice: 1870,
+    });
   });
 });
 
