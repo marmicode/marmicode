@@ -11,8 +11,8 @@ export interface Workshop extends Training {
   type: 'tapas' | 'full';
 
   /**
-   * Upcoming sessions, displayed on the workshop page, the home page and the training list.
-   * Sessions in the past are ignored.
+   * Scheduled sessions, displayed on the workshop page, the home page and the training list.
+   * May include past sessions: use `getUpcomingSessions` to filter them out.
    */
   sessions: Session[];
 
