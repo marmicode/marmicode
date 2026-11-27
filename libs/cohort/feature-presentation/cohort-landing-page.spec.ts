@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { CohortLandingPage } from './cohort-landing-page.ng';
 
 describe(CohortLandingPage.name, () => {
-  it.todo('banner shows the early-bird offer', async () => {
+  it('banner shows the early-bird offer', async () => {
     const { getCrossedOutPrices, getHeroText } = await mountCohortLandingPage();
 
     expect(getHeroText()).toContain('Early bird');

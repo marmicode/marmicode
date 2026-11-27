@@ -12,10 +12,15 @@ import { Training } from '@marmicode/training/core';
  * Dark hero shared by the workshop and cohort pages: breadcrumb, title with the last word in gradient,
  * subheading lines, actions, and an aside card. Nothing about booking: pages project their own content.
  * Slots: `[slot=actions]`, `[slot=aside]` (price card / offer card), `[slot=note]` (OPCO, alternate languages).
+ * `asideLayout`: 'overlap' puts the aside over the picture's corner (price card), 'attached' frames the picture
+ * and the aside as one card, the picture on top (offer card).
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-training-page-hero',
+  host: {
+    '[class.attached-aside]': "asideLayout() === 'attached'",
+  },
   imports: [RouterLink],
   template: `
     <div class="text">
@@ -58,7 +63,11 @@ import { Training } from '@marmicode/training/core';
       </div>
     </div>
 
-    <div class="visual">
+    <div
+      class="visual"
+      [class.mc-surface]="asideLayout() === 'attached'"
+      [class.mc-surface-highlighted]="asideLayout() === 'attached'"
+    >
       <img [alt]="training().pictureAltText" [src]="training().pictureUri" />
       <div class="aside">
         <ng-content select="[slot=aside]" />
@@ -159,6 +168,24 @@ import { Training } from '@marmicode/training/core';
       left: -28px;
     }
 
+    /* The picture and the aside make a single card. */
+    :host(.attached-aside) .visual {
+      overflow: hidden;
+      box-shadow: 0 40px 80px -40px rgba(var(--mc-violet-rgb), 0.6);
+    }
+
+    :host(.attached-aside) img {
+      aspect-ratio: 16 / 9;
+      border: 0;
+      border-bottom: 1px solid var(--mc-dark-line);
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    :host(.attached-aside) .aside:not(:empty) {
+      position: static;
+    }
+
     @media (max-width: 900px) {
       :host {
         grid-template-columns: 1fr;
@@ -178,6 +205,12 @@ import { Training } from '@marmicode/training/core';
         max-width: calc(100% - 24px);
         margin: -44px 12px 0 auto;
       }
+
+      :host(.attached-aside) .aside:not(:empty) {
+        width: auto;
+        max-width: none;
+        margin: 0;
+      }
     }
   `,
 })
@@ -185,6 +218,7 @@ export class TrainingPageHero {
   training = input.required<Training>();
   /** e.g. [{ label: 'Training', link }, { label: 'Workshops' }] */
   breadcrumb = input.required<Array<{ label: string; link?: Link }>>();
+  asideLayout = input<'overlap' | 'attached'>('overlap');
 
   protected crumbs = computed(() =>
     this.breadcrumb().map(({ label, link }) => ({
