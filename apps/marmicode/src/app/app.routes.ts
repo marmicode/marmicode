@@ -68,6 +68,15 @@ export const routes: Routes = [
         pathMatch: 'full',
         redirectTo: cohortRouterHelper.FROM_DRIFT_TO_TRUST_FOR_ANGULAR_ID,
       },
+      /* From Drift to Trust for Angular (WIP). */
+      {
+        path: cohortRouterHelper.FROM_DRIFT_TO_TRUST_FOR_ANGULAR_ID,
+        canMatch: [matchWip],
+        loadComponent: () =>
+          import('@marmicode/cohort/feature-presentation').then(
+            (m) => m.CohortLandingPage,
+          ),
+      },
       /* From Drift to Trust for Angular. */
       {
         path: cohortRouterHelper.FROM_DRIFT_TO_TRUST_FOR_ANGULAR_ID,
