@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { createBasicPageInfo, PageComponent } from '@marmicode/shared/ui';
+import { externalLinks } from '@marmicode/shared/router-helpers';
+import {
+  Button,
+  ClosingSection,
+  CookCard,
+  createBasicPageInfo,
+  PageComponent,
+} from '@marmicode/shared/ui';
 import { TODAY } from '@marmicode/shared/utils';
 import { getUpcomingSessions } from '@marmicode/workshop/core';
 import { WorkshopRepository } from '@marmicode/workshop/infra';
@@ -9,13 +16,19 @@ import { UpcomingSessionList } from './upcoming-session-list.ng';
 
 /**
  * Dark home page: hero, tiles, upcoming events, the cook and the contact section.
- *
- * @deprecated 🚧 work in progress
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-home-page',
-  imports: [HomeHero, HomeTiles, PageComponent, UpcomingSessionList],
+  imports: [
+    Button,
+    ClosingSection,
+    CookCard,
+    HomeHero,
+    HomeTiles,
+    PageComponent,
+    UpcomingSessionList,
+  ],
   template: `
     <mc-page [info]="pageInfo" theme="dark">
       <mc-home-hero class="wrap" />
@@ -30,6 +43,32 @@ import { UpcomingSessionList } from './upcoming-session-list.ng';
         <span class="mc-eyebrow">// on the stove</span>
         <h2>Upcoming events</h2>
         <mc-upcoming-session-list [sessions]="upcomingSessions" />
+      </section>
+
+      <section class="wrap">
+        <mc-cook-card appearance="banner" />
+      </section>
+
+      <section class="wrap contact-section">
+        <mc-closing-section
+          eyebrow="// contact"
+          description="Workshop, coaching, or just a question — I usually reply within a day."
+        >
+          Let's cook something <span class="mc-gradient-text">together.</span>
+          <a
+            mcButton
+            slot="actions"
+            [href]="externalLinks.contactFormUrl"
+            rel="noopener"
+            target="_blank"
+          >
+            Contact me
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+        </mc-closing-section>
       </section>
     </mc-page>
   `,
@@ -47,6 +86,21 @@ import { UpcomingSessionList } from './upcoming-session-list.ng';
       padding-top: 48px;
     }
 
+    .contact-section {
+      padding-bottom: 120px;
+    }
+
+    svg {
+      flex: none;
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     h2 {
       margin: 10px 0 0;
       font-size: clamp(30px, 4vw, 46px);
@@ -57,6 +111,7 @@ import { UpcomingSessionList } from './upcoming-session-list.ng';
   `,
 })
 export class HomePage {
+  protected readonly externalLinks = externalLinks;
   protected readonly upcomingSessions = getUpcomingSessions({
     workshops: inject(WorkshopRepository).getWorkshops(),
     today: inject(TODAY)(),
