@@ -47,7 +47,7 @@ describe(WorkshopPage.name, () => {
     expect(getGlanceFacts()).not.toHaveProperty('Next session');
   });
 
-  it.todo('hero and at a glance', async () => {
+  it('hero and at a glance', async () => {
     const { getBreadcrumbLinks, getGlanceFacts, getHeroText } =
       await mountWorkshopPage({ workshopId: 'pragmatic-angular-testing' });
 
