@@ -3,11 +3,11 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { describe, expect, it } from '@jest/globals';
+import { provideSiteConfig } from '@marmicode/shared/core';
 import { NotFoundPage } from './not-found-page.ng';
 
-/* Jest's `it.todo` does not accept a body, so WIP tests use `it.skip`. */
 describe(NotFoundPage.name, () => {
-  it.skip('not found links back to the sections', async () => {
+  it('not found links back to the sections', async () => {
     const { getHeading, getLinkHref, hasImage } = await mountNotFoundPage();
 
     expect(getHeading()).toBe('Oups! The page pot is empty.');
@@ -24,6 +24,7 @@ async function mountNotFoundPage() {
     providers: [
       provideLocationMocks(),
       provideRouter([{ path: '**', component: NotFoundPage }]),
+      provideSiteConfig({ origin: 'https://marmicode.io' }),
     ],
   });
 

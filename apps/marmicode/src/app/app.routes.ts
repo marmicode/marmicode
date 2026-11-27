@@ -156,6 +156,14 @@ export const routes: Routes = [
     loadComponent: () => import('@marmicode/landing/feature-landing'),
   },
 
+  /* Not found (WIP). */
+  {
+    path: '**',
+    canMatch: [matchWip],
+    loadComponent: () =>
+      import('./not-found-page.ng').then((m) => m.NotFoundPage),
+  },
+
   /* Not found. */
   {
     path: '**',
