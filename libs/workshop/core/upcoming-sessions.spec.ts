@@ -29,7 +29,7 @@ describe(getUpcomingSessions.name, () => {
     ]);
   });
 
-  it.todo('keeps a session until its last day', () => {
+  it('keeps a session until its last day', () => {
     const workshops = [
       createWorkshop({
         id: 'workshop-a',

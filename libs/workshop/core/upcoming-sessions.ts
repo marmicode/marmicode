@@ -1,8 +1,5 @@
 import { IsoDate, Session, Workshop } from './workshop';
 
-/**
- * @deprecated 🚧 work in progress
- */
 export interface UpcomingSession {
   workshop: Workshop;
   session: Session;
@@ -11,8 +8,6 @@ export interface UpcomingSession {
 /**
  * Sessions whose last day (`endDate ?? startDate`) is today or later, soonest first.
  * Compares ISO date strings, so no timezone maths.
- *
- * @deprecated 🚧 work in progress
  */
 export function getUpcomingSessions({
   workshops,
@@ -26,13 +21,15 @@ export function getUpcomingSessions({
     .flatMap((workshop) =>
       workshop.sessions.map((session) => ({ workshop, session })),
     )
-    .filter(({ session }) => session.startDate >= todayIsoDate)
+    .filter(
+      ({ session }) => (session.endDate ?? session.startDate) >= todayIsoDate,
+    )
     .sort((a, b) => a.session.startDate.localeCompare(b.session.startDate));
 }
 
+/**
+ * Uses the UTC date so the result doesn't depend on the machine's timezone.
+ */
 function toIsoDate(date: Date): IsoDate {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}` as IsoDate;
+  return date.toISOString().slice(0, 10) as IsoDate;
 }
