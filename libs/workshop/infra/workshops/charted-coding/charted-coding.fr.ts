@@ -10,7 +10,7 @@ export const chartedCodingFullCourseFr = createWorkshop({
   subheading: `Deux jours pour passer d'un développement assisté par IA rapide mais fragile à une approche que vous pourrez tenir dans la durée.
 Cartographier le paysage, tracer une méthode compatible avec votre architecture, puis construire le « harness » qui garde vos agents sur la trajectoire.`,
   pictureAltText:
-    'Métaphore visuelle du développement assisté par IA cartographié : un chemin clair ou une carte guidant la collaboration entre un développeur et un coding agent.',
+    'Métaphore visuelle du développement assisté par IA cartographié : un chemin clair ou une carte guidant la collaboration entre un développeur et un "coding agent".',
   pictureUri,
   thumbnailUri,
   duration: 2,
@@ -54,7 +54,7 @@ Tout au long, la formation alterne **contenu théorique**, **démonstrations en 
   requiredSkills: [
     `À l'aise avec TypeScript ; les exercices et l'outillage (Vitest, ESLint) viennent de l'écosystème JavaScript`,
     `Familiarité avec les tests automatisés`,
-    `Utilisation préalable d'un coding agent pour générer du code (Claude, Cursor, Copilot, etc.) ; un usage occasionnel suffit`,
+    `Utilisation préalable d'un "coding agent" pour générer du code (Claude, Cursor, Copilot, etc.) ; un usage occasionnel suffit`,
   ],
   benefits: [
     {
@@ -134,17 +134,17 @@ Tout au long, la formation alterne **contenu théorique**, **démonstrations en 
     {
       question: "À qui s'adresse cette formation ?",
       answer:
-        "Aux développeurs qui utilisent ou souhaitent utiliser efficacement les coding agents ; aux lead developers et tech leads en charge de cadrer l'usage de l'IA ; aux architectes et CTOs cherchant à industrialiser le développement assisté par IA sans sacrifier la qualité ; et aux équipes confrontées à la dérive du code généré qui cherchent une approche structurée et reproductible.",
+        'Aux développeurs qui utilisent ou souhaitent utiliser efficacement les "coding agents" ; aux lead developers et tech leads en charge de cadrer l\'usage de l\'IA ; aux architectes et CTOs cherchant à industrialiser le développement assisté par IA sans sacrifier la qualité ; et aux équipes confrontées à la dérive du code généré qui cherchent une approche structurée et reproductible.',
     },
     {
       question: 'Quel niveau est requis ?',
       answer:
-        "Vous devez être à l'aise avec TypeScript, familier avec les tests automatisés, et avoir déjà essayé un coding agent au moins occasionnellement.",
+        'Vous devez être à l\'aise avec TypeScript, familier avec les tests automatisés, et avoir déjà essayé un "coding agent" au moins occasionnellement.',
     },
     {
       question: 'Quels outils sont nécessaires ?',
       answer:
-        "Un ordinateur avec accès Internet, micro, webcam, navigateur à jour, droits d'installation et un coding agent fonctionnel (Claude Code, Cursor, Copilot ou équivalent).",
+        'Un ordinateur avec accès Internet, micro, webcam, navigateur à jour, droits d\'installation et un "coding agent" fonctionnel (Claude Code, Cursor, Copilot ou équivalent).',
     },
     {
       question: "C'est vraiment pratique ?",
