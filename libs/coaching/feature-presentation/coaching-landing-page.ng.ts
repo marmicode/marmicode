@@ -251,12 +251,21 @@ import { CoachingRhythm } from './coaching-rhythm.ng';
         padding-top: 40px;
       }
 
-      .portrait {
-        max-width: 440px;
+      /* Stacked: the picture fills the column with a wider crop, so it is neither lopsided nor too tall. */
+      .portrait img {
+        aspect-ratio: 4 / 3;
+        object-position: 50% 30%;
       }
 
       .portrait .card {
         left: 12px;
+      }
+    }
+
+    /* Phones: a squarer crop, so the name card doesn't cover most of the picture. */
+    @media (max-width: 600px) {
+      .portrait img {
+        aspect-ratio: 1;
       }
     }
 
