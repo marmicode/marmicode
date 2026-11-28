@@ -1,0 +1,128 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: en-US
+tone_instructions: >-
+  Be concise and direct. Prioritize correctness, accessibility and maintainability
+  over stylistic nitpicks that ESLint or Prettier already enforce.
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  collapse_walkthrough: true
+  sequence_diagrams: false
+  poem: false
+  in_progress_fortune: false
+
+  auto_review:
+    # Auto reviews are disabled at the organization level, this enables them for this repository.
+    enabled: true
+    drafts: false
+    auto_incremental_review: true
+    # Dependency bumps are automerged by Renovate once CI passes.
+    ignore_usernames:
+      - renovate[bot]
+
+  pre_merge_checks:
+    title:
+      mode: warning
+      requirements: >-
+        Follow the format `<prefix>(<optional scope>): <emoji> <subject>` where the only allowed
+        prefix/emoji pairs are `build: 📦`, `feat: ✨`, `fix: 🐞`, `refactor: 🛠️`, `test: ✅`,
+        `docs: 📝` and `ci: 🤖` (never `chore`, `style` or `perf`). The scope, when present, is the
+        first-level Nx domain (e.g. `workshop`, not `workshop-infra`) and is omitted for
+        workspace-wide changes.
+
+  path_filters:
+    # Build outputs & caches
+    - '!dist/**'
+    - '!tmp/**'
+    - '!coverage/**'
+    - '!**/node_modules/**'
+    - '!.nx/**'
+    - '!.angular/**'
+    # Lockfiles
+    - '!pnpm-lock.yaml'
+    - '!skills-lock.json'
+    # Generated files
+    # generated from .github/src/workflows
+    - '!.github/workflows/publish.yml'
+    - '!.github/workflows/test-and-deploy.yml'
+    - '!libs/contentful/infra/lib/schema.graphql'
+    - '!libs/contentful/infra/lib/schema.ts'
+    - '!migrations.json'
+    - '!*.log'
+    # Snapshots
+    - '!**/__percy_snapshots__/**'
+    - '!**/*-snapshots/**'
+    - '!**/__snapshots__/**'
+
+  path_instructions:
+    - path: 'libs/**'
+      instructions: |
+        Libraries are organized as `libs/<domain>/<type>` and imported through the
+        `@marmicode/<domain>/<type>` path aliases (see tsconfig.base.json), never via relative
+        paths across libraries or deep imports bypassing a library's `index.ts`.
+        Library types and expected responsibilities:
+        - `core`: framework-agnostic models and pure domain logic (no UI, no HTTP).
+        - `infra`: data access (repositories, Contentful client, static content).
+        - `ui`: presentational components driven by `input()`/`output()`; they should not
+          inject infra services.
+        - `feature-*`: routed pages that wire infra to ui.
+        - `api`: public contracts exposed to other domains.
+        Flag dependencies that go against these responsibilities.
+    - path: '**/*.ng.ts'
+      instructions: |
+        Angular components use the `.ng.ts` extension and the `mc` selector prefix.
+        Expect standalone components (without the explicit `standalone: true`),
+        `ChangeDetectionStrategy.OnPush`, inline templates/styles (no empty `styles` field),
+        `inject()` over constructor injection, `input()`/`output()` over decorators,
+        signals and `computed()` (observables converted to signals for the view),
+        built-in control flow (`@if`, `@for` with `track`) and native `[class]`/`[style]`
+        bindings instead of `NgClass`/`NgStyle`. Avoid `effect()`.
+        The app is server-side rendered: flag direct usage of browser globals (`window`,
+        `document`, `localStorage`...) that would break SSR. Also check accessibility
+        (semantic HTML, alt text, keyboard navigation, color contrast).
+    - path: '**/*.i18n.ts'
+      instructions: |
+        Labels are defined for English and French, the French set being typed as
+        `typeof <LABELS>_EN`. Make sure both languages stay in sync, translations are
+        accurate and natural, and French typography is respected.
+    - path: 'libs/*/infra/**/*.{en,fr}.ts'
+      instructions: |
+        Content (e.g. workshops) lives in English and French counterparts. Check that changes
+        in one language are reflected in the other (dates, prices, links, sessions), and
+        review copy for clarity, typos and broken links.
+    - path: '**/*.spec.ts'
+      instructions: |
+        Tests use Vitest and follow the Pragmatic Angular Testing approach: prefer fakes
+        (`*.fake.ts`) over mocks and spies, use real collaborators by default, test components
+        through the DOM rather than component instances, and keep tests readable
+        (`describe(Subject.name, ...)`, `expect.soft` for multiple assertions).
+        Flag tests that assert implementation details or are likely to be flaky.
+    - path: 'apps/marmicode/e2e/**'
+      instructions: |
+        Playwright end-to-end tests. Prefer role-based and accessible locators, web-first
+        assertions and no arbitrary timeouts.
+    - path: 'apps/**'
+      instructions: |
+        The application shell should stay thin: routes lazy-load feature libraries and
+        business logic belongs in `libs/**`. Pay attention to SSR (`main.server.ts`,
+        `server.ts`), SEO metadata and service worker configuration changes.
+    - path: '.github/src/workflows/**'
+      instructions: |
+        These are the sources of the generated `.github/workflows/**` files. Remind the author
+        to regenerate them (`nx run github-config:sync`) when the generated files are missing
+        from the PR.
+
+  tools:
+    eslint:
+      enabled: true
+
+chat:
+  auto_reply: true
+
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - '.cursor/rules/*.mdc'
