@@ -38,6 +38,14 @@ import { blogPostToPageInfo } from './blog-post-to-page-info';
       </mc-suspense>
 
       <div class="wrap end">
+        <!-- Right after the article: readers who just finished it are the likeliest to subscribe. -->
+        <mc-newsletter-band
+          class="newsletter"
+          description="New articles, videos and workshop dates. No spam, just the sauce."
+          heading="Fresh recipes in your inbox."
+          source="blog"
+        />
+
         <mc-suspense [data$]="latestResources$">
           <ng-template #data let-resources>
             @if (resources.length > 0) {
@@ -56,13 +64,6 @@ import { blogPostToPageInfo } from './blog-post-to-page-info';
           <ng-template #suspense />
           <ng-template #error />
         </mc-suspense>
-
-        <mc-newsletter-band
-          class="newsletter"
-          description="New articles, videos and workshop dates. No spam, just the sauce."
-          heading="Fresh recipes in your inbox."
-          source="blog"
-        />
       </div>
     </mc-page>
   `,
