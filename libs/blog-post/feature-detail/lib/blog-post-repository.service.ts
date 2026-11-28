@@ -88,8 +88,15 @@ export const getLatestResources = gql`
   }
 `;
 
-/** Younes's posts use the same photo as the rest of the site rather than the Contentful one. */
-const YOUNES_TWITTER = 'yjaaidi';
+/**
+ * Younes's posts use the same photo as the rest of the site rather than the Contentful one,
+ * and link his other networks (Contentful authors only have a Twitter handle).
+ */
+const YOUNES = {
+  twitter: 'yjaaidi',
+  bluesky: 'younesjd.dev',
+  linkedin: 'yjaaidi',
+};
 
 @Injectable()
 export class BlogPostRepository {
@@ -107,15 +114,18 @@ export class BlogPostRepository {
       .pipe(
         map(({ data }) => {
           const resource = data!.resourceCollection!.items[0]!;
+          const isYounes = resource.author!.twitter === YOUNES.twitter;
           return createBlogPost({
             id: resource.sys.id,
             author: {
               name: resource.author!.name!,
-              pictureUri:
-                resource.author!.twitter === YOUNES_TWITTER
-                  ? cookPicture.avatarUri
-                  : (resource.author!.picture?.url ?? undefined),
+              pictureUri: isYounes
+                ? cookPicture.avatarUri
+                : (resource.author!.picture?.url ?? undefined),
               twitter: resource.author!.twitter!,
+              ...(isYounes
+                ? { bluesky: YOUNES.bluesky, linkedin: YOUNES.linkedin }
+                : {}),
             },
             duration: resource.duration!,
             pictureUri:

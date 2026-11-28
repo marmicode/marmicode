@@ -25,7 +25,7 @@ import {
 import { Link } from '@marmicode/shared/ui';
 import { BlogPost } from './blog-post';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
-import { FollowButtonComponent } from './social/follow-button.component';
+import { FollowLinks } from './social/follow-links.component';
 import { CopyLinkButton } from './social/copy-link-button.component';
 
 /**
@@ -38,7 +38,7 @@ import { CopyLinkButton } from './social/copy-link-button.component';
   imports: [
     BlockGroupComponent,
     CopyLinkButton,
-    FollowButtonComponent,
+    FollowLinks,
     NgTemplateOutlet,
     RouterLink,
   ],
@@ -141,7 +141,7 @@ import { CopyLinkButton } from './social/copy-link-button.component';
             }
             <div>
               <h2>{{ blogPost.author.name }}</h2>
-              <mc-follow-button [author]="blogPost.author" />
+              <mc-follow-links [author]="blogPost.author" />
             </div>
           </div>
         </div>

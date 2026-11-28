@@ -66,6 +66,8 @@ describe('BlogPostRepository', () => {
           name: 'Younes Jaaidi',
           pictureUri: cookPicture.avatarUri,
           twitter: 'yjaaidi',
+          bluesky: 'younesjd.dev',
+          linkedin: 'yjaaidi',
         },
         duration: 6,
         pictureUri: 'https://picture.url/e2e-http-request-cancelation',
@@ -90,7 +92,7 @@ describe('BlogPostRepository', () => {
     );
   });
 
-  it('other authors keep their Contentful picture', async () => {
+  it('other authors keep their Contentful picture and only link Twitter', async () => {
     mockResourceCollectionResolver.mockReturnValue({
       ...fakeGraphqlResponse,
       items: [
@@ -109,7 +111,11 @@ describe('BlogPostRepository', () => {
       .getBlogPost('end-to-end-http-request-cancelation-with-rxjs-and-nestjs')
       .toPromise();
 
-    expect(blogPost.author.pictureUri).toBe('https://picture.url/guest');
+    expect(blogPost.author).toEqual({
+      name: 'Guest Cook',
+      pictureUri: 'https://picture.url/guest',
+      twitter: 'guestcook',
+    });
   });
 
   it('should not crash if picture is not set', async () => {

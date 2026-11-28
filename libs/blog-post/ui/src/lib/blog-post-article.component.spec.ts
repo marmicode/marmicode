@@ -61,6 +61,39 @@ describe(BlogPostArticle.name, () => {
       { title: 'Set it up', href: expect.stringMatching(/#set-it-up$/) },
     ]);
   });
+
+  it('author follow links', async () => {
+    const { getFollowLinks } = await mountBlogPostArticle({
+      blogPost: BLOG_POST,
+      backLink: { route: ['/', 'library'] },
+    });
+
+    expect(getFollowLinks()).toEqual([
+      { label: 'Follow Younes Jaaidi on X', href: 'https://x.com/yjaaidi' },
+      {
+        label: 'Follow Younes Jaaidi on Bluesky',
+        href: 'https://bsky.app/profile/younesjd.dev',
+      },
+      {
+        label: 'Follow Younes Jaaidi on LinkedIn',
+        href: 'https://www.linkedin.com/in/yjaaidi',
+      },
+    ]);
+  });
+
+  it('author without Bluesky or LinkedIn', async () => {
+    const { getFollowLinks } = await mountBlogPostArticle({
+      blogPost: createBlogPost({
+        ...BLOG_POST,
+        author: { name: 'Guest Cook', twitter: 'guestcook' },
+      }),
+      backLink: { route: ['/', 'library'] },
+    });
+
+    expect(getFollowLinks()).toEqual([
+      { label: 'Follow Guest Cook on X', href: 'https://x.com/guestcook' },
+    ]);
+  });
 });
 
 const BLOG_POST: BlogPost = createBlogPost({
@@ -69,6 +102,8 @@ const BLOG_POST: BlogPost = createBlogPost({
     name: 'Younes Jaaidi',
     pictureUri: 'https://picture.url/younes',
     twitter: 'yjaaidi',
+    bluesky: 'younesjd.dev',
+    linkedin: 'yjaaidi',
   },
   duration: 6,
   releasedAt: new Date('2024-11-18'),
@@ -125,6 +160,14 @@ async function mountBlogPostArticle({
         title: link.textContent?.trim(),
         href: link.getAttribute('href'),
       }));
+    },
+    getFollowLinks() {
+      return Array.from(element.querySelectorAll('mc-follow-links a')).map(
+        (link) => ({
+          label: link.getAttribute('aria-label'),
+          href: link.getAttribute('href'),
+        }),
+      );
     },
     getText() {
       return element.textContent;
