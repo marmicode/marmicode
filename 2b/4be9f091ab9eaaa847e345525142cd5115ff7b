@@ -1,5 +1,11 @@
-{"createdAt":"2026-11-28T16:14:37.627Z","type":"tag","value":"ui core infra test behavioral high"}
+{"createdAt":"2026-11-28T16:14:37.627Z","type":"tag","value":"ui"}
 
-{"createdAt":"2026-11-28T16:26:56.031Z","type":"untag","value":"ui core infra test behavioral high"}
+{"createdAt":"2026-11-28T16:14:37.628Z","type":"tag","value":"core"}
 
-{"createdAt":"2026-11-28T16:27:01.074Z","type":"tag","value":"ui"}
+{"createdAt":"2026-11-28T16:14:37.629Z","type":"tag","value":"infra"}
+
+{"createdAt":"2026-11-28T16:14:37.630Z","type":"tag","value":"test"}
+
+{"createdAt":"2026-11-28T16:14:37.631Z","type":"tag","value":"behavioral"}
+
+{"createdAt":"2026-11-28T16:14:37.632Z","type":"tag","value":"high"}
