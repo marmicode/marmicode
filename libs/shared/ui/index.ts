@@ -3,6 +3,7 @@ export { Badge } from './lib/badge.ng';
 export { Button } from './lib/button.ng';
 export { ClosingSection } from './lib/closing-section.ng';
 export { CookCard } from './lib/cook-card.ng';
+export { cookPicture } from './lib/cook-picture';
 export { CtaBand } from './lib/cta-band.ng';
 export { ErrorComponent } from './lib/error.component';
 export { Link, LinkComponent } from './lib/link.component';

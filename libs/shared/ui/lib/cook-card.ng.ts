@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import cookPictureUri from './cook.webp';
+import { cookPicture } from './cook-picture';
 
 /**
  * Dark horizontal block: photo left, bio right, credential chips (home, workshop, cohort).
@@ -29,9 +29,7 @@ import cookPictureUri from './cook.webp';
           <b>Test-Driven Development</b>, <b>Charted Coding</b>, and
           <b>Collective Ownership</b>.
         </p>
-        <p class="spice">
-          My favorite spice: <code>/charted-autopilot</code>
-        </p>
+        <p class="spice">My favorite spice: <code>/charted-autopilot</code></p>
         <ul class="chips">
           <li>Angular GDE</li>
           <li>Nx Champion</li>
@@ -150,7 +148,6 @@ import cookPictureUri from './cook.webp';
   `,
 })
 export class CookCard {
-  cookPictureUri = cookPictureUri;
-  cookPictureAlt =
-    'Younes Jaaidi wearing a red apron and holding wooden cooking spoons, standing in a kitchen-themed setup with jars of fairy lights and programming stickers (JavaScript, TypeScript, Angular, Nx, RxJS) on a shelf behind him.';
+  cookPictureUri = cookPicture.uri;
+  cookPictureAlt = cookPicture.alt;
 }
