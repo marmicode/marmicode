@@ -1,8 +1,8 @@
 {
   "name": "Marmicode",
   "short_name": "Marmicode",
-  "theme_color": "#380030",
-  "background_color": "#fafafa",
+  "theme_color": "#110a13",
+  "background_color": "#110a13",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

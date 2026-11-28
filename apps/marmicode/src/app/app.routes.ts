@@ -3,12 +3,9 @@ import {
   blogPostDetailRouterHelper,
   coachingRouterHelper,
   cohortRouterHelper,
-  recipeDetailRouterHelper,
   resourceSearchRouterHelper,
-  servicesRouterHelper,
   workshopRouterHelper,
 } from '@marmicode/shared/router-helpers';
-import { or } from '@marmicode/shared/utils';
 import { provideChatWidget } from './chat/chat';
 
 export const routes: Routes = [
@@ -21,41 +18,65 @@ export const routes: Routes = [
       ),
   },
 
-  /* Recipe detail. */
+  /* Recipes and tutorials are gone: send them to the library. */
   {
-    matcher: or([
-      recipeDetailRouterHelper.RECIPE_DETAIL_PATH,
-      recipeDetailRouterHelper.TUTORIAL_DETAIL_PATH,
-    ]),
-    loadChildren: () =>
-      import('@marmicode/recipe/feature-detail').then(
-        (m) => m.RecipeDetailRoutingModule,
-      ),
+    path: 'recipe',
+    children: [
+      {
+        path: '**',
+        redirectTo: resourceSearchRouterHelper.libraryUrl(),
+      },
+    ],
+  },
+  {
+    path: 'tutorial',
+    children: [
+      {
+        path: '**',
+        redirectTo: resourceSearchRouterHelper.libraryUrl(),
+      },
+    ],
   },
 
-  /* Resource search. */
+  /* The library moved from `/learn/*` to `/library`. */
   {
-    path: resourceSearchRouterHelper.LEARN_PATH,
+    path: resourceSearchRouterHelper.LEGACY_LEARN_PATH,
+    children: [
+      {
+        path: '**',
+        redirectTo: resourceSearchRouterHelper.libraryUrl(),
+      },
+    ],
+  },
+
+  /* Library. */
+  {
+    path: resourceSearchRouterHelper.LIBRARY_PATH,
     loadChildren: () =>
       import('@marmicode/resource/feature-search').then(
         (m) => m.ResourceSearchRoutingModule,
       ),
   },
 
-  /* Services */
+  /* Services became coaching. */
   {
-    path: servicesRouterHelper.SERVICES_PATH,
-    loadChildren: () =>
-      import('@marmicode/services/feature-presentation').then(
-        (m) => m.ServicesRoutingModule,
-      ),
+    path: 'services',
+    pathMatch: 'full',
+    redirectTo: coachingRouterHelper.coachingUrl(),
   },
 
   /* Coaching. */
   {
     path: coachingRouterHelper.COACHING_PATH,
     providers: [provideChatWidget()],
-    loadComponent: () => import('@marmicode/coaching/feature-presentation'),
+    children: [
+      /* Coaching page. */
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () => import('@marmicode/coaching/feature-presentation'),
+      },
+    ],
   },
 
   /* Cohorts. */
@@ -76,18 +97,35 @@ export const routes: Routes = [
     ],
   },
 
-  /* Workshops. */
+  /* Trainings moved from `/workshops` to `/trainings`. */
+  {
+    path: workshopRouterHelper.LEGACY_WORKSHOP_LIST_PATH,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: workshopRouterHelper.listUrl(),
+      },
+      {
+        path: workshopRouterHelper.WORKSHOP_DETAIL_RELATIVE_PATH,
+        redirectTo: ({ params }) =>
+          workshopRouterHelper.detailUrl(params['workshopId']),
+      },
+    ],
+  },
+
+  /* Trainings. */
   {
     path: workshopRouterHelper.WORKSHOP_LIST_PATH,
     providers: [provideChatWidget()],
     children: [
-      /* Workshops list. */
+      /* Training list. */
       {
         path: '',
         pathMatch: 'full',
         loadComponent: () => import('@marmicode/catalog/feature-list'),
       },
-      /* Workshop detail. */
+      /* Workshop page. */
       {
         path: workshopRouterHelper.WORKSHOP_DETAIL_RELATIVE_PATH,
         loadComponent: () => import('@marmicode/workshop/feature-detail'),
@@ -95,7 +133,7 @@ export const routes: Routes = [
     ],
   },
 
-  /* Landing page. */
+  /* Home page. */
   {
     path: '',
     pathMatch: 'full',
@@ -105,6 +143,7 @@ export const routes: Routes = [
   /* Not found. */
   {
     path: '**',
-    loadComponent: () => import('./not-found.ng'),
+    loadComponent: () =>
+      import('./not-found-page.ng').then((m) => m.NotFoundPage),
   },
 ];

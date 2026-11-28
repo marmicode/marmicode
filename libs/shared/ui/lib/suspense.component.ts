@@ -1,17 +1,15 @@
-import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
   input,
-  NgModule,
   TemplateRef,
 } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { PushPipe } from '@rx-angular/template/push';
 import { Observable } from 'rxjs';
-import { ErrorComponent, ErrorModule } from './error.component';
-import { LoadingComponent, LoadingModule } from './loading.component';
+import { ErrorComponent } from './error.component';
+import { LoadingComponent } from './loading.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,8 +57,12 @@ import { LoadingComponent, LoadingModule } from './loading.component';
 })
 export class SuspenseComponent<T = unknown> {
   @ContentChild('data') dataTemplate!: TemplateRef<{ $implicit: T }>;
-  @ContentChild('error') errorTemplate: TemplateRef<{ $implicit: unknown }> | undefined;
-  @ContentChild('suspense') suspenseTemplate: TemplateRef<undefined> | undefined;
+  @ContentChild('error') errorTemplate:
+    | TemplateRef<{ $implicit: unknown }>
+    | undefined;
+  @ContentChild('suspense') suspenseTemplate:
+    | TemplateRef<undefined>
+    | undefined;
 
   data$ = input.required<Observable<T>>();
 
@@ -69,15 +71,3 @@ export class SuspenseComponent<T = unknown> {
     stream: ({ params }) => params,
   });
 }
-
-@NgModule({
-  exports: [SuspenseComponent],
-  imports: [
-    CommonModule,
-    LoadingModule,
-    ErrorModule,
-    PushPipe,
-    SuspenseComponent,
-  ],
-})
-export class SuspenseModule {}

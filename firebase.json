@@ -17,8 +17,43 @@
       ],
       "redirects": [
         {
+          "source": "/services",
+          "destination": "/coaching",
+          "type": 301
+        },
+        {
+          "source": "/learn",
+          "destination": "/library",
+          "type": 301
+        },
+        {
+          "source": "/learn/**",
+          "destination": "/library",
+          "type": 301
+        },
+        {
+          "source": "/recipe/**",
+          "destination": "/library",
+          "type": 301
+        },
+        {
+          "source": "/tutorial/**",
+          "destination": "/library",
+          "type": 301
+        },
+        {
           "source": "/workshops/pragmatic-angular-testing-full-course",
-          "destination": "/workshops/pragmatic-angular-testing",
+          "destination": "/trainings/pragmatic-angular-testing",
+          "type": 301
+        },
+        {
+          "source": "/workshops",
+          "destination": "/trainings",
+          "type": 301
+        },
+        {
+          "source": "/workshops/:workshopId",
+          "destination": "/trainings/:workshopId",
           "type": 301
         },
         {

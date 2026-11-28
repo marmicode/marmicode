@@ -1,3 +1,5 @@
-import { LandingPage } from './landing-page.ng';
+import { HomePage } from './home-page.ng';
 
-export default LandingPage;
+export { HomePage };
+
+export default HomePage;

@@ -1,3 +1,5 @@
-import { CatalogPage } from './catalog-page.ng';
+import { TrainingListPage } from './training-list-page.ng';
 
-export default CatalogPage;
+export { TrainingListPage };
+
+export default TrainingListPage;

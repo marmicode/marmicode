@@ -15,6 +15,8 @@ export {
   MarkdownToken,
   MarkdownTokens,
   MarkdownTokenType,
+  getMarkdownHeadingId,
+  getMarkdownHeadingText,
   getMarkdownLinks,
   getMarkdownTokenType,
   parseMarkdown,

@@ -1,4 +1,4 @@
-import { ResourceInfo } from '@marmicode/resource/core';
+import { ResourceInfo, ResourceTopic } from '@marmicode/resource/core';
 import { Skill } from './skill';
 
 export interface Resource extends ResourceInfo {
@@ -7,6 +7,7 @@ export interface Resource extends ResourceInfo {
   slug: string;
   skills: Skill[];
   summary: string;
+  topics: ResourceTopic[];
   url: string;
   isWip?: boolean;
 }

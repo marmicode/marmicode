@@ -2,7 +2,7 @@ import { createCodeBlock } from '@marmicode/block/core';
 
 import type { Meta, StoryFn, StoryObj } from '@storybook/angular';
 import { createHighlightZone } from '../highlight/highlight-zone';
-import { CodeBlockComponent, CodeBlockModule } from './code-block.component';
+import { CodeBlockComponent } from './code-block.component';
 
 export default {
   title: 'CodeBlock',

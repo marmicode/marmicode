@@ -4,6 +4,10 @@ export interface BlogPost {
     name: string;
     pictureUri?: string;
     twitter: string;
+    /** Bluesky handle, e.g. `younesjd.dev`. */
+    bluesky?: string;
+    /** LinkedIn profile id, as in `linkedin.com/in/<id>`. */
+    linkedin?: string;
   };
   duration: number;
   pictureUri?: string;

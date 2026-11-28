@@ -1,13 +1,13 @@
-import { CommonModule, NgClass } from '@angular/common';
+import { DOCUMENT, NgClass } from '@angular/common';
 import {
   afterRenderEffect,
   ChangeDetectionStrategy,
   Component,
   computed,
+  DestroyRef,
   ElementRef,
-  HostListener,
+  inject,
   input,
-  NgModule,
   signal,
   viewChild,
   ViewEncapsulation,
@@ -32,30 +32,48 @@ import { HighlightZone } from '../highlight/highlight-zone';
      * to allow code horizontal scroll in favor of swipe. */
     '(touchstart)': '$event.stopPropagation()',
   },
-  template: ` <div class="code-container">
-    <pre
-      [ngClass]="languageClass()"
-      [style.paddingTop.px]="verticalPadding"
-      [style.paddingBottom.px]="verticalPadding"
-      class="line-numbers preformatted"
-    >@for (style of lineNumberHighlightStyles(); track style.top) {<div
+  template: ` <div class="code-head">
+      <span class="lang">{{ block().language }}</span>
+      <button class="copy" type="button" (click)="copy()">
+        <svg
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.8"
+          viewBox="0 0 24 24"
+        >
+          <rect x="9" y="9" width="12" height="12" rx="2" />
+          <path d="M5 15V5a2 2 0 0 1 2-2h10" />
+        </svg>
+        {{ isCopied() ? 'Copied' : 'Copy' }}
+      </button>
+    </div>
+    <div class="code-container">
+      <pre
+        [ngClass]="languageClass()"
+        [style.paddingTop.px]="verticalPadding"
+        [style.paddingBottom.px]="verticalPadding"
+        class="line-numbers preformatted"
+      >@for (style of lineNumberHighlightStyles(); track style.top) {<div
       [style.backgroundColor]="style.color"
       [style.top.px]="style.top"
       [style.height.px]="style.height"
       class="line-number-highlight"
     ></div>}<code #codeEl class="code" data-role="code-block">{{ code() }}</code></pre>
 
-    <!-- Highlights. -->
-    @for (style of highlightStyles(); track style.top) {
-      <div
-        [style.backgroundColor]="style.color"
-        [style.top.px]="style.top"
-        [style.height.px]="style.height"
-        class="highlight"
-        data-role="code-highlight"
-      ></div>
-    }
-  </div>`,
+      <!-- Highlights. -->
+      @for (style of highlightStyles(); track style.top) {
+        <div
+          [style.backgroundColor]="style.color"
+          [style.top.px]="style.top"
+          [style.height.px]="style.height"
+          class="highlight"
+          data-role="code-highlight"
+        ></div>
+      }
+    </div>`,
   styleUrl: './code-block.component.scss',
   imports: [NgClass],
 })
@@ -68,6 +86,25 @@ export class CodeBlockComponent {
     console.log('onClick', $event);
   }
 
+  protected readonly isCopied = signal(false);
+
+  /** Copies the code with the Clipboard API, then says "Copied" for 2 seconds. */
+  protected async copy() {
+    const clipboard = this._document.defaultView?.navigator.clipboard;
+    if (clipboard == null) {
+      return;
+    }
+    try {
+      await clipboard.writeText(this.code());
+    } catch {
+      /* Denied (e.g. no clipboard permission): nothing was copied, so say nothing. */
+      return;
+    }
+    this.isCopied.set(true);
+    clearTimeout(this._copiedTimeout);
+    this._copiedTimeout = setTimeout(() => this.isCopied.set(false), 2_000);
+  }
+
   protected code = computed(() => this.block().code);
   protected languageClass = computed(
     () => `language-${this.block().language}` as const,
@@ -77,6 +114,8 @@ export class CodeBlockComponent {
   /** Default to 25 on SSR as we can't query DOM. */
   private _lineHeight = signal(25);
   private _lastProcessedCode: string | null = null;
+  private _copiedTimeout?: ReturnType<typeof setTimeout>;
+  private _document = inject(DOCUMENT);
 
   readonly lineNumberHighlightStyles = computed(() => {
     const highlightableZones = this.highlightableZones();
@@ -104,6 +143,7 @@ export class CodeBlockComponent {
   readonly verticalPadding = 10;
 
   constructor() {
+    inject(DestroyRef).onDestroy(() => clearTimeout(this._copiedTimeout));
     afterRenderEffect({
       write: () => {
         const block = this.block();
@@ -140,9 +180,3 @@ export class CodeBlockComponent {
     }));
   }
 }
-
-@NgModule({
-  exports: [CodeBlockComponent],
-  imports: [CommonModule, CodeBlockComponent],
-})
-export class CodeBlockModule {}

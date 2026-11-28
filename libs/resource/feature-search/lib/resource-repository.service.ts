@@ -5,11 +5,15 @@ import {
   provideContentfulClient,
   Query,
 } from '@marmicode/contentful/infra';
-import { createAuthor } from '@marmicode/resource/core';
+import {
+  createAuthor,
+  getResourceTopics,
+  ResourceType,
+} from '@marmicode/resource/core';
 import { WipService } from '@marmicode/shared/utils';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { createResource, Resource } from './resource';
 import { Skill } from './skill';
 import { skillFragment, skillFragmentToSkill } from './skill-fragment';
@@ -61,22 +65,8 @@ const getAllResources = gql`
   }
 `;
 
-const getResourcesBySkill = gql`
-  ${resourceFragment}
-  query getResourcesBySkill($skillSlug: String!) {
-    skillCollection(limit: 1, where: { slug: $skillSlug }) {
-      items {
-        linkedFrom {
-          resourceCollection {
-            items {
-              ...ResourceFragment
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+/* The types the site renders: recipes and tutorials are gone, for instance. */
+const RESOURCE_TYPES = new Set<string>(Object.values(ResourceType));
 
 @Injectable()
 export class ResourceRepository {
@@ -103,47 +93,25 @@ export class ResourceRepository {
       );
   }
 
-  getResourcesBySkillSlug(skillSlug: string): Observable<Resource[]> {
-    console.log(skillSlug);
-    return this._contentfulClient
-      .query<Query>({
-        query: getResourcesBySkill,
-        variables: {
-          skillSlug,
-        },
-      })
-      .pipe(
-        tap(console.log),
-        map(({ data }) => {
-          const collection =
-            data!.skillCollection!.items[0]!.linkedFrom!.resourceCollection!;
-          return this._toResources({
-            items: collection.items.filter(
-              (i: contentful.Resource | null): i is contentful.Resource =>
-                i != null,
-            ),
-          });
-        }),
-        /* We have to filter again because the previous query also returns
-         * resource that have this skill in the `skills` field.
-         * AFAIK, there is no way to return only resources that have this
-         * skill in `requiredSkills` field. */
-        map((resources) =>
-          resources.filter(
-            (resource) =>
-              resource.skills.find((skill) => skill.slug === skillSlug) &&
-              /* Hide wip resources except if we are in wip mode. */
-              (this._wip.isWip() || resource.isWip !== true),
-          ),
-        ),
-      );
-  }
-
   private _toResources(resourceCollection: {
     items: contentful.Resource[];
   }): Resource[] {
-    return resourceCollection.items.map((item) =>
-      createResource({
+    const items = resourceCollection.items.filter(
+      (item) =>
+        item.resourceType != null && RESOURCE_TYPES.has(item.resourceType),
+    );
+    return items.map((item) => {
+      const requiredSkills = this._toSkills({
+        items: (item.requiredSkillCollection?.items ?? []).filter(
+          (s): s is contentful.Skill => s != null,
+        ),
+      });
+      const skills = this._toSkills({
+        items: (item.skillCollection?.items ?? []).filter(
+          (s): s is contentful.Skill => s != null,
+        ),
+      });
+      return createResource({
         id: item.sys.id,
         author:
           item.author != null
@@ -160,24 +128,18 @@ export class ResourceRepository {
             ? item.picture.url
             : undefined,
         releasedAt: new Date(Date.parse(item.releasedAt!)),
-        requiredSkills: this._toSkills({
-          items: item.requiredSkillCollection!.items!.filter(
-            (s): s is contentful.Skill => s != null,
-          ),
-        }),
-        skills: this._toSkills({
-          items: item.skillCollection!.items!.filter(
-            (s): s is contentful.Skill => s != null,
-          ),
-        }),
+        requiredSkills,
+        skills,
         slug: item.slug!,
         summary: item.summary!,
         title: item.title!,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        type: item.resourceType as any,
+        topics: getResourceTopics({
+          skillSlugs: [...skills, ...requiredSkills].map(({ slug }) => slug),
+        }),
+        type: item.resourceType as ResourceType,
         url: item.url!,
-      }),
-    );
+      });
+    });
   }
 
   private _toSkills(skills: { items: contentful.Skill[] }): Skill[] {

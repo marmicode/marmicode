@@ -19,7 +19,7 @@ Learn to build tests that survive refactors, migrations, and AI-assisted develop
   waitlist: {
     url: 'https://forms.gle/mwfc57RfQXdMdMSLA',
   },
-  lumaTag: 'playwright',
+  sessions: [],
   description: `
 Testing — and frontend testing in particular — is undeniably in the top 3 most complex topics in web application development.
 

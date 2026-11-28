@@ -17,7 +17,16 @@ And a suite that survives refactors, migrations, and deadlines.`,
   duration: 3,
   location: 'online',
   customSessionRequestUrl: 'https://forms.gle/TEp9DTM6pHiSFRPY9',
-  lumaTag: 'angular-testing',
+  sessions: [
+    {
+      startDate: '2027-01-12',
+      endDate: '2027-01-14',
+      startTime: '09:30',
+      endTime: '18:00',
+      timezone: 'CET',
+      url: 'https://luma.com/73n2dvji',
+    },
+  ],
   description: `
 There are two ways to keep a product stable: **never touch it — or cook up a solid testing strategy.**
 

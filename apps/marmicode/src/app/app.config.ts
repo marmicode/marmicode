@@ -30,11 +30,8 @@ import {
 } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { provideSiteConfig } from '@marmicode/shared/core';
-import { provideRouterStore, routerReducer } from '@ngrx/router-store';
-import { provideStore } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { routes } from './app.routes';
-import { provideUpdateEffects } from './update/update.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -64,8 +61,5 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled',
       }),
     ),
-    provideRouterStore(),
-    provideStore({ router: routerReducer }),
-    provideUpdateEffects(),
   ],
 };

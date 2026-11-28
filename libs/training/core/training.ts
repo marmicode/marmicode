@@ -21,18 +21,7 @@ export interface Training {
    */
   waitlist?: {
     url: string;
-
-    /**
-     * Next session month in `YYYY-MM` format.
-     * Displayed in the hero when set.
-     */
-    nextSessionMonth?: `${number}-${number}`;
   };
-
-  /**
-   * Tag used to show upcoming sessions.
-   */
-  lumaTag?: string;
 
   /**
    * The subheading is a short description of the training.

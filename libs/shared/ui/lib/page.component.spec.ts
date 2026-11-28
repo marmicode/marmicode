@@ -2,6 +2,7 @@ import {
   MOCK_PLATFORM_LOCATION_CONFIG,
   MockPlatformLocationConfig,
 } from '@angular/common/testing';
+import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideSiteConfig } from '@marmicode/shared/core';
 import { MetaDefinition } from '@angular/platform-browser';
@@ -248,13 +249,28 @@ describe('PageComponent', () => {
 
     setPageInfo(
       createArticlePageInfo({
-        path: '/workshop/pragmatic-angular-testing'
+        path: '/workshop/pragmatic-angular-testing',
       }),
     );
 
     await destroyOnceStable();
 
     expect(htmlAdapterFake.getLinkTags()).toEqual([]);
+  });
+
+  it('renders the page content', async () => {
+    @Component({
+      imports: [PageComponent],
+      template: `<mc-page><p>Dish of the day</p></mc-page>`,
+    })
+    class PageHost {}
+
+    configureTestingModule();
+    const fixture = TestBed.createComponent(PageHost);
+    await fixture.whenStable();
+
+    const pageEl: HTMLElement = fixture.nativeElement.querySelector('mc-page');
+    expect(pageEl.textContent).toContain('Dish of the day');
   });
 
   it('should remove all meta on destroy', async () => {
@@ -280,7 +296,7 @@ describe('PageComponent', () => {
   });
 });
 
-async function renderComponent() {
+function configureTestingModule() {
   TestBed.configureTestingModule({
     providers: [
       provideSiteConfig({ origin: 'https://marmicode.io' }),
@@ -289,6 +305,10 @@ async function renderComponent() {
       provideHtmlAdapterFake(),
     ],
   });
+}
+
+async function renderComponent() {
+  configureTestingModule();
 
   const fixture = TestBed.createComponent(PageComponent);
 

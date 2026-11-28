@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { getAssetUri } from '@marmicode/shared/utils';
 
 @Component({
@@ -8,7 +7,7 @@ import { getAssetUri } from '@marmicode/shared/utils';
   template: `<img
       [src]="pictureUri"
       alt="Sad Marmicode"
-      class="error-animation mc-primary-text"
+      class="error-animation"
     />
     <div class="error-message">
       <ng-content></ng-content>
@@ -42,9 +41,3 @@ import { getAssetUri } from '@marmicode/shared/utils';
 export class ErrorComponent {
   pictureUri = getAssetUri('error.gif');
 }
-
-@NgModule({
-  exports: [ErrorComponent],
-  imports: [CommonModule, ErrorComponent],
-})
-export class ErrorModule {}

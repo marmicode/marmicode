@@ -19,7 +19,7 @@ Learn to build tests that survive refactors, migrations, and deadlines.`,
   waitlist: {
     url: 'https://forms.gle/ZxCFYeRq73epEyVA6',
   },
-  lumaTag: 'react-testing',
+  sessions: [],
   description: `
 There are two ways to keep a product stable: **never touch it, or cook up a solid testing strategy.**
 

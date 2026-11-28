@@ -7,13 +7,16 @@ const test = base.extend<{ glove: WorkshopListGlove }>({
 });
 
 test.describe('workshop list', () => {
-  test('shows all workshops', async ({ glove }) => {
+  test('shows one card per workshop', async ({ glove }) => {
     await glove.goto();
 
-    await expect(glove.workshopTitle()).toContainText([
-      'Pragmatic Angular Testing',
-      'Test Angular Pragmatique',
-    ]);
+    /* Without a language filter, each workshop shows its English version. */
+    await expect(
+      glove.workshopCardTitle('Pragmatic Angular Testing'),
+    ).toHaveCount(1);
+    await expect(
+      glove.workshopCardTitle('Test Angular Pragmatique'),
+    ).toHaveCount(0);
   });
 
   test('go to workshop when clicking on title', async ({ glove, page }) => {
@@ -33,13 +36,13 @@ test.describe('workshop list', () => {
   test('filters workshops by language', async ({ glove }) => {
     await glove.goto();
 
-    await glove.languageFilter('French').click();
-    await expect(glove.workshopTitle()).toContainText([
-      'Test Angular Pragmatique',
-    ]);
-    await expect(glove.workshopTitle()).not.toContainText([
-      'Pragmatic Angular Testing',
-    ]);
+    await glove.languageFilter('Français').click();
+    await expect(
+      glove.workshopCardTitle('Test Angular Pragmatique'),
+    ).toHaveCount(1);
+    await expect(
+      glove.workshopCardTitle('Pragmatic Angular Testing'),
+    ).toHaveCount(0);
   });
 });
 
@@ -52,28 +55,25 @@ class WorkshopListGlove {
    * and it can take most of the test timeout on slow browsers.
    */
   goto() {
-    return this._page.goto('/workshops', { waitUntil: 'domcontentloaded' });
+    return this._page.goto('/trainings', { waitUntil: 'domcontentloaded' });
   }
 
   /**
    * Selects a language filter button.
    */
-  languageFilter(name: 'All' | 'English' | 'French') {
-    return this._page.getByRole('radio', { name });
-  }
-
-  workshopTitle() {
-    return this._page.getByRole('heading', { level: 3 });
+  languageFilter(name: 'All languages' | 'English' | 'Français') {
+    return this._page
+      .getByRole('group', { name: 'Filter by language' })
+      .getByRole('button', { name, exact: true });
   }
 
   /**
    * The video course has the same title as the workshop,
-   * so this only looks at workshop cards.
+   * so this only looks at titles linking to a workshop page.
    */
   workshopCardTitle(title: string) {
     return this._page
-      .getByRole('article')
-      .filter({ hasText: 'Workshop' })
-      .getByRole('heading', { level: 3, name: title, exact: true });
+      .getByRole('heading', { level: 3, name: title, exact: true })
+      .filter({ has: this._page.locator('a[href^="/trainings/"]') });
   }
 }

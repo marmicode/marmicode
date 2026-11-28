@@ -1,10 +1,17 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, EventEmitter, input, Input, NgModule, Output, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  EventEmitter,
+  input,
+  Input,
+  Output,
+  inject,
+} from '@angular/core';
 import { MarkdownBlock, parseMarkdown } from '@marmicode/block/core';
 import { HighlightZone } from '../highlight/highlight-zone';
 import { MarkdownBlockStateService } from './markdown-block-state.service';
 import { MarkdownTokensComponent } from './markdown-tokens.component';
-import { MarkdownModule } from './markdown.module';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,24 +24,20 @@ import { MarkdownModule } from './markdown.module';
     `
       :host {
         display: block;
-        margin: 10px;
 
-        color: #292929;
-        font-family: Georgia, 'Times New Roman', Times, serif;
+        color: #e6dde8;
+        font-family: var(--mc-font-sans);
         font-weight: 400;
         text-rendering: optimizeLegibility;
         word-break: break-word;
         -webkit-font-smoothing: antialiased;
 
         font-size: 18px;
-        line-height: 28px;
-      }
+        line-height: 1.75;
 
-      @media (min-width: 960px) {
-        :host {
-          font-size: 21px;
-          line-height: 31px;
-        }
+        --mc-markdown-link-color: var(--mc-accent-bright);
+        --mc-markdown-link-decoration-color: rgba(var(--mc-accent-rgb), 0.45);
+        --mc-markdown-link-underline-offset: 4px;
       }
     `,
   ],
@@ -71,9 +74,3 @@ export class MarkdownBlockComponent {
     this.highlightZoneChange.emit(event.detail);
   }
 }
-
-@NgModule({
-  exports: [MarkdownBlockComponent],
-  imports: [CommonModule, MarkdownModule, MarkdownBlockComponent],
-})
-export class MarkdownBlockModule {}

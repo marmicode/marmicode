@@ -3,7 +3,9 @@ import { nxE2EPreset } from '@nx/playwright/preset';
 import { workspaceRoot } from '@nx/devkit';
 
 // For CI, you may want to set BASE_URL to the deployed application.
-const baseURL = process.env['BASE_URL'] || 'http://localhost:4200';
+// PORT lets several checkouts (e.g. git worktrees) run their own dev server side by side.
+const port = Number(process.env['PORT'] ?? 4200);
+const baseURL = process.env['BASE_URL'] || `http://localhost:${port}`;
 
 /**
  * Read environment variables from file.
@@ -25,8 +27,8 @@ export default defineConfig({
   timeout: 5_000,
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'pnpm nx serve marmicode',
-    url: 'http://localhost:4200',
+    command: `pnpm nx serve marmicode --port ${port}`,
+    url: `http://localhost:${port}`,
     reuseExistingServer: !process.env.CI,
     cwd: workspaceRoot,
   },

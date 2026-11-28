@@ -11,6 +11,8 @@ export {
   createCodeBlock,
   createMarkdownBlock,
   createTextBlock,
+  getMarkdownHeadingId,
+  getMarkdownHeadingText,
   getMarkdownTokenType,
   isTextBlock,
   parseMarkdown,

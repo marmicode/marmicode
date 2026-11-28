@@ -1,11 +1,11 @@
 export const resourceSearchRouterHelper = {
-  LEARN_PATH: 'learn',
-  SKILL_SLUG_PARAM: 'skillSlug',
-  EVERYTHING: 'everything',
-  learn(skillSlug: string) {
-    return ['/', this.LEARN_PATH, skillSlug];
+  LIBRARY_PATH: 'library',
+  /* The library used to live under `/learn/:skillSlug`: it redirects to the library now. */
+  LEGACY_LEARN_PATH: 'learn',
+  library() {
+    return ['/', this.LIBRARY_PATH];
   },
-  learnEverything() {
-    return ['/', this.LEARN_PATH, this.EVERYTHING];
+  libraryUrl() {
+    return `/${this.LIBRARY_PATH}`;
   },
 };

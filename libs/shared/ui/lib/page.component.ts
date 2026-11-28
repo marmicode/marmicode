@@ -1,8 +1,6 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  NgModule,
   effect,
   inject,
   input,
@@ -51,12 +49,55 @@ export type PageInfo = BasicPageInfo | ArticlePageInfo;
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-page',
-  template: `<ng-content />`,
+  template: `
+    <div class="glow" aria-hidden="true"></div>
+    <ng-content />
+  `,
   styles: `
     :host {
       display: block;
-      background-color: white;
+      position: relative;
+      isolation: isolate;
       min-height: 100%;
+      background-color: var(--mc-dark-bg);
+      color: var(--mc-dark-text);
+      font-family: var(--mc-font-sans);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .glow {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 900px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .glow::before,
+    .glow::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      border-radius: 50%;
+      filter: blur(90px);
+    }
+
+    .glow::before {
+      width: 620px;
+      height: 620px;
+      top: -260px;
+      transform: translateX(-80%);
+      background: rgba(var(--mc-violet-rgb), 0.38);
+    }
+
+    .glow::after {
+      width: 520px;
+      height: 520px;
+      top: -160px;
+      transform: translateX(10%);
+      background: rgba(var(--mc-accent-rgb), 0.26);
     }
   `,
 })
@@ -179,9 +220,3 @@ export class PageComponent {
     return new URL(path, this._platformInfo.getOrigin()).href;
   }
 }
-
-@NgModule({
-  exports: [PageComponent],
-  imports: [CommonModule, PageComponent],
-})
-export class PageModule {}

@@ -1,12 +1,11 @@
-import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   computed,
   input,
-  NgModule,
 } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -84,9 +83,3 @@ export class LinkComponent {
 }
 
 export type Link = { href: string } | { route: string[] };
-
-@NgModule({
-  exports: [LinkComponent],
-  imports: [CommonModule, RouterModule, LinkComponent],
-})
-export class LinkModule {}

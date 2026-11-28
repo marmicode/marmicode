@@ -32,7 +32,6 @@
   },
   "private": true,
   "dependencies": {
-    "@amcharts/amcharts4": "^4.9.28",
     "@angular/animations": "21.1.6",
     "@angular/cdk": "21.1.6",
     "@angular/common": "21.1.6",
@@ -50,18 +49,8 @@
     "@angular/ssr": "21.1.5",
     "@apollo/client": "4.1.9",
     "@firebase/app": "0.11.5",
-    "@fortawesome/angular-fontawesome": "1.0.0",
-    "@fortawesome/fontawesome-svg-core": "6.7.2",
-    "@fortawesome/free-brands-svg-icons": "6.7.2",
-    "@fortawesome/free-solid-svg-icons": "6.7.2",
     "@jscutlery/operators": "3.2.10",
     "@jscutlery/rx-computed": "0.7.5",
-    "@ngneat/until-destroy": "^10.0.0",
-    "@ngrx/effects": "21.0.1",
-    "@ngrx/entity": "21.0.1",
-    "@ngrx/operators": "21.0.1",
-    "@ngrx/router-store": "21.0.1",
-    "@ngrx/store": "21.0.1",
     "@nx/angular": "22.5.3",
     "@rx-angular/cdk": "^19.0.0",
     "@rx-angular/state": "^15.0.0",
@@ -75,8 +64,6 @@
     "graphql": "16.13.1",
     "graphql-tag": "^2.10.4",
     "marked": "^1.2.7",
-    "ngx-sharebuttons": "17.0.0",
-    "panzoom": "^9.2.5",
     "prismjs": "^1.20.0",
     "rxjs": "7.8.2",
     "tslib": "^2.3.0"
@@ -101,8 +88,6 @@
     "@graphql-codegen/typescript": "^4.0.0",
     "@jest/globals": "30.0.5",
     "@jscutlery/cypress-harness": "0.8.5",
-    "@ngrx/schematics": "21.0.1",
-    "@ngrx/store-devtools": "21.0.1",
     "@nx/cypress": "22.5.3",
     "@nx/devkit": "22.5.3",
     "@nx/eslint": "22.5.3",
@@ -162,7 +147,7 @@
     "jest-util": "30.0.5",
     "jiti": "2.6.0",
     "js-yaml": "^4.0.0",
-    "jsdom": "~22.1.0",
+    "jsdom": "~26.1.0",
     "json": "^11.0.0",
     "nx": "22.5.3",
     "open": "^10.0.0",
@@ -179,9 +164,6 @@
   },
   "dependenciesMeta": {
     "@babel/runtime@7.29.15": {
-      "unplugged": true
-    },
-    "ngx-sharebuttons@11.0.0": {
       "unplugged": true
     },
     "ts-node@10.9.2": {

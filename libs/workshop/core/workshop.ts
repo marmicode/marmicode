@@ -11,9 +11,10 @@ export interface Workshop extends Training {
   type: 'tapas' | 'full';
 
   /**
-   * Tag used to show upcoming sessions.
+   * Scheduled sessions, displayed on the workshop page, the home page and the training list.
+   * May include past sessions: use `getUpcomingSessions` to filter them out.
    */
-  lumaTag: string;
+  sessions: Session[];
 
   thumbnailUri: string;
 
@@ -32,24 +33,26 @@ export type WorkshopLanguage = TrainingLanguage;
 
 export interface Session {
   /**
-   * The date of the session.
+   * First day of the session, in the session's timezone.
+   * e.g. '2026-12-01'
    */
-  startDate: Date;
+  startDate: IsoDate;
 
   /**
-   * The end date of the session if multiple days.
+   * Last day of the session if multiple days.
+   * e.g. '2026-12-02'
    */
-  endDate?: Date;
+  endDate?: IsoDate;
 
   /**
-   * The start time of the session.
-   * e.g. '18:00'
+   * The daily start time of the session.
+   * e.g. '09:30'
    */
   startTime: string;
 
   /**
-   * The end time of the session.
-   * e.g. '21:00'
+   * The daily end time of the session.
+   * e.g. '18:00'
    */
   endTime: string;
 
@@ -59,10 +62,15 @@ export interface Session {
   timezone: 'CET' | 'PT';
 
   /**
-   * Pre-filled google form url for the waitlist.
+   * Luma event page where attendees book a seat.
    */
-  waitlistUrl: string;
+  url: string;
 }
+
+/**
+ * Date in `YYYY-MM-DD` format.
+ */
+export type IsoDate = `${number}-${number}-${number}`;
 
 export function createWorkshop(workshop: Workshop): Workshop {
   return workshop;
