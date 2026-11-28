@@ -1,9 +1,5 @@
-{"createdAt":"2026-11-28T16:13:54.686Z","type":"tag","value":"test structural low"}
+{"createdAt":"2026-11-28T16:13:54.686Z","type":"tag","value":"test"}
 
-{"createdAt":"2026-11-28T16:24:03.097Z","type":"untag","value":"test structural low"}
+{"createdAt":"2026-11-28T16:13:54.687Z","type":"tag","value":"structural"}
 
-{"createdAt":"2026-11-28T16:24:06.825Z","type":"tag","value":"test"}
-
-{"createdAt":"2026-11-28T16:24:10.449Z","type":"tag","value":"structural"}
-
-{"createdAt":"2026-11-28T16:24:14.378Z","type":"tag","value":"low"}
+{"createdAt":"2026-11-28T16:13:54.688Z","type":"tag","value":"low"}
