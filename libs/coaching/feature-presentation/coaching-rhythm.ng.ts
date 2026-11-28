@@ -180,7 +180,7 @@ export class CoachingRhythm {
   coaching = input.required<CoachingOffering>();
 
   protected labels = COACHING_LABELS;
-  /* "More than advice," + gradient "a team that needs me less over time". */
+  /* "More than advice," + gradient "a team transformation". */
   protected title = computed(() => this.coaching().philosophyTitle);
   protected paragraphs = computed(() =>
     this.coaching().philosophyContent.split('\n\n'),
