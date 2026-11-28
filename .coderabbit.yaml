@@ -1,8 +1,5 @@
 # yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
 language: en-US
-tone_instructions: >-
-  Be concise and direct. Prioritize correctness, accessibility and maintainability
-  over stylistic nitpicks that ESLint or Prettier already enforce.
 
 reviews:
   profile: chill
