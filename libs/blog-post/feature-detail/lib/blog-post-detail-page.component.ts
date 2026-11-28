@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Analytics, logEvent } from '@angular/fire/analytics';
 import { ActivatedRoute } from '@angular/router';
 import { BlogPostArticle } from '@marmicode/blog-post/ui';
 import { ResourceRow } from '@marmicode/resource/ui';
@@ -31,6 +32,7 @@ import { blogPostToPageInfo } from './blog-post-to-page-info';
           <mc-blog-post-article
             [backLink]="libraryLink"
             [blogPost]="blogPost"
+            (linkCopied)="trackLinkCopy()"
           />
         </ng-template>
       </mc-suspense>
@@ -109,6 +111,8 @@ import { blogPostToPageInfo } from './blog-post-to-page-info';
   ],
 })
 export class BlogPostDetailPageComponent {
+  /* Optional: not provided in tests. */
+  private _analytics = inject(Analytics, { optional: true });
   private _blogPostRepository = inject(BlogPostRepository);
   private _route = inject(ActivatedRoute);
   private _transferStateHelper = inject(TransferStateHelper);
@@ -146,4 +150,18 @@ export class BlogPostDetailPageComponent {
   );
 
   pageInfo$ = this.blogPost$.pipe(map(blogPostToPageInfo));
+
+  /** GA4's recommended `share` event, so we can tell whether anyone copies links. */
+  protected trackLinkCopy() {
+    if (this._analytics == null) {
+      return;
+    }
+    logEvent(this._analytics, 'share', {
+      method: 'copy_link',
+      content_type: 'article',
+      item_id: this._route.snapshot.paramMap.get(
+        blogPostDetailRouterHelper.BLOG_POST_SLUG_PARAM,
+      )!,
+    });
+  }
 }

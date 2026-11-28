@@ -8,6 +8,7 @@ import {
   ElementRef,
   inject,
   input,
+  output,
   signal,
   viewChild,
 } from '@angular/core';
@@ -25,21 +26,21 @@ import { Link } from '@marmicode/shared/ui';
 import { BlogPost } from './blog-post';
 import { markdownToFrameBlockGroups } from './markdown-to-frame-block-groups';
 import { FollowButtonComponent } from './social/follow-button.component';
-import { ShareButtonsComponent } from './social/share-buttons.component';
+import { CopyLinkButton } from './social/copy-link-button.component';
 
 /**
  * Dark article: header (back link, kicker, title, summary, byline, cover), reading column with `mc-block-group`,
- * sticky "On this page" from the `##` headings, share buttons and author card.
+ * sticky "On this page" from the `##` headings, a copy link button and author card.
  */
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mc-blog-post-article',
   imports: [
     BlockGroupComponent,
+    CopyLinkButton,
     FollowButtonComponent,
     NgTemplateOutlet,
     RouterLink,
-    ShareButtonsComponent,
   ],
   template: `
     @let blogPost = this.blogPost();
@@ -88,12 +89,7 @@ import { ShareButtonsComponent } from './social/share-buttons.component';
             </span>
           </div>
         </div>
-        <mc-share-buttons
-          class="share"
-          size="small"
-          [author]="blogPost.author"
-          [title]="blogPost.title"
-        />
+        <mc-copy-link-button (linkCopied)="linkCopied.emit()" />
       </div>
     </header>
 
@@ -137,12 +133,7 @@ import { ShareButtonsComponent } from './social/share-buttons.component';
         <div class="article-end">
           <div class="end-row">
             <span>Enjoyed it? Pass it on.</span>
-            <mc-share-buttons
-              class="share"
-              size="small"
-              [author]="blogPost.author"
-              [title]="blogPost.title"
-            />
+            <mc-copy-link-button (linkCopied)="linkCopied.emit()" />
           </div>
           <div class="author-card">
             @if (blogPost.author.pictureUri; as pictureUri) {
@@ -447,6 +438,8 @@ export class BlogPostArticle {
   blogPost = input.required<BlogPost>();
   /** Library link, built by the page: `blog-post/ui` can't import `shared/router-helpers`. */
   backLink = input.required<Link>();
+  /** The reader copied the post's link, so the page can track it. */
+  readonly linkCopied = output<void>();
 
   protected readonly backHref = computed(() => {
     const link = this.backLink();

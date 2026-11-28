@@ -49,10 +49,6 @@
     "@angular/ssr": "21.1.5",
     "@apollo/client": "4.1.9",
     "@firebase/app": "0.11.5",
-    "@fortawesome/angular-fontawesome": "1.0.0",
-    "@fortawesome/fontawesome-svg-core": "6.7.2",
-    "@fortawesome/free-brands-svg-icons": "6.7.2",
-    "@fortawesome/free-solid-svg-icons": "6.7.2",
     "@jscutlery/operators": "3.2.10",
     "@jscutlery/rx-computed": "0.7.5",
     "@nx/angular": "22.5.3",
@@ -68,7 +64,6 @@
     "graphql": "16.13.1",
     "graphql-tag": "^2.10.4",
     "marked": "^1.2.7",
-    "ngx-sharebuttons": "17.0.0",
     "prismjs": "^1.20.0",
     "rxjs": "7.8.2",
     "tslib": "^2.3.0"
@@ -169,9 +164,6 @@
   },
   "dependenciesMeta": {
     "@babel/runtime@7.29.15": {
-      "unplugged": true
-    },
-    "ngx-sharebuttons@11.0.0": {
       "unplugged": true
     },
     "ts-node@10.9.2": {

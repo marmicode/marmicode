@@ -1,6 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { AuthorSocialInfo } from './author-social-info';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -10,7 +8,11 @@ import { AuthorSocialInfo } from './author-social-info';
     @if (author.twitter) {
       <a [href]="'https://twitter.com/' + author.twitter" target="_blank">
         <button class="button">
-          <fa-icon [icon]="faXTwitter" class="icon"></fa-icon>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M18.9 2H22l-6.8 7.8L23 22h-6.2l-4.8-6.3L6.4 22H3.3l7.3-8.3L1 2h6.3l4.4 5.8L18.9 2Zm-1.1 18.1h1.7L6.3 3.8H4.5l13.3 16.3Z"
+            />
+          </svg>
           <span>Follow &#64;{{ author.twitter }}</span>
         </button>
       </a>
@@ -58,16 +60,15 @@ import { AuthorSocialInfo } from './author-social-info';
       }
 
       .icon {
-        font-size: 1em;
-        text-align: center;
+        width: 1em;
+        height: 1em;
         margin-right: 5px;
+        fill: currentColor;
       }
     `,
   ],
-  imports: [FontAwesomeModule],
 })
 export class FollowButtonComponent {
   @Input()
   author!: AuthorSocialInfo;
-  faXTwitter = faXTwitter;
 }
