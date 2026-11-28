@@ -15,6 +15,7 @@ import {
   ResourceType,
 } from '@marmicode/resource/core';
 import { ResourceRowData } from '@marmicode/resource/ui';
+import { cookPicture } from '@marmicode/shared/ui';
 import { WipService } from '@marmicode/shared/utils';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
@@ -87,6 +88,9 @@ export const getLatestResources = gql`
   }
 `;
 
+/** Younes's posts use the same photo as the rest of the site rather than the Contentful one. */
+const YOUNES_TWITTER = 'yjaaidi';
+
 @Injectable()
 export class BlogPostRepository {
   private _contentfulClient = inject(ContentfulClient);
@@ -108,10 +112,9 @@ export class BlogPostRepository {
             author: {
               name: resource.author!.name!,
               pictureUri:
-                resource.author!.picture != null &&
-                resource.author!.picture.url != null
-                  ? resource.author!.picture.url
-                  : undefined,
+                resource.author!.twitter === YOUNES_TWITTER
+                  ? cookPicture.avatarUri
+                  : (resource.author!.picture?.url ?? undefined),
               twitter: resource.author!.twitter!,
             },
             duration: resource.duration!,

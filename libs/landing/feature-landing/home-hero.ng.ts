@@ -31,11 +31,7 @@ import { Badge, Button, cookPicture } from '@marmicode/shared/ui';
         through training, coaching and free recipes.
       </p>
       <p class="byline">
-        <span
-          class="face"
-          aria-hidden="true"
-          [style.background-image]="faceBackground"
-        ></span>
+        <img class="face" [src]="cookPicture.avatarUri" alt="" />
         <span>by <b>Younes Jaaidi</b> · Angular GDE · Nx Champion</span>
       </p>
       <div class="actions">
@@ -161,14 +157,11 @@ import { Badge, Button, cookPicture } from '@marmicode/shared/ui';
       font-weight: 600;
     }
 
-    /* Round crop on the whole head: the photo is landscape and the head is small. */
     .face {
       flex: none;
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background-position: 50% 22%;
-      background-size: 190% auto;
     }
 
     /* Photo card: the whole kitchen, not a close-up. */
@@ -243,7 +236,6 @@ import { Badge, Button, cookPicture } from '@marmicode/shared/ui';
 })
 export class HomeHero {
   protected readonly cookPicture = cookPicture;
-  protected readonly faceBackground = `url(${cookPicture.uri})`;
   protected readonly cohort = FROM_DRIFT_TO_TRUST_FOR_ANGULAR;
   protected readonly cohortWeekCount =
     FROM_DRIFT_TO_TRUST_FOR_ANGULAR.schedule.weeks.length;

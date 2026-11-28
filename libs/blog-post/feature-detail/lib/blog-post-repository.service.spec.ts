@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ContentfulClient } from '@marmicode/contentful/infra';
 import { provideApolloCacheWithResolvers } from '@marmicode/shared/testing';
+import { cookPicture } from '@marmicode/shared/ui';
 import { ApolloTestingModule } from 'apollo-angular/testing';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { BlogPostRepository } from './blog-post-repository.service';
@@ -63,7 +64,7 @@ describe('BlogPostRepository', () => {
         id: '62vt3ifOPzuBOv31JzHdMd',
         author: {
           name: 'Younes Jaaidi',
-          pictureUri: 'https://picture.url/younes',
+          pictureUri: cookPicture.avatarUri,
           twitter: 'yjaaidi',
         },
         duration: 6,
@@ -87,6 +88,28 @@ describe('BlogPostRepository', () => {
         },
       }),
     );
+  });
+
+  it('other authors keep their Contentful picture', async () => {
+    mockResourceCollectionResolver.mockReturnValue({
+      ...fakeGraphqlResponse,
+      items: [
+        {
+          ...fakeGraphqlResponse.items[0],
+          author: {
+            name: 'Guest Cook',
+            picture: { url: 'https://picture.url/guest' },
+            twitter: 'guestcook',
+          },
+        },
+      ],
+    });
+
+    const blogPost = await blogPostRepository
+      .getBlogPost('end-to-end-http-request-cancelation-with-rxjs-and-nestjs')
+      .toPromise();
+
+    expect(blogPost.author.pictureUri).toBe('https://picture.url/guest');
   });
 
   it('should not crash if picture is not set', async () => {
