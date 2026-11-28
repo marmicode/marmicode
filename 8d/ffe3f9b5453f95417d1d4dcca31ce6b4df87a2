@@ -1,13 +1,9 @@
-{"createdAt":"2026-11-28T16:12:23.536Z","type":"tag","value":"ui core test structural medium"}
+{"createdAt":"2026-11-28T16:12:23.536Z","type":"tag","value":"ui"}
 
-{"createdAt":"2026-11-28T16:17:25.867Z","type":"untag","value":"ui core test structural medium"}
+{"createdAt":"2026-11-28T16:12:23.537Z","type":"tag","value":"core"}
 
-{"createdAt":"2026-11-28T16:17:29.493Z","type":"tag","value":"ui"}
+{"createdAt":"2026-11-28T16:12:23.538Z","type":"tag","value":"test"}
 
-{"createdAt":"2026-11-28T16:17:33.312Z","type":"tag","value":"core"}
+{"createdAt":"2026-11-28T16:12:23.539Z","type":"tag","value":"structural"}
 
-{"createdAt":"2026-11-28T16:17:37.173Z","type":"tag","value":"test"}
-
-{"createdAt":"2026-11-28T16:17:40.949Z","type":"tag","value":"structural"}
-
-{"createdAt":"2026-11-28T16:17:44.808Z","type":"tag","value":"medium"}
+{"createdAt":"2026-11-28T16:12:23.540Z","type":"tag","value":"medium"}
